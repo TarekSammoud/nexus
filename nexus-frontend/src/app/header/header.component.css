@@ -1,0 +1,38 @@
+/* Profile Image */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  
+  /* Cart Icon */
+  .cart-icon {
+    position: relative;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .cart-icon:hover {
+    color: #f8f9fa;
+  }
+  
+  /* Cart Badge */
+  .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+  
+  /* Ensure cart and profile stay aligned */
+  .navbar-nav.d-flex {
+    gap: 10px; /* Space between cart and profile */
+  }
+  
