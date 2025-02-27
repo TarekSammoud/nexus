@@ -35,4 +35,8 @@
   .navbar-nav.d-flex {
     gap: 10px; /* Space between cart and profile */
   }
+
+  .dropdown-menu {
+    border: none;
+  }
   
