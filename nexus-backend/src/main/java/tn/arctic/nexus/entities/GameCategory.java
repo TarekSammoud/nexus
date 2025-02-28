@@ -49,6 +49,7 @@ public class GameCategory implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
     @ManyToMany
     private List<Game> games;
 

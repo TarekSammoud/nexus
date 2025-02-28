@@ -1,5 +1,6 @@
 package tn.arctic.nexus.services.GamesModule;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.Game;
@@ -33,9 +34,10 @@ public class GameService implements IGameService{
         return this.gameRepository.findByCategoriesIn(categories);
     }
 
+    @Transactional
     @Override
-    public boolean deleteGameById(Long id) {
-        return false;
+    public void deleteGameById(Long id) {
+        gameRepository.deleteById(id);
     }
 
     @Override
