@@ -17,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.JOINED)  // Set the inheritance strategy here
+
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

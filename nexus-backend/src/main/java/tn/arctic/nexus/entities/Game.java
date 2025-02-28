@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -17,9 +18,17 @@ import java.util.Date;
 @Getter
 @Setter
 public class Game implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    private GamePlatform platform;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,5 +37,19 @@ public class Game implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @ManyToMany
+    @JoinTable(
+            name = "game_game_item", // The join table that connects Game and GameItem
+            joinColumns = @JoinColumn(name = "game_id"), // Foreign key referencing Game
+            inverseJoinColumns = @JoinColumn(name = "game_item_id") // Foreign key referencing GameItem
+    )
+    private List<GameItem> gameItems;
+
+    @ManyToMany
+    private List<User> users;
+
+    @ManyToMany
+    private List<GameCategory> categories;
 
 }

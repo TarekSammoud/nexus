@@ -12,9 +12,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class Developer extends User {

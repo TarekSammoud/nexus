@@ -21,4 +21,7 @@ public class GameReview implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @ManyToOne
+    private Game game;
 }
