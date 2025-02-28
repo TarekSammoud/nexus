@@ -10,7 +10,7 @@ public interface IGameService {
     public List<Game> getAllGames();
     public Game getGameById(Long id);
     public List<Game> getAllGamesByCategory(List<GameCategory> categories);
-    public boolean deleteGameById(Long id);
+    public void deleteGameById(Long id);
     public Game updateGame(Game game);
 
 }

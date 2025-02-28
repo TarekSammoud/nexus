@@ -49,8 +49,14 @@ public class Game implements Serializable {
     @ManyToMany
     private List<User> users;
 
-    @ManyToMany(mappedBy = "games")
+    @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)  // Deletes related records in game_categories when Game is deleted
     private List<GameCategory> categories;
+
+
+    @OneToMany(mappedBy = "game")
+    @OnDelete(action = OnDeleteAction.CASCADE)  // Deletes related records in game_categories when Game is deleted
+    private List<GameMedia> gameMediaList;
 
     public Long getId() {
         return id;
