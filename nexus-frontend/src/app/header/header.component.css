@@ -6,6 +6,19 @@
     object-fit: cover;
     border: 2px solid white;
   }
+
+  .profile-img-dropdown {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  
+  .dropdown-item{
+    padding: 0.5rem 1rem;
+  }
+  
   
   /* Cart Icon */
   .cart-icon {
@@ -36,7 +49,29 @@
     gap: 10px; /* Space between cart and profile */
   }
 
-  .dropdown-menu {
-    border: none;
+/* Change dropdown background color */
+/* Base styles for all dropdown menus */
+.dropdown-menu {
+  border: none;
+}
+
+/* Specific styles for dropdowns with both 'dropdown-menu' and 'customdropdownmenu' classes */
+/* More specific selector to ensure styles are applied */
+.customdropdownmenu {
+  background-color: #1c1e26 !important;  /* Slightly darker gray */
+  box-shadow: 0 4px 7px rgba(50, 50, 50, 1) !important; /* Soft white shadow to match */
+  border-radius: 6px !important; /* Optional: adding rounded corners */
+  
+}
+
+
+
+/* Optional: Add hover effect */
+.dropdown-item:hover {
+  background-color: rgba(80, 80, 80, 0.9);  /* Slightly lighter gray for hover */
+}
+
+  .custom-dropdown-width {
+    width: 400px;  /* Change this value to resize the width */
   }
   
