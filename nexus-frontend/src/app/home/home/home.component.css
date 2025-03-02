@@ -1,0 +1,22 @@
+.carousel-container {
+    max-width: 100%;       /* Limit the maximum width */
+    margin: 0 auto;        /* Center the carousel */
+    overflow: hidden;      /* Prevent the carousel from overflowing */
+    display: flex;         /* Use flexbox for better alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center;   /* Center vertically */
+  }
+  
+  app-games-carousel {
+    width: 120%;            /* Adjust width as necessary */
+    max-width: 800px;      /* Prevent it from becoming too wide */
+    height: auto;          /* Maintain aspect ratio */
+  }
+  
+  .featured-container {
+    display: grid;                 /* Use grid layout */
+    grid-template-columns: 1fr;     /* Create a single column for stacking items */
+    width: 100%;                   /* Ensure it takes the full width of the container */
+    justify-items: center;         /* Center the items horizontally within the grid */
+  }
+  

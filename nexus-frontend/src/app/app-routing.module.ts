@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
+import { HomeComponent } from './home/home/home.component';
 
 const routes: Routes = [
-  {path: 'games', component: GamesComponent}
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
