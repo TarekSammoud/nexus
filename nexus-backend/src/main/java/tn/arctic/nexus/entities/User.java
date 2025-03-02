@@ -31,6 +31,7 @@ public class User implements Serializable {
     private String phoneNumber;
     private String address;
 
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
