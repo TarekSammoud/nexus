@@ -1,1 +1,35 @@
-<p>games-carousel works!</p>
+<div class="control-container">
+    <ejs-carousel>
+        
+      <e-carousel-items>
+        <ng-container *ngFor="let game of Games; let i = index">
+          <!-- Wrap 5 games in a single carousel item -->
+          <e-carousel-item *ngIf="i % 5 === 0">
+            <ng-template #template>
+              <div class="carousel-item-content">
+                <!-- Container for the 5 games -->
+                <div class="game-grid">
+                  <!-- Loop through 5 games at a time -->
+                  <div *ngFor="let g of Games?.slice(i, i + 5)" class="game-item">
+                    <figure class="img-container">
+                      <!-- Use safe navigation to avoid errors when gameMediaList is undefined -->
+                      <img [src]="g.gameMediaList?.[0]?.mediaUrl" alt="{{ g.name }}" class="game-image" />
+                    </figure>
+                    <div class="game-info">
+                      <!-- <div class="categories">
+                        <span *ngFor="let category of g.categories">{{ category.name }} </span>
+                      </div> -->
+                      <h6 class="text-light">{{ g.name }}</h6>
+                      <div class="text-muted text-light">{{ g.createdAt | date: 'yyyy MM dd' }}</div>
+                      <p><strong>Price: ${{ g.price }}</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </e-carousel-item>
+        </ng-container>
+      </e-carousel-items>
+    </ejs-carousel>
+  </div>
+  

@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,8 +55,9 @@ public class Game implements Serializable {
     private List<GameCategory> categories;
 
 
-    @OneToMany(mappedBy = "game")
-    @OnDelete(action = OnDeleteAction.CASCADE)  // Deletes related records in game_categories when Game is deleted
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference  // This marks the parent side to handle serialization
     private List<GameMedia> gameMediaList;
 
     public Long getId() {
@@ -67,6 +69,7 @@ public class Game implements Serializable {
     }
 
     public String getName() {
+        Game game ;
         return name;
     }
 

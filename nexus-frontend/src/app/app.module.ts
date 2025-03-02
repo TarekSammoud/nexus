@@ -10,21 +10,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home/home.component';
+import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    GamesCarouselComponent,
     GamesComponent,
+    HomeComponent,
+    GamesCarouselComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule
 
   ],
   providers: [],
