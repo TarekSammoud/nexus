@@ -8,7 +8,10 @@ import java.util.Optional;
 public interface IEntryMediaService {
     List<EntryMedia> getAllMedia();
     List<EntryMedia> getMediaByEntry(Long entryId);
+
     Optional<EntryMedia> getMediaById(Long id);
     EntryMedia createMedia(EntryMedia media);
+    EntryMedia updateMedia(Long id, EntryMedia mediaDetails);
+
     void deleteMedia(Long id);
 }

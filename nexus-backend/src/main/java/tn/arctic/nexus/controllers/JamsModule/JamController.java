@@ -1,14 +1,16 @@
 package tn.arctic.nexus.controllers.JamsModule;
+
 import tn.arctic.nexus.entities.Jam;
 import tn.arctic.nexus.services.JamsModule.IJamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/api/gamejams")
@@ -52,9 +54,14 @@ public class JamController {
     }
 
     @GetMapping("/starting-after/{date}")
-    public List<Jam> getJamsStartingAfter(@PathVariable String date) {
-        LocalDateTime parsedDate = LocalDateTime.parse(date);
-        return jamService.getJamsStartingAfter(parsedDate);
+    public ResponseEntity<List<Jam>> getJamsStartingAfter(@PathVariable String date) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = formatter.parse(date);
+            return ResponseEntity.ok(jamService.getJamsStartingAfter(parsedDate));
+        } catch (ParseException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/ongoing-voting")

@@ -5,7 +5,6 @@ import tn.arctic.nexus.repositories.JamsModule.IEntryMediaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +31,19 @@ public class EntryMediaService implements IEntryMediaService {
 
     @Override
     public EntryMedia createMedia(EntryMedia media) {
-        media.setCreatedAt(LocalDateTime.now());
-        media.setUpdatedAt(LocalDateTime.now());
         return mediaRepository.save(media);
+    }
+
+    @Override
+    public EntryMedia updateMedia(Long id, EntryMedia mediaDetails) {
+        Optional<EntryMedia> existingMedia = mediaRepository.findById(id);
+        if (existingMedia.isPresent()) {
+            EntryMedia media = existingMedia.get();
+            media.setUrl(mediaDetails.getUrl());
+            media.setType(mediaDetails.getType());
+            return mediaRepository.save(media);
+        }
+        return null;
     }
 
     @Override

@@ -21,9 +21,26 @@ public class EntryMediaController {
         return mediaService.getAllMedia();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<EntryMedia> getMediaById(@PathVariable Long id) {
+        Optional<EntryMedia> media = mediaService.getMediaById(id);
+        return media.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/entry/{entryId}")
+    public List<EntryMedia> getMediaByEntry(@PathVariable Long entryId) {
+        return mediaService.getMediaByEntry(entryId);
+    }
+
     @PostMapping
     public ResponseEntity<EntryMedia> createMedia(@RequestBody EntryMedia media) {
         return ResponseEntity.ok(mediaService.createMedia(media));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EntryMedia> updateMedia(@PathVariable Long id, @RequestBody EntryMedia mediaDetails) {
+        EntryMedia updatedMedia = mediaService.updateMedia(id, mediaDetails);
+        return updatedMedia != null ? ResponseEntity.ok(updatedMedia) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
