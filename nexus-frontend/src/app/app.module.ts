@@ -12,6 +12,8 @@ import { GamesComponent } from './games/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home/home.component';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
+import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
     FooterComponent,
     GamesComponent,
     HomeComponent,
-    GamesCarouselComponent
+    GamesCarouselComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,10 @@ import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CarouselModule
+    CarouselModule,
+    GamesListComponent
+
+
 
   ],
   providers: [],

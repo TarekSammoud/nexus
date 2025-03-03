@@ -1,0 +1,114 @@
+/* General Grid Styling */
+/*
+.e-game-cell {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    background: #171a21; 
+    color: #ffffff; 
+    padding: 8px;
+
+}*/
+
+/* Row Layout */
+.e-game-info-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #171a21; /* Dark row background */
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transition */
+    min-height: 60px; /* Reduced row height */
+}
+
+.e-game-info-container:hover {
+    background-color: #2c3038; /* Lighter shade or another color on hover */
+}
+
+
+/* Game Image */
+.e-game-image-layout {
+    flex: 0 0 80px; /* Smaller image */
+    margin-right: 12px;
+}
+
+.e-game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Game Info */
+.e-game-info-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #c5c6c7; /* Softer text color */
+}
+
+/* Game Title */
+.e-game-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Description */
+.e-info-text-separator {
+    font-size: 13px;
+    color: #b0b3b8;
+}
+
+/* Platform */
+.e-game-platform {
+    font-size: 13px;
+    font-style: italic;
+    color: #66c0f4;
+}
+
+/* Price */
+.e-game-price-min-layout {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.e-game-price-text {
+    color: #cccccc;
+    font-weight: normal;
+}
+
+.e-game-price {
+    font-size: 17px;
+    font-weight: bold;
+    color: #ff5733;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .e-game-info-container {
+        flex-direction: column;
+        align-items: left;
+        text-align: left;
+        min-height: 80px; /* Slightly larger for mobile */
+    }
+
+    .e-game-image-layout {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .e-game-image {
+        width: 10%;
+        height: auto;
+        border-radius: 6px;
+        object-fit: cover;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+}
