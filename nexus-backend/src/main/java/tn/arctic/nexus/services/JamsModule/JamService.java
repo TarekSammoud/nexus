@@ -1,14 +1,13 @@
 package tn.arctic.nexus.services.JamsModule;
+
 import tn.arctic.nexus.entities.Jam;
 import tn.arctic.nexus.repositories.JamsModule.IJamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class JamService implements IJamService {
@@ -28,8 +27,6 @@ public class JamService implements IJamService {
 
     @Override
     public Jam createJam(Jam jam) {
-        jam.setCreatedAt(LocalDateTime.now());
-        jam.setUpdatedAt(LocalDateTime.now());
         return jamRepository.save(jam);
     }
 
@@ -45,11 +42,9 @@ public class JamService implements IJamService {
             jam.setVoteStartDate(jamDetails.getVoteStartDate());
             jam.setVoteEndDate(jamDetails.getVoteEndDate());
             jam.setReward(jamDetails.getReward());
-            jam.setUpdatedAt(LocalDateTime.now());
             return jamRepository.save(jam);
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -63,14 +58,13 @@ public class JamService implements IJamService {
     }
 
     @Override
-    public List<Jam> getJamsStartingAfter(LocalDateTime date) {
+    public List<Jam> getJamsStartingAfter(Date date) {
         return jamRepository.findByDevStartDateAfter(date);
     }
 
     @Override
     public List<Jam> getOngoingVotingJams() {
-        LocalDateTime now = LocalDateTime.now();
+        Date now = new Date();
         return jamRepository.findByVoteStartDateBeforeAndVoteEndDateAfter(now, now);
     }
 }
-

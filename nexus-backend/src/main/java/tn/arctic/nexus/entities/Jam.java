@@ -1,13 +1,13 @@
 package tn.arctic.nexus.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -24,20 +24,34 @@ public class Jam implements Serializable {
     private String name;
     private String description;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime devStartDate;
-    private LocalDateTime devEndDate;
-    private LocalDateTime voteStartDate;
-    private LocalDateTime voteEndDate;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    private Date devStartDate;
+    private Date devEndDate;
+    private Date voteStartDate;
+    private Date voteEndDate;
 
     private String reward;
 
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Entry> entrys;
+    @OneToMany(mappedBy = "jam", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Entry> entries;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "jam_participants",
+            joinColumns = @JoinColumn(name = "jam_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> participants;
 }

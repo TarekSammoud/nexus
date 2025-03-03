@@ -2,6 +2,7 @@ package tn.arctic.nexus.services.JamsModule;
 
 import tn.arctic.nexus.entities.Jam;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,6 @@ public interface IJamService {
     Jam updateJam(Long id, Jam jamDetails);
     void deleteJam(Long id);
     List<Jam> getJamsByUserId(Long userId);
-    List<Jam> getJamsStartingAfter(java.time.LocalDateTime date);
+    List<Jam> getJamsStartingAfter(Date date);
     List<Jam> getOngoingVotingJams();
 }
