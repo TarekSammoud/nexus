@@ -51,13 +51,13 @@ public class Game implements Serializable {
     private List<User> users;
 
     @ManyToMany
-    @OnDelete(action = OnDeleteAction.CASCADE)  // Deletes related records in game_categories when Game is deleted
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<GameCategory> categories;
 
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference  // This marks the parent side to handle serialization
+    @JsonManagedReference
     private List<GameMedia> gameMediaList;
 
     public Long getId() {
