@@ -18,8 +18,11 @@ public class UserController {
         return userService.retrieveAllUser();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public User addUser(@RequestBody User user) {
+
+        System.out.println(user.toString());  // Log the user object to check if it's populated
+
         return  userService.addUser(user);
     }
 
@@ -29,12 +32,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return userService.retrieveUser(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
         userService.removeUser(id);
     }
 }

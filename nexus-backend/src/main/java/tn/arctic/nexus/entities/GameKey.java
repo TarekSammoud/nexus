@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @AllArgsConstructor
@@ -22,9 +24,12 @@ public class GameKey implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String keyCode;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,6 +40,8 @@ public class GameKey implements Serializable {
     private Game game;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")  // Foreign key column in GameKey table
+    @JsonBackReference  // This prevents serialization of the game field in GameMedia
     private User user;
 
     public Long getId() {
@@ -75,5 +82,31 @@ public class GameKey implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+
+    public String generateCode(){
+        StringBuilder code = new StringBuilder();
+        Random random = new Random();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (int i = 0; i < 13; i++) {
+            if (i > 0 && i % 4 == 0) {
+                code.append("-");  // Add hyphen every 4 characters
+            }
+            code.append(characters.charAt(random.nextInt(characters.length())));
+        }
+
+        return code.toString();
+    }
+
+
+    public String getKeyCode() {
+        return keyCode;
+    }
+
+    public void setKeyCode(String keyCode) {
+        this.keyCode = keyCode;
     }
 }

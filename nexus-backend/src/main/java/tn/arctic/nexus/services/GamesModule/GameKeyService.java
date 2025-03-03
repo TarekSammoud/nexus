@@ -14,6 +14,9 @@ public class GameKeyService implements IGameKeyService{
 
     @Override
     public GameKey createGameKey(GameKey gameKey) {
+       // gameKey.setKey(gameKey.generateCode());
+        String generatedKey = gameKey.generateCode();
+        gameKey.setKeyCode(generatedKey);
         return gameKeyRepository.save(gameKey);
     }
 

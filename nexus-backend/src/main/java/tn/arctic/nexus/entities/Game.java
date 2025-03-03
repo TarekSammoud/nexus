@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,8 +48,9 @@ public class Game implements Serializable {
     @ManyToMany
     private List<GameItem> gameItems;
 
-    @ManyToMany
-    private List<User> users;
+    @ManyToOne
+    @JsonBackReference  // This prevents serialization of the game field in GameMedia
+    private User user;
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -125,12 +127,12 @@ public class Game implements Serializable {
         this.gameItems = gameItems;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<GameCategory> getCategories() {
