@@ -1,22 +1,102 @@
+/* Featured Section */
+.background-video {
+  top: 0;               /* Position it at the top */
+  left: 0;              /* Position it at the left */
+  width: 100%;          /* Make the video take the full width */
+  height: 100%;         /* Make the video take the full height */
+  object-fit: cover;    /* Ensure the video covers the area without distortion */
+  z-index: -1;          /* Place it behind the content */
+}
+
+html, body {
+  overflow-x: hidden;
+}
+/*
+.games-list-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #1b1e25, #171a21); /* Dark gradient for depth */
+ /* text-align: center;
+  overflow-x: hidden;
+}*/
+.featured-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #1b1e25, #171a21); /* Dark gradient for depth */
+  text-align: center;
+}
+
+/* Title Styling */
+.featured-container > div:first-child {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+}
+
+.featured-container > div:first-child::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #66c0f4; /* Steam Blue */
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Carousel Wrapper */
 .carousel-container {
-    max-width: 100%;       /* Limit the maximum width */
-    margin: 0 auto;        /* Center the carousel */
-    overflow: hidden;      /* Prevent the carousel from overflowing */
-    display: flex;         /* Use flexbox for better alignment */
-    justify-content: center; /* Center horizontally */
-    align-items: center;   /* Center vertically */
-  }
-  
-  app-games-carousel {
-    width: 120%;            /* Adjust width as necessary */
-    max-width: 800px;      /* Prevent it from becoming too wide */
-    height: auto;          /* Maintain aspect ratio */
-  }
-  
+  width: 100%;
+  max-width: 1200px; /* Limits max width */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Carousel Component */
+app-games-carousel {
+  width: 100%;
+  max-width: 900px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Games List */
+app-games-list {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+/* Hover Effect for a Nice Glow */
+app-games-carousel:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .featured-container {
-    display: grid;                 /* Use grid layout */
-    grid-template-columns: 1fr;     /* Create a single column for stacking items */
-    width: 100%;                   /* Ensure it takes the full width of the container */
-    justify-items: center;         /* Center the items horizontally within the grid */
+      padding: 30px 15px;
   }
-  
+
+  .featured-container > div:first-child {
+      font-size: 20px;
+  }
+
+  app-games-carousel {
+      max-width: 100%;
+  }
+}
