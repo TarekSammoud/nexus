@@ -33,7 +33,7 @@ public class EntryController {
         return ResponseEntity.ok(newEntry);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public Entry updateEntry( @RequestBody Entry entry) {
         return entryService.updateEntry(entry);
     }
