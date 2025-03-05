@@ -12,7 +12,7 @@ public interface IEntryService {
 
     Entry createEntry(Entry entry);
 
-    Entry updateEntry(Long id, Entry entryDetails);
+    Entry updateEntry(Entry entry);
 
     void deleteEntry(Long id);
 

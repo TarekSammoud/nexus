@@ -31,20 +31,8 @@ public class JamService implements IJamService {
     }
 
     @Override
-    public Jam updateJam(Long id, Jam jamDetails) {
-        Optional<Jam> existingJam = jamRepository.findById(id);
-        if (existingJam.isPresent()) {
-            Jam jam = existingJam.get();
-            jam.setName(jamDetails.getName());
-            jam.setDescription(jamDetails.getDescription());
-            jam.setDevStartDate(jamDetails.getDevStartDate());
-            jam.setDevEndDate(jamDetails.getDevEndDate());
-            jam.setVoteStartDate(jamDetails.getVoteStartDate());
-            jam.setVoteEndDate(jamDetails.getVoteEndDate());
-            jam.setReward(jamDetails.getReward());
-            return jamRepository.save(jam);
-        }
-        return null;
+    public Jam updateJam(Jam jam) {
+        return jamRepository.save(jam);
     }
 
     @Override

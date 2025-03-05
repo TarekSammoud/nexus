@@ -1,10 +1,10 @@
 package tn.arctic.nexus.controllers.JamsModule;
 
 import tn.arctic.nexus.entities.Jam;
-import tn.arctic.nexus.services.JamsModule.IJamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.services.JamsModule.IJamService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ public class JamController {
     @Autowired
     IJamService jamService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Jam> getAllJams() {
         return jamService.getAllJams();
     }
@@ -30,16 +30,15 @@ public class JamController {
         return jam.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Jam> createJam(@RequestBody Jam jam) {
         Jam newJam = jamService.createJam(jam);
         return ResponseEntity.ok(newJam);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Jam> updateJam(@PathVariable Long id, @RequestBody Jam jamDetails) {
-        Jam updatedJam = jamService.updateJam(id, jamDetails);
-        return updatedJam != null ? ResponseEntity.ok(updatedJam) : ResponseEntity.notFound().build();
+    public Jam updateJam(@RequestBody Jam jam) {
+        return jamService.updateJam(jam);
     }
 
     @DeleteMapping("/{id}")

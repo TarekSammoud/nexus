@@ -32,8 +32,7 @@ public class EntryRatingService implements IEntryRatingService {
 
     @Override
     public EntryRating createRating(EntryRating rating) {
-        rating.setCreatedAt(LocalDateTime.now());
-        rating.setUpdatedAt(LocalDateTime.now());
+
         return ratingRepository.save(rating);
     }
 

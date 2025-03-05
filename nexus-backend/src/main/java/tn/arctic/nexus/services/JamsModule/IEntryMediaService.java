@@ -11,7 +11,7 @@ public interface IEntryMediaService {
 
     Optional<EntryMedia> getMediaById(Long id);
     EntryMedia createMedia(EntryMedia media);
-    EntryMedia updateMedia(Long id, EntryMedia mediaDetails);
+    EntryMedia updateMedia(EntryMedia entryMedia);
 
     void deleteMedia(Long id);
 }

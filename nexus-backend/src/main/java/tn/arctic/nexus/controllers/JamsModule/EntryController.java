@@ -16,7 +16,7 @@ public class EntryController {
     @Autowired
     IEntryService entryService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Entry> getAllEntries() {
         return entryService.getAllEntries();
     }
@@ -27,19 +27,18 @@ public class EntryController {
         return entry.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Entry> createEntry(@RequestBody Entry entry) {
         Entry newEntry = entryService.createEntry(entry);
         return ResponseEntity.ok(newEntry);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Entry> updateEntry(@PathVariable Long id, @RequestBody Entry entryDetails) {
-        Entry updatedEntry = entryService.updateEntry(id, entryDetails);
-        return updatedEntry != null ? ResponseEntity.ok(updatedEntry) : ResponseEntity.notFound().build();
+    @PutMapping("/update/{id}")
+    public Entry updateEntry( @RequestBody Entry entry) {
+        return entryService.updateEntry(entry);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEntry(@PathVariable Long id) {
         entryService.deleteEntry(id);
         return ResponseEntity.noContent().build();
