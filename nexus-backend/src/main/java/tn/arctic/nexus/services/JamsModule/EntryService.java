@@ -30,16 +30,8 @@ public class EntryService implements IEntryService {
     }
 
     @Override
-    public Entry updateEntry(Long id, Entry entryDetails) {
-        Optional<Entry> existingEntry = entryRepository.findById(id);
-        if (existingEntry.isPresent()) {
-            Entry entry = existingEntry.get();
-            entry.setNameEntry(entryDetails.getNameEntry());
-            entry.setDescriptionEntry(entryDetails.getDescriptionEntry());
-            return entryRepository.save(entry);
-        } else {
-            return null;
-        }
+    public Entry updateEntry( Entry entry) {
+        return entryRepository.save(entry);
     }
 
     @Override

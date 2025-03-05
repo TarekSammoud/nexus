@@ -10,7 +10,7 @@ public interface IJamService {
     List<Jam> getAllJams();
     Optional<Jam> getJamById(Long id);
     Jam createJam(Jam jam);
-    Jam updateJam(Long id, Jam jamDetails);
+    Jam updateJam(Jam jam);
     void deleteJam(Long id);
     List<Jam> getJamsByUserId(Long userId);
     List<Jam> getJamsStartingAfter(Date date);

@@ -35,15 +35,8 @@ public class EntryMediaService implements IEntryMediaService {
     }
 
     @Override
-    public EntryMedia updateMedia(Long id, EntryMedia mediaDetails) {
-        Optional<EntryMedia> existingMedia = mediaRepository.findById(id);
-        if (existingMedia.isPresent()) {
-            EntryMedia media = existingMedia.get();
-            media.setUrl(mediaDetails.getUrl());
-            media.setType(mediaDetails.getType());
-            return mediaRepository.save(media);
-        }
-        return null;
+    public EntryMedia updateMedia(EntryMedia entryMedia) {
+        return mediaRepository.save(entryMedia);
     }
 
     @Override

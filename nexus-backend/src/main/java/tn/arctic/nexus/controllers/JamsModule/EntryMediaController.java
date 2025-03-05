@@ -37,10 +37,9 @@ public class EntryMediaController {
         return ResponseEntity.ok(mediaService.createMedia(media));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<EntryMedia> updateMedia(@PathVariable Long id, @RequestBody EntryMedia mediaDetails) {
-        EntryMedia updatedMedia = mediaService.updateMedia(id, mediaDetails);
-        return updatedMedia != null ? ResponseEntity.ok(updatedMedia) : ResponseEntity.notFound().build();
+    @PutMapping("/update")
+    public EntryMedia updateMedia(@RequestBody EntryMedia entryMedia) {
+        return mediaService.updateMedia(entryMedia);
     }
 
     @DeleteMapping("/{id}")
