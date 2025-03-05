@@ -1,5 +1,6 @@
 package tn.arctic.nexus.services.JamsModule;
 
+import tn.arctic.nexus.entities.EntryMedia;
 import tn.arctic.nexus.entities.EntryRating;
 import tn.arctic.nexus.repositories.JamsModule.IEntryRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class EntryRatingService implements IEntryRatingService {
         return ratingRepository.save(rating);
     }
 
+    @Override
+    public EntryRating updateRating(EntryRating entryRating) {
+        return ratingRepository.save(entryRating);
+    }
     @Override
     public void deleteRating(Long id) {
         ratingRepository.deleteById(id);

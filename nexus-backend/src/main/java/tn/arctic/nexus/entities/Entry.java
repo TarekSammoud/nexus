@@ -46,6 +46,10 @@ public class Entry implements Serializable {
     @JsonManagedReference
     private Set<EntryMedia> entryMediaList;
 
+    @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("entry-entryRating")
+    private Set<EntryRating> ratings;
+
     public Long getId() {
         return id;
     }

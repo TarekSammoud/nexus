@@ -11,4 +11,5 @@ public interface IEntryRatingService {
     Optional<EntryRating> getRatingById(Long id);
     EntryRating createRating(EntryRating rating);
     void deleteRating(Long id);
+    public EntryRating updateRating(EntryRating entryRating);
 }
