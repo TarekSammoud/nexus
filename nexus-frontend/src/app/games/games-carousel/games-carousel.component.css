@@ -1,0 +1,119 @@
+.carousel-item-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 150%; /* Increase the width of the carousel item */
+    padding: 50px; /* Increase padding to make the items bigger */
+  }
+  
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 games per row */
+    gap: 30px; /* Increase spacing between games */
+    width: 100%;
+  }
+  
+  /* Categories styling (smaller font and ellipsis for overflow) */
+  .categories {
+    font-size: 12px;
+    color: gray;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis; /* Add ellipsis when content overflows */
+    margin-bottom: 10px;
+  }
+  
+  .game-item {
+    text-align: left; /* Align game items to the left */
+  }
+  
+  .img-container {
+    width: 100%; /* Full width */
+    height: 0;
+    padding-bottom: 125%; /* 4:5 Aspect Ratio (5/4 = 1.25) */
+    overflow: hidden;
+    position: relative; /* Needed for absolute positioning */
+  }
+  
+  .game-image {
+    position: absolute;
+    width: 100%; /* Ensure the image covers the full width */
+    height: 100%;
+    object-fit: cover; /* Maintain 4:5 aspect ratio and cover the container */
+  }
+  
+  .game-info {
+    padding: 15px; /* Increase padding for more spacing */
+  }
+  
+  .game-info h3 {
+    font-weight: bold;
+    margin-bottom: 15px; /* Increase margin for more spacing */
+  }
+  
+  .game-info p {
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  /* Responsive Design Adjustments */
+  @media (max-width: 1024px) {
+    .game-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 games per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .game-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 games per row */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .game-grid {
+      grid-template-columns: 1fr; /* 1 game per row */
+    }
+  }
+
+  .control-container {
+    position: relative; /* To make sure everything is aligned properly */
+  }
+  
+  .carousel-title {
+    font-size: 36px; /* Large font size */
+    font-weight: bold;
+    color: #fff; /* White text color */
+    text-align: left; /* Align the title to the left */
+    margin-bottom: 20px; /* Space between the title and the carousel */
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: dark background behind the title */
+    border-radius: 10px; /* Optional: rounded corners */
+    width: fit-content; /* Makes the width fit to content */
+    max-width: 100%;
+    line-height: 1.2;
+    word-wrap: break-word; /* Ensure it breaks lines properly */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Optional: shadow to make text more readable */
+    top: 10px; /* Position the title a bit above the carousel */
+    left: 20px; /* Align to the left of the container */
+  }
+  
+  /* Ensure responsiveness */
+  @media (max-width: 1024px) {
+    .carousel-title {
+      font-size: 30px; /* Slightly smaller font on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-title {
+      font-size: 24px; /* Even smaller font on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .carousel-title {
+      font-size: 20px; /* Small font size on mobile */
+    }
+  }
+  

@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 
     @Override
     public User retrieveUser(long idUser) {
-        return userRepository.findById(idUser).get();
+        return userRepository.findById(idUser).orElse(null);
     }
 
     @Override
