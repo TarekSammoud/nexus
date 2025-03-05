@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class Jam implements Serializable {
 
     @Id
@@ -41,10 +43,12 @@ public class Jam implements Serializable {
 
     @OneToMany(mappedBy = "jam", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
+//    @ToString.Exclude
     private Set<Entry> entries;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToMany

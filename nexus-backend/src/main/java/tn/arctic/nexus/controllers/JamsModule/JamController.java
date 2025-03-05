@@ -36,12 +36,12 @@ public class JamController {
         return ResponseEntity.ok(newJam);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Jam updateJam(@RequestBody Jam jam) {
         return jamService.updateJam(jam);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteJam(@PathVariable Long id) {
         jamService.deleteJam(id);
         return ResponseEntity.noContent().build();
