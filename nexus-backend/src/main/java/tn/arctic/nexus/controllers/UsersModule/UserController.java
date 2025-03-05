@@ -18,12 +18,12 @@ public class UserController {
         return userService.retrieveAllUser();
     }
 
-    @PostMapping
+    @PostMapping("add")
     public User addUser(@RequestBody User user) {
         return  userService.addUser(user);
     }
 
-    @PutMapping
+    @PutMapping("update")
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
@@ -33,7 +33,7 @@ public class UserController {
         return userService.retrieveUser(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.removeUser(id);
     }

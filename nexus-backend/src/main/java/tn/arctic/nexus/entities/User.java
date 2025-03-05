@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import tn.arctic.nexus.entities.FinanceModule.Wallet;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -51,5 +52,10 @@ public class User implements Serializable {
 
     @ManyToMany
     private List<Game> gameLibrary;
+
+    @OneToOne(mappedBy = "user")
+    private Wallet wallet;
+
+
 
 }
