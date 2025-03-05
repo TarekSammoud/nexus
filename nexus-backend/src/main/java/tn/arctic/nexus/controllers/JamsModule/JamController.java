@@ -36,7 +36,7 @@ public class JamController {
         return ResponseEntity.ok(newJam);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public Jam updateJam(@RequestBody Jam jam) {
         return jamService.updateJam(jam);
     }

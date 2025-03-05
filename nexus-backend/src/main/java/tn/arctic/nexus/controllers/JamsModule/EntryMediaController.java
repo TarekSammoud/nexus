@@ -16,7 +16,7 @@ public class EntryMediaController {
     @Autowired
     IEntryMediaService mediaService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<EntryMedia> getAllMedia() {
         return mediaService.getAllMedia();
     }
@@ -32,7 +32,7 @@ public class EntryMediaController {
         return mediaService.getMediaByEntry(entryId);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<EntryMedia> createMedia(@RequestBody EntryMedia media) {
         return ResponseEntity.ok(mediaService.createMedia(media));
     }
@@ -42,7 +42,7 @@ public class EntryMediaController {
         return mediaService.updateMedia(entryMedia);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteMedia(@PathVariable Long id) {
         mediaService.deleteMedia(id);
         return ResponseEntity.noContent().build();

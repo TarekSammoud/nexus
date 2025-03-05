@@ -48,7 +48,7 @@ public class Jam implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference("user-jam")
     private User user;
 
     @ManyToMany
