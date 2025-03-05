@@ -37,4 +37,7 @@ public class GameItem implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt; // Auto-updated timestamp when modified
 
+    public Long getId() {
+        return id;
+    }
 }
