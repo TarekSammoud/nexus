@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations'
 import { Game } from 'src/app/core/entities/game/game';
 import { GameService } from 'src/app/core/services/game/game.service';
@@ -11,7 +12,8 @@ import { GameService } from 'src/app/core/services/game/game.service';
 export class GamesCarouselComponent implements OnInit{
 
     Games? : Game[];
-    constructor(private gameService: GameService) {
+
+    constructor(private _router:Router,private gameService: GameService) {
       this.gameService.getGames().subscribe(games => {
         this.Games = games; 
       });
@@ -20,5 +22,10 @@ export class GamesCarouselComponent implements OnInit{
     ngOnInit(): void {
       console.log(this.Games);
     }
+
+    
+  OnSelect(game : Game){
+    this._router.navigate(['/games', game.id]);
+  }
 
 }

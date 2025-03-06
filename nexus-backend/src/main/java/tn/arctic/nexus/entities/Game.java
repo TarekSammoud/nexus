@@ -62,6 +62,11 @@ public class Game implements Serializable {
     @JsonManagedReference
     private List<GameMedia> gameMediaList;
 
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
+    private List<GameReview> gameReviewList;
+
     public Long getId() {
         return id;
     }
@@ -141,5 +146,21 @@ public class Game implements Serializable {
 
     public void setCategories(List<GameCategory> categories) {
         this.categories = categories;
+    }
+
+    public List<GameMedia> getGameMediaList() {
+        return gameMediaList;
+    }
+
+    public void setGameMediaList(List<GameMedia> gameMediaList) {
+        this.gameMediaList = gameMediaList;
+    }
+
+    public List<GameReview> getGameReviewList() {
+        return gameReviewList;
+    }
+
+    public void setGameReviewList(List<GameReview> gameReviewList) {
+        this.gameReviewList = gameReviewList;
     }
 }

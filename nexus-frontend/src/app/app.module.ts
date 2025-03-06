@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home/home.component';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
+import { GamePageComponent } from './games/game-page/game-page.component';
 
 
 
@@ -24,6 +25,7 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
     GamesComponent,
     HomeComponent,
     GamesCarouselComponent,
+    GamePageComponent,
     
   ],
   imports: [

@@ -4,6 +4,7 @@ import { GridComponent, GridModule } from '@syncfusion/ej2-angular-grids';
 import { ChipListModule } from '@syncfusion/ej2-angular-buttons';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameService } from 'src/app/core/services/game/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-games-list',
@@ -22,7 +23,7 @@ import { GameService } from 'src/app/core/services/game/game.service';
 export class GamesListComponent  implements OnInit {
 
       data? : Game[];
-      constructor(private gameService: GameService) {
+      constructor(private _router : Router,private gameService: GameService) {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
         });
@@ -35,5 +36,9 @@ export class GamesListComponent  implements OnInit {
 
   ngOnInit(): void {
       this.data = [];
+  }
+
+  OnSelect(game : Game){
+    this._router.navigate(['/games', game.id]);
   }
 }

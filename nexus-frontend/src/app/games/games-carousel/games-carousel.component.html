@@ -13,7 +13,9 @@
                   <div *ngFor="let g of Games?.slice(i, i + 5)" class="game-item">
                     <figure class="img-container">
                       <!-- Use safe navigation to avoid errors when gameMediaList is undefined -->
+                      <button class="no-styling" (click)="OnSelect(g)">
                       <img [src]="g.gameMediaList?.[0]?.mediaUrl" alt="{{ g.name }}" class="game-image" />
+                    </button>
                     </figure>
                     <div class="game-info">
                       <!-- <div class="categories">
@@ -25,6 +27,7 @@
                     </div>
                   </div>
                 </div>
+                
               </div>
             </ng-template>
           </e-carousel-item>
