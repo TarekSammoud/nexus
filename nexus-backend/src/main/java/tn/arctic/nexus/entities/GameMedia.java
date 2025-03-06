@@ -40,7 +40,7 @@ public class GameMedia implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "game_id")
-    @JsonBackReference  // This prevents serialization of the game field in GameMedia
+    @JsonBackReference
     private Game game;
 
     public Long getId() {

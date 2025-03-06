@@ -58,6 +58,10 @@ public class User implements Serializable {
     @JsonManagedReference
     private List<GameKey> gamekeyLibrary;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("reviews-user")
+    private List<GameReview> gameReviews;
+
 
     @Override
     public String toString() {
@@ -198,5 +202,13 @@ public class User implements Serializable {
 
     public void setGamekeyLibrary(List<GameKey> gamekeyLibrary) {
         this.gamekeyLibrary = gamekeyLibrary;
+    }
+
+    public List<GameReview> getGameReviews() {
+        return gameReviews;
+    }
+
+    public void setGameReviews(List<GameReview> gameReviews) {
+        this.gameReviews = gameReviews;
     }
 }

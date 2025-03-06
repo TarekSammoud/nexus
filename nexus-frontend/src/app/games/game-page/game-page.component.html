@@ -1,0 +1,42 @@
+<div class="game-container">
+    <!-- First Row: Game Title -->
+    <div class="game-title-container">
+      <h1 class="game-title text-light">{{ game?.name }}</h1>
+    </div>
+  
+    <!-- Second Row: Carousel and Right Column -->
+    <div class="game-content">
+      <!-- Left Column: Carousel -->
+      <div class="game-left">
+        <div class="game-carousel">
+          <ejs-carousel>
+            <e-carousel-items>
+              <ng-container *ngFor="let media of game?.gameMediaList">
+                <e-carousel-item>
+                  <ng-template #template>
+                    <figure class="img-container">
+                      <img [src]="media.mediaUrl" alt="error" class="game-image" />
+                    </figure>
+                  </ng-template>
+                </e-carousel-item>
+              </ng-container>
+            </e-carousel-items>
+          </ejs-carousel>
+        </div>
+      </div>
+  
+      <!-- Right Column: Banner, Price, and Buy Button -->
+      <div class="game-right">
+        <div class="game-banner">
+          <img src="https://cdn1.epicgames.com/spt-assets/e83b81f79e604f8ba21cca597f1dc850/citizen-sleeper-2-starward-vector-logo-1i7hq.png?resize=1&w=480&h=270&quality=medium" 
+               alt="{{ game?.name }} banner" 
+               class="banner-image" />
+        </div>
+        <div class="game-price">
+          <h6 class="text-light text-left">{{ game?.price | currency: 'USD' }}</h6>
+          <button class="buy-button">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,87 @@
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr; /* One column for the title */
+    grid-template-rows: auto 1fr; /* Title in the first row, content in the second */
+    gap: 20px; /* Space between rows */
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .game-title-container {
+    grid-column: 1 / -1; /* Spans the full width */
+    text-align: left;
+  }
+  
+  .game-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns for carousel and right content */
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .game-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+    padding-top: 56.25%; /* This creates the 16:9 aspect ratio */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .game-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .ejs-carousel {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .e-carousel-items {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .e-carousel-item {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .e-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the images fit the container properly without stretching */
+  }
+  
+  .game-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .game-banner {
+    margin-bottom: 20px;
+  }
+  
+  .game-price h6 {
+    margin-bottom: 10px;
+  }
+  
+  .buy-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .buy-button:hover {
+    background-color: #0056b3;
+  }
+  
