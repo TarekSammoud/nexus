@@ -1,0 +1,48 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .jam-card {
+    width: 350px;
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .jam-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-body h3 {
+    font-size: 1.4rem;
+    color: white;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .card-footer {
+    background: transparent;
+    border-top: none;
+  }
+  
+  .btn {
+    font-size: 0.9rem;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    opacity: 0.8;
+  }
+  
+  .jam-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+

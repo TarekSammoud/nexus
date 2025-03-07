@@ -1,0 +1,15 @@
+<h2>Détails du Game Jam</h2>
+<h2>GAME JAM DETAILS</h2>
+<div *ngIf="jam">
+  <h3>{{ jam.name }}</h3>
+  <p>{{ jam.description }}</p>
+  <p><strong>Start Date:</strong> {{ jam.devStartDate | date: 'dd/MM/yyyy' }}</p>
+  <p><strong>End Date:</strong> {{ jam.devEndDate | date: 'dd/MM/yyyy' }}</p>
+  <p><strong>Reward:</strong> {{ jam.reward }}</p>
+  <button routerLink="/jams">Back to List</button>
+</div>
+
+
+<ng-template #noData>
+  <p>waiting ...</p>
+</ng-template>

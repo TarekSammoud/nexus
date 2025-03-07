@@ -1,0 +1,55 @@
+<div class="container my-5">
+    <!-- Titre principal -->
+    <div class="text-center">
+        <h1 class="fw-bold text-white">Game Jams on Nexus</h1>
+        <p class="text-muted">
+            Join or create exciting game jams and showcase your creativity!
+        </p>
+        <button class="btn btn-danger mt-3 px-4 py-2 fw-bold" (click)="toggleForm()">
+            + Host a Game Jam
+        </button>
+    </div>
+
+    <!-- Formulaire de création -->
+    <div *ngIf="showForm" class="mt-4">
+        <app-jam-form (jamCreated)="onJamCreated($event)"></app-jam-form>
+    </div>
+
+    <!-- Liste des Game Jams -->
+    <div class="row mt-5">
+        <div *ngIf="jams.length > 0; else noData" class="d-flex flex-wrap justify-content-center gap-4">
+            <div *ngFor="let jam of jams" class="card jam-card">
+                <!-- Image du Game Jam -->
+                <img *ngIf="jam.imageUrl; else noImage" [src]="jam.imageUrl" alt="Game Jam Image" class="jam-img">
+                
+                <!-- Image de remplacement si aucune URL fournie -->
+                <ng-template #noImage>
+                    <img src="assets/default-jam.jpg" alt="Default Game Jam Image" class="jam-img">
+                </ng-template>
+
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">{{ jam.name }}</h3>
+                    <p class="card-text text-muted">{{ jam.description }}</p>
+                    <p><strong>Start:</strong> {{ jam.devStartDate | date: 'dd/MM/yyyy' }}</p>
+                    <p><strong>End:</strong> {{ jam.devEndDate | date: 'dd/MM/yyyy' }}</p>
+                </div>
+                
+                <div class="card-footer d-flex justify-content-between">
+                    <button class="btn btn-info btn-sm text-white" (click)="viewDetails(jam.id)">View Details</button>
+                    <button class="btn btn-warning btn-sm text-white" (click)="editJam(jam)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteJam(jam.id)">Delete</button>
+                </div>
+
+                <!-- Formulaire de modification visible uniquement pour le Jam sélectionné -->
+                <div *ngIf="selectedJam && selectedJam.id === jam.id" class="mt-3">
+                    <app-jam-edit [jam]="selectedJam" (jamUpdated)="onJamUpdated($event)"></app-jam-edit>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message si aucun Game Jam disponible -->
+    <ng-template #noData>
+        <p class="text-center text-muted mt-4">No Game Jams available.</p>
+    </ng-template>
+</div>
