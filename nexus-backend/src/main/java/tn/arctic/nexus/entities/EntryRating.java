@@ -32,7 +32,7 @@ public class EntryRating implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
-
+//entry & rating
     @ManyToOne
     @JoinColumn(name = "entry_id")
     @JsonBackReference("entry-entryRating")

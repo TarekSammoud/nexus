@@ -1,0 +1,58 @@
+<div class="jam-form-container">
+    <h2 class="form-title">Create a New Game Jam</h2>
+
+    <form (ngSubmit)="createJam()" class="jam-form">
+        <!-- Image URL -->
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" [(ngModel)]="jam.imageUrl" name="imageUrl" class="form-control" placeholder="Enter image URL">
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="jam.name" name="name" class="form-control" placeholder="Enter game jam name" required>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label>Description</label>
+            <textarea [(ngModel)]="jam.description" name="description" class="form-control" placeholder="Describe your jam" required></textarea>
+        </div>
+
+        <!-- Start & End Date -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Start Date</label>
+                <input type="date" [(ngModel)]="jam.devStartDate" name="devStartDate" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>End Date</label>
+                <input type="date" [(ngModel)]="jam.devEndDate" name="devEndDate" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- Vote Start & End Date -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Vote Start Date</label>
+                <input type="date" [(ngModel)]="jam.voteStartDate" name="voteStartDate" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Vote End Date</label>
+                <input type="date" [(ngModel)]="jam.voteEndDate" name="voteEndDate" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- Reward -->
+        <div class="form-group">
+            <label>Reward</label>
+            <input type="text" [(ngModel)]="jam.reward" name="reward" class="form-control" placeholder="Enter reward (optional)">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary form-btn">Create</button>
+    </form>
+</div>

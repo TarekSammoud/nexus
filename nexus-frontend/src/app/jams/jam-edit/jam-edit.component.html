@@ -1,0 +1,21 @@
+<h3>Edit Game Jam</h3>
+
+<form (ngSubmit)="updateJam()">
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="jam.name" name="name" required>
+
+  <label>Description:</label>
+  <textarea [(ngModel)]="jam.description" name="description" required></textarea>
+
+  <label>Start Date:</label>
+  <input type="date" [(ngModel)]="jam.devStartDate" name="devStartDate" required>
+
+  <label>End Date:</label>
+  <input type="date" [(ngModel)]="jam.devEndDate" name="devEndDate" required>
+
+  <label>Reward:</label>
+  <input type="text" [(ngModel)]="jam.reward" name="reward">
+
+  <button type="submit">Update</button>
+  <button type="button" (click)="cancelEdit()">Cancel</button>
+</form>

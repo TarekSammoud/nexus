@@ -1,0 +1,67 @@
+.jam-form-container {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.jam-form .form-group {
+    margin-bottom: 15px;
+}
+
+.jam-form .form-group label {
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+}
+
+.jam-form .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #2c2c2c;
+    color: white;
+    font-size: 1rem;
+}
+
+.jam-form .form-control::placeholder {
+    color: #888;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-row .form-group {
+    width: 48%;
+}
+
+.form-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 15px;
+    background: #e74c3c;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-btn:hover {
+    background: #c0392b;
+}

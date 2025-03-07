@@ -22,9 +22,10 @@ public class Jam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String imageUrl;
     private String name;
     private String description;
+
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,6 +67,15 @@ public class Jam implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 
     public String getName() {
         return name;
