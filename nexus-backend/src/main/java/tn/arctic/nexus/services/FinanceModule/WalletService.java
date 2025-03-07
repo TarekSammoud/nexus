@@ -24,10 +24,6 @@ public class WalletService implements IWalletService {
         return walletRepository.findById(id).orElseThrow(() -> new RuntimeException("Wallet not found"));
     }
 
-    @Override
-    public Wallet getWalletsByUserId(Long id) {
-        return walletRepository.findByUserId(id);
-    }
 
     @Override
     public Wallet addWallet(Wallet wallet) {
@@ -49,17 +45,7 @@ public class WalletService implements IWalletService {
         }
     }
 
-    @Override
-    public boolean deleteWalletByUserId(Long id) {
-        Wallet wallet = walletRepository.findByUserId(id);
-        if (wallet != null) {
-            walletRepository.delete(wallet);
-            return true;
-        }else {
-            return false;
-        }
 
-    }
 
 
 }

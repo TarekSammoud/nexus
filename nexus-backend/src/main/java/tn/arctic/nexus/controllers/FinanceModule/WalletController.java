@@ -29,10 +29,6 @@ public class WalletController {
     public Wallet createWallet(@RequestBody Wallet wallet) {
        return walletService.addWallet(wallet);
     }
-    @GetMapping("/user/{id}")
-    public Wallet getWalletByUserId(@PathVariable Long id) {
-        return walletService.getWalletsByUserId(id);
-    }
     @GetMapping("/update")
     public Wallet updateWallet(Wallet wallet) {
         return walletService.updateWallet(wallet);
