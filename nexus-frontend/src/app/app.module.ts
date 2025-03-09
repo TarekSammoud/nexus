@@ -14,7 +14,13 @@ import { HomeComponent } from './home/home/home.component';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
-
+import { CreateGameComponent } from './games/create-game/create-game.component';
+import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipInput, MatChipsModule } from '@angular/material/chips';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -26,6 +32,8 @@ import { GamePageComponent } from './games/game-page/game-page.component';
     HomeComponent,
     GamesCarouselComponent,
     GamePageComponent,
+    CreateGameComponent,
+    CreateGameCategoryComponent,
     
   ],
   imports: [
@@ -35,9 +43,11 @@ import { GamePageComponent } from './games/game-page/game-page.component';
     ReactiveFormsModule,
     HttpClientModule,
     CarouselModule,
-    GamesListComponent
-
-
+    GamesListComponent,
+    BrowserAnimationsModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressBarModule
 
   ],
   providers: [],

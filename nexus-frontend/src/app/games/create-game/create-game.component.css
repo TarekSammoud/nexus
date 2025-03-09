@@ -1,0 +1,126 @@
+/* Dark Glassmorphic Background */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Card with Glass Effect */
+  .card {
+    background: rgba(20, 20, 20, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    max-width: 600px;
+
+  }
+  
+  .card:hover {
+  }
+  
+  /* Form Styling */
+  form {
+    background: transparent;
+    padding: 20px;
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Labels */
+  .form-group label {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  
+  /* Inputs */
+  .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-control::placeholder {
+    color: #bbbbbb;
+  }
+  
+  .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    border: 1px solid white;
+  }
+  
+  /* Select */
+  select {
+    cursor: pointer;
+  }
+  
+  /* Animated Chips */
+  mat-chip-option {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    margin: 3px;
+    border-radius: 20px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  mat-chip:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Chip Remove Icon */
+  mat-chip mat-icon {
+    color: #ff5252;
+    cursor: pointer;
+  }
+  
+  /* Floating Next Button */
+  .next-btn {
+    background: linear-gradient(45deg, #6338B0, #9A5ED6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    float: right;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+  }
+  
+  .next-btn:hover {
+    background: linear-gradient(45deg, #6338B0, #8A6BD5);
+}
+  
+  /* Progress Bar */
+  mat-progress-bar {
+    margin-top: 20px;
+    height: 5px;
+  }
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

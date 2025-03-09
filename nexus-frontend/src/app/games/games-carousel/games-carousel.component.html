@@ -1,38 +1,34 @@
-<div class="control-container">
-    <ejs-carousel>
-        
-      <e-carousel-items>
-        <ng-container *ngFor="let game of Games; let i = index">
-          <!-- Wrap 5 games in a single carousel item -->
-          <e-carousel-item *ngIf="i % 5 === 0">
-            <ng-template #template>
-              <div class="carousel-item-content">
-                <!-- Container for the 5 games -->
-                <div class="game-grid">
-                  <!-- Loop through 5 games at a time -->
-                  <div *ngFor="let g of Games?.slice(i, i + 5)" class="game-item">
-                    <figure class="img-container">
-                      <!-- Use safe navigation to avoid errors when gameMediaList is undefined -->
-                      <button class="no-styling" (click)="OnSelect(g)">
-                      <img [src]="g.gameMediaList?.[0]?.mediaUrl" alt="{{ g.name }}" class="game-image" />
-                    </button>
-                    </figure>
-                    <div class="game-info">
-                      <!-- <div class="categories">
-                        <span *ngFor="let category of g.categories">{{ category.name }} </span>
-                      </div> -->
-                      <h6 class="text-light">{{ g.name }}</h6>
-                      <div class="text-muted text-light">{{ g.createdAt | date: 'yyyy MM dd' }}</div>
-                      <p><strong>Price: ${{ g.price }}</strong></p>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </ng-template>
-          </e-carousel-item>
-        </ng-container>
-      </e-carousel-items>
-    </ejs-carousel>
+
+<div id="gameCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li *ngFor="let game of Games; let i = index" data-bs-target="#gameCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"></li>
+  </ol>
+
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div *ngFor="let game of Games; let i = index" class="carousel-item" [class.active]="i === 0" 
+         [ngStyle]="{ 'background-image': 'url(' + game.gameMediaList[0]?.mediaUrl + ')' }">
+      <div class="carousel-caption d-flex justify-content-start align-items-start">
+        <div class="carousel-text">
+          <h5 class="text-light">{{ game.name }}</h5>
+          <p>{{ game.description }}</p>
+          <p><strong>Price: </strong>${{ game.price }}</p>
+          <button class="btn btn-light">Learn More</button>
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <!-- Controls -->
+  <div class="carousel-controls">
+    <button class="carousel-control-prev" type="button" data-bs-target="#gameCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#gameCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
