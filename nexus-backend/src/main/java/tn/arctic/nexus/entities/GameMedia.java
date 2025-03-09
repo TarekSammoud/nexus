@@ -43,6 +43,8 @@ public class GameMedia implements Serializable {
     @JsonBackReference
     private Game game;
 
+    private GameMediaType gameMediaType;
+
     public Long getId() {
         return id;
     }
@@ -97,5 +99,13 @@ public class GameMedia implements Serializable {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public GameMediaType getGameMediaType() {
+        return gameMediaType;
+    }
+
+    public void setGameMediaType(GameMediaType gameMediaType) {
+        this.gameMediaType = gameMediaType;
     }
 }

@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow-lg" style="width: 70vw;">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4 text-light">Add New Game</h4>
+      <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
+
+      <form class="background-dark" [formGroup]="gameForm!" (ngSubmit)="onSubmit()">
+        <!-- Game Name -->
+        <div class="form-group">
+          <label for="gameName">Game Name</label>
+          <input formControlName="name" type="text" class="form-control" id="gameName" placeholder="Super Mario Bros">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea formControlName="description" class="form-control" id="description" rows="3"
+            placeholder="Enter game description"></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label for="price">Price (TND)</label>
+          <input formControlName="price" type="number" class="form-control" id="price" placeholder="60">
+        </div>
+
+        <!-- Platforms (Chips) -->
+        <div class="form-group">
+          <label>Platforms</label>
+          <br>
+          <mat-chip-list aria-label="select platforms" formControlName="platforms">
+            <mat-chip-option *ngFor="let platform of availablePlatforms" [value]="platform">
+              {{ platform }}
+            </mat-chip-option>
+          </mat-chip-list>
+
+        </div>
+
+        <!-- Next Button -->
+        <a routerLink="/next-form" class="next-btn">Next →</a>
+        
+        <mat-progress-bar mode="determinate" value="15"></mat-progress-bar>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+

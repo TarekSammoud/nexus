@@ -27,5 +27,7 @@ export class GamesCarouselComponent implements OnInit{
   OnSelect(game : Game){
     this._router.navigate(['/games', game.id]);
   }
+  
+  
 
 }
