@@ -7,33 +7,33 @@ import tn.arctic.nexus.services.UsersModule.IUserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @GetMapping
+    @GetMapping("/allUser")
     public List<User> getAllUsers() {
         return userService.retrieveAllUser();
     }
 
-    @PostMapping
+    @PostMapping("/addUser")
     public User addUser(@RequestBody User user) {
         return  userService.addUser(user);
     }
 
-    @PutMapping
+    @PutMapping("/updateUser")
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getbyid/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.retrieveUser(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.removeUser(id);
     }

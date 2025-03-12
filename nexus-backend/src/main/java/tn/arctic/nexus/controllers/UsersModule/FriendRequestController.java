@@ -13,27 +13,27 @@ public class FriendRequestController {
     @Autowired
     private IFriendRequestService friendRequestService;
 
-    @GetMapping
+    @GetMapping("/allFriendRequest")
     public List<FriendRequest> getAllFriendRequests() {
         return friendRequestService.retrieveAllFriendRequest();
     }
 
-    @PostMapping
-    public List<FriendRequest> addFriendRequests(@RequestBody List<FriendRequest> friendRequests) {
-        return friendRequestService.addFriendRequest(friendRequests);
+    @PostMapping("/addFriendRequest")
+    public FriendRequest addFriendRequests(@RequestBody FriendRequest friendRequest) {
+        return friendRequestService.addFriendRequest(friendRequest);
     }
 
-    @PutMapping
+    @PutMapping()
     public FriendRequest updateFriendRequest(@RequestBody FriendRequest friendRequest) {
         return friendRequestService.updateFriendRequest(friendRequest);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getbyIdFriendRequest/{id}")
     public FriendRequest getFriendRequestById(@PathVariable Long id) {
         return friendRequestService.retrieveFriendRequest(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteFriendRequest/{id}")
     public void deleteFriendRequest(@PathVariable Long id) {
         friendRequestService.removeFriendRequest(id);
     }
