@@ -19,8 +19,8 @@ public class FriendRequestService implements IFriendRequestService{
     }
 
     @Override
-    public List<FriendRequest> addFriendRequest(List<FriendRequest> FriendRequests) {
-        return friendRequestRepository.saveAll(FriendRequests);
+    public FriendRequest addFriendRequest(FriendRequest FriendRequests) {
+        return friendRequestRepository.save(FriendRequests);
     }
 
     @Override

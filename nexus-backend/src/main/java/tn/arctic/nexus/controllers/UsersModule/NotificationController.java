@@ -13,27 +13,28 @@ public class NotificationController {
     @Autowired
     private INotificationService notificationService;
 
-    @GetMapping
+
+    @GetMapping("/all-notif")
     public List<Notification> getAllNotifications() {
         return notificationService.retrieveAllNotification();
     }
 
-    @PostMapping
+    @PostMapping("/addNotif")
     public Notification addNotification(@RequestBody Notification notification) {
         return (Notification) notificationService.addNotification(notification);
     }
 
-    @PutMapping
+    @PutMapping()
     public Notification updateNotification(@RequestBody Notification notification) {
         return notificationService.updateNotification(notification);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getNotif/{id}")
     public Notification getNotificationById(@PathVariable Long id) {
         return notificationService.retrieveNotification(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteNotif/{id}")
     public void deleteNotification(@PathVariable Long id) {
         notificationService.removeNotification(id);
     }
