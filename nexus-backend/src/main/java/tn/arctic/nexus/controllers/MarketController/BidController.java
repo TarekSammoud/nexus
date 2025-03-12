@@ -1,4 +1,5 @@
 package tn.arctic.nexus.controllers.MarketController;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Bid;
@@ -6,7 +7,6 @@ import tn.arctic.nexus.services.MarketService.BidService;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 public class BidController {
@@ -31,11 +31,18 @@ public class BidController {
     public Bid create(@RequestBody Bid bid) {
         return service.save(bid);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Bid> update(@PathVariable Long id, @RequestBody Bid bid) {
+        try {
+            return ResponseEntity.ok(service.update(id, bid));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
