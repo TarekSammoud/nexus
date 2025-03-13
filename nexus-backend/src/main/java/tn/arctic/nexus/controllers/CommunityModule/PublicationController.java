@@ -14,7 +14,6 @@ public class PublicationController {
     @Autowired
     private PublicationService publicationService;
 
-    // Create a new Publication (must reference an existing category)
     @PostMapping
     public Publication createPublication(@RequestBody Publication publication) {
         if (publication.getCategory() == null) {
@@ -23,13 +22,11 @@ public class PublicationController {
         return publicationService.createPublication(publication);
     }
 
-    // Get all Publications
-    @GetMapping
+    @GetMapping("/all")
     public List<Publication> getAllPublications() {
         return publicationService.getAllPublications();
     }
 
-    // Get a Publication by ID
     @GetMapping("/{id}")
     public Publication getPublicationById(@PathVariable Long id) {
         return publicationService.getPublicationById(id)
@@ -37,13 +34,11 @@ public class PublicationController {
 
     }
 
-    // Update a Publication
     @PutMapping("/{id}")
     public Publication updatePublication(@PathVariable Long id, @RequestBody Publication updatedPublication) {
         return publicationService.updatePublication(id, updatedPublication);
     }
 
-    // Delete a Publication by ID
     @DeleteMapping("/{id}")
     public void deletePublication(@PathVariable Long id) {
         publicationService.deletePublication(id);

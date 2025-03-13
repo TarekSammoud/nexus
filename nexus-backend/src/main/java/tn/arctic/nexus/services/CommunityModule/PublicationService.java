@@ -24,7 +24,7 @@ public class PublicationService {
 
     // Return Optional<Publication>
     public Optional<Publication> getPublicationById(Long id) {
-        return publicationRepository.findById(id);  // Returns Optional
+        return publicationRepository.findById(id);
     }
 
     public Publication updatePublication(Long id, Publication updatedPublication) {

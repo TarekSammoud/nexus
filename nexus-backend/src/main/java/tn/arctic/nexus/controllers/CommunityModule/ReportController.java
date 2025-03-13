@@ -16,12 +16,12 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Report> createReport(@RequestBody Report report) {
         return new ResponseEntity<>(reportService.createReport(report), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Report>> getAllReports() {
         return ResponseEntity.ok(reportService.getAllReports());
     }
@@ -35,5 +35,12 @@ public class ReportController {
     public ResponseEntity<Void> deleteReport(@PathVariable Long id) {
         reportService.deleteReport(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Report> updateReport(@PathVariable Long id, @RequestBody Report report) {
+        Report updatedReport = reportService.updateReport(id, report);
+        return ResponseEntity.ok(updatedReport);
     }
 }

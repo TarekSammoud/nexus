@@ -36,4 +36,17 @@ public class ReportService implements IReportService {
         reportRepository.delete(report);
     }
 
+
+    @Override
+    public Report updateReport(Long id, Report report) {
+        Report existingReport = getReportById(id);
+
+        existingReport.setReason(report.getReason());
+        existingReport.setStatus(report.getStatus());
+        existingReport.setUser(report.getUser());
+        existingReport.setPublication(report.getPublication());
+
+        return reportRepository.save(existingReport);
+    }
+
 }
