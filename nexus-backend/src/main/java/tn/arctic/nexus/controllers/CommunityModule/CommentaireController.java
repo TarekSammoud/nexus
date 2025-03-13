@@ -18,14 +18,20 @@ public class CommentaireController {
     @Autowired
     private CommentaireService commentaireService;
 
-    @PostMapping
+
+    @PostMapping("/add")
     public ResponseEntity<Commentaire> createCommentaire(@RequestBody Commentaire commentaire) {
-        return new ResponseEntity<>(commentaireService.createCommentaire(commentaire), HttpStatus.CREATED);
+        if (commentaire.getContent() == null || commentaire.getContent().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        Commentaire createdCommentaire = commentaireService.createCommentaire(commentaire);
+        return new ResponseEntity<>(createdCommentaire, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Commentaire>> getAllCommentaires() {
-        return ResponseEntity.ok(commentaireService.getAllCommentaires());
+        List<Commentaire> commentaires = commentaireService.getAllCommentaires();
+        return ResponseEntity.ok(commentaires);
     }
 
     @GetMapping("/{id}")

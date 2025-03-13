@@ -10,4 +10,6 @@ public interface IReportService {
     List<Report> getAllReports();
     Report getReportById(Long id);
     void deleteReport(Long id);
+    Report updateReport(Long id, Report report);
+
 }

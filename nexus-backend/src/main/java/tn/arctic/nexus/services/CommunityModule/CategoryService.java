@@ -28,13 +28,10 @@ public class CategoryService {
     public Optional<Category> getCategoryById(Long id) {
         return categoryRepository.findById(id);  // Return category by id
     }
-    // Update Category by ID (PUT method)
     public Category updateCategory(Long id, Category updatedCategory) {
-        // Find the category by id
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        // Update the fields of the category
         category.setName(updatedCategory.getName());
         category.setDescription(updatedCategory.getDescription());
 

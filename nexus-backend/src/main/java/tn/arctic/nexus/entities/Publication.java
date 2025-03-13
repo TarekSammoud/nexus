@@ -1,5 +1,7 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +13,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "publication")
+@JsonIgnoreProperties({"user.publications"})
+
 public class Publication {
 
     @Id
@@ -18,18 +22,19 @@ public class Publication {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)  // Category is mandatory for publication
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)  // User is mandatory for publication
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
+    @Getter
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commentaire> commentaires = new ArrayList<>();
 
-    @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
+
 
     @Column(nullable = false)
     private String title;
@@ -55,13 +60,6 @@ public class Publication {
         return user;
     }
 
-    public List<Commentaire> getCommentaires() {
-        return commentaires;
-    }
-
-    public List<Like> getLikes() {
-        return likes;
-    }
 
     public String getTitle() {
         return title;
@@ -87,9 +85,6 @@ public class Publication {
         this.commentaires = commentaires;
     }
 
-    public void setLikes(List<Like> likes) {
-        this.likes = likes;
-    }
 
     public void setTitle(String title) {
         this.title = title;
