@@ -29,5 +29,9 @@ export class JamService {
   updateJam(id: number, jam: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update`, jam);
   }
+
+  uploadImage(formData: FormData): Observable<string> {
+    return this.http.post(`${this.apiUrl}/upload`, formData, { responseType: 'text' });
+  }
   
 }

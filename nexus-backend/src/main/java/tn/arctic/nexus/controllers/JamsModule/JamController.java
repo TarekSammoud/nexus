@@ -1,11 +1,17 @@
 package tn.arctic.nexus.controllers.JamsModule;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.multipart.MultipartFile;
 import tn.arctic.nexus.entities.Jam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.services.JamsModule.IJamService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,10 +21,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/gamejams")
 @CrossOrigin(origins = "http://localhost:4200")
+
 public class JamController {
 
     @Autowired
     IJamService jamService;
+
+    private static final String UPLOAD_DIR = "uploads/";
 
     @GetMapping("/all")
     public List<Jam> getAllJams() {
@@ -68,4 +77,25 @@ public class JamController {
     public List<Jam> getOngoingVotingJams() {
         return jamService.getOngoingVotingJams();
     }
+
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            File uploadDir = new  File(UPLOAD_DIR);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+
+            Path filePath = Paths.get(UPLOAD_DIR + file.getOriginalFilename());
+            file.transferTo(filePath);
+
+            String fileUrl = "/uploads/" + file.getOriginalFilename();
+            return ResponseEntity.ok(fileUrl);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
+        }
+    }
+
 }

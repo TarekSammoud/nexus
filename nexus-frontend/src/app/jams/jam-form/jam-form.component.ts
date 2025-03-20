@@ -7,10 +7,10 @@ import { JamService } from 'src/app/core/services/jam/jam.service';
   styleUrls: ['./jam-form.component.css']
 })
 export class JamFormComponent {
-  @Output() jamCreated = new EventEmitter<any>(); // Émettre un événement quand un Jam est créé
+  @Output() jamCreated = new EventEmitter<any>();
 
   jam = {
-    imageUrl: '',
+    imageUrl: '', 
     name: '',
     description: '',
     devStartDate: '',
@@ -26,7 +26,7 @@ export class JamFormComponent {
     this.jamService.addJam(this.jam).subscribe({
       next: (newJam) => {
         console.log("Game Jam created:", newJam);
-        this.jamCreated.emit(newJam); // Envoyer le Jam créé au composant parent
+        this.jamCreated.emit(newJam);
       },
       error: (err) => {
         console.error("Error creating Game Jam:", err);

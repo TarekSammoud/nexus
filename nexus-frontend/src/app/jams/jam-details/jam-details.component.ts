@@ -25,7 +25,7 @@ export class JamDetailsComponent implements OnInit {
         this.jam = data;
       },
       error: (err) => {
-        console.error("Erreur lors du chargement du Game Jam :", err);
+        console.error("Erreur  :", err);
       }
     });
   }

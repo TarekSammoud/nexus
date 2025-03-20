@@ -1,48 +1,279 @@
+/* Global Container */
+/* Dark Glassmorphic Background */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Card with Glass Effect */
+  .card {
+    background: rgba(20, 20, 20, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    max-width: 600px;
+
+  }
+  
+  
+  /* Form Styling */
+  form {
+    background: transparent;
+    padding: 20px;
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Labels */
+  .form-group label {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  
+  /* Inputs */
+  .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-control::placeholder {
+    color: #bbbbbb;
+  }
+  
+  .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    border: 1px solid white;
+  }
+  
+  /* Select */
+  select {
+    cursor: pointer;
+  }
+  
+  /* Animated Chips */
+  mat-chip-option {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    margin: 3px;
+    border-radius: 20px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  mat-chip:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Chip Remove Icon */
+  mat-chip mat-icon {
+    color: #ff5252;
+    cursor: pointer;
+  }
+  
+  /* Floating Next Button */
+  .next-btn {
+    background: linear-gradient(45deg, #6338B0, #9A5ED6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+  }
+  
+  .next-btn:hover {
+    background: linear-gradient(45deg, #6338B0, #8A6BD5);
+}
+  
+  /* Progress Bar */
+  mat-progress-bar {
+    margin-top: 20px;
+    height: 5px;
+  }
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+
 .container {
     max-width: 1200px;
     margin: auto;
-  }
-  
-  .jam-card {
-    width: 350px;
-    background-color: #1e1e1e;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .jam-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-body h3 {
-    font-size: 1.4rem;
-    color: white;
-  }
-  
-  .card-text {
-    font-size: 0.9rem;
-  }
-  
-  .card-footer {
-    background: transparent;
-    border-top: none;
-  }
-  
-  .btn {
-    font-size: 0.9rem;
-    transition: 0.3s;
-  }
-  
-  .btn:hover {
-    opacity: 0.8;
-  }
-  
-  .jam-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
 }
 
+/* Game Jam Card */
+.jam-card {
+    width: 280px;
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jam-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Game Jam Image */
+.jam-img-container {
+    height: 140px;
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.jam-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Game Jam Card Body */
+.card-body {
+    padding: 10px;
+}
+
+.card-body h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: white;
+}
+
+.card-text {
+    font-size: 0.85rem;
+    color: #b3b3b3;
+}
+
+/* Card Footer (Buttons) */
+.card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Small Buttons with Icons */
+.small-btn {
+    font-size: 0.7rem;
+    padding: 5px 7px;
+    border-radius: 4px;
+    
+}
+
+
+
+.btn i {
+    font-size: 12px;
+}
+
+/* View Details & Edit/Delete Buttons */
+.btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Game Jam Details Modal (Properly Sized) */
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #222;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Details List */
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.details-list li {
+    font-size: 0.9rem;
+    padding: 4px 0;
+    color: #ddd;
+}
+
+.details-list i {
+    color: #f39c12;
+    margin-right: 6px;
+}
+
+/* Modal Image */
+.modal-img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}

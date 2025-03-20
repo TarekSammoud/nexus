@@ -7,8 +7,8 @@ import { JamService } from 'src/app/core/services/jam/jam.service';
   styleUrls: ['./jam-edit.component.css']
 })
 export class JamEditComponent {
-  @Input() jam: any; // Reçoit le Game Jam à modifier
-  @Output() jamUpdated = new EventEmitter<any>(); // Émettre un événement après mise à jour
+  @Input() jam: any; 
+  @Output() jamUpdated = new EventEmitter<any>(); 
 
   constructor(private jamService: JamService) {}
 
@@ -16,7 +16,7 @@ export class JamEditComponent {
     this.jamService.updateJam(this.jam.id, this.jam).subscribe({
       next: (updatedJam) => {
         console.log("Game Jam updated:", updatedJam);
-        this.jamUpdated.emit(updatedJam); // Envoyer les nouvelles données
+        this.jamUpdated.emit(updatedJam); 
       },
       error: (err) => {
         console.error("Error updating Game Jam:", err);
@@ -25,6 +25,6 @@ export class JamEditComponent {
   }
 
   cancelEdit() {
-    this.jamUpdated.emit(null); // Annuler la modification
+    this.jamUpdated.emit(null); 
   }
 }
