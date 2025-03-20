@@ -30,6 +30,7 @@
     "@syncfusion/ej2-angular-navigations": "^28.2.6",
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
+    "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,6 @@ import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
     JamDetailsComponent,
     JamFormComponent,
     JamEditComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,8 @@ import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
     ReactiveFormsModule,
     HttpClientModule,
     CarouselModule,
-    GamesListComponent
+    GamesListComponent,
+    NgxPaginationModule
 
 
 
