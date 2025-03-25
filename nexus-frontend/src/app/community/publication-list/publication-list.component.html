@@ -1,0 +1,56 @@
+<div class="page-wrapper">
+    <div class="content-wrapper">
+        <div class="publication-list-container">
+            <h2 class="header-title">📚 Publications Récentes</h2>
+
+            <!-- Bouton Ajouter une Publication -->
+            <div class="add-publication-btn">
+                <button class="btn btn-primary" routerLink="/community/add">
+                    ➕ Ajouter une Publication
+                </button>
+            </div>
+
+            <!-- Affichage si aucune publication -->
+            <div *ngIf="!publications || publications.length === 0" class="no-data">
+                🚨 Aucune publication trouvée.
+            </div>
+
+            <!-- Liste des Publications -->
+            <div class="publication-list">
+                <div *ngFor="let publication of publications" class="publication-card">
+
+                    <!-- HEADER : Avatar + Nom Utilisateur + Date -->
+                    <div class="publication-header">
+                        <img src="assets/user-avatar.png" alt="User Avatar" class="user-avatar">
+                        <div class="user-info">
+                            <h3 class="user-name">{{ publication.user?.firstName || '' }} {{ publication.user?.lastName || '' }}</h3>
+                        </div>
+                    </div>
+
+                    <!-- CONTENU : Titre + Description -->
+                    <div class="publication-content">
+                        <h3 class="publication-title">{{ publication.title }}</h3>
+                        <p class="publication-text">{{ publication.content }}</p>
+                        <span class="category-tag">#{{ publication.category?.name || 'Sans Catégorie' }}</span>
+                    </div>
+
+                    <!-- ACTIONS -->
+                    <div class="publication-actions">
+                        <button class="action-btn like-btn">
+                            ❤️ J'aime
+                        </button>
+                        <button class="action-btn comment-btn">
+                            💬 Commenter
+                        </button>
+                        <button class="action-btn edit-btn" [routerLink]="['/community/edit', publication.id]">
+                            ✏️ Modifier
+                        </button>
+                        <button class="action-btn delete-btn" (click)="deletePublication(publication.id)">
+                            🗑️ Supprimer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
