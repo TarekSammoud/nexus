@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PublicationListComponent } from './community/publication-list/publication-list.component';
+import { PublicationFormComponent } from './community/publication-form/publication-form.component';
+import { FormsModule } from '@angular/forms'; // <-- IMPORT ICI
 
 @NgModule({
   declarations: [
@@ -18,12 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     GamesCarouselComponent,
     GamesComponent,
+    PublicationListComponent,
+    PublicationFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
 
   ],

@@ -7,6 +7,8 @@ import tn.arctic.nexus.services.CommunityModule.PublicationService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/publications")
 public class PublicationController {
