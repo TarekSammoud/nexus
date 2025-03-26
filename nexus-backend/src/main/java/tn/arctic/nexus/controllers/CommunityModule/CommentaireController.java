@@ -47,5 +47,12 @@ public class CommentaireController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/publication/{publicationId}")
+    public ResponseEntity<List<Commentaire>> getCommentairesByPublicationId(@PathVariable Long publicationId) {
+        List<Commentaire> commentaires = commentaireService.getCommentairesByPublicationId(publicationId);
+        return ResponseEntity.ok(commentaires);
+    }
+
+
 
 }

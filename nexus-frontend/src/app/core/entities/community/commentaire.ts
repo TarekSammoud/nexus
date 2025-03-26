@@ -1,12 +1,13 @@
+// commentaire.ts
 import { User } from '../user/user.model';
 import { Publication } from './publication';
 
 export class Commentaire {
-  id!: number;
+  id?: number; // ✅ rendre l'id optionnel
   content!: string;
-  user!: User;
-  publication!: Publication;
-  createdAt!: Date;
+  user!: Partial<User>;
+  publication!: Partial<Publication>;
+  createdAt?: Date;
   updatedAt?: Date;
   edited?: boolean;
 

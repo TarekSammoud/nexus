@@ -9,4 +9,9 @@ public interface ILikeService {
     Like createLike(Like like);
     List<Like> getAllLikes();
     void deleteLike(Long id);
+
+
+    boolean hasUserLikedPublication(Long userId, Long publicationId);
+    long countLikesByPublication(Long publicationId);
+
 }

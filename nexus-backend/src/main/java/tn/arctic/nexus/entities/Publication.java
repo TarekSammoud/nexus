@@ -36,6 +36,14 @@ public class Publication {
 
 
 
+    @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+
+
+
+
+
+
     @Column(nullable = false)
     private String title;
 

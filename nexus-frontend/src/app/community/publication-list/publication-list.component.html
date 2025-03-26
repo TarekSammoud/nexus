@@ -1,56 +1,94 @@
 <div class="page-wrapper">
-    <div class="content-wrapper">
-        <div class="publication-list-container">
-            <h2 class="header-title">📚 Publications Récentes</h2>
+  <div class="content-wrapper container">
+    <div class="publication-list-container shadow">
+      <h2 class="header-title">📚 Publications Récentes</h2>
 
-            <!-- Bouton Ajouter une Publication -->
-            <div class="add-publication-btn">
-                <button class="btn btn-primary" routerLink="/community/add">
-                    ➕ Ajouter une Publication
-                </button>
+      <div class="text-end mb-3">
+        <button class="btn btn-outline-light" routerLink="/community/add">
+          ➕ Ajouter une Publication
+        </button>
+      </div>
+
+      <div *ngIf="!publications || publications.length === 0" class="alert alert-warning text-center">
+        🚨 Aucune publication trouvée.
+      </div>
+
+      <div class="publication-list">
+
+        
+        <div *ngFor="let publication of publications" class="card bg-dark text-light mb-4">
+          <div class="card-body">
+
+            <!-- En-tête -->
+            <div class="d-flex align-items-center mb-3">
+              <img src="assets/user-avatar.png" class="rounded-circle me-3 user-avatar" alt="avatar" />
+              <div>
+                <h5 class="mb-0">{{ publication.user?.firstName || '' }} {{ publication.user?.lastName || '' }}</h5>
+                <small class="text-muted">#{{ publication.category?.name || 'Sans Catégorie' }}</small>
+              </div>
             </div>
 
-            <!-- Affichage si aucune publication -->
-            <div *ngIf="!publications || publications.length === 0" class="no-data">
-                🚨 Aucune publication trouvée.
+            <!-- Titre + contenu -->
+            <h4 class="fw-bold">{{ publication.title }}</h4>
+            <p class="text-white-50">{{ publication.content }}</p>
+
+            <!-- Actions -->
+            <div class="d-flex justify-content-between mt-3">
+              <button
+  class="btn btn-like d-flex align-items-center gap-1"
+  [ngClass]="{ 'btn-outline-danger': !userLiked[publication.id], 'btn-danger': userLiked[publication.id] }"
+  (click)="toggleLike(publication.id)"
+>
+  <i class="bi bi-heart-fill"></i>
+  <span class="fw-semibold">J’aime</span>
+  <span class="badge bg-light text-dark ms-1">{{ likeCounts[publication.id] || 0 }}</span>
+</button>
+
+
+                            <button class="btn btn-outline-info btn-sm" (click)="toggleCommentForm(publication.id)">💬 Commenter</button>
+              <button class="btn btn-outline-warning btn-sm" [routerLink]="['/community/edit', publication.id]">✏️ Modifier</button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deletePublication(publication.id)">🗑️ Supprimer</button>
             </div>
 
-            <!-- Liste des Publications -->
-            <div class="publication-list">
-                <div *ngFor="let publication of publications" class="publication-card">
+            <!-- Formulaire de commentaire -->
+            <div *ngIf="showCommentForm[publication.id]" class="mt-3">
+              <textarea [(ngModel)]="newCommentContent[publication.id]" rows="3"
+                class="form-control bg-dark text-white border-secondary" placeholder="✍️ Écris ton commentaire ici..."></textarea>
+              <div class="d-flex gap-2 mt-2 justify-content-end">
+                <button class="btn btn-success btn-sm" (click)="addComment(publication.id)">➕ Ajouter</button>
+                <button class="btn btn-secondary btn-sm" (click)="toggleCommentForm(publication.id)">❌ Annuler</button>
+              </div>
+            </div>
 
-                    <!-- HEADER : Avatar + Nom Utilisateur + Date -->
-                    <div class="publication-header">
-                        <img src="assets/user-avatar.png" alt="User Avatar" class="user-avatar">
-                        <div class="user-info">
-                            <h3 class="user-name">{{ publication.user?.firstName || '' }} {{ publication.user?.lastName || '' }}</h3>
-                        </div>
-                    </div>
-
-                    <!-- CONTENU : Titre + Description -->
-                    <div class="publication-content">
-                        <h3 class="publication-title">{{ publication.title }}</h3>
-                        <p class="publication-text">{{ publication.content }}</p>
-                        <span class="category-tag">#{{ publication.category?.name || 'Sans Catégorie' }}</span>
-                    </div>
-
-                    <!-- ACTIONS -->
-                    <div class="publication-actions">
-                        <button class="action-btn like-btn">
-                            ❤️ J'aime
-                        </button>
-                        <button class="action-btn comment-btn">
-                            💬 Commenter
-                        </button>
-                        <button class="action-btn edit-btn" [routerLink]="['/community/edit', publication.id]">
-                            ✏️ Modifier
-                        </button>
-                        <button class="action-btn delete-btn" (click)="deletePublication(publication.id)">
-                            🗑️ Supprimer
-                        </button>
-                    </div>
+     
+           <!-- Liste des commentaires -->
+           <ng-container *ngIf="publication.id as pubId">
+            <div *ngIf="hasComments(pubId)" class="mt-4 border-top pt-3">
+              <h6 class="text-info mb-3">💬 Commentaires :</h6>
+          
+              <div *ngFor="let comment of commentsByPublication?.[pubId]" class="comment-item d-flex justify-content-between align-items-start border-bottom py-2">
+                <div>
+                  <p class="mb-1">
+                    <strong>{{ comment.user?.firstName || 'Utilisateur' }} :</strong> {{ comment.content }}
+                  </p>
+                  <small class="text-muted">{{ comment.createdAt | date:'short' }}</small>
                 </div>
+          
+                <!-- Ajout d’un ! pour dire à Angular : "je suis sûr que pubId est défini" -->
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteComment(pubId!, comment.id!)">
+                  🗑️
+                </button>
+                
+              </div>
             </div>
+          </ng-container>
+          
+
+
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
