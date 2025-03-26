@@ -28,4 +28,18 @@ public class LikeService implements ILikeService {
     public void deleteLike(Long id) {
         likeRepository.deleteById(id);
     }
+
+
+
+    @Override
+
+    public boolean hasUserLikedPublication(Long userId, Long publicationId) {
+        return likeRepository.existsByUserIdAndPublicationId(userId, publicationId);
+    }
+    @Override
+
+    public long countLikesByPublication(Long publicationId) {
+        return likeRepository.countByPublicationId(publicationId);
+    }
+
 }

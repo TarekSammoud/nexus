@@ -10,4 +10,7 @@ import java.util.List;
 public interface CommentaireRepository extends JpaRepository<Commentaire, Long> {
     List<Commentaire> findByPublicationId(Long publicationId);
 
+
+
+
 }

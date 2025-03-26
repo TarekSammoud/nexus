@@ -11,9 +11,7 @@ export class CommentaireService {
 
   constructor(private http: HttpClient) {}
 
-  getCommentairesByPublicationId(publicationId: number): Observable<Commentaire[]> {
-    return this.http.get<Commentaire[]>(`${this.baseUrl}/publication/${publicationId}`);
-  }
+ 
 
   createCommentaire(commentaire: Commentaire): Observable<Commentaire> {
     return this.http.post<Commentaire>(`${this.baseUrl}/add`, commentaire);
@@ -22,4 +20,9 @@ export class CommentaireService {
   deleteCommentaire(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  getCommentairesByPublicationId(publicationId: number): Observable<Commentaire[]> {
+    return this.http.get<Commentaire[]>(`${this.baseUrl}/publication/${publicationId}`);
+  }
+  
 }

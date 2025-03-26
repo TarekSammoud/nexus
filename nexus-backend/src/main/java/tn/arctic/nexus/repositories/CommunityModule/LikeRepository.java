@@ -11,4 +11,8 @@ import java.util.List;
 public interface LikeRepository extends JpaRepository<Like, Long> {
     List<Like> findByPublicationId(Long publicationId);
 
+    boolean existsByUserIdAndPublicationId(Long userId, Long publicationId);
+
+    long countByPublicationId(Long publicationId);
+
 }

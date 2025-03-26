@@ -10,4 +10,6 @@ public interface ICommentaireService {
     List<Commentaire> getAllCommentaires();
     Commentaire getCommentaireById(Long id);
     void deleteCommentaire(Long id);
+
+    List<Commentaire> getCommentairesByPublicationId(Long publicationId);
 }

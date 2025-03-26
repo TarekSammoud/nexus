@@ -9,6 +9,7 @@ import tn.arctic.nexus.services.CommunityModule.LikeService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping("/api/likes")
@@ -32,4 +33,19 @@ public class LikeController  {
         likeService.deleteLike(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/check")
+    public ResponseEntity<Boolean> hasUserLiked(
+            @RequestParam Long userId,
+            @RequestParam Long publicationId) {
+        boolean liked = likeService.hasUserLikedPublication(userId, publicationId);
+        return ResponseEntity.ok(liked);
+    }
+
+    @GetMapping("/count/{publicationId}")
+    public ResponseEntity<Long> countLikes(@PathVariable Long publicationId) {
+        long count = likeService.countLikesByPublication(publicationId);
+        return ResponseEntity.ok(count);
+    }
+
 }
