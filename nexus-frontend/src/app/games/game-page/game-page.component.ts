@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { GameService } from 'src/app/core/services/game/game.service';
@@ -11,10 +12,13 @@ import { GameService } from 'src/app/core/services/game/game.service';
 export class GamePageComponent {
   game? : Game;
 
-  constructor(private _gameService: GameService) {
-    this._gameService.getGame(1).subscribe(game => {
-      this.game = game; 
-    });
+  constructor(private _gameService: GameService, private route: ActivatedRoute) {
+    const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
+    if (gameId) {
+      this._gameService.getGame(+gameId).subscribe(game => {
+        this.game = game;
+      });
+    }
   }
   chunkArray(arr: GameMedia[] | undefined, size: number): GameMedia[][] {
     if (!arr || arr.length === 0) return [];

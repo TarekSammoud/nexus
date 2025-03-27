@@ -66,6 +66,16 @@ html, body {
   padding: 20px;
 }
 
+.home-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #1b1e25, #171a21); /* Dark gradient for depth */
+  text-align: center;
+}
 /* Carousel Component */
 app-games-carousel {
   width: 100%;

@@ -35,7 +35,7 @@ public class Game implements Serializable {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    private GamePlatform platform;
+    private List<GamePlatform> platforms;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -100,13 +100,7 @@ public class Game implements Serializable {
         this.price = price;
     }
 
-    public GamePlatform getPlatform() {
-        return platform;
-    }
 
-    public void setPlatform(GamePlatform platform) {
-        this.platform = platform;
-    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -162,5 +156,14 @@ public class Game implements Serializable {
 
     public void setGameReviewList(List<GameReview> gameReviewList) {
         this.gameReviewList = gameReviewList;
+    }
+
+
+    public List<GamePlatform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<GamePlatform> platforms) {
+        this.platforms = platforms;
     }
 }

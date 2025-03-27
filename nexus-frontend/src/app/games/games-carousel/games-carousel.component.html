@@ -8,7 +8,7 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
     <div *ngFor="let game of Games; let i = index" class="carousel-item" [class.active]="i === 0" 
-         [ngStyle]="{ 'background-image': 'url(' + game.gameMediaList[0]?.mediaUrl + ')' }">
+    [ngStyle]="{ 'background-image': 'url(' + 'http://localhost:9000/nexus-backend/games/upload/download/' + game.gameMediaList[0]?.mediaUrl + ')' }">
       <div class="carousel-caption d-flex justify-content-start align-items-start">
         <div class="carousel-text">
           <h5 class="text-light">{{ game.name }}</h5>

@@ -49,4 +49,9 @@ public class GameController {
         return gameService.updateGame(game);
     }
 
+    @GetMapping("/number-of-games")
+    public Integer getNumberOfGames(){
+        return gameService.getNumberOfGames();
+    }
+
 }

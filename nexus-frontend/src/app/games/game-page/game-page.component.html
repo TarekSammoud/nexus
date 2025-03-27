@@ -15,8 +15,9 @@
                 <e-carousel-item>
                   <ng-template #template>
                     <figure class="img-container">
-                      <img [src]="media.mediaUrl" alt="error" class="game-image" />
+                      <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" alt="error" class="game-image" />
                     </figure>
+                    
                   </ng-template>
                 </e-carousel-item>
               </ng-container>
