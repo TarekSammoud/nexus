@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { GameCategory } from 'src/app/core/entities/game/game-category';
 import { GamePlatform } from 'src/app/core/entities/game/game-platform.enum';
+import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.service';
+import { GameService } from 'src/app/core/services/game/game.service';
+import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
+import { GameMedia } from 'src/app/core/entities/game/game-media';
 
 @Component({
   selector: 'app-create-game',
@@ -8,20 +14,133 @@ import { GamePlatform } from 'src/app/core/entities/game/game-platform.enum';
   styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent implements OnInit {
-  gameForm?: FormGroup;
+  gameForm!: FormGroup;
   
   availablePlatforms = Object.values(GamePlatform);
-  // Set to track selected platforms
   selectedPlatforms: Set<string> = new Set();
+  availableCategories!: GameCategory[];
+  selectedCategories: Set<GameCategory> = new Set();
+  numberOfGames!: number; 
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private _gameMediaService: GameMediaService
+    ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
+    this._gameCategoryService.getGameCategories().subscribe((data) => {
+      this.availableCategories = data.map((category) => {
+        return {
+          id: category.id,
+          name: category.name,
+          description: category.description
+        };
+      });
+    });
+
+    console.log(this.availableCategories);
+      this._gameService.getNumberOfGames().subscribe((data) => {
+      this.numberOfGames = data;
+      console.log(this.numberOfGames);
+      });
+
+  }
+
+  step = 1;
+  progress = 15;
+
+nextStep() {
+  this.step++;
+  this.progress += 15;
+}
+
+prevStep() {
+  this.step--;
+}
+
+url = '';
+images: any[] = [];
+
+/*
+onSelectFile(event: any) {
+  if (event.target.files && event.target.files[0]) {
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); 
+
+    reader.onload = () => {
+      this.images.push(reader.result); 
+    console.log(reader.result);
+    };
+  }
+}*/
+
+filesToUpload: FormGroup[] = [];
+ftpFiles: FormData[] = [];
+
+onSelectFile(event: any): void {
+  if (event.target.files && event.target.files[0]) {
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); 
+
+    reader.onload = () => {
+      this.images.push(reader.result); 
+    };
+
+    // Get the file URL (Assuming the image is uploaded or the URL is available)
+    const mediaUrl = file.name;
+
+    // Get file type and file size
+    const fileType = file.type;
+    const fileSize = file.size;
+
+     var gameId = this.numberOfGames +1 ; 
+
+     const newForm = this.fb.group({
+      mediaUrl: [mediaUrl, Validators.required],
+      fileType: [fileType, Validators.required],
+      fileSize: [fileSize, Validators.required],
+      gameMediaType: ['COVER', Validators.required],
+      game: this.fb.group({
+        id: [this.numberOfGames + 1, Validators.required] // Game id nested inside the game object
+      })
+    });
+
+    const formData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    /* const formData = new FormData();
+     formData.append('file', file, file.name); // Append the file
+     formData.append('fileType', fileType);  // Append file type
+     formData.append('fileSize', fileSize.toString()); // Append file size
+     formData.append('gameId', gameId.toString()); // Append game ID
+     formData.append('gameMediaType', 'COVER'); // Media type, can be dynamic
+*/
+    // // Log the media data (for testing)
+    // console.log('Media Data:', formData);
+    this.filesToUpload.push(newForm);
+    this.ftpFiles.push(formData);
+
+  }
+}
+
+
+
+
+removeImage(index: number) {
+  this.images.splice(index, 1);
+}
+
+
 
   ngOnInit(): void {
+
     this.gameForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      platforms: this.fb.array([]) // FormArray for platforms
+      platforms: [this.selectedPlatforms],
+      categories: [this.selectedCategories] // FormArray for platforms
     });
   }
 
@@ -36,21 +155,46 @@ export class CreateGameComponent implements OnInit {
   }
 
   // Toggle platform selection
-  togglePlatformSelection(platform: string): void {
+  togglePlatformSelection(event: any): void {
+    const platform = event.source.value; // Get platform value
+  
+    console.log('Platform:', platform);
+    
     if (this.selectedPlatforms.has(platform)) {
-      // If platform is already selected, remove it from the Set
+      // If the platform is already selected, remove it
       this.selectedPlatforms.delete(platform);
-      this.removePlatform(platform);
+      console.log('Removed Platform:', platform);
     } else {
-      // If platform is not selected, add it to the Set
+      // If the platform is not selected, add it
       this.selectedPlatforms.add(platform);
-      this.addPlatform(platform);
+      console.log('Added Platform:', platform);
     }
+    
+    console.log('Selected Platforms:', this.selectedPlatforms);
   }
+  
+
+  toggleCategorySelection(event: any): void {
+    const category = event.source.value; // Get platform value
+  
+    console.log('Category:', category);
+    
+    if (this.selectedCategories.has(category)) {
+      this.selectedCategories.delete(category);
+      console.log('Removed category:', category);
+    } else {
+      this.selectedCategories.add(category);
+      console.log('Added category:', category);
+    }
+    
+    console.log('Selected categories:', this.selectedCategories);
+  }
+  
 
   // Add platform to FormArray
   addPlatform(platform: string): void {
     this.platforms.push(new FormControl(platform));
+
   }
 
   // Remove platform from FormArray
@@ -63,6 +207,22 @@ export class CreateGameComponent implements OnInit {
 
   // Submit the form
   onSubmit(): void {
-    console.log('Form Data:', this.gameForm?.value);
+    this.gameForm.value.categories = Array.from(this.selectedCategories);
+    this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
+    console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+    this._gameService.addGame(this.gameForm.value).subscribe((data) => {
+      console.log('Game added:', data);
+    });
+    for (let i = 0; i < this.images.length; i++) {
+      console.log(this.filesToUpload[i].value); 
+      this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {
+        console.log('File uploaded:', data);
+      });
+      this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe((data) => {
+        console.log('Game Media added:', data);
+      }
+      );   
+     }
+
   }
 }

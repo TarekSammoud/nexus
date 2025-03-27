@@ -14,5 +14,6 @@ public interface IGameService {
     public void deleteGameById(Long id);
     public Game updateGame(Game game);
    // public List<GameMedia> getGameMediaByGameId(Long id);
+    public Integer getNumberOfGames() ;
 
 }
