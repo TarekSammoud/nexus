@@ -69,7 +69,7 @@
 
         <div *ngFor="let image of images; index as i" class="image-wrapper" >
         <img [src]="image" height="200" class="preview-image">
-        <button class="remove-btn" (click)="removeImage(i)">✖</button>
+        <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
       </div>
 
         <br/>
@@ -81,9 +81,10 @@
       </div>
             </div>
       
-            
-        <a *ngIf="step< 3 " (click) = nextStep() class="next-btn">Next →</a>
         <button *ngIf="step === 3" type="submit" class="next-btn">Submit</button>
+        <a *ngIf="step< 3 " (click) = nextStep() class="next-btn">Next →</a>
+        <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
+
 
         <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
 

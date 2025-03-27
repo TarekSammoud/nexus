@@ -53,24 +53,13 @@ nextStep() {
 
 prevStep() {
   this.step--;
+  this.progress -= 15;
+
 }
 
 url = '';
 images: any[] = [];
 
-/*
-onSelectFile(event: any) {
-  if (event.target.files && event.target.files[0]) {
-    var reader = new FileReader();
-
-    reader.readAsDataURL(event.target.files[0]); 
-
-    reader.onload = () => {
-      this.images.push(reader.result); 
-    console.log(reader.result);
-    };
-  }
-}*/
 
 filesToUpload: FormGroup[] = [];
 ftpFiles: FormData[] = [];
@@ -87,10 +76,8 @@ onSelectFile(event: any): void {
       this.images.push(reader.result); 
     };
 
-    // Get the file URL (Assuming the image is uploaded or the URL is available)
     const mediaUrl = file.name;
 
-    // Get file type and file size
     const fileType = file.type;
     const fileSize = file.size;
 
@@ -100,24 +87,15 @@ onSelectFile(event: any): void {
       mediaUrl: [mediaUrl, Validators.required],
       fileType: [fileType, Validators.required],
       fileSize: [fileSize, Validators.required],
-      gameMediaType: ['COVER', Validators.required],
+      gameMediaType: ['SCREENSHOT', Validators.required],
       game: this.fb.group({
-        id: [this.numberOfGames + 1, Validators.required] // Game id nested inside the game object
+        id: [this.numberOfGames + 1, Validators.required]
       })
     });
 
     const formData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
-    /* const formData = new FormData();
-     formData.append('file', file, file.name); // Append the file
-     formData.append('fileType', fileType);  // Append file type
-     formData.append('fileSize', fileSize.toString()); // Append file size
-     formData.append('gameId', gameId.toString()); // Append game ID
-     formData.append('gameMediaType', 'COVER'); // Media type, can be dynamic
-*/
-    // // Log the media data (for testing)
-    // console.log('Media Data:', formData);
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
 
@@ -128,7 +106,10 @@ onSelectFile(event: any): void {
 
 
 removeImage(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
   this.images.splice(index, 1);
+  console.log(this.filesToUpload.length); 
 }
 
 
@@ -140,32 +121,27 @@ removeImage(index: number) {
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       platforms: [this.selectedPlatforms],
-      categories: [this.selectedCategories] // FormArray for platforms
+      categories: [this.selectedCategories] 
     });
   }
 
-  // Getter for platforms FormArray
   get platforms(): FormArray {
     return this.gameForm?.get('platforms') as FormArray;
   }
 
-  // Check if a platform is selected
   isSelected(platform: string): boolean {
     return this.selectedPlatforms.has(platform);
   }
 
-  // Toggle platform selection
   togglePlatformSelection(event: any): void {
-    const platform = event.source.value; // Get platform value
+    const platform = event.source.value; 
   
     console.log('Platform:', platform);
     
     if (this.selectedPlatforms.has(platform)) {
-      // If the platform is already selected, remove it
       this.selectedPlatforms.delete(platform);
       console.log('Removed Platform:', platform);
     } else {
-      // If the platform is not selected, add it
       this.selectedPlatforms.add(platform);
       console.log('Added Platform:', platform);
     }
@@ -175,7 +151,7 @@ removeImage(index: number) {
   
 
   toggleCategorySelection(event: any): void {
-    const category = event.source.value; // Get platform value
+    const category = event.source.value; 
   
     console.log('Category:', category);
     
@@ -191,11 +167,6 @@ removeImage(index: number) {
   }
   
 
-  // Add platform to FormArray
-  addPlatform(platform: string): void {
-    this.platforms.push(new FormControl(platform));
-
-  }
 
   // Remove platform from FormArray
   removePlatform(platform: string): void {
