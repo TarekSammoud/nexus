@@ -1,0 +1,32 @@
+<div class="entry-media-form">
+    <h4 class="text-white mb-3">📸 Add Media to Entry</h4>
+  
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label class="text-white">Entry</label>
+        <select class="form-select" [(ngModel)]="media.entry.id" name="entryId" required>
+          <option value="" disabled selected>Select an Entry</option>
+          <option *ngFor="let entry of entries" [value]="entry.id">
+            {{ entry.nameEntry }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label class="text-white">Media URL</label>
+        <input type="text" class="form-control" [(ngModel)]="media.url" name="mediaUrl" required>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label class="text-white">Media Type</label>
+        <select class="form-select" [(ngModel)]="media.type" name="mediaType" required>
+          <option *ngFor="let type of mediaTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-success w-100">📤 Submit Media</button>
+    </form>
+  </div>
+  
