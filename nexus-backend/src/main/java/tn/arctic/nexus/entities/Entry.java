@@ -38,7 +38,7 @@ public class Entry implements Serializable {
     private User user;
 //jam & entryyyyyyy
     @ManyToOne
-    @JoinColumn(name = "jam_id", nullable = false)
+    @JoinColumn(name = "jam_id")
     @JsonBackReference
     private Jam jam;
 

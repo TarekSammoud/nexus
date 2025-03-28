@@ -21,6 +21,9 @@ import { JamDetailsComponent } from './jams/jam-details/jam-details.component';
 import { JamFormComponent } from './jams/jam-form/jam-form.component';
 import { FormsModule } from '@angular/forms';
 import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
+import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
+import { EntryFormComponent } from './jams/entries/entry-form.component';
+import { EntryMediaFormComponent } from './jams/EntryMedia/entry-media-form/entry-media-form.component';
 
 
 
@@ -38,6 +41,9 @@ import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
     JamDetailsComponent,
     JamFormComponent,
     JamEditComponent,
+    JamDetailsPageComponent,
+    EntryFormComponent,
+    EntryMediaFormComponent 
   ],
   imports: [
     BrowserModule,

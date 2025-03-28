@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/entries")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class EntryController {
 
     @Autowired

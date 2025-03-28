@@ -1,0 +1,131 @@
+<div class="tab-wrapper">
+  <button [class.active]="activeTab === 'overview'" (click)="setTab('overview')">
+    <i class="fas fa-info-circle"></i> Overview
+  </button>
+  <button [class.active]="activeTab === 'submissions'" (click)="setTab('submissions')">
+    <i class="fas fa-gamepad"></i> Submissions
+  </button>
+  <button [class.active]="activeTab === 'media'" (click)="setTab('media')">
+    <i class="fas fa-photo-video"></i> Entry Media
+  </button>
+</div>
+
+<div *ngIf="activeTab === 'overview' && jam">
+  <div class="jam-header">
+    <h1 class="jam-title">{{ jam.name }}</h1>
+
+ <!-- <p class="jam-hosted">
+      🎤 Hosted by:
+      <span *ngIf="jam.user?.firstName">
+        {{ jam.user.firstName }} {{ jam.user.lastName }}
+      </span>
+      <span *ngIf="!jam.user?.firstName">Unknown</span>
+    </p>-->
+  </div>
+
+  <p class="jam-description">{{ jam.description }}</p>
+
+  <div class="jam-date-boxes">
+    <div class="jam-box">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Start Date</span>
+      <strong>{{ jam.devStartDate | date: 'dd/MM/yyyy' }}</strong>
+    </div>
+    <div class="jam-box">
+      <i class="fas fa-hourglass-end"></i>
+      <span>End Date</span>
+      <strong>{{ jam.devEndDate | date: 'dd/MM/yyyy' }}</strong>
+    </div>
+    <div class="jam-box">
+      <i class="fas fa-vote-yea"></i>
+      <span>Voting Start</span>
+      <strong>{{ jam.voteStartDate | date: 'dd/MM/yyyy' }}</strong>
+    </div>
+    <div class="jam-box">
+      <i class="fas fa-vote-yea"></i>
+      <span>Voting End</span>
+      <strong>{{ jam.voteEndDate | date: 'dd/MM/yyyy' }}</strong>
+    </div>
+    <div class="jam-box reward">
+      <i class="fas fa-trophy"></i>
+      <span>Reward</span>
+      <strong>{{ jam.reward }}</strong>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="activeTab === 'submissions'">
+  <h4 class="text-white">
+    🎮 Entries <span class="badge bg-info">{{ entries.length }}</span>
+  </h4>
+
+  <app-entry-form
+  *ngIf="activeTab === 'submissions'"
+  [jamId]="jamId"
+  (entryCreated)="onEntryCreated($event)">
+</app-entry-form>
+
+  <div *ngIf="entries.length > 0; else noEntries" class="entry-list mt-4">
+    <div *ngFor="let entry of entries" class="entry-card p-3 mb-3 rounded">
+      <h5 class="text-uppercase text-primary">{{ entry.nameEntry }}</h5>
+      <p class="text-light mb-1">{{ entry.descriptionEntry }}</p>
+      <p class="text-muted small mb-0">
+        👤 Submitted by: <strong>{{ entry.user }} {{ entry.user }}</strong> |
+        🕓 {{ entry.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <button class="btn btn-outline-warning btn-sm mt-2 me-2" (click)="startEdit(entry)">
+        ✏️ Edit
+      </button>
+      <button class="btn btn-outline-danger btn-sm mt-2" (click)="deleteEntry(entry.id)">
+        🗑️ Delete Entry
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="selectedEntryToEdit" class="entry-form-container mt-4">
+    <h4 class="text-warning">✏️ Edit Entry</h4>
+    <form (ngSubmit)="updateEntry()">
+      <div class="form-group">
+        <label>Game Name</label>
+        <input 
+          type="text" 
+          [(ngModel)]="selectedEntryToEdit.nameEntry" 
+          name="editNameEntry" 
+          class="form-control" 
+          required>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea 
+          [(ngModel)]="selectedEntryToEdit.descriptionEntry" 
+          name="editDescriptionEntry" 
+          class="form-control" 
+          required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-2">💾 Save</button>
+      <button type="button" class="btn btn-secondary mt-2 ms-2" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+
+  <ng-template #noEntries>
+    <p class="text-muted">No entries have been submitted yet.</p>
+  </ng-template>
+</div>
+
+<div *ngIf="activeTab === 'media'" class="text-light mt-4">
+  <h4>🖼️ Entry Media Submission</h4>
+
+  <p>Select an entry and upload a media item related to it.</p>
+
+  
+  <app-entry-media-form
+  [entries]="entries"
+  (mediaCreated)="loadEntries()">
+</app-entry-media-form>
+
+  <div *ngIf="entries.length === 0" class="text-muted mt-3">
+    No entries available yet. Add an entry first to submit media.
+  </div>
+</div>

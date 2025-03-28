@@ -8,7 +8,10 @@ export class Entry {
     createdAt!: Date;
     updatedAt!: Date;
     user!: User;
-    jam!: Jam;
+    jam!: Partial<Jam>;
+    entryMediaList?: any[];  
+    ratings?: any[];         
+  
 
     constructor(data?: Partial<Entry>) {
         Object.assign(this, data);
