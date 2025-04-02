@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
   <div class="card p-4 shadow-lg" style="width: 70vw;">
     <div class="card-body">
-      <h4 class="card-title text-center mb-4 text-light">Add New Game</h4>
+      <h4 class="card-title text-center mb-4 text-light">{{title}}</h4>
       <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
 
       <form class="background-dark" [formGroup]="gameForm" (ngSubmit)="onSubmit()">
@@ -31,13 +31,16 @@
 <div class="form-group">
   <label>Platforms</label>
   <br>
-  <mat-chip-list aria-label="select platforms" formControlName="platforms">
+  <mat-chip-set aria-label="select platforms" >
     <mat-chip-option *ngFor="let platform of availablePlatforms"
     (selectionChange)="togglePlatformSelection($event)"
-    [value]="platform">
+    [value]="platform"
+    [selected]="selectedUpdatePlatforms.has(platform)"
+
+    >
       {{ platform }}
     </mat-chip-option>
-  </mat-chip-list>
+  </mat-chip-set>
 </div>
 
 
@@ -52,11 +55,14 @@
           <mat-chip-option 
             *ngFor="let category of availableCategories" 
             [value]="category"
+            [selected]="selectedUpdateCategories.has(category.id)"
+
             matTooltip="{{ category.description }}" 
             matTooltipPosition="right"
             class="category-chip"
             (selectionChange)="toggleCategorySelection($event)"
           >
+
             {{ category.name }}
           </mat-chip-option>
         </mat-chip-set>

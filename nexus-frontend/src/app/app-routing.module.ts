@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'games/:id', component: GamePageComponent},
   {path: 'category/:name', component: GameGridComponent},
   {path: 'add-new-game', component: CreateGameComponent},
+  {path: 'update-game/:id', component: CreateGameComponent},
 ];
 
 @NgModule({

@@ -35,4 +35,8 @@ export class GameService {
   getNumberOfGames(): Observable<number> {
     return this.http.get<number>(`${this.gamesUrl}/number-of-games`);
   }
+
+  deleteGame(game: Game): Observable<void> {
+    return this.http.delete<void>(`${this.gamesUrl}/delete/${game.id}`);
+  }
 }

@@ -7,6 +7,7 @@ import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.ser
 import { GameService } from 'src/app/core/services/game/game.service';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-game',
@@ -18,12 +19,14 @@ export class CreateGameComponent implements OnInit {
   
   availablePlatforms = Object.values(GamePlatform);
   selectedPlatforms: Set<string> = new Set();
+  selectedUpdatePlatforms: Set<string> = new Set();
+  selectedUpdateCategories: Set<number> = new Set();
   availableCategories!: GameCategory[];
   selectedCategories: Set<GameCategory> = new Set();
   numberOfGames!: number; 
 
 
-  constructor(private _gameMediaService: GameMediaService
+  constructor(private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
     this._gameCategoryService.getGameCategories().subscribe((data) => {
       this.availableCategories = data.map((category) => {
@@ -63,6 +66,10 @@ images: any[] = [];
 
 filesToUpload: FormGroup[] = [];
 ftpFiles: FormData[] = [];
+
+isPlatformSelected(platform: string): boolean {
+  return this.selectedPlatforms.has(platform);
+}
 
 onSelectFile(event: any): void {
   if (event.target.files && event.target.files[0]) {
@@ -112,9 +119,17 @@ removeImage(index: number) {
   console.log(this.filesToUpload.length); 
 }
 
+gameId? : number; 
+isEditMode: boolean = false;
+title: string = 'Create Game';
 
 
   ngOnInit(): void {
+
+    this.gameId= 0 ;
+    if (this._route.snapshot.paramMap.get('id'))
+    this.gameId = Number(this._route.snapshot.paramMap.get('id'));
+    this.isEditMode = !!this.gameId;  // If ID exists, it's edit mode
 
     this.gameForm = this.fb.group({
       name: ['', Validators.required],
@@ -123,6 +138,24 @@ removeImage(index: number) {
       platforms: [this.selectedPlatforms],
       categories: [this.selectedCategories] 
     });
+
+    if (this.isEditMode) {
+      this.title = 'Update Game';
+      this._gameService.getGame(this.gameId).subscribe((game) => {
+        this.gameForm.patchValue({
+          name: game.name,
+          description: game.description,
+          price: game.price,
+        });
+        this.selectedUpdatePlatforms = new Set(game.platforms);
+        for (let i = 0; i < game.categories.length; i++) {
+          this.selectedUpdateCategories.add(game.categories[i].id);
+        }
+        console.log("update cat : ", this.selectedUpdateCategories);
+        console.log("update plat : ", this.selectedUpdatePlatforms);
+        console.log('Game:', game);
+      });
+    }
   }
 
   get platforms(): FormArray {
