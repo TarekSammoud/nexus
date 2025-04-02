@@ -1,0 +1,109 @@
+.filter {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding-left: 20px;
+}
+
+::ng-deep {
+    .mat-form-field-infix {
+        background-color: #3f51b5;
+    }
+
+    .mat-select-value,
+    .mat-select-arrow,
+    .mat-form-field-hide-placeholder .mat-select-placeholder,
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: #fff !important;
+        opacity: 1;
+    }
+
+    .mat-form-field-infix {
+        border-color: #fff !important;
+        border-top: none;
+        padding-left: 5px !important;
+    }
+
+    .mat-form-field-apperence-legacy .mat-form-field-label {
+        padding-left: 5px;
+    }
+
+    .mat-form-fields-apperence-legacy .mat-form-field-underline {
+        background-color: #fff !important;
+    }
+}
+
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.game {
+    width: 280px;
+    margin: 10px;
+    height: 450px; /* Increased height to make the game container taller */
+    overflow: hidden;
+    border-radius: 5px;
+
+    transition-duration: 0.3s;
+    cursor: pointer;
+    position: relative; /* Ensures positioning is relative for child elements */
+    
+    &:hover {
+        box-shadow: 4px 3px 11px 6px #9A5ED6;
+        transform: translateY(-3px);
+    }
+
+    &-thumb-container {
+        background-color: #000;
+        position: relative;
+        height: 300px; /* Adjusted height to match new game container height */
+        color: #fff;
+        text-align: center;
+        overflow: hidden; /* Ensures the image stays within the container bounds */
+    }
+
+    &-thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 300px; /* Adjusted height to match new game container height */
+        width: 100%; /* Ensures the image fills the container */
+        transition: filter 0.3s ease-in-out; /* Smooth transition for the grayscale effect */
+    }
+
+    /* Apply grayscale effect on hover */
+    &:hover .game-thumb-container .game-thumbnail {
+        filter: grayscale(100%); /* Greyscale effect */
+    }
+
+    &-description {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    &-name {
+        color: #fff;
+        font-weight: 700;
+        font-size: 22px;
+        margin-bottom: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &-platforms {
+        display: flex;
+    }
+
+    &-platform {
+        width: 20px;
+        margin-right: 10px;
+    }
+}
