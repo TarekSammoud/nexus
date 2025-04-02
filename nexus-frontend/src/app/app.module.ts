@@ -22,6 +22,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GameGridComponent } from './games/game-grid/game-grid.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     GamePageComponent,
     CreateGameComponent,
     CreateGameCategoryComponent,
+    GameGridComponent,
     
   ],
   imports: [

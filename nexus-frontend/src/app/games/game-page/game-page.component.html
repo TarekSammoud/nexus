@@ -1,43 +1,73 @@
-<div class="game-container">
-    <!-- First Row: Game Title -->
-    <div class="game-title-container">
-      <h1 class="game-title text-light">{{ game?.name }}</h1>
+<div class="container my-5">
+  <div class="row">
+    <!-- Game Image Section -->
+    <div class="col-md-6 text-center">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <!-- Carousel Inner -->
+        <div class="carousel-inner">
+          
+          <div class="carousel-item" *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
+            <ng-container  *ngIf="media.gameMediaType === 'SCREENSHOT'">
+            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="error">
+          </ng-container>
+
+          </div>
+        </div>
+      
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      
+      <!-- Thumbnails -->
+      <div class="thumbnail-container d-flex justify-content-center mt-3">
+        <div class="thumbnail"  *ngFor="let media of game?.gameMediaList; let i = index" (click)="setActiveSlide(i)">
+          <ng-container  *ngIf="media.gameMediaType === 'SCREENSHOT'">
+          <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
+        </ng-container>
+        </div>
+      </div>
+     
     </div>
-  
-    <!-- Second Row: Carousel and Right Column -->
-    <div class="game-content">
-      <!-- Left Column: Carousel -->
-      <div class="game-left">
-        <div class="game-carousel">
-          <ejs-carousel>
-            <e-carousel-items>
-              <ng-container *ngFor="let media of game?.gameMediaList">
-                <e-carousel-item>
-                  <ng-template #template>
-                    <figure class="img-container">
-                      <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" alt="error" class="game-image" />
-                    </figure>
-                    
-                  </ng-template>
-                </e-carousel-item>
-              </ng-container>
-            </e-carousel-items>
-          </ejs-carousel>
-        </div>
-      </div>
-  
-      <!-- Right Column: Banner, Price, and Buy Button -->
-      <div class="game-right">
-        <div class="game-banner">
-          <img src="https://cdn1.epicgames.com/spt-assets/e83b81f79e604f8ba21cca597f1dc850/citizen-sleeper-2-starward-vector-logo-1i7hq.png?resize=1&w=480&h=270&quality=medium" 
-               alt="{{ game?.name }} banner" 
-               class="banner-image" />
-        </div>
-        <div class="game-price">
-          <h6 class="text-light text-left">{{ game?.price | currency: 'USD' }}</h6>
-          <button class="buy-button">Buy Now</button>
-        </div>
-      </div>
+
+
+
+    <!-- Game Details Section -->
+    <div class="col-md-6">
+      <div  *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
+        <ng-container  *ngIf="media.gameMediaType === 'BANNER'">
+        <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="error">
+      </ng-container>
+
+      </div>      <h1 class="text-light">{{ game.name }}</h1>
+      <p class="text-muted">Released on: {{ game.createdAt | date:'longDate' }}</p>
+
+      <p class="text-light">
+        <strong>Description:</strong> {{ game.description }}
+      </p>
+
+      <p class="text-light">
+        <strong>Platforms:</strong> {{ game.platforms }}
+      </p>
+
+      <p class="text-light">
+        <strong>Categories:</strong>
+        <span *ngFor="let category of game.categories; let isLast = last">
+          {{ category.name }}<span *ngIf="!isLast">, </span>
+        </span>
+      </p>
+
+      <h3 class="text-primary">${{ game.price }}</h3>
+
+      <button class="btn btn-primary btn-lg mt-3 buy-button">Buy Now</button>
     </div>
   </div>
-  
+
+
+</div>

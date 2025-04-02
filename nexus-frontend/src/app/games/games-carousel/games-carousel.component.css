@@ -57,7 +57,8 @@
 .carousel-control-prev,
 .carousel-control-next {
  /* background-color: rgba(0, 0, 0, 0.5);*/
-  color: white;
+  color: red;
+  width: 50px; /* Adjust width for larger buttons */
  /* padding: 15px;*/
  /* border-radius: 50%;*/
 }

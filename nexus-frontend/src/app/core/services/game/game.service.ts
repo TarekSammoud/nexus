@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Game } from '../../entities/game/game';
 
@@ -14,6 +14,14 @@ export class GameService {
   getGames(): Observable<Game[]> {  // ✅ Fix the return type
 
     return this.http.get<Game[]>(`${this.gamesUrl}/all-games`);
+  }
+
+  getGamesByCategory(category: string): Observable<Game[]> {
+    // Creating query parameters to pass the category
+   // const params = new HttpParams().set('name', category);
+
+    // Sending GET request with the category name as query parameter filter-by-category
+    return this.http.get<Game[]>(`${this.gamesUrl}/filter-by-category/${category}`);
   }
 
   getGame(id: number): Observable<Game> {

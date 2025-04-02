@@ -11,6 +11,16 @@
 html, body {
   overflow-x: hidden;
 }
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
 /*
 .games-list-container{
   display: flex;
@@ -50,7 +60,7 @@ html, body {
   display: block;
   width: 60px;
   height: 3px;
-  background: #66c0f4; /* Steam Blue */
+  background: #9A5ED6; /* Steam Blue */
   margin: 10px auto 0;
   border-radius: 2px;
 }
@@ -109,4 +119,116 @@ app-games-carousel:hover {
   app-games-carousel {
       max-width: 100%;
   }
+}
+
+
+/* Chip Bar with Glassmorphic Effect */
+.chip-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px;
+  background: rgba(20, 20, 20, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Prevents overflow */
+}
+
+/* Scrollable Chip Container */
+.chip-container {
+  display: flex;
+  overflow-x: auto; /* Allows horizontal scrolling */
+  white-space: nowrap;
+  padding: 5px;
+  width: 100%;
+  gap: 8px; /* Add space between chips */
+  flex-wrap: nowrap; /* Ensures chips stay in one line */
+}
+
+/* Hide Scrollbar */
+.chip-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.chip-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.chip-container::-webkit-scrollbar-track {
+  background: rgba(20, 20, 20, 0.3);
+  border-radius: 10px;
+}
+
+/* Styled Chips */
+.category-chip {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  margin-right: 8px; /* Add space between chips */
+  border-radius: 20px;
+  padding: 8px 12px;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  scroll-snap-align: start;
+  flex-shrink: 0; /* Prevent chips from shrinking */
+}
+
+/* Hover Animation */
+.category-chip:hover {
+  transform: scale(1.1);
+}
+
+
+
+/* Glassmorphic Effect for the List */
+.glassmorphic-list {
+  background: rgba(20, 20, 20, 0.1); /* Transparent dark background */
+  backdrop-filter: blur(10px); /* Blurred background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Soft shadow */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Subtle border */
+  padding: 10px;
+  max-width: 100%;
+  overflow-x: auto; /* Allows scrolling if content overflows */
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Spacing between items */
+  flex-wrap: nowrap; /* Ensure the list stays on one line */
+}
+
+/* List Items Style */
+.glassmorphic-list .list-group-item {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for items */
+  color: white; /* White text */
+  border: none; /* Remove default borders */
+  border-radius: 20px; /* Rounded corners for the items */
+  padding: 8px 16px; /* Padding inside each item */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+  cursor: pointer;
+  flex-shrink: 0; /* Prevent shrinking of list items */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Hover Effect on List Items */
+.glassmorphic-list .list-group-item:hover {
+  transform: scale(1.1); /* Slight scaling effect when hovered */
+}
+
+/* Scrollbar Customization */
+.glassmorphic-list::-webkit-scrollbar {
+  height: 6px; /* Thin scrollbar */
+}
+
+.glassmorphic-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Subtle scrollbar thumb */
+  border-radius: 10px;
+}
+
+.glassmorphic-list::-webkit-scrollbar-track {
+  background: rgba(20, 20, 20, 0.3); /* Background color of the scrollbar track */
+  border-radius: 10px;
 }
