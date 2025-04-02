@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { GameService } from 'src/app/core/services/game/game.service';
@@ -12,7 +12,7 @@ declare var bootstrap: any;
 export class GamePageComponent {
   game! : Game;
 
-  constructor(private _gameService: GameService, private route: ActivatedRoute) {
+  constructor(private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
     if (gameId) {
       this._gameService.getGame(+gameId).subscribe(game => {
@@ -40,6 +40,22 @@ setActiveSlide(index: number): void {
       (acc, _, i) => (i % size === 0 ? [...acc, arr.slice(i, i + size)] : acc),
       [] as GameMedia[][]
     );
+  }
+
+  deleteGame(game: Game){
+    if (confirm("Are you sure you want to delete this game?")) {
+      this._gameService.deleteGame(game).subscribe(() => {
+        alert("Game deleted successfully");
+        window.location.href = '/home';
+      }, error => {
+        alert("Error deleting game: " + error.message);
+      });
+    }
+  }
+
+  navigateToUpdate(game: Game) {
+    // Navigate to the update game page with the selected game ID
+    this._router.navigate(['/update-game', game.id]);
   }
   
   
