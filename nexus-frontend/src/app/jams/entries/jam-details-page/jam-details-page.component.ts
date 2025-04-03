@@ -16,10 +16,10 @@ export class JamDetailsPageComponent implements OnInit {
   entries: Entry[] = [];
 
   activeTab: 'overview' | 'submissions' | 'media' = 'overview';
-  showEntryForm: boolean = false;
 
   selectedEntryToEdit: Entry | null = null;
-  showEditForm: boolean = false;
+  selectedEntryToRate: Entry | null = null;
+  selectedEntryForModal: Entry | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,67 +33,67 @@ export class JamDetailsPageComponent implements OnInit {
     this.loadEntries();
   }
 
-  setTab(tab: 'overview' | 'submissions' | 'media') {
+  setTab(tab: 'overview' | 'submissions' | 'media'): void {
     this.activeTab = tab;
-    this.showEntryForm = tab === 'submissions';
   }
-  
 
   loadJamDetails(): void {
-    this.jamService.getJamById(this.jamId).subscribe((data) => {
-      this.jam = data;
+    this.jamService.getJamById(this.jamId).subscribe(jam => {
+      this.jam = jam;
     });
   }
 
   loadEntries(): void {
-    this.entryService.getEntriesByJam(this.jamId).subscribe(data => {
-      this.entries = data;
-      console.log("Updated entries:", this.entries);
+    this.entryService.getEntriesByJam(this.jamId).subscribe(entries => {
+      this.entries = entries;
     });
   }
 
-  onEntryCreated(newEntry: Entry) {
-    this.entries.push(newEntry); 
+  onEntryCreated(newEntry: Entry): void {
+    this.entries.push(newEntry);
   }
-  
+
   deleteEntry(id: number): void {
-    if (confirm("Are you sure you want to delete this entry?")) {
-      this.entryService.deleteEntry(id).subscribe({
-        next: () => {
-          console.log("Entry deleted ✅");
-          this.loadEntries();
-        },
-        error: err => {
-          console.error("Failed to delete entry:", err);
-        }
-      });
-    }
+    if (!confirm("Are you sure you want to delete this entry?")) return;
+    
+    this.entryService.deleteEntry(id).subscribe({
+      next: () => this.loadEntries()
+    });
   }
 
-  startEdit(entry: Entry) {
-    this.selectedEntryToEdit = { ...entry }; // Clone
-    this.showEditForm = true;
+  startEdit(entry: Entry): void {
+    this.selectedEntryToEdit = { ...entry }; 
   }
 
-  cancelEdit() {
+  cancelEdit(): void {
     this.selectedEntryToEdit = null;
-    this.showEditForm = false;
   }
 
   updateEntry(): void {
     if (!this.selectedEntryToEdit) return;
 
     this.selectedEntryToEdit.jam = { id: this.jamId };
-
     this.entryService.updateEntry(this.selectedEntryToEdit).subscribe({
       next: () => {
-        console.log("Entry updated ✅");
         this.selectedEntryToEdit = null;
         this.loadEntries();
-      },
-      error: (err) => {
-        console.error("Failed to update entry:", err);
       }
     });
+  }
+
+  openMediaModal(entry: Entry): void {
+    this.selectedEntryForModal = entry;
+  }
+
+  closeMediaModal(): void {
+    this.selectedEntryForModal = null;
+  }
+
+  openRatingModal(entry: Entry): void {
+    this.selectedEntryToRate = entry;
+  }
+
+  closeRatingModal(): void {
+    this.selectedEntryToRate = null;
   }
 }

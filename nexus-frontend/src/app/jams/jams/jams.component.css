@@ -7,11 +7,11 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+
 .video-inline {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  max-height: 300px;
   display: block;
-  border-radius: 10px;
-  pointer-events: none;
+  object-fit: cover;
+  background-color: black;
 }

@@ -1,19 +1,31 @@
 <div class="entry-form-container">
-    <h3 class="form-title">🎮 Submit Your Entry</h3>
-  
-    <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label>Game Name</label>
-          <input type="text" [(ngModel)]="entry.nameEntry" name="nameEntry" class="form-control" required>
-        </div>
-      
-        <div class="form-group">
-          <label>Description</label>
-          <textarea [(ngModel)]="entry.descriptionEntry" name="descriptionEntry" class="form-control" required></textarea>
-        </div>
-      
-        <button type="submit" class="btn btn-primary mt-3">Submit Entry</button>
-      </form>
-      
-  </div>
-  
+  <h3 class="form-title">📝 Submit Your Entry</h3>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nameEntry">Game Title</label>
+      <input
+        type="text"
+        id="nameEntry"
+        [(ngModel)]="entry.nameEntry"
+        name="nameEntry"
+        class="form-control"
+        placeholder="Enter your game's title"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="descriptionEntry">Short Description</label>
+      <textarea
+        id="descriptionEntry"
+        [(ngModel)]="entry.descriptionEntry"
+        name="descriptionEntry"
+        class="form-control"
+        placeholder="Describe your game"
+        rows="3"
+        required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">🚀 Submit Entry</button>
+  </form>
+</div>
