@@ -1,4 +1,3 @@
-import { Entry } from './entry';
 
 export enum EntryMediaType {
   SCREENSHOT = 'SCREENSHOT',

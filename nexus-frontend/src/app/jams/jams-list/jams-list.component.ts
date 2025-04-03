@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JamService } from 'src/app/core/services/jam/jam.service';
 import { Router } from '@angular/router';
+import { Jam } from 'src/app/core/entities/Jam/jam';
 
 @Component({
   selector: 'app-jams-list',
@@ -8,85 +9,66 @@ import { Router } from '@angular/router';
   styleUrls: ['./jams-list.component.css']
 })
 export class JamsListComponent implements OnInit {
-  jams: any[] = [];
-  selectedJam: any = null;
-  editMode: boolean = false;
-  showForm: boolean = false;
+  jams: Jam[] = [];
+  selectedJam: Jam | null = null;
+  editMode = false;
+  showForm = false;
+  page = 1;
 
-  constructor(private jamService: JamService, private router: Router) {}
-
+   constructor(private jamService: JamService, private router: Router) {}
   ngOnInit(): void {
     this.loadJams();
   }
 
-  loadJams() {
+  loadJams(): void {
     this.jamService.getJams().subscribe({
-      next: (data) => {
-        this.jams = data;
-      },
-      error: (err) => {
-        console.error("Error loading game jams:", err);
-      }
+      next: (data) => this.jams = data,
     });
   }
 
-  viewDetails(jam: any) {
+  viewDetails(jam: Jam): void {
     this.selectedJam = jam;
-    this.editMode = false; 
-    console.log("Viewing details for:", jam);
+    this.editMode = false;
   }
-  
 
-  editJam(jam: any) {
+  editJam(jam: Jam): void {
     this.selectedJam = { ...jam };
-    this.editMode = true; 
-    console.log("Editing game jam:", jam);
+    this.editMode = true;
   }
-  
 
-  closeDetails() {
+  closeDetails(): void {
     this.selectedJam = null;
     this.editMode = false;
   }
 
-  toggleForm() {
+  toggleForm(): void {
     this.showForm = !this.showForm;
   }
 
-  onJamCreated(newJam: any) {
+  onJamCreated(newJam: Jam): void {
     this.jams.push(newJam);
     this.showForm = false;
   }
 
-  deleteJam(jamId: number) {
-    if (confirm("Are you sure you want to delete this Game Jam?")) {
-      this.jamService.deleteJam(jamId).subscribe(() => {
-        this.jams = this.jams.filter(j => j.id !== jamId);
-      });
-    }
-  }
+  deleteJam(jamId: number): void {
+    if (!confirm("Are you sure you want to delete this Game Jam?")) return;
 
-  updateJam() {
-    this.jamService.updateJam(this.selectedJam.id, this.selectedJam).subscribe(() => {
-      const index = this.jams.findIndex(j => j.id === this.selectedJam.id);
-      if (index !== -1) {
-        this.jams[index] = this.selectedJam;
-      }
-      this.closeDetails();
+    this.jamService.deleteJam(jamId).subscribe(() => {
+      this.jams = this.jams.filter(j => j.id !== jamId);
     });
   }
 
-  page: number = 1;  
+  updateJam(): void {
+    if (!this.selectedJam) return;
 
-  getCountdown(startDate: string): string {
-    const now = new Date();
-    const start = new Date(startDate);
-    const diff = start.getTime() - now.getTime();
-  
-    if (diff <= 0) return "🚀 Already Started!";
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    return `${days} days left`;
+    this.jamService.updateJam(this.selectedJam.id, this.selectedJam).subscribe(() => {
+      const index = this.jams.findIndex(j => j.id === this.selectedJam!.id);
+      if (index !== -1) this.jams[index] = this.selectedJam!;
+      this.closeDetails();
+    });
   }
   
+  
+
+
 }

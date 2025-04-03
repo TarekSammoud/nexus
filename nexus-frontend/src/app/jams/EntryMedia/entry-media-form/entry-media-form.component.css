@@ -1,11 +1,251 @@
 .entry-media-form {
-    background-color: #1e1e2f;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 8px #00000077;
-    margin-top: 20px;
-  }
-  .entry-media-form label {
-    font-weight: bold;
-  }
-  
+  background-color: #1f2230;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.15);
+  max-width: 500px;
+  margin: auto;
+  color: #f0f0f0;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.media-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #b599ff;
+}
+
+
+.form-heading {
+  color: #d6c2ff;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(138, 106, 255, 0.2);
+}
+
+.media-form .form-group {
+  margin-bottom: 15px;
+}
+
+.media-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.media-form input,
+.media-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #2c2e3a;
+  color: #eee;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+
+.media-form input:focus,
+.media-form select:focus {
+  border-color: #a58aff;
+  outline: none;
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #8f44fd, #5e00f0);
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(138, 106, 255, 0.3);
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #a070ff, #6f3aff);
+  transform: scale(1.03);
+}
+.section-heading {
+  font-size: 1.8rem;
+  color: #c59fff;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(197, 159, 255, 0.4);
+}
+
+.entry-media-list {
+  background-color: #1e1f29;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.entry-media-card {
+  background-color: #292b36;
+  border: 1px solid #3e3f4b;
+  padding: 16px;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+  color: #ddd;
+}
+
+.entry-media-card:hover {
+  transform: translateY(-4px);
+  background-color: #333544;
+  box-shadow: 0 0 10px rgba(153, 118, 255, 0.2);
+}
+
+.entry-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #a68fff;
+  margin-bottom: 8px;
+}
+
+.entry-desc {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.entry-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 500;
+  color: #ccc;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-control,
+.form-select {
+  background-color: #2b2f3d;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #8c5eff;
+  outline: none;
+}
+
+.btn-media-submit {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #8f44fd, #4a00e0);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-media-submit:hover {
+  background: linear-gradient(to right, #a844ff, #5e00f0);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.entry-media-card {
+  background: #1e1f27;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(100, 100, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.entry-name {
+  font-size: 1.2rem;
+  color: #a78bfa;
+  margin-bottom: 6px;
+}
+
+.entry-desc {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.entry-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.toggle-btn-wrapper button {
+  background-color: #5e50fa;
+  color: white;
+  font-weight: bold;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle-btn-wrapper button:hover {
+  background-color: #7a66ff;
+}
+
+.media-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+
+
+.media-tile {
+  position: relative;
+  width: 150px;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.media-tile img,
+.media-tile video {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.media-label {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  background: #6f42c1;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+}

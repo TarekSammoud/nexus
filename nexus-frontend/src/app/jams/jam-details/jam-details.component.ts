@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JamService } from 'src/app/core/services/jam/jam.service';
 
@@ -8,7 +8,7 @@ import { JamService } from 'src/app/core/services/jam/jam.service';
   styleUrls: ['./jam-details.component.css']
 })
 export class JamDetailsComponent implements OnInit {
-  jam: any;
+  @Input() jam: any; 
 
   constructor(private route: ActivatedRoute, private jamService: JamService) {}
 

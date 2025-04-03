@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/entry-media")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EntryMediaController {
 
     @Autowired

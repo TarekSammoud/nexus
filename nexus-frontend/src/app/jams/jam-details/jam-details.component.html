@@ -1,14 +1,14 @@
-<h2>GAME JAM DETAILS</h2>
-<div *ngIf="jam">
-  <h3>{{ jam.name }}</h3>
-  <p>{{ jam.description }}</p>
-  <p><strong>Start Date:</strong> {{ jam.devStartDate | date: 'dd/MM/yyyy' }}</p>
-  <p><strong>End Date:</strong> {{ jam.devEndDate | date: 'dd/MM/yyyy' }}</p>
-  <p><strong>Reward:</strong> {{ jam.reward }}</p>
-  <button routerLink="/jams">Back to List</button>
+<div *ngIf="jam" class="jam-details-view">
+  <h2 class="card-title text-center">{{ jam.name }}</h2>
+  <img *ngIf="jam.imageUrl" [src]="jam.imageUrl" class="modal-img" />
+
+  <ul class="jam-details-list">
+    <li><i class="fas fa-calendar-alt"></i> {{ jam.devStartDate | date:'dd/MM/yyyy' }}</li>
+    <li><i class="fas fa-hourglass-end"></i> {{ jam.devEndDate | date:'dd/MM/yyyy' }}</li>
+    <li>
+      <i class="fas fa-poll"></i>
+      Voting: {{ jam.voteStartDate | date:'dd/MM/yyyy' }} - {{ jam.voteEndDate | date:'dd/MM/yyyy' }}
+    </li>
+    <li><i class="fas fa-trophy"></i> Reward: {{ jam.reward }}</li>
+  </ul>
 </div>
-
-
-<ng-template #noData>
-  <p>waiting ...</p>
-</ng-template>
