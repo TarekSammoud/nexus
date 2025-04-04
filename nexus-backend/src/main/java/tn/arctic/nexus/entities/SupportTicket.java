@@ -1,33 +1,43 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SupportTicket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId; // User from external module
-    private String description;
 
-    @Enumerated(EnumType.STRING)
-    private TicketCategory category;
+    private String title;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
+
     @Enumerated(EnumType.STRING)
     private TicketPriority priority;
 
-    @OneToMany(mappedBy = "supportTicket", cascade = CascadeType.ALL)
-    private List<TicketMessage> messages;
+    @Enumerated(EnumType.STRING)
+    private TicketCategory category;
 
     @ManyToOne
-    private SupportAgent assignedAgent;
+    @JoinColumn(name = "assigneA_id") // Ensure the column name is correct
+    private SupportAgent assigneA;
+
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "ticket")
+    private Room room;// This is the field referred by mappedBy in SupportAgent
 }
