@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameCategory;
+
+
 import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 
 import java.util.List;
 
 @Service
-public class GameService implements IGameService{
+public class GameService implements IGameService {
     @Autowired
     IGameRepository gameRepository;
 
@@ -21,7 +23,7 @@ public class GameService implements IGameService{
 
     @Override
     public List<Game> getAllGames() {
-        return (List<Game>) this.gameRepository.findAll();
+        return this.gameRepository.findAll();
     }
 
     @Override
