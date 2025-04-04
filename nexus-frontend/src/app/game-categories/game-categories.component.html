@@ -1,0 +1,15 @@
+<div class="featured-container">
+    <div>Available Categories</div>
+    <div class="card-container">
+      <div class="card" *ngFor="let category of availableCategories">
+        <div class="card-body">
+          <h5 class="card-title">{{ category.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <p class="card-text">{{ category.description }}</p>
+          <a href="#" routerLink = "/admin/category/{{category.id}}" class="card-link">Edit</a>
+          <button (click)="deleteGameCategory(category.id)" class="card-link text-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

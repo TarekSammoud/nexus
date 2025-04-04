@@ -23,6 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GameGridComponent } from './games/game-grid/game-grid.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { GameCategoriesComponent } from './game-categories/game-categories.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { GameGridComponent } from './games/game-grid/game-grid.component';
     CreateGameComponent,
     CreateGameCategoryComponent,
     GameGridComponent,
+    AdminHomeComponent,
+    GameCategoriesComponent,
     
   ],
   imports: [

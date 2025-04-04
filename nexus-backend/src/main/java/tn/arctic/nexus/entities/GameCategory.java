@@ -50,7 +50,8 @@ public class GameCategory implements Serializable {
         this.description = description;
     }
 
-    @ManyToMany
+    //@ManyToMany
+    @ManyToMany(mappedBy = "categories", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Game> games;
 
 }
