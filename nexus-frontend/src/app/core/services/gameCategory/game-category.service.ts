@@ -22,5 +22,9 @@ export class GameCategoryService {
     getGameCategory(id: number): Observable<GameCategory> {
       return this.http.get<GameCategory>(`${this.gamesCategoryUrl}/${id}`);
     }
+    
+    deleteGameCategory(id: number): Observable<GameCategory> {
+      return this.http.delete<GameCategory>(`${this.gamesCategoryUrl}/delete/${id}`);
+    }
 
 }

@@ -52,8 +52,20 @@ public class Game implements Serializable {
     @JsonBackReference  // This prevents serialization of the game field in GameMedia
     private User user;
 
+   // @ManyToMany
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+   /* @JoinTable(
+            name = "game_category_games",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )*/
     @ManyToMany
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE) // Cascade deletes on the join table
+    @JoinTable(
+            name = "game_category_games",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<GameCategory> categories;
 
 
