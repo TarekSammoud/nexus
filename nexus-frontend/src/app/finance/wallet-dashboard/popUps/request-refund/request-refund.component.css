@@ -1,0 +1,327 @@
+/* Modal Header Styles */
+.modal-header {
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+  
+    .modal-title {
+      color: #343a40;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+  
+      i {
+        color: #143584;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  /* Modal Body Styles */
+  .modal-body {
+    background-color: white;
+    padding: 2rem 1.5rem;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: #f8f9fa;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #143584;
+      border-radius: 3px;
+    }
+  }
+  
+  /* Payments List Styles */
+  .payments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Payment Item Styles */
+  .payment-item {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  /* Payment Info Styles */
+  .payment-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.8rem 1.5rem;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 1.5rem;
+  
+    &.selected {
+      background-color: #f8f9fa;
+    }
+  }
+  
+  /* Payment Details Styles */
+  .payment-details {
+    text-align: center;
+  
+    h6 {
+      color: #343a40;
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+  
+  /* Amount Info Styles */
+  .amount-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    min-width: 280px;
+  
+    .coin-amount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #495057;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+  
+      i {
+        color: #ffc107;
+        font-size: 1.3rem;
+      }
+  
+      span {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+  
+      .coins-text {
+        color: #6c757d;
+        font-size: 1rem;
+        margin-left: 0.3rem;
+      }
+    }
+  
+    .eth-amount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #495057;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+      position: relative;
+  
+      &::before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        height: 24px;
+        width: 1px;
+        background-color: #dee2e6;
+      }
+  
+      i {
+        color: #627eea;
+        font-size: 1.3rem;
+      }
+  
+      span {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  /* Button Styles */
+  .refund-btn {
+    color: #143584;
+    border-color: #143584;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    min-width: 140px;
+  
+    i {
+      font-size: 1rem;
+    }
+  
+    &:hover {
+      background-color: #143584;
+      color: white;
+      transform: translateY(-2px);
+    }
+  }
+  
+  /* Refund Form Styles */
+  .refund-form {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    box-sizing: border-box;
+  
+    textarea {
+      background-color: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 100%;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 100px;
+  
+      &:focus {
+        border-color: #143584;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(20, 53, 132, 0.1);
+      }
+    }
+  
+    .form-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+  
+      button {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease-in-out;
+        min-width: 120px;
+  
+        &.btn-primary {
+          background-color: #143584;
+          border-color: #143584;
+  
+          &:hover:not(:disabled) {
+            background-color: darken(#143584, 5%);
+          }
+  
+          &:disabled {
+            opacity: 0.7;
+          }
+        }
+  
+        &.btn-secondary {
+          &:hover {
+            background-color: darken(#6c757d, 5%);
+          }
+        }
+      }
+    }
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .modal-body {
+      padding: 1.5rem 1rem;
+    }
+  
+    .payment-info {
+      padding: 1.5rem 1.2rem;
+    }
+  
+    .payment-details h6 {
+      font-size: 1.3rem;
+    }
+  
+    .amount-info {
+      min-width: 240px;
+      gap: 1.5rem;
+      padding: 0.4rem;
+  
+      .coin-amount,
+      .eth-amount {
+        font-size: 1.1rem;
+  
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-body {
+      padding: 1rem;
+    }
+  
+    .payment-info {
+      padding: 1.2rem 1rem;
+    }
+  
+    .payment-details h6 {
+      font-size: 1.2rem;
+    }
+  
+    .amount-info {
+      min-width: 200px;
+      gap: 1rem;
+      flex-direction: column;
+      padding: 0.8rem;
+  
+      .eth-amount {
+        &::before {
+          display: none;
+        }
+      }
+    }
+  
+    .refund-form {
+      padding: 1.2rem 1rem;
+  
+      .form-actions {
+        flex-direction: column-reverse;
+        gap: 0.8rem;
+  
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  

@@ -1,0 +1,64 @@
+<!-- transfers.component.html -->
+<div class="overflow-auto" style="height: 400px;">
+    <div *ngFor="let transfer of transfers">
+      <div class="card m-2 w-90">
+        <div class="row g-0">
+          <!-- Content Column -->
+          <div class="col-md-11">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-4">
+                  <h5 class="card-title mb-0">ID: {{ transfer.id }}</h5>
+                  <!-- Receiver Wallet ID -->
+                  <span class="receiver-badge">
+                    <i class="fas fa-wallet me-1"></i>
+                    Wallet ID: {{ transfer.receiver_wallet_id }}
+                  </span>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                  <h5 class="card-title price-tag coins mb-0">
+                    <img src="../../assets/img/token.png" alt="Coins" class="coin-icon">
+                    {{ transfer.amount }} coins
+                  </h5>
+                </div>
+              </div>
+  
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="date-info">
+                  <i class="far fa-calendar-alt me-2"></i>
+                  {{ transfer.createdAt | date:'dd MMM yyyy HH:mm' }}
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Delete Button Column -->
+          <div class="col-md-1 d-flex justify-content-center align-items-center">
+            <button class="btn btn-link delete-btn" data-bs-toggle="modal" data-bs-target="#deleteTransferModal"
+              (click)="setSelectedTransfer(transfer.id)">
+              <i class="far fa-trash-can fa-2x"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteTransferModal" tabindex="-1" aria-labelledby="deleteTransferModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteTransferModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete transfer with ID: <strong>{{ selectedTransferId }}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="deleteItem(selectedTransferId)" data-bs-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
