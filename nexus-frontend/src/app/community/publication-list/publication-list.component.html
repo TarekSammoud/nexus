@@ -81,7 +81,8 @@
      
 <ng-container *ngIf="publication.id as pubId">
 <p></p>
-<p></p>
+
+
   <div *ngFor="let comment of commentsByPublication?.[pubId]" class="comment-bubble shadow-sm">
     <div class="d-flex justify-content-between align-items-start">
       <div>
@@ -109,4 +110,5 @@
       </div>
     </div>
   </div>
+
 </div>

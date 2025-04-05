@@ -4,11 +4,12 @@ import { CommentaireService } from '../../core/services/community/commentaire.se
 import { LikeService } from '../../core/services/community/like.service';
 import { Publication } from '../../core/entities/community/publication';
 import { Commentaire } from '../../core/entities/community/commentaire';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-publication-list',
   templateUrl: './publication-list.component.html',
-  styleUrls: ['./publication-list.component.css']
+  styleUrls: ['./publication-list.component.css'],
 })
 export class PublicationListComponent implements OnInit {
 
@@ -18,12 +19,13 @@ export class PublicationListComponent implements OnInit {
   commentsByPublication: { [key: number]: Commentaire[] } = {};
   likeCounts: { [key: number]: number } = {};
   userLiked: { [key: number]: boolean } = {};
-  userId: number = 1; // À remplacer plus tard par l'utilisateur connecté
+  userId: number = 1;
 
   constructor(
     private communityService: CommunityService,
     private commentaireService: CommentaireService,
-    private likeService: LikeService
+    private likeService: LikeService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +43,8 @@ export class PublicationListComponent implements OnInit {
           this.loadLikes(pub.id);
         });
       },
-      error: (error: any) => {
-        console.error('Erreur lors du chargement des publications :', error);
+      error: () => {
+        this.toastr.error('Erreur lors du chargement des publications.');
       }
     });
   }
@@ -52,8 +54,8 @@ export class PublicationListComponent implements OnInit {
       next: (comments: Commentaire[]) => {
         this.commentsByPublication[pubId] = comments || [];
       },
-      error: (err: any) => {
-        console.error(`❌ Erreur chargement commentaires pour la publication ${pubId} :`, err);
+      error: () => {
+        this.toastr.error('Erreur lors du chargement des commentaires.');
       }
     });
   }
@@ -82,8 +84,11 @@ export class PublicationListComponent implements OnInit {
       next: () => {
         this.userLiked[pubId] = true;
         this.likeCounts[pubId] = (this.likeCounts[pubId] || 0) + 1;
+        this.toastr.success('❤️ Like ajouté avec succès !');
       },
-      error: (err) => console.error('Erreur ajout like :', err)
+      error: () => {
+        this.toastr.error('Erreur lors du like 😢');
+      }
     });
   }
 
@@ -94,7 +99,7 @@ export class PublicationListComponent implements OnInit {
   addComment(pubId: number): void {
     const content = this.newCommentContent[pubId]?.trim();
     if (!content) {
-      alert('⚠️ Le commentaire est vide.');
+      this.toastr.warning('Le commentaire est vide.');
       return;
     }
 
@@ -112,11 +117,10 @@ export class PublicationListComponent implements OnInit {
         ];
         this.newCommentContent[pubId] = '';
         this.showCommentForm[pubId] = false;
-        alert('✅ Commentaire ajouté avec succès.');
+        this.toastr.success('✅ Commentaire ajouté avec succès.');
       },
-      error: (err: any) => {
-        console.error('❌ Erreur backend :', err);
-        alert('Erreur lors de l’ajout du commentaire.');
+      error: () => {
+        this.toastr.error('Erreur lors de l’ajout du commentaire.');
       }
     });
   }
@@ -127,9 +131,10 @@ export class PublicationListComponent implements OnInit {
         next: () => {
           this.publications = this.publications.filter(pub => pub.id !== id);
           delete this.commentsByPublication[id];
+          this.toastr.success('🗑️ Publication supprimée avec succès.');
         },
-        error: (error: any) => {
-          console.error('Erreur lors de la suppression :', error);
+        error: () => {
+          this.toastr.error('Erreur lors de la suppression de la publication.');
         }
       });
     }
@@ -143,11 +148,10 @@ export class PublicationListComponent implements OnInit {
         next: () => {
           this.commentsByPublication[pubId] = this.commentsByPublication[pubId]
             .filter(comment => comment.id !== commentId);
-          alert('✅ Commentaire supprimé avec succès.');
+          this.toastr.success('✅ Commentaire supprimé avec succès.');
         },
-        error: (err) => {
-          console.error('Erreur suppression commentaire :', err);
-          alert('Une erreur est survenue lors de la suppression.');
+        error: () => {
+          this.toastr.error('❌ Une erreur est survenue lors de la suppression.');
         }
       });
     }
@@ -157,23 +161,19 @@ export class PublicationListComponent implements OnInit {
     return !!this.commentsByPublication[pubId]?.length;
   }
 
-
   togglePin(pub: Publication): void {
     const updated = { ...pub, pinned: !pub.pinned };
 
     this.communityService.updatePublication(pub.id, updated).subscribe({
       next: () => {
         pub.pinned = !pub.pinned;
-        // Trie à nouveau après modification
         this.publications = this.publications.sort((a, b) => Number(b.pinned) - Number(a.pinned));
-        alert(pub.pinned ? '✅ Publication épinglée.' : '✅ Publication désépinglée.');
+        this.toastr.info(pub.pinned ? '📌 Publication épinglée.' : '📍 Publication désépinglée.');
       },
-      error: (err) => {
-        console.error('❌ Erreur lors du changement de statut épinglé :', err);
-        alert('Une erreur est survenue. Réessayez plus tard.');
+      error: () => {
+        this.toastr.error('Erreur lors de l’action épingler/désépingler.');
       }
     });
   }
-
 
 }
