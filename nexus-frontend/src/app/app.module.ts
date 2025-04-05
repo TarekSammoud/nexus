@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PublicationListComponent } from './community/publication-list/publication-list.component';
 import { PublicationFormComponent } from './community/publication-form/publication-form.component';
 import { FormsModule } from '@angular/forms'; // <-- IMPORT ICI
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -30,8 +33,14 @@ import { FormsModule } from '@angular/forms'; // <-- IMPORT ICI
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
