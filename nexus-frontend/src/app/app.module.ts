@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { GameGridComponent } from './games/game-grid/game-grid.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 
 
 @NgModule({
@@ -56,6 +57,8 @@ import { GameCategoriesComponent } from './game-categories/game-categories.compo
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
+    AdminGameListComponent,
+
 
   ],
   providers: [],
