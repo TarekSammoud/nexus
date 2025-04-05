@@ -41,7 +41,10 @@ html, body {
   
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
 html, body { height: 100%; }
 
 
@@ -55,3 +58,8 @@ html, body { height: 100%; }
     * {
       font: "Fira Sans", sans-serif !important;
     }
+
+    angular-editor-toolbar button i {
+      font-family: FontAwesome !important;
+      color: black !important;
+      }

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +26,9 @@ import { GameGridComponent } from './games/game-grid/game-grid.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
+import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
+import { QuillModule } from 'ngx-quill';
+import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
+    GameCategoryListComponent,
     
   ],
   imports: [
@@ -49,6 +53,7 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CarouselModule,
     GamesListComponent,
@@ -58,6 +63,10 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
     MatProgressBarModule,
     MatTooltipModule,
     AdminGameListComponent,
+    AngularEditorModule,
+    QuillModule.forRoot(),
+      
+    
 
 
   ],

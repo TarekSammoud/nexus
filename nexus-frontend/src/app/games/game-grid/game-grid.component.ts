@@ -16,9 +16,11 @@ export class GameGridComponent {
 
   constructor(private _gameService: GameService,private route: ActivatedRoute) {
     // Initialize the component
-    const category = this.route.snapshot.paramMap.get('name'); 
-    this.name = category!;
-    this._gameService.getGamesByCategory(category!).subscribe(games => {
+    const category = this.route.snapshot.paramMap.get('name');
+    const formattedCategory = category ? category.replace(/ /g, '_') : ''; // Handle null case
+        this.name = category!;
+
+    this._gameService.getGamesByCategory(formattedCategory!).subscribe(games => {
       this.games = games;
       console.log(this.games);
     })
