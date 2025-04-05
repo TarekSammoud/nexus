@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Game } from '../../entities/game/game';
 import { GameCategory } from '../../entities/game/game-category';
 
@@ -14,10 +14,17 @@ export class GameCategoryService {
   
     constructor(private http: HttpClient) {}
   
-    getGameCategories(): Observable<GameCategory[]> {  // ✅ Fix the return type
-  
-      return this.http.get<GameCategory[]>(`${this.gamesCategoryUrl}/all-categories`);
+    getGameCategories(): Observable<GameCategory[]> {
+      return this.http.get<GameCategory[]>(`${this.gamesCategoryUrl}/all-categories`).pipe(
+        map(categories =>  // Remove the type annotation here, since it's inferred
+          categories.map(category => ({
+            ...category,
+            name: category.name.replace(/_/g, ' ')  // Replace underscores with spaces
+          }))
+        )
+      );
     }
+    
   
     getGameCategory(id: number): Observable<GameCategory> {
       return this.http.get<GameCategory>(`${this.gamesCategoryUrl}/${id}`);
@@ -26,5 +33,10 @@ export class GameCategoryService {
     deleteGameCategory(id: number): Observable<GameCategory> {
       return this.http.delete<GameCategory>(`${this.gamesCategoryUrl}/delete/${id}`);
     }
+
+    createGameCategory(category: GameCategory): Observable<GameCategory> {
+      return this.http.post<GameCategory>(`${this.gamesCategoryUrl}/add-category`, category);
+    }
+
 
 }

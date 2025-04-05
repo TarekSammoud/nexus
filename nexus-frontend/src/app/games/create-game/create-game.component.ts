@@ -15,7 +15,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent implements OnInit {
+  
   gameForm!: FormGroup;
+  editorContent: string = '';  
   
   availablePlatforms = Object.values(GamePlatform);
   selectedPlatforms: Set<string> = new Set();
@@ -214,9 +216,17 @@ title: string = 'Create Game';
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
     console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+    if (this.isEditMode) {
+      this.gameForm.value.id = this.gameId;
+      this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
+        console.log('Game updated:', data);
+      });
+    }
+    else {
     this._gameService.addGame(this.gameForm.value).subscribe((data) => {
       console.log('Game added:', data);
     });
+  }
     for (let i = 0; i < this.images.length; i++) {
       console.log(this.filesToUpload[i].value); 
       this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {

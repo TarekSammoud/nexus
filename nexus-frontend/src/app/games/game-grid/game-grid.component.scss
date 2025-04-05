@@ -106,4 +106,31 @@
         width: 20px;
         margin-right: 10px;
     }
+
+    
+
+
 }
+
+
+.featured-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, #1b1e25, #171a21); /* Dark gradient for depth */
+    text-align: center;
+  }
+  
+  /* Title Styling */
+  .featured-container > div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+  }
