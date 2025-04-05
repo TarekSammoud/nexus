@@ -1,1 +1,20 @@
-<p>support works!</p>
+
+<div class="support-tickets">
+    <h1>Support Tickets</h1>
+
+    <ng-container *ngIf="tickets.length > 0; else noTickets">
+        <app-support-ticket *ngFor="let ticket of tickets" [ticket]="ticket"></app-support-ticket>
+      </ng-container>
+      
+      <ng-template #noTickets>
+        <p>No tickets available.</p>
+      </ng-template>
+  </div>
+
+  <style>
+    .support-tickets {
+      padding: 20px;
+      background-color: #fafafa;
+      border-radius: 5px;
+    }
+  </style>

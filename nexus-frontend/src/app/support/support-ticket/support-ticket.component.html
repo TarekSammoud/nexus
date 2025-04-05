@@ -1,0 +1,34 @@
+<div class="support-ticket-list container mt-4 text-center">
+    <h2 class="mb-4 text-white">Support Tickets</h2>
+    <p class="text-white">Welcome, if you have any problems please submit a ticket</p>
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="mb-4 mx-auto" style="max-width: 600px;">
+      <div class="form-group mb-3">
+        <label for="title" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Title:</label>
+        <input id="title" formControlName="title" class="form-control" />
+      </div>
+      <div class="form-group mb-3">
+        <label for="description" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Description:</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+        <div class="form-group mb-3">
+        <label for="category" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Category:</label>
+        <select id="category" formControlName="category" class="form-select">
+          <option *ngFor="let category of ['PURCHASE', 'TECHNICAL', 'ACCOUNT', 'COMMUNITY_CONTENT']" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="ticketForm.invalid">Create Ticket</button>
+    </form>
+
+    <!-- Success message -->
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+  
+    <ul class="list-group mt-4 mx-auto" style="max-width: 800px;">
+      <li *ngFor="let ticket of tickets" class="list-group-item">
+        <h3>{{ ticket.title }}</h3>
+        <p>{{ ticket.description }}</p>
+        <p>Status: {{ ticket.status }}</p>
+      </li>
+    </ul>
+  </div>
