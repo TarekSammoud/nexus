@@ -10,7 +10,7 @@ import tn.arctic.nexus.services.TechnicalSupportModule.SupportAgentService;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("agents")
 public class SupportAgentController {

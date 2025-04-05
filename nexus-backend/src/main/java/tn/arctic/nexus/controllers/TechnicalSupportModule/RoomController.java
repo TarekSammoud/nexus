@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Room;
 import tn.arctic.nexus.services.TechnicalSupportModule.RoomService;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("rooms")
 public class RoomController {
