@@ -45,4 +45,12 @@ public class PaymentController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payment not found"); // Return 404 with message
     }
+
+    /////////////////////////////////
+
+    @PutMapping("/{paymentId}/assign/{walletId}")
+    public ResponseEntity<Payment> assignPaymentToWallet(@PathVariable Long paymentId, @PathVariable Long walletId) {
+        Payment updatedPayment = paymentService.assignPaymentToWallet(paymentId, walletId);
+        return ResponseEntity.ok(updatedPayment);
+    }
 }

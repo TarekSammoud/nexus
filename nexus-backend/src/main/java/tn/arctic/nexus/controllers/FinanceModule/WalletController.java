@@ -29,8 +29,8 @@ public class WalletController {
     public Wallet createWallet(@RequestBody Wallet wallet) {
        return walletService.addWallet(wallet);
     }
-    @GetMapping("/update")
-    public Wallet updateWallet(Wallet wallet) {
+    @PutMapping("/update")
+    public Wallet updateWallet( @RequestBody Wallet wallet) {
         return walletService.updateWallet(wallet);
     }
     @DeleteMapping("/delete/{id}")
