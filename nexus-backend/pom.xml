@@ -63,6 +63,11 @@
 			<artifactId>stripe-java</artifactId>
 			<version>24.3.0-beta.1</version> <!-- Check for the latest version -->
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 

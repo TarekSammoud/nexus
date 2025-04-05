@@ -1,4 +1,5 @@
 package tn.arctic.nexus.entities.FinanceModule;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Payment implements Serializable {
     private Date updatedAt;
 
     @ManyToOne
+    @JsonBackReference
     private Wallet wallet;
 
 
