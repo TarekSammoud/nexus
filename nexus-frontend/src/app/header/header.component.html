@@ -39,9 +39,11 @@
         <ul class="navbar-nav d-flex flex-row align-items-center ">
           <!-- Cart Icon -->
           <li class="nav-item me-3 ">
-            <a class="nav-link cart-icon" href="#">
+            <a class="nav-link cart-icon" routerLink="/panier">
               <i class="fas fa-shopping-cart"></i>
-              <span class="cart-badge">3</span>
+              <div *ngIf="cartCountItems > 0">
+                <span class="cart-badge">{{cartCountItems}}</span>
+              </div>
             </a>
           </li>
           <!-- Profile Dropdown -->
@@ -66,7 +68,7 @@
               </li>
               
               <li><a class="dropdown-item" href="#">Account Settings</a></li>
-              <li><a class="dropdown-item" href="#">Payment Management</a></li>
+              <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
               <li><a class="dropdown-item" href="#">Use a Code</a></li>
               <li><a class="dropdown-item" href="#">Game Library</a></li>
               <li><hr class="dropdown-divider"></li>

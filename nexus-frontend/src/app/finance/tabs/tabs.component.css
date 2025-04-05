@@ -1,0 +1,260 @@
+/* Layout container */
+.layout-container {
+  display: flex;
+  height: 500px; /* Set your desired fixed height here */
+  background-color: #000000;
+}
+
+/* Tabs Container */
+.tabs-container {
+  flex: 1;
+  height: 100%;
+  background: #1A1A1A;
+}
+
+/* Custom Styling for ngx-bootstrap tabs */
+::ng-deep .nav-tabs {
+  border: none !important;
+  background: #1A1A1A;
+  border-radius: 15px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .nav-tabs .nav-item {
+  margin: 0 5px;
+}
+
+::ng-deep .nav-tabs .nav-link {
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+::ng-deep .nav-tabs .nav-link:not(.active) {
+  background: transparent;
+  color: #ffffff;
+}
+
+::ng-deep .nav-tabs .nav-link.active {
+  background: #143584 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(20, 53, 132, 0.2);
+}
+
+/* Tab Header with Icon */
+.tab-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.tab-header i {
+  font-size: 1.1rem;
+}
+
+/* Custom Tab Heading */
+.custom-tab-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Tab Content Wrapper */
+.tab-content-wrapper {
+  height: calc(500px - 70px);
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: 1A1A1A;
+  position: relative;
+
+  /*hide the Scrollbar*/
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+
+
+/* Tab Animations */
+::ng-deep .tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects */
+::ng-deep .nav-tabs .nav-link:not(.active):hover {
+  background: rgba(20, 53, 132, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Active Tab Indicator */
+::ng-deep .nav-tabs .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #143584;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+::ng-deep .nav-tabs .nav-link.active::after {
+  width: 80%;
+}
+
+/* Tab Ripple Effect */
+::ng-deep .nav-tabs .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+::ng-deep .nav-tabs .nav-link:active::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tabs-container {
+    padding: 10px;
+  }
+
+  ::ng-deep .nav-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 5px;
+  }
+
+  ::ng-deep .nav-tabs .nav-link {
+    padding: 10px 15px;
+    white-space: nowrap;
+  }
+
+  .custom-tab-heading {
+    font-size: 0.9rem;
+  }
+
+  .tab-header i {
+    font-size: 1rem;
+  }
+}
+
+/* Loading State (optional) */
+.tab-content-wrapper.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  background-color: #1A1A1A;
+  height: 100%;
+}
+
+.sidebar-content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+/* Sidebar navigation styles */
+.sidebar .nav-link {
+  color: #ffffff;
+  padding: 12px 20px;
+  transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+.sidebar .nav-link i {
+  margin-right: 10px;
+}
+
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: #ff0d0d;
+}
+
+.tab-content-wrapper::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.tab-content-wrapper::-webkit-scrollbar-thumb:hover,
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Make sure tabset takes full height */
+::ng-deep .tab-content {
+  height: calc(100% - 50px); /* Subtract height of tab headers */
+}
+
+::ng-deep tabset {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional: Responsive styles */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .tabs-container {
+    height: 500px; /* Maintain height on mobile */
+  }
+}
