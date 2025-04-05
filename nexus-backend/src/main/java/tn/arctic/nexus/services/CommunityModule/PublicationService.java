@@ -41,4 +41,11 @@ public class PublicationService {
     public void deletePublication(Long id) {
         publicationRepository.deleteById(id);
     }
+
+
+
+    public List<Publication> getAllPublicationsSorted() {
+        return publicationRepository.findAllSortedByPinned();
+    }
+
 }

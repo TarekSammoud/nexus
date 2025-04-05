@@ -156,4 +156,24 @@ export class PublicationListComponent implements OnInit {
   hasComments(pubId: number): boolean {
     return !!this.commentsByPublication[pubId]?.length;
   }
+
+
+  togglePin(pub: Publication): void {
+    const updated = { ...pub, pinned: !pub.pinned };
+
+    this.communityService.updatePublication(pub.id, updated).subscribe({
+      next: () => {
+        pub.pinned = !pub.pinned;
+        // Trie à nouveau après modification
+        this.publications = this.publications.sort((a, b) => Number(b.pinned) - Number(a.pinned));
+        alert(pub.pinned ? '✅ Publication épinglée.' : '✅ Publication désépinglée.');
+      },
+      error: (err) => {
+        console.error('❌ Erreur lors du changement de statut épinglé :', err);
+        alert('Une erreur est survenue. Réessayez plus tard.');
+      }
+    });
+  }
+
+
 }

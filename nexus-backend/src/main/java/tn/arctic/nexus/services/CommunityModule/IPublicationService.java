@@ -10,4 +10,9 @@ public interface IPublicationService {
     Publication getPublicationById(Long id);
     Publication updatePublication(Long id, Publication updatedPublication);
     void deletePublication(Long id);
-}
+
+    List<Publication> getAllPublicationsSorted();
+
+
+
+    }

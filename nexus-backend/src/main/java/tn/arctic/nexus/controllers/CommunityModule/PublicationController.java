@@ -26,7 +26,8 @@ public class PublicationController {
 
     @GetMapping("/all")
     public List<Publication> getAllPublications() {
-        return publicationService.getAllPublications();
+
+        return publicationService.getAllPublicationsSorted();
     }
 
     @GetMapping("/{id}")
