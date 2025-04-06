@@ -27,7 +27,7 @@ public class ProfilePictureController  {
 
     @Autowired
     private UserService userService;  // Injection du service utilisateur
-/*
+
 
     @PostMapping(value = "/uploadProfilePicture/{userId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadProfilePicture(
@@ -64,13 +64,29 @@ public class ProfilePictureController  {
     }
 
 
-    // Méthode pour récupérer la photo de profil d'un utilisateur
     @GetMapping("/profile-picture/{userId}")
-    public ResponseEntity<ProfilePictures> getProfilePicture(@PathVariable Long userId) {
+    public ResponseEntity<byte[]> getProfilePicture(@PathVariable Long userId) {
         ProfilePictures profilePicture = profilePicturesRepository.findByUserId(userId);
         if (profilePicture == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.ok(profilePicture);
-    }*/
+
+        try {
+            // Lecture du fichier image
+            Path path = Paths.get(profilePicture.getImageUrl());
+            byte[] imageBytes = Files.readAllBytes(path);
+
+            // Déterminer le type MIME du fichier (ici on suppose que l'image est en PNG, ajustez selon vos besoins)
+            String contentType = profilePicture.getFileType() != null ? profilePicture.getFileType() : "image/jpeg";
+
+            // Retourner l'image en réponse avec le bon content-type
+            return ResponseEntity.ok()
+                    .contentType(MediaType.valueOf(contentType))
+                    .body(imageBytes);
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 }
