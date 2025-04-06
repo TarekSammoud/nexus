@@ -44,4 +44,19 @@ public class GameService implements IGameService{
     public Game updateGame(Game game) {
         return gameRepository.save(game);
     }
+
+    @Override
+    public Integer getNumberOfGames(){
+        return gameRepository.findAll().size();
+    }
+
+    @Override
+    public List<Game> getGamesByCategoryName(String name) {
+        return gameRepository.findGamesByCategoryName(name);
+    }
+
+    @Override
+    public List<Game> getAllGamesBySingleCategory(String name) {
+        return this.gameRepository.findGamesByCategoryName(name);
+    }
 }
