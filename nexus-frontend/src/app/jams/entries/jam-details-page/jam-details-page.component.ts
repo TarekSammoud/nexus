@@ -96,4 +96,6 @@ export class JamDetailsPageComponent implements OnInit {
   closeRatingModal(): void {
     this.selectedEntryToRate = null;
   }
+
+  
 }
