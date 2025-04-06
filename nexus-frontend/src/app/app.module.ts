@@ -41,7 +41,6 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
-import { QuillModule } from 'ngx-quill';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 
 
@@ -90,8 +89,6 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     MatProgressBarModule,
     MatTooltipModule,
     AdminGameListComponent,
-    AngularEditorModule,
-    QuillModule.forRoot(),
     GameCategoryListComponent
       
     
