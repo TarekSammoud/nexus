@@ -90,7 +90,6 @@ onSelectFile(event: any): void {
     const fileType = file.type;
     const fileSize = file.size;
 
-     var gameId = this.numberOfGames +1 ; 
 
      const newForm = this.fb.group({
       mediaUrl: [mediaUrl, Validators.required],
@@ -98,9 +97,11 @@ onSelectFile(event: any): void {
       fileSize: [fileSize, Validators.required],
       gameMediaType: ['SCREENSHOT', Validators.required],
       game: this.fb.group({
-        id: [this.numberOfGames + 1, Validators.required]
+        id: [this.numberOfGames + 1 , Validators.required]
       })
     });
+
+    console.log("Media form : ", newForm);
 
     const formData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
@@ -228,7 +229,7 @@ title: string = 'Create Game';
     });
   }
     for (let i = 0; i < this.images.length; i++) {
-      console.log(this.filesToUpload[i].value); 
+      console.log("Image files : ",this.filesToUpload[i].value); 
       this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {
         console.log('File uploaded:', data);
       });

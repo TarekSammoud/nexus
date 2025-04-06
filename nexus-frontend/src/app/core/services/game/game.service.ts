@@ -17,6 +17,7 @@ export class GameService {
   }
 
   getGamesByCategory(category: string): Observable<Game[]> {
+    console.log(category);
     return this.http.get<Game[]>(`${this.gamesUrl}/filter-by-category/${category}`);
   }
 

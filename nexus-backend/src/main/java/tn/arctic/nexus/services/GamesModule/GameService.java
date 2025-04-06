@@ -20,11 +20,6 @@ public class GameService implements IGameService{
     }
 
     @Override
-    public List<Game> addMultipleGames(List<Game> games){
-        return this.gameRepository.saveAll(games);
-    }
-
-    @Override
     public List<Game> getAllGames() {
         return (List<Game>) this.gameRepository.findAll();
     }
@@ -37,11 +32,6 @@ public class GameService implements IGameService{
     @Override
     public List<Game> getAllGamesByCategory(List<GameCategory> categories) {
         return this.gameRepository.findByCategoriesIn(categories);
-    }
-
-    @Override
-    public List<Game> getAllGamesBySingleCategory(String name) {
-        return this.gameRepository.getGamesByCategoryName(name);
     }
 
     @Transactional
@@ -58,5 +48,15 @@ public class GameService implements IGameService{
     @Override
     public Integer getNumberOfGames(){
         return gameRepository.findAll().size();
+    }
+
+    @Override
+    public List<Game> getGamesByCategoryName(String name) {
+        return gameRepository.findGamesByCategoryName(name);
+    }
+
+    @Override
+    public List<Game> getAllGamesBySingleCategory(String name) {
+        return this.gameRepository.findGamesByCategoryName(name);
     }
 }

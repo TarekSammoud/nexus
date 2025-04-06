@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface IGameRepository extends JpaRepository<Game,Long> {
     List<Game> findByCategoriesIn(List<GameCategory> gameCategories);
-    @Query("SELECT g FROM Game g JOIN g.categories c WHERE c.name = :name")
-    List<Game> getGamesByCategoryName(String name) ;
+    @Query("SELECT g FROM Game g JOIN g.categories c WHERE c.name = :categoryName")
+    List<Game> findGamesByCategoryName(String categoryName);
+
+
 }

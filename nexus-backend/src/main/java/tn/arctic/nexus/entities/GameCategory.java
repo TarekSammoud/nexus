@@ -1,5 +1,9 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class GameCategory implements Serializable {
 
     @Id
@@ -50,8 +58,16 @@ public class GameCategory implements Serializable {
         this.description = description;
     }
 
-    //@ManyToMany
-    @ManyToMany(mappedBy = "categories", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
+
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
     private List<Game> games;
 
 }

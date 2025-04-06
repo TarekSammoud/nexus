@@ -23,6 +23,7 @@ export class GameMediaService {
   }
 
   addGameMedia(gameMedia: any): Observable<GameMedia> {
+    console.log(gameMedia);
     return this.http.post<GameMedia>(`${this.gamesUrl}/add`, gameMedia);
   }
   

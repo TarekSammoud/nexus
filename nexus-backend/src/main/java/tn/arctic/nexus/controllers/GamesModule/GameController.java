@@ -23,11 +23,6 @@ public class GameController {
         return gameService.addGame(game);
     }
 
-    @PostMapping("/add-many-games")
-    public List<Game> addGames(@RequestBody List<Game> games){
-        return gameService.addMultipleGames(games);
-    }
-
     @Operation(description = "get all games from database")
     @GetMapping("/all-games")
     public List<Game> getAllGames(){
