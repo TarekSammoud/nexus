@@ -15,8 +15,8 @@
           <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
              href="javascript:void(0)"
              (click)="toggleDropdown()">
-            <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
-            <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpen, 'fa-chevron-up': dropdownOpen }"></i>
+             <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
+             <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpen, 'fa-chevron-up': dropdownOpen }"></i>
           </a>
   
           <div *ngIf="dropdownOpen" class="submenu ps-4">
@@ -28,6 +28,8 @@
           </div>
         </div>
       </div>
+
+      
     </div>
   
     <!-- Main Content Area -->
