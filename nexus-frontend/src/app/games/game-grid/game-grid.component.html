@@ -1,0 +1,35 @@
+<div class="title featured-container">
+  <div>{{name}} yalo ?</div>
+</div>
+
+
+
+  
+  <div class="games">  
+    <div *ngFor="let game of games">
+      <div class="game" >
+        <div class="game-thumb-container">
+          <img
+            [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + game.gameMediaList[0].mediaUrl"
+            alt="thumbnail"
+            class="game-thumbnail"
+          />
+        <p *ngIf="!game.gameMediaList[0].mediaUrl">No image</p>
+        </div>
+        <div class="game-description">
+          <p class="game-name">{{ game.name }}</p>
+          <div class="text-muted" style="margin-bottom: 2px;">{{ game.description }}</div>
+          <div class="game-platforms">
+            <div style="margin-right: 5px;">{{ game.price }} TND</div> 
+            <img
+             *ngFor="let gamePlatform of game.platforms"            
+              class="game-platform"
+
+              src="assets/images/platforms/{{ gamePlatform }}.svg"
+              alt="{{ gamePlatform }}"
+            />
+          </div> 
+        </div>
+      </div>
+    </div> 
+  </div>

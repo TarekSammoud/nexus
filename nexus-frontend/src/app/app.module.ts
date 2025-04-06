@@ -30,13 +30,29 @@ import { RequestRefundComponent } from './finance/wallet-dashboard/popUps/reques
 import { TransfersComponent } from './finance/tabs/Listes/transfers/transfers.component';
 import { RefundComponent } from './finance/tabs/Listes/refund/refund.component';
 
+import { HomeComponent } from './home/home/home.component';
+import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
+import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
+import { GamePageComponent } from './games/game-page/game-page.component';
+import { CreateGameComponent } from './games/create-game/create-game.component';
+import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { GameGridComponent } from './games/game-grid/game-grid.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { GameCategoriesComponent } from './game-categories/game-categories.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { QuillModule } from 'ngx-quill';
+import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    GamesCarouselComponent,
     GamesComponent,
     WalletDashboardComponent,
     TabsComponent,
@@ -49,25 +65,42 @@ import { RefundComponent } from './finance/tabs/Listes/refund/refund.component';
     TasksListPopupComponent,
     RequestRefundComponent,
     TransfersComponent,
-    RefundComponent,   
+    RefundComponent,
+    HomeComponent,
+    GamesCarouselComponent,
+    GamePageComponent,
+    CreateGameComponent,
+    CreateGameCategoryComponent,
+    GameGridComponent,
+    AdminHomeComponent,
+    GameCategoriesComponent,
+    GameCategoryListComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, // <-- Add FormsModule to the imports array
-    NgbModule,
+    FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TabsModule.forRoot(),
     MatButtonModule,
     MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    CommonModule
-    
+    CommonModule,
+    CarouselModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    AngularEditorModule,
+    QuillModule.forRoot(),
+    GamesListComponent,
+    AdminGameListComponent
+
 
   ],
   providers: [],
