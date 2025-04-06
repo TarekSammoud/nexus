@@ -29,6 +29,7 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
 import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     AdminGameListComponent,
     AngularEditorModule,
     QuillModule.forRoot(),
-    GameCategoryListComponent
+    GameCategoryListComponent,
+    GameKeyListComponent
       
     
 

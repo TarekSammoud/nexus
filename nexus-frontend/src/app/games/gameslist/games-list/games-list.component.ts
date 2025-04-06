@@ -5,6 +5,7 @@ import { ChipListModule } from '@syncfusion/ej2-angular-buttons';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameService } from 'src/app/core/services/game/game.service';
 import { Router } from '@angular/router';
+import { GameMedia } from 'src/app/core/entities/game/game-media';
 
 @Component({
   selector: 'app-games-list',
@@ -26,9 +27,21 @@ export class GamesListComponent  implements OnInit {
       constructor(private _router : Router,private gameService: GameService) {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
+          for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
+              if (this.data[i].gameMediaList[j].gameMediaType == 'COVER') {
+                this.data[i].coverPicture = this.data[i].gameMediaList[j]; 
+                console.log(this.data[i].coverPicture?.mediaUrl);
+                break; 
+              }
+            }
+          }
+
         });
   
       }
+
+ 
 
 
   @ViewChild('grid')

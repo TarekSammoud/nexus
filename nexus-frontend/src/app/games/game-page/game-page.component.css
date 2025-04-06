@@ -208,3 +208,15 @@
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.thumbnail img {
+  width: 100px;
+  height: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Added transform for scaling */
+}
+
+.active-thumbnail img {
+  box-shadow: 0 0 1px 3px white;
+  border-radius: 5px;
+  transform: scale(1.1); /* Optionally, make the active thumbnail slightly larger */
+}

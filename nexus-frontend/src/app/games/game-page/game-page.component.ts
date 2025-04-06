@@ -17,6 +17,15 @@ export class GamePageComponent {
     if (gameId) {
       this._gameService.getGame(+gameId).subscribe(game => {
         this.game = game;
+        this.game.screenshots = []; // ✅ Initialize
+
+        for (let media of this.game.gameMediaList) {
+          if (media.gameMediaType === 'SCREENSHOT') {
+            this.game.screenshots.push(media);
+          }
+        }
+      
+        console.log(this.game.screenshots); // ✅ Now it's safe
       });
     }
   }
@@ -29,10 +38,15 @@ changeSlide(index: number): void {
 }
 
 setActiveSlide(index: number): void {
+  console.log("Setting active slide to: " + index);
+  this.activeIndex = index; // Set the active index
+
+  // Update the carousel to show the active slide
   const carousel = document.querySelector('#carouselExample');
   const carouselInstance = bootstrap.Carousel.getInstance(carousel);
   carouselInstance.to(index);
 }
+
 
   chunkArray(arr: GameMedia[] | undefined, size: number): GameMedia[][] {
     if (!arr || arr.length === 0) return [];

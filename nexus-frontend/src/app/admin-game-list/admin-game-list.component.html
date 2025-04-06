@@ -1,6 +1,9 @@
 
 <div class="control-section">
-    <ejs-grid #grid [dataSource]='data' height=500 width='auto'>
+    <div class="button-grid-wrapper">
+        <button class="next-btn" (click)="navigateToCreate()">Create Game</button>
+    </div>
+    <ejs-grid #grid [dataSource]='data' height=500 >
         <e-columns>
             <e-column headerText='GAME LIST' textAlign='Center' field='name' [customAttributes]="{ class: 'e-game-cell' }"></e-column>
         </e-columns>
@@ -37,6 +40,10 @@
                             </button>
                             <button class="btn btn-danger btn-sm" (click)="deleteGame(data)">
                                 <i class="fas fa-trash-alt me-1"></i>Delete
+                            </button>
+
+                            <button class="next-btn" (click)="generateKey(data)">
+                                <i class="fas fa-key me-1"></i>
                             </button>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 
 @Component({
@@ -9,11 +9,15 @@ import { GameCategoryService } from 'src/app/core/services/gameCategory/game-cat
   styleUrls: ['./create-game-category.component.css']
 })
 export class CreateGameCategoryComponent implements OnInit {
-  constructor(private _route: ActivatedRoute,private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
+  constructor(private _router: Router,private _route: ActivatedRoute,private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
   gameCategoryForm!: FormGroup;
   gameCategoryId? : number; 
   isEditMode: boolean = false;
   title: string = 'Create Game Category';
+
+  navigateToDashboard() {
+    this._router.navigate(['/admin/games/categories']);
+  }
   
   ngOnInit(): void {
 

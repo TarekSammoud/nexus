@@ -1,10 +1,17 @@
+
+<div class="">
+  <button class="btn" (click)="navigateToDashboard()">Back to dashboard</button>
+</div>
 <div class="d-flex justify-content-center align-items-center min-vh-100">
+  
   <div class="card p-4 shadow-lg" style="width: 70vw;">
     <div class="card-body">
+
       <h4 class="card-title text-center mb-4 text-light">{{title}}</h4>
       <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
 
       <form class="background-dark" [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+        
         <!-- Game Name -->
         <div *ngIf="step === 1"> 
           
@@ -68,7 +75,47 @@
         </mat-chip-set>
       </div>
 
+      
       <div *ngIf="step === 3" class="form-group">
+        <label>Game Cover</label>
+        <br>
+        <div class="image-grid">
+
+        <div *ngFor="let image of images; index as i" class="image-wrapper" >
+        <img [src]="image" height="200" class="preview-image">
+        <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+      </div>
+
+        <br/>
+      </div>
+
+      <div class="file-upload-wrapper">
+        <input type="file" id="fileInput" (change)="onSelectFileCover($event)" multiple hidden>
+        <label for="fileInput" class="file-upload-btn">+ Add Files</label>
+      </div>
+            </div>
+
+            <div *ngIf="step === 4" class="form-group">
+              <label>Game Banner</label>
+              <br>
+              <div class="image-grid">
+      
+              <div *ngFor="let image of images; index as i" class="image-wrapper" >
+              <img [src]="image" height="200" class="preview-image">
+              <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+            </div>
+      
+              <br/>
+            </div>
+      
+            <div class="file-upload-wrapper">
+              <input type="file" id="fileInput" (change)="onSelectFileBanner($event)" multiple hidden>
+              <label for="fileInput" class="file-upload-btn">+ Add Files</label>
+            </div>
+                  </div>
+
+
+      <div *ngIf="step === 5" class="form-group">
         <label>Game screenshots</label>
         <br>
         <div class="image-grid">
@@ -82,7 +129,7 @@
       </div>
 
       <div class="file-upload-wrapper">
-        <input type="file" id="fileInput" (change)="onSelectFile($event)" multiple hidden>
+        <input type="file" id="fileInput" (change)="onSelectFileScreenShots($event)" multiple hidden>
         <label for="fileInput" class="file-upload-btn">+ Add Files</label>
       </div>
             </div>
@@ -90,9 +137,12 @@
 
 
 
+
+
+
       
-        <button *ngIf="step === 3" type="submit" class="next-btn">Submit</button>
-        <a *ngIf="step< 3 " (click) = nextStep() class="next-btn">Next →</a>
+        <button *ngIf="step === 5" type="submit" class="next-btn">Submit</button>
+        <a *ngIf="step< 5 " (click) = nextStep() class="next-btn">Next →</a>
         <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
 
 
