@@ -1,20 +1,32 @@
+import { Role } from './role.model';
+
 export class User {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    phoneNumber?: string;
-    address?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    lastLogin?: Date;
-    friends?: User[];
-    role?: string;
-    profilePictures?: string[];
-    gameLibrary?: string[];
+    id: number | null = null;
+    firstName: string = '';
+    lastName: string = '';
+    email: string = '';
+    password: string = ''; // Important pour l'inscription
+    phoneNumber: string | null = null;
+    address: string | null = null;
+    createdAt: Date | null = null;
+    updatedAt: Date | null = null;
+    last_login: Date | null = null; // Note: snake_case pour correspondre au backend
+    friends: User[] = [];
+    role: Role = new Role(); // Toujours initialisé avec un rôle par défaut
+    profilePictures: string[] = [];
+    gameLibrary: string[] = [];
 
     constructor(data: Partial<User> = {}) {
         Object.assign(this, data);
+
+        // Initialisation propre des tableaux
+        this.friends = data.friends || [];
+        this.profilePictures = data.profilePictures || [];
+        this.gameLibrary = data.gameLibrary || [];
+
+        // Gestion du rôle
+        if (data.role) {
+            this.role = new Role(data.role);
+        }
     }
 }

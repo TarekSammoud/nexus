@@ -1,0 +1,32 @@
+// src/app/user-management/user.service.ts
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../../entities/user/user.model';  // Modèle User
+import { SignUp } from '../../entities/user/signup.model';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class UserService {
+    private apiUrl = `http://localhost:9000/nexus-backend/user/addUser`;  // L'URL de l'API backend
+
+    constructor(private http: HttpClient) { }
+    createUser(signUpData: SignUp): Observable<User> {
+        const body = {
+            firstName: signUpData.firstName,
+            lastName: signUpData.lastName,
+            email: signUpData.email,
+            password: signUpData.password,
+            phoneNumber: signUpData.phoneNumber || null,
+            address: signUpData.address || null,
+            role: {
+                name: signUpData.role.roleType // car backend attend "name": "PLAYER"
+            }
+        };
+
+        return this.http.post<User>(this.apiUrl, body);
+    }
+
+}

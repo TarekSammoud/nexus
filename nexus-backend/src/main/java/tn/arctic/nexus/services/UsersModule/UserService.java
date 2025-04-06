@@ -6,11 +6,31 @@ import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
+
     @Autowired
     private IUserRepository userRepository;
+
+
+
+    @Override
+    public User authenticateUser(String email, String password) {
+        // Recherche de l'utilisateur par email
+        User user = userRepository.findByEmail(email);
+
+        // Vérification si l'utilisateur existe
+        if (user != null) {
+            // Vérification du mot de passe en clair (pas de cryptage ici)
+            if (password.equals(user.getPassword())) {
+                return user;  // L'utilisateur est authentifié
+            }
+        }
+        return null;  // Si l'authentification échoue
+    }
+
 
     @Override
     public List<User> retrieveAllUser() {
@@ -29,11 +49,19 @@ public class UserService implements IUserService {
 
     @Override
     public User retrieveUser(long idUser) {
-        return userRepository.findById(idUser).get();
+        return userRepository.findById(idUser)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + idUser));
     }
+
 
     @Override
     public void removeUser(long idUser) {
-    userRepository.deleteById(idUser);
+        userRepository.deleteById(idUser);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }
