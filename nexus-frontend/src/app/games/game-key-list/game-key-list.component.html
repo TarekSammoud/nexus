@@ -17,7 +17,7 @@
                         </div>
                         <div class="e-game-info-layout">
                             <div class="e-info-text-separator">
-                                <span  class="e-game-title">{{data.keyCode | uppercase}} <button (click)="copyToClipboard(data.keyCode)">cp</button>
+                                <span  class="e-game-title">{{data.keyCode | uppercase}} <button class="no-style" (click)="copyToClipboard(data.keyCode)"><i class="fa-regular fa-paste" style="color: grey;"></i></button>
                                     [{{data.status}}]</span>
                             </div>
                             <div class="e-info-text-separator">
