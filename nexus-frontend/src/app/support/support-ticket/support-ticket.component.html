@@ -1,34 +1,80 @@
-<div class="support-ticket-list container mt-4 text-center">
-    <h2 class="mb-4 text-white">Support Tickets</h2>
-    <p class="text-white">Welcome, if you have any problems please submit a ticket</p>
-    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="mb-4 mx-auto" style="max-width: 600px;">
-      <div class="form-group mb-3">
-        <label for="title" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Title:</label>
-        <input id="title" formControlName="title" class="form-control" />
-      </div>
-      <div class="form-group mb-3">
-        <label for="description" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Description:</label>
-        <textarea id="description" formControlName="description" class="form-control"></textarea>
-      </div>
-        <div class="form-group mb-3">
-        <label for="category" class="form-label" style="font-size: 0.9rem; color: #f8f9fa;">Category:</label>
-        <select id="category" formControlName="category" class="form-select">
-          <option *ngFor="let category of ['PURCHASE', 'TECHNICAL', 'ACCOUNT', 'COMMUNITY_CONTENT']" [value]="category">{{ category }}</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary btn-lg" [disabled]="ticketForm.invalid">Create Ticket</button>
-    </form>
+<div class="ticket-form">
+  <h2>{{ isEditMode ? 'Edit Ticket' : 'Create Ticket' }}</h2>
 
-    <!-- Success message -->
-    <div *ngIf="successMessage" class="alert alert-success mt-3">
-      {{ successMessage }}
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <!-- Title Field -->
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input 
+        id="title" 
+        formControlName="title" 
+        type="text" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': title?.invalid && title?.touched}"
+        maxlength="100"
+      >
+      <div *ngIf="title?.invalid && title?.touched" class="invalid-feedback">
+        Title is required (max length 100).
+      </div>
     </div>
-  
-    <ul class="list-group mt-4 mx-auto" style="max-width: 800px;">
-      <li *ngFor="let ticket of tickets" class="list-group-item">
-        <h3>{{ ticket.title }}</h3>
-        <p>{{ ticket.description }}</p>
-        <p>Status: {{ ticket.status }}</p>
-      </li>
-    </ul>
-  </div>
+
+    <!-- Description Field -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea 
+        id="description" 
+        formControlName="description" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': description?.invalid && description?.touched}" 
+        maxlength="500"
+      ></textarea>
+      <div *ngIf="description?.invalid && description?.touched" class="invalid-feedback">
+        Description is required (max length 500).
+      </div>
+    </div>
+
+    <!-- Category Field -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select 
+        id="category" 
+        formControlName="category" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': category?.invalid && category?.touched}"
+      >
+        <option value="">Select a category</option>
+        <option value="TECHNICAL">Technical</option>
+        <option value="PURCHASE">Purchase</option>
+        <option value="GENERAL">General</option>
+      </select>
+      <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">
+        Category is required.
+      </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">
+        {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onModify(null)">
+        Reset Form
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="ticket-list">
+  <h2>All Tickets</h2>
+  <ul>
+    <!-- Ensuring correct usage by iterating ticket as variable -->
+    <li *ngFor="let ticket of tickets">
+      <strong>{{ ticket.title }}</strong>
+      <p>{{ ticket.description }}</p>
+      <p><em>Category: {{ ticket.category }}</em></p>
+      <p><em>Status: {{ ticket.status }}</em></p>
+      <button class="btn btn-outline-warning" (click)="onModify(ticket.id)">Edit</button>
+      <button class="btn btn-outline-danger" (click)="onDelete(ticket.id)">Delete</button>
+    </li>
+  </ul>
+</div>

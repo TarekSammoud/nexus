@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { SupportTicket } from '../../entities/support/SupportTicket.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SupportService {
   private baseUrl = 'http://localhost:9000/nexus-backend/tickets';
@@ -18,5 +18,15 @@ export class SupportService {
 
   createTicket(ticket: SupportTicket): Observable<SupportTicket> {
     return this.http.post<SupportTicket>(`${this.baseUrl}/createticket`, ticket);
+  }
+  
+  // Method to update a ticket
+  updateTicket(ticket: SupportTicket): Observable<SupportTicket> {
+    return this.http.put<SupportTicket>(`${this.baseUrl}/${ticket.id}`, ticket);
+  }
+
+  // Method to delete a ticket
+  deleteTicket(ticketId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${ticketId}`);
   }
 }

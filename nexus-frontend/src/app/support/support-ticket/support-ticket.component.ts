@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SupportTicket } from 'src/app/core/entities/support/SupportTicket.model';
-import { SupportService } from 'src/app/core/services/support/support-ticket.service';
 
 @Component({
   selector: 'app-support-ticket',
@@ -9,62 +7,90 @@ import { SupportService } from 'src/app/core/services/support/support-ticket.ser
   styleUrls: ['./support-ticket.component.css']
 })
 export class SupportTicketComponent implements OnInit {
-  tickets: SupportTicket[] = [];
+  tickets: any[] = [];  // Liste des tickets
   ticketForm: FormGroup;
-  successMessage: string = ''; // Pour le message de remerciement
+  isEditMode: boolean = false;  // Indicateur pour modifier un ticket
+  successMessage: string = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private supportService: SupportService
-  ) {
+  constructor(private fb: FormBuilder) {
+    // Initialisation du formulaire
     this.ticketForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      category: ['TECHNICAL', Validators.required]
+      category: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
+    // Charger les tickets si nécessaire
     this.loadTickets();
   }
 
-  loadTickets(): void {
-    this.supportService.getAllTickets().subscribe(
-      (data) => {
-        this.tickets = data;
-      },
-      (error) => {
-        console.error('Error fetching tickets', error);
-      }
-    );
+  // Accesseurs
+  get title() { 
+    return this.ticketForm.get('title'); 
   }
 
+  get description() { 
+    return this.ticketForm.get('description'); 
+  }
+
+  get category() { 
+    return this.ticketForm.get('category'); 
+  }
+
+  // Charger les tickets
+  loadTickets(): void {
+    // Exemple de tickets pour le démonstration
+    this.tickets = [
+      { title: 'Ticket 1', description: 'Description du ticket 1', category: 'TECHNICAL' },
+      { title: 'Ticket 2', description: 'Description du ticket 2', category: 'PURCHASE' }
+    ];
+  }
+
+  // Méthodes pour les actions de création, suppression et modification
   onSubmit(): void {
     if (this.ticketForm.valid) {
-      const newTicket: SupportTicket = {
-        ...this.ticketForm.value,
-        status: 'OPEN',       // Défini un statut par défaut
-        priority: 'LOW',      // Défini une priorité par défaut
-      };
-  
-      console.log('Ticket data to send:', newTicket); // Log les données avant d'envoyer la requête
-  
-      this.supportService.createTicket(newTicket).subscribe(
-        (ticket) => {
-          this.tickets.push(ticket);
-          this.ticketForm.reset();
-          this.successMessage = '🎉 Merci pour votre ticket ! Un agent de support a bien reçu votre demande. Veuillez vérifier votre email pour les prochaines étapes.';
-        },
-        (error) => {
-          console.error('Error creating ticket', error);
-        }
-      );
+      if (this.isEditMode) {
+        this.updateTicket(this.ticketForm.value);
+      } else {
+        this.createTicket(this.ticketForm.value);
+      }
     }
   }
-  
-  
+
+  // Créer un ticket
+  createTicket(ticket: any): void {
+    console.log('Ticket créé:', ticket);
+    this.tickets.push(ticket);  // Ajout du ticket dans la liste (simulé)
+    this.ticketForm.reset();
+    this.successMessage = '🎉 Ticket créé avec succès!';
   }
-  
-    
 
+  // Mettre à jour un ticket
+  updateTicket(ticket: any): void {
+    console.log('Ticket modifié:', ticket);
+    // Mettre à jour le ticket dans la liste (simulé)
+    this.successMessage = '🎉 Ticket mis à jour avec succès!';
+  }
 
+  // Supprimer un ticket
+  onDelete(ticket: any): void {
+    const index = this.tickets.indexOf(ticket);
+    if (index > -1) {
+      this.tickets.splice(index, 1);  // Supprimer le ticket
+      console.log('Ticket supprimé');
+    }
+  }
+
+  // Modifier un ticket (passer en mode édition)
+  onModify(ticket: any): void {
+    this.ticketForm.setValue({
+      title: ticket.title,
+      description: ticket.description,
+      category: ticket.category
+    });
+    this.isEditMode = true;  // Passer en mode édition
+  }
+
+}
