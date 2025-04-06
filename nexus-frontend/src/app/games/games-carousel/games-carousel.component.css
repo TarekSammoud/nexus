@@ -1,0 +1,74 @@
+/* Make carousel bigger */
+.carousel-item {
+  background-size: cover;
+  background-position: center;
+  height: 600px; /* Adjust height to make carousel bigger */
+  position: relative;
+}
+
+/* Center caption content */
+.carousel-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  text-align: left;
+  }
+
+/* Text styling */
+.carousel-text {
+  max-width: 500px;
+  padding: 20px;
+  /* background: rgba(0, 0, 0, 0.5); */
+  border-radius: 5px;
+}
+
+/* Game name, description, and price */
+.carousel-text h5 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.carousel-text p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.carousel-text button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.carousel-text button:hover {
+  background-color: #f8f9fa;
+}
+
+/* Vertical carousel controls on the right *//*
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}*/
+
+.carousel-control-prev,
+.carousel-control-next {
+ /* background-color: rgba(0, 0, 0, 0.5);*/
+  color: red;
+  width: 50px; /* Adjust width for larger buttons */
+ /* padding: 15px;*/
+ /* border-radius: 50%;*/
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+/*  background-color: white;*/
+}
+
+/* Adjust the active indicator */
+.carousel-indicators li.active {
+  background-color: #fff;
+}
