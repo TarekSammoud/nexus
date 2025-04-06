@@ -8,7 +8,6 @@ import { GameService } from 'src/app/core/services/game/game.service';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-create-game',
@@ -298,39 +297,29 @@ title: string = 'Create Game';
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
     console.log('Form Data:', JSON.stringify(this.gameForm?.value));
-  
-    let requests = [];
-  
     if (this.isEditMode) {
       this.gameForm.value.id = this.gameId;
-      // Push the update game request to the requests array
-      requests.push(this._gameService.updateGame(this.gameForm.value));
-    } else {
-      // Push the add game request to the requests array
-      requests.push(this._gameService.addGame(this.gameForm.value));
+      this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
+        console.log('Game updated:', data);
+      });
     }
-  
-    // Handle file upload and add game media
-    for (let i = 0; i < this.images.length; i++) {
-      console.log("Image files:", this.filesToUpload[i].value);
-      
-      // Push the file upload and game media add requests to the requests array
-      requests.push(this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]));
-      requests.push(this._gameMediaService.addGameMedia(this.filesToUpload[i].value));
-    }
-  
-    // Use forkJoin to wait for all requests to complete
-    forkJoin(requests).subscribe({
-      next: (responses) => {
-        // All requests have completed successfully
-        console.log('All server requests completed:', responses);
-  
-        // Now redirect after all responses have been received
-      },
-      error: (err) => {
-        // Handle any errors from the requests
-        console.error('Error occurred:', err);
-      }
+    else {
+    this._gameService.addGame(this.gameForm.value).subscribe((data) => {
+      console.log('Game added:', data);
     });
+
+    for (let i = 0; i < this.images.length; i++) {
+      console.log("Image files : ",this.filesToUpload[i].value); 
+      this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {
+        console.log('File uploaded:', data);
+      });
+      this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe((data) => {
+        console.log('Game Media added:', data);
+      }
+      );   
+     }
+  }
+
+
   }
 }
