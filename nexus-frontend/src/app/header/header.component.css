@@ -64,6 +64,11 @@
   
 }
 
+.offcanvas-start {
+  width: 250px;
+}
+
+
 
 
 /* Optional: Add hover effect */
@@ -75,3 +80,40 @@
     width: 400px;  /* Change this value to resize the width */
   }
   
+
+  /* Side Navigation / Offcanvas */
+.offcanvas-start {
+  background-color: #1c1e26; /* Matches your custom dropdown */
+  color: white;
+  width: 250px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Offcanvas Header */
+.offcanvas-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offcanvas-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Offcanvas Body Links */
+.offcanvas-body .nav-link {
+  color: white;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: background-color 0.2s ease-in-out, padding-left 0.2s;
+}
+
+.offcanvas-body .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding-left: 10px;
+}
+
+/* Ensure icon alignment if needed */
+.offcanvas-body .nav-link i {
+  margin-right: 10px;
+}

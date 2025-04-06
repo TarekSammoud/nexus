@@ -1,0 +1,85 @@
+.featured-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, #1b1e25, #171a21);
+    text-align: center;
+  }
+  
+  .featured-container > div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+  }
+  
+  .featured-container > div:first-child::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #9A5ED6;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Bootstrap card customizations */
+  .card {
+    background-color: #22252b;
+    border: none;
+    border-radius: 10px;
+    width: 18rem;
+    color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .card-subtitle {
+    font-size: 14px;
+    color: #bbbbbb;
+  }
+  
+  .card-text {
+    font-size: 14px;
+    color: #cccccc;
+    margin-top: 10px;
+  }
+  
+  .card-link {
+    color: #9A5ED6;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .card-link:hover {
+    text-decoration: underline;
+  }
+  
