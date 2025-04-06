@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.GameKey;
 import tn.arctic.nexus.repositories.GamesModule.IGameKeyRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,13 +19,34 @@ public class GameKeyService implements IGameKeyService{
     public GameKey createGameKey(GameKey gameKey) {
        // gameKey.setKey(gameKey.generateCode());
         String generatedKey = gameKey.generateCode();
+
         gameKey.setKeyCode(generatedKey);
+        Date now = new Date(); // Current date and time
+        long expiresAtTime = now.getTime() + 60L * 24 * 60 * 60 * 1000; // 60 days in milliseconds
+        gameKey.setExpiresAt(new Date(expiresAtTime));
+
+        gameKey.setStatus("ACTIVE");
         return gameKeyRepository.save(gameKey);
     }
 
     @Override
     public void deleteGameKey(Long id) {
         gameKeyRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean redeemGameKey(String gameKey) {
+        GameKey gk = this.gameKeyRepository.findGameKeyByKeyCode(gameKey);
+        if (gk != null){
+            if (gk.getStatus().equals("ACTIVATED") ) {
+                System.out.println("ERROR KEY");
+                return false;
+            }
+            gk.setStatus("ACTIVATED");
+            this.gameKeyRepository.save(gk);
+            return true;
+        }
+        return false;
     }
 
     @Override

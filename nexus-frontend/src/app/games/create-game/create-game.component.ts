@@ -7,7 +7,8 @@ import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.ser
 import { GameService } from 'src/app/core/services/game/game.service';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-create-game',
@@ -28,7 +29,7 @@ export class CreateGameComponent implements OnInit {
   numberOfGames!: number; 
 
 
-  constructor(private _gameMediaService: GameMediaService,private _route: ActivatedRoute
+  constructor(private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
     this._gameCategoryService.getGameCategories().subscribe((data) => {
       this.availableCategories = data.map((category) => {
@@ -73,7 +74,85 @@ isPlatformSelected(platform: string): boolean {
   return this.selectedPlatforms.has(platform);
 }
 
-onSelectFile(event: any): void {
+
+onSelectFileCover(event: any): void {
+  if (event.target.files && event.target.files[0]) {
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); 
+
+    reader.onload = () => {
+      this.images.push(reader.result); 
+    };
+
+    const mediaUrl = file.name;
+
+    const fileType = file.type;
+    const fileSize = file.size;
+
+
+     const newForm = this.fb.group({
+      mediaUrl: [mediaUrl, Validators.required],
+      fileType: [fileType, Validators.required],
+      fileSize: [fileSize, Validators.required],
+      gameMediaType: ['COVER', Validators.required],
+      game: this.fb.group({
+        id: [this.numberOfGames + 1 , Validators.required]
+      })
+    });
+
+    console.log("Media form : ", newForm);
+
+    const formData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.filesToUpload.push(newForm);
+    this.ftpFiles.push(formData);
+
+  }
+}
+onSelectFileBanner(event: any): void {
+  if (event.target.files && event.target.files[0]) {
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); 
+
+    reader.onload = () => {
+      this.images.push(reader.result); 
+    };
+
+    const mediaUrl = file.name;
+
+    const fileType = file.type;
+    const fileSize = file.size;
+
+
+     const newForm = this.fb.group({
+      mediaUrl: [mediaUrl, Validators.required],
+      fileType: [fileType, Validators.required],
+      fileSize: [fileSize, Validators.required],
+      gameMediaType: ['BANNER', Validators.required],
+      game: this.fb.group({
+        id: [this.numberOfGames + 1 , Validators.required]
+      })
+    });
+
+    console.log("Media form : ", newForm);
+
+    const formData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.filesToUpload.push(newForm);
+    this.ftpFiles.push(formData);
+
+  }
+}
+
+onSelectFileScreenShots(event: any): void {
   if (event.target.files && event.target.files[0]) {
     const file = event.target.files[0];
 
@@ -112,7 +191,9 @@ onSelectFile(event: any): void {
   }
 }
 
-
+navigateToDashboard() {
+  this._router.navigate(['/admin/games/list']);
+}
 
 
 removeImage(index: number) {
@@ -217,27 +298,39 @@ title: string = 'Create Game';
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
     console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+  
+    let requests = [];
+  
     if (this.isEditMode) {
       this.gameForm.value.id = this.gameId;
-      this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
-        console.log('Game updated:', data);
-      });
+      // Push the update game request to the requests array
+      requests.push(this._gameService.updateGame(this.gameForm.value));
+    } else {
+      // Push the add game request to the requests array
+      requests.push(this._gameService.addGame(this.gameForm.value));
     }
-    else {
-    this._gameService.addGame(this.gameForm.value).subscribe((data) => {
-      console.log('Game added:', data);
-    });
-  }
+  
+    // Handle file upload and add game media
     for (let i = 0; i < this.images.length; i++) {
-      console.log("Image files : ",this.filesToUpload[i].value); 
-      this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {
-        console.log('File uploaded:', data);
-      });
-      this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe((data) => {
-        console.log('Game Media added:', data);
+      console.log("Image files:", this.filesToUpload[i].value);
+      
+      // Push the file upload and game media add requests to the requests array
+      requests.push(this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]));
+      requests.push(this._gameMediaService.addGameMedia(this.filesToUpload[i].value));
+    }
+  
+    // Use forkJoin to wait for all requests to complete
+    forkJoin(requests).subscribe({
+      next: (responses) => {
+        // All requests have completed successfully
+        console.log('All server requests completed:', responses);
+  
+        // Now redirect after all responses have been received
+      },
+      error: (err) => {
+        // Handle any errors from the requests
+        console.error('Error occurred:', err);
       }
-      );   
-     }
-
+    });
   }
 }

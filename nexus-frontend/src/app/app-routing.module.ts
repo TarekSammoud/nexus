@@ -12,6 +12,7 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
     component: AdminHomeComponent, // has the sidebar
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {path: 'games/keys', component: GameKeyListComponent},
+
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/list', component: AdminGameListComponent },
       {path: 'update-game/:id', component: CreateGameComponent},
@@ -27,8 +30,6 @@ const routes: Routes = [
       {path: 'games/:id', component: GamePageComponent},
       {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
 
-
-
     ]
   },
   {path: '', component: HomeComponent},
@@ -36,7 +37,6 @@ const routes: Routes = [
   {path: 'category/:name', component: GameGridComponent},
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
-  {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
 
 ];
 

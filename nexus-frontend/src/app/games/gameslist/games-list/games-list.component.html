@@ -10,8 +10,11 @@
                     <div class="e-game-info-container">
                         <div class="e-game-image-layout">
                             <img class="e-game-image" 
-                            [src]="data.gameMediaList.length > 0 ? 'http://localhost:9000/nexus-backend/games/upload/download/' + data.gameMediaList[0].mediaUrl : './assets/default-game.jpg'"
-                            alt="{{data.name}}" />
+                            [src]="data.coverPicture?.mediaUrl 
+                            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + data.coverPicture.mediaUrl 
+                            : './assets/default-game.jpg'"
+                    alt="Game Cover"
+                                                alt="{{data.name}}" />
 
                         </div>
                         <div class="e-game-info-layout">

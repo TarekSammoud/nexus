@@ -16,6 +16,9 @@ export class Game {
     users!: User[];
     categories!: GameCategory[];
     gameMediaList!: GameMedia[];
+    coverPicture?: GameMedia;
+    screenshots?: GameMedia[];
+
   
     constructor(data?: Partial<Game>) {
       Object.assign(this, data);
