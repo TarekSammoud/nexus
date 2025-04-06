@@ -12,17 +12,6 @@
 
 <div *ngIf="activeTab === 'overview' && jam" class="jam-details-container">
   <h1 class="jam-title">{{ jam.name }}</h1>
-
-  
-   <!--
-  <p class="jam-hosted">
-    🎤 Hosted by:
-    <span *ngIf="jam.user?.firstName">
-      {{ jam.user.firstName }} {{ jam.user.lastName }}
-    </span>
-    <span *ngIf="!jam.user?.firstName">Unknown</span>
-  </p>
-  -->
   <p class="jam-description">{{ jam.description }}</p>
 
   <div class="jam-date-boxes">
@@ -30,10 +19,27 @@
     <div class="jam-box"><i class="fas fa-hourglass-end"></i><span>End Date</span><strong>{{ jam.devEndDate | date: 'dd/MM/yyyy' }}</strong></div>
     <div class="jam-box"><i class="fas fa-vote-yea"></i><span>Voting Start</span><strong>{{ jam.voteStartDate | date: 'dd/MM/yyyy' }}</strong></div>
     <div class="jam-box"><i class="fas fa-vote-yea"></i><span>Voting End</span><strong>{{ jam.voteEndDate | date: 'dd/MM/yyyy' }}</strong></div>
-    <div class="jam-box reward"><i class="fas fa-trophy"></i><span>Reward</span><strong>{{ jam.reward }}</strong></div>
   </div>
-  
+
+  <div class="jam-meta-container">
+    <div class="reward-box">
+      <i class="fas fa-trophy"></i>
+      <span>Reward</span>
+      <strong>{{ jam.reward }}</strong>
+    </div>
+
+    <div class="qr-floating">
+      <qrcode 
+        [qrdata]="'https://fedizorai.github.io/qrcodejams/?id=' + jam.id + '&nom=' + jam.name + '&date=' + (jam.devStartDate | date:'dd/MM/yyyy') + '&lieu=' + jam.description + '&reward=' + jam.reward"
+        [width]="100"
+        [errorCorrectionLevel]="'M'">
+      </qrcode>
+      <p class="qr-label">📱 Scan this Jam</p>
+    </div>
+  </div>
 </div>
+
+
 
 <div *ngIf="activeTab === 'submissions'" class="submissions-tab">
   <h2 class="section-heading">🎮 Game Jam Entries <span class="badge-count">{{ entries.length }}</span></h2>

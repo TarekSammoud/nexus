@@ -25,6 +25,7 @@ import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-det
 import { EntryFormComponent } from './jams/entries/entry-form.component';
 import { EntryMediaFormComponent } from './jams/EntryMedia/entry-media-form/entry-media-form.component';
 import { EntryRatingFormComponent } from './jams/entry-rating-form/entry-rating-form.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 
@@ -56,7 +57,8 @@ import { EntryRatingFormComponent } from './jams/entry-rating-form/entry-rating-
     HttpClientModule,
     CarouselModule,
     GamesListComponent,
-    NgxPaginationModule
+    NgxPaginationModule,
+    QRCodeModule
 
 
 
