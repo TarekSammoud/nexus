@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +28,22 @@ import { EntryRatingFormComponent } from './jams/entry-rating-form/entry-rating-
 import { QRCodeModule } from 'angularx-qrcode';
 
 
+import { GamePageComponent } from './games/game-page/game-page.component';
+import { CreateGameComponent } from './games/create-game/create-game.component';
+import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipInput, MatChipsModule } from '@angular/material/chips';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { GameGridComponent } from './games/game-grid/game-grid.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { GameCategoriesComponent } from './game-categories/game-categories.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
+import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
+import { QuillModule } from 'ngx-quill';
+import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 
 
 @NgModule({
@@ -47,6 +63,14 @@ import { QRCodeModule } from 'angularx-qrcode';
     EntryFormComponent,
     EntryMediaFormComponent,
     EntryRatingFormComponent 
+    GamePageComponent,
+    CreateGameComponent,
+    CreateGameCategoryComponent,
+    GameGridComponent,
+    AdminHomeComponent,
+    GameCategoriesComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -54,12 +78,24 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CarouselModule,
     GamesListComponent,
     NgxPaginationModule,
-    QRCodeModule
+    QRCodeModule,
 
+    BrowserAnimationsModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    AdminGameListComponent,
+    AngularEditorModule,
+    QuillModule.forRoot(),
+    GameCategoryListComponent
+      
+    
 
 
   ],

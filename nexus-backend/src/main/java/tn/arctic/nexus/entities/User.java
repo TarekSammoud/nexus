@@ -63,6 +63,8 @@ public class User implements Serializable {
     @JsonManagedReference("user-entryrating")
     private Set<EntryRating> ratings;
 
+    @JsonManagedReference("reviews-user")
+    private List<GameReview> gameReviews;
 
 
     @Override
@@ -204,5 +206,13 @@ public class User implements Serializable {
 
     public void setGamekeyLibrary(List<GameKey> gamekeyLibrary) {
         this.gamekeyLibrary = gamekeyLibrary;
+    }
+
+    public List<GameReview> getGameReviews() {
+        return gameReviews;
+    }
+
+    public void setGameReviews(List<GameReview> gameReviews) {
+        this.gameReviews = gameReviews;
     }
 }

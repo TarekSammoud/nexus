@@ -35,7 +35,7 @@ public class Game implements Serializable {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    private GamePlatform platform;
+    private List<GamePlatform> platforms;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,7 +53,6 @@ public class Game implements Serializable {
     private User user;
 
     @ManyToMany
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<GameCategory> categories;
 
 
@@ -61,6 +60,23 @@ public class Game implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<GameMedia> gameMediaList;
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
+    private List<GameReview> gameReviewList;
+
+    public String getExtraGameInfo() {
+        return extraGameInfo;
+    }
+
+    public void setExtraGameInfo(String extraGameInfo) {
+        this.extraGameInfo = extraGameInfo;
+    }
+
+    @Lob  // This annotation tells Hibernate to treat the field as a large object
+    @Column(nullable = true)  // Optional: set to true to allow null values
+    private String extraGameInfo;
 
     public Long getId() {
         return id;
@@ -95,13 +111,7 @@ public class Game implements Serializable {
         this.price = price;
     }
 
-    public GamePlatform getPlatform() {
-        return platform;
-    }
 
-    public void setPlatform(GamePlatform platform) {
-        this.platform = platform;
-    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -141,5 +151,30 @@ public class Game implements Serializable {
 
     public void setCategories(List<GameCategory> categories) {
         this.categories = categories;
+    }
+
+    public List<GameMedia> getGameMediaList() {
+        return gameMediaList;
+    }
+
+    public void setGameMediaList(List<GameMedia> gameMediaList) {
+        this.gameMediaList = gameMediaList;
+    }
+
+    public List<GameReview> getGameReviewList() {
+        return gameReviewList;
+    }
+
+    public void setGameReviewList(List<GameReview> gameReviewList) {
+        this.gameReviewList = gameReviewList;
+    }
+
+
+    public List<GamePlatform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<GamePlatform> platforms) {
+        this.platforms = platforms;
     }
 }

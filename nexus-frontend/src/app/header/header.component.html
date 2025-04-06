@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+
+      <a class="navbar-brand" data-bs-toggle="offcanvas" href="#sidebarMenu" role="button" aria-controls="sidebarMenu">
         <img src="../../assets/img/symbol_only_white.svg" alt="x" width="30" height="24" class="d-inline-block align-text-top">
       </a>
+      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,6 +29,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">Store</a>
           </li>
+          <li><a class="nav-link" routerLink="/admin"href="#">Dev Studio</a></li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/jams">Game Jams</a>
           </li>
@@ -69,6 +72,7 @@
               </li>
               
               <li><a class="dropdown-item" href="#">Account Settings</a></li>
+              <li><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
               <li><a class="dropdown-item" href="#">Payment Management</a></li>
               <li><a class="dropdown-item" href="#">Use a Code</a></li>
               <li><a class="dropdown-item" href="#">Game Library</a></li>
@@ -81,4 +85,27 @@
       </div>
     </div>
   </nav>
-  
+  <!-- Side Navigation -->
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class=" text-light d-inline-block align-text-top" id="sidebarMenuLabel">Dev Studio</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-box"></i> Games</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/categories" href="#"><i class="fas fa-tags"></i>Game Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-users"></i>Users</a>
+      </li>
+    </ul>
+    
+  </div>
+</div>
