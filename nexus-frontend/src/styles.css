@@ -41,4 +41,47 @@ html, body {
   
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+html, body { height: 100%; }
+
+
+
+  @font-face {
+    font-family: lato;
+    src: url(assets/font/CoolveticaRg.otf) format("opentype");
+  }
+
+
+    * {
+      font: "Fira Sans", sans-serif !important;
+    }
+
+    angular-editor-toolbar button i {
+      font-family: FontAwesome !important;
+      color: black !important;
+      }
+
+        /* Floating Next Button */
+  .next-btn {
+    background: linear-gradient(45deg, #6338B0, #9A5ED6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    float: right;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  
+  .next-btn:hover {
+    background: linear-gradient(45deg, #6338B0, #8A6BD5);
+}

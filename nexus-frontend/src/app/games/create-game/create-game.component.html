@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow-lg" style="width: 70vw;">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4 text-light">{{title}}</h4>
+      <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
+
+      <form class="background-dark" [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+        <!-- Game Name -->
+        <div *ngIf="step === 1"> 
+          
+        <div class="form-group">
+          <label for="gameName">Game Name</label>
+          <input formControlName="name" type="text" class="form-control" id="gameName" placeholder="Super Mario Bros">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea formControlName="description" class="form-control" id="description" rows="3"
+            placeholder="Enter game description"></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label for="price">Price (TND)</label>
+          <input formControlName="price" type="number" class="form-control" id="price" placeholder="60">
+        </div>
+
+        <!-- Platforms (Chips) -->
+<!-- Platforms (Chips) -->
+<div class="form-group">
+  <label>Platforms</label>
+  <br>
+  <mat-chip-set aria-label="select platforms" >
+    <mat-chip-option *ngFor="let platform of availablePlatforms"
+    (selectionChange)="togglePlatformSelection($event)"
+    [value]="platform"
+    [selected]="selectedUpdatePlatforms.has(platform)"
+
+    >
+      {{ platform }}
+    </mat-chip-option>
+  </mat-chip-set>
+</div>
+
+
+
+
+      </div>
+
+      <div *ngIf="step === 2" class="form-group">
+        <label>Categories</label>
+        <br>
+        <mat-chip-set>
+          <mat-chip-option 
+            *ngFor="let category of availableCategories" 
+            [value]="category"
+            [selected]="selectedUpdateCategories.has(category.id)"
+
+            matTooltip="{{ category.description }}" 
+            matTooltipPosition="right"
+            class="category-chip"
+            (selectionChange)="toggleCategorySelection($event)"
+          >
+
+            {{ category.name }}
+          </mat-chip-option>
+        </mat-chip-set>
+      </div>
+
+      <div *ngIf="step === 3" class="form-group">
+        <label>Game screenshots</label>
+        <br>
+        <div class="image-grid">
+
+        <div *ngFor="let image of images; index as i" class="image-wrapper" >
+        <img [src]="image" height="200" class="preview-image">
+        <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+      </div>
+
+        <br/>
+      </div>
+
+      <div class="file-upload-wrapper">
+        <input type="file" id="fileInput" (change)="onSelectFile($event)" multiple hidden>
+        <label for="fileInput" class="file-upload-btn">+ Add Files</label>
+      </div>
+            </div>
+
+
+
+
+      
+        <button *ngIf="step === 3" type="submit" class="next-btn">Submit</button>
+        <a *ngIf="step< 3 " (click) = nextStep() class="next-btn">Next →</a>
+        <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
+
+
+        <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+

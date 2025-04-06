@@ -1,0 +1,210 @@
+/* Game Container */
+.game-container {
+  display: grid;
+  grid-template-columns: 1fr; /* One column for the title */
+  grid-template-rows: auto 1fr; /* Title in the first row, content in the second */
+  gap: 40px; /* Increased space between rows for better spacing */
+  width: 100%;
+  padding: 30px;
+}
+
+/* Game Title */
+.game-title-container {
+  grid-column: 1 / -1; /* Spans the full width */
+  text-align: left;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+/* Game Content Section */
+.game-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns for carousel and right content */
+  gap: 30px;
+  justify-content: center;
+  align-items: start;
+}
+
+/* Game Left - Image and Carousel */
+.game-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0;
+  padding-top: 56.25%; /* This creates the 16:9 aspect ratio */
+  position: relative;
+  overflow: hidden;
+}
+
+.game-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Thumbnail Container */
+.thumbnail-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 15px; /* Increased gap between thumbnails */
+}
+
+.thumbnail {
+  width: 90px;
+  height: 70px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail.active {
+  border-color: #007bff; /* Highlight the active thumbnail */
+}
+
+/* Carousel */
+.ejs-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.e-carousel-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.carousel-item img {
+  max-height: 350px;
+}
+
+.e-carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.e-carousel-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover; /* Ensures the images fit the container properly without stretching */
+}
+
+/* Game Right - Info Section */
+.game-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+/* Game Banner */
+.game-banner {
+  margin-bottom: 30px;
+}
+
+/* Game Price */
+.game-price h6 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+
+/* Buy Button */
+.buy-button {
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.buy-button:hover {
+  background-color: #0056b3;
+}
+
+/* Game Platforms */
+.game-platforms {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.game-platforms img {
+  width: 60px;
+  height: auto;
+  margin-right: 15px;
+}
+
+/* Game Categories */
+.game-categories {
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.game-categories .badge {
+  font-size: 1rem;
+  background-color: #333;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+/* Description Section */
+.text-start {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #f1f1f1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-content {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    gap: 20px;
+  }
+
+  .game-left {
+    padding-top: 75%; /* Adjust aspect ratio for smaller screens */
+  }
+
+  .game-title-container {
+    font-size: 2rem;
+  }
+
+  .game-price h6 {
+    font-size: 1rem;
+  }
+}
+
+.buy-button {
+  padding: 15px 30px;
+  background-color: #9A5ED6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

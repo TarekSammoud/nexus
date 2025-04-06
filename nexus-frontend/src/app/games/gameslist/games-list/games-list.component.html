@@ -1,17 +1,18 @@
 
 <div class="control-section">
-    <ejs-grid #grid [dataSource]='data' height=335 width='auto'>
+    <ejs-grid #grid [dataSource]='data' height=500 width='auto'>
         <e-columns>
             <e-column headerText='GAME STORE' textAlign='Center' field='name' [customAttributes]="{ class: 'e-game-cell' }"></e-column>
         </e-columns>
         <ng-template #rowTemplate let-data>
-            <tr>
+            <tr (click)="OnSelect(data)">
                 <td class="details">
                     <div class="e-game-info-container">
                         <div class="e-game-image-layout">
                             <img class="e-game-image" 
-                                 [src]="data.gameMediaList.length > 0 ? data.gameMediaList[0].mediaUrl : './assets/default-game.jpg'"
-                                 alt="{{data.name}}" />
+                            [src]="data.gameMediaList.length > 0 ? 'http://localhost:9000/nexus-backend/games/upload/download/' + data.gameMediaList[0].mediaUrl : './assets/default-game.jpg'"
+                            alt="{{data.name}}" />
+
                         </div>
                         <div class="e-game-info-layout">
                             <div class="e-info-text-separator">
@@ -21,7 +22,7 @@
                                 <span>{{data.description}}</span>
                             </div>
                             <div class="e-info-text-separator">
-                                <span class="e-game-platform">Platform: {{data.platform}}</span>
+                                <span class="e-game-platform">{{data.platforms}}</span>
                             </div>
                             <div class="e-game-price-min-layout e-info-text-separator">
                                 <span class="e-game-price-text">Price:&nbsp;</span>
