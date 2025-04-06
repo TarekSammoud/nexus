@@ -64,7 +64,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
 
   ],
   providers: [],

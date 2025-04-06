@@ -1,7 +1,4 @@
 /* Signup Form Styling */
-.container {
-    max-width: 600px;
-}
 
 .card {
     background-color: #f8f9fa;
@@ -28,7 +25,7 @@ h2 {
 }
 
 button[type="submit"] {
-    background-color: #007bff;
+    background-color: #0b315a;
     color: white;
     font-size: 1.1rem;
     padding: 12px 20px;
@@ -38,16 +35,16 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #3c5268;
 }
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: #0b315a;
 }
 
 a:hover {
-    color: #0056b3;
+    color: #08ec26;
 }
 
 .mb-3 {

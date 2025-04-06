@@ -11,13 +11,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor  // Lombok génère déjà le constructeur sans paramètre
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)  // Set the inheritance strategy here
+@Inheritance(strategy = InheritanceType.JOINED)  // Stratégie d'héritage
 
 public class User implements Serializable {
     @Id
@@ -31,25 +30,30 @@ public class User implements Serializable {
     private String phoneNumber;
     private String address;
 
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = true)
     private Date updatedAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = true)
     private Date last_login;
+
     @ManyToMany
     private List<User> friends;
+
     @ManyToOne
+    @JoinColumn( nullable = true)
     private Role role;
+
     @OneToMany
+    @JoinColumn( nullable = true)
     private List<ProfilePictures> profilesPictures;
 
     @ManyToMany
     private List<Game> gameLibrary;
-
 }
