@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 
 @Component({
@@ -8,25 +9,58 @@ import { GameCategoryService } from 'src/app/core/services/gameCategory/game-cat
   styleUrls: ['./create-game-category.component.css']
 })
 export class CreateGameCategoryComponent implements OnInit {
-  constructor(private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
+  constructor(private _route: ActivatedRoute,private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
   gameCategoryForm!: FormGroup;
+  gameCategoryId? : number; 
+  isEditMode: boolean = false;
+  title: string = 'Create Game Category';
   
   ngOnInit(): void {
+
     this.gameCategoryForm = this.fb.group({
-      name: [''],
-      description: ['']
+      name: ['',Validators.required],
+      description: ['',Validators.required]
     });
     
+
+    if (this._route.snapshot.paramMap.get('id'))
+      this.gameCategoryId = Number(this._route.snapshot.paramMap.get('id'));
+      this.isEditMode = !!this.gameCategoryId;  // If ID exists, it's edit mode
+  
+
+      console.log(this.isEditMode);
+
+
+
+    if (this.isEditMode) {
+      this.title = 'Update Game Category';
+      this._gameCategoryService.getGameCategory(this.gameCategoryId!).subscribe((data) => {
+        this.gameCategoryForm.patchValue({
+          name: data.name,
+          description: data.description
+        });
+      });
+    }
   }
 
   onSubmit() {
-    console.log(this.gameCategoryForm.value);
-    this._gameCategoryService.createGameCategory(this.gameCategoryForm.value).subscribe((response) => {
-      console.log('Game category created successfully', response);
-      this.gameCategoryForm.reset();
-    }, (error) => {
-      console.error('Error creating game category', error);
-    });
+    if (this.isEditMode) {
+      this.gameCategoryForm.value.id = this.gameCategoryId;
+      console.log(this.gameCategoryForm.value);
+      this._gameCategoryService.updateGameCategory(this.gameCategoryForm.value).subscribe((response) => {
+        console.log('Game category updated successfully', response);
+        this.gameCategoryForm.reset();
+      }, (error) => {
+        console.error('Error updating game category', error);
+      });
+    } else {
+      this._gameCategoryService.createGameCategory(this.gameCategoryForm.value).subscribe((response) => {
+        console.log('Game category created successfully', response);
+        this.gameCategoryForm.reset();
+      }, (error) => {
+        console.error('Error creating game category', error);
+      });
+      }
 
 }
 }

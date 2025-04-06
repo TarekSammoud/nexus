@@ -45,7 +45,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
-    GameCategoryListComponent,
+    
     
   ],
   imports: [
@@ -65,6 +65,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     AdminGameListComponent,
     AngularEditorModule,
     QuillModule.forRoot(),
+    GameCategoryListComponent
       
     
 

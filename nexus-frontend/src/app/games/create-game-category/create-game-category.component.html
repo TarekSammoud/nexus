@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg" style="width: 70vw;">
       <div class="card-body">
-        <h4 class="card-title text-center mb-4 text-light">Create new Game Category</h4>
+        <h4 class="card-title text-center mb-4 text-light">{{title}}</h4>
         <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
   
         <form class="background-dark" [formGroup]="gameCategoryForm" (ngSubmit)="onSubmit()">

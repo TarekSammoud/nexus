@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/list', component: AdminGameListComponent },
       {path: 'update-game/:id', component: CreateGameComponent},
+      {path: 'update-game-category/:id', component: CreateGameCategoryComponent},
       {path: 'add-new-game', component: CreateGameComponent},
       {path: 'games/:id', component: GamePageComponent},
       {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
