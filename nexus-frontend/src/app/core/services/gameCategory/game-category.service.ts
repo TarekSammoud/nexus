@@ -24,6 +24,10 @@ export class GameCategoryService {
         )
       );
     }
+
+    updateGameCategory(category: GameCategory): Observable<GameCategory> {
+      return this.http.put<GameCategory>(`${this.gamesCategoryUrl}/update`, category);
+    }
     
   
     getGameCategory(id: number): Observable<GameCategory> {
