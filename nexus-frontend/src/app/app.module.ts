@@ -19,7 +19,6 @@ import { JamsListComponent } from './jams/jams-list/jams-list.component';
 import { JamsComponent } from './jams/jams/jams.component';
 import { JamDetailsComponent } from './jams/jam-details/jam-details.component';
 import { JamFormComponent } from './jams/jam-form/jam-form.component';
-import { FormsModule } from '@angular/forms';
 import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
 import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
 import { EntryFormComponent } from './jams/entries/entry-form.component';
@@ -62,7 +61,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     JamDetailsPageComponent,
     EntryFormComponent,
     EntryMediaFormComponent,
-    EntryRatingFormComponent 
+    EntryRatingFormComponent,
     GamePageComponent,
     CreateGameComponent,
     CreateGameCategoryComponent,
