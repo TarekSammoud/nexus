@@ -13,4 +13,6 @@ export class HeaderComponent {
   navigateToJams(){
     this._router.navigate(['jams']);
   }
+
+  
 }

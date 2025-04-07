@@ -14,6 +14,10 @@ export class AdminHomeComponent {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
+  toggleDropdownf () {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
   navigateToGamesList(){
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
   }
@@ -24,6 +28,7 @@ export class AdminHomeComponent {
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
+  
 
 
 
