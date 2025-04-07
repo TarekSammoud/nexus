@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+          <i class="fas fa-layer-group me-2 text-white"></i>
+          {{ isEdit ? 'Modifier la Catégorie' : 'Ajouter une Catégorie' }}
+        </h4>
+        <button class="btn btn-light btn-sm rounded-pill" (click)="router.navigate(['/admin/community/categories'])">
+          <i class="fas fa-arrow-left me-1"></i> Retour
+        </button>
+      </div>
+  
+      <div class="card-body">
+        <form (ngSubmit)="saveCategory()" #form="ngForm" novalidate>
+          <!-- Nom -->
+          <div class="mb-4">
+            <label for="name" class="form-label fw-semibold">Nom de la Catégorie</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="category.name"
+              class="form-control form-control-lg rounded-3"
+              placeholder="Ex: Live Streams, Tutoriels, Concours..."
+              required
+            >
+          </div>
+  
+          <!-- Description -->
+          <div class="mb-4">
+            <label for="description" class="form-label fw-semibold">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="category.description"
+              class="form-control rounded-3"
+              rows="4"
+              placeholder="Décrivez brièvement cette catégorie..."
+            ></textarea>
+          </div>
+  
+          <!-- Boutons -->
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-success px-4 rounded-pill me-2">
+              <i class="fas fa-save me-2"></i>{{ isEdit ? 'Mettre à jour' : 'Créer' }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary rounded-pill" (click)="router.navigate(['/admin/community/categories'])">
+              <i class="fas fa-times me-1"></i> Annuler
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -54,6 +54,9 @@ import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { CategoryListComponent } from './community/category-list/category-list.component';
+import { CategoryFormComponent } from './community/category-form/category-form.component';
+import { ReportListComponent } from './community/report-list/report-list.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +82,10 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     EntryMediaFormComponent,
     EntryRatingFormComponent,
     AdminHomeComponent,
-    GameCategoriesComponent
+    GameCategoriesComponent,
+    CategoryListComponent,
+    CategoryFormComponent,
+    ReportListComponent
   ],
   imports: [
     BrowserModule,

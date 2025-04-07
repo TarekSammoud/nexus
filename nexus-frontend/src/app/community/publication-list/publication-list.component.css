@@ -240,3 +240,75 @@ textarea.form-control {
 }
 
 
+.hero-banner {
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0 0 20px 20px;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1);
+}
+
+.hero-content {
+  z-index: 2;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+.glow-text {
+  color: #fff;
+  text-shadow:
+    0 0 5px #ea7a9a,
+    0 0 10px #ea7a9a,
+    0 0 15px #ea7a9a;
+}
+
+
+
+
+
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ea7a9a20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #ea7a9a;
+}
+
+.title-text {
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(234, 122, 154, 0.6);
+}
+
+
+
+.btn-neon {
+  background: linear-gradient(90deg, #ea7a9a, #7f5af0);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(234, 122, 154, 0.7), 0 0 20px rgba(127, 90, 240, 0.5);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-neon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(234, 122, 154, 1), 0 0 30px rgba(127, 90, 240, 0.8);
+}
+
+/* ****** */
+
+
