@@ -45,7 +45,8 @@
         <option value="">Select a category</option>
         <option value="TECHNICAL">Technical</option>
         <option value="PURCHASE">Purchase</option>
-        <option value="GENERAL">General</option>
+        <option value="ACCOUNT">account</option>
+        <option value="COMMUNITY_CONTENT">community_content</option>
       </select>
       <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">
         Category is required.
@@ -57,7 +58,7 @@
       <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">
         {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
       </button>
-      <button type="button" class="btn btn-secondary" (click)="onModify(null)">
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
         Reset Form
       </button>
     </div>
@@ -73,8 +74,8 @@
       <p>{{ ticket.description }}</p>
       <p><em>Category: {{ ticket.category }}</em></p>
       <p><em>Status: {{ ticket.status }}</em></p>
-      <button class="btn btn-outline-warning" (click)="onModify(ticket.id)">Edit</button>
-      <button class="btn btn-outline-danger" (click)="onDelete(ticket.id)">Delete</button>
+      <button class="btn btn-outline-warning" (click)="onModify(ticket)">Edit</button>
+      <button class="btn btn-outline-danger" (click)="onDelete(ticket)">Delete</button>
     </li>
   </ul>
 </div>
