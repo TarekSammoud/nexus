@@ -69,11 +69,11 @@
                         </div>
                     </div>
 
-                    <!-- Role (removed Profile Picture section) -->
+                    <!-- Role -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="role" class="form-label">Role</label>
-                            <select class="form-control" id="role" [(ngModel)]="user.role.roleType" name="role" required
+                            <select class="form-control" id="role" [(ngModel)]="user.roleType" name="roleType" required
                                 #role="ngModel">
                                 <option [ngValue]="RoleType.PLAYER">Player</option>
                                 <option [ngValue]="RoleType.DEVELOPER">Developer</option>

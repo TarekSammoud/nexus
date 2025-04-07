@@ -31,7 +31,6 @@ public class UserController {
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user) {
         System.out.println("User received: " + user.toString());
-        System.out.println("Role received: " + (user.getRole() != null ? user.getRole().toString() : "null"));
         return userService.addUser(user);
     }
 

@@ -1,4 +1,5 @@
-import { Role } from './role.model';
+
+import { RoleType } from './enums';
 
 export class User {
     id: number | null = null;
@@ -12,7 +13,7 @@ export class User {
     updatedAt: Date | null = null;
     last_login: Date | null = null; // Note: snake_case pour correspondre au backend
     friends: User[] = [];
-    role: Role = new Role(); // Toujours initialisé avec un rôle par défaut
+    roleType: RoleType = RoleType.PLAYER;; // Toujours initialisé avec un rôle par défaut
     profilePictures: string[] = [];
     gameLibrary: string[] = [];
 
@@ -24,9 +25,6 @@ export class User {
         this.profilePictures = data.profilePictures || [];
         this.gameLibrary = data.gameLibrary || [];
 
-        // Gestion du rôle
-        if (data.role) {
-            this.role = new Role(data.role);
-        }
+
     }
 }

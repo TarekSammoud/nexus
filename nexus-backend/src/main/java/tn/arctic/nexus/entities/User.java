@@ -48,9 +48,8 @@ public class User implements Serializable {
     @ManyToMany
     private List<User> friends;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(nullable = true)
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProfilePictures profilePicture;
