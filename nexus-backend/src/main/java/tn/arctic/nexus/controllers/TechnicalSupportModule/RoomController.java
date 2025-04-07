@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.entities.Message;
 import tn.arctic.nexus.entities.Room;
 import tn.arctic.nexus.services.TechnicalSupportModule.RoomService;
 import java.util.List;
@@ -50,4 +51,17 @@ public class RoomController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  // Si une erreur se produit lors de la récupération des rooms
         }
     }
+    @PostMapping("/sendMessage/{roomId}")
+    public ResponseEntity<Message> sendMessage(
+            @PathVariable Long roomId,
+            @RequestParam String sender,
+            @RequestParam String content) {
+        try {
+            Message message = roomService.sendMessageToRoom(roomId, sender, content);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

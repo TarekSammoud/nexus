@@ -3,9 +3,6 @@ package tn.arctic.nexus.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import tn.arctic.nexus.entities.Departement;
-import tn.arctic.nexus.entities.PerformanceReview;
-import tn.arctic.nexus.entities.SupportTicket;
 
 import java.util.List;
 import java.util.Set;

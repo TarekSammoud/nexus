@@ -1,1 +1,35 @@
-<p>room works!</p>
+<div class="room-container">
+    <h2>Rooms</h2>
+  
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- List of rooms -->
+    <div *ngIf="rooms.length > 0; else noRooms">
+      <ul>
+        <li *ngFor="let room of rooms">
+          <p><strong>Room Link:</strong> <a href="{{ room.lien }}" target="_blank">{{ room.lien }}</a></p>
+          <p><strong>Ticket ID:</strong> {{ room.ticket.id }}</p>
+          <button (click)="closeRoom(room.ticket.id)">Close Room</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- No rooms available message -->
+    <ng-template #noRooms>
+      <p>No rooms available.</p>
+    </ng-template>
+  
+    <hr>
+  
+    <!-- Create room for a specific ticket -->
+    <div>
+      <h3>Create Room for Ticket</h3>
+      <label for="ticketId">Ticket ID:</label>
+      <input type="number" id="ticketId" #ticketIdInput>
+      <button (click)="createRoom(+ticketIdInput.value)">Create Room</button>
+    </div>
+  </div>
+  
