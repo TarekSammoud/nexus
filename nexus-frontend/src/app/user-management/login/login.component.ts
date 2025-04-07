@@ -18,14 +18,13 @@ export class LoginComponent {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe(
         userId => {
-          // Si l'authentification réussit, enregistrez l'ID de l'utilisateur dans localStorage
+          console.log('User ID:', userId);  // Affiche l'ID de l'utilisateur dans la console
           localStorage.setItem('userId', JSON.stringify(userId));  // Stocke l'ID utilisateur dans localStorage
 
           // Redirigez vers le profil de l'utilisateur
-          this.router.navigate(['/user-profile']);
+          this.router.navigate([`/user-profile/${userId}`]);
         },
         error => {
-          // Si erreur, affichez un message d'erreur
           this.errorMessage = 'Invalid credentials. Please try again.';
         }
       );
@@ -33,5 +32,6 @@ export class LoginComponent {
       this.errorMessage = 'Please fill in both email and password.';
     }
   }
+
 
 }

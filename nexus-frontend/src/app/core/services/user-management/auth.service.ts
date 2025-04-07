@@ -15,18 +15,20 @@ export class AuthService {
     constructor(private http: HttpClient) { }
 
 
+
     login(email: string, password: string): Observable<any> {
         const url = `http://localhost:9000/nexus-backend/user/login?email=${email}&password=${password}`;
         return this.http.post<any>(url, {}).pipe(
             map(response => {
-                // Vérifiez que la réponse contient l'ID et retournez cet ID si nécessaire
+                console.log(response); // Affiche la réponse complète dans la console
                 if (response && response.id) {
-                    return response.id;  // Retourner uniquement l'ID de l'utilisateur
+                    return response.id;  // Retourne uniquement l'ID de l'utilisateur
                 }
                 throw new Error('User not found');
             })
         );
     }
+
 
 
     getUserProfile(userId: number): Observable<User> {
