@@ -122,4 +122,5 @@ export class SupportTicketComponent implements OnInit {
     this.isEditMode = true;
     this.currentTicketId = ticket.id;
   }
+  
 }

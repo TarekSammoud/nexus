@@ -15,4 +15,6 @@ public interface ISupportAgentRepository extends JpaRepository<SupportAgent, Lon
 
     // Corrected method signature to use 'id' instead of 'supportAgentId'
     Optional<SupportAgent> findById(Long id);
+
+
 }

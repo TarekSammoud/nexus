@@ -1,3 +1,7 @@
+<div class="navigation-button">
+  <button routerLink="/support-agent" class="btn btn-info">Go to Support Agent</button>
+</div>
+
 <div class="ticket-form">
   <h2>{{ isEditMode ? 'Edit Ticket' : 'Create Ticket' }}</h2>
 
@@ -76,6 +80,9 @@
       <p><em>Status: {{ ticket.status }}</em></p>
       <button class="btn btn-outline-warning" (click)="onModify(ticket)">Edit</button>
       <button class="btn btn-outline-danger" (click)="onDelete(ticket)">Delete</button>
-    </li>
+          </li>
   </ul>
 </div>
+
+<!-- New button to navigate to the support agent page -->
+
