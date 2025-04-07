@@ -32,6 +32,19 @@
         <li class="nav-item"><a class="nav-link active" href="#">Store</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+
+
+        <li class="nav-item dropdown d-none d-md-block">
+          <a class="nav-link dropdown-toggle" href="#" id="friendsDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Friends
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="friendsDropdown">
+            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Your Friends</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/friend-requests']">Friend Requests</a></li>
+          </ul>
+        </li>
+
       </ul>
 
       <!-- Right-side desktop section -->

@@ -6,6 +6,8 @@ import { GamesComponent } from './games/games/games.component';
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
+import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
+import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component'
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Page par défaut : login
   { path: 'login', component: LoginComponent },
@@ -14,9 +16,9 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'user-profile/:id', component: UserProfileComponent },
-  {
-    path: 'edit-profile/:id', component: EditProfileComponent
-  }
+  { path: 'edit-profile/:id', component: EditProfileComponent },
+  { path: 'your-friends', component: FriendManagementComponent },
+  { path: 'friend-requests', component: FriendRequestListComponent },
 
 ];
 
