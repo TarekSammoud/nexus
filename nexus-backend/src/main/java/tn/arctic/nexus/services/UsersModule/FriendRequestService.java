@@ -55,4 +55,14 @@ public class FriendRequestService implements IFriendRequestService{
     public void removeFriendRequest(long idFriendRequest) {
         friendRequestRepository.deleteById(idFriendRequest);
     }
+
+    @Override
+    public List<User> findAvailablePlayersForFriendRequest(Long id) {
+        return userRepository.findAvailablePlayersForFriendRequest(id);
+    }
+
+
+
+
+
 }
