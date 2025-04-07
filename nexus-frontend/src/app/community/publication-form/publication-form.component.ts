@@ -82,7 +82,7 @@ export class PublicationFormComponent implements OnInit {
     const publication: Publication = {
       ...this.publicationForm.value,
       category: { id: this.publicationForm.value.category },  // 🔹 Format correct pour la catégorie
-      user: { id: 1 },     // 🔹 Utilisateur ajouté automatiquement
+     user: { id: 1 },     // 🔹 Utilisateur ajouté automatiquement
       pinned: false,       // 🔹 Non épinglé par défaut
       locked: false        // 🔹 Non verrouillé par défaut
     };
