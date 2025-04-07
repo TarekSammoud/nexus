@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -54,7 +55,8 @@ public class User implements Serializable {
     @OneToMany
     private List<ProfilePictures> profilesPictures;
 
-    @ManyToMany
+    @OneToMany
+    @JsonManagedReference
     private List<Game> gameLibrary;
 
 
@@ -68,6 +70,40 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commentaire> commentaires = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<GameKey> gamekeyLibrary;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user-entryrating")
+    private Set<EntryRating> ratings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("reviews-user")
+    private List<GameReview> gameReviews;
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", last_login=" + last_login +
+                ", friends=" + friends +
+                ", role=" + role +
+                ", profilesPictures=" + profilesPictures +
+                ", gameLibrary=" + gameLibrary +
+                ", gamekeyLibrary=" + gamekeyLibrary +
+                '}';
+    }
+
 
     public Long getId() {
         return id;
@@ -201,7 +237,23 @@ public class User implements Serializable {
         return commentaires;
     }
 
+
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
+    }
+    public List<GameKey> getGamekeyLibrary() {
+        return gamekeyLibrary;
+    }
+
+    public void setGamekeyLibrary(List<GameKey> gamekeyLibrary) {
+        this.gamekeyLibrary = gamekeyLibrary;
+    }
+
+    public List<GameReview> getGameReviews() {
+        return gameReviews;
+    }
+
+    public void setGameReviews(List<GameReview> gameReviews) {
+        this.gameReviews = gameReviews;
     }
 }
