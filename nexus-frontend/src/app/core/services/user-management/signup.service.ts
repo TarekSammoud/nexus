@@ -21,9 +21,7 @@ export class UserService {
             password: signUpData.password,
             phoneNumber: signUpData.phoneNumber || null,
             address: signUpData.address || null,
-            role: {
-                name: signUpData.role.roleType // car backend attend "name": "PLAYER"
-            }
+            roleType: signUpData.roleType
         };
 
         return this.http.post<User>(this.apiUrl, body);

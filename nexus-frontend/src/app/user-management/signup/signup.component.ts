@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 import { RoleType } from '../../core/entities/user/enums';
 import { SignUp } from '../../core/entities/user/signup.model';
-import { Role } from '../../core/entities/user/role.model';
 import { UserService } from '../../core/services/user-management/signup.service';
 
 @Component({
@@ -23,7 +22,7 @@ export class SignupComponent implements OnInit {
       lastName: '',
       email: '',
       password: '',
-      role: new Role({ roleType: RoleType.PLAYER })
+      roleType: RoleType.PLAYER
     });
   }
 
@@ -35,6 +34,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    // Envoi de roleType directement sans encapsuler dans Role
     this.userService.createUser(this.user).subscribe({
       next: (response) => {
         console.log('Inscription réussie', response);
@@ -46,4 +46,5 @@ export class SignupComponent implements OnInit {
       }
     });
   }
+
 }

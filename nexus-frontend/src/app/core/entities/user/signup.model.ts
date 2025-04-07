@@ -1,8 +1,4 @@
-
 import { RoleType } from './enums';
-
-import { Role } from './role.model';
-
 export class SignUp {
     id?: number;
     firstName: string = '';
@@ -11,10 +7,9 @@ export class SignUp {
     password: string = '';
     phoneNumber?: string;
     address?: string;
-    role: Role = new Role({ roleType: RoleType.PLAYER });
+    roleType: RoleType = RoleType.PLAYER;  // Utilisation de RoleType directement
 
     constructor(data: Partial<SignUp> = {}) {
         Object.assign(this, data);
     }
 }
-
