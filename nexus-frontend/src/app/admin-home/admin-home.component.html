@@ -33,18 +33,17 @@
         <div class="dropdown-section">
           <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
              href="javascript:void(0)"
-             (click)="toggleDropdownf()">
+             (click)="toggleDropdownD()">
              <span><i class="fas fa-folder-open me-2"></i>community</span>
-             <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpen, 'fa-chevron-up': dropdownOpen }"></i>
+             <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpenD, 'fa-chevron-up': dropdownOpenD }"></i>
           </a>
   
-          <div *ngIf="dropdownOpen" class="submenu ps-4">
-            <a class="d-block py-2 text-white" routerLink="/admin/games/media" routerLinkActive="active"><i class="fas fa-image me-2"></i>Game Media</a>
-            <a class="d-block py-2 text-white" routerLink="/admin/games/list" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Games</a>
-            <a class="d-block py-2 text-white" routerLink="/admin/games/categories" routerLinkActive="active"><i class="fas fa-tags me-2"></i>Game Categories</a>
-            <a class="d-block py-2 text-white" routerLink="/admin/games/keys" routerLinkActive="active"><i class="fas fa-key me-2"></i>Game Keys</a>
-            <a class="d-block py-2 text-white" routerLink="/admin/games/reviews" routerLinkActive="active"><i class="fas fa-star me-2"></i>Game Reviews</a>
-            <a class="d-block py-2 text-white" routerLink="/admin/games/media" routerLinkActive="active"><i class="fas fa-image me-2"></i>Game Media</a>
+          <div *ngIf="dropdownOpenD" class="submenu ps-4">
+            <a class="d-block py-2 text-white" routerLink="/admin/community/categories" routerLinkActive="active"><i class="fas fa-image me-2"></i>categories Liste</a>
+            <a class="d-block py-2 text-white" routerLink="/admin/community/categories/add" routerLinkActive="active"><i class="fas fa-tags me-2"></i> add categories</a>
+            <a class="d-block py-2 text-white" routerLink="/admin/community/reports" routerLinkActive="active"><i class="fas fa-tags me-2"></i> reports</a>
+
+
 
           </div>
         </div>

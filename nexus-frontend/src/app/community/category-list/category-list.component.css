@@ -1,0 +1,8 @@
+table tr {
+    transition: all 0.2s ease-in-out;
+  }
+  table tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+  }
+  

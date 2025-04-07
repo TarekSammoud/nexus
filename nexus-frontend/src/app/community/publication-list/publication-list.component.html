@@ -1,13 +1,31 @@
+
+<div class="hero-banner position-relative text-center text-white d-flex align-items-center justify-content-center">
+  <img src="assets/images/communityimg.png" alt="Community Banner" class="banner-img" />
+
+  <div class="hero-content position-absolute">
+    <h1 class="display-4 fw-bold glow-text">🎮 COMMUNITY ON NEXUS</h1>
+    <p class="lead mb-4">Engage with fellow gamers, share your experiences, and contribute to discussions!</p>
+    <button class="btn btn-neon" routerLink="/community/add">
+      <i class="bi bi-plus-circle-dotted me-2"></i> Ajouter une Publication
+    </button>
+      </div>
+</div>
+
+
 <div class="page-wrapper">
+
+  
   <div class="content-wrapper container">
     <div class="publication-list-container shadow">
-      <h2 class="header-title">📚 Publications Récentes</h2>
 
-      <div class="text-end mb-3">
-        <button class="btn btn-outline-light" routerLink="/community/add">
-          ➕ Ajouter une Publication
-        </button>
+      <div class="title-box my-5 text-center">
+        <div class="icon-box mx-auto mb-2">
+          <i class="bi bi-chat-right-text-fill fs-3 text-pink"></i>
+        </div>
+        <h2 class="title-text">📚 Publications Récentes</h2>
       </div>
+      
+      
 
       <div *ngIf="!publications || publications.length === 0" class="alert alert-warning text-center">
         🚨 Aucune publication trouvée.

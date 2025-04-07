@@ -19,7 +19,7 @@ export class PublicationListComponent implements OnInit {
   commentsByPublication: { [key: number]: Commentaire[] } = {};
   likeCounts: { [key: number]: number } = {};
   userLiked: { [key: number]: boolean } = {};
-  userId: number = 1;
+  userId: number = 3;
 
   constructor(
     private communityService: CommunityService,

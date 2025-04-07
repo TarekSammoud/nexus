@@ -9,9 +9,14 @@ import { Router } from '@angular/router';
 export class AdminHomeComponent {
   constructor(private _router: Router) { }
   dropdownOpen = false;
+  dropdownOpenD = false;
+
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+  toggleDropdownD() {
+    this.dropdownOpenD = !this.dropdownOpenD;
   }
 
   toggleDropdownf () {

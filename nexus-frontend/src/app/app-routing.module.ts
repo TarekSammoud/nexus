@@ -19,18 +19,21 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { CategoryListComponent } from './community/category-list/category-list.component';
+import { CategoryFormComponent } from './community/category-form/category-form.component';
+import { ReportListComponent } from './community/report-list/report-list.component';
+
+
 
 const routes: Routes = [
-  // Routes de ta branche (CommunityManagement)
   { path: 'games', component: GamesComponent },
   { path: 'community', component: PublicationListComponent },
   { path: 'community/add', component: PublicationFormComponent },
   { path: 'community/edit/:id', component: PublicationFormComponent },
 
-  // Routes de la branche prod intégrées clairement
   {
     path: 'admin',
-    component: AdminHomeComponent, // a le sidebar
+    component: AdminHomeComponent, 
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'games/categories', component: GameCategoryListComponent },
@@ -39,7 +42,13 @@ const routes: Routes = [
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
       { path: 'add-new-game', component: CreateGameComponent },
       { path: 'games/:id', component: GamePageComponent },
-      { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent }
+      { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
+      { path: 'community/categories', component: CategoryListComponent },
+      { path: 'community/categories/add', component: CategoryFormComponent },
+      { path: 'community/categories/edit/:id', component: CategoryFormComponent },
+      { path: 'community/reports', component: ReportListComponent }
+
+
     ]
   },
 
