@@ -1,5 +1,7 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +13,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor  // Lombok génère déjà le constructeur sans paramètre
+@NoArgsConstructor
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)  // Stratégie d'héritage
-
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,12 +49,11 @@ public class User implements Serializable {
     private List<User> friends;
 
     @ManyToOne
-    @JoinColumn( nullable = true)
+    @JoinColumn(nullable = true)
     private Role role;
 
-    @OneToMany
-    @JoinColumn( nullable = true)
-    private List<ProfilePictures> profilesPictures;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProfilePictures profilePicture;
 
     @ManyToMany
     private List<Game> gameLibrary;

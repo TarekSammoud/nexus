@@ -1,6 +1,27 @@
+<app-header></app-header>
+
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <hr>
+            <div class="text-center mt-4">
+                <h4>Photo de profil</h4>
+
+                <div *ngIf="imageUrl; else noImage">
+                    <img [src]="imageUrl" alt="Profile Picture" class="img-thumbnail" style="max-width: 200px;">
+                </div>
+                <ng-template #noImage>
+                    <p>Aucune photo disponible.</p>
+                </ng-template>
+
+                <input type="file" (change)="onFileSelected($event)" class="form-control mt-3">
+                <button class="btn btn-primary mt-2" (click)="uploadProfilePicture()">Mettre à jour la photo</button>
+
+                <p *ngIf="uploadProgress > 0" class="mt-2">Progression: {{ uploadProgress }}%</p>
+            </div>
+
+
             <div class="card shadow p-4">
                 <h2 class="text-center">User Profile</h2>
 
