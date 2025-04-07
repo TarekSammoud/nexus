@@ -2,8 +2,10 @@ package tn.arctic.nexus.services.TechnicalSupportModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.arctic.nexus.entities.Message;
 import tn.arctic.nexus.entities.Room;
 import tn.arctic.nexus.entities.SupportTicket;
+import tn.arctic.nexus.repositories.TechnicalSupportModule.IMessageRepository;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.IRoomRepository;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.ISupportTicketRepository;
 
@@ -19,6 +21,12 @@ public class RoomService implements IRoomService {
 
     @Autowired
     private ISupportTicketRepository ticketRepository;
+
+    @Autowired
+    private IMessageRepository messageRepository;
+
+    @Autowired
+    private MessageService messageService;
 
     @Override
     public Room creerRoom(Long ticketId) {
@@ -68,5 +76,8 @@ public class RoomService implements IRoomService {
 
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
+    }
+    public Message sendMessageToRoom(Long roomId, String sender, String content) {
+        return messageService.sendMessage(roomId, sender, content);
     }
 }
