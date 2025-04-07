@@ -1,5 +1,7 @@
 package tn.arctic.nexus.controllers.GamesModule;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Game;
@@ -8,6 +10,7 @@ import tn.arctic.nexus.services.GamesModule.IGameService;
 
 import java.util.List;
 
+@Tag(name = "Game Management")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/games")
@@ -20,6 +23,7 @@ public class GameController {
         return gameService.addGame(game);
     }
 
+    @Operation(description = "get all games from database")
     @GetMapping("/all-games")
     public List<Game> getAllGames(){
         return  gameService.getAllGames();
@@ -35,6 +39,12 @@ public class GameController {
         return gameService.getAllGamesByCategory(gameCategories);
     }
 
+    @GetMapping("/filter-by-category/{name}")
+    public List<Game> getAllGamesBySingleCategory(@PathVariable("name") String name)
+    {
+        return gameService.getAllGamesBySingleCategory(name);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteGameById(@PathVariable("id")Long id){
         gameService.deleteGameById(id);
@@ -43,6 +53,11 @@ public class GameController {
     @PutMapping("/update-game")
     public Game updateGame(@RequestBody Game game){
         return gameService.updateGame(game);
+    }
+
+    @GetMapping("/number-of-games")
+    public Integer getNumberOfGames(){
+        return gameService.getNumberOfGames();
     }
 
 }
