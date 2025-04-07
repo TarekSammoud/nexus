@@ -20,13 +20,14 @@ public class FriendRequest implements Serializable {
     private long idFriendRequest;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipient;
+
 
     @Temporal(TemporalType.DATE)
     private Date createdAt ;
@@ -35,6 +36,7 @@ public class FriendRequest implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date deletedAt ;
 
+    @Enumerated(EnumType.STRING)
     private StatusFriendRequest status;
 
 }
