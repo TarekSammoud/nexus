@@ -48,7 +48,7 @@ public class User implements Serializable {
     @ManyToMany
     private List<User> friends;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = true)
     private Role role;
 
