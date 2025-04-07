@@ -20,9 +20,9 @@ public class SupportAgentService {
         return supportAgentRepository.findAll();
     }
 
-    // Create or update a support agent
-    public SupportAgent createOrUpdateAgent(SupportAgent agent) {
-        return supportAgentRepository.save(agent);
+    // Get agents by department
+    public List<SupportAgent> getAgentsByDepartement(Departement departement) {
+        return supportAgentRepository.findByDepartement(departement);
     }
 
     // Get agent by ID
@@ -30,20 +30,26 @@ public class SupportAgentService {
         return supportAgentRepository.findById(id);
     }
 
-    // Get agents by department
-    public List<SupportAgent> getAgentsByDepartement(Departement departement) {
-        return supportAgentRepository.findByDepartement(departement);
+    // Create a new agent
+    public SupportAgent createAgent(SupportAgent agent) {
+        return supportAgentRepository.save(agent);
+    }
+
+    // Update an existing agent
+    public Optional<SupportAgent> updateAgent(Long id, SupportAgent agent) {
+        if (supportAgentRepository.existsById(id)) {
+            agent.setId(id);
+            return Optional.of(supportAgentRepository.save(agent));
+        }
+        return Optional.empty();
     }
 
     // Delete agent by ID
     public boolean deleteAgent(Long id) {
-        Optional<SupportAgent> agent = supportAgentRepository.findById(id);
-        if (agent.isPresent()) {
+        if (supportAgentRepository.existsById(id)) {
             supportAgentRepository.deleteById(id);
             return true;
         }
         return false;
     }
-
-
 }

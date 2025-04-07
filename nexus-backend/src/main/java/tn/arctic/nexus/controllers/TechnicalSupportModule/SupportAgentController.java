@@ -10,6 +10,7 @@ import tn.arctic.nexus.services.TechnicalSupportModule.SupportAgentService;
 
 import java.util.List;
 import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("agents")
@@ -32,17 +33,30 @@ public class SupportAgentController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    // Create or update a support agent
+    // Get agents by department
+    @GetMapping("/department/{departement}")
+    public ResponseEntity<List<SupportAgent>> getAgentsByDepartment(@PathVariable Departement departement) {
+        List<SupportAgent> agents = supportAgentService.getAgentsByDepartement(departement);
+        if (agents != null && !agents.isEmpty()) {
+            return ResponseEntity.ok(agents);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // Create a new agent
     @PostMapping("createagent")
-    public ResponseEntity<SupportAgent> createOrUpdateAgent(@RequestBody SupportAgent agent) {
-        SupportAgent savedAgent = supportAgentService.createOrUpdateAgent(agent);
+    public ResponseEntity<SupportAgent> createAgent(@RequestBody SupportAgent agent) {
+        SupportAgent savedAgent = supportAgentService.createAgent(agent);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedAgent);
     }
 
-    // Get agents by department
-    @GetMapping("/department/{departement}")
-    public List<SupportAgent> getAgentsByDepartment(@PathVariable Departement departement) {
-        return supportAgentService.getAgentsByDepartement(departement);
+    // Update an existing agent
+    @PutMapping("/{id}")
+    public ResponseEntity<SupportAgent> updateAgent(@PathVariable Long id, @RequestBody SupportAgent agent) {
+        Optional<SupportAgent> updatedAgent = supportAgentService.updateAgent(id, agent);
+        return updatedAgent.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // Delete an agent
@@ -53,5 +67,17 @@ public class SupportAgentController {
                 ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-
+    // Combined method to get agent by ID or by department
+    @GetMapping("/search")
+    public ResponseEntity<?> getAgent(@RequestParam(required = false) Long id,
+                                      @RequestParam(required = false) Departement departement) {
+        if (id != null) {
+            return getAgentById(id);  // Reuse the existing getAgentById method
+        } else if (departement != null) {
+            return getAgentsByDepartment(departement);  // Reuse the existing getAgentsByDepartment method
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Please provide either an agent ID or department.");
+        }
+    }
 }
