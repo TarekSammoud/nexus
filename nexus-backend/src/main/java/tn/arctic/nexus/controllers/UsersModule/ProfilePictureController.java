@@ -41,21 +41,32 @@ public class ProfilePictureController  {
         }
 
         try {
+            // 🔁 1. Supprimer l'ancienne photo s'il y en a une
+            ProfilePictures existingPicture = profilePicturesRepository.findByUserId(userId);
+            if (existingPicture != null) {
+                // Supprimer le fichier physique
+                Path oldPath = Paths.get(existingPicture.getImageUrl());
+                Files.deleteIfExists(oldPath);
+
+                // Supprimer de la base de données
+                profilePicturesRepository.delete(existingPicture);
+            }
+
+            // 🆕 2. Enregistrer la nouvelle image
             String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
             Path filePath = Paths.get("uploads").resolve(fileName);
 
-            // Sauvegarde physique de l'image
-            Files.createDirectories(filePath.getParent()); // Crée le dossier s'il n'existe pas
+            Files.createDirectories(filePath.getParent());
             Files.write(filePath, file.getBytes());
 
-            // Sauvegarde en base de données
-            ProfilePictures profilePicture = new ProfilePictures();
-            profilePicture.setImageUrl(filePath.toString());
-            profilePicture.setFileType(file.getContentType());
-            profilePicture.setFileSize(file.getSize());
-            profilePicture.setUser(user);
+            ProfilePictures newPicture = new ProfilePictures();
+            newPicture.setImageUrl(filePath.toString());
+            newPicture.setFileType(file.getContentType());
+            newPicture.setFileSize(file.getSize());
+            newPicture.setUser(user);
 
-            profilePicturesRepository.save(profilePicture);
+            profilePicturesRepository.save(newPicture);
+
             return ResponseEntity.ok("Profile picture uploaded successfully");
 
         } catch (IOException e) {
@@ -64,6 +75,8 @@ public class ProfilePictureController  {
     }
 
 
+
+    // Méthode pour récupérer la photo de profil d'un utilisateur
     @GetMapping("/profile-picture/{userId}")
     public ResponseEntity<byte[]> getProfilePicture(@PathVariable Long userId) {
         ProfilePictures profilePicture = profilePicturesRepository.findByUserId(userId);
@@ -88,5 +101,4 @@ public class ProfilePictureController  {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
 }
