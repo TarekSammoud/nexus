@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +20,7 @@ public class MarketListing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "game_item_id", nullable = false)
-    private GameItem item;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -31,10 +30,18 @@ public class MarketListing {
 
     private LocalDateTime endDate;
     private Double startBid;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_item_id", nullable = false)
 
-    @ManyToOne
+    @JsonIgnoreProperties({"mediaList"}) // si GameItem contient des listes ou relations non nécessaires
+    private GameItem item;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"gameLibrary", "friends", "profilesPictures", "role"})
     private User user;
+
+
 
     @OneToMany(mappedBy = "marketListing", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bid> bids;
