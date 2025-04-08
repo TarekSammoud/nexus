@@ -3,6 +3,7 @@ package tn.arctic.nexus.services.UsersModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.FriendRequest;
+import tn.arctic.nexus.entities.StatusFriendRequest;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IFriendRequestRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
@@ -23,10 +24,11 @@ public class FriendRequestService implements IFriendRequestService{
     }
 
     @Override
-    public FriendRequest addFriendRequest(FriendRequest friendRequest) {
+    public FriendRequest envoyerFriendRequest(FriendRequest friendRequest) {
         // Récupérer les vrais objets User depuis la BDD à partir des IDs
         Long senderId = friendRequest.getSender().getId();
         Long recipientId = friendRequest.getRecipient().getId();
+
 
         User sender = userRepository.findById(senderId)
                 .orElseThrow(() -> new RuntimeException("Sender not found with id: " + senderId));
@@ -37,6 +39,8 @@ public class FriendRequestService implements IFriendRequestService{
         // Mettre à jour les relations avec les objets complets
         friendRequest.setSender(sender);
         friendRequest.setRecipient(recipient);
+        friendRequest.setStatus(StatusFriendRequest.PENDING);
+
 
         return friendRequestRepository.save(friendRequest);
     }

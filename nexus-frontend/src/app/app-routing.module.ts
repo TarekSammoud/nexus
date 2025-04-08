@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'user-profile/:id', component: UserProfileComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent },
-  { path: 'your-friends', component: FriendManagementComponent },
-  { path: 'friend-requests', component: FriendRequestListComponent },
+  { path: 'your-your-friends/:id', component: FriendManagementComponent },
+  { path: 'friend-requests/:id', component: FriendRequestListComponent },
 
 ];
 
