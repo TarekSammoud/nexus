@@ -1,0 +1,14 @@
+<div class="chat-container">
+  <div class="header">
+    <button (click)="closeRoom()" class="close-chat-button" [disabled]="chatClosed">Close Chat</button>
+  </div>
+  <div class="message-list">
+    <div *ngFor="let message of messages" class="message-item">
+      <strong>{{ message.sender }}:</strong> {{ message.content }}
+    </div>
+  </div>
+  <div class="message-input">
+    <input [(ngModel)]="newMessage" placeholder="Type a message" [disabled]="chatClosed" />
+    <button (click)="sendMessage()" [disabled]="sending || chatClosed">Send</button>
+  </div>
+</div>

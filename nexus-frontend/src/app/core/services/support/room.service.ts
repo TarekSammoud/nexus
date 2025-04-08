@@ -12,14 +12,15 @@ export class RoomService {
   constructor(private http: HttpClient) {}
 
   // Create a new room for a ticket
-  createRoom(ticketId: number): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/create/${ticketId}`, null)
-      .pipe(catchError(this.handleError));
+  createRoom(ticketId: number, userId: number): Observable<string> {
+    const url = `${this.baseUrl}/create/${ticketId}?userId=${userId}`;
+    return this.http.post<string>(url, null);
   }
+  
 
   // Close a room for a ticket
-  closeRoom(ticketId: number): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/close/${ticketId}`, null)
+  closeRoom(roomId: number): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/close/${roomId}`, null)
       .pipe(catchError(this.handleError));
   }
 
@@ -29,7 +30,24 @@ export class RoomService {
       .pipe(catchError(this.handleError));
   }
 
-  // Handle HTTP errors
+  // Send a message to a room
+  sendMessage(roomId: number, sender: string, content: string): Observable<any> {
+    const url = `${this.baseUrl}/sendMessage/${roomId}`;
+    const params = {
+      sender: sender,
+      content: content
+    };
+    
+    return this.http.post(url, null, { params })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Receive messages for a room
+  receiveMessages(roomId: number): Observable<any> {
+    const url = `${this.baseUrl}/messages/${roomId}`;
+    return this.http.get<any>(url)
+      .pipe(catchError(this.handleError));
+  }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred!';
     if (error.error instanceof ErrorEvent) {
