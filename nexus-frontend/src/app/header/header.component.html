@@ -40,8 +40,8 @@
             Friends
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="friendsDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Your Friends</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/friend-requests']">Friend Requests</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/your-friends', user.id]">Your Friends</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/friend-requests', user.id]">Friend Requests</a></li>
           </ul>
         </li>
 

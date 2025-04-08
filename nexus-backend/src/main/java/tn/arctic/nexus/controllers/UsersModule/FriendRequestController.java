@@ -25,7 +25,7 @@ public class FriendRequestController {
 
     @PostMapping("/addFriendRequest")
     public FriendRequest addFriendRequests(@RequestBody FriendRequest friendRequest) {
-        return friendRequestService.addFriendRequest(friendRequest);
+        return friendRequestService.envoyerFriendRequest(friendRequest);
     }
 
     @PutMapping()
