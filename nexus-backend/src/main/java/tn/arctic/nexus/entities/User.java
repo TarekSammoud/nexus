@@ -52,6 +52,10 @@ public class User implements Serializable {
     @ManyToMany
     private List<Game> gameLibrary;
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public Long getId() {
         return id;
     }

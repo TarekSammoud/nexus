@@ -43,6 +43,11 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
 import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { MarketListComponent } from './market/market-list/market-list.component';
+import { MarketCreateComponent } from './market/market-create/market-create.component';
+import { MarketEditComponent } from './market/market-edit/market-edit.component';
+import { BidComponent } from './market/bid/bid.component';
+import { MarketDetailsComponent } from './market/market-details/market-details.component';
 
 
 @NgModule({
@@ -68,8 +73,13 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
-    
-    
+    MarketListComponent,
+    MarketCreateComponent,
+    MarketEditComponent,
+    BidComponent,
+    MarketDetailsComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -93,8 +103,8 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     AngularEditorModule,
     QuillModule.forRoot(),
     GameCategoryListComponent
-      
-    
+
+
 
 
   ],
