@@ -25,4 +25,19 @@ export class FriendRequestService {
         return this.http.post<any>(url, requestPayload);
     }
 
+    getReceivedFriendRequests(userId: number): Observable<any[]> {
+        const url = `http://localhost:9000/nexus-backend/friendRequests/received/${userId}`;
+        return this.http.get<any[]>(url);
+    }
+
+    acceptFriendRequest(requestId: number): Observable<any> {
+        return this.http.put(`http://localhost:9000/nexus-backend/friendRequests/accept/${requestId}`, {});
+    }
+
+
+    //put
+    rejectFriendRequest(requestId: number): Observable<any> {
+        return this.http.put(`http://localhost:9000/nexus-backend/friendRequests/reject/${requestId}`, {});
+    }
+
 }

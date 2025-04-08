@@ -1,31 +1,64 @@
 <app-header></app-header>
 
 <div class="container mt-4">
-    <h2>Available Players for Friend Request</h2>
 
-    <!-- Affichage pendant le chargement -->
-    <div *ngIf="isLoading" class="text-center">
-        <p>Loading available players...</p>
-    </div>
+    <!-- SECTION 1 : Joueurs disponibles -->
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Available Players for Friend Request</h2>
 
-    <!-- Affichage des joueurs disponibles -->
-    <div *ngIf="!isLoading && availablePlayers.length === 0" class="text-center">
-        <p>No available players for friend request.</p>
-    </div>
+            <div *ngIf="isLoading" class="text-center">
+                <p>Loading available players...</p>
+            </div>
 
-    <div *ngIf="!isLoading && availablePlayers.length > 0">
-        <div *ngFor="let player of availablePlayers" class="card mb-3">
-            <div class="card-body d-flex align-items-center">
-                <img [src]="imageUrls[player.id] || '../../assets/img/profilepic.jpg'" alt="Profile"
-                    class="profile-img rounded-circle" width="50" height="50">
+            <div *ngIf="!isLoading && availablePlayers.length === 0" class="text-center">
+                <p>No available players for friend request.</p>
+            </div>
 
-                <div class="ms-3">
-                    <h5 class="card-title">{{ player.firstName }} {{ player.lastName }}</h5>
+            <div *ngIf="!isLoading && availablePlayers.length > 0">
+                <div *ngFor="let player of availablePlayers" class="card mb-3">
+                    <div class="card-body d-flex align-items-center">
+                        <img [src]="imageUrls[player.id] || '../../assets/img/profilepic.jpg'" alt="Profile"
+                            class="profile-img rounded-circle" width="50" height="50">
+                        <div class="ms-3">
+                            <h5 class="card-title">{{ player.firstName }} {{ player.lastName }}</h5>
+                        </div>
+                        <button class="btn btn-primary ms-auto" (click)="sendFriendRequest(player.id)">
+                            Send Friend Request
+                        </button>
+                    </div>
                 </div>
-                <button class="btn btn-primary ms-auto" (click)="sendFriendRequest(player.id)">
-                    Send Friend Request
-                </button>
             </div>
         </div>
+
+        <!-- SECTION 2 : Invitations reçues -->
+        <div class="col-md-6">
+            <h2>Received Friend Requests</h2>
+
+            <div *ngIf="receivedRequests.length === 0" class="text-center">
+                <p>No received friend requests.</p>
+            </div>
+
+            <div *ngIf="receivedRequests.length > 0">
+                <div *ngFor="let req of receivedRequests" class="card mb-3">
+                    <div class="card-body d-flex align-items-center">
+                        <img [src]="imageUrls[req.sender.id] || '../../assets/img/profilepic.jpg'" alt="Profile"
+                            class="profile-img rounded-circle" width="50" height="50">
+
+                        <div class="ms-3">
+                            <h5 class="card-title">{{ req.sender.firstName }} {{ req.sender.lastName }}</h5>
+                        </div>
+
+                        <div class="ms-auto d-flex gap-2">
+                            <button class="btn btn-success" (click)="acceptRequest(req.idFriendRequest)">Accept</button>
+                            <button class="btn btn-danger" (click)="rejectRequest(req.idFriendRequest)">Reject</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
 </div>
