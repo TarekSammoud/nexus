@@ -1,5 +1,6 @@
 package tn.arctic.nexus.controllers.UsersModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.FriendRequest;
 import tn.arctic.nexus.entities.User;
@@ -49,6 +50,24 @@ public class FriendRequestController {
     public List<User> getAvailablePlayers(@PathVariable Long id) {
         System.out.println("==> getAvailablePlayers called for id: " + id);
         return friendRequestService.findAvailablePlayersForFriendRequest(id);
+    }
+
+    @GetMapping("/received/{userId}")
+    public List<FriendRequest> getReceivedFriendRequests(@PathVariable Long userId) {
+        List<FriendRequest> friendRequests = friendRequestService.getReceivedFriendRequests(userId);
+        return friendRequests;
+    }
+
+    @PutMapping("/accept/{requestId}")
+    public ResponseEntity<?> acceptFriendRequest(@PathVariable Long requestId) {
+        friendRequestService.acceptRequest(requestId);
+        return ResponseEntity.ok("Friend request accepted.");
+    }
+
+    @PutMapping("/reject/{requestId}")
+    public ResponseEntity<?> rejectFriendRequest(@PathVariable Long requestId) {
+        friendRequestService.rejectRequest(requestId);
+        return ResponseEntity.ok("Friend request rejected.");
     }
 
 

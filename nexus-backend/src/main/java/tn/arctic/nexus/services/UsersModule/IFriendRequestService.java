@@ -12,5 +12,7 @@ public interface IFriendRequestService {
     FriendRequest retrieveFriendRequest(long idFriendRequest);
     void removeFriendRequest(long idFriendRequest);
     List<User> findAvailablePlayersForFriendRequest(Long id);
-
+    List<FriendRequest> getReceivedFriendRequests(Long userId);
+    public void rejectRequest(Long requestId);
+    public void acceptRequest(Long requestId);
 }

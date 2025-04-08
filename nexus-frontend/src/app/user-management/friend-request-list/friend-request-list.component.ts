@@ -28,6 +28,7 @@ export class FriendRequestListComponent implements OnInit {
     const userId = Number(this.route.snapshot.paramMap.get('id'));
     this.userId = userId;
     this.loadAvailablePlayers(userId);
+    this.loadReceivedRequests(userId);
   }
 
 
@@ -72,5 +73,48 @@ export class FriendRequestListComponent implements OnInit {
       }
     });
   }
+
+  receivedRequests: any[] = [];
+
+  loadReceivedRequests(userId: number): void {
+    this.friendRequestService.getReceivedFriendRequests(userId).subscribe({
+      next: (requests: any[]) => {
+        this.receivedRequests = requests;
+        this.receivedRequests.forEach(req => {
+          this.loadProfilePicture(req.sender.id);
+        });
+      },
+      error: () => {
+        console.error("Erreur lors du chargement des invitations reçues.");
+      }
+    });
+  }
+
+  acceptRequest(requestId: number): void {
+    this.friendRequestService.acceptFriendRequest(requestId).subscribe({
+      next: () => {
+        this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
+        alert('Friend request accepted.');
+      },
+      error: () => {
+        alert('Failed to accept the request.');
+      }
+    });
+  }
+
+  rejectRequest(requestId: number): void {
+    this.friendRequestService.rejectFriendRequest(requestId).subscribe({
+      next: () => {
+        this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
+        alert('Friend request rejected.');
+      },
+      error: () => {
+        alert('Failed to reject the request.');
+      }
+    });
+  }
+
+
+
 
 }

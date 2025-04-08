@@ -1,5 +1,6 @@
 package tn.arctic.nexus.services.UsersModule;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.FriendRequest;
@@ -67,6 +68,27 @@ public class FriendRequestService implements IFriendRequestService{
 
 
 
+    @Transactional
+    public List<FriendRequest> getReceivedFriendRequests(Long userId) {
+        // Récupérer toutes les demandes d'amis où l'utilisateur est le destinataire et que le statut est PENDING
+        return friendRequestRepository.findByRecipientIdAndStatus(userId, StatusFriendRequest.PENDING);
+    }
 
+   @Override
+    public void acceptRequest(Long requestId) {
+        FriendRequest request = friendRequestRepository.findById(requestId)
+                .orElseThrow(() -> new RuntimeException("Friend request not found"));
+
+        request.setStatus(StatusFriendRequest.ACCEPTED);
+        friendRequestRepository.save(request);
+    }
+    @Override
+    public void rejectRequest(Long requestId) {
+        FriendRequest request = friendRequestRepository.findById(requestId)
+                .orElseThrow(() -> new RuntimeException("Friend request not found"));
+
+        request.setStatus(StatusFriendRequest.REJECTED);
+        friendRequestRepository.save(request);
+    }
 
 }
