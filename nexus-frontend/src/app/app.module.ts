@@ -15,6 +15,7 @@ import { SupportTicketComponent } from './support/support-ticket/support-ticket.
 import { RoomComponent } from './support/room/room.component';
 import { PerformanceReviewComponent } from './support/performance-review/performance-review.component';
 import { SupportAgentComponent } from './support/support-agent/support-agent.component';
+import { RoomChatComponent } from './support/room-chat/room-chat.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SupportAgentComponent } from './support/support-agent/support-agent.com
     SupportTicketComponent,
     SupportAgentComponent,
     RoomComponent,
-    PerformanceReviewComponent
+    PerformanceReviewComponent,
+    RoomChatComponent
   ],
   imports: [
     BrowserModule,
