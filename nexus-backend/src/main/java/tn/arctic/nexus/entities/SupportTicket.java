@@ -43,7 +43,12 @@ public class SupportTicket {
     private SupportAgent assigneA;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToOne(mappedBy = "ticket")
     private Room room;// This is the field referred by mappedBy in SupportAgent
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User   user;
 }

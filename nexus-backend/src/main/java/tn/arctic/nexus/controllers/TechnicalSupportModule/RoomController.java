@@ -1,6 +1,8 @@
 package tn.arctic.nexus.controllers.TechnicalSupportModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,8 @@ import tn.arctic.nexus.entities.Message;
 import tn.arctic.nexus.entities.Room;
 import tn.arctic.nexus.services.TechnicalSupportModule.RoomService;
 import java.util.List;
+
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("rooms")
@@ -75,6 +79,16 @@ public class RoomController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @DeleteMapping("/delete/{ticketId}")
+    public ResponseEntity<String> deleteRoom(@PathVariable Long ticketId) {
+        try {
+            roomService.deleteRoom(ticketId);  // Call the service to delete the room
+            return new ResponseEntity<>("Room deleted successfully.", HttpStatus.OK);
+        } catch (RuntimeException e) {
+            // Handle errors such as room not found
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

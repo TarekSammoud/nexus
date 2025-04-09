@@ -1,6 +1,8 @@
 package tn.arctic.nexus.controllers.TechnicalSupportModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,7 @@ import tn.arctic.nexus.services.TechnicalSupportModule.SupportAgentService;
 
 import java.util.List;
 import java.util.Optional;
-
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("agents")

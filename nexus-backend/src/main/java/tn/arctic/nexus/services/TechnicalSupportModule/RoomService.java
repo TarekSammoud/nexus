@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class RoomService implements IRoomService {
 
     @Autowired
@@ -49,14 +50,12 @@ public class RoomService implements IRoomService {
         // Créer la room
         Room room = new Room();
         room.setTicket(ticket);
+     // Lien fictif
         room.setDateCreation(LocalDateTime.now());
         room.setDernierMessage(LocalDateTime.now());
         room.setActive(true);
         roomRepository.save(room);
-
         room.setLien("http://localhost:4200/room/" + room.getId());
-        roomRepository.save(room);
-
         // Associer la room au ticket
         ticket.setRoom(room);
         ticketRepository.save(ticket);
@@ -103,5 +102,11 @@ public class RoomService implements IRoomService {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room non trouvée"));
         return messageRepository.findByRoom(room);
+    }
+
+    public void deleteRoom(Long id) {
+        if (roomRepository.existsById(id)) {
+            roomRepository.deleteById(id);
+        }
     }
 }
