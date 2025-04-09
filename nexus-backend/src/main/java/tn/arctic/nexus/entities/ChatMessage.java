@@ -12,5 +12,12 @@ public class ChatMessage {
     private String recipientId;
     private String content;
     private Date timestamp;
-}
 
+    // Constructeur pour initialiser un message avec l'heure actuelle
+    public ChatMessage(String senderId, String recipientId, String content) {
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.content = content;
+        this.timestamp = new Date();  // Ajouter la date du message
+    }
+}

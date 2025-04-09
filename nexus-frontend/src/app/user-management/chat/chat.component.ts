@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FriendRequestService } from '../../core/services/user-management/friend-request.service';
-import { ChatService } from '../../core/services/user-management/Chat.Service'; // importez le service de chat
+import { ChatService } from '../../core/services/user-management/Chat.Service';  // Utilisez le bon chemin
+import { ChatMessage } from '../../core/entities/user/ChatMessage';  // Import du modèle ChatMessage
 
 @Component({
   selector: 'app-chat',
@@ -9,9 +10,9 @@ import { ChatService } from '../../core/services/user-management/Chat.Service'; 
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  messages: any[] = [];
+  messages: ChatMessage[] = [];  // Type des messages mis à jour
   messageContent = '';
-  recipientId = '';
+  recipientId: number = 0;  // ID du destinataire modifié pour être un nombre
   currentUserId: number | null = null;
   friends: any[] = [];
 
@@ -27,9 +28,9 @@ export class ChatComponent implements OnInit {
       this.currentUserId = id ? +id : null;
 
       if (this.currentUserId !== null) {
-        this.chatService.connect(this.currentUserId.toString());  // Connexion au WebSocket
+        this.chatService.connect(this.currentUserId);  // Connexion au WebSocket
 
-        this.friendRequestService.getAvailablePlayers(this.currentUserId).subscribe({
+        this.friendRequestService.getFriends(this.currentUserId).subscribe({
           next: (data) => {
             this.friends = data;
           },
@@ -41,7 +42,9 @@ export class ChatComponent implements OnInit {
         // Souscrire aux messages reçus
         this.chatService.messages$.subscribe(msg => {
           if (msg) {
-            this.messages.push(msg);  // Ajouter les messages reçus à la liste
+            // Conversion du message reçu en objet ChatMessage avec IDs de type number
+            const receivedMessage = new ChatMessage(+msg.senderId, +msg.recipientId, msg.content);
+            this.messages.push(receivedMessage);  // Ajouter le message reçu à la liste
           }
         });
       }
@@ -51,27 +54,21 @@ export class ChatComponent implements OnInit {
   sendMessage(): void {
     if (!this.messageContent.trim()) return;
 
-    const isFriend = this.friends.some(friend => friend.id != null && friend.id === +this.recipientId);
-    if (!isFriend) {
-      alert("Vous ne pouvez envoyer un message qu'à vos amis !");
-      return;
-    }
+    const message = new ChatMessage(this.currentUserId || 0, this.recipientId, this.messageContent);
 
-    const message = {
-      senderId: this.currentUserId?.toString() || '',
-      recipientId: this.recipientId,
-      content: this.messageContent
-    };
+    // Affichage des détails dans la console
+    console.log(`User ID (sender): ${this.currentUserId}`);
+    console.log(`Recipient ID: ${this.recipientId}`);
+    console.log(`Message Content: ${this.messageContent}`);
 
-    // Ajouter le message envoyé à la liste
-    this.messages.push({
-      senderId: this.currentUserId?.toString(),
-      content: this.messageContent,
-      recipientId: this.recipientId
-    });
+    // Ajouter le message à la liste des messages locaux
+    this.messages.push(message);
 
-    // Envoyer le message via le ChatService
-    this.chatService.sendMessage(message.senderId, this.recipientId, this.messageContent);
-    this.messageContent = '';  // Réinitialiser le champ de texte
+    // Envoyer le message via le ChatService avec les IDs en number
+    this.chatService.sendMessage(message.senderId, message.recipientId, this.messageContent);
+
+    // Réinitialiser le champ de texte du message
+    this.messageContent = '';
   }
+
 }
