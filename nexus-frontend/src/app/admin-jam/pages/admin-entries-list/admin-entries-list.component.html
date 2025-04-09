@@ -1,0 +1,98 @@
+<div class="admin-entries-container animate-glow">
+  <h2 class="panel-title">🧩 All Game Jam Entries</h2>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>🎮 Game Title</th>
+        <th>📝 Description</th>
+        <th>👤 User</th>
+        <th>📅 Date</th>
+        <th>⚙️ Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of entries" class="table-row-animate">
+        <td>{{ entry.id }}</td>
+
+        <td>
+          <span class="game-title neon-text">
+            <i class="fa-solid fa-gamepad flicker"></i>
+            {{ entry.nameEntry }}
+            <span *ngIf="isNew(entry)" class="new-badge flash-pulse">🆕</span>
+          </span>
+        </td>
+
+        <td>
+          <span class="desc pulse-desc">
+            {{ entry.descriptionEntry || 'No description' }}
+          </span>
+        </td>
+
+        <td>
+          <span class="user-name">
+            {{ entry.user || 'Anonymous' }}
+          </span>
+        </td>
+
+        <td>
+          {{ entry.createdAt | date:'dd/MM/yyyy HH:mm' }}
+        </td>
+
+        <td>
+          <button class="icon-btn view glow-icon" (click)="viewEntry(entry)" title="View Entry">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedEntry" class="entry-modal-backdrop fade-in">
+    <div class="entry-modal zoom-in">
+      <div class="entry-modal-header">
+        <h3 class="modal-title flicker">
+          {{ selectedEntry.nameEntry }}
+        </h3>
+        <button class="close-btn" (click)="closeEntryView()">×</button>
+      </div>
+
+      <div class="entry-modal-body">
+        <p><strong>Description:</strong> {{ selectedEntry.descriptionEntry }}</p>
+        <p><strong>Created At:</strong> {{ selectedEntry.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+        <p><strong>User:</strong> {{ selectedEntry.user || 'Unknown' }}</p>
+        <p><strong>Ratings:</strong> {{ selectedEntry.ratings?.length || 0 }}</p>
+
+        <h2 class="panel-title"> 📸 Media Preview</h2>
+
+        <div class="modal-media-gallery slide-in">
+          <ng-container *ngFor="let media of selectedEntry.entryMediaList">
+            <ng-container [ngSwitch]="media.type">
+              <img *ngSwitchCase="'SCREENSHOT'" [src]="media.url" />
+              <video *ngSwitchCase="'VIDEO'" [src]="media.url" controls></video>
+              <img *ngSwitchDefault [src]="media.url" />
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <div class="entry-modal-actions">
+          <button class="btn btn-danger soft-pulse" (click)="confirmDelete()">🗑️ Delete Entry</button>
+        </div>
+
+        <div *ngIf="confirmingDelete" class="delete-confirmation bounce">
+          <p>
+            Are you sure you want to delete
+            <b>{{ selectedEntry.nameEntry }}</b>?
+          </p>
+          <button class="btn btn-outline-light me-2" (click)="deleteEntry(selectedEntry.id)">
+            Yes, Delete
+          </button>
+          <button class="btn btn-secondary" (click)="confirmingDelete = false">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

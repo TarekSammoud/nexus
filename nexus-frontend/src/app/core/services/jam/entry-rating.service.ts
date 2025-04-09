@@ -30,4 +30,9 @@ export class EntryRatingService {
   deleteRating(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+
+  getRatingsByEntry(entryId: number): Observable<EntryRating[]> {
+    return this.http.get<EntryRating[]>(`${this.baseUrl}/entry/${entryId}`);
+  }
+  
 }

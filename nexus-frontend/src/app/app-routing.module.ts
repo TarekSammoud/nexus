@@ -15,9 +15,12 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
-
-
-
+import { AdminJamsListComponent } from './admin-jam/pages/admin-jams-list/admin-jams-list.component';
+import { AdminJamEditComponent } from './admin-jam/pages/admin-jam-edit/admin-jam-edit.component';
+import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/admin-jam-details.component';
+import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/admin-entries-list.component';
+import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
+import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
 
 const routes: Routes = [
   {
@@ -31,9 +34,13 @@ const routes: Routes = [
       {path: 'update-game-category/:id', component: CreateGameCategoryComponent},
       {path: 'add-new-game', component: CreateGameComponent},
       {path: 'games/:id', component: GamePageComponent},
-      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
-
-
+      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent},
+    { path: 'jams/list', component: AdminJamsListComponent },
+    { path: 'jams/edit/:id', component: AdminJamEditComponent },
+    { path: 'jams/details/:id', component: AdminJamDetailsComponent },
+    { path: 'jams/entries', component: AdminEntriesListComponent },
+    { path: 'jams/media' , component: AdminJamMediaListComponent },
+   { path: 'jams/ratings' , component: AdminJamRatingsListComponent },
 
     ]
   },

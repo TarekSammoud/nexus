@@ -1,0 +1,200 @@
+.admin-entries-container {
+  max-width: 95%;
+  margin: auto;
+  padding: 40px 30px;
+  background: linear-gradient(to bottom right, #1a1d2b, #1f2233);
+  border-radius: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #eaeaea;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.admin-entries-container h2 {
+  text-align: center;
+  color: #00d9ff;
+  font-size: 26px;
+  font-weight: 800;
+  text-shadow: 0 0 12px #00d9ff44;
+  margin-bottom: 35px;
+}
+
+table {
+  width: 100%;
+  background: #282a3a;
+  border-collapse: collapse;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+}
+
+thead {
+  background-color: #1e1f2e;
+  color: #ffc107;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  border-bottom: 2px solid #00e7ff44;
+}
+
+tbody tr {
+  background-color: #2b2d42;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+tbody tr:hover {
+  background-color: #343652;
+  transform: scale(1.01);
+  box-shadow: 0 0 10px #00f2ff33;
+}
+
+th, td {
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.game-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #00ffe0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.new-badge {
+  background: #00ffbb;
+  color: #111;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  animation: pulseBadge 1.5s infinite ease-in-out;
+}
+
+.user-name {
+  color: #5df0d2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.desc {
+  font-size: 13px;
+  color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  margin: auto;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  color: #cccccc;
+  transition: 0.2s ease-in-out;
+  font-size: 17px;
+}
+
+.icon-btn:hover {
+  color: #00ffe0;
+  transform: scale(1.2);
+  text-shadow: 0 0 6px #00ffe0;
+}
+
+/* Modal Styling */
+.entry-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(12, 12, 22, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.entry-modal {
+  background-color: #212436;
+  padding: 30px;
+  border-radius: 14px;
+  width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  color: #eaeaea;
+}
+
+.entry-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3f3f5c;
+  margin-bottom: 20px;
+}
+
+.entry-modal-header h3 {
+  font-size: 22px;
+  color: #00d9ff;
+}
+.entry-modal-header h4 {
+  font-size: 22px;
+  color: #00d9ff;
+}
+
+.close-btn {
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
+}
+
+.entry-modal-body p {
+  margin: 10px 0;
+}
+
+.modal-media-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.modal-media-gallery img,
+.modal-media-gallery video {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  max-height: 180px;
+}
+
+.entry-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.delete-confirmation {
+  margin-top: 20px;
+  background: #3a1e1e;
+  border: 1px solid #ff5f5f55;
+  color: #ffb6b6;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); background-color: #1afff0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
