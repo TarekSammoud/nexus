@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.arctic.nexus.entities.ProfilePictures;
 import tn.arctic.nexus.entities.User;
+import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.IProfilePicturesService;
 import tn.arctic.nexus.services.UsersModule.IUserService;
 import tn.arctic.nexus.repositories.UsersModule.IProfilePicturesRepository;
@@ -65,6 +66,17 @@ public class UserController {
             throw new RuntimeException("Invalid credentials");  // Mauvais email ou mot de passe
         }
     }
+
+    @Autowired
+    private IUserRepository userRepository;
+
+    @GetMapping("/friends/{userId}")
+    public List<User> getFriends(@PathVariable Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getFriends();
+    }
+
 
 
 

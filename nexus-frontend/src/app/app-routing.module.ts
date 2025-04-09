@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
 import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
 import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component'
+import { ChatComponent } from './user-management/chat/chat.component'
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Page par défaut : login
   { path: 'login', component: LoginComponent },
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'your-your-friends/:id', component: FriendManagementComponent },
   { path: 'friend-requests/:id', component: FriendRequestListComponent },
+  { path: 'chat/:id', component: ChatComponent }, // Route de messagerie,
 
 ];
 
