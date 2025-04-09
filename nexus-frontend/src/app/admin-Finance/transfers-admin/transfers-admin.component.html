@@ -1,0 +1,124 @@
+<!-- transfer-admin.component.html -->
+<div class="dashboard-container">
+    <!-- Statistics Section -->
+    <div class="statistics-section">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Transfers</h3>
+                <p class="stat-value">{{totalTransfers}}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Amount</h3>
+                <p class="stat-value">{{totalAmountTransferred}} coins</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Average Transfer</h3>
+                <p class="stat-value">{{averageTransferAmount | number:'1.0-0'}} coins</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfers Section -->
+    <div class="transfers-section">
+        <div class="section-header">
+            <h2>Transfer History</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="number" 
+                        [(ngModel)]="searchTransferId" 
+                        (input)="searchById()"
+                        placeholder="Search by Transfer ID..."
+                        class="search-input"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollable-container">
+            <div class="transfers-container">
+                <div class="transfer-card" *ngFor="let transfer of filteredTransfers">
+                    <div class="transfer-header">
+                        <h3>Transfer ID: {{transfer.id}}</h3>
+                        <div class="transfer-amounts">
+                            <span class="price">
+                                <i class="fas fa-coins"></i>
+                                {{transfer.amount}} coins
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="transfer-body">
+                        <div class="wallet-info">
+                            <label>Transfer Details</label>
+                            <div class="wallet-transfer">
+                                <div class="wallet-id">
+                                    <i class="fas fa-wallet"></i>
+                                    {{transfer.wallet?.id}}
+                                </div>
+                                <i class="fas fa-arrow-right transfer-arrow"></i>
+                                <div class="wallet-id">
+                                    <i class="fas fa-wallet"></i>
+                                    {{transfer.receiver_wallet_id}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="transfer-dates">
+                            <div class="date-info">
+                                <i class="far fa-calendar-plus"></i>
+                                <span>Created: {{transfer.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                            <div class="date-info">
+                                <i class="far fa-calendar-check"></i>
+                                <span>Updated: {{transfer.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transfer-actions">
+                        <button class="delete-btn" 
+                                *ngIf="transfer.id" 
+                                (click)="showDeleteConfirmation(transfer.id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="delete-confirmation" *ngIf="deleteConfirmation.show">
+    <div class="confirmation-dialog">
+        <h3>Delete Transfer</h3>
+        <p>Are you sure you want to delete this transfer?</p>
+        <div class="confirmation-actions">
+            <button class="confirm-btn" 
+                    (click)="deleteTransfer(deleteConfirmation.transferId!)">
+                Delete
+            </button>
+            <button class="cancel-btn" 
+                    (click)="hideDeleteConfirmation()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

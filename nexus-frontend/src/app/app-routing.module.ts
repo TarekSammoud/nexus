@@ -16,6 +16,11 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { WalletsComponent } from './admin-Finance/wallets/wallets.component';
+import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-admin.component';
+import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
+import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
+import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,10 +41,23 @@ const routes: Routes = [
       { path: 'games/list', component: AdminGameListComponent },
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'add-new-game', component: CreateGameComponent },
-      { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent }
+      { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
+      { path: 'wallets', component: WalletsComponent },
+      { path: 'payments', component: PaymentsAdminComponent },
+      { path: 'purchases', component: PurchaseAdminComponent },
+      { path: 'transfers', component: TransfersAdminComponent },
+      { path: 'refunds', component: RefundAdminComponent },
+
+
+      
+
+      
+
+      
+
     ]
   },
-
+  
   { path: 'admin/categories', component: GameCategoriesComponent },
   { path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet' }
 ];

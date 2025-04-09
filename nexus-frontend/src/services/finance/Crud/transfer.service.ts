@@ -19,4 +19,5 @@ export class TransferService {
   deleteTransfer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+  
 }

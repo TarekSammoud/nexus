@@ -47,6 +47,11 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { WalletsComponent } from './admin-Finance/wallets/wallets.component';
+import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-admin.component';
+import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
+import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
+import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +80,11 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     AdminHomeComponent,
     GameCategoriesComponent,
     GameCategoryListComponent,
+    WalletsComponent,
+    PaymentsAdminComponent,
+    PurchaseAdminComponent,
+    TransfersAdminComponent,
+    RefundAdminComponent,
     
   ],
   imports: [

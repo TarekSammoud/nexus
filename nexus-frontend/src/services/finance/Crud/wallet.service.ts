@@ -26,4 +26,7 @@ export class WalletService {
   deleteWallet(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+  updateWallet(wallet: NexusWallet,): Observable<NexusWallet> {
+    return this.http.put<NexusWallet>(`${this.baseUrl}/update`, wallet);
+  }
 }

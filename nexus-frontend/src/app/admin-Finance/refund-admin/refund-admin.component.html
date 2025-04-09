@@ -1,0 +1,190 @@
+<!-- refund-admin.component.html -->
+<div class="dashboard-container">
+
+
+    <!-- Statistics Section -->
+    <div class="statistics-section">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-undo"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Refunds</h3>
+                <p class="stat-value">{{totalRefunds}}</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Refunded</h3>
+                <p class="stat-value">{{totalRefundAmount}} coins</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-content2">
+                <div class="stat-row">
+                    <div class="stat-icon2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h3>Success Rate</h3>
+                        <p class="stat-value">{{acceptedRate | number:'1.0-1'}}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-content2">
+                <div class="stat-row">
+                    <div class="stat-icon2">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3>Pending Refunds</h3>
+                        <p class="stat-value">{{pendingCount}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refunds Section -->
+    <div class="refunds-section">
+        <div class="section-header">
+            <h2>Refund History</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="number" 
+                        [(ngModel)]="searchRefundId" 
+                        (input)="searchById()"
+                        placeholder="Search by Refund ID..."
+                        class="search-input"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollable-container">
+            <div class="refunds-container">
+                <div class="refund-card" *ngFor="let refund of filteredRefunds" (click)="showUpdateDialog($event, refund)">
+                    <div class="refund-header">
+                        <h3>Refund ID: {{refund.id}}</h3>
+                        <div class="refund-amounts">
+                            <span class="price">
+                                <i class="fas fa-coins"></i>
+                                {{refund.refundAmount}} coins
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="refund-body">
+                        <div class="refund-info">
+                            <label>Purchase ID: {{refund.purchase?.id || "No purchase"}}</label>
+                            <div class="status-badge">
+                                <span *ngIf="refund.status === 'Accepted'" class="badge badge-Completed">
+                                    <i class="fas fa-check me-1"></i>Accepted
+                                </span>
+                                <span *ngIf="refund.status === 'Pending'" class="badge badge-Pending">
+                                    <i class="fas fa-clock me-1"></i>Pending
+                                </span>
+                                <span *ngIf="refund.status === 'Failed'" class="badge badge-Failed">
+                                    <i class="fas fa-times me-1"></i>Failed
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="refund-dates">
+                            <div class="date-info">
+                                <i class="far fa-calendar-plus"></i>
+                                <span>Created: {{refund.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                            <div class="date-info">
+                                <i class="far fa-calendar-check"></i>
+                                <span>Updated: {{refund.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="refund-actions">
+                        <button class="delete-btn" 
+                                *ngIf="refund.id" 
+                                (click)="showDeleteConfirmation(refund.id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Dialog -->
+<div class="update-dialog" *ngIf="updateDialogData.show">
+    <div class="dialog-content">
+        <h3>Update Refund Status</h3>
+        <p>Reason : 
+            {{updateDialogData.refund?.reason}}</p>
+        <form (ngSubmit)="updateRefund()" #updateForm="ngForm">
+            <div class="form-group">
+                <label>Refund Status</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Accepted"
+                               [(ngModel)]="updateDialogData.refund!.status">
+                        <i class="fas fa-check"></i> Accepted
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Pending"
+                               [(ngModel)]="updateDialogData.refund!.status">
+                        <i class="fas fa-clock"></i> Pending
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Failed"
+                               [(ngModel)]="updateDialogData.refund!.status">
+                        <i class="fas fa-times"></i> Failed
+                    </label>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button type="submit" 
+                        class="update-btn" 
+                        [disabled]="!updateForm.form.valid">
+                    Update
+                </button>
+                <button type="button" 
+                        class="cancel-btn" 
+                        (click)="hideUpdateDialog()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="delete-confirmation" *ngIf="deleteConfirmation.show">
+    <div class="confirmation-dialog">
+        <h3>Delete Refund</h3>
+        <p>Are you sure you want to delete this refund?</p>
+        <div class="confirmation-actions">
+            <button class="confirm-btn" 
+                    (click)="deleteRefund(deleteConfirmation.refundId!)">
+                Delete
+            </button>
+            <button class="cancel-btn" 
+                    (click)="hideDeleteConfirmation()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

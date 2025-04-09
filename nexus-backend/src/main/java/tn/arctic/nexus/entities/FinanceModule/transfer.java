@@ -1,6 +1,10 @@
 package tn.arctic.nexus.entities.FinanceModule;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +34,8 @@ public class transfer implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
-
-    @ManyToOne()
+    @ManyToOne
+    @JsonIgnoreProperties("transfers") // Prevents serialization of the 'transfers' field in Wallet
     private Wallet wallet;
 
 }

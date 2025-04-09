@@ -21,10 +21,7 @@ public class Reward implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long amount;
-    private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deadline;
-    private String status;
+
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

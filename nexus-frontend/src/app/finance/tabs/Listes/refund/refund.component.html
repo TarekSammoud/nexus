@@ -28,7 +28,7 @@
   
               <div class="d-flex justify-content-start align-items-center gap-4">
                 <span class="purchase-id">
-                  Purchase ID: {{ refund.purchaseId }}
+                  Purchase ID: {{ refund.purchase?.id || 'No purchase' }}
                 </span>
                 <span class="date-info">
                   <i class="far fa-calendar-alt me-2"></i>
