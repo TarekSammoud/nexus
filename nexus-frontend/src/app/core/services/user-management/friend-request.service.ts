@@ -40,4 +40,12 @@ export class FriendRequestService {
         return this.http.put(`http://localhost:9000/nexus-backend/friendRequests/reject/${requestId}`, {});
     }
 
+
+    private baseUrl = 'http://localhost:9000/nexus-backend/user';
+
+    getFriends(userId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.baseUrl}/friends/${userId}`);
+    }
+
+
 }

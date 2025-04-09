@@ -9,9 +9,68 @@
     </select>
 </div>
 
-<div *ngFor="let msg of messages">
-    <strong>{{ msg.senderId === currentUserId ? 'Moi' : msg.senderId }}:</strong> {{ msg.content }}
+<!-- Affichage des messages -->
+<div *ngFor="let msg of messages"
+    [ngClass]="{ 'sent': msg.senderId === currentUserId, 'received': msg.senderId !== currentUserId }">
+    <div class="message">
+        <strong>{{ msg.senderId === currentUserId ? 'Moi' : msg.senderId }}:</strong>
+        <p>{{ msg.content }}</p>
+    </div>
 </div>
 
+<!-- Zone de saisie du message -->
 <textarea [(ngModel)]="messageContent" placeholder="Votre message ici..."></textarea>
 <button (click)="sendMessage()">Envoyer</button>
+
+<!-- Style CSS pour la séparation des messages envoyés et reçus -->
+<style>
+    .sent {
+        text-align: right;
+        background-color: #e6ffe6;
+        /* Couleur de fond pour les messages envoyés */
+        padding: 5px;
+        margin: 5px 0;
+        border-radius: 10px;
+    }
+
+    .received {
+        text-align: left;
+        background-color: #f2f2f2;
+        /* Couleur de fond pour les messages reçus */
+        padding: 5px;
+        margin: 5px 0;
+        border-radius: 10px;
+    }
+
+    .message {
+        display: inline-block;
+        max-width: 60%;
+        word-wrap: break-word;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px 0;
+    }
+
+    textarea {
+        width: 100%;
+        height: 80px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>

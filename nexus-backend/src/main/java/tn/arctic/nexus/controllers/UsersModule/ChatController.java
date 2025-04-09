@@ -1,27 +1,41 @@
 package tn.arctic.nexus.controllers.UsersModule;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import tn.arctic.nexus.entities.ChatMessage;
 
-import java.util.Date;
-
 @Controller
 public class ChatController {
 
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    private final SimpMessagingTemplate messagingTemplate;
 
+    public ChatController(SimpMessagingTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
+
+    // Gérer l'envoi de messages via STOMP
     @MessageMapping("/chat.sendMessage")
     public void sendMessage(@Payload ChatMessage message) {
-        message.setTimestamp(new Date());
-        messagingTemplate.convertAndSendToUser(
-                message.getRecipientId(),
-                "/queue/messages",
-                message
-        );
+        System.out.println("Message envoyé : " + message.getSenderId() + " -> " + message.getRecipientId());
+
+        // Vérification que le message contient des valeurs valides
+        if (message.getRecipientId() == null || message.getSenderId() == null) {
+            System.err.println("Message invalide, destinataire ou expéditeur manquant.");
+            return;
+        }
+
+        // Envoi au destinataire
+        try {
+            messagingTemplate.convertAndSendToUser(
+                    message.getRecipientId().toString(), // Utilise l'ID comme nom d'utilisateur
+                    "/queue/messages",  // Le canal auquel l'utilisateur est abonné
+                    message  // Le message à envoyer
+            );
+            System.out.println("Message envoyé à l'utilisateur " + message.getRecipientId());
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'envoi du message à " + message.getRecipientId() + ": " + e.getMessage());
+        }
     }
 }
