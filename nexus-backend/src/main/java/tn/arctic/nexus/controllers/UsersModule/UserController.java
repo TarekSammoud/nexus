@@ -103,5 +103,10 @@ public class UserController {
 
 
 
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<Boolean> checkEmailUnique(@PathVariable String email) {
+        User user = userRepository.findByEmail(email);
+        return ResponseEntity.ok(user == null); // Renvoie true si l'email est unique, sinon false
+    }
 
 }

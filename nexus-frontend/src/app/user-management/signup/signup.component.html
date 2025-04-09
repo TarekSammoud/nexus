@@ -36,6 +36,10 @@
                             <div *ngIf="email.invalid && email.touched" class="text-danger">
                                 A valid email is required.
                             </div>
+                            <!-- Email Uniqueness Error -->
+                            <div *ngIf="emailError" class="text-danger">
+                                {{ emailError }}
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="password" class="form-label">Password</label>
