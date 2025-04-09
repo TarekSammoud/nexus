@@ -26,5 +26,12 @@ export class UserService {
 
         return this.http.post<User>(this.apiUrl, body);
     }
+    private apiUrl2 = `ttp://localhost:9000/nexus-backend/user/check-email`;
+    // L'URL de l'API backend
+
+    checkEmailUnique(email: string): Observable<boolean> {
+        return this.http.get<boolean>(`${this.apiUrl2}/${email}`);
+    }
+
 
 }
