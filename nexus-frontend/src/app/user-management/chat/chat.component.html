@@ -9,10 +9,9 @@
     </select>
 </div>
 
-
-<textarea [(ngModel)]="messageContent" placeholder="Votre message ici..."></textarea>
-<button (click)="sendMessage()">Envoyer</button>
-
 <div *ngFor="let msg of messages">
     <strong>{{ msg.senderId === currentUserId ? 'Moi' : msg.senderId }}:</strong> {{ msg.content }}
 </div>
+
+<textarea [(ngModel)]="messageContent" placeholder="Votre message ici..."></textarea>
+<button (click)="sendMessage()">Envoyer</button>

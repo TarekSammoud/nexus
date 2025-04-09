@@ -76,7 +76,7 @@ public class UserController {
     @Autowired
     private IFriendRequestRepository friendRequestRepository;
 
-    
+
     @GetMapping("/friends/{userId}")
     public List<User> getFriends(@PathVariable Long userId) {
         // Vérifier que l'utilisateur existe
