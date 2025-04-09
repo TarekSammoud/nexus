@@ -39,6 +39,7 @@ export class ChatComponent implements OnInit {
           }
         });
 
+
         // Souscrire aux messages reçus
         this.chatService.messages$.subscribe(msg => {
           if (msg) {
