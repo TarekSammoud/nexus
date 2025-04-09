@@ -13,6 +13,6 @@ public interface IFriendRequestService {
     void removeFriendRequest(long idFriendRequest);
     List<User> findAvailablePlayersForFriendRequest(Long id);
     List<FriendRequest> getReceivedFriendRequests(Long userId);
-    public void rejectRequest(Long requestId);
-    public void acceptRequest(Long requestId);
+     void rejectRequest(Long requestId);
+     FriendRequest acceptRequest(Long requestId);
 }

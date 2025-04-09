@@ -1,5 +1,6 @@
 package tn.arctic.nexus.controllers.UsersModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.FriendRequest;
@@ -59,10 +60,15 @@ public class FriendRequestController {
     }
 
     @PutMapping("/accept/{requestId}")
-    public ResponseEntity<?> acceptFriendRequest(@PathVariable Long requestId) {
-        friendRequestService.acceptRequest(requestId);
-        return ResponseEntity.ok("Friend request accepted.");
+    public FriendRequest acceptFriendRequest(@PathVariable Long requestId) {
+        try {
+            return friendRequestService.acceptRequest(requestId);  // Retourner directement l'objet FriendRequest mis à jour
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to accept friend request", e);  // Gestion de l'erreur en levant une exception
+        }
     }
+
+
 
     @PutMapping("/reject/{requestId}")
     public ResponseEntity<?> rejectFriendRequest(@PathVariable Long requestId) {
