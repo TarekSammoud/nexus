@@ -1,7 +1,6 @@
-import { ChatService } from '../../core/services/user-management/Chat.Service';
-import { User } from '../../core/entities/user/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FriendRequestService } from '../../core/services/user-management/friend-request.service'; // importez FriendRequestService
 
 @Component({
   selector: 'app-chat',
@@ -13,11 +12,10 @@ export class ChatComponent implements OnInit {
   messageContent = '';
   recipientId = ''; // sera choisi via dropdown
   currentUserId: number | null = null; // ID de type number
-
-  friends: User[] = [];
+  friends: any[] = []; // Liste des amis
 
   constructor(
-    private chatService: ChatService,
+    private friendRequestService: FriendRequestService, // Utilisation du service FriendRequest
     private route: ActivatedRoute, // Injecter ActivatedRoute pour récupérer l'ID
   ) { }
 
@@ -28,16 +26,8 @@ export class ChatComponent implements OnInit {
       this.currentUserId = id ? +id : null; // Convertir l'ID en number
 
       if (this.currentUserId !== null) {
-        // Connexion WebSocket si l'ID est valide
-        this.chatService.connect(this.currentUserId.toString()); // Le service attend un string, donc convertir ici
-
-        // Écoute des messages entrants
-        this.chatService.messages$.subscribe(msg => {
-          if (msg) this.messages.push(msg);
-        });
-
         // Récupérer les amis de l'utilisateur
-        this.chatService.getFriends(this.currentUserId).subscribe({
+        this.friendRequestService.getAvailablePlayers(this.currentUserId).subscribe({
           next: (data) => {
             this.friends = data;
           },
@@ -58,7 +48,8 @@ export class ChatComponent implements OnInit {
       return;
     }
 
-    this.chatService.sendMessage(this.currentUserId?.toString() || '', this.recipientId, this.messageContent);
+    // Appel pour envoyer un message via chatService (si nécessaire)
+    // this.chatService.sendMessage(this.currentUserId?.toString() || '', this.recipientId, this.messageContent);
     this.messageContent = '';
   }
 }
