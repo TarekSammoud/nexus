@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/bids")  // <- important
+@CrossOrigin(origins = "http://localhost:4200")  // allow frontend access
 public class BidController {
     private final BidService service;
 
@@ -26,6 +28,10 @@ public class BidController {
         Optional<Bid> bid = service.findById(id);
         return bid.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @GetMapping("/marketlistings/{listingId}/bids")
+    public List<Bid> getBidsForListing(@PathVariable Long listingId) {
+        return service.findByMarketListingId(listingId);
+    }
 
     @PostMapping
     public Bid create(@RequestBody Bid bid) {
@@ -39,10 +45,22 @@ public class BidController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/marketlistings/{listingId}/bids/highest")
+    public ResponseEntity<Double> getHighestBidAmount(@PathVariable Long listingId) {
+        Double highest = service.getHighestBidAmount(listingId);
+        return ResponseEntity.ok(highest != null ? highest : 0.0); // fallback if no bids
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/market/{marketId}")
+    public ResponseEntity<List<Bid>> getBidsForMarket(@PathVariable Long marketId) {
+        List<Bid> bids = service.findByMarketListingId(marketId);
+        return ResponseEntity.ok(bids);
+    }
+
 }

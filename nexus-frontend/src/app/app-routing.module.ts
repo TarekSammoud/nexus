@@ -54,7 +54,8 @@ const routes: Routes = [
   { path: 'market', component: MarketListComponent },
   { path: 'market/create', component: MarketCreateComponent },
   { path: 'market/edit/:id', component: MarketEditComponent },
-  { path: 'market/:id/bid', component: BidComponent }
+  { path: 'market/:id/bid', component: BidComponent },
+  { path: 'market/:id/bid',component: BidComponent }
 
 ];
 
