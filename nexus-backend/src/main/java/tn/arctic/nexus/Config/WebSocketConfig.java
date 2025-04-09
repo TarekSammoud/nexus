@@ -2,23 +2,25 @@ package tn.arctic.nexus.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+@CrossOrigin(origins = "http://localhost:4200") // Changez l'URL en fonction de votre frontend
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue"); // Pour l'envoi aux clients
-        config.setApplicationDestinationPrefixes("/app"); // Pour les requêtes des clients
+        config.enableSimpleBroker("/topic", "/queue"); // For broadcasting messages to clients
+        config.setApplicationDestinationPrefixes("/app"); // For client requests
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS(); // Endpoint pour les connexions
+        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS(); // WebSocket endpoint
     }
 }
+
 

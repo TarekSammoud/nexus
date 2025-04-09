@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FriendRequestService } from '../../core/services/user-management/friend-request.service'; // importez FriendRequestService
+import { FriendRequestService } from '../../core/services/user-management/friend-request.service';
+import { ChatService } from '../../core/services/user-management/Chat.Service'; // importez le service de chat
 
 @Component({
   selector: 'app-chat',
@@ -10,29 +11,37 @@ import { FriendRequestService } from '../../core/services/user-management/friend
 export class ChatComponent implements OnInit {
   messages: any[] = [];
   messageContent = '';
-  recipientId = ''; // sera choisi via dropdown
-  currentUserId: number | null = null; // ID de type number
-  friends: any[] = []; // Liste des amis
+  recipientId = '';
+  currentUserId: number | null = null;
+  friends: any[] = [];
 
   constructor(
-    private friendRequestService: FriendRequestService, // Utilisation du service FriendRequest
-    private route: ActivatedRoute, // Injecter ActivatedRoute pour récupérer l'ID
+    private friendRequestService: FriendRequestService,
+    private chatService: ChatService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    // Récupérer l'ID de l'utilisateur depuis l'URL
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      this.currentUserId = id ? +id : null; // Convertir l'ID en number
+      this.currentUserId = id ? +id : null;
 
       if (this.currentUserId !== null) {
-        // Récupérer les amis de l'utilisateur
+        this.chatService.connect(this.currentUserId.toString());  // Connexion au WebSocket
+
         this.friendRequestService.getAvailablePlayers(this.currentUserId).subscribe({
           next: (data) => {
             this.friends = data;
           },
           error: (err) => {
             console.error('Erreur lors du chargement des amis :', err);
+          }
+        });
+
+        // Souscrire aux messages reçus
+        this.chatService.messages$.subscribe(msg => {
+          if (msg) {
+            this.messages.push(msg);  // Ajouter les messages reçus à la liste
           }
         });
       }
@@ -48,8 +57,21 @@ export class ChatComponent implements OnInit {
       return;
     }
 
-    // Appel pour envoyer un message via chatService (si nécessaire)
-    // this.chatService.sendMessage(this.currentUserId?.toString() || '', this.recipientId, this.messageContent);
-    this.messageContent = '';
+    const message = {
+      senderId: this.currentUserId?.toString() || '',
+      recipientId: this.recipientId,
+      content: this.messageContent
+    };
+
+    // Ajouter le message envoyé à la liste
+    this.messages.push({
+      senderId: this.currentUserId?.toString(),
+      content: this.messageContent,
+      recipientId: this.recipientId
+    });
+
+    // Envoyer le message via le ChatService
+    this.chatService.sendMessage(message.senderId, this.recipientId, this.messageContent);
+    this.messageContent = '';  // Réinitialiser le champ de texte
   }
 }
