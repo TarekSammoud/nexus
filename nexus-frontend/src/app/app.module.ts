@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { CommonModule } from '@angular/common'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +42,12 @@ import { GameCategoriesComponent } from './game-categories/game-categories.compo
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-editor';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { AdminJamsListComponent } from './admin-jam/pages/admin-jams-list/admin-jams-list.component';
+import { AdminJamEditComponent } from './admin-jam/pages/admin-jam-edit/admin-jam-edit.component';
+import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/admin-jam-details.component';
+import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/admin-entries-list.component';
+import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
+import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
 
 
 @NgModule({
@@ -67,7 +73,13 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
-    
+    AdminJamsListComponent,
+    AdminJamEditComponent,
+    AdminJamDetailsComponent,
+    AdminEntriesListComponent,
+    AdminJamMediaListComponent,
+    AdminJamRatingsListComponent,
+
     
   ],
   imports: [
@@ -82,6 +94,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
     GamesListComponent,
     NgxPaginationModule,
     QRCodeModule,
+    CommonModule,
 
     BrowserAnimationsModule,
     MatChipsModule,
