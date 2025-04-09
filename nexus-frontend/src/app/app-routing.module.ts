@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'support-tickets', component: SupportTicketComponent},
   {path: 'support-agent', component: SupportAgentComponent}, 
   {path:'room',component:RoomComponent},
-  {path:'room/:id',component:RoomChatComponent}  // Add this route
+  {path:'room/:roomId',component:RoomChatComponent}  // Add this route
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import { RoomService } from '../../core/services/support/room.service';
 export class RoomChatComponent implements OnInit {
   messages: any[] = [];
   newMessage: string = '';
-  roomId: number = 0;// Example room ID
+  roomId!: number; // Example room ID
   sending: boolean = false;
   chatClosed: boolean = false;
 
@@ -30,26 +30,49 @@ export class RoomChatComponent implements OnInit {
 
   loadMessages(): void {
     if (!this.chatClosed && this.roomId) {
-      this.roomService.receiveMessages(this.roomId).subscribe((data) => {
-        this.messages = data;
-      });
+      this.roomService.receiveMessages(this.roomId).subscribe(
+        (data) => {
+          this.messages = data;
+        },
+        (error) => {
+          console.error('Error loading messages:', error);
+        }
+      );
     }
   }
 
   sendMessage(): void {
-    if (this.newMessage && !this.sending && !this.chatClosed) {
+    if (!this.roomId) {
+      alert("Room ID is not loaded yet!");
+      return;
+    }
+  
+    if (this.newMessage.trim() && !this.sending && !this.chatClosed) {
       this.sending = true;
-      this.roomService.sendMessage(this.roomId, 'username', this.newMessage).subscribe(() => {
-        this.messages.push({ sender: 'username', content: this.newMessage }); // Add sent message to history
-        this.newMessage = '';
-        this.sending = false;
-        this.loadMessages(); // Refresh messages after sending
-      });
+      this.roomService.sendMessage(this.roomId, 'username', this.newMessage.trim()).subscribe(
+        () => {
+          this.messages.push({ sender: 'username', content: this.newMessage.trim() });
+          this.newMessage = '';
+          this.sending = false;
+          this.loadMessages();
+        },
+        (error) => {
+          console.error('Error sending message:', error);
+          alert('Failed to send message.');
+          this.sending = false;
+        }
+      );
     }
   }
   closeRoom(): void {
-    this.roomService.closeRoom(this.roomId).subscribe(() => {
-      this.chatClosed = true;
-    });
+    this.roomService.closeRoom(this.roomId).subscribe(
+      () => {
+        this.chatClosed = true;
+      },
+      (error) => {
+        console.error('Error closing room:', error);
+        alert('Failed to close the room.');
+      }
+    );
   }
 }
