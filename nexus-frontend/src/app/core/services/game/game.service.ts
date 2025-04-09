@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Game } from '../../entities/game/game';
+import { GameReview } from '../../entities/game/game-review';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,22 @@ export class GameService {
   getGames(): Observable<Game[]> {  // ✅ Fix the return type
 
     return this.http.get<Game[]>(`${this.gamesUrl}/all-games`);
+  }
+
+  getLastGameId(): Observable<number> {
+    return this.http.get<number>(`${this.gamesUrl}/last-id`);
+  }
+
+  getReviews(): Observable<GameReview[]> {
+    return this.http.get<GameReview[]>(`${this.gamesUrl}/reviews/all`);
+  }
+
+  addGameReview(gameReview: GameReview): Observable<GameReview> {
+    return this.http.post<GameReview>(`${this.gamesUrl}/reviews/add`, gameReview);
+  }
+
+  deleteGameReview(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.gamesUrl}/reviews/delete/${id}`);
   }
 
   getGamesByCategory(category: string): Observable<Game[]> {

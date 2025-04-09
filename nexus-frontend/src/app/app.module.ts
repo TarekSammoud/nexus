@@ -32,6 +32,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { CommonModule } from '@angular/common';
     GameKeyListComponent,
     MatFormFieldModule,
     MatDialogModule,
+    GameReviewListComponent
     
     
       
