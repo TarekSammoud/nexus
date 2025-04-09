@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { Router, ActivatedRoute } from '@angular/router';
 import { RoomService } from '../../core/services/support/room.service';
+import { PerformanceReviewService } from '../../core/services/support/performance-review.service';
 
 @Component({
   selector: 'app-room-chat',
@@ -10,20 +11,23 @@ import { RoomService } from '../../core/services/support/room.service';
 export class RoomChatComponent implements OnInit {
   messages: any[] = [];
   newMessage: string = '';
-  roomId!: number; // Example room ID
+  roomId!: number;
   sending: boolean = false;
   chatClosed: boolean = false;
 
-  constructor(private roomService: RoomService, private route: ActivatedRoute) {}
+  constructor(
+    private roomService: RoomService,
+    private route: ActivatedRoute,
+    private reviewService: PerformanceReviewService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // Extract roomId from the URL parameters
-
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('roomId');
       if (idParam !== null) {
-        this.roomId = +idParam; // Convert to number
-        this.loadMessages();   // Load messages for the room
+        this.roomId = +idParam;
+        this.loadMessages();
       }
     });
   }
@@ -36,6 +40,7 @@ export class RoomChatComponent implements OnInit {
         },
         (error) => {
           console.error('Error loading messages:', error);
+          alert('Failed to load messages.');
         }
       );
     }
@@ -46,7 +51,7 @@ export class RoomChatComponent implements OnInit {
       alert("Room ID is not loaded yet!");
       return;
     }
-  
+
     if (this.newMessage.trim() && !this.sending && !this.chatClosed) {
       this.sending = true;
       this.roomService.sendMessage(this.roomId, 'username', this.newMessage.trim()).subscribe(
@@ -58,21 +63,26 @@ export class RoomChatComponent implements OnInit {
         },
         (error) => {
           console.error('Error sending message:', error);
-          alert('Failed to send message.');
+          alert('Failed to send message. Please try again.');
           this.sending = false;
         }
       );
     }
   }
-  closeRoom(): void {
-    this.roomService.closeRoom(this.roomId).subscribe(
-      () => {
-        this.chatClosed = true;
-      },
-      (error) => {
-        console.error('Error closing room:', error);
-        alert('Failed to close the room.');
-      }
-    );
+
+  closeChat(): void {
+    if (this.router && this.reviewService.showPerformanceReview) {
+      this.chatClosed = true;
+      this.router.navigate(['/performance-reviews']).then(success => {
+        if (success) {
+          console.log('Navigation successful');
+        } else {
+          console.error('Navigation failed');
+        }
+      }).catch(err => console.error('Navigation error:', err));
+      this.reviewService.showPerformanceReview();
+    } else {
+      console.error('Navigation or PerformanceReviewService not setup correctly');
+    }
   }
 }

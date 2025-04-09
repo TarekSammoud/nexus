@@ -17,4 +17,5 @@ public interface IRoomService {
     Message sendMessageToRoom(Long roomId, String sender, String content);
 
     List<Message> getMessagesByRoom(Long roomId);
+    public void deleteRoom(Long id);
 }

@@ -52,18 +52,25 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>2.0.0</version> <!-- Or check for the latest version -->
+		</dependency>
+
+
 		<!-- OpenAI API support (WebFlux for non-blocking calls) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
-		<!-- Apache Tika for language detection -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-core</artifactId>
-			<version>2.4.0</version>
-		</dependency>
 
 
 
@@ -73,6 +80,7 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
