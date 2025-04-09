@@ -7,7 +7,6 @@ export interface Refund {
     reason: string;
     createdAt: Date;
     updatedAt: Date;
-    purchaseId: number; 
-    purchase: Purchase;
+    purchase?: Purchase;
   }
   

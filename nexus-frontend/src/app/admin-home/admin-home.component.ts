@@ -9,22 +9,25 @@ import { Router } from '@angular/router';
 export class AdminHomeComponent {
   constructor(private _router: Router) { }
   dropdownOpen = false;
+  walletDropdownOpen = false;  // New property for wallet dropdown
+  isCollapsed = false;  // Track whether sidebar is collapsed
+
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleWalletDropdown() {  // New method for wallet dropdown
+    this.walletDropdownOpen = !this.walletDropdownOpen;
   }
 
   navigateToGamesList(){
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
   }
 
-  isCollapsed = false;  // Track whether sidebar is collapsed
 
   // Toggle the sidebar state
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
-
-
-
 }

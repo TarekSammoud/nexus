@@ -19,4 +19,7 @@ export class RefundService {
   deleteRefund(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+    updateRefund(refund: Refund): Observable<Refund> {
+      return this.http.put<Refund>(`${this.baseUrl}/update`, refund);
+    }
 }

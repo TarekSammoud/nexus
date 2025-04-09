@@ -1,6 +1,5 @@
 package tn.arctic.nexus.entities.FinanceModule;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,22 +16,18 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Refund implements Serializable  {
+public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
-    private Long refundAmount;
-    private String reason;
+
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date createdAt;
+    private Date createdAt;
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @OneToOne
-    @JsonIgnoreProperties("refund")
-    private Purchase purchase;
+
 }

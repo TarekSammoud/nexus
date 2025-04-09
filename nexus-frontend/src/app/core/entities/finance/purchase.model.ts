@@ -1,3 +1,6 @@
+import { Refund } from "./refund.model";
+import { NexusWallet } from "./wallet.model";
+
 export interface Purchase {
   id: number;
   productType: productType;
@@ -5,8 +8,8 @@ export interface Purchase {
   price: number;
   createdAt: Date;
   updatedAt: Date;
-  NexusWalletId?: number; // wallet associated with the transfer
-  refundId?: number; // Assuming Refund is referenced by ID
+  wallet?: NexusWallet; 
+  refund?:Refund
 }
   export enum productType {
     GAME= 'GAME',
