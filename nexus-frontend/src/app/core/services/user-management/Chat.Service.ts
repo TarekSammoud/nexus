@@ -38,9 +38,11 @@ export class ChatService {
 
     private baseUrl = 'http://localhost:9000/nexus-backend'; // adapte à ton URL backend
 
+    private urlgetfriend = 'http://localhost:9000/nexus-backend/users/friends';
     constructor(private http: HttpClient) { }
 
-    getFriends(userId: number): Observable<User[]> {
-        return this.http.get<User[]>(`${this.baseUrl}/users/friends/${userId}`);
+    getFriends(userId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.urlgetfriend}/${userId}`);
     }
+
 }
