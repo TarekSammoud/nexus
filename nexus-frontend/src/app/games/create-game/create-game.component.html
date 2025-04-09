@@ -4,21 +4,21 @@
 <!-- Modal -->
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-    <button type="button" class="close" (click)="modal.close('Close click')" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5  id="exampleModalLabel">Your game has been successfully added</h5>
+
   </div>
   <div class="modal-body">
-    <!-- Your content goes here -->
-    ...
+<p class="text-center text-dark">
+    Your game has been successfully added to the database. You can now view it on the dashboard or continue adding more games.
+</p>    ...
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="navigateToDashboard()">Save changes</button>
+    <button type="button" class="btn btn-secondary" (click)="navigateToDashboard()">Go to dashboard</button>
+    <button type="button" class="btn btn-primary" (click)="navigateToGamePage(numberOfGames +1)">Go to game page</button>
   </div>
 </ng-template>
 
+<button (click)="open(content)"></button>
 
 <div class="">
   <button class="btn btn-primary" (click)="navigateToDashboard()">Back to dashboard</button>
@@ -39,6 +39,9 @@
         <div class="form-group">
           <label for="gameName">Game Name</label>
           <input formControlName="name" type="text" class="form-control" id="gameName" placeholder="Super Mario Bros">
+          <span *ngIf="gameForm.controls['name'].hasError('required') && gameForm.controls['name'].touched" class="login-error" style="color: red">
+            You must include a name.
+          </span>
         </div>
 
         <!-- Description -->
@@ -56,6 +59,9 @@
         <div class="form-group">
           <label for="price">Price (TND)</label>
           <input formControlName="price" type="number" class="form-control" id="price" placeholder="60">
+          <span *ngIf="gameForm.controls['price'].hasError('required') && gameForm.controls['price'].touched" class="login-error" style="color: red">
+            You must include a valid price.
+          </span>
         </div>
 
         <!-- Platforms (Chips) -->
@@ -73,6 +79,9 @@
       {{ platform }}
     </mat-chip-option>
   </mat-chip-set>
+  <span *ngIf="selectedPlatforms.size === 0" class="login-error" style="color: red">
+    You must choose at least 1 platform.
+  </span>
 </div>
 
 
@@ -98,6 +107,9 @@
             {{ category.name }}
           </mat-chip-option>
         </mat-chip-set>
+        <span *ngIf="selectedCategories.size === 0" class="login-error" style="color: red">
+          You must choose at least 1 category.
+        </span>
       </div>
 
       
@@ -112,6 +124,9 @@
       </div>
 
         <br/>
+        <span *ngIf="ftpFiles.length==0" class="login-error" style="color: red">
+          You must include a game cover.
+        </span>
       </div>
 
       <div class="file-upload-wrapper">
@@ -300,15 +315,15 @@
         <button *ngIf="step === 6"
          type="submit" class="next-btn"
          (click)="open(content)" 
-          [disabled]="gameForm.invalid || gameForm.pristine || gameForm.pending">
-         >Submit</button>
+         [class.disabled]=" gameForm.invalid || gameForm.pristine || gameForm.pending">
+         Submit</button>
         <div [ngSwitch]="step">
   
           <!-- Step 1 Button -->
           <a *ngSwitchCase="1" 
              (click)="nextStep()" 
              class="next-btn" 
-             [class.disabled]=" gameForm.controls['platforms'].invalid || gameForm.controls['name'].invalid || gameForm.controls['price'].invalid || gameForm.controls['description'].invalid">
+             [class.disabled]="selectedPlatforms.size === 0 || gameForm.controls['platforms'].invalid || gameForm.controls['name'].invalid || gameForm.controls['price'].invalid || gameForm.controls['description'].invalid">
              Next →
           </a>
         
@@ -316,7 +331,7 @@
           <a *ngSwitchCase="2" 
              (click)="nextStep()" 
              class="next-btn" 
-             [class.disabled]="gameForm.controls['categories'].invalid">
+             [class.disabled]="selectedCategories.size === 0 ">
             Next →
           </a>
         
@@ -324,6 +339,7 @@
           <a *ngSwitchCase="3" 
              (click)="nextStep()" 
              class="next-btn" 
+             [class.disabled]="ftpFiles.length === 0 "
              >
             Next →
           </a>
@@ -340,6 +356,8 @@
           <a *ngSwitchCase="5" 
              (click)="nextStep()" 
              class="next-btn" 
+    
+             [class.disabled]="filesToUpload.length === 0 "
              >
             Next →
           </a>

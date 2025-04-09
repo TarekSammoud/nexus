@@ -3,6 +3,7 @@ import { GameCategory } from "./game-category";
 import { GameItem } from "./game-item";
 import { GameMedia } from "./game-media";
 import { GamePlatform } from "./game-platform.enum";
+import { GameReview } from "./game-review";
 import { SystemRequirements } from "./system-requirements";
 
 export class Game {
@@ -21,6 +22,7 @@ export class Game {
     screenshots?: GameMedia[];
     minRequirements?: SystemRequirements; 
     recommendedRequirements?: SystemRequirements;
+    gameReviewList?: GameReview[]; 
 
   
     constructor(data?: Partial<Game>) {

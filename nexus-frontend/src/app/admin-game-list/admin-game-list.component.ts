@@ -29,6 +29,15 @@ export class AdminGameListComponent implements OnInit {
       constructor(private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
+          for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
+              if (this.data[i].gameMediaList[j].gameMediaType == 'COVER') {
+                this.data[i].coverPicture = this.data[i].gameMediaList[j]; 
+                console.log(this.data[i].coverPicture?.mediaUrl);
+                break; 
+              }
+            }
+          }
         });
   
       }

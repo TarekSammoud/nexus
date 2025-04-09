@@ -13,6 +13,7 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
+import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {path: 'games/keys', component: GameKeyListComponent},
-
+      {path: 'games/reviews', component: GameReviewListComponent},
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/list', component: AdminGameListComponent },
       {path: 'update-game/:id', component: CreateGameComponent},

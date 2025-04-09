@@ -93,6 +93,94 @@
           </div>
         </div>
       </div>
+
+<!-- Reviews Carousel -->
+<ng-container *ngIf="groupedReviews && groupedReviews.length > 0">
+  <h2 class="text-light mt-4">User Reviews</h2>
+<div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div 
+      class="carousel-item" 
+      *ngFor="let group of groupedReviews; let i = index"
+      [class.active]="i === 0"
+    >
+      <div class="d-flex justify-content-center  gap-3 p-3">
+        <div 
+          class="card text-white bg-dark border-0 shadow-sm review-card" 
+          *ngFor="let review of group"
+        >
+          <div class="card-body">
+            <h5 class="card-title">
+
+              
+              {{ review.rating }} / 5</h5>
+            <p class="card-text fst-italic review-text">"{{ review.reviewText }}"</p>
+            <p class="card-subtitle text-muted text-end mt-2 small">
+              {{ review.createdAt | date: 'mediumDate' }}
+            </p>
+                          
+            <div class="star-rating">
+              <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+                <input
+                  type="radio"
+                  [id]="'star' + star + review.id"
+                  [value]="star"
+                  [checked]="review.rating === star"
+                  disabled
+                />
+                <label [for]="'star' + star + review.id">&#9733;</label>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</ng-container>
+
+<br>
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+  <label for="reviewText">Add a review:</label>
+  <textarea
+    id="reviewText"
+    rows="4"
+    formControlName="reviewText"
+    [class.invalid]="reviewForm.get('reviewText')?.invalid && reviewForm.get('reviewText')?.touched">
+  </textarea>
+
+  <label for="rating">Rating:</label>
+  <div class="star-rating">
+    <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+      <input
+        type="radio"
+        [id]="'star' + star"
+        formControlName="rating"
+        [value]="star"
+      />
+      <label [for]="'star' + star">&#9733;</label>
+    </ng-container>
+  </div>
+
+  <button type="submit" 
+  [class.disabled]="reviewForm.invalid || reviewForm.pristine "
+  >Submit Review</button>
+</form>
+
+
+      
+      
+
     </div>
 
     <!-- Game Details Section (Right Side) -->

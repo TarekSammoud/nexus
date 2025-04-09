@@ -1,16 +1,15 @@
 package tn.arctic.nexus.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -37,6 +36,19 @@ public class Game implements Serializable {
     @Enumerated(EnumType.STRING)
     private List<GamePlatform> platforms;
 
+    public List<GameKey> getGameKeys() {
+        return gameKeys;
+    }
+
+    public void setGameKeys(List<GameKey> gameKeys) {
+        this.gameKeys = gameKeys;
+    }
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonIgnore
+    private List<GameKey> gameKeys;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -46,10 +58,12 @@ public class Game implements Serializable {
     private Date updatedAt;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "min_requirements_id")
     private SystemRequirements minRequirements;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "recommended_requirements_id")
     private SystemRequirements recommendedRequirements;
 
@@ -65,13 +79,12 @@ public class Game implements Serializable {
 
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JsonManagedReference
     private List<GameMedia> gameMediaList;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<GameReview> gameReviewList;
 
     public String getExtraGameInfo() {

@@ -78,7 +78,7 @@ export class CreateGameComponent implements OnInit {
 
 
 
-      this._gameService.getNumberOfGames().subscribe((data) => {
+      this._gameService.getLastGameId().subscribe((data) => {
       this.numberOfGames = data;
       });
 
@@ -406,6 +406,11 @@ loadExcelData(fileName: string): void {
 
   open(content: any) {
     this.modalService.open(content);
+  }
+
+  navigateToGamePage(n: number){
+    this._router.navigate(['/games', n]); 
+    this.modalService.dismissAll(); 
   }
 
 }
