@@ -18,11 +18,11 @@ public class RoomController {
 
     // Créer une room pour un ticket donné
     @PostMapping("/create/{ticketId}")
-    public ResponseEntity<String> creerRoom(@PathVariable Long ticketId, @RequestParam Long userId) {
+    public ResponseEntity<String> creerRoom(@PathVariable Long ticketId) {
         try {
             // Création de la room sans l'email
             System.out.println("creerRoom");
-            Room room = roomService.creerRoom(ticketId,userId);
+            Room room = roomService.creerRoom(ticketId);
             return new ResponseEntity<>("Room créée avec le lien : " + room.getLien(), HttpStatus.CREATED);
         } catch (RuntimeException e) {
             // Gestion des erreurs : Ticket non trouvé ou room déjà existante
@@ -57,9 +57,11 @@ public class RoomController {
     @GetMapping("/messages/{roomId}")
     public ResponseEntity<List<Message>> getMessagesByRoom(@PathVariable Long roomId) {
         try {
+            System.out.println("Fetching messages for roomId: " + roomId);
             List<Message> messages = roomService.getMessagesByRoom(roomId);
             return new ResponseEntity<>(messages, HttpStatus.OK);
         } catch (RuntimeException e) {
+            System.out.println("Room not found: " + roomId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

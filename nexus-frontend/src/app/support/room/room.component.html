@@ -13,11 +13,7 @@
       <label for="ticketId">Ticket ID:</label>
       <input type="number" id="ticketId" #ticketIdInput class="form-control">
     </div>
-    <div class="form-group">
-      <label for="userId">User ID:</label>
-      <input type="number" id="userId" #userIdInput class="form-control">
-    </div>
-    <button (click)="createRoom(+ticketIdInput.value, +userIdInput.value)" class="btn-primary">Create Room</button>
+    <button (click)="createRoom(+ticketIdInput.value)" class="btn-primary">Create Room</button>
   </div>
 
   <hr>
@@ -35,6 +31,11 @@
         <p>
           <strong>Username:</strong>
           {{ room.user?.firstName || 'No user available' }}
+        </p>
+
+        <p>
+          <strong>TicketID:</strong>
+          {{ room.ticket?.id || 'No ID available' }}
         </p>
         
       

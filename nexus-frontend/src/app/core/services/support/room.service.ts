@@ -12,9 +12,9 @@ export class RoomService {
   constructor(private http: HttpClient) {}
 
   // Create a new room for a ticket
-  createRoom(ticketId: number, userId: number): Observable<string> {
-    const url = `${this.baseUrl}/create/${ticketId}?userId=${userId}`;
-    return this.http.post<string>(url, null);
+  createRoom(ticketId: number): Observable<string> {
+    const url = `${this.baseUrl}/create/${ticketId}`;
+    return this.http.post<string>(url, null).pipe(catchError(this.handleError));
   }
   
 

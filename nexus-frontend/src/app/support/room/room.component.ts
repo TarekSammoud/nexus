@@ -29,21 +29,17 @@ export class RoomComponent implements OnInit {
     );
   }
 
-  // Create a room for a ticket with user ID
-  createRoom(ticketId: number, userId: number): void {
-    if (userId) {
-      this.roomService.createRoom(ticketId, userId).subscribe(
-        (response) => {
-          alert(response);
-          this.getAllRooms();  // Refresh the list of rooms
-        },
-        (error) => {
-          alert('Error: ' + error);
-        }
-      );
-    } else {
-      alert('User ID is required to create a room.');
-    }
+  // Create a room for a ticket
+  createRoom(ticketId: number): void {
+    this.roomService.createRoom(ticketId).subscribe(
+      (response) => {
+        alert(response);
+        this.getAllRooms(); // Refresh the list of rooms
+      },
+      (error) => {
+        alert('Error: ' + error);
+      }
+    );
   }
 
   // Close a room for a ticket

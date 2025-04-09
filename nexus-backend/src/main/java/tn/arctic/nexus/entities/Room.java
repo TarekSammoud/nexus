@@ -1,7 +1,6 @@
 package tn.arctic.nexus.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Room {
 
     @Id
@@ -24,7 +26,6 @@ public class Room {
     private Long id;
 
 
-    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "ticket_id")
     private SupportTicket ticket; // Relation avec le SupportTicket
@@ -42,4 +43,3 @@ public class Room {
     private User user;
 
 }
-
