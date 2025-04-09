@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { GameCategory } from 'src/app/core/entities/game/game-category';
 import { GamePlatform } from 'src/app/core/entities/game/game-platform.enum';
@@ -8,6 +8,10 @@ import { GameService } from 'src/app/core/services/game/game.service';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExcelService } from 'src/app/core/services/excel.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-create-game',
@@ -28,9 +32,14 @@ export class CreateGameComponent implements OnInit {
   numberOfGames!: number; 
 
 
-  constructor(private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
+
+  constructor(public modalService: NgbModal,private _excelService: ExcelService,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
-    this._gameCategoryService.getGameCategories().subscribe((data) => {
+    
+      
+
+    
+      this._gameCategoryService.getGameCategories().subscribe((data) => {
       this.availableCategories = data.map((category) => {
         return {
           id: category.id,
@@ -40,20 +49,55 @@ export class CreateGameComponent implements OnInit {
       });
     });
 
-    console.log(this.availableCategories);
+    this._excelService.getExcelDataFromFTP("hardware.xlsx").subscribe(
+      (data: string[][]) => {
+        // Filter out rows where all cells are empty
+        const filteredData = data.filter(row => row.some(cell => cell.trim() !== ''));
+  
+        this.excelData = filteredData;
+  
+        // Extract GPU and CPU options
+        this.gpuOptions = filteredData.map(item => item[0]).filter(gpu => gpu.trim() !== ''); // Ensure GPU is not empty
+        this.cpuOptions = filteredData.map(item => item[1]).filter(cpu => cpu.trim() !== ''); // Ensure CPU is not empty
+  
+        console.log('Filtered GPU Options:', this.gpuOptions);
+        console.log('Filtered CPU Options:', this.cpuOptions);
+  
+        // Optionally, you can set default values or apply further logic here
+        if (this.gpuOptions.length > 0 && this.cpuOptions.length > 0) {
+          this.gameForm.patchValue({
+            gpu: this.gpuOptions[0], // Set a default GPU option
+            cpu: this.cpuOptions[0]  // Set a default CPU option
+          });
+        }
+      },
+      error => {
+        console.error('Error loading Excel data', error);
+      }
+    );
+
+
+
       this._gameService.getNumberOfGames().subscribe((data) => {
       this.numberOfGames = data;
-      console.log(this.numberOfGames);
       });
 
   }
 
+  @ViewChild('exampleModal') modal!: ElementRef;
+
+
+
+
+  excelData: any[] = [];
+  fileName: string = '';
   step = 1;
   progress = 15;
 
 nextStep() {
   this.step++;
   this.progress += 15;
+
 }
 
 prevStep() {
@@ -61,6 +105,8 @@ prevStep() {
   this.progress -= 15;
 
 }
+
+
 
 url = '';
 images: any[] = [];
@@ -102,7 +148,6 @@ onSelectFileCover(event: any): void {
       })
     });
 
-    console.log("Media form : ", newForm);
 
     const formData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
@@ -140,7 +185,6 @@ onSelectFileBanner(event: any): void {
       })
     });
 
-    console.log("Media form : ", newForm);
 
     const formData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
@@ -179,7 +223,6 @@ onSelectFileScreenShots(event: any): void {
       })
     });
 
-    console.log("Media form : ", newForm);
 
     const formData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
@@ -192,6 +235,7 @@ onSelectFileScreenShots(event: any): void {
 
 navigateToDashboard() {
   this._router.navigate(['/admin/games/list']);
+  this.modalService.dismissAll(); // Close the modal after navigation
 }
 
 
@@ -207,20 +251,48 @@ isEditMode: boolean = false;
 title: string = 'Create Game';
 
 
-  ngOnInit(): void {
 
+get minRequirements() {
+  return this.gameForm.get('minRequirements') as FormGroup;
+}
+
+get recommendedRequirements() {
+  return this.gameForm.get('recommendedRequirements') as FormGroup;
+}
+
+
+
+
+  ngOnInit(): void {
     this.gameId= 0 ;
     if (this._route.snapshot.paramMap.get('id'))
     this.gameId = Number(this._route.snapshot.paramMap.get('id'));
     this.isEditMode = !!this.gameId;  // If ID exists, it's edit mode
-
     this.gameForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      platforms: [this.selectedPlatforms],
-      categories: [this.selectedCategories] 
+      name: ['', [Validators.required, Validators.minLength(3)]],  // Name should be at least 3 characters long
+      description: ['', [Validators.required, Validators.minLength(10)]],  // Description should be at least 10 characters long
+      price: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],  // Price should be a positive number, optional decimal with two digits
+      platforms: [this.selectedPlatforms, [Validators.required]],  // Platforms should be required
+      categories: [this.selectedCategories ,Validators.required],  // Categories should be required
+    
+      minRequirements: this.fb.group({
+        os: ['Windows 10', [Validators.required, Validators.minLength(3)]],  // OS should be at least 3 characters long
+        cpu: ['', [Validators.required, Validators.minLength(3)]],  // CPU should be at least 3 characters long
+        gpu: ['', [Validators.required, Validators.minLength(3)]],  // GPU should be at least 3 characters long
+        ram: ['', [Validators.required]],  // RAM should be a positive number, optional decimal with two digits
+        storage: ['50 GB', [Validators.required]]  // Storage should be a number with "GB" suffix
+      }),
+    
+      recommendedRequirements: this.fb.group({
+        os: ['Windows 10', [Validators.required, Validators.minLength(3)]],  // OS should be at least 3 characters long
+        cpu: ['', [Validators.required, Validators.minLength(3)]],  // CPU should be at least 3 characters long
+        gpu: ['', [Validators.required, Validators.minLength(3)]],  // GPU should be at least 3 characters long
+        ram: ['', [Validators.required]],  // RAM should be a positive number, optional decimal with two digits
+        storage: ['50 GB', [Validators.required]]  // Storage should be a number with "GB" suffix
+      })
     });
+    
+
 
     if (this.isEditMode) {
       this.title = 'Update Game';
@@ -234,9 +306,6 @@ title: string = 'Create Game';
         for (let i = 0; i < game.categories.length; i++) {
           this.selectedUpdateCategories.add(game.categories[i].id);
         }
-        console.log("update cat : ", this.selectedUpdateCategories);
-        console.log("update plat : ", this.selectedUpdatePlatforms);
-        console.log('Game:', game);
       });
     }
   }
@@ -252,36 +321,34 @@ title: string = 'Create Game';
   togglePlatformSelection(event: any): void {
     const platform = event.source.value; 
   
-    console.log('Platform:', platform);
     
     if (this.selectedPlatforms.has(platform)) {
       this.selectedPlatforms.delete(platform);
-      console.log('Removed Platform:', platform);
     } else {
       this.selectedPlatforms.add(platform);
-      console.log('Added Platform:', platform);
     }
     
-    console.log('Selected Platforms:', this.selectedPlatforms);
   }
   
 
   toggleCategorySelection(event: any): void {
     const category = event.source.value; 
   
-    console.log('Category:', category);
     
     if (this.selectedCategories.has(category)) {
       this.selectedCategories.delete(category);
-      console.log('Removed category:', category);
     } else {
       this.selectedCategories.add(category);
-      console.log('Added category:', category);
     }
     
-    console.log('Selected categories:', this.selectedCategories);
   }
   
+gpuOptions: string[] = [];
+cpuOptions: string[] = [];
+loadExcelData(fileName: string): void {
+ 
+}
+
 
 
   // Remove platform from FormArray
@@ -297,6 +364,17 @@ title: string = 'Create Game';
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
     console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+
+
+    if (this.gameForm.invalid) {
+      // Loop through the controls and log errors
+      for (const controlName in this.gameForm.controls) {
+        if (this.gameForm.controls[controlName].errors) {
+          console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
+        }
+      }
+    } else {
+
     if (this.isEditMode) {
       this.gameForm.value.id = this.gameId;
       this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
@@ -306,20 +384,29 @@ title: string = 'Create Game';
     else {
     this._gameService.addGame(this.gameForm.value).subscribe((data) => {
       console.log('Game added:', data);
+      this.uploadFiles(); // Call the upload function after adding the game
     });
+  }
+  }
 
+
+  }
+  uploadFiles() {
+    
     for (let i = 0; i < this.images.length; i++) {
-      console.log("Image files : ",this.filesToUpload[i].value); 
       this._gameMediaService.uploadFileToFtp(this.ftpFiles[i]).subscribe((data) => {
-        console.log('File uploaded:', data);
       });
       this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe((data) => {
-        console.log('Game Media added:', data);
       }
       );   
      }
   }
 
 
+
+  open(content: any) {
+    this.modalService.open(content);
   }
+
 }
+

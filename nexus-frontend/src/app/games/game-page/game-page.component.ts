@@ -46,6 +46,21 @@ setActiveSlide(index: number): void {
   const carouselInstance = bootstrap.Carousel.getInstance(carousel);
   carouselInstance.to(index);
 }
+prevSlide() {
+  if (this.activeIndex > 0) {
+    this.activeIndex--;
+  } else {
+    this.activeIndex = (this.game?.screenshots!.length || 0) - 1;
+  }
+}
+
+nextSlide() {
+  if (this.activeIndex < this.game?.screenshots!.length - 1) {
+    this.activeIndex++;
+  } else {
+    this.activeIndex = 0;
+  }
+}
 
 
   chunkArray(arr: GameMedia[] | undefined, size: number): GameMedia[][] {

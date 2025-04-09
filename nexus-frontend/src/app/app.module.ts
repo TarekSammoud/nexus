@@ -18,7 +18,7 @@ import { CreateGameComponent } from './games/create-game/create-game.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatChipInput, MatChipsModule } from '@angular/material/chips';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -30,6 +30,8 @@ import { AngularEditorComponent, AngularEditorModule } from '@kolkov/angular-edi
 import { QuillModule } from 'ngx-quill';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { GameKeyListComponent } from './games/game-key-list/game-key-list.compon
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
+    
     
     
   ],
@@ -67,7 +70,11 @@ import { GameKeyListComponent } from './games/game-key-list/game-key-list.compon
     AngularEditorModule,
     QuillModule.forRoot(),
     GameCategoryListComponent,
-    GameKeyListComponent
+    GameKeyListComponent,
+    MatFormFieldModule,
+    MatDialogModule,
+    
+    
       
     
 

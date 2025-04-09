@@ -45,6 +45,14 @@ public class Game implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "min_requirements_id")
+    private SystemRequirements minRequirements;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recommended_requirements_id")
+    private SystemRequirements recommendedRequirements;
+
     @ManyToMany
     private List<GameItem> gameItems;
 
@@ -176,5 +184,21 @@ public class Game implements Serializable {
 
     public void setPlatforms(List<GamePlatform> platforms) {
         this.platforms = platforms;
+    }
+
+    public SystemRequirements getMinRequirements() {
+        return minRequirements;
+    }
+
+    public void setMinRequirements(SystemRequirements minRequirements) {
+        this.minRequirements = minRequirements;
+    }
+
+    public SystemRequirements getRecommendedRequirements() {
+        return recommendedRequirements;
+    }
+
+    public void setRecommendedRequirements(SystemRequirements recommendedRequirements) {
+        this.recommendedRequirements = recommendedRequirements;
     }
 }

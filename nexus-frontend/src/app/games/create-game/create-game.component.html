@@ -1,6 +1,27 @@
 
+
+
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+    <button type="button" class="close" (click)="modal.close('Close click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Your content goes here -->
+    ...
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="navigateToDashboard()">Save changes</button>
+  </div>
+</ng-template>
+
+
 <div class="">
-  <button class="btn" (click)="navigateToDashboard()">Back to dashboard</button>
+  <button class="btn btn-primary" (click)="navigateToDashboard()">Back to dashboard</button>
 </div>
 <div class="d-flex justify-content-center align-items-center min-vh-100">
   
@@ -25,7 +46,11 @@
           <label for="description">Description</label>
           <textarea formControlName="description" class="form-control" id="description" rows="3"
             placeholder="Enter game description"></textarea>
+
         </div>
+        <span *ngIf="gameForm.controls['description'].hasError('required') && gameForm.controls['description'].touched" class="login-error" style="color: red">
+          You must include a valid description element.
+        </span>
 
         <!-- Price -->
         <div class="form-group">
@@ -134,6 +159,137 @@
       </div>
             </div>
 
+            <div *ngIf="step === 6" >
+              <!-- System Requirements -->
+              <div class="form-group">
+                <label for="systemRequirements">System Requirements</label>
+              </div>
+            
+              <!-- GPU -->
+              
+              <div class="form-row">
+                <div class="form-column">
+                  <label for="gpuLabel" class="text-light cell">GPU</label>
+                </div>
+                <div class="form-column" *ngIf="gpuOptions.length > 0" formGroupName="minRequirements">
+                  <label for="gpu">Minimum</label>
+                  <select formControlName="gpu" class="form-control" id="gpu">
+                    <option *ngFor="let gpu of gpuOptions" [value]="gpu">{{ gpu }}</option>
+                  </select>   
+                  <span *ngIf="minRequirements.controls['gpu'].hasError('required') && minRequirements.controls['gpu'].touched" class="login-error" style="color: red">
+                    You must include a GPU element.
+                  </span>
+                                 
+                </div>
+                
+
+                <div class="form-column" *ngIf="gpuOptions.length > 0" formGroupName="recommendedRequirements">
+                  <label for="gpu">Recommended</label>
+                  <select formControlName="gpu" class="form-control" id="gpu">
+                    <option value="">Select GPU</option>
+                    <option *ngFor="let gpu of gpuOptions" [value]="gpu">{{ gpu }}</option>
+                  </select>  
+                  <span *ngIf="recommendedRequirements.controls['gpu'].hasError('required') && minRequirements.controls['gpu'].touched" class="login-error" style="color: red">
+                    You must include a GPU element.
+                  </span>                
+                </div>
+              </div>
+            
+              <!-- CPU -->
+              <div class="form-row">
+                <div class="form-column">
+                  <label for="cpuLabel" class="text-light cell">CPU</label>
+                </div>
+                <div class="form-column" *ngIf="cpuOptions.length > 0" formGroupName="minRequirements">
+                  <label for="cpu">Minimum</label>
+                  <select formControlName="cpu" class="form-control" id="cpu">
+                    <option value="">Select CPU</option>
+                    <option *ngFor="let cpu of cpuOptions" [value]="cpu">{{ cpu }}</option>
+                  </select>
+                  <span *ngIf="minRequirements.controls['cpu'].hasError('required') && minRequirements.controls['cpu'].touched" class="login-error" style="color: red">
+                    You must include a CPU element.
+                  </span>                  
+                </div>
+                
+
+                <div class="form-column" *ngIf="cpuOptions.length > 0" formGroupName="recommendedRequirements">
+                  <label for="cpu">Recommended</label>
+                  <select formControlName="cpu" class="form-control" id="cpu">
+                    <option value="">Select CPU</option>
+                    <option *ngFor="let cpu of cpuOptions" [value]="cpu">{{ cpu }}</option>
+                  </select>                  
+                  <span *ngIf="recommendedRequirements.controls['cpu'].hasError('required') && minRequirements.controls['cpu'].touched" class="login-error" style="color: red">
+                    You must include a CPU element.
+                  </span> 
+                </div>
+              </div>
+            
+              <!-- Operating System -->
+              <div class="form-row">
+                <div class="form-column">
+                  <label for="osLabel" class="text-light">Operating System</label>
+                </div>
+                <div class="form-column" formGroupName="minRequirements">
+                  <label for="os">Minimum</label>
+                  <input formControlName="os" type="text" class="form-control" id="os" placeholder="e.g. Windows 10">
+                  <span *ngIf="minRequirements.controls['os'].hasError('required') && minRequirements.controls['os'].touched" class="login-error" style="color: red">
+                    You must include an OS element.
+                  </span>   
+                </div>
+                <div class="form-column" formGroupName="recommendedRequirements">
+                  <label for="os">Recommended</label>
+                  <input formControlName="os" type="text" class="form-control" id="os" placeholder="e.g. Windows 11">
+                  <span *ngIf="recommendedRequirements.controls['os'].hasError('required') && minRequirements.controls['os'].touched" class="login-error" style="color: red">
+                    You must include an OS element.
+                  </span> 
+                </div>
+              </div>
+            
+              <!-- Storage -->
+              <div class="form-row">
+                <div class="form-column" >
+                  <label for="storageLabel" class="text-light">Storage</label>
+                </div>
+                <div class="form-column" formGroupName="minRequirements">
+                  <label for="storage">Minimum</label>
+                  <input formControlName="storage" type="text" class="form-control" id="storage" placeholder="e.g. 256GB SSD">
+                  <span *ngIf="minRequirements.controls['storage'].hasError('required') && minRequirements.controls['storage'].touched" class="login-error" style="color: red">
+                    You must include a storage element.
+                  </span> 
+                </div>
+                <div class="form-column" formGroupName="recommendedRequirements">
+                  <label for="storage">Recommended</label>
+                  <input formControlName="storage" type="text" class="form-control" id="storage" placeholder="e.g. 512GB SSD">
+                  <span *ngIf="recommendedRequirements.controls['storage'].hasError('required') && minRequirements.controls['storage'].touched" class="login-error" style="color: red">
+                    You must include a storage element.
+                  </span> 
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-column" >
+                  <label for="ramlabel" class="text-light">RAM</label>
+                </div>
+                <div class="form-column" formGroupName="minRequirements">
+                  <label for="ramMin">Minimum</label>
+                  <input formControlName="ram" type="text" class="form-control" id="ramMin" placeholder="e.g. 8GB">
+                  <span *ngIf="minRequirements.controls['ram'].hasError('required') && minRequirements.controls['ram'].touched" class="login-error" style="color: red">
+                    You must include a ram element.
+                  </span> 
+                </div>
+                <div class="form-column" formGroupName="recommendedRequirements">
+                  <label for="ramRec">Recommended</label>
+                  <input formControlName="ram" type="text" class="form-control" id="ramRec" placeholder="e.g. 32GB">
+                  <span *ngIf="recommendedRequirements.controls['ram'].hasError('required') && minRequirements.controls['ram'].touched" class="login-error" style="color: red">
+                    You must include a ram element.
+                  </span> 
+                </div>
+              </div>
+
+
+            
+            </div>
+            
 
 
 
@@ -141,14 +297,82 @@
 
 
       
-        <button *ngIf="step === 5" type="submit" class="next-btn">Submit</button>
-        <a *ngIf="step< 5 " (click) = nextStep() class="next-btn">Next →</a>
-        <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
+        <button *ngIf="step === 6"
+         type="submit" class="next-btn"
+         (click)="open(content)" 
+          [disabled]="gameForm.invalid || gameForm.pristine || gameForm.pending">
+         >Submit</button>
+        <div [ngSwitch]="step">
+  
+          <!-- Step 1 Button -->
+          <a *ngSwitchCase="1" 
+             (click)="nextStep()" 
+             class="next-btn" 
+             [class.disabled]=" gameForm.controls['platforms'].invalid || gameForm.controls['name'].invalid || gameForm.controls['price'].invalid || gameForm.controls['description'].invalid">
+             Next →
+          </a>
+        
+          <!-- Step 2 Button -->
+          <a *ngSwitchCase="2" 
+             (click)="nextStep()" 
+             class="next-btn" 
+             [class.disabled]="gameForm.controls['categories'].invalid">
+            Next →
+          </a>
+        
+          <!-- Step 3 Button -->
+          <a *ngSwitchCase="3" 
+             (click)="nextStep()" 
+             class="next-btn" 
+             >
+            Next →
+          </a>
+        
+          <!-- Step 4 Button -->
+          <a *ngSwitchCase="4" 
+             (click)="nextStep()" 
+             class="next-btn" 
+             >
+            Next →
+          </a>
+        
+          <!-- Step 5 Button -->
+          <a *ngSwitchCase="5" 
+             (click)="nextStep()" 
+             class="next-btn" 
+             >
+            Next →
+          </a>
+          </div>
+          <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
 
 
         <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
 
+        <!-- Modal -->
+<div #exampleModal class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
       </form>
+
+      <!-- Modal -->
+
     </div>
   </div>
 </div>
