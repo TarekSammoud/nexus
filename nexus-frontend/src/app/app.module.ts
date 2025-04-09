@@ -30,6 +30,7 @@ import { LoginComponent } from './user-management/login/login.component';
 import { SignupComponent } from './user-management/signup/signup.component';
 import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 import { FormsModule } from '@angular/forms';
+import { ChatComponent } from './user-management/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
