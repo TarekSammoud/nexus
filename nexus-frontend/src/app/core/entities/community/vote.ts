@@ -7,3 +7,4 @@ export interface Vote {
   user: User;
   sondage: Sondage;
 }
+

@@ -1,6 +1,8 @@
 package tn.arctic.nexus.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -55,9 +57,13 @@ public class Report {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "thread_id", nullable = false)
+    @JsonIgnoreProperties({"commentaires", "likes", "user", "category", "reports"})
     private Publication publication;
+
+
 
     @Column(nullable = false)
     private String reason;

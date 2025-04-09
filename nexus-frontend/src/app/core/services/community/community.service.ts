@@ -40,4 +40,17 @@ export class CommunityService {
   deletePublication(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  getPublicationById(id: number): Observable<Publication> {
+    return this.http.get<Publication>(`${this.baseUrl}/${id}`);
+  }
+  
+
+  getPublicationsVisibles(): Observable<Publication[]> {
+    return this.http.get<Publication[]>(`${this.baseUrl}/visibles`);
+  }
+  
+  
+
+
 }

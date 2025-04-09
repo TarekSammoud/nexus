@@ -1,6 +1,7 @@
 package tn.arctic.nexus.controllers.CommunityModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Publication;
 import tn.arctic.nexus.services.CommunityModule.PublicationService;
@@ -46,4 +47,11 @@ public class PublicationController {
     public void deletePublication(@PathVariable Long id) {
         publicationService.deletePublication(id);
     }
+
+
+    @GetMapping("/visibles")
+    public ResponseEntity<List<Publication>> getPublicationsVisibles() {
+        return ResponseEntity.ok(publicationService.getPublicationsVisibles());
+    }
+
 }

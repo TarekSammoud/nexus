@@ -14,5 +14,6 @@ public interface IPublicationService {
     List<Publication> getAllPublicationsSorted();
 
 
+    public List<Publication> getPublicationsVisibles();
 
     }

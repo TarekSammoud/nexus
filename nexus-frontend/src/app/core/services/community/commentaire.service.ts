@@ -24,5 +24,7 @@ export class CommentaireService {
   getCommentairesByPublicationId(publicationId: number): Observable<Commentaire[]> {
     return this.http.get<Commentaire[]>(`${this.baseUrl}/publication/${publicationId}`);
   }
+
+  
   
 }

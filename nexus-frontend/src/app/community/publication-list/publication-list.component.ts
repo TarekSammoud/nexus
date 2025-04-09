@@ -33,9 +33,10 @@ export class PublicationListComponent implements OnInit {
   }
 
   loadPublications(): void {
-    this.communityService.getPublications().subscribe({
+    this.communityService.getPublicationsVisibles().subscribe({
       next: (data: Publication[]) => {
         this.publications = data;
+  
         this.publications.forEach(pub => {
           this.showCommentForm[pub.id] = false;
           this.newCommentContent[pub.id] = '';
@@ -48,6 +49,9 @@ export class PublicationListComponent implements OnInit {
       }
     });
   }
+  
+  
+  
 
   loadCommentaires(pubId: number): void {
     this.commentaireService.getCommentairesByPublicationId(pubId).subscribe({

@@ -57,6 +57,7 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
 import { CategoryListComponent } from './community/category-list/category-list.component';
 import { CategoryFormComponent } from './community/category-form/category-form.component';
 import { ReportListComponent } from './community/report-list/report-list.component';
+import { ReportFormComponent } from './community/report-form/report-form.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ReportListComponent } from './community/report-list/report-list.compone
     GameCategoriesComponent,
     CategoryListComponent,
     CategoryFormComponent,
-    ReportListComponent
+    ReportListComponent,
+    ReportFormComponent
   ],
   imports: [
     BrowserModule,

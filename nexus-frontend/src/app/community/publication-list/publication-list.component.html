@@ -82,6 +82,10 @@
               <button class="btn btn-outline-primary btn-sm" (click)="togglePin(publication)">
                 {{ publication.pinned ? '📍 Désépingler' : '📍 Épingler' }}
               </button>
+              <button class="btn btn-outline-danger btn-sm" [routerLink]="['/report/create', publication.id]">
+                🚩 Signaler
+              </button>
+              
             </div>
 
             <!-- Formulaire de commentaire -->

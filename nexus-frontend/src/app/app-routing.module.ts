@@ -5,7 +5,7 @@ import { GamesComponent } from './games/games/games.component';
 
 import { PublicationListComponent } from './community/publication-list/publication-list.component';
 import { PublicationFormComponent } from './community/publication-form/publication-form.component';
-
+import { ReportFormComponent } from './community/report-form/report-form.component';
 import { HomeComponent } from './home/home/home.component';
 import { JamsListComponent } from './jams/jams-list/jams-list.component';
 import { JamsComponent } from './jams/jams/jams.component';
@@ -30,6 +30,8 @@ const routes: Routes = [
   { path: 'community', component: PublicationListComponent },
   { path: 'community/add', component: PublicationFormComponent },
   { path: 'community/edit/:id', component: PublicationFormComponent },
+  { path: 'report/create/:publicationId', component: ReportFormComponent },
+
 
   {
     path: 'admin',
