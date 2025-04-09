@@ -1,1 +1,40 @@
-<p>bid works!</p>
+<div class="container">
+  <div class="jam-hero">
+    <h2 class="jam-title">🎯 Place a Bid for Listing #{{ marketId }}</h2>
+    <p class="jam-subtitle">Join the auction by placing your best offer.</p>
+  </div>
+
+  <form (ngSubmit)="placeBid()" class="jam-card bid-form mt-4">
+    <div class="form-group">
+      <label for="amount">💰 Bid Amount</label>
+      <input
+        type="number"
+        id="amount"
+        class="form-control"
+        [(ngModel)]="newBidAmount"
+        name="amount"
+        required
+        min="1"
+      />
+    </div>
+    <div class="text-center mt-3">
+      <button type="submit" class="jam-btn">📤 Submit Bid</button>
+    </div>
+    <p class="text-success mt-2" *ngIf="message">{{ message }}</p>
+  </form>
+
+  <div class="jam-cards mt-5">
+    <h3 class="jam-title">📋 Existing Bids</h3>
+    <div *ngIf="bids.length > 0; else noBids" class="bid-list">
+      <div *ngFor="let bid of bids" class="jam-card">
+        <p><strong>👤 {{ bid.user?.firstName || 'User #' + bid.user?.id }}</strong></p>
+        <p>💸 {{ bid.amount }} DT</p>
+        <p>🕒 {{ bid.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+    </div>
+
+    <ng-template #noBids>
+      <p class="text-muted text-center">No bids yet. Be the first to bid!</p>
+    </ng-template>
+  </div>
+</div>

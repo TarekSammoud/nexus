@@ -34,7 +34,7 @@ import java.util.List;
 
         @ManyToOne
         @JoinColumn(name = "market_listing_id", referencedColumnName = "id", nullable = false)
-        @JsonIgnore
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         private MarketListing marketListing;
 
         public Long getId() {

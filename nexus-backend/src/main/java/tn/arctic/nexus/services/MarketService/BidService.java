@@ -30,9 +30,19 @@ public class BidService {
     public Optional<Bid> findById(Long id) {
         return repository.findById(id);
     }
+    public List<Bid> findByMarketListingId(Long listingId) {
+        return repository.findByMarketListing_IdOrderByCreatedAtDesc(listingId);
+    }
+
 
     public Bid save(Bid bid) {
-        // Load references to ensure they are managed entities
+        System.out.println("🟡 BID DEBUG - MarketListing: " + bid.getMarketListing());
+        System.out.println("🟡 BID DEBUG - User: " + bid.getUser());
+
+        if (bid.getMarketListing() == null || bid.getUser() == null) {
+            throw new IllegalArgumentException("MarketListing or User is null in incoming Bid.");
+        }
+
         User user = userRepository.findById(bid.getUser().getId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + bid.getUser().getId()));
 
@@ -44,6 +54,10 @@ public class BidService {
 
         return repository.save(bid);
     }
+    public Double getHighestBidAmount(Long listingId) {
+        return repository.findHighestBidAmountByMarketListingId(listingId);
+    }
+
 
     public Bid update(Long id, Bid updatedBid) {
         return repository.findById(id).map(existingBid -> {

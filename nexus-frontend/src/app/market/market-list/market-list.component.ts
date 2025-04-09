@@ -21,7 +21,13 @@ export class MarketListComponent implements OnInit {
 
   loadMarketItems(): void {
     this.marketService.getAllListings().subscribe(data => {
-      this.markets = data;
+      // Add highestBidAmount to each listing
+      this.markets = data.map(item => {
+        const highestBid = item.bids?.length
+          ? Math.max(...item.bids.map((bid: any) => bid.amount))
+          : null;
+        return { ...item, highestBidAmount: highestBid };
+      });
     });
   }
 
