@@ -39,4 +39,7 @@ public class FriendRequest implements Serializable {
     @Enumerated(EnumType.STRING)
     private StatusFriendRequest status;
 
+    public boolean isAccepted() {
+        return this.status == StatusFriendRequest.ACCEPTED;
+    }
 }

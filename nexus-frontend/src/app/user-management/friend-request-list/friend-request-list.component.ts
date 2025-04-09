@@ -92,15 +92,19 @@ export class FriendRequestListComponent implements OnInit {
 
   acceptRequest(requestId: number): void {
     this.friendRequestService.acceptFriendRequest(requestId).subscribe({
-      next: () => {
+      next: (updatedRequest) => {
+        // Si la demande d'ami a été acceptée, filtre les demandes reçues
         this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
-        alert('Friend request accepted.');
+
+        // Tu peux ici utiliser l'objet updatedRequest pour afficher des informations supplémentaires ou mettre à jour l'UI
+        alert(`Friend request accepted from ${updatedRequest.sender.firstName} ${updatedRequest.sender.lastName}.`);
       },
       error: () => {
         alert('Failed to accept the request.');
       }
     });
   }
+
 
   rejectRequest(requestId: number): void {
     this.friendRequestService.rejectFriendRequest(requestId).subscribe({

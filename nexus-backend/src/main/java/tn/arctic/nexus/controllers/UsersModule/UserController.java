@@ -4,13 +4,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tn.arctic.nexus.entities.FriendRequest;
 import tn.arctic.nexus.entities.ProfilePictures;
+import tn.arctic.nexus.entities.StatusFriendRequest;
 import tn.arctic.nexus.entities.User;
+import tn.arctic.nexus.repositories.UsersModule.IFriendRequestRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.IProfilePicturesService;
 import tn.arctic.nexus.services.UsersModule.IUserService;
 import tn.arctic.nexus.repositories.UsersModule.IProfilePicturesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -69,12 +73,30 @@ public class UserController {
 
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IFriendRequestRepository friendRequestRepository;
 
     @GetMapping("/friends/{userId}")
     public List<User> getFriends(@PathVariable Long userId) {
+        // Vérifier que l'utilisateur existe
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return user.getFriends();
+
+        // Récupérer les demandes d'amis acceptées où l'utilisateur est soit l'envoyeur, soit le destinataire
+        List<FriendRequest> friendRequests = friendRequestRepository.findAcceptedFriends(userId, StatusFriendRequest.ACCEPTED);
+
+        // Extraire les autres utilisateurs (les amis) en excluant l'utilisateur actuel
+        List<User> friends = new ArrayList<>();
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getId() != userId) {
+                friends.add(friendRequest.getSender());  // Ajouter l'ami qui est l'envoyeur
+            }
+            if (friendRequest.getRecipient().getId() != userId) {
+                friends.add(friendRequest.getRecipient());  // Ajouter l'ami qui est le destinataire
+            }
+        }
+
+        return friends;  // Retourner la liste des amis
     }
 
 

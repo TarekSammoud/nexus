@@ -73,33 +73,21 @@ public class FriendRequestService implements IFriendRequestService{
         // Récupérer toutes les demandes d'amis où l'utilisateur est le destinataire et que le statut est PENDING
         return friendRequestRepository.findByRecipientIdAndStatus(userId, StatusFriendRequest.PENDING);
     }
-
     @Override
-    public void acceptRequest(Long requestId) {
+    public FriendRequest acceptRequest(Long requestId) {
         FriendRequest friendRequest = friendRequestRepository.findById(requestId)
                 .orElseThrow(() -> new RuntimeException("FriendRequest not found"));
 
         friendRequest.setStatus(StatusFriendRequest.ACCEPTED);
 
-        User sender = friendRequest.getSender();
-        User recipient = friendRequest.getRecipient();
 
-        // Ajouter mutuellement à la liste des amis
-        if (!sender.getFriends().contains(recipient)) {
-            sender.getFriends().add(recipient);
-        }
-
-        if (!recipient.getFriends().contains(sender)) {
-            recipient.getFriends().add(sender);
-        }
-
-        // Sauvegarder les deux utilisateurs
-        userRepository.save(sender);
-        userRepository.save(recipient);
 
         // Sauvegarder la mise à jour du FriendRequest
         friendRequestRepository.save(friendRequest);
+
+        return friendRequest;  // Retourner la demande d'ami mise à jour
     }
+
 
     @Override
     public void rejectRequest(Long requestId) {

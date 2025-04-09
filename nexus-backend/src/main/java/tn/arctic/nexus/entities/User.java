@@ -45,8 +45,7 @@ public class User implements Serializable {
     @Column(nullable = true)
     private Date last_login;
 
-    @ManyToMany
-    private List<User> friends;
+
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
