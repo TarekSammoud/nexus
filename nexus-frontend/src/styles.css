@@ -17,7 +17,7 @@ html, body {
     display: flex;
     flex-direction: column;
     /* Set global background color */
-      background-color: #1c1e26;  /* Dark blue-gray background */
+      background-color: #101014;  /* Dark blue-gray background */
       color: white;  /* Set default text color to white */
     
 
@@ -104,4 +104,23 @@ html, body { height: 100%; }
 
 .next-btn:hover {
   background: linear-gradient(45deg, #6338B0, #8A6BD5);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+select {
+  background-color: #37373A; /* Grey background */
+  color: white; /* White text */
+  border: 1px solid #ccc; /* Optional: border color */
+  padding: 8px; /* Optional: add some padding */
+  font-size: 16px; /* Optional: adjust font size */
+}
+
+select option {
+  background-color: #37373A; /* Same grey background for options */
+  color: white; /* White text for options */
+}
+
+select:focus {
+  outline: none; /* Optional: remove focus outline */
 }

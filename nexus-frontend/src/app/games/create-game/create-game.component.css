@@ -1,28 +1,33 @@
 /* Dark Glassmorphic Background */
+/* Dark Glassmorphic Background */
 body {
-    background-color: #121212;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-  }
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  justify-content: flex-start; /* Align content at the top */
+  align-items: flex-start; /* Align content at the top */
+  padding-top: 20px; /* Add top padding to create space */
+  font-family: 'Poppins', sans-serif;
+  min-height: auto; /* Removes full screen height, making it natural height */
+}
+
   
   /* Card with Glass Effect */
   .card {
-    background: rgba(20, 20, 20, 0.1);
+    background: #202024;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
     max-width: 600px;
-
+    margin-top: -50px; /* Adjust this value to move the card higher */
   }
   
   .card:hover {
   }
+
+
   
   /* Form Styling */
   form {
@@ -195,3 +200,59 @@ body {
   transform: scale(0.98);
 }
 
+/* Flexbox layout for form columns */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* Each column takes equal width */
+.form-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Form controls */
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+.form-control::placeholder {
+  color: #bbbbbb;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  border: 1px solid white;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column; /* Stack columns vertically on smaller screens */
+  }
+
+  .form-column {
+    margin-bottom: 10px;
+  }
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

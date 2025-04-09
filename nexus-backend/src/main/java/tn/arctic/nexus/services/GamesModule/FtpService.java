@@ -2,12 +2,18 @@ package tn.arctic.nexus.services.GamesModule;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class FtpService {
@@ -78,5 +84,34 @@ public class FtpService {
             ftpClient.logout();
             ftpClient.disconnect();
         }
+    }
+
+    public List<List<String>> readExcelFromBytes(byte[] fileData) throws IOException {
+        List<List<String>> data = new ArrayList<>();
+
+        InputStream inputStream = new ByteArrayInputStream(fileData);
+        Workbook workbook = new XSSFWorkbook(inputStream);
+        Sheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.iterator();
+
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            List<String> rowData = new ArrayList<>();
+            for (Cell cell : row) {
+                rowData.add(cell.toString());
+            }
+            data.add(rowData);
+        }
+
+        workbook.close();
+        inputStream.close();
+
+        return data;
+    }
+
+    // Method to download and read the Excel file from FTP
+    public List<List<String>> getExcelDataFromFTP(String fileName) throws IOException {
+        byte[] fileData = downloadFile(fileName);
+        return readExcelFromBytes(fileData);
     }
 }
