@@ -48,4 +48,10 @@ public class PublicationService {
         return publicationRepository.findAllSortedByPinned();
     }
 
+
+
+    public List<Publication> getPublicationsVisibles() {
+        return publicationRepository.findPublicationsWithNoOrUnresolvedReports();
+    }
+
 }

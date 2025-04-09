@@ -5,7 +5,7 @@ export class Report {
   id?: number;
   reason!: string;
   status!: string;
-  user!: User;
+  user!: Partial<User>;
   publication!: Publication;
 
   constructor(data?: Partial<Report>) {

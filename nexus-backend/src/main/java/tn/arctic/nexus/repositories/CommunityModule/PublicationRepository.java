@@ -16,4 +16,16 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
     @Query("SELECT p FROM Publication p ORDER BY p.isPinned DESC, p.id DESC")
     List<Publication> findAllSortedByPinned();
 
+
+
+    @Query("""
+SELECT DISTINCT p
+FROM Publication p
+LEFT JOIN p.reports r
+GROUP BY p
+HAVING COUNT(r) = 0 OR SUM(CASE WHEN r.status = 'RESOLVED' THEN 1 ELSE 0 END) < COUNT(r)
+""")
+    List<Publication> findPublicationsWithNoOrUnresolvedReports();
+
+
 }

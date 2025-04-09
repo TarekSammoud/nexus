@@ -24,6 +24,7 @@ export class ReportService {
     return this.http.post<Report>(`${this.apiUrl}/add`, report);
   }
 
+  
   updateReport(id: number, report: Report): Observable<Report> {
     return this.http.put<Report>(`${this.apiUrl}/${id}`, report);
   }
