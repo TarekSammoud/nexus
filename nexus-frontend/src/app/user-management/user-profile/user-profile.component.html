@@ -14,11 +14,6 @@
                 <ng-template #noImage>
                     <p>Aucune photo disponible.</p>
                 </ng-template>
-
-                <input type="file" (change)="onFileSelected($event)" class="form-control mt-3">
-                <button class="btn btn-primary mt-2" (click)="uploadProfilePicture()">Mettre à jour la photo</button>
-
-                <p *ngIf="uploadProgress > 0" class="mt-2">Progression: {{ uploadProgress }}%</p>
             </div>
 
 

@@ -71,10 +71,14 @@ public class FriendRequestController {
 
 
     @PutMapping("/reject/{requestId}")
-    public ResponseEntity<?> rejectFriendRequest(@PathVariable Long requestId) {
-        friendRequestService.rejectRequest(requestId);
-        return ResponseEntity.ok("Friend request rejected.");
+    public boolean rejectFriendRequest(@PathVariable Long requestId) {
+        try {
+            return friendRequestService.rejectRequest(requestId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to reject friend request", e);
+        }
     }
+
 
 
 }
