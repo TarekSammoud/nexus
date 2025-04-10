@@ -1,53 +1,54 @@
 /* Profile Image */
 .profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-  }
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
 
-  .profile-img-dropdown {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-  }
-  
-  .dropdown-item{
-    padding: 0.5rem 1rem;
-  }
-  
-  
-  /* Cart Icon */
-  .cart-icon {
-    position: relative;
-    font-size: 20px;
-    color: white;
-  }
-  
-  .cart-icon:hover {
-    color: #f8f9fa;
-  }
-  
-  /* Cart Badge */
-  .cart-badge {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 50%;
-  }
-  
-  /* Ensure cart and profile stay aligned */
-  .navbar-nav.d-flex {
-    gap: 10px; /* Space between cart and profile */
-  }
+.profile-img-dropdown {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+}
+
+
+/* Cart Icon */
+.cart-icon {
+  position: relative;
+  font-size: 20px;
+  color: white;
+}
+
+.cart-icon:hover {
+  color: #f8f9fa;
+}
+
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Ensure cart and profile stay aligned */
+.navbar-nav.d-flex {
+  gap: 10px;
+  /* Space between cart and profile */
+}
 
 /* Change dropdown background color */
 /* Base styles for all dropdown menus */
@@ -58,20 +59,40 @@
 /* Specific styles for dropdowns with both 'dropdown-menu' and 'customdropdownmenu' classes */
 /* More specific selector to ensure styles are applied */
 .customdropdownmenu {
-  background-color: #1c1e26 !important;  /* Slightly darker gray */
-  box-shadow: 0 4px 7px rgba(50, 50, 50, 1) !important; /* Soft white shadow to match */
-  border-radius: 6px !important; /* Optional: adding rounded corners */
-  
+  background-color: #1c1e26 !important;
+  /* Slightly darker gray */
+  box-shadow: 0 4px 7px rgba(50, 50, 50, 1) !important;
+  /* Soft white shadow to match */
+  border-radius: 6px !important;
+  /* Optional: adding rounded corners */
+
 }
 
 
 
 /* Optional: Add hover effect */
 .dropdown-item:hover {
-  background-color: rgba(80, 80, 80, 0.9);  /* Slightly lighter gray for hover */
+  background-color: rgba(80, 80, 80, 0.9);
+  /* Slightly lighter gray for hover */
 }
 
-  .custom-dropdown-width {
-    width: 400px;  /* Change this value to resize the width */
-  }
-  
+.custom-dropdown-width {
+  width: 400px;
+  /* Change this value to resize the width */
+}
+
+.profile-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  /* Ajuste selon ton besoin */
+  height: 40px;
+}
+
+.default-profile {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 50%;
+}

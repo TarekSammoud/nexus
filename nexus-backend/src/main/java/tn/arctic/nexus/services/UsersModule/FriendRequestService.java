@@ -90,12 +90,12 @@ public class FriendRequestService implements IFriendRequestService{
 
 
     @Override
-    public void rejectRequest(Long requestId) {
-        FriendRequest request = friendRequestRepository.findById(requestId)
-                .orElseThrow(() -> new RuntimeException("Friend request not found"));
-
-        request.setStatus(StatusFriendRequest.REJECTED);
-        friendRequestRepository.save(request);
+    public boolean rejectRequest(Long requestId) {
+        return friendRequestRepository.findById(requestId).map(request -> {
+            request.setStatus(StatusFriendRequest.REJECTED);
+            friendRequestRepository.save(request);
+            return true;
+        }).orElse(false);
     }
 
 }
