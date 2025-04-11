@@ -51,6 +51,7 @@ public class User implements Serializable {
     private RoleType roleType;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private ProfilePictures profilePicture;
 
     @ManyToMany

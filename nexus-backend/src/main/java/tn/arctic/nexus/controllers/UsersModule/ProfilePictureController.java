@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -28,7 +30,6 @@ public class ProfilePictureController  {
     @Autowired
     private UserService userService;  // Injection du service utilisateur
 
-
     @PostMapping(value = "/uploadProfilePicture/{userId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadProfilePicture(
             @PathVariable Long userId,
@@ -41,39 +42,57 @@ public class ProfilePictureController  {
         }
 
         try {
-            // 🔁 1. Supprimer l'ancienne photo s'il y en a une
+            // 🔁 1. Vérifier si une image de profil existe pour l'utilisateur
             ProfilePictures existingPicture = profilePicturesRepository.findByUserId(userId);
             if (existingPicture != null) {
-                // Supprimer le fichier physique
+                // Mettre à jour l'image de profil existante
+                // Supprimer le fichier physique si un fichier existe déjà
                 Path oldPath = Paths.get(existingPicture.getImageUrl());
                 Files.deleteIfExists(oldPath);
 
-                // Supprimer de la base de données
-                profilePicturesRepository.delete(existingPicture);
+                // Mettre à jour l'ancienne image avec les nouvelles informations
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                Path filePath = Paths.get("uploads").resolve(fileName);
+
+                Files.createDirectories(filePath.getParent());
+                Files.write(filePath, file.getBytes());
+
+                // Mettre à jour l'image de profil dans la base de données
+                existingPicture.setImageUrl(filePath.toString());
+                existingPicture.setFileType(file.getContentType());
+                existingPicture.setFileSize(file.getSize());
+                Date now = new Date();
+                existingPicture.setUpdatedAt(now);
+
+                // Sauvegarder les modifications
+                profilePicturesRepository.save(existingPicture);
+
+                return ResponseEntity.ok("Profile picture updated successfully");
+
+            } else {
+                // 🆕 2. Si aucune image n'existe, ajouter une nouvelle image
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                Path filePath = Paths.get("uploads").resolve(fileName);
+
+                Files.createDirectories(filePath.getParent());
+                Files.write(filePath, file.getBytes());
+
+                ProfilePictures newPicture = new ProfilePictures();
+                newPicture.setImageUrl(filePath.toString());
+                newPicture.setFileType(file.getContentType());
+                newPicture.setFileSize(file.getSize());
+                newPicture.setUser(user);
+
+                // Sauvegarder la nouvelle image
+                profilePicturesRepository.save(newPicture);
+
+                return ResponseEntity.ok("Profile picture uploaded successfully");
             }
-
-            // 🆕 2. Enregistrer la nouvelle image
-            String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-            Path filePath = Paths.get("uploads").resolve(fileName);
-
-            Files.createDirectories(filePath.getParent());
-            Files.write(filePath, file.getBytes());
-
-            ProfilePictures newPicture = new ProfilePictures();
-            newPicture.setImageUrl(filePath.toString());
-            newPicture.setFileType(file.getContentType());
-            newPicture.setFileSize(file.getSize());
-            newPicture.setUser(user);
-
-            profilePicturesRepository.save(newPicture);
-
-            return ResponseEntity.ok("Profile picture uploaded successfully");
 
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading profile picture");
         }
     }
-
 
 
     // Méthode pour récupérer la photo de profil d'un utilisateur
