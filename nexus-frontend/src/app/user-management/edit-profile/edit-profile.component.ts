@@ -60,13 +60,16 @@ export class EditProfileComponent implements OnInit {
     this.userProfileService.getProfilePicture(userId).subscribe({
       next: (blob: Blob) => {
         const objectURL = URL.createObjectURL(blob);
+        console.log(objectURL); // Log de l'URL de l'image
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       error: () => {
         this.imageUrl = null;
+        this.errorMessage = 'Image non trouvée.';
       }
     });
   }
+
 
   saveChanges(): void {
     this.userProfileService.updateUserProfile(this.user).subscribe({
