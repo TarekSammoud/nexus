@@ -1,15 +1,28 @@
 export class ChatMessage {
-    id: number;
-    senderId: number;       // ID de l'expéditeur, type number
-    recipientId: number;    // ID du destinataire, type number
+    id: number;               // Utilisation de number ici (correspond au Long côté backend)
+    sendername: string;
+    senderId: number;         // Utilisation de number pour correspondre à Long côté backend
+    recipientId: number;      // Utilisation de number pour correspondre à Long côté backend
     content: string;
-    timestamp: Date;
+    timestamp: string = new Date().toISOString()
+    type: string;
 
-    constructor(senderId: number, recipientId: number, content: string, id: number = 0) {
+    constructor(
+        senderId: number,
+        recipientId: number,
+        content: string,
+        sendername: string,
+        type: string,
+        id: number = 0,
+        timestamp: string = new Date().toISOString()
+    ) {
         this.senderId = senderId;
         this.recipientId = recipientId;
         this.content = content;
-        this.timestamp = new Date();  // Ajoute la date et l'heure actuelles
-        this.id = id; // Initialisation de l'ID
+        this.sendername = sendername;
+        this.type = type;
+        this.id = id;
+        this.timestamp = timestamp;
     }
+
 }
