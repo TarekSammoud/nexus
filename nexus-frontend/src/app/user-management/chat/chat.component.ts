@@ -42,14 +42,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
         this.chatService.messages$.subscribe(msg => {
           if (msg) {
-            const receivedMessage = new ChatMessage(+msg.senderId, +msg.recipientId, msg.content);
-            // Ajouter uniquement si c'est un message envoyé par l'utilisateur connecté au destinataire sélectionné
-            if (
-              receivedMessage.senderId === this.currentUserId &&
-              receivedMessage.recipientId === this.recipientId
-            ) {
-              this.messages.push(receivedMessage);
-            }
+            this.messages.push(msg);
+            console.log('Message ajouté à l’interface:', msg);
+
           }
         });
       }
@@ -67,7 +62,8 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.chatService.getMessages(this.currentUserId).subscribe(
         (messages) => {
           this.messages = messages.filter(msg =>
-            msg.senderId === this.currentUserId && msg.recipientId === this.recipientId
+            (msg.senderId === this.currentUserId && msg.recipientId === this.recipientId) ||
+            (msg.senderId === this.recipientId && msg.recipientId === this.currentUserId)
           );
         },
         (error) => {
@@ -78,14 +74,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(): void {
-    if (!this.messageContent.trim()) return;
+    if (!this.messageContent.trim() || !this.currentUserId) return;
 
-    const message = new ChatMessage(this.currentUserId || 0, this.recipientId, this.messageContent);
-    this.messages.push(message);
+    const message = {
+      senderId: this.currentUserId,
+      sendername: 'Moi', // Optionnel si backend la récupère
+      content: this.messageContent,
+      type: 'CHAT'
+    };
 
-    this.chatService.sendMessage(message.senderId, message.recipientId, this.messageContent);
+    this.chatService.sendMessage(message.senderId, "videee", message.content); // recipientId à null
     this.messageContent = '';
   }
+
+
 
   trackById(index: number, item: any): number {
     return item.id;

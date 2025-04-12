@@ -8,10 +8,13 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import tn.arctic.nexus.entities.ChatMessage;
+import tn.arctic.nexus.entities.MessageType;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+
 
 @RestController
 public class ChatController {
@@ -27,28 +30,12 @@ public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        if (chatMessage.getSenderId() == null || chatMessage.getRecipientId() == null) {
-            System.err.println("Message invalide, destinataire ou expéditeur manquant.");
-        }
-
-        try {
-
-            // Envoyer le message à l'utilisateur via WebSocket
-//            messagingTemplate.convertAndSendToUser(
-//                    chatMessage.getRecipientId().toString(),
-//                    "/queue/messages",
-//                    chatMessage
-//            );
-            System.out.println("Message envoyé à l'utilisateur " + chatMessage.getRecipientId());
-            return chatMessage;
-        } catch (Exception e) {
-            System.err.println("Erreur lors de l'envoi du message: " + e.getMessage());
-            e.printStackTrace();
-
-        }
+        chatMessage.setTimestamp(LocalDateTime.now());
+        System.out.println("Message envoyé par: " + chatMessage.getSendername());
         return chatMessage;
     }
-@Autowired
+
+    @Autowired
     private IUserRepository userRepository;
 
     @MessageMapping("/chat.addUser")
@@ -57,20 +44,15 @@ public class ChatController {
             @Payload ChatMessage chatMessage,
             SimpMessageHeaderAccessor headerAccessor
     ) {
+        userRepository.findById(chatMessage.getSenderId()).ifPresent(user -> {
+            headerAccessor.getSessionAttributes().put("username", user.getFirstName());
+            chatMessage.setSendername(user.getFirstName());
+            chatMessage.setType(MessageType.JOIN);
+        });
 
-        Optional<User> user = Optional.of(new User());
-        user= userRepository.findById(chatMessage.getSenderId());
-
-        headerAccessor.getSessionAttributes().put("username",user.get().getFirstName());
         return chatMessage;
     }
 
+
 }
 
-/*
-*
-*  @GetMapping("/getMessages")
-    public List<ChatMessage> getMessages(@RequestParam Long userId) {
-        // Récupérer tous les messages envoyés ou reçus par l'utilisateur
-        return chatMessageRepository.findBySenderIdAndRecipientIdOrderByTimestampAsc(userId, userId);
-    }*/
