@@ -1,23 +1,31 @@
 package tn.arctic.nexus.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jetbrains.annotations.NotNull;
 
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ChatMessage {
-    private String senderId;
-    private String recipientId;
-    private String content;
-    private Date timestamp;
 
-    // Constructeur pour initialiser un message avec l'heure actuelle
-    public ChatMessage(String senderId, String recipientId, String content) {
-        this.senderId = senderId;
-        this.recipientId = recipientId;
-        this.content = content;
-        this.timestamp = new Date();  // Ajouter la date du message
-    }
+
+    private Long id;
+    private String sendername;
+    private Long senderId;
+    private Long recipientId;
+    private String content;
+    private MessageType type;
+    private LocalDateTime timestamp = LocalDateTime.now();
+
 }

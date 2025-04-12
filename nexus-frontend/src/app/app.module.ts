@@ -32,6 +32,7 @@ import { ForgotPasswordComponent } from './user-management/forgot-password/forgo
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './user-management/chat/chat.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { ChatComponent } from './user-management/chat/chat.component';
     SignupComponent,
     ForgotPasswordComponent,
     ChatComponent,
+
   ],
   imports: [
     BrowserModule,

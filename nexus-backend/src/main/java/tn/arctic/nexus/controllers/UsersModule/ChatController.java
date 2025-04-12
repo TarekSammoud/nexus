@@ -1,41 +1,76 @@
 package tn.arctic.nexus.controllers.UsersModule;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import tn.arctic.nexus.entities.ChatMessage;
+import tn.arctic.nexus.entities.User;
+import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
-@Controller
+import java.util.Optional;
+
+@RestController
 public class ChatController {
 
     private final SimpMessagingTemplate messagingTemplate;
 
+
     public ChatController(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
+
     }
 
-    // Gérer l'envoi de messages via STOMP
     @MessageMapping("/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessage message) {
-        System.out.println("Message envoyé : " + message.getSenderId() + " -> " + message.getRecipientId());
-
-        // Vérification que le message contient des valeurs valides
-        if (message.getRecipientId() == null || message.getSenderId() == null) {
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        if (chatMessage.getSenderId() == null || chatMessage.getRecipientId() == null) {
             System.err.println("Message invalide, destinataire ou expéditeur manquant.");
-            return;
         }
 
-        // Envoi au destinataire
         try {
-            messagingTemplate.convertAndSendToUser(
-                    message.getRecipientId().toString(), // Utilise l'ID comme nom d'utilisateur
-                    "/queue/messages",  // Le canal auquel l'utilisateur est abonné
-                    message  // Le message à envoyer
-            );
-            System.out.println("Message envoyé à l'utilisateur " + message.getRecipientId());
+
+            // Envoyer le message à l'utilisateur via WebSocket
+//            messagingTemplate.convertAndSendToUser(
+//                    chatMessage.getRecipientId().toString(),
+//                    "/queue/messages",
+//                    chatMessage
+//            );
+            System.out.println("Message envoyé à l'utilisateur " + chatMessage.getRecipientId());
+            return chatMessage;
         } catch (Exception e) {
-            System.err.println("Erreur lors de l'envoi du message à " + message.getRecipientId() + ": " + e.getMessage());
+            System.err.println("Erreur lors de l'envoi du message: " + e.getMessage());
+            e.printStackTrace();
+
         }
+        return chatMessage;
     }
+@Autowired
+    private IUserRepository userRepository;
+
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage addUser(
+            @Payload ChatMessage chatMessage,
+            SimpMessageHeaderAccessor headerAccessor
+    ) {
+
+        Optional<User> user = Optional.of(new User());
+        user= userRepository.findById(chatMessage.getSenderId());
+
+        headerAccessor.getSessionAttributes().put("username",user.get().getFirstName());
+        return chatMessage;
+    }
+
 }
+
+/*
+*
+*  @GetMapping("/getMessages")
+    public List<ChatMessage> getMessages(@RequestParam Long userId) {
+        // Récupérer tous les messages envoyés ou reçus par l'utilisateur
+        return chatMessageRepository.findBySenderIdAndRecipientIdOrderByTimestampAsc(userId, userId);
+    }*/
