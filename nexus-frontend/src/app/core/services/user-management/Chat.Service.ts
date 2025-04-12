@@ -15,33 +15,43 @@ export class ChatService {
     connect(userId: number): void {
         console.log('Connexion à WebSocket...');
         this.stompClient = new Client({
-            brokerURL: 'ws://localhost:9000/nexus-backend/ws', // URL complète du broker WebSocket
-            reconnectDelay: 5000, // Tentatives de reconnexion
-            webSocketFactory: () => new SockJS('http://localhost:9000/nexus-backend/ws'), // Factory pour SockJS
+            brokerURL: 'ws://localhost:9000/nexus-backend/ws',
+            reconnectDelay: 5000,
+            webSocketFactory: () => new SockJS('http://localhost:9000/nexus-backend/ws'),
             onConnect: () => {
                 console.log('Connecté à WebSocket');
-                this.stompClient.subscribe(`/user/${userId}/queue/messages`, (msg: Message) => {
-                    const message: ChatMessage = JSON.parse(msg.body); // Traitement du message reçu
-                    this.messageSubject.next(message); // Diffusion du message reçu
-                    console.log('Message reçu:', message);
+
+                // Remplacer par l'abonnement au canal public
+                this.stompClient.subscribe('/topic/public', (msg: Message) => {
+                    const message: ChatMessage = JSON.parse(msg.body);
+                    this.messageSubject.next(message);
+                    console.log('Message public reçu:', message);
                 });
-            },
+            }
+            ,
             onStompError: (frame) => {
-                console.error('Erreur de STOMP:', frame);
+                console.error('Erreur STOMP:', frame);
             }
         });
+
 
         this.stompClient.activate(); // Activation du client WebSocket
     }
 
-    sendMessage(senderId: number, recipientId: number, content: string): void {
-        const message = new ChatMessage(senderId, recipientId, content);
-        console.log(`Envoi du message de ${senderId} à ${recipientId}: ${content}`);
+    sendMessage(senderId: number, content: string, sendername?: string): void {
+        const message: any = {
+            senderId,
+            content,
+            sendername,
+            type: 'CHAT'
+        };
+
         this.stompClient.publish({
-            destination: '/app/chat.sendMessage', // Destination pour l'envoi
-            body: JSON.stringify(message) // Conversion du message en JSON
+            destination: '/app/chat.sendMessage',
+            body: JSON.stringify(message)
         });
     }
+
 
     // Déconnexion du WebSocket
     disconnect(): void {

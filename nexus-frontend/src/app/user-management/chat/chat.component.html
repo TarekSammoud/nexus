@@ -1,23 +1,12 @@
 <app-header></app-header>
 
-<!-- Sélection de l'ami -->
-<div>
-    <label for="recipient">Choisir un ami :</label>
-    <select [(ngModel)]="recipientId" (change)="loadMessages()" id="recipient" name="recipient">
-        <option *ngFor="let friend of friends; trackBy: trackById" [value]="friend.id">
-            {{ friend.firstName }} {{ friend.lastName }}
-        </option>
-    </select>
-</div>
-
-<!-- Liste des messages envoyés -->
+<!-- Liste des messages publics -->
 <ul class="message-list">
     <li *ngFor="let msg of messages; trackBy: trackById"
         [ngClass]="{ 'sent': msg.senderId === currentUserId, 'received': msg.senderId !== currentUserId }">
         <div class="message-card">
             <div class="message-header">
-                <strong>De:</strong> {{ getUserNameById(msg.senderId) }} |
-                <strong>À:</strong> {{ getUserNameById(msg.recipientId) }}
+                <strong>{{ msg.senderId || getUserNameById(msg.senderId) }}</strong>
             </div>
             <div class="message-content">
                 {{ msg.content }}
@@ -27,9 +16,10 @@
             </div>
         </div>
     </li>
+
 </ul>
 
-<!-- Envoi de message -->
+<!-- Envoi de message dans le canal -->
 <div>
     <label for="messageContent">Votre message :</label>
     <textarea id="messageContent" [(ngModel)]="messageContent" placeholder="Votre message ici..."></textarea>
