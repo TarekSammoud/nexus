@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as SockJS from 'sockjs-client';
 import { Client, Message } from '@stomp/stompjs';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ChatMessage } from '../../entities/user/ChatMessage';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
     private stompClient!: Client;
     private messageSubject = new BehaviorSubject<any>(null);
     public messages$ = this.messageSubject.asObservable();
-
-
 
     // Connexion WebSocket
     connect(userId: number): void {
@@ -35,9 +34,6 @@ export class ChatService {
         this.stompClient.activate(); // Activation du client WebSocket
     }
 
-
-
-
     sendMessage(senderId: number, recipientId: number, content: string): void {
         const message = new ChatMessage(senderId, recipientId, content);
         console.log(`Envoi du message de ${senderId} à ${recipientId}: ${content}`);
@@ -53,5 +49,11 @@ export class ChatService {
             this.stompClient.deactivate();
             console.log('Déconnecté de WebSocket');
         }
+    }
+
+
+    constructor(private http: HttpClient) { }
+    getMessages(userId: number): Observable<ChatMessage[]> {
+        return this.http.get<ChatMessage[]>(`http://localhost:9000/nexus-backend/msg/getMessages?userId=${userId}`);
     }
 }
