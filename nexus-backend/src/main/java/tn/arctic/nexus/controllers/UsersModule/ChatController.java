@@ -28,12 +28,33 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        chatMessage.setTimestamp(LocalDateTime.now());
-        System.out.println("Message envoyé par: " + chatMessage.getSendername());
-        return chatMessage;
+    public void sendMessage(@Payload ChatMessage chatMessage) {
+        try {
+            // Envoyer le message au destinataire
+            messagingTemplate.convertAndSendToUser(
+                    chatMessage.getRecipientId().toString(),
+                    "/queue/messages",
+                    chatMessage
+            );
+
+            // Éventuellement aussi à l’expéditeur (pour affichage immédiat)
+            messagingTemplate.convertAndSendToUser(
+                    chatMessage.getSenderId().toString(),
+                    "/queue/messages",
+                    chatMessage
+            );
+            System.out.println("Reçu sur /chat.sendMessage: " +
+                    "from=" + chatMessage.getSenderId() +
+                    " to=" + chatMessage.getRecipientId() +
+                    " content=" + chatMessage.getContent());
+
+
+
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'envoi du message: " + e.getMessage());
+        }
     }
+
 
     @Autowired
     private IUserRepository userRepository;
