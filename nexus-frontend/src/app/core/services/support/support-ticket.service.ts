@@ -29,4 +29,12 @@ export class SupportService {
   deleteTicket(ticketId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${ticketId}`);
   }
+  getTicketByRoomId(roomId: number): Observable<SupportTicket> {
+    return this.http.get<SupportTicket>(`${this.baseUrl}/by-room/${roomId}`);
+  }
+
+  // Method to fetch tickets sorted by priority and creation date
+  getTicketsSortedByPriorityAndCreatedAt(): Observable<SupportTicket[]> {
+    return this.http.get<SupportTicket[]>(`${this.baseUrl}/sorted`);
+  }
 }

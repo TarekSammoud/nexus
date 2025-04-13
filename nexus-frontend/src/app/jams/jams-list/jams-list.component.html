@@ -10,7 +10,7 @@
   </div>
 
   <div *ngIf="jams.length > 0; else noData" class="jam-cards">
-    <div *ngFor="let jam of jams | paginate: { itemsPerPage: 3, currentPage: page }" class="jam-card">
+    <div *ngFor="let jam of jams" class="jam-card">
       <div class="jam-img-wrapper">
         <img *ngIf="jam.imageUrl" [src]="jam.imageUrl" alt="Jam Image" class="jam-img" />
       </div>
@@ -40,7 +40,7 @@
     </div>
   </div>
   
-  <pagination-controls (pageChange)="page = $event" class="pagination"></pagination-controls>
+ 
 
   <ng-template #noData>
     <p class="text-center text-muted">No Game Jams available.</p>

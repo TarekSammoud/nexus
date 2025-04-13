@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,12 +34,18 @@ public class SupportTicket {
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
-
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false) // Ensure it's non-nullable
     private TicketPriority priority;
+
 
     @Enumerated(EnumType.STRING)
     private TicketCategory category;
+
+
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "assigneA_id") // Ensure the column name is correct
@@ -51,4 +60,11 @@ public class SupportTicket {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User   user;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

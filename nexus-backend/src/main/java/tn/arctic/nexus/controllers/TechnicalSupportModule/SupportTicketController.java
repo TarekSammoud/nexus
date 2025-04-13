@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.SupportTicket;
-import tn.arctic.nexus.services.TechnicalSupportModule.OpenAiApiService;
 import tn.arctic.nexus.services.TechnicalSupportModule.SupportTicketService;
 
 import java.util.List;
@@ -20,8 +19,13 @@ public class SupportTicketController {
 
     @Autowired
     private SupportTicketService supportTicketService;
-    @Autowired
+    
+  /*  @Autowired
     private OpenAiApiService openAiApiService;
+    */
+    @Autowired
+    private SupportTicketService ticketService;
+
     // Get all tickets
     @GetMapping("getAll")
     public List<SupportTicket> getAllTickets() {
@@ -63,9 +67,22 @@ public class SupportTicketController {
         return isDeleted ? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
+/*
     @PostMapping("/chatgpt-response")
     public String getChatGptResponse(@RequestBody String prompt) {
         return openAiApiService.getChatGptResponse(prompt);
     }
+ */
+    @GetMapping("/by-room/{roomId}")
+    public ResponseEntity<SupportTicket> getTicketByRoomId(@PathVariable Long roomId) {
+        return ticketService.getTicketByRoomId(roomId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/sorted")
+    public List<SupportTicket> getTicketsSortedByPriorityAndCreatedAt() {
+        return supportTicketService.getTicketsSortedByPriorityAndCreatedAt();
+    }
 }
+
