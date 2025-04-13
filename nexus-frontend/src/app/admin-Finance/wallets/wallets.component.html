@@ -71,7 +71,7 @@
             <div class="wallet-body">
               <div class="wallet-info">
                 <label>Public Key:</label>
-                <p class="metamask-key">{{ wallet.metamask_public_key }}</p>
+                <p class="metamask-key">{{ wallet.metamaskPublicKey }}</p>
               </div>
               
               <div class="wallet-dates">
@@ -132,7 +132,7 @@
                     type="text" 
                     id="metamaskKey"
                     name="metamaskKey"
-                    [(ngModel)]="updateDialogData.wallet!.metamask_public_key"
+                    [(ngModel)]="updateDialogData.wallet!.metamaskPublicKey"
                     required
                     class="form-input"
                 >

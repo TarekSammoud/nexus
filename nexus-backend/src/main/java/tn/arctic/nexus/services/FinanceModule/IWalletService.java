@@ -11,6 +11,7 @@ public interface IWalletService {
     public Wallet addWallet(Wallet wallet);
     public Wallet updateWallet(Wallet wallet);
     public boolean deleteWalletById(Long id);
+    Wallet findByMetamaskPublicKey(String metamask_public_key);
 
 
 

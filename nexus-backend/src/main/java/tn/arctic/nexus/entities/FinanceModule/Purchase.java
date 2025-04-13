@@ -33,7 +33,7 @@ public class Purchase implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @OneToOne(mappedBy = "purchase")
+    @OneToOne(mappedBy = "purchase",cascade = CascadeType.ALL, orphanRemoval = true)
     private Refund refund;
 
     @ManyToOne

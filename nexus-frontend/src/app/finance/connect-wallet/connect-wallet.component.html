@@ -1,3 +1,8 @@
+
+
+
+
+
 <div class="stepper-container">
   <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
     <!-- Step 1 -->
@@ -109,7 +114,7 @@
               </div>
             </div>
             <div class="button-group">
-              <button mat-flat-button class="next-btn"  routerLink="/wallet">
+              <button mat-flat-button class="next-btn" (click)="createNewWallet()"  >
                 <i class="fas fa-wallet"></i>
                 Go to Wallet
               </button>
