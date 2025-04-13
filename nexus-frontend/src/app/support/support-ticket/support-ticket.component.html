@@ -66,6 +66,31 @@
         </div>
       </div>
 
+      <!-- Priority Field -->
+<div class="form-group">
+  <label for="priority">Priority:</label>
+  <select 
+    id="priority" 
+    formControlName="priority" 
+    class="form-control" 
+    [ngClass]="{'is-invalid': priority?.invalid && priority?.touched}" 
+    aria-describedby="priorityHelp"
+  >
+    <option value="">Select a priority</option>
+    <option value="CRITICAL">Critical</option>
+    <option value="HIGH">High</option>
+    <option value="MEDIUM">Medium</option>
+    <option value="LOW">Low</option>
+  </select>
+  <small id="priorityHelp" class="form-text text-muted">
+    Set the priority level for this agent or task.
+  </small>
+  <div *ngIf="priority?.invalid && priority?.touched" class="invalid-feedback d-block">
+    Priority is required.
+  </div>
+</div>
+
+
       <!-- Category Field -->
       <div class="form-group">
         <label for="category">Category:</label>

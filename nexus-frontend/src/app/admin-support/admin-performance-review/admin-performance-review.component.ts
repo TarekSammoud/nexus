@@ -23,7 +23,8 @@ export class AdminPerformanceReviewComponent {
     departement: Departement.PAYMENTS,
     userId: 0,
     ticketsAssignes: [],
-    evaluations: []
+    evaluations: [],
+    averageRating: 0
   };
 
   constructor(
@@ -50,7 +51,7 @@ export class AdminPerformanceReviewComponent {
   addReview(): void {
     if (this.reviewForm.valid) {
       const review: PerformanceReview = {
-        supportAgentId: 2,
+        supportAgentId: 11,
         rating: this.reviewForm.value.rating,
         feedback: this.reviewForm.value.feedback,
         agent: this.staticAgent,
@@ -69,13 +70,7 @@ export class AdminPerformanceReviewComponent {
     }
   }
 
-  editReview(review: PerformanceReview): void {
-    this.reviewForm.setValue({
-      rating: review.rating,
-      feedback: review.feedback
-    });
-    this.currentReview = review;
-  }
+ 
 
   updateReview(): void {
     if (!this.currentReview || !this.reviewForm.valid) return;

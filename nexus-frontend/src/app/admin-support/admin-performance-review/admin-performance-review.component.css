@@ -57,6 +57,21 @@ body {
     transition: background-color 0.3s;
   }
   
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    color:#000
+  }
+  
+  thead {
+    background-color: #f0f0f0;
+  }
+  
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+  }
+  
   button:hover {
     background-color: #45a049;
   }

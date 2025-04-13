@@ -11,7 +11,11 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./admin-agent-support.component.css']
 })
 export class AdminAgentSupportComponent implements OnInit {
+onEdit(_t56: SupportAgent) {
+throw new Error('Method not implemented.');
+}
   agents: SupportAgent[] = [];
+  rankedAgents: SupportAgent[] = [];
   agentForm: FormGroup;
   isEditMode: boolean = false;
   currentAgentId: number | null = null;
@@ -20,6 +24,10 @@ export class AdminAgentSupportComponent implements OnInit {
   errorMessage: string = '';
 
   departements = Object.values(Departement);
+totalAgents: any;
+avgRating: string | number | undefined;
+topPerformerDept: any;
+$index: any;
 
   constructor(
     private fb: FormBuilder, 
@@ -39,27 +47,11 @@ export class AdminAgentSupportComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAgents();
+    this.loadRankedAgents();
     console.log('Component initialized, attempting to load agents...');
   }
 
-  loadAgents(): void {
-    this.isLoading = true;
-    this.errorMessage = '';
-    
-    this.agentService.getAllAgents()
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe(
-        (data: SupportAgent[]) => {
-          this.agents = data;
-          console.log('Agents loaded:', this.agents);
-        },
-        (error: any) => {
-          console.error('Error loading agents', error);
-          this.errorMessage = 'Failed to load agents. Please try again later.';
-        }
-      );
-  }
-
+  
   onModify(agent: SupportAgent): void {
     this.isEditMode = true;
     this.currentAgentId = agent.id;
@@ -173,4 +165,96 @@ export class AdminAgentSupportComponent implements OnInit {
       this.successMessage = '';
     }, 5000);
   }
+  // Add these methods to your AdminAgentSupportComponent class
+
+/**
+ * Calculate and set metrics based on loaded agents
+ */
+calculateMetrics(): void {
+  // Total agents count
+  this.totalAgents = this.agents.length;
+  
+  // Calculate average rating
+  if (this.rankedAgents.length > 0) {
+    const sum = this.rankedAgents.reduce((total, agent) => 
+      total + (agent.averageRating || 0), 0);
+    this.avgRating = (sum / this.rankedAgents.length).toFixed(1);
+  } else {
+    this.avgRating = '0.0';
+  }
+  
+  // Find top performing department
+  if (this.rankedAgents.length > 0) {
+    const deptPerformance = new Map<string, { count: number, totalRating: number }>();
+    
+    // Group by department and sum ratings
+    this.rankedAgents.forEach(agent => {
+      if (!deptPerformance.has(agent.departement)) {
+        deptPerformance.set(agent.departement, { count: 0, totalRating: 0 });
+      }
+      
+      const dept = deptPerformance.get(agent.departement);
+      if (dept) {
+        dept.count++;
+        dept.totalRating += (agent.averageRating || 0);
+      }
+    });
+    
+    // Find department with highest average rating
+    let topDept = '';
+    let topAvg = 0;
+    
+    deptPerformance.forEach((value, key) => {
+      const avgRating = value.totalRating / value.count;
+      if (avgRating > topAvg) {
+        topAvg = avgRating;
+        topDept = key;
+      }
+    });
+    
+    this.topPerformerDept = topDept;
+  } else {
+    this.topPerformerDept = 'N/A';
+  }
+}
+
+// Update your loadRankedAgents method to calculate metrics
+loadRankedAgents(): void {
+  this.isLoading = true;
+  this.errorMessage = '';
+
+  this.agentService.getRankedAgents()
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe(
+      (data: SupportAgent[]) => {
+        this.rankedAgents = data;
+        this.calculateMetrics(); // Add this line to calculate metrics
+        console.log('Ranked agents loaded:', this.rankedAgents);
+      },
+      (error: any) => {
+        console.error('Error loading ranked agents', error);
+        this.errorMessage = 'Failed to load ranked agents. Please try again later.';
+      }
+    );
+}
+
+// Also update loadAgents to recalculate metrics if needed
+loadAgents(): void {
+  this.isLoading = true;
+  this.errorMessage = '';
+  
+  this.agentService.getAllAgents()
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe(
+      (data: SupportAgent[]) => {
+        this.agents = data;
+        this.calculateMetrics(); // Add this line to calculate metrics
+        console.log('Agents loaded:', this.agents);
+      },
+      (error: any) => {
+        console.error('Error loading agents', error);
+        this.errorMessage = 'Failed to load agents. Please try again later.';
+      }
+    );
+}
 }

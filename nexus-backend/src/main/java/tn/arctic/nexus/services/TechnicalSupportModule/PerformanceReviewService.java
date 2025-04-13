@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PerformanceReviewService {
@@ -64,5 +66,26 @@ public class PerformanceReviewService {
     // Delete a performance review by ID
     public void deleteReview(Long id) {
         performanceReviewRepository.deleteById(id);
+    }
+
+
+
+
+    public List<SupportAgent> getAgentsRankedByAverageRating() {
+        List<SupportAgent> agents = supportAgentRepository.findAll();
+
+        agents.forEach(agent -> {
+            Set<PerformanceReview> reviews = agent.getEvaluations();
+            double avgRating = reviews.isEmpty()
+                    ? 0.0
+                    : reviews.stream().mapToDouble(PerformanceReview::getRating).average().orElse(0.0);
+            agent.setAverageRating(avgRating);
+        });
+
+        // Sort descending by average rating
+
+        return agents.stream()
+                .sorted((a, b) -> Double.compare(b.getAverageRating(), a.getAverageRating()))
+                .collect(Collectors.toList());
     }
 }

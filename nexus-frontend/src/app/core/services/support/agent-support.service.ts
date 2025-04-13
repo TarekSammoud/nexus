@@ -40,4 +40,7 @@ export class SupportAgentService {
   getAgentsByDepartment(department: string): Observable<SupportAgent[]> {
     return this.http.get<SupportAgent[]>(`${this.baseUrl}/department/${department}`);
   }
+  getRankedAgents(): Observable<SupportAgent[]> {
+    return this.http.get<SupportAgent[]>(`${this.baseUrl}/ranked`);
+  }
 }
