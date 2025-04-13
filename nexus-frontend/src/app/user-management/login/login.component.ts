@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/user-management/auth.service';  // Assurez-vous que le service est importé
+import { AuthService } from '../../core/services/user-management/auth.service';  // Service d'authentification
+import { TokenService } from '../../core/services/user-management/token.service';
 
 @Component({
   selector: 'app-login',
@@ -10,21 +11,27 @@ import { AuthService } from '../../core/services/user-management/auth.service'; 
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  errorMessage: string = '';  // Pour afficher les erreurs, si nécessaire
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   onLogin(): void {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe(
-        userId => {
-          console.log('User ID:', userId);  // Affiche l'ID de l'utilisateur dans la console
-          localStorage.setItem('userId', JSON.stringify(userId));  // Stocke l'ID utilisateur dans localStorage
+        (response) => {
+          const token = response.token;
+          localStorage.setItem('auth_token', token);
 
-          // Redirigez vers le profil de l'utilisateur
-          this.router.navigate([`/user-profile/${userId}`]);
+          const userId = TokenService.getUserId();
+          // ✅ utilise ton service
+
+          if (userId) {
+            this.router.navigate(['/user-profile', userId]);
+          } else {
+            this.errorMessage = 'Impossible de récupérer l\'ID utilisateur.';
+          }
         },
-        error => {
+        (error) => {
           this.errorMessage = 'Invalid credentials. Please try again.';
         }
       );

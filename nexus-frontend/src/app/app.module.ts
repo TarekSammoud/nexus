@@ -32,7 +32,9 @@ import { ForgotPasswordComponent } from './user-management/forgot-password/forgo
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './user-management/chat/chat.component';
 
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
+import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +73,11 @@ import { ChatComponent } from './user-management/chat/chat.component';
     FormsModule,
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -30,4 +30,8 @@ public class AuthService {
     public boolean checkPassword(String rawPassword, String encodedPassword) {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
+    public User loadUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoleType } from '../../core/entities/user/enums';
 import { SignUp } from '../../core/entities/user/signup.model';
-import { UserService } from '../../core/services/user-management/signup.service';
+import { AuthService } from '../../core/services/user-management/auth.service'; // ✅ utiliser AuthService
 
 @Component({
   selector: 'app-signup',
@@ -11,10 +11,10 @@ import { UserService } from '../../core/services/user-management/signup.service'
 })
 export class SignupComponent implements OnInit {
   user: SignUp;
-  RoleType = RoleType; // ✅ Pour que le template y ait accès
-  emailError: string | null = null; // Pour afficher l'erreur d'email
+  RoleType = RoleType;
+  emailError: string | null = null;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
     this.user = new SignUp({
       firstName: '',
       lastName: '',
@@ -27,36 +27,32 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(): void {
-    // Vérification de l'email
     if (!this.user.email || !this.user.password) {
       alert('Email et mot de passe sont requis');
       return;
     }
 
-    // Vérification de l'unicité de l'email
-    this.userService.checkEmailUnique(this.user.email).subscribe({
-      next: (isEmailUnique) => {
-        if (isEmailUnique) {
-          // L'email est unique, on peut soumettre l'inscription
-          this.userService.createUser(this.user).subscribe({
-            next: (response) => {
-              console.log('Inscription réussie', response);
-              this.router.navigate(['/login']);
-            },
-            error: (error) => {
-              console.error("Erreur d'inscription", error);
-              alert('Une erreur est survenue lors de l\'inscription.');
-            }
-          });
-        } else {
-          // L'email est déjà utilisé
-          this.emailError = 'Cet email est déjà utilisé. Veuillez en choisir un autre.';
-        }
+    // Commenter temporairement la vérification de l'email unique
+    // this.authService.checkEmailUnique(this.user.email).subscribe({
+    //   next: (isUnique) => {
+    //     if (isUnique) {
+    this.authService.register(this.user).subscribe({
+      next: () => {
+        console.log('Inscription réussie');
+        this.router.navigate(['/login']);
       },
-      error: (error) => {
-        console.error('Erreur lors de la vérification de l\'email', error);
-        alert('Une erreur est survenue lors de la vérification de l\'email.');
+      error: (err) => {
+        console.error("Erreur lors de l'inscription", err);
+        alert('Erreur lors de l\'inscription.');
       }
     });
+    //     } else {
+    //       this.emailError = 'Cet email est déjà utilisé. Veuillez en choisir un autre.';
+    //     }
+    //   },
+    //   error: () => {
+    //     alert('Erreur lors de la vérification de l\'email.');
+    //   }
+    // });
   }
 }
