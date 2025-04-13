@@ -63,6 +63,7 @@ public class User implements Serializable {
     @JsonManagedReference("user-entryrating")
     private Set<EntryRating> ratings;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviews-user")
     private List<GameReview> gameReviews;
 
@@ -216,3 +217,4 @@ public class User implements Serializable {
         this.gameReviews = gameReviews;
     }
 }
+

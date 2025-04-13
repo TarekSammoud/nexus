@@ -3,7 +3,6 @@ package tn.arctic.nexus.controllers.GamesModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.GameMedia;
-import tn.arctic.nexus.repositories.GamesModule.IGameMediaRepository;
 import tn.arctic.nexus.services.GamesModule.IGameMediaService;
 
 import java.util.List;

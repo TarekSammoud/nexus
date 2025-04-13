@@ -1,0 +1,142 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    color: #000; /* Set text color to black */
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Info Button */
+  button.btn-info {
+    background-color: #17a2b8;
+    color: #fff;
+  }
+  
+  button.btn-info:hover {
+    background-color: #138496;
+  }
+  
+  /* Primary Button */
+  button.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Secondary Button */
+  button.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  button.btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Warning Button */
+  button.btn-outline-warning {
+    border: 2px solid #ffc107;
+    background-color: transparent;
+    color: #ffc107;
+  }
+  
+  button.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+  }
+  
+  /* Danger Button */
+  button.btn-outline-danger {
+    border: 2px solid #dc3545;
+    background-color: transparent;
+    color: #dc3545;
+  }
+  
+  button.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Form Styling */
+  .ticket-form {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Form Group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Input and Textarea Styling */
+  input.form-control, textarea.form-control, select.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  input.form-control:focus, textarea.form-control:focus, select.form-control:focus {
+    border-color: #007bff;
+  }
+  
+  /* Invalid Form Field */
+  .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* Ticket List Styling */
+  .ticket-list {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .ticket-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ticket-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .ticket-list li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Text Styling */
+  h2 {
+    color: #333;
+  }
+  
+  h2, label, p {
+    color: #000; /* Set text color to black */
+  }
+  

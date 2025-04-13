@@ -15,7 +15,16 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { SupportAgentComponent } from './support/support-agent/support-agent.component'; 
+import { RoomComponent } from './support/room/room.component';
 
+import { RoomChatComponent } from './support/room-chat/room-chat.component';
+import { PerformanceReviewComponent } from './support/performance-review/performance-review.component';
+import { SupportTicketComponent } from './support/support-ticket/support-ticket.component';
+import { AdminSupportListComponent } from './admin-support/admin-support-list/admin-support-list.component';
+import { AdminPerformanceReviewComponent } from './admin-support/admin-performance-review/admin-performance-review.component';
+import { AdminRoomComponent } from './admin-support/admin-room/admin-room.component';
+import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/admin-agent-support.component';
 
 
 
@@ -31,8 +40,11 @@ const routes: Routes = [
       {path: 'update-game-category/:id', component: CreateGameCategoryComponent},
       {path: 'add-new-game', component: CreateGameComponent},
       {path: 'games/:id', component: GamePageComponent},
-      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
-
+      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent},
+      {path: 'support-agent', component: AdminAgentSupportComponent},
+      {path:'room',component:AdminRoomComponent},
+      {path: 'performance-review', component: AdminPerformanceReviewComponent},       
+      {path:'support/list_ticket',component:AdminSupportListComponent},
 
 
     ]
@@ -40,13 +52,16 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'jams', component: JamsComponent},
   { path: 'jam/:id', component: JamDetailsPageComponent },
-
   {path: '', component: HomeComponent},
   {path: 'games/:id', component: GamePageComponent},
   {path: 'category/:name', component: GameGridComponent},
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
   {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
+  {path: 'games', component: GamesComponent},
+  {path: 'support-tickets', component: SupportTicketComponent},
+  {path:'room/:roomId',component:RoomChatComponent},
+  {path: 'performance-reviews' , component:PerformanceReviewComponent}  // Add this route
 
 ];
 

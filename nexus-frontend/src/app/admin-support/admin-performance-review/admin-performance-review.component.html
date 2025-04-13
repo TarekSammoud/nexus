@@ -1,0 +1,34 @@
+<div *ngIf="reviews$ | async as reviews">
+    <ul>
+      <li *ngFor="let review of reviews">
+        {{ review.rating }} - {{ review.feedback }}
+        <button (click)="editReview(review)">Edit</button>
+        <button *ngIf="review.id !== undefined" (click)="deleteReview(review.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+<div *ngIf="reviews$ | async as reviews">
+    <ul>
+      <li *ngFor="let review of reviews">
+        {{ review.rating }} - {{ review.feedback }}
+        <button (click)="editReview(review)">Edit</button>
+        <button *ngIf="review.id !== undefined" (click)="deleteReview(review.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <label for="rating">Rating:</label>
+    <input id="rating" formControlName="rating" type="number">
+  
+    <label for="feedback">Feedback:</label>
+    <textarea id="feedback" formControlName="feedback"></textarea>
+  
+    <button type="submit" [disabled]="reviewForm.invalid">
+      {{ currentReview ? 'Update Review' : 'Add Review' }}
+    </button>
+  </form>
+  
+
+
+  
