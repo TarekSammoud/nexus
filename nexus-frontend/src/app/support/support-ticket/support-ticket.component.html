@@ -1,0 +1,92 @@
+<div class="navigation-button">
+  <button routerLink="/support-agent" class="btn btn-info">Go to Support Agent</button>
+</div>
+
+
+<div class="ticket-form">
+  <h2>{{ isEditMode ? 'Edit Ticket' : 'Create Ticket' }}</h2>
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <!-- Title Field -->
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input 
+        id="title" 
+        formControlName="title" 
+        type="text" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': title?.invalid && title?.touched}"
+        maxlength="100"
+      >
+      <div *ngIf="title?.invalid && title?.touched" class="invalid-feedback">
+        Title is required (max length 100).
+      </div>
+    </div>
+
+    <!-- Description Field -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea 
+        id="description" 
+        formControlName="description" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': description?.invalid && description?.touched}" 
+        maxlength="500"
+      ></textarea>
+      <div *ngIf="description?.invalid && description?.touched" class="invalid-feedback">
+        Description is required (max length 500).
+      </div>
+    </div>
+
+    <!-- Category Field -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select 
+        id="category" 
+        formControlName="category" 
+        class="form-control" 
+        [ngClass]="{'is-invalid': category?.invalid && category?.touched}"
+      >
+        <option value="">Select a category</option>
+        <option value="TECHNICAL">Technical</option>
+        <option value="PURCHASE">Purchase</option>
+        <option value="ACCOUNT">Account</option>
+        <option value="COMMUNITY_CONTENT">Community Content</option>
+      </select>
+      <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">
+        Category is required.
+      </div>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="form-group">
+      <button 
+      type="submit" 
+      class="btn btn-primary" 
+      [disabled]="ticketForm.invalid || !ticketForm.dirty">
+      {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
+  </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        Reset Form
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="ticket-list">
+  <h2>All Tickets</h2>
+  <ul>
+    <!-- Ensuring correct usage by iterating ticket as variable -->
+    <li *ngFor="let ticket of tickets">
+      <strong>{{ ticket.title }}</strong>
+      <p>{{ ticket.description }}</p>
+      <p><em>Category: {{ ticket.category }}</em></p>
+      <p><em>Status: {{ "OPEN" }}</em></p>
+      <button class="btn btn-outline-warning" (click)="onModify(ticket)">Edit</button>
+      <button class="btn btn-outline-danger" (click)="onDelete(ticket)">Delete</button>
+          </li>
+  </ul>
+</div>
+
+<!-- New button to navigate to the support agent page -->
+

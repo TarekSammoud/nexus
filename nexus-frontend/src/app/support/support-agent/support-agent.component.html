@@ -1,0 +1,86 @@
+<div class="agent-form card mt-4 p-4 shadow-sm rounded">
+    <h2 class="text-center mb-4">{{ isEditMode ? 'Edit Agent' : 'Create Agent' }}</h2>
+    <div class="navigation-button">
+        <button routerLink="/room" class="btn btn-info">Go to Room</button>
+      </div>
+    <form [formGroup]="agentForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input 
+          id="name" 
+          formControlName="name" 
+          type="text" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': agentForm.get('name')?.invalid && agentForm.get('name')?.touched}"
+          maxlength="100"
+          placeholder="Enter agent name"
+        >
+        <div *ngIf="agentForm.get('name')?.invalid && agentForm.get('name')?.touched" class="invalid-feedback">
+          Name is required (max length 100).
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-group mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input 
+          id="email" 
+          formControlName="email" 
+          type="email" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': agentForm.get('email')?.invalid && agentForm.get('email')?.touched}"
+          maxlength="100"
+          placeholder="Enter agent email"
+        >
+        <div *ngIf="agentForm.get('email')?.invalid && agentForm.get('email')?.touched" class="invalid-feedback">
+          A valid email is required (max length 100).
+        </div>
+      </div>
+  
+      <!-- Department Field -->
+      <div class="form-group mb-4">
+        <label for="departement" class="form-label">Department:</label>
+        <select 
+          id="departement" 
+          formControlName="departement" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': agentForm.get('departement')?.invalid && agentForm.get('departement')?.touched}"
+        >
+          <option value="" disabled>Select a department</option>
+          <option *ngFor="let dept of departements" [value]="dept">{{ dept }}</option>
+        </select>
+        <div *ngIf="agentForm.get('departement')?.invalid && agentForm.get('departement')?.touched" class="invalid-feedback">
+          Department is required.
+        </div>
+      </div>
+  
+      <!-- Buttons Section -->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary me-2 px-4" [disabled]="agentForm.invalid">
+          {{ isEditMode ? 'Update Agent' : 'Create Agent' }}
+        </button>
+        <button type="button" class="btn btn-secondary px-4" (click)="resetForm()">
+          Reset Form
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="agent-list mt-5">
+    <h2>All Agents</h2>
+    <ul class="list-group">
+      <li *ngFor="let agent of agents" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ agent.name }}</strong>
+          <p class="mb-0">{{ agent.email }}</p>
+          <p class="mb-0"><em>Department: {{ agent.departement }}</em></p>
+        </div>
+        <div>
+          <button class="btn btn-outline-warning btn-sm me-2" (click)="onModify(agent)">Edit</button>
+          <button class="btn btn-outline-danger btn-sm" (click)="onDelete(agent)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

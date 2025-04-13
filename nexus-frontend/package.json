@@ -30,10 +30,12 @@
     "@syncfusion/ej2": "^28.2.7",
     "@syncfusion/ej2-angular-buttons": "^28.2.7",
     "@syncfusion/ej2-angular-grids": "^28.2.7",
+    "@syncfusion/ej2-angular-layouts": "^29.1.37",
     "@syncfusion/ej2-angular-navigations": "^28.2.6",
     "angularx-qrcode": "^15.0.1",
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
+    "cors": "^2.8.5",
     "font-awesome": "^4.7.0",
     "ngx-pagination": "^6.0.3",
     "ngx-quill": "^20.0.1",
@@ -42,7 +44,7 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.5",
+    "@angular-devkit/build-angular": "^15.2.11",
     "@angular/cli": "~15.2.5",
     "@angular/compiler-cli": "^15.2.0",
     "@angular/localize": "^15.2.0",
