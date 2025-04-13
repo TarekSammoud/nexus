@@ -5,7 +5,7 @@ import { Transfer } from "./transfer.model";
 export interface NexusWallet {
   id?: number;
   coinBalance?: number;
-  metamask_public_key?: string;
+  metamaskPublicKey?: string;
   createdAt?: Date;
   updatedAt?: Date;
   payments?: Payment[];

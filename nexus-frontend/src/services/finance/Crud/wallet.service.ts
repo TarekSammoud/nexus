@@ -29,4 +29,8 @@ export class WalletService {
   updateWallet(wallet: NexusWallet,): Observable<NexusWallet> {
     return this.http.put<NexusWallet>(`${this.baseUrl}/update`, wallet);
   }
+
+  getWalletByPublicKey(publicKey: string): Observable<NexusWallet> {
+    return this.http.get<NexusWallet>(`${this.baseUrl}/findByPublicKey/${publicKey}`);
+  }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CoinsService } from 'src/services/finance/coins.service';
 
 interface Friend {
   id: number;
@@ -13,7 +12,7 @@ interface Friend {
   styleUrls: ['./transfer-popup.component.css']
 })
 export class TransferPopupComponent {
-  constructor(public activeModal: NgbActiveModal, public coinsService: CoinsService) {
+  constructor(public activeModal: NgbActiveModal) {
     this.filteredFriends = [...this.friends];
 
   }

@@ -42,6 +42,11 @@ public class WalletController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wallet not found"); // Return 404 with message
     }
 
+    @GetMapping("/findByPublicKey/{pK}")
+    public Wallet getWalletByPublicKey(@PathVariable String pK) {
+        return walletService.findByMetamaskPublicKey(pK);
+    }
+
 
 
 }

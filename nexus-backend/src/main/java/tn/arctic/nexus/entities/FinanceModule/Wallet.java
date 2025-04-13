@@ -26,7 +26,7 @@ public class Wallet implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long coinBalance;
-    private String metamask_public_key;
+    private String metamaskPublicKey;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

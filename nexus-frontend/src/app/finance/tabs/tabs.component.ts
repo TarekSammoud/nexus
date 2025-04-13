@@ -3,6 +3,8 @@ import { TransferPopupComponent } from '../wallet-dashboard/popUps/transfer-popu
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TasksListPopupComponent } from '../wallet-dashboard/popUps/tasks-list-popup/tasks-list-popup.component';
 import { RequestRefundComponent } from '../wallet-dashboard/popUps/request-refund/request-refund.component';
+import { MetamaskService } from 'src/services/finance/metamask.service';
+import { Router } from '@angular/router';
 interface ITab {
   title: string;
   content: string;
@@ -20,7 +22,7 @@ interface ITab {
 })
 export class TabsComponent {
   customClass:string = 'customClass'
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private metamaskService : MetamaskService,private router:Router) {}
 
 
   //popups
@@ -32,6 +34,11 @@ export class TabsComponent {
   }
   openRefunsPopup() {
     const modalRef = this.modalService.open(RequestRefundComponent);
+  }
+  disconnectWallet() {
+  this.metamaskService.disconnectWallet();
+  this.router.navigate(['/connectWallet']);
+
   }
 
 }

@@ -45,7 +45,10 @@ public class WalletService implements IWalletService {
         }
     }
 
-
+    @Override
+    public Wallet findByMetamaskPublicKey(String metamask_public_key) {
+        return walletRepository.findByMetamaskPublicKey(metamask_public_key);
+    }
 
 
 }

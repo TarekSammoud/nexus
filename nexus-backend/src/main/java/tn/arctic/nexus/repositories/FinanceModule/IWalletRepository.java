@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import tn.arctic.nexus.entities.FinanceModule.Wallet;
 
+import java.util.Optional;
+
 @Repository
 public interface IWalletRepository extends JpaRepository<Wallet, Long> {
+
+    Wallet findByMetamaskPublicKey(String metamask_public_key);
 
 }
