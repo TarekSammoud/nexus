@@ -31,10 +31,11 @@ import { SignupComponent } from './user-management/signup/signup.component';
 import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './user-management/chat/chat.component';
-
+import { TokenService } from '../app/core/services/user-management/token.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
 import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,6 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     SignupComponent,
     ForgotPasswordComponent,
     ChatComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -71,13 +71,20 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [
+    TokenService,  // Ajout de TokenService ici
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

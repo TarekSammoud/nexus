@@ -18,7 +18,7 @@
             <span class="ms-2">{{ user.username }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdownMobile">
-            <li><a class="dropdown-item" [routerLink]="['/user-profile', user.id]">Edit Profile</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/user-profile']">Edit Profile</a></li>
             <li><a class="dropdown-item" href="#">Cart</a></li>
             <li><a class="dropdown-item" href="#">Wallet</a></li>
             <li><a class="dropdown-item" href="#">Friends</a></li>
@@ -40,14 +40,14 @@
             Friends
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="friendsDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/your-friends', user.id]">Your Friends</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/friend-requests', user.id]">Friend Requests</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Your Friends</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/friend-requests']">Friend Requests</a></li>
           </ul>
         </li>
 
         <!-- Ajout du lien de messagerie -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/chat', user.id]">Chat</a>
+          <a class="nav-link" [routerLink]="['/chat']">Chat</a>
         </li>
 
 
@@ -71,7 +71,7 @@
             <ul class="dropdown-menu dropdown-menu-end custom-dropdown-width customdropdownmenu"
               aria-labelledby="profileDropdown">
               <li>
-                <a class="dropdown-item" [routerLink]="['/user-profile', user.id]">
+                <a class="dropdown-item" [routerLink]="['/user-profile']">
                   <div class="d-flex align-items-center">
                     <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile"
                       class="profile-img-dropdown">
@@ -82,8 +82,8 @@
                   </div>
                 </a>
               </li>
-              <li><a class="dropdown-item" [routerLink]="['/user-profile', user.id]">Profile</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/edit-profile', user.id]">Account Settings</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/user-profile']">Profile</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/edit-profile']">Account Settings</a></li>
 
               <li><a class="dropdown-item" href="#">Payment Management</a></li>
               <li><a class="dropdown-item" href="#">Use a Code</a></li>

@@ -22,23 +22,15 @@ export class LoginComponent {
           const token = response.token;
           localStorage.setItem('auth_token', token);
 
-          const userId = TokenService.getUserId();
-          // ✅ utilise ton service
-
-          if (userId) {
-            this.router.navigate(['/user-profile', userId]);
-          } else {
-            this.errorMessage = 'Impossible de récupérer l\'ID utilisateur.';
-          }
+          // Redirige vers le profil sans passer l'ID dans l'URL
+          this.router.navigate(['/user-profile']);
         },
         (error) => {
-          this.errorMessage = 'Invalid credentials. Please try again.';
+          this.errorMessage = 'Identifiants invalides. Veuillez réessayer.';
         }
       );
     } else {
-      this.errorMessage = 'Please fill in both email and password.';
+      this.errorMessage = 'Veuillez remplir l\'email et le mot de passe.';
     }
   }
-
-
 }
