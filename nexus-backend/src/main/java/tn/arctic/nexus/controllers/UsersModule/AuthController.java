@@ -1,30 +1,38 @@
 package tn.arctic.nexus.controllers.UsersModule;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.Config.JwtUtil;
+import tn.arctic.nexus.entities.AuthRequest;
+import tn.arctic.nexus.entities.AuthResponse;
 import tn.arctic.nexus.entities.User;
-import tn.arctic.nexus.services.UsersModule.UserService;
+import tn.arctic.nexus.services.UsersModule.AuthService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")  // Permettre l'accès à partir de votre front-end Angular
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
+    private final AuthService authService;
+    private final JwtUtil jwtUtil;
 
-    // Endpoint pour gérer l'authentification
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody User user) {
+        User savedUser = authService.register(user);
+        String token = jwtUtil.generateToken(savedUser);
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
+
     @PostMapping("/login")
-    public User login(@RequestParam String email, @RequestParam String password) {
-        // Utilisation du service UserService pour authentifier l'utilisateur
-        User user = userService.authenticateUser(email, password);
+    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+        User foundUser = authService.loadUserByEmail(request.getEmail());
 
-        if (user != null) {
-            // Authentification réussie
-            return user;  // Retourner l'utilisateur authentifié (vous pouvez ajouter plus d'informations ici, comme un JWT)
-        } else {
-            // Authentification échouée
-            return null;  // Vous pouvez retourner une réponse d'erreur plus spécifique si nécessaire
+        if (authService.checkPassword(request.getPassword(), foundUser.getPassword())) {
+            String token = jwtUtil.generateToken(foundUser);
+            return ResponseEntity.ok(new AuthResponse(token));
         }
+
+        return ResponseEntity.status(401).body("Invalid credentials");
     }
 }
