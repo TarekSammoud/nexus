@@ -23,4 +23,6 @@ public interface IUserRepository  extends JpaRepository<User,Long> {
     List<User> findAvailablePlayersForFriendRequest(@Param("id") Long userId);
 
 
+
+
 }
