@@ -135,3 +135,10 @@ select {
     object-fit: cover;
     filter: brightness(1.5); /* rend l'image plus sombre pour que le texte ressorte si tu veux en mettre */
   }
+
+  .form-title {
+    color: #ea7a9a; /* Rose élégant */
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
+  

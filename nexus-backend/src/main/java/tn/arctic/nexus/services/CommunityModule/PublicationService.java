@@ -50,8 +50,17 @@ public class PublicationService {
 
 
 
-    public List<Publication> getPublicationsVisibles() {
+/*    public List<Publication> getPublicationsVisibles() {
         return publicationRepository.findPublicationsWithNoOrUnresolvedReports();
     }
+*/
+
+    public List<Publication> getPublicationsVisibles() {
+        return publicationRepository.findVisiblePublicationsSorted();
+    }
+
+
+
+
 
 }

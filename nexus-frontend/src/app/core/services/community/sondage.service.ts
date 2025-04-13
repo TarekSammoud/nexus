@@ -7,7 +7,7 @@ import { Sondage } from '../../entities/community/sondage';
   providedIn: 'root'
 })
 export class SondageService {
-  private apiUrl = 'http://localhost:8080/api/sondages';
+  private apiUrl = 'http://localhost:9000/nexus-backend/api/sondages';
 
   constructor(private http: HttpClient) {}
 
@@ -19,11 +19,25 @@ export class SondageService {
     return this.http.get<Sondage>(`${this.apiUrl}/${id}`);
   }
 
-  createSondage(sondage: Sondage): Observable<Sondage> {
+  createSondage(sondage: Partial<Sondage>): Observable<Sondage> {
     return this.http.post<Sondage>(`${this.apiUrl}/create`, sondage);
   }
+  
 
   deleteSondage(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  approveSondage(id: number): Observable<Sondage> {
+    return this.http.put<Sondage>(`${this.apiUrl}/${id}/approve`, {});
+  }
+
+  startLive(sondageId: number, liveUrl: string): Observable<Sondage> {
+    return this.http.put<Sondage>(`${this.apiUrl}/${sondageId}/start-live`, liveUrl, {
+      headers: { 'Content-Type': 'text/plain' }
+    });
+  }
+  
+
+  
 }

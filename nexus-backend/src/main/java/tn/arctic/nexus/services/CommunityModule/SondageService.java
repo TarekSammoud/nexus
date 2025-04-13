@@ -30,4 +30,13 @@ public class SondageService implements ISondageService {
     public void deleteSondage(Long id) {
         sondageRepository.deleteById(id);
     }
+
+
+    public Sondage startLive(Long id, String liveUrl) {
+        Sondage sondage = sondageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sondage non trouvé avec id : " + id));
+
+        sondage.setLiveUrl(liveUrl);
+        return sondageRepository.save(sondage);
+    }
 }

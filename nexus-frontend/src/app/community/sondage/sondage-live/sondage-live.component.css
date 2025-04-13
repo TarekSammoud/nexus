@@ -1,0 +1,23 @@
+.card {
+    border-radius: 1rem;
+  }
+  
+  .card-title {
+    font-weight: 600;
+  }
+  
+  .btn-dark:hover {
+    background-color: #ea7a9a;
+    border-color: #ea7a9a;
+  }
+  
+  .input-group select.form-select {
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+  }
+  
+  .input-group .btn {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
+  

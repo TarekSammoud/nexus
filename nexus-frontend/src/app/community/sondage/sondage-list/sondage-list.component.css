@@ -1,0 +1,41 @@
+.btn-neon {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+  }
+  .btn-neon:hover {
+    background-color: #6610f2;
+    transform: scale(1.05);
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  }
+  
+
+  .title-glow {
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ea7a9a, 0 0 15px #ea7a9a;
+  }
+
+
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-glass:hover {
+    background: rgba(234, 122, 154, 0.3); /* rose principal */
+    color: #ffffff;
+    border-color: #ea7a9a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(234, 122, 154, 0.4);
+  }
+  

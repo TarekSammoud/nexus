@@ -11,4 +11,8 @@ public interface ISondageService {
     List<Sondage> getAllSondages();
     Optional<Sondage> getSondageById(Long id);
     void deleteSondage(Long id);
-}
+
+
+   Sondage startLive(Long id, String liveUrl);
+
+    }

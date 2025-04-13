@@ -1,0 +1,17 @@
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+  }
+  
+  input.form-control:focus,
+  select.form-select:focus {
+    border-color: #ea7a9a;
+    box-shadow: 0 0 0 0.2rem rgba(234, 122, 154, 0.25);
+  }
+  
+  .btn-dark:hover {
+    background-color: #ea7a9a;
+    border-color: #ea7a9a;
+    color: #fff;
+  }
+  

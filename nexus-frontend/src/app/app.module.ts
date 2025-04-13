@@ -58,6 +58,12 @@ import { CategoryListComponent } from './community/category-list/category-list.c
 import { CategoryFormComponent } from './community/category-form/category-form.component';
 import { ReportListComponent } from './community/report-list/report-list.component';
 import { ReportFormComponent } from './community/report-form/report-form.component';
+import { SondageCreateComponent } from './community/sondage/sondage-create/sondage-create.component';
+import { SondageListComponent } from './community/sondage/sondage-list/sondage-list.component';
+import { SondageLiveComponent } from './community/sondage/sondage-live/sondage-live.component';
+import { SondageAdminComponent } from './community/sondage/sondage-admin/sondage-admin.component';
+import { StreamerManagementComponent } from './community/sondage/streamer-management/streamer-management.component';
+import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +93,13 @@ import { ReportFormComponent } from './community/report-form/report-form.compone
     CategoryListComponent,
     CategoryFormComponent,
     ReportListComponent,
-    ReportFormComponent
+    ReportFormComponent,
+    SondageCreateComponent,
+    SondageListComponent,
+    SondageLiveComponent,
+    SondageAdminComponent,
+    StreamerManagementComponent,
+    LiveRoomComponent
   ],
   imports: [
     BrowserModule,
