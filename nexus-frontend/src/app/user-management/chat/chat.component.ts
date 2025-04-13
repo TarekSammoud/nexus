@@ -10,7 +10,7 @@ import { ChatMessage } from '../../core/entities/user/ChatMessage';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  messages: ChatMessage[] = []; // Correction du type ici
+  messages: ChatMessage[] = [];
   messageContent = '';
   recipientId: number = 0;
   currentUserId: number | null = null;
@@ -40,10 +40,11 @@ export class ChatComponent implements OnInit, OnDestroy {
           }
         });
 
-        this.chatService.messages$.subscribe((msg: ChatMessage) => {  // Ajout du type ici
-          if (msg && this.isPrivateMessage(msg)) {
+        this.chatService.messages$.subscribe(msg => {
+          if (msg) {
             this.messages.push(msg);
-            console.log('Message privé reçu:', msg);
+            console.log('Message ajouté à l’interface:', msg);
+
           }
         });
       }
@@ -56,18 +57,14 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  isPrivateMessage(msg: ChatMessage): boolean {
-    return (
-      (msg.senderId === this.currentUserId && msg.recipientId === this.recipientId) ||
-      (msg.senderId === this.recipientId && msg.recipientId === this.currentUserId)
-    );
-  }
-
   loadMessages(): void {
     if (this.currentUserId && this.recipientId) {
       this.chatService.getMessages(this.currentUserId).subscribe(
-        (messages: ChatMessage[]) => { // Spécification du type ici
-          this.messages = messages.filter(msg => this.isPrivateMessage(msg));
+        (messages) => {
+          this.messages = messages.filter(msg =>
+            (msg.senderId === this.currentUserId && msg.recipientId === this.recipientId) ||
+            (msg.senderId === this.recipientId && msg.recipientId === this.currentUserId)
+          );
         },
         (error) => {
           console.error('Erreur lors de la récupération des messages', error);
@@ -77,29 +74,19 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(): void {
-    if (!this.messageContent.trim() || !this.currentUserId || !this.recipientId) {
-      console.warn("Message ou destinataire manquant.");
-      return;
-    }
+    if (!this.messageContent.trim() || !this.currentUserId) return;
 
-    const message: ChatMessage = {
-      id: 0, // ou undefined
+    const message = {
       senderId: this.currentUserId,
-      recipientId: this.recipientId,
-      sendername: 'Moi',
+      sendername: 'Moi', // Optionnel si backend la récupère
       content: this.messageContent,
-      type: 'CHAT',
-      timestamp: new Date().toISOString() // Compatible avec LocalDateTime côté backend si format ISO
+      type: 'CHAT'
     };
 
-    this.chatService.sendMessage(
-      message.senderId,
-      message.recipientId,
-      message.content
-    );
+    this.chatService.sendMessage(message.senderId, message.content);
 
-    this.messageContent = '';
   }
+
 
 
   trackById(index: number, item: any): number {
