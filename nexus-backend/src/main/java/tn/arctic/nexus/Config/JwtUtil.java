@@ -14,29 +14,50 @@ import java.util.Date;
 public class JwtUtil {
 
     private final long expirationMs = 86400000; // 1 jour
-
-
     private final String SECRET_KEY = "ton-secret-base64-encode-ou-une-longue-phrase-de-256-bits";
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-
     public String generateToken(User user) {
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .setSubject(user.getEmail())
+                .claim("id", user.getId()) // 👈 Ajouter l'ID utilisateur ici
                 .claim("role", user.getRoleType().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(key)
                 .compact();
+        System.out.println("Generated token: " + token); // Log pour vérifier le jeton généré
+        return token;
+    }
+
+
+    public Long extractUserId(String token) {
+        try {
+            Claims claims = getClaims(token);
+            return claims.get("id", Integer.class).longValue(); // ou Long.class si tu veux directement un Long
+        } catch (Exception e) {
+            System.out.println("Error extracting userId from token: " + e.getMessage());
+            throw e;
+        }
     }
 
     public String extractEmail(String token) {
-        return getClaims(token).getSubject();
+        try {
+            Claims claims = getClaims(token);
+            String email = claims.getSubject();
+            System.out.println("Extracted email from token: " + email); // Log pour vérifier l'email extrait
+            return email;
+        } catch (Exception e) {
+            System.out.println("Error extracting email from token: " + e.getMessage()); // Log d'erreur
+            throw e;
+        }
     }
 
     public boolean isTokenValid(String token, User user) {
         final String email = extractEmail(token);
-        return email.equals(user.getEmail()) && !isTokenExpired(token);
+        boolean isValid = email.equals(user.getEmail()) && !isTokenExpired(token);
+        System.out.println("Token valid: " + isValid); // Log pour vérifier la validité du jeton
+        return isValid;
     }
 
     private boolean isTokenExpired(String token) {
