@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FriendRequestService } from '../../core/services/user-management/friend-request.service';
 import { ChatService } from '../../core/services/user-management/Chat.Service';
 import { ChatMessage } from '../../core/entities/user/ChatMessage';
+import { TokenService } from '../../core/services/user-management/token.service';
 
 @Component({
   selector: 'app-chat',
@@ -19,36 +19,31 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   constructor(
     private friendRequestService: FriendRequestService,
-    private chatService: ChatService,
-    private route: ActivatedRoute,
+    private chatService: ChatService
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      this.currentUserId = id ? +id : null;
+    this.currentUserId = TokenService.getUserId();
 
-      if (this.currentUserId !== null) {
-        this.chatService.connect(this.currentUserId);
+    if (this.currentUserId !== null) {
+      this.chatService.connect(this.currentUserId);
 
-        this.friendRequestService.getFriends(this.currentUserId).subscribe({
-          next: (data) => {
-            this.friends = data;
-          },
-          error: (err) => {
-            console.error('Erreur lors du chargement des amis :', err);
-          }
-        });
+      this.friendRequestService.getFriends(this.currentUserId).subscribe({
+        next: (data) => {
+          this.friends = data;
+        },
+        error: (err) => {
+          console.error('Erreur lors du chargement des amis :', err);
+        }
+      });
 
-        this.chatService.messages$.subscribe(msg => {
-          if (msg) {
-            this.messages.push(msg);
-            console.log('Message ajouté à l’interface:', msg);
-
-          }
-        });
-      }
-    });
+      this.chatService.messages$.subscribe(msg => {
+        if (msg) {
+          this.messages.push(msg);
+          console.log('Message ajouté à l’interface:', msg);
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -78,16 +73,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     const message = {
       senderId: this.currentUserId,
-      sendername: 'Moi', // Optionnel si backend la récupère
+      sendername: 'Moi',
       content: this.messageContent,
       type: 'CHAT'
     };
 
     this.chatService.sendMessage(message.senderId, message.content);
-
   }
-
-
 
   trackById(index: number, item: any): number {
     return item.id;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/services/user-management/auth.service';
+import { TokenService } from '../../core/services/user-management/token.service';  // Service pour récupérer l'ID utilisateur depuis le token
+import { AuthService } from '../../core/services/user-management/auth.service';  // Service pour récupérer le profil
 import { UserProfileService } from '../../core/services/user-management/userprofile.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private tokenService: TokenService  // Pour récupérer l'ID utilisateur à partir du token
   ) { }
 
   ngOnInit(): void {
@@ -26,33 +26,34 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserDetails(): void {
-    const userIdParam = this.route.snapshot.paramMap.get('id');
-    const userId = userIdParam ? parseInt(userIdParam, 10) : null;
-
+    const userId = TokenService.getUserId();  // Utilisation de TokenService.getUserId() pour récupérer l'ID utilisateur
     if (userId) {
-      this.authService.getUserProfile(userId).subscribe(
+      this.authService.getLoggedInUserProfile().subscribe(
         response => {
           this.user = response;
-          this.loadProfilePicture(userId);
+          this.loadProfilePicture();
         },
         error => {
           this.errorMessage = 'Erreur lors de la récupération des informations.';
         }
       );
     } else {
-      this.errorMessage = 'ID utilisateur introuvable.';
+      this.errorMessage = 'Utilisateur non connecté.';
     }
   }
 
-  loadProfilePicture(userId: number): void {
-    this.userProfileService.getProfilePicture(userId).subscribe({
-      next: (blob: Blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      },
-      error: () => {
-        this.imageUrl = null; // Pas d’image => pas d'affichage
-      }
-    });
+  loadProfilePicture(): void {
+    const userId = TokenService.getUserId();  // Utilisation de TokenService.getUserId() pour récupérer l'ID utilisateur
+    if (userId) {
+      this.userProfileService.getProfilePicture(userId).subscribe({
+        next: (blob: Blob) => {
+          const objectURL = URL.createObjectURL(blob);
+          this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        },
+        error: () => {
+          this.imageUrl = null; // Pas d’image => pas d'affichage
+        }
+      });
+    }
   }
 }

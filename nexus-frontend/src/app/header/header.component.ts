@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/user-management/auth.service';
 import { UserProfileService } from '../core/services/user-management/userprofile.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TokenService } from '../core/services/user-management/token.service';  // Import de TokenService
 
 @Component({
   selector: 'app-header',
@@ -15,22 +16,27 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userProfileService: UserProfileService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private tokenService: TokenService  // Injection du TokenService
   ) { }
 
   ngOnInit(): void {
-    const userId = JSON.parse(localStorage.getItem('userId') || '{}');
-    if (userId) {
-      this.authService.getUserProfile(userId).subscribe({
-        next: user => {
-          this.user = user;
+    this.authService.getLoggedInUserProfile().subscribe({
+      next: (user: any) => {
+        this.user = user;
+
+        const userId = TokenService.getUserId();  // Récupérer l'ID depuis le TokenService
+
+        if (userId) {
           this.loadProfilePicture(userId);
-        },
-        error: err => {
-          console.error('Error fetching user profile', err);
+        } else {
+          console.error('ID utilisateur non trouvé dans le token.');
         }
-      });
-    }
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la récupération du profil utilisateur', err);
+      }
+    });
   }
 
   loadProfilePicture(userId: number): void {

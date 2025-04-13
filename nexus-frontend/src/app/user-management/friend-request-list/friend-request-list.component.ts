@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FriendRequestService } from '../../core/services/user-management/friend-request.service';
 import { UserProfileService } from '../../core/services/user-management/userprofile.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { TokenService } from '../../core/services/user-management/token.service';
 
 @Component({
   selector: 'app-friend-request-list',
@@ -10,27 +10,24 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./friend-request-list.component.css']
 })
 export class FriendRequestListComponent implements OnInit {
-
   isLoading: boolean = false;
   availablePlayers: any[] = [];
   errorMessage: string = '';
   imageUrls: { [userId: number]: any } = {};
-
+  receivedRequests: any[] = [];
   userId!: number;
+
   constructor(
     private friendRequestService: FriendRequestService,
     private userProfileService: UserProfileService,
-    private sanitizer: DomSanitizer,
-    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
-    const userId = Number(this.route.snapshot.paramMap.get('id'));
-    this.userId = userId;
-    this.loadAvailablePlayers(userId);
-    this.loadReceivedRequests(userId);
+    this.userId = TokenService.getUserId()!;
+    this.loadAvailablePlayers(this.userId);
+    this.loadReceivedRequests(this.userId);
   }
-
 
   loadAvailablePlayers(userId: number): void {
     this.isLoading = true;
@@ -65,7 +62,6 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.sendFriendRequest(this.userId, playerId).subscribe({
       next: () => {
         alert('Friend request sent successfully!');
-        // Optionnel : retirer le joueur de la liste
         this.availablePlayers = this.availablePlayers.filter(p => p.id !== playerId);
       },
       error: () => {
@@ -73,8 +69,6 @@ export class FriendRequestListComponent implements OnInit {
       }
     });
   }
-
-  receivedRequests: any[] = [];
 
   loadReceivedRequests(userId: number): void {
     this.friendRequestService.getReceivedFriendRequests(userId).subscribe({
@@ -93,10 +87,7 @@ export class FriendRequestListComponent implements OnInit {
   acceptRequest(requestId: number): void {
     this.friendRequestService.acceptFriendRequest(requestId).subscribe({
       next: (updatedRequest) => {
-        // Si la demande d'ami a été acceptée, filtre les demandes reçues
         this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
-
-        // Tu peux ici utiliser l'objet updatedRequest pour afficher des informations supplémentaires ou mettre à jour l'UI
         alert(`Friend request accepted from ${updatedRequest.sender.firstName} ${updatedRequest.sender.lastName}.`);
       },
       error: () => {
@@ -104,7 +95,6 @@ export class FriendRequestListComponent implements OnInit {
       }
     });
   }
-
 
   rejectRequest(requestId: number): void {
     this.friendRequestService.rejectFriendRequest(requestId).subscribe({
@@ -117,8 +107,4 @@ export class FriendRequestListComponent implements OnInit {
       }
     });
   }
-
-
-
-
 }
