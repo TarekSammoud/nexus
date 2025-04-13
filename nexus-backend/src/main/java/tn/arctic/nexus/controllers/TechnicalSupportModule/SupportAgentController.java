@@ -82,4 +82,8 @@ public class SupportAgentController {
                     .body("Please provide either an agent ID or department.");
         }
     }
+    @GetMapping("/ranked")
+    public List<SupportAgent> getRankedAgents() {
+        return supportAgentService.getAgentsRankedByAverageRating();
+    }
 }

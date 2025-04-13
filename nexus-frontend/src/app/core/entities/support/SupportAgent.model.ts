@@ -7,7 +7,9 @@ export interface SupportAgent {
   userId: number;
   name: string;
   email: string;
+  averageRating?: number;
   departement: Departement;
   ticketsAssignes: SupportTicket[];
   evaluations: PerformanceReview[];
+
 }

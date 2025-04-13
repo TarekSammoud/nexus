@@ -31,4 +31,7 @@ public class SupportAgent {
     @OneToMany(mappedBy = "agent")
     @JsonIgnore  // 🔥 Prevents infinite recursion
     private Set<PerformanceReview> evaluations;
+
+    @Transient
+    private Double averageRating;
 }

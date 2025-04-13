@@ -18,6 +18,7 @@ export class SupportTicketComponent implements OnInit {
   currentTicketId: number | null = null;
   isLoading: boolean = false;
   isSubmitting: boolean = false;
+priority: any;
 
   constructor(
     private supportService: SupportService,
@@ -27,6 +28,7 @@ export class SupportTicketComponent implements OnInit {
     this.ticketForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
+      priority: ['', Validators.required],
       category: ['', Validators.required]
      // Added status field
     });
