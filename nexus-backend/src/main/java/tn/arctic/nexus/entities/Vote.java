@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "sondage_id", nullable = false)
+    @JsonBackReference
     private Sondage sondage;
 
     public Long getId() {

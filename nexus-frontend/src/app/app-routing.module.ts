@@ -22,6 +22,12 @@ import { GameCategoryListComponent } from './game-category-list/game-category-li
 import { CategoryListComponent } from './community/category-list/category-list.component';
 import { CategoryFormComponent } from './community/category-form/category-form.component';
 import { ReportListComponent } from './community/report-list/report-list.component';
+import { SondageCreateComponent } from './community/sondage/sondage-create/sondage-create.component';
+import { SondageListComponent } from './community/sondage/sondage-list/sondage-list.component';
+import { SondageLiveComponent } from './community/sondage/sondage-live/sondage-live.component';
+import { SondageAdminComponent } from './community/sondage/sondage-admin/sondage-admin.component';
+import { StreamerManagementComponent } from './community/sondage/streamer-management/streamer-management.component';
+import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
 
 
 
@@ -31,6 +37,11 @@ const routes: Routes = [
   { path: 'community/add', component: PublicationFormComponent },
   { path: 'community/edit/:id', component: PublicationFormComponent },
   { path: 'report/create/:publicationId', component: ReportFormComponent },
+  { path: 'sondages/create', component: SondageCreateComponent },
+  { path: 'sondages/list', component: SondageListComponent },
+  { path: 'live-room/:id', component: LiveRoomComponent },
+
+
 
 
   {
@@ -48,7 +59,12 @@ const routes: Routes = [
       { path: 'community/categories', component: CategoryListComponent },
       { path: 'community/categories/add', component: CategoryFormComponent },
       { path: 'community/categories/edit/:id', component: CategoryFormComponent },
-      { path: 'community/reports', component: ReportListComponent }
+      { path: 'community/reports', component: ReportListComponent },
+      { path: 'sondages', component: SondageAdminComponent },
+      { path: 'streamers', component: StreamerManagementComponent },
+      { path: 'live', component: SondageLiveComponent },
+
+
 
 
     ]

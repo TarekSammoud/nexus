@@ -1,0 +1,9 @@
+.title-glow {
+    color: #343a40;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    vertical-align: middle;
+  }
+  

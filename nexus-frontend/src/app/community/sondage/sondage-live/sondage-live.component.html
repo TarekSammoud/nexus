@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center fw-bold text-dark">🎥 Sondages prêts pour le Live</h2>
+  
+    <div *ngFor="let sondage of sondages" class="card mb-4 shadow border-0">
+      <div class="card-body">
+        <h4 class="card-title mb-3 text-secondary">{{ sondage.question }}</h4>
+        <p class="text-muted mb-3">
+          👍 Pourcentage de Oui :
+          <span class="fw-bold text-success">{{ percentOui[sondage.id!] || 0 }}%</span>
+        </p>
+  
+        <div *ngIf="percentOui[sondage.id!] >= 50" class="bg-light p-3 rounded shadow-sm">
+          <label class="form-label fw-semibold">🎙️ Choisissez un streamer</label>
+          <div class="input-group mb-3">
+            <select class="form-select" [(ngModel)]="selectedStreamer[sondage.id!]" name="streamerSelect-{{ sondage.id }}">
+              <option [ngValue]="null" disabled>-- Sélectionnez un streamer --</option>
+              <option *ngFor="let s of streamers" [ngValue]="s.id">
+                {{ s.name }} - {{ s.platform }}
+              </option>
+            </select>
+            <button class="btn btn-dark" (click)="goToLiveMenu(sondage.id!)">
+              🚀 Lancer le Live
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

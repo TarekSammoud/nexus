@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <h3 class="mb-4 text-center fw-bold text-dark">
+      📋 Gestion des Sondages (Admin)
+    </h3>
+  
+    <div class="table-responsive shadow rounded">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark text-white">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Question</th>
+            <th scope="col">Streamer</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sondage of sondages">
+            <th scope="row">{{ sondage.id }}</th>
+            <td>{{ sondage.question }}</td>
+            <td>
+              🎙️ <strong>{{ sondage.streamer?.name }}</strong>
+              <small class="text-muted">({{ sondage.streamer?.platform }})</small>
+            </td>
+            <td>
+              <span
+                class="badge px-3 py-2 fs-6"
+                [ngClass]="sondage.approved ? 'bg-success' : 'bg-warning text-dark'"
+              >
+                {{ sondage.approved ? '✅ Approuvé' : '🕓 En attente' }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn btn-outline-success btn-sm me-2"
+                *ngIf="!sondage.approved"
+                (click)="approuverSondage(sondage.id!)"
+              >
+                ✅ Approuver
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="supprimerSondage(sondage.id!)"
+              >
+                🗑️ Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="sondages.length === 0" class="alert alert-info mt-4 text-center">
+      Aucun sondage trouvé.
+    </div>
+  </div>
+  

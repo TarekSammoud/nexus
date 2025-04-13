@@ -3,11 +3,13 @@
 </div>
 
 <div class="form-container">
-    <div class="form-header">
-        <h2>{{ isEditMode ? '✏️ Modifier la Publication' : '➕ Ajouter une Nouvelle Publication' }}</h2>
-        <p>Remplissez les champs ci-dessous pour enregistrer votre publication.</p>
-    </div>
-
+  <div class="form-header text-light">
+    <h2 class="form-title">
+      {{ isEditMode ? '✏️ Modifier la Publication' : '➕ Ajouter une Nouvelle Publication' }}
+    </h2>
+    <p>Remplissez les champs ci-dessous pour enregistrer votre publication.</p>
+  </div>
+  
     <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" class="form-body">
       
       <!-- Titre -->

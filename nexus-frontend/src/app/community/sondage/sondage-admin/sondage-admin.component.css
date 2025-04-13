@@ -1,0 +1,13 @@
+table {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  
+  .badge {
+    font-size: 0.9rem;
+  }
+  
+  .btn-sm {
+    border-radius: 20px;
+  }
+  

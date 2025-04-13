@@ -1,0 +1,56 @@
+<button class="btn btn-glass mb-4 px-5 py-3 shadow" routerLink="/sondages/create">
+    <i class="bi bi-plus-circle-dotted me-2"></i> Créer un nouveau sondage
+  </button>
+  
+  
+  <div class="container mt-4">
+    <h2 class="mb-4 text-center fw-bold title-glow">
+        🗳️ Sondages à voter
+      </h2>
+      
+  
+    <div *ngFor="let sondage of sondages" class="card mb-4 shadow-sm border-0">
+      <div class="card-body">
+        <h4 class="card-title mb-2 text-secondary">{{ sondage.question }}</h4>
+        <p class="mb-3 text-muted">
+          🎥 Diffusé par <strong>{{ sondage.streamer?.name }}</strong> sur
+          <span class="badge bg-info text-dark">{{ sondage.streamer?.platform }}</span>
+        </p>
+  
+        <div class="mb-3">
+          <ng-container *ngIf="hasVotedMap[sondage.id!]; else voteButtons">
+            <div class="alert alert-success mb-2">
+              ✅ Vous avez voté
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar"
+                [style.width.%]="getPourcentageOui(sondage.id!)"
+                aria-valuemin="0" aria-valuemax="100">
+                👍 Oui : {{ getPourcentageOui(sondage.id!) }}%
+              </div>
+            </div>
+          </ng-container>
+  
+          <ng-template #voteButtons>
+            <button class="btn btn-outline-success me-2" (click)="voter(sondage.id!, true)">
+              👍 Oui
+            </button>
+            <button class="btn btn-outline-danger" (click)="voter(sondage.id!, false)">
+              👎 Non
+            </button>
+          </ng-template>
+        </div>
+  
+        <div *ngIf="sondage.liveUrl" class="mt-3">
+          <a
+            [routerLink]="['/live-room', sondage.id]"
+            [queryParams]="{ url: sondage.liveUrl }"
+            class="btn btn-outline-primary w-100"
+          >
+            🎬 Rejoindre le Live maintenant
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

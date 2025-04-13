@@ -7,7 +7,7 @@ import { Vote } from '../../entities/community/vote';
   providedIn: 'root'
 })
 export class VoteService {
-  private apiUrl = 'http://localhost:8080/api/votes';
+  private apiUrl = 'http://localhost:9000/nexus-backend/api/votes';
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,7 @@ export class VoteService {
   countYesVotes(sondageId: number): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/count-yes/${sondageId}`);
   }
+
 
   countTotalVotes(sondageId: number): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/count-total/${sondageId}`);

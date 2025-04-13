@@ -37,4 +37,27 @@ public class SondageController {
     public void delete(@PathVariable Long id) {
         sondageService.deleteSondage(id);
     }
+
+
+
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<Sondage> approveSondage(@PathVariable Long id) {
+        return sondageService.getSondageById(id)
+                .map(sondage -> {
+                    sondage.setApproved(true);
+                    sondageService.createSondage(sondage);
+                    return ResponseEntity.ok(sondage);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @PutMapping("/{id}/start-live")
+    public ResponseEntity<Sondage> startLive(@PathVariable Long id, @RequestBody String liveUrl) {
+        Sondage updated = sondageService.startLive(id, liveUrl);
+        return ResponseEntity.ok(updated);
+    }
+
+
+
 }
