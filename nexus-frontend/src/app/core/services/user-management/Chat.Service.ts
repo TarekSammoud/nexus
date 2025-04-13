@@ -5,56 +5,46 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ChatMessage } from '../../entities/user/ChatMessage';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ChatService {
-    private stompClient: Client;
-    private messagesSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-    public messages$ = this.messagesSubject.asObservable();
+    private stompClient!: Client;
+    private messageSubject = new BehaviorSubject<any>(null);
+    public messages$ = this.messageSubject.asObservable();
 
-    constructor(private http: HttpClient) {
-        // Initialisation du client STOMP
-        this.stompClient = new Client({
-            webSocketFactory: () => new SockJS('http://localhost:9000/nexus-backend/ws'),  // URL du WebSocket (Spring backend)
-            connectHeaders: {},
-            debug: (str) => {
-                console.log(str); // Pour voir les logs de connexion
-            },
-            onConnect: (frame) => {
-                console.log('WebSocket connecté', frame);
-                // L'ID d'utilisateur est passé ici pour l'abonnement
-                this.stompClient.subscribe(`/user/queue/messages`, (message: Message) => {
-                    if (message.body) {
-                        const chatMessage = JSON.parse(message.body);
-                        this.messagesSubject.next(chatMessage);
-                    }
-                });
-            },
-            onDisconnect: () => {
-                console.log('WebSocket déconnecté');
-            },
-        });
-    }
-
-    // Connexion au WebSocket
+    // Connexion WebSocket
     connect(userId: number): void {
-        // Pour STOMP version 6.x et supérieur
-        if (!this.stompClient.connected) {
-            this.stompClient.activate();
-        }
+        console.log('Connexion à WebSocket...');
+        this.stompClient = new Client({
+            brokerURL: 'ws://localhost:9000/nexus-backend/ws',
+            reconnectDelay: 5000,
+            webSocketFactory: () => new SockJS('http://localhost:9000/nexus-backend/ws'),
+            onConnect: () => {
+                console.log('Connecté à WebSocket');
+
+                // Remplacer par l'abonnement au canal public
+                this.stompClient.subscribe('/topic/public', (msg: Message) => {
+                    const message: ChatMessage = JSON.parse(msg.body);
+                    this.messageSubject.next(message);
+                    console.log('Message public reçu:', message);
+                });
+            }
+            ,
+            onStompError: (frame) => {
+                console.error('Erreur STOMP:', frame);
+            }
+        });
+
+
+        this.stompClient.activate(); // Activation du client WebSocket
     }
 
-    // Envoi d'un message via WebSocket
-    sendMessage(senderId: number, recipientId: number, content: string): void {
+    sendMessage(senderId: number, content: string): void {
         const message = {
             senderId,
-            recipientId,
             content,
-            type: 'CHAT',
+            type: 'CHAT'
         };
 
-        // Vérifie que le client STOMP est bien connecté
         if (this.stompClient.connected) {
             this.stompClient.publish({
                 destination: '/app/chat.sendMessage',
@@ -65,8 +55,19 @@ export class ChatService {
         }
     }
 
-    getMessages(userId: number): Observable<ChatMessage[]> {
-        return this.http.get<ChatMessage[]>(`/api/messages/${userId}`);  // L'URL doit être correcte selon ton backend
+
+
+    // Déconnexion du WebSocket
+    disconnect(): void {
+        if (this.stompClient) {
+            this.stompClient.deactivate();
+            console.log('Déconnecté de WebSocket');
+        }
     }
 
+
+    constructor(private http: HttpClient) { }
+    getMessages(userId: number): Observable<ChatMessage[]> {
+        return this.http.get<ChatMessage[]>(`http://localhost:9000/nexus-backend/msg/getMessages?userId=${userId}`);
+    }
 }
