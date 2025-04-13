@@ -1,145 +1,61 @@
-.admin-support-container {
-    padding: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    color: #333;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 0.75rem;
-  }
-  
-  .form-card {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    margin-bottom: 2rem;
-    border: none;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  .card-header {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-    padding: 1rem 1.25rem;
-  }
-  
-  .ticket-list {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    border: none;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  .ticket-list .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .ticket-list h2 {
-    font-size: 1.25rem;
-    margin-bottom: 0;
-  }
-  
-  .table {
-    margin-bottom: 0;
-  }
-  
-  .table th {
-    font-weight: 600;
-    color: #495057;
-  }
-  
-  .table td {
-    vertical-align: middle;
-  }
-  
-  .ticket-description {
-    max-width: 250px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .btn-group {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  
-  .btn-group .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-  }
-  
-  .alert {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  .alert-dismissible .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.75rem 1.25rem;
-  }
-  
-  .badge {
-    padding: 0.35em 0.65em;
-    font-weight: normal;
-  }
-  
-  @media (max-width: 768px) {
-    .table-responsive {
-      overflow-x: auto;
-    }
-    
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    
-    .btn-group .btn {
-      width: 100%;
-    }
-    
-    .ticket-description {
-      max-width: 150px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .admin-support-container {
-      padding: 1rem;
-    }
-    
-    .card-header {
-      padding: 0.75rem 1rem;
-    }
-    
-    .card-body {
-      padding: 1rem;
-    }
-    
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
-  
-  /* Animation for alerts */
-  .alert.fade.show {
-    animation: fade-in 0.3s ease-out;
-  }
-  
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.entry-form-container {
+  background-color: #262a33;
+  padding: 24px 28px;
+  border-radius: 14px;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  box-shadow: 0 0 16px rgba(140, 94, 255, 0.15);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  color: #ccc;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-control {
+  width: 100%;
+  background-color: #1c1e26;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s, background-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #a58aff;
+  background-color: #22242c;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #7c4dff, #b388ff);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(45deg, #6c40e9, #9e5fff);
+}

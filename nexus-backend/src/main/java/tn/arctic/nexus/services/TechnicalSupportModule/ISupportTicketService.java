@@ -10,4 +10,5 @@ public interface ISupportTicketService {
     Optional<SupportTicket> getTicketById(Long id);
     SupportTicket createTicket(SupportTicket ticket);
     void deleteTicket(Long id);
+    public List<SupportTicket> getTicketsSortedByPriorityAndCreatedAt();
 }

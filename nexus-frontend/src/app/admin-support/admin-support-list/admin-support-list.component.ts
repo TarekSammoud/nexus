@@ -11,6 +11,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class AdminSupportListComponent implements OnInit {
 
+
   tickets: SupportTicket[] = [];
   ticketForm: FormGroup;
   isEditMode: boolean = false;  // Indicator for editing a ticket
@@ -18,6 +19,7 @@ export class AdminSupportListComponent implements OnInit {
   currentTicketId: number | null = null;
   isLoading: boolean = false;
   errorMessage: string = '';
+priority: any;
   
   constructor(
     private supportService: SupportService,
@@ -27,6 +29,7 @@ export class AdminSupportListComponent implements OnInit {
     this.ticketForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      priority: ['', Validators.required],
       category: ['', Validators.required]
       // Added status field
     });
@@ -80,6 +83,31 @@ export class AdminSupportListComponent implements OnInit {
         (error: any) => {
           console.error('Error loading tickets:', error);
           this.errorMessage = 'Failed to load tickets. Please try again.';
+        }
+      );
+  }
+
+  onSortChange(event: any): void {
+    const sortCriteria = event.target.value;
+    if (sortCriteria === 'priority-and-createdAt') {
+      this.loadSortedTickets();
+    } else {
+      this.loadTickets(); // Default sorting
+    }
+  }
+
+  // Method to load sorted tickets
+  loadSortedTickets(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
+    this.supportService.getTicketsSortedByPriorityAndCreatedAt()
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe(
+        (data: SupportTicket[]) => this.tickets = data,
+        (error: any) => {
+          console.error('Error loading sorted tickets:', error);
+          this.errorMessage = 'Failed to load sorted tickets. Please try again.';
         }
       );
   }

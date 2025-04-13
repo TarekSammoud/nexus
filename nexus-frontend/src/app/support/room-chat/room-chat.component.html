@@ -1,14 +1,81 @@
 <div class="chat-container" aria-label="Chat Window">
   <div class="header">
-    <button (click)="closeChat()" class="close-chat-button" [disabled]="chatClosed" aria-label="Close Chat">Close Chat</button>
+    <h2>Support Chat</h2>
+    <button (click)="closeChat()" class="close-chat-button" [disabled]="chatClosed" aria-label="Close Chat">
+      <span class="icon-close"></span>
+      <span>Close Chat</span>
+    </button>
   </div>
-  <div class="message-list" role="log" aria-live="polite">
-    <div *ngFor="let message of messages" class="message-item">
-      <strong>{{ message.sender }}:</strong> {{ message.content }}
+
+  <!-- 🎯 Ticket details -->
+  <div *ngIf="ticket" class="ticket-details">
+    <h3>Ticket Details</h3>
+    <div class="ticket-info">
+      <p><strong>Title:</strong> {{ ticket.title }}</p>
+      <p><strong>Description:</strong> {{ ticket.description }}</p>
+      <p><strong>Category:</strong> {{ ticket.category }}</p>
+      <p><strong>Status:</strong> <span class="status-badge">{{ ticket.status || 'Open' }}</span></p>
     </div>
   </div>
+
+  <!-- 💬 Chat messages -->
+  <div class="message-list" role="log" aria-live="polite">
+    <div *ngIf="messages.length === 0" class="no-messages">
+      <p>No messages yet. Start the conversation!</p>
+    </div>
+    
+    <div *ngFor="let message of messages" 
+         class="message-item" 
+         [ngClass]="{'user-message': message.sender === 'username', 'agent-message': message.sender !== 'username'}">
+      <div class="message-content">
+        <div class="message-header">
+          <strong>{{ message.sender }}</strong>
+          <span class="message-time">{{ message.timestamp | date:'short' }}</span>
+        </div>
+        <div class="message-body">
+          {{ message.content }}
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="typing" class="typing-indicator">
+      <span>Agent is typing...</span>
+    </div>
+  </div>
+
   <div class="message-input">
-    <input [(ngModel)]="newMessage" placeholder="Type a message" [disabled]="chatClosed" aria-label="Type your message here" />
-    <button (click)="sendMessage()" [disabled]="sending || chatClosed" aria-label="Send Message">Send</button>
+    <form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+      <textarea 
+        [(ngModel)]="newMessage" 
+        name="messageInput"
+        placeholder="Type a message" 
+        [disabled]="chatClosed || sending" 
+        aria-label="Type your message here"
+        (keydown.enter)="$event.preventDefault(); sendMessage()"
+        rows="2"></textarea>
+      
+      <div class="input-actions">
+        <button 
+          type="button"
+          class="attach-button" 
+          [disabled]="chatClosed" 
+          aria-label="Attach file">
+          <span class="icon-attachment"></span>
+        </button>
+        
+        <button 
+          type="submit" 
+          class="send-button"
+          [disabled]="sending || chatClosed || !newMessage.trim()" 
+          aria-label="Send Message">
+          <span class="icon-send"></span>
+          <span>Send</span>
+        </button>
+      </div>
+    </form>
+    
+    <div *ngIf="chatClosed" class="chat-closed-message">
+      This chat has been closed. Thank you for using our support.
+    </div>
   </div>
 </div>

@@ -42,5 +42,6 @@ export class GameCategoryService {
       return this.http.post<GameCategory>(`${this.gamesCategoryUrl}/add-category`, category);
     }
 
+    
 
 }

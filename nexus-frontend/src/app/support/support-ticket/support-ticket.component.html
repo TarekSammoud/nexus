@@ -1,92 +1,108 @@
-<div class="navigation-button">
-  <button routerLink="/support-agent" class="btn btn-info">Go to Support Agent</button>
-</div>
+<!-- Video Banner -->
+<div class="video-banner">
+  <video class="video-inline" autoplay muted loop>
+    <source src="assets/videos/support-banner.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
 
-<div class="ticket-form">
-  <h2>{{ isEditMode ? 'Edit Ticket' : 'Create Ticket' }}</h2>
+<!-- Ticket Form -->
+<div class="container">
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ successMessage }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="successMessage = ''"></button>
+  </div>
 
-  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-    <!-- Title Field -->
-    <div class="form-group">
-      <label for="title">Title:</label>
-      <input 
-        id="title" 
-        formControlName="title" 
-        type="text" 
-        class="form-control" 
-        [ngClass]="{'is-invalid': title?.invalid && title?.touched}"
-        maxlength="100"
-      >
-      <div *ngIf="title?.invalid && title?.touched" class="invalid-feedback">
-        Title is required (max length 100).
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="errorMessage = ''"></button>
+  </div>
+
+  <div class="entry-form-container">
+    <h2 class="form-title">{{ isEditMode ? 'Edit Ticket' : 'Create a Support Ticket' }}</h2>
+
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input 
+          id="title" 
+          formControlName="title" 
+          type="text" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': title?.invalid && title?.touched}" 
+          maxlength="100"
+          aria-describedby="titleHelp"
+        >
+        <small id="titleHelp" class="form-text text-muted character-count">
+          {{ getCharacterCount('title') }}/{{ getMaxLength('title') }}
+        </small>
+        <div *ngIf="title?.invalid && title?.touched" class="invalid-feedback d-block">
+          <span *ngIf="title?.errors?.['required']">Title is required.</span>
+          <span *ngIf="title?.errors?.['maxlength']">Title cannot exceed 100 characters.</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Description Field -->
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea 
-        id="description" 
-        formControlName="description" 
-        class="form-control" 
-        [ngClass]="{'is-invalid': description?.invalid && description?.touched}" 
-        maxlength="500"
-      ></textarea>
-      <div *ngIf="description?.invalid && description?.touched" class="invalid-feedback">
-        Description is required (max length 500).
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea 
+          id="description" 
+          formControlName="description" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': description?.invalid && description?.touched}" 
+          maxlength="500"
+          rows="4"
+          aria-describedby="descriptionHelp"
+        ></textarea>
+        <small id="descriptionHelp" class="form-text text-muted character-count">
+          {{ getCharacterCount('description') }}/{{ getMaxLength('description') }}
+        </small>
+        <div *ngIf="description?.invalid && description?.touched" class="invalid-feedback d-block">
+          <span *ngIf="description?.errors?.['required']">Description is required.</span>
+          <span *ngIf="description?.errors?.['maxlength']">Description cannot exceed 500 characters.</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Category Field -->
-    <div class="form-group">
-      <label for="category">Category:</label>
-      <select 
-        id="category" 
-        formControlName="category" 
-        class="form-control" 
-        [ngClass]="{'is-invalid': category?.invalid && category?.touched}"
-      >
-        <option value="">Select a category</option>
-        <option value="TECHNICAL">Technical</option>
-        <option value="PURCHASE">Purchase</option>
-        <option value="ACCOUNT">Account</option>
-        <option value="COMMUNITY_CONTENT">Community Content</option>
-      </select>
-      <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">
-        Category is required.
+      <!-- Category Field -->
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select 
+          id="category" 
+          formControlName="category" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': category?.invalid && category?.touched}" 
+          aria-describedby="categoryHelp"
+        >
+          <option value="">Select a category</option>
+          <option value="TECHNICAL">Technical</option>
+          <option value="PURCHASE">Purchase</option>
+          <option value="ACCOUNT">Account</option>
+          <option value="COMMUNITY_CONTENT">Community Content</option>
+        </select>
+        <small id="categoryHelp" class="form-text text-muted">
+          Choose the category that best matches your issue.
+        </small>
+        <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback d-block">
+          Category is required.
+        </div>
       </div>
-    </div>
 
-    <!-- Buttons Section -->
-    <div class="form-group">
-      <button 
-      type="submit" 
-      class="btn btn-primary" 
-      [disabled]="ticketForm.invalid || !ticketForm.dirty">
-      {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
-  </button>
-      <button type="button" class="btn btn-secondary" (click)="resetForm()">
-        Reset Form
-      </button>
-    </div>
-  </form>
+      <!-- Buttons -->
+      <div class="form-group">
+        <button 
+          type="submit" 
+          class="submit-btn" 
+          [disabled]="ticketForm.invalid || !ticketForm.dirty || isSubmitting">
+          <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          {{ isEditMode ? 'Update' : 'Submit' }}
+        </button>
+        <button type="button" class="submit-btn" style="margin-top: 10px; background: #444;" (click)="resetForm()">
+          {{ isEditMode ? 'Cancel' : 'Reset' }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-
-<div class="ticket-list">
-  <h2>All Tickets</h2>
-  <ul>
-    <!-- Ensuring correct usage by iterating ticket as variable -->
-    <li *ngFor="let ticket of tickets">
-      <strong>{{ ticket.title }}</strong>
-      <p>{{ ticket.description }}</p>
-      <p><em>Category: {{ ticket.category }}</em></p>
-      <p><em>Status: {{ "OPEN" }}</em></p>
-      <button class="btn btn-outline-warning" (click)="onModify(ticket)">Edit</button>
-      <button class="btn btn-outline-danger" (click)="onDelete(ticket)">Delete</button>
-          </li>
-  </ul>
-</div>
-
-<!-- New button to navigate to the support agent page -->
-

@@ -8,10 +8,15 @@ import { Router } from '@angular/router';
 })
 export class AdminHomeComponent {
   constructor(private _router: Router) { }
-  dropdownOpen = false;
+  gamesDropdownOpen = false;   // State for games dropdown
+  supportDropdownOpen = false; // State for support dropdown
 
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
+  toggleGamesDropdown() {
+    this.gamesDropdownOpen = !this.gamesDropdownOpen;
+  }
+
+  toggleSupportDropdown(){
+    this.supportDropdownOpen = !this.supportDropdownOpen;
   }
 
   navigateToGamesList(){

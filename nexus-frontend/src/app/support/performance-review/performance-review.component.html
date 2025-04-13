@@ -1,12 +1,4 @@
-<div *ngIf="reviews$ | async as reviews">
-    <ul>
-      <li *ngFor="let review of reviews">
-        {{ review.rating }} - {{ review.feedback }}
-        <button (click)="editReview(review)">Edit</button>
-        <button *ngIf="review.id !== undefined" (click)="deleteReview(review.id)">Delete</button>
-      </li>
-    </ul>
-  </div>
+
   
   <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
     <label for="rating">Rating:</label>

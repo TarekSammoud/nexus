@@ -1,3 +1,4 @@
+/*
 package tn.arctic.nexus.services.TechnicalSupportModule;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -73,3 +74,4 @@ public class OpenAiApiService implements IOpenAiApiService {
         }
     }
 }
+*/

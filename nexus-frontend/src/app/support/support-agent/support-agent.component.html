@@ -1,8 +1,4 @@
-<div class="agent-form card mt-4 p-4 shadow-sm rounded">
-    <h2 class="text-center mb-4">{{ isEditMode ? 'Edit Agent' : 'Create Agent' }}</h2>
-    <div class="navigation-button">
-        <button routerLink="/room" class="btn btn-info">Go to Room</button>
-      </div>
+<div class="container mt-5">
     <form [formGroup]="agentForm" (ngSubmit)="onSubmit()">
       <!-- Name Field -->
       <div class="form-group mb-3">

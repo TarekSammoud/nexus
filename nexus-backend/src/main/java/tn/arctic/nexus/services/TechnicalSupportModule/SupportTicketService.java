@@ -1,11 +1,13 @@
 package tn.arctic.nexus.services.TechnicalSupportModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.SupportTicket;
-
+import tn.arctic.nexus.entities.TicketPriority;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.ISupportTicketRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,4 +45,34 @@ public class SupportTicketService {
         }
         return false;
     }
+
+    public Optional<SupportTicket> getTicketByRoomId(Long roomId) {
+        return supportTicketRepository.findByRoomId(roomId);
+    }
+
+    public List<SupportTicket> getTicketsSortedByPriorityAndCreatedAt() {
+        List<SupportTicket> tickets = supportTicketRepository.findAll();
+
+        tickets.sort(Comparator
+                .comparing((SupportTicket t) -> getPriorityOrder(t.getPriority()))
+                .thenComparing(SupportTicket::getCreatedAt, Comparator.nullsLast(Comparator.reverseOrder())));
+
+        return tickets;
+    }
+
+    // Custom priority ranking with null check
+    private int getPriorityOrder(TicketPriority priority) {
+        if (priority == null) {
+            // Handle the null case, for example, assign a default priority
+            return 5; // Default to a lowest priority if null
+        }
+        return switch (priority) {
+            case CRITICAL -> 1;
+            case HIGH -> 2;
+            case MEDIUM -> 3;
+            case LOW -> 4;
+            default -> 5;
+        };
+    }
+
 }
