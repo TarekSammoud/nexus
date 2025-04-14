@@ -12,10 +12,15 @@ import { ChatComponent } from './user-management/chat/chat.component';
 
 import { AuthGuard } from '../app/core/services/user-management/auth.guard';
 
+// Ajoute cet import
+import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
