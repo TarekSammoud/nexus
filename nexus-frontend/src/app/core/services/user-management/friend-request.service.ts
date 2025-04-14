@@ -1,51 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { User } from '../../entities/user/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FriendRequestService {
-
-    private apiUrl = `http://localhost:9000/nexus-backend/friendRequests/players/available`; // Assure-toi que l'URL est correcte
+    private baseUrl = 'http://localhost:9000/nexus-backend';
 
     constructor(private http: HttpClient) { }
 
     getAvailablePlayers(userId: number): Observable<any[]> {
-        return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
+        return this.http.get<any[]>(`${this.baseUrl}/friendRequests/players/available/${userId}`);
     }
 
     sendFriendRequest(senderId: number, recipientId: number): Observable<any> {
-        const url = `http://localhost:9000/nexus-backend/friendRequests/addFriendRequest`;
-        const requestPayload = {
+        const url = `${this.baseUrl}/friendRequests/addFriendRequest`;
+        const payload = {
             sender: { id: senderId },
             recipient: { id: recipientId }
         };
-        return this.http.post<any>(url, requestPayload);
+        return this.http.post<any>(url, payload);
     }
 
     getReceivedFriendRequests(userId: number): Observable<any[]> {
-        const url = `http://localhost:9000/nexus-backend/friendRequests/received/${userId}`;
-        return this.http.get<any[]>(url);
+        return this.http.get<any[]>(`${this.baseUrl}/friendRequests/received/${userId}`);
     }
-
 
     acceptFriendRequest(requestId: number): Observable<any> {
-        return this.http.put(`http://localhost:9000/nexus-backend/friendRequests/accept/${requestId}`, {});
+        return this.http.put(`${this.baseUrl}/friendRequests/accept/${requestId}`, {});
     }
 
-    //put
     rejectFriendRequest(requestId: number): Observable<any> {
-        return this.http.put(`http://localhost:9000/nexus-backend/friendRequests/reject/${requestId}`, {});
+        return this.http.put(`${this.baseUrl}/friendRequests/reject/${requestId}`, {});
     }
-
-
-    private baseUrl = 'http://localhost:9000/nexus-backend/user';
 
     getFriends(userId: number): Observable<any[]> {
-        return this.http.get<any[]>(`${this.baseUrl}/friends/${userId}`);
+        return this.http.get<any[]>(`${this.baseUrl}/user/friends/${userId}`);
     }
 
-
+    getRecommendedFriends(userId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.baseUrl}/friendRequests/recommendations2/${userId}`);
+    }
 }

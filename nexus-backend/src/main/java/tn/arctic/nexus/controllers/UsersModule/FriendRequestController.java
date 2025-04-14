@@ -8,7 +8,10 @@ import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.services.UsersModule.FriendRequestService;
 import tn.arctic.nexus.services.UsersModule.IFriendRequestService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -77,6 +80,31 @@ public class FriendRequestController {
         } catch (Exception e) {
             throw new RuntimeException("Failed to reject friend request", e);
         }
+    }
+
+    @GetMapping("/recommendations/{userId}")
+    public List<User> recommendFriends(@PathVariable Long userId) {
+        return friendRequestService.recommendFriends(userId);
+    }
+
+    @GetMapping("/recommendations2/{userId}")
+    public ResponseEntity<List<Map<String, Object>>> getRecommendations(@PathVariable Long userId) {
+        Map<User, Long> recommendations = friendRequestService.getRecommendedUsersWithMutualCount(userId);
+
+        // Transformer manuellement pour ne pas exposer d'attributs inutiles
+        List<Map<String, Object>> response = recommendations.entrySet().stream().map(entry -> {
+            User u = entry.getKey();
+            Long count = entry.getValue();
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", u.getId());
+            map.put("firstName", u.getFirstName());
+            map.put("lastName", u.getLastName());
+            map.put("email", u.getEmail());
+            map.put("mutualFriendsCount", count);
+            return map;
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(response);
     }
 
 

@@ -13,7 +13,18 @@ public interface IFriendRequestRepository  extends JpaRepository<FriendRequest,L
 
     List<FriendRequest> findByRecipientIdAndStatus(Long recipientId, StatusFriendRequest status);
 
+    // affichage liste des amis
     @Query("SELECT fr FROM FriendRequest fr WHERE (fr.sender.id = :userId OR fr.recipient.id = :userId) AND fr.status = :status")
     List<FriendRequest> findAcceptedFriends(@Param("userId") long userId, @Param("status") StatusFriendRequest status);
+
+
+    //utliser pour ML
+
+    @Query("SELECT CASE WHEN fr.sender.id = :userId THEN fr.recipient.id ELSE fr.sender.id END " +
+            "FROM FriendRequest fr " +
+            "WHERE (fr.sender.id = :userId OR fr.recipient.id = :userId) " +
+            "AND fr.status = tn.arctic.nexus.entities.StatusFriendRequest.ACCEPTED")
+    List<Long> findAcceptedFriendIds(@Param("userId") Long userId);
+
 
 }

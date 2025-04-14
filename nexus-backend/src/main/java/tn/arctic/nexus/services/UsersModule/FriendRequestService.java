@@ -9,7 +9,9 @@ import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IFriendRequestRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class FriendRequestService implements IFriendRequestService{
 
@@ -97,5 +99,82 @@ public class FriendRequestService implements IFriendRequestService{
             return true;
         }).orElse(false);
     }
+
+// ML
+    @Override
+    public List<User> recommendFriends(Long userId) {
+        List<Long> myFriends = friendRequestRepository.findAcceptedFriendIds(userId);
+        Set<Long> suggestedIds = new HashSet<>();
+
+        for (Long friendId : myFriends) {
+            List<Long> friendsOfFriend = friendRequestRepository.findAcceptedFriendIds(friendId);
+            for (Long foafId : friendsOfFriend) {
+                if (!foafId.equals(userId) && !myFriends.contains(foafId)) {
+                    suggestedIds.add(foafId);
+                }
+            }
+        }
+
+        return userRepository.findAllById(suggestedIds);
+    }
+
+    public Map<User, Long> getRecommendedUsersWithMutualCount(Long userId) {
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 1. Amis actuels (requêtes acceptées)
+        List<FriendRequest> currentFriendRequests = friendRequestRepository.findAcceptedFriends(userId, StatusFriendRequest.ACCEPTED);
+
+        // Convertir en liste d'amis (User)
+        Set<User> currentFriends = currentFriendRequests.stream()
+                .map(fr -> fr.getSender().getId().equals(userId) ? fr.getRecipient() : fr.getSender())
+                .collect(Collectors.toSet());
+
+        // 2. Tous les utilisateurs
+        List<User> allUsers = userRepository.findAll();
+
+        Map<User, Long> recommendations = new HashMap<>();
+
+        for (User potential : allUsers) {
+            if (potential.getId().equals(userId)) continue;  // Ne pas recommander soi-même
+            if (currentFriends.contains(potential)) continue;  // Ne pas recommander ses propres amis
+
+            // Obtenir les amis du potentiel
+            List<FriendRequest> potentialFriendRequests = friendRequestRepository.findAcceptedFriends(potential.getId(), StatusFriendRequest.ACCEPTED);
+            Set<User> potentialFriends = potentialFriendRequests.stream()
+                    .map(fr -> fr.getSender().getId().equals(potential.getId()) ? fr.getRecipient() : fr.getSender())
+                    .collect(Collectors.toSet());
+
+            // Comptabiliser les amis en commun
+            long mutualCount = currentFriends.stream()
+                    .filter(potentialFriends::contains)
+                    .count();
+
+            if (mutualCount > 0) {
+                recommendations.put(potential, mutualCount);
+            }
+        }
+
+        // Recommandation par fallback si aucune correspondance
+        if (recommendations.isEmpty()) {
+            List<User> suggestedUsers = userRepository.findTopUsersByActivity();  // À implémenter
+            for (User user : suggestedUsers) {
+                if (!user.getId().equals(userId)) {  // Toujours éviter soi-même
+                    recommendations.put(user, 0L);
+                }
+            }
+        }
+
+        return recommendations.entrySet().stream()
+                .sorted(Map.Entry.<User, Long>comparingByValue().reversed())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
+    }
+
+
 
 }
