@@ -62,4 +62,25 @@ export class AuthService {
         });
         return this.http.get<boolean>(`${this.userUrl}/check-email/${email}`, { headers });
     }
+
+
+
+
+
+
+
+    sendOtp(email: string) {
+        return this.http.post(`http://localhost:9000/nexus-backend/auth/forgot-password`, null, {
+            params: { email }
+        });
+    }
+
+    resetPassword(email: string, otp: string, newPassword: string) {
+        return this.http.post(`http://localhost:9000/nexus-backend/auth/reset-password`, null, {
+            params: { email, otp, newPassword }
+        });
+    }
+
+
+
 }

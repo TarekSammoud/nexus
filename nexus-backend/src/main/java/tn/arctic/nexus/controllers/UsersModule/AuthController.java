@@ -35,4 +35,26 @@ public class AuthController {
 
         return ResponseEntity.status(401).body("Invalid credentials");
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestParam String email) {
+        try {
+            authService.sendOtpBySms(email);
+            return ResponseEntity.ok("Code envoyé par SMS !");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestParam String email, @RequestParam String otp, @RequestParam String newPassword) {
+        try {
+            authService.resetPassword(email, otp, newPassword);
+            return ResponseEntity.ok("Mot de passe réinitialisé !");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
 }
