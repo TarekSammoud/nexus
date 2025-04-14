@@ -1,1 +1,39 @@
-<p>games-carousel works!</p>
+
+<div id="gameCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li *ngFor="let game of Games; let i = index" data-bs-target="#gameCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"></li>
+  </ol>
+
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div *ngFor="let game of Games; let i = index" class="carousel-item" [class.active]="i === 0" 
+    [ngStyle]="{ 'background-image': 'url(' + 'http://localhost:9000/nexus-backend/games/upload/download/' + game.gameMediaList[0]?.mediaUrl + ')' }">  
+    
+    
+    
+    <div class="carousel-caption d-flex justify-content-start align-items-start">
+        <div class="carousel-text">
+          <h5 class="text-light">{{ game.name }}</h5>
+          <p>{{ game.description }}</p>
+          <p><strong>Price: </strong>${{ game.price }}</p>
+          <button class="btn btn-light" (click)="OnSelect(game)">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="carousel-controls">
+    <button class="carousel-control-prev" type="button" data-bs-target="#gameCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#gameCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+

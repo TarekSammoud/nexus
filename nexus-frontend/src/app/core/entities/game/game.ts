@@ -9,7 +9,7 @@ export class Game {
     name!: string;
     description!: string;
     price!: number;
-    platform!: GamePlatform;
+    platforms!: GamePlatform;
     createdAt!: Date;
     updatedAt!: Date;
     gameItems!: GameItem[];
@@ -19,6 +19,7 @@ export class Game {
   
     constructor(data?: Partial<Game>) {
       Object.assign(this, data);
+      this.gameMediaList = data?.gameMediaList ?? []; // Ensures it's always an array
     }
   }
   

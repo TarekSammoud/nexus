@@ -7,9 +7,16 @@ export class GameMedia {
   fileSize!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  game!: Game;
+  gameMediaType!: string;
+  game_id!: Number;
 
-  constructor(data?: Partial<GameMedia>) {
-    Object.assign(this, data);
-  }
+  constructor(
+    mediaUrl: string,
+    fileType: string,
+    fileSize: number,
+    createdAt: Date,
+    updatedAt: Date,
+    gameMediaType: string,
+    game_id: Number
+  ) {}
 }

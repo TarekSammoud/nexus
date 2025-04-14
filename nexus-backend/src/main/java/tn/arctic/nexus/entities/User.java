@@ -1,7 +1,5 @@
 package tn.arctic.nexus.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)  // Set the inheritance strategy here
+
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,28 +31,25 @@ public class User implements Serializable {
     private String phoneNumber;
     private String address;
 
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = true)
     private Date updatedAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = true)
     private Date last_login;
-
-
-
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private ProfilePictures profilePicture;
+    @ManyToMany
+    private List<User> friends;
+    @ManyToOne
+    private Role role;
+    @OneToMany
+    private List<ProfilePictures> profilesPictures;
 
     @ManyToMany
     private List<Game> gameLibrary;
+
 }
