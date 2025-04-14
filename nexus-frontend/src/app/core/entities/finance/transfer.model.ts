@@ -1,8 +1,8 @@
 import { NexusWallet } from "./wallet.model";
 
 export interface Transfer {
-    id: number;
-    receiver_wallet_id: number;
+    id?: number;
+    receiverMetaMaskAddress: String;
     amount: number;
     createdAt?: Date;
     updatedAt?: Date;

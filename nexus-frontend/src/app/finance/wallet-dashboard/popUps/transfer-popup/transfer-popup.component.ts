@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Transfer } from 'src/app/core/entities/finance/transfer.model';
+import { TransferService } from 'src/services/finance/Crud/transfer.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
 
 interface Friend {
   id: number;
+  metaMaskAddress: String;
   name: string;
   profilePic: string;
 }
@@ -12,7 +16,7 @@ interface Friend {
   styleUrls: ['./transfer-popup.component.css']
 })
 export class TransferPopupComponent {
-  constructor(public activeModal: NgbActiveModal) {
+  constructor(public activeModal: NgbActiveModal,private metamaskService :MetamaskService,private transferService :TransferService) {
     this.filteredFriends = [...this.friends];
 
   }
@@ -25,29 +29,11 @@ export class TransferPopupComponent {
   friends: Friend[] = [
     {
       id: 1,
-      name: 'John Doe',
+      metaMaskAddress: '0x9375f2d84f9843Df4BC29260219B7B25E73a92d1',
+      name: 'nexus',
       profilePic: 'https://i.pravatar.cc/150?img=1'
     },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      profilePic: 'https://i.pravatar.cc/150?img=2'
-    },
-    {
-      id: 3,
-      name: 'Mike Johnson',
-      profilePic: 'https://i.pravatar.cc/150?img=3'
-    },
-    {
-      id: 4,
-      name: 'Sarah Williams',
-      profilePic: 'https://i.pravatar.cc/150?img=4'
-    },
-    {
-      id: 5,
-      name: 'David Brown',
-      profilePic: 'https://i.pravatar.cc/150?img=5'
-    }
+    
   ];
   searchFriends() {
     if (!this.searchText) {
@@ -76,11 +62,29 @@ export class TransferPopupComponent {
     }
   }
 
+  transfer: Transfer = {
+    receiverMetaMaskAddress: "0",
+    amount: 0
+  };
+  createTransfer(): void {
+    this.transferService.createTransfer(this.transfer).subscribe({
+      next: (response) => {
+        console.log('Transfer created:', response);
+      },
+      error: (err) => {
+        console.error('Error creating transfer:', err);
+      }
+    });
+
+  }
   sendCoins(friend: Friend) {
     if (this.coinAmountTosend <= 0) {
       alert('Please select amount of coins to send');
       return;
+    }else{
+          this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend)
     }
+  
+  }
+}
 
-}
-}

@@ -23,7 +23,7 @@ public class Payment implements Serializable {
     private Long id;
     private Long coinAmount;
     private String status;
-    private Long price;
+    private String price;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

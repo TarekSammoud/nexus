@@ -47,7 +47,7 @@
         <!-- Delete Button Column -->
         <div class="col-md-1 d-flex justify-content-center align-items-center">
           <button class="btn btn-link delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
-            (click)="setSelectedPayment(payment.id)">
+            (click)="payment.id !== undefined && setSelectedPayment(payment.id)">
             <i class="far fa-trash-can fa-2x"></i>
           </button>
         </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ethers } from 'ethers';
+import { PaymentService } from './Crud/payment.service';
+import { Payment } from 'src/app/core/entities/finance/payment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class MetamaskService {
   private provider: ethers.BrowserProvider | ethers.JsonRpcProvider | null = null;
   private signer: ethers.Signer | null = null;
   private contract: ethers.Contract | null = null;
-  private contractAddress = '0x3e6640CF83CCdb57b339A72512FCb5c47310E281'; // Replace with actual contract address
+  private contractAddress = '0xF3D2109c12f133D16bEa33fc98f135E09C91d665'; // Replace with actual contract address
   private contractABI = [
     "function getBalance(address userMetamaskAdd) view returns (uint256)",
     "function addVirtualCoins(address userMetamaskAdd, uint256 amount)",
@@ -33,7 +35,7 @@ export class MetamaskService {
   errorMessage: string = '';
 
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private paymentService : PaymentService) {}
 
 
 
@@ -205,9 +207,81 @@ async userExists(addrese:string): Promise<boolean> {
   }
 }
 
+payment:  Payment = {
+  coinAmount: 0,
+  status: 'Pending',
+  price: "0",
+};
+public async listenToEtherReceived() {
+  console.log('Listening to EtherReceived event...');
+  // Ensure the contract is initialized
+  if (!this.contract) {
+    console.error('Contract not initialized');
+    return;
+  }
+  // Listen to the EtherReceived event
+  this.contract.on('EtherReceived', (sender: string, amount: number) => {
+    console.log(`EtherReceived Event:`);
+    console.log(`Sender: ${sender}`);
+    console.log(`Amount: ${ethers.formatEther(amount)} ETH`); // Convert amount to ETH for better readability
+
+    this.addCoins(sender, Number(localStorage.getItem('coinsToPurchase')));
+    this.payment.coinAmount = Number(localStorage.getItem('coinsToPurchase'));
+    this.payment.price = localStorage.getItem('n') || '0';
+    this.paymentService.createPayment(this.payment).subscribe({
+      next: (response) => {
+        console.log('Payment created:', response);
+        // reset form
+        this.payment = {   coinAmount: 0,
+          status: 'Pending',
+          price: "0",
+        };
+      },
+      error: (err) => {
+        console.error('Error creating payment:', err);
+        alert('Failed to create payment.');
+      }
+    });    
+  });
+}
+async addCoins(addrese:string,amount:number) {
+  try {
+    if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
+    const tx = await this.contract['addVirtualCoins'](addrese, amount);
+    console.log('Transaction sent:', tx.hash);
+
+    await tx.wait();
+    console.log('Transaction mined:', tx.hash);
+    console.log('Coins added successfully:', 'to : ', addrese," and amount of coin", amount);
+
+  } catch (error: any) {
+    console.error('Error setting value:', error.message || error);
+    this.errorMessage = error.message || 'Failed to set value.';
+    console.log(this.errorMessage);
+
+  }
+}
+async TransfertCoins(_to:String,amount:number) {
+  try {
+    if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
+    const tx = await this.contract['transferVirtualCoins'](this. getWalletAddress(),_to, amount);
+    console.log('Transaction sent (transfert):', tx.hash);
+
+    await tx.wait();
+    console.log('Transaction mined (transfert):', tx.hash);
+    console.log('Coins sended  successfully:', "from :",this. getWalletAddress() , ' to : ', _to," and amount of coin", amount);
+
+  } catch (error: any) {
+    console.error('Error transfert value:', error.message || error);
+    this.errorMessage = error.message || 'Failed to transfert value.';
+    console.log(this.errorMessage);
+
+  }
+}
+
 ////////// transaction functions /////////////s
 
-  async sendTransaction(toAddress: string, amountEther: string): Promise<any> {
+  async sendTransaction( amountEther: string): Promise<any> {
     if (!this.signer) {
       console.log('MetaMask is not connected');
       throw new Error('MetaMask is not connected');
@@ -219,7 +293,7 @@ async userExists(addrese:string): Promise<boolean> {
 
       // Prepare the transaction details
       const transaction = {
-        to: toAddress,
+        to: this.contractAddress,
         value: amountWei // Send value in Wei (1 Ether = 1e18 Wei)
       };
 

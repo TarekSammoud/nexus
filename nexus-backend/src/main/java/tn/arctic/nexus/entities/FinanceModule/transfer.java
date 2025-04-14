@@ -25,7 +25,7 @@ public class transfer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long receiver_wallet_id;
+    private String receiverMetaMaskAddress;
     private Long amount;
 
     @CreationTimestamp
