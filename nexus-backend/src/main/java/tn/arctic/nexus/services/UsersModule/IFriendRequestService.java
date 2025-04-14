@@ -4,6 +4,7 @@ import tn.arctic.nexus.entities.FriendRequest;
 import tn.arctic.nexus.entities.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IFriendRequestService {
     List<FriendRequest> retrieveAllFriendRequest();
@@ -15,4 +16,6 @@ public interface IFriendRequestService {
     List<FriendRequest> getReceivedFriendRequests(Long userId);
     boolean rejectRequest(Long requestId);
      FriendRequest acceptRequest(Long requestId);
+    List<User> recommendFriends(Long userId);
+    public Map<User, Long> getRecommendedUsersWithMutualCount(Long userId);
 }

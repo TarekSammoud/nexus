@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
-  { path: 'your-your-friends', component: FriendManagementComponent, canActivate: [AuthGuard] },
+  { path: 'your-friends', component: FriendManagementComponent, canActivate: [AuthGuard] },
   { path: 'friend-requests', component: FriendRequestListComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
 ];

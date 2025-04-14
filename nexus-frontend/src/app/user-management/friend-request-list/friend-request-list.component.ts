@@ -10,11 +10,12 @@ import { TokenService } from '../../core/services/user-management/token.service'
   styleUrls: ['./friend-request-list.component.css']
 })
 export class FriendRequestListComponent implements OnInit {
-  isLoading: boolean = false;
+  isLoading = false;
   availablePlayers: any[] = [];
-  errorMessage: string = '';
+  errorMessage = '';
   imageUrls: { [userId: number]: any } = {};
   receivedRequests: any[] = [];
+  recommendedFriends: any[] = [];
   userId!: number;
 
   constructor(
@@ -27,6 +28,7 @@ export class FriendRequestListComponent implements OnInit {
     this.userId = TokenService.getUserId()!;
     this.loadAvailablePlayers(this.userId);
     this.loadReceivedRequests(this.userId);
+    this.loadRecommendedFriends(this.userId);
   }
 
   loadAvailablePlayers(userId: number): void {
@@ -34,13 +36,11 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.getAvailablePlayers(userId).subscribe({
       next: (players: any[]) => {
         this.availablePlayers = players;
-        this.availablePlayers.forEach(player => {
-          this.loadProfilePicture(player.id);
-        });
+        players.forEach(player => this.loadProfilePicture(player.id));
         this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = "Erreur lors du chargement des joueurs.";
+        this.errorMessage = 'Erreur lors du chargement des joueurs.';
         this.isLoading = false;
       }
     });
@@ -61,11 +61,11 @@ export class FriendRequestListComponent implements OnInit {
   sendFriendRequest(playerId: number): void {
     this.friendRequestService.sendFriendRequest(this.userId, playerId).subscribe({
       next: () => {
-        alert('Friend request sent successfully!');
+        alert('Demande d\'ami envoyée avec succès !');
         this.availablePlayers = this.availablePlayers.filter(p => p.id !== playerId);
       },
       error: () => {
-        alert('Failed to send friend request.');
+        alert('Échec de l\'envoi de la demande d\'ami.');
       }
     });
   }
@@ -74,12 +74,10 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.getReceivedFriendRequests(userId).subscribe({
       next: (requests: any[]) => {
         this.receivedRequests = requests;
-        this.receivedRequests.forEach(req => {
-          this.loadProfilePicture(req.sender.id);
-        });
+        requests.forEach(req => this.loadProfilePicture(req.sender.id));
       },
       error: () => {
-        console.error("Erreur lors du chargement des invitations reçues.");
+        console.error('Erreur lors du chargement des invitations reçues.');
       }
     });
   }
@@ -88,10 +86,10 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.acceptFriendRequest(requestId).subscribe({
       next: (updatedRequest) => {
         this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
-        alert(`Friend request accepted from ${updatedRequest.sender.firstName} ${updatedRequest.sender.lastName}.`);
+        alert(`Demande acceptée de ${updatedRequest.sender.firstName} ${updatedRequest.sender.lastName}.`);
       },
       error: () => {
-        alert('Failed to accept the request.');
+        alert('Échec lors de l\'acceptation de la demande.');
       }
     });
   }
@@ -100,11 +98,24 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.rejectFriendRequest(requestId).subscribe({
       next: () => {
         this.receivedRequests = this.receivedRequests.filter(r => r.idFriendRequest !== requestId);
-        alert('Friend request rejected.');
+        alert('Demande d\'ami rejetée.');
       },
       error: () => {
-        alert('Failed to reject the request.');
+        alert('Échec lors du rejet de la demande.');
       }
     });
   }
+
+  loadRecommendedFriends(userId: number): void {
+    this.friendRequestService.getRecommendedFriends(userId).subscribe({
+      next: (friends: any[]) => {
+        this.recommendedFriends = friends;  // Remplacer availablePlayers par recommendedFriends
+        friends.forEach(friend => this.loadProfilePicture(friend.id));
+      },
+      error: () => {
+        console.error('Erreur lors du chargement des recommandations d\'amis.');
+      }
+    });
+  }
+
 }
