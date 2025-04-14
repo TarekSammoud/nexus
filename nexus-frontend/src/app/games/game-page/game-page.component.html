@@ -1,0 +1,96 @@
+<div class="container my-5">
+  <div class="row">
+    <!-- Game Title -->
+    <div class="col-12 game-title-container">
+      <h1 class="text-light" style="        font-weight: 700;
+        font-size: 50px;">{{game.name}}</h1>
+    </div>
+
+    <!-- Game Image Section -->
+    <div class="col-md-6 text-center">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <!-- Carousel Inner -->
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
+            <ng-container *ngIf="media.gameMediaType === 'SCREENSHOT'">
+              <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game screenshot">
+            </ng-container>
+          </div>
+        </div>
+      
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      
+      <!-- Thumbnails -->
+      <div class="thumbnail-container d-flex justify-content-center mt-3">
+        <div class="thumbnail" *ngFor="let media of game?.gameMediaList; let i = index" (click)="setActiveSlide(i)">
+          <ng-container *ngIf="media.gameMediaType === 'SCREENSHOT'">
+            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Game Description -->
+      <p class="text-start">{{ game.description }}</p>
+      
+      <!-- Categories -->
+      <div class="row">
+        <div class="col-md-6 text-start">
+          <div class="game-categories">
+            <span>Categories:</span>
+            <br>
+            <div *ngFor="let category of game.categories" class="badge bg-dark me-2 mb-2">{{ category.name }}</div>
+          </div>
+        </div>
+        
+        <!-- Test Section (You can replace this with real content) -->
+        <div class="col-md-6 text-start">
+          <!-- Placeholder for additional content -->
+         <!-- <p>test</p>-->
+         <div class="game-categories">
+          <span>Platforms:</span>
+          <div class="game-platforms">
+          <img  *ngFor="let gamePlatform of game.platforms"  class=" me-2 mb-2"
+               src="assets/images/platforms/{{ gamePlatform }}.svg" alt="{{ gamePlatform }}" /></div>
+        </div>
+        </div>
+      </div>
+
+      <!-- System Requirements -->
+      <div class="text-start mt-3">
+        <strong>Configuration système requise pour {{game.name}}</strong>
+        <p>Insert system requirements here</p>
+      </div>
+    </div>
+
+    <!-- Game Details Section (Right Side) -->
+    <div class="col-md-6">
+      <div *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
+        <ng-container *ngIf="media.gameMediaType === 'BANNER'">
+          <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game banner">
+        </ng-container>
+      </div> 
+
+      <!-- Game Platforms -->
+
+
+      <!-- Game Price -->
+      <h3 class="text-light" style="font-weight: 700; font-size: 30px;">{{ game.price }} TND</h3>
+
+      <!-- Buy Now Button -->
+      <button class="btn btn-primary btn-lg mt-3 buy-button">Buy Now</button>
+      <button (click)="navigateToUpdate(game)" class="btn btn-primary btn-lg mt-3 buy-button">Update</button>
+
+      <button (click)="deleteGame(game)" class="btn btn-danger btn-lg mt-3">Delete game</button>
+
+    </div>
+  </div>
+</div>

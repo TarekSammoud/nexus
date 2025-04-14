@@ -1,0 +1,14 @@
+
+  
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <label for="rating">Rating:</label>
+    <input id="rating" formControlName="rating" type="number">
+  
+    <label for="feedback">Feedback:</label>
+    <textarea id="feedback" formControlName="feedback"></textarea>
+  
+    <button type="submit" [disabled]="reviewForm.invalid">
+      {{ currentReview ? 'Update Review' : 'Add Review' }}
+    </button>
+  </form>
+  

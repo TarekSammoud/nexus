@@ -4,6 +4,8 @@ import { UserProfileService } from '../core/services/user-management/userprofile
 import { DomSanitizer } from '@angular/platform-browser';
 import { TokenService } from '../core/services/user-management/token.service';  // Import de TokenService
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,7 +19,9 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer,
-    private tokenService: TokenService  // Injection du TokenService
+    private tokenService: TokenService
+    // Injection du TokenService
+    , private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -50,4 +54,9 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
+  navigateToJams() {
+    this._router.navigate(['jams']);
+  }
+
 }
