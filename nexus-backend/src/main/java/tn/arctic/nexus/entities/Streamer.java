@@ -15,6 +15,19 @@ public class Streamer {
     private String streamUrl;
 
 
+    private Boolean isAvailable ;
+
+    // getters et setters
+
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,58 +1,56 @@
-<div class="container mt-5">
-    <h3 class="mb-4">
-      <i class="fas fa-flag text-danger me-2"></i>Gestion des Signalements
-    </h3>
-  
-    <div class="card shadow-sm">
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle mb-0">
-          <thead class="table-dark">
-            <tr>
-              <th>#</th>
-              <th>Utilisateur</th>
-              <th>Publication</th>
-              <th>Raison</th>
-              <th>Statut</th>
-              <th class="text-end">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let report of reports">
-              <td>{{ report.id }}</td>
-              <td>{{ report.user?.id}}</td>
-              <td>
-                {{ report.publication?.title || report.publication?.content?.slice(0, 50) + '...' }}
-            </td>
-              <td>{{ report.reason }}</td>
-              <td>
-                <span class="badge" 
-                      [ngClass]="{
-                        'bg-warning text-dark': report.status === 'PENDING',
-                        'bg-success': report.status === 'RESOLVED',
-                        'bg-secondary': report.status !== 'PENDING' && report.status !== 'RESOLVED'
-                      }">
-                  {{ report.status }}
-                </span>
-              </td>
-              <td class="text-end">
-                <button *ngIf="report.status !== 'RESOLVED'"
-                        class="btn btn-sm btn-outline-success me-2"
-                        (click)="markAsResolved(report)">
-                  <i class="fas fa-check"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger" (click)="deleteReport(report.id!)">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-            <tr *ngIf="reports.length === 0">
-              <td colspan="6" class="text-center text-muted py-4">
-                Aucun signalement à afficher.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="report-container shadow-lg p-4 rounded">
+  <h2 class="report-title mb-4">
+    <i class="fas fa-flag me-2 text-danger"></i> GESTION DES SIGNALEMENTS
+  </h2>
+
+  <div class="table-responsive rounded shadow-sm">
+    <table class="table table-dark table-borderless align-middle report-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>UTILISATEUR</th>
+          <th>PUBLICATION</th>
+          <th>RAISON</th>
+          <th>STATUT</th>
+          <th class="text-end">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>{{ report.id }}</td>
+          <td><span class="badge bg-light text-dark px-3 py-2">{{ report.user?.id }}</span></td>
+          <td>{{ report.publication?.title || (report.publication?.content | slice:0:50) + '...' }}</td>
+          <td class="text-warning fw-bold">{{ report.reason }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-warning text-dark': report.status === 'PENDING',
+                    'bg-success': report.status === 'RESOLVED',
+                    'bg-secondary': report.status !== 'PENDING' && report.status !== 'RESOLVED'
+                  }">
+              {{ report.status }}
+            </span>
+          </td>
+          <td class="text-end">
+            <button *ngIf="report.status !== 'RESOLVED'"
+                    class="btn btn-sm btn-outline-success me-2"
+                    (click)="markAsResolved(report)"
+                    title="Marquer comme résolu">
+              ✅
+            </button>
+            <button class="btn btn-sm btn-outline-danger"
+                    (click)="deleteReport(report.id!)"
+                    title="Supprimer le signalement">
+              🗑️
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="reports.length === 0">
+          <td colspan="6" class="text-center text-muted py-4">
+            <i class="fas fa-info-circle me-2"></i> Aucun signalement trouvé.
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>

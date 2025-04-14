@@ -1,42 +1,53 @@
+<div class="poll-create-container">
+  <div class="poll-card">
+    <h2 class="poll-title">
+      🗳️ Lancer un Sondage Communautaire
+    </h2>
+    <p class="poll-description">
+      Engage ta communauté en leur posant une question stratégique. 
+      Choisis un streamer et vois ce que pense ton public.
+    </p>
 
-<div class="container mt-5 d-flex justify-content-center">
-    <div class="card shadow-lg p-4 w-100" style="max-width: 600px;">
-      <h2 class="mb-4 text-center fw-bold text-dark">🗳️ Créer un nouveau sondage</h2>
-  
-      <form [formGroup]="sondageForm" (ngSubmit)="onSubmit()">
-        <div class="form-group mb-4">
-          <label for="question" class="form-label fw-semibold text-secondary">Question du sondage</label>
-          <input
-            type="text"
-            id="question"
-            class="form-control rounded-pill px-4 py-2 shadow-sm"
-            placeholder="Ex: Souhaitez-vous un live de StreamerX ?"
-            formControlName="question"
-          />
-        </div>
-  
-        <div class="form-group mb-4">
-          <label for="streamerId" class="form-label fw-semibold text-secondary">Choisir un streamer</label>
-          <select
-            id="streamerId"
-            class="form-select rounded-pill px-4 py-2 shadow-sm"
-            formControlName="streamerId"
-          >
-            <option value="" disabled selected>-- Sélectionnez un streamer --</option>
-            <option *ngFor="let streamer of streamers" [value]="streamer.id">
-              {{ streamer.name }} - {{ streamer.platform }}
-            </option>
-          </select>
-        </div>
-  
-        <button
-          type="submit"
-          class="btn btn-dark w-100 rounded-pill py-2 fw-semibold shadow"
-          [disabled]="sondageForm.invalid"
+    <form [formGroup]="sondageForm" (ngSubmit)="onSubmit()">
+      <!-- Question -->
+      <div class="form-group">
+        <label for="question" class="form-label">
+          ❓ Question du sondage
+        </label>
+        <input
+          type="text"
+          id="question"
+          class="form-control input-dark"
+          placeholder="Ex: Souhaitez-vous un live de StreamerX ?"
+          formControlName="question"
+        />
+      </div>
+
+      <!-- Streamer -->
+      <div class="form-group">
+        <label for="streamerId" class="form-label">
+          🎮 Choisir un streamer
+        </label>
+        <select
+          id="streamerId"
+          class="form-select input-dark"
+          formControlName="streamerId"
         >
-          ✅ Créer le sondage
-        </button>
-      </form>
-    </div>
+          <option value="" disabled selected>-- Sélectionnez un streamer --</option>
+          <option *ngFor="let streamer of streamers" [value]="streamer.id">
+            {{ streamer.name }} - {{ streamer.platform }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-primary poll-submit-btn"
+        [disabled]="sondageForm.invalid"
+      >
+        🚀 Créer le sondage
+      </button>
+    </form>
   </div>
-  
+</div>

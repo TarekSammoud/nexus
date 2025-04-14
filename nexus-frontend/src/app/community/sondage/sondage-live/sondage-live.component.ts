@@ -52,21 +52,33 @@ export class SondageLiveComponent implements OnInit {
   }
 
   goToLiveMenu(sondageId: number): void {
-    const selectedId = this.selectedStreamer[sondageId];
-    const streamer = this.streamers.find(s => s.id === selectedId);
-    if (streamer && streamer.streamUrl) {
-      // ⬇️ Appel backend pour sauvegarder le lien dans liveUrl
+    const streamerId = this.sondages.find(s => s.id === sondageId)?.streamer?.id;
+    const streamer = this.streamers.find(s => s.id === streamerId);
+  
+    if (!streamer) {
+      alert("❌ Aucun streamer sélectionné.");
+      return;
+    }
+  
+    if (!streamer.available) {
+      alert("⚠️ Ce streamer n'est pas disponible actuellement.");
+      return;
+    }
+  
+    if (streamer.streamUrl) {
       this.sondageService.startLive(sondageId, streamer.streamUrl).subscribe({
         next: () => {
           this.router.navigate(['/live-room', sondageId], {
             queryParams: { url: streamer.streamUrl }
           });
         },
-        error: (err) => alert('Erreur lancement du live : ' + err.message)
+        error: err => alert('Erreur lancement du live : ' + err.message)
       });
     } else {
-      alert('⚠️ Veuillez sélectionner un streamer !');
+      alert('❌ Ce streamer n’a pas de lien de stream.');
     }
   }
+  
+  
   
 }

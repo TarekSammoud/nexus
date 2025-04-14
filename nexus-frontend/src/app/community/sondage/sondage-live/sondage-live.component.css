@@ -1,23 +1,59 @@
-.card {
-    border-radius: 1rem;
-  }
-  
-  .card-title {
-    font-weight: 600;
-  }
-  
-  .btn-dark:hover {
-    background-color: #ea7a9a;
-    border-color: #ea7a9a;
-  }
-  
-  .input-group select.form-select {
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-  }
-  
-  .input-group .btn {
-    border-top-right-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-  }
-  
+.live-polls-container {
+  background: linear-gradient(to bottom right, #1a1c29, #202233);
+  border-radius: 16px;
+  padding: 50px 30px;
+  color: #eaeaea;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.title-glow {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffc107;
+  text-shadow: 0 0 10px #ffc10755;
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 15px;
+}
+
+.poll-card {
+  background-color: #2b2d3c;
+  border-radius: 16px;
+  transition: 0.3s ease;
+}
+
+.poll-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+}
+
+.card-body h4 {
+  font-size: 20px;
+}
+
+.launch-section {
+  background-color: #1e1e2f;
+  border: 1px solid #3c3f5c;
+}
+
+.btn-launch {
+  background-color: #28a745;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-launch:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.form-select {
+  min-width: 250px;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
