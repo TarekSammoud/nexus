@@ -1,5 +1,7 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +25,7 @@ public class ProfilePictures implements Serializable {
     private Long id;
 
     private String imageUrl;
-
     private String fileType;
-
     private Long fileSize;
 
     @CreationTimestamp
@@ -36,6 +36,10 @@ public class ProfilePictures implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    @JsonBackReference
     private User user;
+
 }
+

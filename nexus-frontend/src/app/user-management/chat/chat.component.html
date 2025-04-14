@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<!-- Liste des messages publics -->
+<ul class="message-list">
+    <li *ngFor="let msg of messages; trackBy: trackById"
+        [ngClass]="{ 'sent': msg.senderId === currentUserId, 'received': msg.senderId !== currentUserId }">
+        <div class="message-card">
+            <div class="message-header">
+                <strong>{{ msg.senderId || getUserNameById(msg.senderId) }}</strong>
+            </div>
+            <div class="message-content">
+                {{ msg.content }}
+            </div>
+            <div class="message-timestamp">
+                <small>{{ msg.timestamp | date:'short' }}</small>
+            </div>
+        </div>
+    </li>
+
+</ul>
+
+<!-- Envoi de message dans le canal -->
+<div>
+    <label for="messageContent">Votre message :</label>
+    <textarea id="messageContent" [(ngModel)]="messageContent" placeholder="Votre message ici..."></textarea>
+    <button (click)="sendMessage()">Envoyer</button>
+</div>

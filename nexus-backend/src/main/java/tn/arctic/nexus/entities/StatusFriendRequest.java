@@ -1,5 +1,9 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum StatusFriendRequest {
-    pending,accepted,rejected
+    PENDING,
+    ACCEPTED,
+    REJECTED
 }
