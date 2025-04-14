@@ -8,6 +8,7 @@ import java.io.IOException;
 
 @Service
 public class SmsService {
+    /*
     private static final String SMS_API_URL = "https://api.webexinteract.com/v1/sms";
     private static final String ACCESS_TOKEN = "aky_2vjaU9CNxlAP5YFOjWlT5XVwntl"; // Sécuriser plus tard
     private static final String SENDER_ID = "NEXUS_APP";
@@ -44,4 +45,5 @@ public class SmsService {
             throw new RuntimeException("Erreur SMS : " + e.getMessage());
         }
     }
+    */
 }
