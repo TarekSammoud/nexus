@@ -35,7 +35,7 @@ public class SupportTicket {
     private TicketStatus status;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false) // Ensure it's non-nullable
+   @Column(nullable = false) // Ensure it's non-nullable
     private TicketPriority priority;
 
 
@@ -53,7 +53,7 @@ public class SupportTicket {
 
 
     @JsonIgnore
-    @OneToOne(mappedBy = "ticket")
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
     private Room room;// This is the field referred by mappedBy in SupportAgent
 
 

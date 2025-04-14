@@ -11,9 +11,7 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./admin-agent-support.component.css']
 })
 export class AdminAgentSupportComponent implements OnInit {
-onEdit(_t56: SupportAgent) {
-throw new Error('Method not implemented.');
-}
+
   agents: SupportAgent[] = [];
   rankedAgents: SupportAgent[] = [];
   agentForm: FormGroup;

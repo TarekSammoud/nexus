@@ -18,7 +18,7 @@ export class SupportTicketComponent implements OnInit {
   currentTicketId: number | null = null;
   isLoading: boolean = false;
   isSubmitting: boolean = false;
-priority: any;
+  priority:any;
 
   constructor(
     private supportService: SupportService,
@@ -65,6 +65,8 @@ priority: any;
   get description() { 
     return this.ticketForm.get('description'); 
   }
+
+ 
 
   get category() { 
     return this.ticketForm.get('category'); 
