@@ -38,10 +38,14 @@
               
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "sockjs-client",
+              "rxjs-compat",
+              "rxjs"
             ]
           },
           "configurations": {

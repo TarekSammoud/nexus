@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+
+// --- Composants jeux, jams, support ---
 import { HomeComponent } from './home/home/home.component';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
 import { JamsListComponent } from './jams/jams-list/jams-list.component';
@@ -36,27 +38,54 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
+import { GamesComponent } from './games/games/games.component';
+
+// --- Composants support ---
 import { SupportTicketComponent } from './support/support-ticket/support-ticket.component';
 import { RoomComponent } from './support/room/room.component';
 import { PerformanceReviewComponent } from './support/performance-review/performance-review.component';
 import { SupportAgentComponent } from './support/support-agent/support-agent.component';
 import { RoomChatComponent } from './support/room-chat/room-chat.component';
-import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
-import { GamesComponent } from './games/games/games.component';
 import { AdminSupportListComponent } from './admin-support/admin-support-list/admin-support-list.component';
 import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/admin-agent-support.component';
 import { AdminPerformanceReviewComponent } from './admin-support/admin-performance-review/admin-performance-review.component';
 import { AdminRoomComponent } from './admin-support/admin-room/admin-room.component';
-// Import support components
+
+// --- Composants user management ---
+import { UserListComponent } from './user-management/user-list/user-list.component';
+import { UserDetailsComponent } from './user-management/user-details/user-details.component';
+import { UserFormComponent } from './user-management/user-form/user-form.component';
+import { UserAvatarComponent } from './user-management/user-avatar/user-avatar.component';
+import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component';
+import { FriendRequestActionsComponent } from './user-management/friend-request-actions/friend-request-actions.component';
+import { BlockedUsersComponent } from './user-management/blocked-users/blocked-users.component';
+import { NotificationsComponent } from './user-management/notifications/notifications.component';
+import { GameLibraryComponent } from './user-management/game-library/game-library.component';
+import { RoleManagementComponent } from './user-management/role-management/role-management.component';
+import { ChangePasswordComponent } from './user-management/change-password/change-password.component';
+import { UserDashboardComponent } from './user-management/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './user-management/admin-dashboard/admin-dashboard.component';
+import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
+import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
+import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
+import { LoginComponent } from './user-management/login/login.component';
+import { SignupComponent } from './user-management/signup/signup.component';
+import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
+import { ChatComponent } from './user-management/chat/chat.component';
+
+// --- Services & Intercepteurs ---
+import { TokenService } from '../app/core/services/user-management/token.service';
+import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
+import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    GamesCarouselComponent,
-    GamesComponent,
     HomeComponent,
+    GamesListComponent,
     JamsListComponent,
     JamsComponent,
     JamDetailsComponent,
@@ -72,15 +101,39 @@ import { AdminRoomComponent } from './admin-support/admin-room/admin-room.compon
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
+    AdminGameListComponent,
+    GameCategoryListComponent,
+    GamesCarouselComponent,
+    GamesComponent,
     SupportTicketComponent,
-    SupportAgentComponent,
     RoomComponent,
     PerformanceReviewComponent,
+    SupportAgentComponent,
     RoomChatComponent,
     AdminSupportListComponent,
     AdminAgentSupportComponent,
     AdminPerformanceReviewComponent,
     AdminRoomComponent,
+    UserListComponent,
+    UserDetailsComponent,
+    UserFormComponent,
+    UserAvatarComponent,
+    FriendRequestListComponent,
+    FriendRequestActionsComponent,
+    BlockedUsersComponent,
+    NotificationsComponent,
+    GameLibraryComponent,
+    RoleManagementComponent,
+    ChangePasswordComponent,
+    UserDashboardComponent,
+    AdminDashboardComponent,
+    UserProfileComponent,
+    EditProfileComponent,
+    FriendManagementComponent,
+    LoginComponent,
+    SignupComponent,
+    ForgotPasswordComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -96,8 +149,22 @@ import { AdminRoomComponent } from './admin-support/admin-room/admin-room.compon
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
-      ],
-  providers: [],
+    AngularEditorModule,
+    NgxPaginationModule
+  ],
+  providers: [
+    TokenService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

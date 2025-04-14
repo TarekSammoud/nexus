@@ -1,9 +1,9 @@
 package tn.arctic.nexus.services.UsersModule;
 
-import tn.arctic.nexus.entities.Notification;
 import tn.arctic.nexus.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
     List<User> retrieveAllUser();
@@ -11,4 +11,6 @@ public interface IUserService {
     User updateUser (User user);
     User retrieveUser(long idUser);
     void removeUser(long idUser);
+    User findByEmail(String email);
+    User authenticateUser(String email, String password);
 }

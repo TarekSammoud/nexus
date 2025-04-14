@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<div class="container mt-5">
+    <h2>Modifier le profil</h2>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <form (ngSubmit)="saveChanges()">
+        <div class="mb-3">
+            <label class="form-label">Profile Picture</label><br>
+            <img *ngIf="imageUrl" [src]="imageUrl" class="rounded mb-2" width="100"><br>
+            <input type="file" (change)="onFileSelected($event)">
+            <button type="button" class="btn btn-sm btn-secondary mt-2" (click)="uploadProfilePicture()">Update
+                Picture</button>
+        </div>
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" id="firstName" class="form-control" [(ngModel)]="user.firstName" name="firstName">
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" id="lastName" class="form-control" [(ngModel)]="user.lastName" name="lastName">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" id="password" class="form-control" [(ngModel)]="user.password" name="password">
+        </div>
+
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="text" id="phoneNumber" class="form-control" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Adresse</label>
+            <input type="text" id="address" class="form-control" [(ngModel)]="user.address" name="address">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
