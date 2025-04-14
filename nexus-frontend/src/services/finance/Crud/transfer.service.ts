@@ -19,5 +19,8 @@ export class TransferService {
   deleteTransfer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+  createTransfer(transfer: Transfer): Observable<Transfer> {
+    return this.http.post<Transfer>(`${this.baseUrl}/create`, transfer);
+  }
   
 }

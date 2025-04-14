@@ -54,7 +54,7 @@ export class TransfersAdminComponent {
       this.filteredTransfers = [...this.transfers];
     } else {
       this.filteredTransfers = this.transfers.filter(
-        transfer => transfer.id.toString().includes(this.searchTransferId!.toString())
+        transfer => (transfer.id?.toString() ?? '').includes(this.searchTransferId!.toString())
       );
     }
   }

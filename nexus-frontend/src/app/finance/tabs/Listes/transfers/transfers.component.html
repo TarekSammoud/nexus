@@ -12,7 +12,7 @@
                   <!-- Receiver Wallet ID -->
                   <span class="receiver-badge">
                     <i class="fas fa-wallet me-1"></i>
-                    Wallet ID: {{ transfer.receiver_wallet_id }}
+                    Wallet address: {{ transfer.receiverMetaMaskAddress }}
                   </span>
                 </div>
                 <div class="d-flex align-items-center gap-4">
@@ -35,7 +35,7 @@
           <!-- Delete Button Column -->
           <div class="col-md-1 d-flex justify-content-center align-items-center">
             <button class="btn btn-link delete-btn" data-bs-toggle="modal" data-bs-target="#deleteTransferModal"
-              (click)="setSelectedTransfer(transfer.id)">
+              (click)="setSelectedTransfer(transfer.id ?? 0)">
               <i class="far fa-trash-can fa-2x"></i>
             </button>
           </div>

@@ -22,4 +22,8 @@ export class PaymentService {
     updatePayment(payment: Payment,): Observable<Payment> {
       return this.http.put<Payment>(`${this.baseUrl}/update`, payment);
     }
+
+    createPayment(payment: Payment): Observable<Payment> {
+      return this.http.post<Payment>(`${this.baseUrl}/create`, payment);
+    }
 }

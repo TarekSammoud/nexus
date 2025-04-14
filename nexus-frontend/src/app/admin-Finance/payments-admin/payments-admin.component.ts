@@ -47,7 +47,7 @@ export class PaymentsAdminComponent {
   }
 
   calculateStatistics(): void {
-    this.totalRevenue = this.payments.reduce((sum, payment) => sum + payment.price, 0);
+    this.totalRevenue = this.payments.reduce((sum, payment) => sum + Number(payment.price), 0);
     this.totalCoinsPurchased = this.payments.reduce((sum, payment) => sum + payment.coinAmount, 0);
     
     const totalPayments = this.payments.length;
@@ -128,7 +128,7 @@ export class PaymentsAdminComponent {
       this.filteredPayments = [...this.payments];
     } else {
       this.filteredPayments = this.payments.filter(
-        payment => payment.id.toString().includes(this.searchPaymentId!.toString())
+        payment => (payment.id?.toString() ?? '').includes(this.searchPaymentId!.toString())
       );
     }
   }

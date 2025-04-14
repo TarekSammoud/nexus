@@ -19,12 +19,12 @@ ngOnInit() {
   this.ininitializeContract();
   this.connectedWalletAddress = this.metamaskService.getWalletAddress() || ''; // Get the connected wallet address from the service
   this.fetchWallet(); // Fetch the wallet when the component initializes
+  
 }
 
 async ininitializeContract() {
   await this.metamaskService.connectWallet();
-  await this.metamaskService.initializeContract();
- this.UserBalance = (await this.metamaskService.getBalance(this.connectedWalletAddress)) || '0';
+   this.UserBalance = (await this.metamaskService.getBalance(this.connectedWalletAddress)) || '0';
 
 }
 
@@ -48,4 +48,6 @@ async ininitializeContract() {
       }
     });
   }
+
+
 }
