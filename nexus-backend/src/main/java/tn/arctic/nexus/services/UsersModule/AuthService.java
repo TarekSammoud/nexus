@@ -37,9 +37,9 @@ public class AuthService {
     public User loadUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+/*
 
 
-    /*api sms forget password */
 
     private final SmsService smsService;
 
@@ -73,5 +73,5 @@ public class AuthService {
         userRepository.save(user);
 
         otpStore.remove(email); // Supprimer OTP après succès
-    }
+    }*/
 }

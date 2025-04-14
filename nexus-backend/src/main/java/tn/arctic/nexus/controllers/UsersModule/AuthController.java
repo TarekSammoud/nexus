@@ -35,7 +35,7 @@ public class AuthController {
 
         return ResponseEntity.status(401).body("Invalid credentials");
     }
-
+/*
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestParam String email) {
         try {
@@ -54,7 +54,7 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+    }*/
 
 
 }
