@@ -368,7 +368,7 @@ public class EmailService {
                     "      <div class=\"logo-container\">" +
                     "        <div class=\"logo-glow\"></div>" +
                     "        <div class=\"logo\">" +
-                    "          <img src=\"https://i.imgur.com/7A8exeL.jpeg\" alt=\"Nexus Logo\" style=\"width: 100%; height: 100%; object-fit: contain; border-radius: 12px;\">" +
+                    "          <img src=\"https://i.imgur.com/WyvHdvr.png\" alt=\"Nexus Logo\" style=\"width: 100%; height: 100%; object-fit: contain; border-radius: 12px;\">" +
                     "        </div>" +
                     "      </div>" +
                     "      <h1>Nexus Technical Support</h1>" +
