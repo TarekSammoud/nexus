@@ -1,5 +1,7 @@
 package tn.arctic.nexus.services.TechnicalSupportModule;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,6 +54,11 @@ public class SupportTicketService {
             return true;
         }
         return false;
+    }
+
+    // Delete all tickets
+    public void deleteAllTickets() {
+        supportTicketRepository.deleteAll();
     }
 
     public Optional<SupportTicket> getTicketByRoomId(Long roomId) {

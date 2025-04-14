@@ -42,6 +42,13 @@ export class RoomService {
       .pipe(catchError(this.handleError));
   }
 
+  // Delete a room
+  deleteRoom(roomId: number): Observable<string> {
+    const url = `${this.baseUrl}/delete/${roomId}`;
+    return this.http.delete<string>(url)
+      .pipe(catchError(this.handleError));
+  }
+
   // Receive messages for a room
   receiveMessages(roomId: number): Observable<any> {
     const url = `${this.baseUrl}/messages/${roomId}`;

@@ -19,7 +19,7 @@ export class AdminSupportListComponent implements OnInit {
   currentTicketId: number | null = null;
   isLoading: boolean = false;
   errorMessage: string = '';
-priority: any;
+  priority: any;
   
   constructor(
     private supportService: SupportService,
@@ -66,6 +66,8 @@ priority: any;
   get description() { 
     return this.ticketForm.get('description'); 
   }
+
+
 
   get category() { 
     return this.ticketForm.get('category'); 
@@ -156,43 +158,45 @@ priority: any;
   
   // Update a ticket
   updateTicket(ticketData: any): void {
-    if (!this.currentTicketId) return;
-    
-    const updatedTicket = {
+    const updatedTicket: SupportTicket = {
       ...ticketData,
-      id: this.currentTicketId // Ensure correct ticket ID
+      id: this.currentTicketId!,
+      createdAt: this.tickets.find(t => t.id === this.currentTicketId)?.createdAt || new Date().toISOString()
     };
-    
+
     this.supportService.updateTicket(updatedTicket)
       .pipe(finalize(() => this.isLoading = false))
       .subscribe(
-        () => this.finalizeAction('🎉 Ticket updated successfully!'),
-        (error: any) => {
-          console.error('Error updating ticket:', error);
-          this.errorMessage = 'Failed to update ticket. Please try again.';
-        }
+        () => {
+          const index = this.tickets.findIndex(t => t.id === this.currentTicketId);
+          if (index !== -1) this.tickets[index] = updatedTicket;
+          this.successMessage = '✅ Ticket updated successfully!';
+          this.resetForm();
+        },
+        () => this.errorMessage = 'Failed to update ticket.'
       );
   }
 
   // Delete a ticket
   onDelete(ticket: SupportTicket): void {
-    if (!ticket.id) return;
-    
-    if (confirm(`Are you sure you want to delete the ticket "${ticket.title}"?`)) {
+    if (!ticket.id) {
+      this.errorMessage = 'Ticket ID is missing. Cannot delete the ticket.';
+      return;  // Early exit if there's no ticket ID
+    }
+  
+    const confirmDeletion = confirm(`Are you sure you want to delete the ticket "${ticket.title}"?`);
+    if (confirmDeletion) {
       this.isLoading = true;
-      this.errorMessage = '';
-      
+      this.errorMessage = '';  // Reset any previous error messages
+  
       this.supportService.deleteTicket(ticket.id)
         .pipe(finalize(() => this.isLoading = false))
         .subscribe(
           () => {
+            // Filter out the deleted ticket from the list
             this.tickets = this.tickets.filter(t => t.id !== ticket.id);
             this.successMessage = '🗑️ Ticket deleted successfully!';
-            
-            // Auto-dismiss success message after 5 seconds
-            setTimeout(() => {
-              this.successMessage = '';
-            }, 5000);
+            setTimeout(() => this.successMessage = '', 5000); // Auto-clear success message
           },
           (error: any) => {
             console.error('Error deleting ticket:', error);
@@ -201,20 +205,18 @@ priority: any;
         );
     }
   }
-
   // Modify a ticket (switch to edit mode)
-  onModify(ticket: SupportTicket): void {
+ onModify(ticket: SupportTicket): void {
     this.ticketForm.setValue({
       title: ticket.title,
       description: ticket.description,
+      priority: ticket.priority,
       category: ticket.category
     });
     this.isEditMode = true;
     this.currentTicketId = ticket.id;
-    this.errorMessage = '';
-    
-    // Scroll to the form
     document.getElementById('ticketForm')?.scrollIntoView({ behavior: 'smooth' });
+  
   }
 
   onCancelEdit(): void {

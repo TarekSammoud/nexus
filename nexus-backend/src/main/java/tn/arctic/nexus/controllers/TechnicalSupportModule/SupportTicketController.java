@@ -23,8 +23,6 @@ public class SupportTicketController {
   /*  @Autowired
     private OpenAiApiService openAiApiService;
     */
-    @Autowired
-    private SupportTicketService ticketService;
 
     // Get all tickets
     @GetMapping("getAll")
@@ -67,15 +65,18 @@ public class SupportTicketController {
         return isDeleted ? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-/*
-    @PostMapping("/chatgpt-response")
-    public String getChatGptResponse(@RequestBody String prompt) {
-        return openAiApiService.getChatGptResponse(prompt);
-    }
- */
+
+    @DeleteMapping("/tickets")
+public ResponseEntity<Void> deleteAllTickets() {
+
+    supportTicketService.deleteAllTickets();
+    return ResponseEntity.noContent().build();
+}
+
+
     @GetMapping("/by-room/{roomId}")
     public ResponseEntity<SupportTicket> getTicketByRoomId(@PathVariable Long roomId) {
-        return ticketService.getTicketByRoomId(roomId)
+        return supportTicketService.getTicketByRoomId(roomId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

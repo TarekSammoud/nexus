@@ -10,6 +10,9 @@ export class AdminRoomComponent {
   rooms: any[] = [];
   errorMessage: string = '';
 
+ticket:any;
+room: any;
+
   constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
@@ -53,5 +56,18 @@ export class AdminRoomComponent {
       }
     );
   }
+  deleteRoom(roomId: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cette room ?')) {
+      this.roomService.deleteRoom(roomId).subscribe(
+        (response) => {
+          alert(response);
+          this.getAllRooms();
+        },
+        (error: string) => {
+          alert('Erreur: ' + error);
+        }
+      );
+    }
+  }  
 }
 

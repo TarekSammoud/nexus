@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Message;
 import tn.arctic.nexus.entities.Room;
+import tn.arctic.nexus.services.TechnicalSupportModule.EmailService;
+import tn.arctic.nexus.services.TechnicalSupportModule.MessageService;
 import tn.arctic.nexus.services.TechnicalSupportModule.RoomService;
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+    @Autowired
+    private EmailService emailService;
+
     // Créer une room pour un ticket donné
     @PostMapping("/create/{ticketId}")
     public ResponseEntity<String> creerRoom(@PathVariable Long ticketId) {
@@ -27,6 +32,7 @@ public class RoomController {
             // Création de la room sans l'email
             System.out.println("creerRoom");
             Room room = roomService.creerRoom(ticketId);
+            emailService.sendVerificationEmail("abdouhanafi090@gmail.com", room.getLien());
             return new ResponseEntity<>("Room créée avec le lien : " + room.getLien(), HttpStatus.CREATED);
         } catch (RuntimeException e) {
             // Gestion des erreurs : Ticket non trouvé ou room déjà existante
@@ -81,10 +87,10 @@ public class RoomController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("/delete/{ticketId}")
-    public ResponseEntity<String> deleteRoom(@PathVariable Long ticketId) {
+    @DeleteMapping("/delete/{roomId}")
+    public ResponseEntity<String> deleteRoom(@PathVariable Long roomId) {
         try {
-            roomService.deleteRoom(ticketId);  // Call the service to delete the room
+            roomService.deleteRoom(roomId);  // Call the service to delete the room
             return new ResponseEntity<>("Room deleted successfully.", HttpStatus.OK);
         } catch (RuntimeException e) {
             // Handle errors such as room not found
