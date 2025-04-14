@@ -18,7 +18,6 @@ public class EmailServiceTest {
     public void testSendVerificationEmail() {
 
 
-        String email = "abdouhanafi090@gmail.com";
         String code = "ABC123";
 
         emailService.sendVerificationEmail(email, code);
