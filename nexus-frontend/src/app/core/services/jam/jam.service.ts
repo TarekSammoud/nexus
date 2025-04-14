@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class JamService {
   private apiUrl = 'http://localhost:9000/nexus-backend/api/gamejams'; 
 
+
   constructor(private http: HttpClient) {}
 
   getJams(): Observable<any[]> {

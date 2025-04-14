@@ -21,6 +21,8 @@ import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/ad
 import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/admin-entries-list.component';
 import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
 import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
+import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.component';
+import { VipJamFormComponent } from './admin-jam/pages/vip-jam-form/vip-jam-form.component';
 
 const routes: Routes = [
   {
@@ -41,12 +43,19 @@ const routes: Routes = [
     { path: 'jams/entries', component: AdminEntriesListComponent },
     { path: 'jams/media' , component: AdminJamMediaListComponent },
    { path: 'jams/ratings' , component: AdminJamRatingsListComponent },
+   { path: 'jams/vip', component: VipJamFormComponent },
+
+
 
     ]
   },
   {path: '', component: HomeComponent},
   {path: 'jams', component: JamsComponent},
   { path: 'jam/:id', component: JamDetailsPageComponent },
+  { path: 'vip-jams', component: VipJamsListComponent },
+  
+
+
 
   {path: '', component: HomeComponent},
   {path: 'games/:id', component: GamePageComponent},
@@ -54,6 +63,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
   {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
+  
 
 ];
 
