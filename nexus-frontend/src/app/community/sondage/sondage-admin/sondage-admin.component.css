@@ -1,13 +1,87 @@
-table {
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-  
-  .badge {
-    font-size: 0.9rem;
-  }
-  
-  .btn-sm {
-    border-radius: 20px;
-  }
-  
+.admin-poll-container {
+  background: linear-gradient(to bottom right, #1a1c29, #202233);
+  border-radius: 16px;
+  color: #eaeaea;
+  padding: 40px 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  max-width: 98%;
+}
+
+.admin-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffc107;
+  text-shadow: 0 0 8px #ffc10755;
+}
+
+.admin-subtext {
+  color: #aaa;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* 👇 Pour foncer le fond de la table */
+.custom-table-wrapper {
+  background-color: #1a1c29 !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.custom-table {
+  background-color: transparent;
+  color: #e0e0e0;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead {
+  background-color: #2a2c3e;
+  color: #ffc107;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 16px;
+  text-align: center;
+  border: none;
+}
+
+.custom-table tbody tr {
+  background-color: #2b2c3c;
+  transition: background-color 0.3s ease;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #343647;
+}
+
+.btn {
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 30px;
+  padding: 6px 14px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-approve {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-approve:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}

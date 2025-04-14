@@ -27,7 +27,8 @@ export class StreamerManagementComponent implements OnInit {
     this.streamerForm = this.fb.group({
       name: ['', Validators.required],
       platform: ['', Validators.required],
-      streamUrl: ['', [Validators.required, Validators.pattern('https?://.+')]]
+      streamUrl: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      available: [true, Validators.required] // ✅ Utiliser 'available' ici aussi
     });
   }
 
@@ -46,7 +47,7 @@ export class StreamerManagementComponent implements OnInit {
       this.streamerService.updateStreamer(this.editingStreamerId, streamer).subscribe({
         next: () => {
           this.loadStreamers();
-          this.streamerForm.reset();
+          this.streamerForm.reset({ available: true });
           this.editingStreamerId = null;
         },
         error: err => console.error('Erreur maj streamer', err)
@@ -55,7 +56,7 @@ export class StreamerManagementComponent implements OnInit {
       this.streamerService.createStreamer(streamer).subscribe({
         next: () => {
           this.loadStreamers();
-          this.streamerForm.reset();
+          this.streamerForm.reset({ available: true });
         },
         error: err => console.error('Erreur ajout streamer', err)
       });
@@ -63,7 +64,12 @@ export class StreamerManagementComponent implements OnInit {
   }
 
   onEdit(streamer: Streamer): void {
-    this.streamerForm.patchValue(streamer);
+    this.streamerForm.patchValue({
+      name: streamer.name,
+      platform: streamer.platform,
+      streamUrl: streamer.streamUrl,
+      available: streamer.available // ✅ Récupération correcte
+    });
     this.editingStreamerId = streamer.id!;
   }
 
@@ -77,7 +83,7 @@ export class StreamerManagementComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    this.streamerForm.reset();
+    this.streamerForm.reset({ available: true });
     this.editingStreamerId = null;
   }
 }

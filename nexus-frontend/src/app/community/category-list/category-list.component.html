@@ -1,51 +1,44 @@
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-dark fw-bold">
-            <i class="fas fa-layer-group me-2 text-white"></i>Catégories Community
-          </h2>
-          
-      <a routerLink="/admin/community/categories/add" class="btn btn-success shadow-sm rounded-pill px-4 py-2">
-        <i class="fas fa-plus me-2"></i>Nouvelle Catégorie
-      </a>
-    </div>
-  
-    <div class="card shadow-lg border-0">
-      <div class="card-body p-0">
-        <div class="table-responsive">
-          <table class="table table-hover align-middle mb-0">
-            <thead class="table-light text-uppercase text-secondary small fw-bold">
-              <tr>
-                <th scope="col" class="ps-4">#</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col" class="text-end pe-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let category of categories; let i = index" class="border-top">
-                <td class="ps-4">{{ i + 1 }}</td>
-                <td class="fw-semibold text-dark">{{ category.name }}</td>
-                <td class="text-muted">{{ category.description }}</td>
-                <td class="text-end pe-4">
-                  <button class="btn btn-sm btn-outline-primary me-2 rounded-pill"
-                          (click)="editCategory(category.id)">
-                    <i class="fas fa-edit me-1"></i> Modifier
-                  </button>
-                  <button class="btn btn-sm btn-outline-danger rounded-pill"
-                          (click)="deleteCategory(category.id)">
-                    <i class="fas fa-trash me-1"></i> Supprimer
-                  </button>
-                </td>
-              </tr>
-              <tr *ngIf="categories.length === 0">
-                <td colspan="4" class="text-center py-4 text-muted">
-                  <i class="fas fa-info-circle me-2"></i>Aucune catégorie trouvée.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<div class="community-categories-container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="title-glow">
+      <i class="fas fa-layer-group me-2"></i> GESTION DES CATÉGORIES
+    </h2>
+
+    <a routerLink="/admin/community/categories/add" class="btn btn-add shadow">
+      <i class="fas fa-plus me-2"></i> Nouvelle Catégorie
+    </a>
   </div>
-  
+
+  <div class="table-responsive shadow rounded">
+    <table class="table table-hover align-middle category-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="fw-bold">{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td>
+            <button class="btn btn-edit me-1" (click)="editCategory(category.id)">
+              ✏️ Modifier
+            </button>
+            <button class="btn btn-delete" (click)="deleteCategory(category.id)">
+              🗑️ Supprimer
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="categories.length === 0">
+          <td colspan="4" class="text-center text-muted py-3">
+            <i class="fas fa-info-circle me-2"></i> Aucune catégorie trouvée.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

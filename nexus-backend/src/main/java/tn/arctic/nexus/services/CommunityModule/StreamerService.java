@@ -37,6 +37,7 @@ public class StreamerService implements IStreamerService {
         existing.setName(updatedStreamer.getName());
         existing.setPlatform(updatedStreamer.getPlatform());
         existing.setStreamUrl(updatedStreamer.getStreamUrl());
+        existing.setAvailable(updatedStreamer.getAvailable());
         return streamerRepository.save(existing);
     }
 

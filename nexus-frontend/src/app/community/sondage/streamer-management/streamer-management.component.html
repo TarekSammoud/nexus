@@ -1,74 +1,70 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4 fw-bold title-glow">🎥 Gestion des Streamers</h2>
-  
-    <form [formGroup]="streamerForm" (ngSubmit)="onSubmit()" class="p-4 bg-light rounded shadow-sm mb-5">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label fw-semibold">🎙️ Nom du streamer</label>
-          <input type="text" class="form-control" formControlName="name" placeholder="Ex: GamerX" />
-        </div>
-  
-        <div class="col-md-4">
-          <label class="form-label fw-semibold">📺 Plateforme</label>
-          <input type="text" class="form-control" formControlName="platform" placeholder="Twitch, YouTube, Kick..." />
-        </div>
-  
-        <div class="col-md-4">
-          <label class="form-label fw-semibold">🔗 URL du stream</label>
-          <input type="url" class="form-control" formControlName="streamUrl" placeholder="https://..." />
-        </div>
+<div class="streamer-panel">
+  <h2 class="panel-title">🎥 Gestion des Streamers</h2>
+
+  <form [formGroup]="streamerForm" (ngSubmit)="onSubmit()" class="streamer-form">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label>🎙️ Nom du streamer</label>
+        <input type="text" class="form-control dark-input" formControlName="name" placeholder="Ex: GamerX" />
       </div>
-  
-      <div class="text-end mt-4">
-        <button type="submit" class="btn btn-success me-2 rounded-pill px-4" [disabled]="streamerForm.invalid">
-          {{ editingStreamerId ? '✅ Modifier' : '➕ Ajouter' }}
-        </button>
-        <button *ngIf="editingStreamerId" type="button" class="btn btn-secondary rounded-pill px-4" (click)="cancelEdit()">
-          ❌ Annuler
-        </button>
+      <div class="col-md-3">
+        <label>📺 Plateforme</label>
+        <input type="text" class="form-control dark-input" formControlName="platform" placeholder="Twitch, YouTube..." />
       </div>
-    </form>
-  
-    <h4 class="mb-3 fw-bold">📃 Liste des Streamers enregistrés</h4>
-  
-    <div class="table-responsive shadow rounded">
-      <table class="table table-hover align-middle">
-        <thead class="table-dark text-white">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Plateforme</th>
-            <th scope="col">URL</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let s of streamers">
-            <th scope="row">{{ s.id }}</th>
-            <td>{{ s.name }}</td>
-            <td>
-              <span class="badge bg-info text-dark">{{ s.platform }}</span>
-            </td>
-            <td>
-              <a [href]="s.streamUrl" class="text-decoration-none" target="_blank">
-                🔗 Voir le stream
-              </a>
-            </td>
-            <td>
-              <button class="btn btn-outline-primary btn-sm me-2 rounded-pill" (click)="onEdit(s)">
-                ✏️ Modifier
-              </button>
-              <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="onDelete(s.id!)">
-                🗑️ Supprimer
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-md-4">
+        <label>🔗 URL du stream</label>
+        <input type="url" class="form-control dark-input" formControlName="streamUrl" placeholder="https://..." />
+      </div>
+      <div class="col-md-2">
+        <label>✅ Disponible ?</label>
+        <select class="form-select dark-input" formControlName="available">
+          <option [value]="true">Oui</option>
+          <option [value]="false">Non</option>
+        </select>
+      </div>
     </div>
-  
-    <div *ngIf="streamers.length === 0" class="alert alert-warning mt-4 text-center">
-      Aucun streamer enregistré pour le moment.
+
+    <div class="text-end mt-3">
+      <button type="submit" class="btn btn-primary me-2" [disabled]="streamerForm.invalid">
+        {{ editingStreamerId ? '✅ Modifier' : '➕ Ajouter' }}
+      </button>
+      <button *ngIf="editingStreamerId" type="button" class="btn btn-outline-light" (click)="cancelEdit()">
+        ❌ Annuler
+      </button>
     </div>
+  </form>
+
+  <h4 class="section-subtitle mt-5">📃 Liste des Streamers enregistrés</h4>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle streamer-table text-center">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Plateforme</th>
+          <th>URL</th>
+          <th>Disponibilité</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of streamers">
+          <td>{{ s.id }}</td>
+          <td>{{ s.name }}</td>
+          <td><span class="badge bg-info text-dark">{{ s.platform }}</span></td>
+          <td><a [href]="s.streamUrl" target="_blank" class="text-decoration-none">🔗 Voir</a></td>
+          <td>
+            <span class="badge" [ngClass]="s.available ? 'bg-success' : 'bg-secondary'">
+              {{ s.available ? '✅ Oui' : '❌ Non' }}
+            </span>            
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-warning me-1" (click)="onEdit(s)">✏️</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(s.id!)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>

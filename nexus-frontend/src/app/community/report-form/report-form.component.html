@@ -1,19 +1,40 @@
-<div class="container mt-5">
-    <h3 class="mb-4 text-danger"><i class="fas fa-flag me-2"></i>Signaler une publication</h3>
-  
-    <div class="card shadow-sm p-4">
-      <h5 class="text-primary mb-3">{{ publication?.title }}</h5>
-      <p class="text-muted">{{ publication?.content }}</p>
-  
-      <label for="reason" class="form-label fw-bold mt-3">Motif du signalement</label>
-      <textarea id="reason" class="form-control" rows="4" [(ngModel)]="reason" placeholder="Décrivez la raison..."></textarea>
-  
-      <div class="mt-4 text-end">
-        <button class="btn btn-outline-secondary me-2" (click)="router.navigate(['/community'])">Annuler</button>
-        <button class="btn btn-danger" (click)="submitReport()">
-          <i class="fas fa-paper-plane me-1"></i>Envoyer
-        </button>
-      </div>
+<div class="report-form-container">
+  <h2 class="section-title mb-4">
+    <i class="fas fa-flag text-danger me-2"></i> Signaler une publication inappropriée
+  </h2>
+
+  <p class="section-desc mb-4">
+    Utilisez ce formulaire pour signaler une publication que vous jugez offensante, inappropriée ou non conforme aux règles de la communauté.
+  </p>
+
+  <div class="report-card p-4 shadow-lg rounded">
+    <div class="mb-3">
+      <h4 class="text-warning fw-bold"><i class="fas fa-newspaper me-2"></i>{{ publication?.title }}</h4>
+      <p class="text-light fst-italic">{{ publication?.content }}</p>
+    </div>
+
+    <hr class="border-secondary my-4" />
+
+    <div class="mb-3">
+      <label for="reason" class="form-label text-white fw-semibold">
+        ✍️ Raison du signalement
+      </label>
+      <textarea
+        id="reason"
+        [(ngModel)]="reason"
+        class="form-control custom-textarea"
+        rows="5"
+        placeholder="Expliquez pourquoi cette publication mérite un signalement (ex : langage offensant, spam, contenu inapproprié...)"
+      ></textarea>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button class="btn btn-outline-light me-2 px-4 rounded-pill" (click)="router.navigate(['/community'])">
+        ❌ Annuler
+      </button>
+      <button class="btn btn-danger px-4 rounded-pill" (click)="submitReport()">
+        🚀 Envoyer le signalement
+      </button>
     </div>
   </div>
-  
+</div>

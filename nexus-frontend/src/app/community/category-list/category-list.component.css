@@ -1,8 +1,88 @@
-table tr {
-    transition: all 0.2s ease-in-out;
-  }
-  table tr:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.01);
-  }
-  
+.community-categories-container {
+  padding: 40px 30px;
+  background: linear-gradient(to bottom right, #1a1c29, #202233);
+  border-radius: 16px;
+  color: #eaeaea;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.title-glow {
+  font-weight: 800;
+  font-size: 28px;
+  text-shadow: 0 0 12px #ffc10766;
+  color: #ffc107;
+}
+
+.btn-add {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  font-weight: bold;
+  padding: 10px 22px;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  border: none;
+}
+
+.btn-add:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+.category-table {
+  width: 100%;
+  background-color: #2b2d42;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #e0e0e0;
+}
+
+.category-table thead {
+  background-color: #1e1e2f;
+  color: #ffc107;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.category-table td,
+.category-table th {
+  padding: 14px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #2b2d42 !important;
+  border-bottom: 1px solid #3d3d5c;
+}
+
+.category-table tr:hover {
+  background-color: #353759;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn {
+  padding: 6px 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  font-size: 14px;
+  border: none;
+  transition: 0.2s ease-in-out;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: #1f1f1f;
+}
+
+.btn-edit:hover {
+  background-color: #ffdb58;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background-color: #dc3545;
+}
+
+.btn-delete:hover {
+  background-color: #ff6b6b;
+  transform: scale(1.05);
+}
