@@ -33,9 +33,9 @@ export class AdminJamRatingsListComponent implements OnInit {
     return rating.graphicsScore + rating.gameplayScore + rating.musicScore;
   }
 
-  getStars(score: number): string {
-    const safeScore = Math.max(0, Math.min(5, score));
-    return '★'.repeat(safeScore) + '☆'.repeat(5 - safeScore);
-  }
-  
+ getStars(score: number): string {
+  const safeScore = Math.max(0, Math.min(5, score));
+  return '★'.repeat(safeScore) + '☆'.repeat(5 - safeScore);
+}
+
 }
