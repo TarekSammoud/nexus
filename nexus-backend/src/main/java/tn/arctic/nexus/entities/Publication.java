@@ -28,7 +28,24 @@ public class Publication {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties({
+            "publications",
+            "friends",
+            "profilesPictures",
+            "gameLibrary",
+            "likes",
+            "commentaires",
+            "gamekeyLibrary",
+            "ratings",
+            "gameReviews",
+            "role",
+            "email",
+            "password",
+            "address",
+            "createdAt",
+            "updatedAt",
+            "last_login"
+    })
     private User user;
 
     @Getter

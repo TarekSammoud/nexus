@@ -18,8 +18,14 @@
       <tbody>
         <tr *ngFor="let report of reports">
           <td>{{ report.id }}</td>
-          <td><span class="badge bg-light text-dark px-3 py-2">{{ report.user?.id }}</span></td>
-          <td>{{ report.publication?.title || (report.publication?.content | slice:0:50) + '...' }}</td>
+          <td>
+            <span class="text-warning fw-bold">
+              {{ report.user?.firstName }}
+            </span>
+          </td>
+          <td>
+            {{ report.publication?.title || (report.publication?.content | slice: 0:50) + '...' }}
+          </td>
           <td class="text-warning fw-bold">{{ report.reason }}</td>
           <td>
             <span class="badge"
@@ -52,5 +58,24 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- MODAL DE CONFIRMATION DE SUPPRESSION -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white border border-secondary rounded">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">🗑️ Confirmation</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Voulez-vous vraiment supprimer ce signalement ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Supprimer</button>
+      </div>
+    </div>
   </div>
 </div>

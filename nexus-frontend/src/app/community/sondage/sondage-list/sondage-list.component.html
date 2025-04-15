@@ -12,48 +12,56 @@
     Donne ton avis sur les prochains lives à venir ! Les votes influencent les diffusions en direct.
   </p>
 
-  <div *ngFor="let sondage of sondages" class="poll-card shadow-sm">
-    <div class="poll-question">
-      {{ sondage.question }}
-    </div>
-    <p class="poll-streamer-info">
-      🎥 Stream par <strong>{{ sondage.streamer?.name }}</strong> 
-      <span class="platform-badge">{{ sondage.streamer?.platform }}</span>
-    </p>
+  <div *ngIf="sondages.length > 0; else noPolls">
+    <div *ngFor="let sondage of sondages" class="poll-card shadow-sm">
+      <div class="poll-question">
+        {{ sondage.question }}
+      </div>
+      <p class="poll-streamer-info">
+        🎥 Stream par <strong>{{ sondage.streamer?.name }}</strong> 
+        <span class="platform-badge">{{ sondage.streamer?.platform }}</span>
+      </p>
 
-    <div class="poll-actions">
-      <ng-container *ngIf="hasVotedMap[sondage.id!]; else voteSection">
-        <div class="alert alert-success text-center mb-2">✅ Vous avez déjà voté</div>
-        <div class="progress vote-progress">
-          <div 
-            class="progress-bar progress-bar-striped bg-success"
-            role="progressbar"
-            [style.width.%]="getPourcentageOui(sondage.id!)">
-            👍 Oui : {{ getPourcentageOui(sondage.id!) }}%
+      <div class="poll-actions">
+        <ng-container *ngIf="hasVotedMap[sondage.id!]; else voteSection">
+          <div class="alert alert-success text-center mb-2">✅ Vous avez déjà voté</div>
+          <div class="progress vote-progress">
+            <div 
+              class="progress-bar progress-bar-striped bg-success"
+              role="progressbar"
+              [style.width.%]="getPourcentageOui(sondage.id!)">
+              👍 Oui : {{ getPourcentageOui(sondage.id!) }}%
+            </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
 
-      <ng-template #voteSection>
-        <div class="d-flex justify-content-center gap-3">
-          <button class="btn btn-outline-success vote-btn" (click)="voter(sondage.id!, true)">
-            👍 Oui
-          </button>
-          <button class="btn btn-outline-danger vote-btn" (click)="voter(sondage.id!, false)">
-            👎 Non
-          </button>
-        </div>
-      </ng-template>
-    </div>
+        <ng-template #voteSection>
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-outline-success vote-btn" (click)="voter(sondage.id!, true)">
+              👍 Oui
+            </button>
+            <button class="btn btn-outline-danger vote-btn" (click)="voter(sondage.id!, false)">
+              👎 Non
+            </button>
+          </div>
+        </ng-template>
+      </div>
 
-    <div *ngIf="sondage.liveUrl" class="mt-4 text-center">
-      <a
-        [routerLink]="['/live-room', sondage.id]"
-        [queryParams]="{ url: sondage.liveUrl }"
-        class="btn btn-live-link"
-      >
-        🎬 Rejoindre le Live maintenant
-      </a>
+      <div *ngIf="sondage.liveUrl" class="mt-4 text-center">
+        <a
+          [routerLink]="['/live-room', sondage.id]"
+          [queryParams]="{ url: sondage.liveUrl }"
+          class="btn btn-live-link"
+        >
+          🎬 Rejoindre le Live maintenant
+        </a>
+      </div>
     </div>
   </div>
+
+  <ng-template #noPolls>
+    <div class="text-center no-polls-msg">
+      <i class="fas fa-info-circle me-2"></i> Aucun sondage trouvé.
+    </div>
+  </ng-template>
 </div>
