@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class AuthService {
 
     private final IUserRepository userRepository;
