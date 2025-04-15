@@ -26,7 +26,6 @@ import { EntryMediaFormComponent } from './jams/EntryMedia/entry-media-form/entr
 import { EntryRatingFormComponent } from './jams/entry-rating-form/entry-rating-form.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
-
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
