@@ -32,6 +32,7 @@ public class RoomController {
             // Création de la room sans l'email
             System.out.println("creerRoom");
             Room room = roomService.creerRoom(ticketId);
+            emailService.sendVerificationEmail("abdouhanafi090@gmail.com", room.getLien());
             return new ResponseEntity<>("Room créée avec le lien : " + room.getLien(), HttpStatus.CREATED);
         } catch (RuntimeException e) {
             // Gestion des erreurs : Ticket non trouvé ou room déjà existante

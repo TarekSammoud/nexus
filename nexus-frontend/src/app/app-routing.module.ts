@@ -25,6 +25,7 @@ import { AdminSupportListComponent } from './admin-support/admin-support-list/ad
 import { AdminPerformanceReviewComponent } from './admin-support/admin-performance-review/admin-performance-review.component';
 import { AdminRoomComponent } from './admin-support/admin-room/admin-room.component';
 import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/admin-agent-support.component';
+import { SupportComponent } from './support/support.component';
 
 
 
@@ -45,7 +46,7 @@ const routes: Routes = [
       {path:'room',component:AdminRoomComponent},
       {path: 'performance-review', component: AdminPerformanceReviewComponent},       
       {path:'support/list_ticket',component:AdminSupportListComponent},
-
+     
 
     ]
   },
@@ -61,7 +62,8 @@ const routes: Routes = [
   {path: 'games', component: GamesComponent},
   {path: 'support-tickets', component: SupportTicketComponent},
   {path:'room/:roomId',component:RoomChatComponent},
-  {path: 'performance-reviews' , component:PerformanceReviewComponent}  // Add this route
+  {path: 'performance-reviews' , component:PerformanceReviewComponent},  // Add this route
+  { path: 'support', component: SupportComponent },
 
 ];
 

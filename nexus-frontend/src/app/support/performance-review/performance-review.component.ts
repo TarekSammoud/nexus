@@ -61,8 +61,8 @@ export class PerformanceReviewComponent implements OnInit {
         () => {
           this.loadReviews();
           this.resetForm();
-          console.log('Navigating to /support-tickets');
-          this.router.navigate(['/support-tickets']);
+          console.log('Navigating to /support');
+          this.router.navigate(['/support']);
         },
         (error) => console.error('Error adding review:', error)
       );

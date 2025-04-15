@@ -47,6 +47,7 @@ import { AdminSupportListComponent } from './admin-support/admin-support-list/ad
 import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/admin-agent-support.component';
 import { AdminPerformanceReviewComponent } from './admin-support/admin-performance-review/admin-performance-review.component';
 import { AdminRoomComponent } from './admin-support/admin-room/admin-room.component';
+import { SupportComponent } from './support/support.component';
 // Import support components
 
 @NgModule({
@@ -81,6 +82,7 @@ import { AdminRoomComponent } from './admin-support/admin-room/admin-room.compon
     AdminAgentSupportComponent,
     AdminPerformanceReviewComponent,
     AdminRoomComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,

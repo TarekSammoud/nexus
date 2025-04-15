@@ -5,108 +5,7 @@
     </div>
   </div>
 
-  <!-- Form Section -->
-  <div class="entry-form-container" id="ticketForm">
-    <div class="card-header">
-      <h3>{{ isEditMode ? 'Edit Ticket' : 'Create New Ticket' }}</h3>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-        <!-- Success Message -->
-        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ successMessage }}
-          <button type="button" class="btn-close" (click)="successMessage = ''"></button>
-        </div>
-
-        <!-- Error Message -->
-        <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ errorMessage }}
-          <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
-        </div>
-
-        <div class="form-group">
-          <label for="title" class="form-label">Title</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="title" 
-            formControlName="title" 
-            [ngClass]="{'is-invalid': title?.invalid && (title?.dirty || title?.touched)}"
-            placeholder="Enter ticket title">
-          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="invalid-feedback">
-            Title is required
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="description" class="form-label">Description</label>
-          <textarea 
-            class="form-control" 
-            id="description" 
-            rows="3" 
-            formControlName="description"
-            [ngClass]="{'is-invalid': description?.invalid && (description?.dirty || description?.touched)}"
-            placeholder="Enter ticket description"></textarea>
-          <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="invalid-feedback">
-            Description is required
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="category" class="form-label">Priority</label>
-          <select 
-            class="form-select" 
-            id="priority" 
-            formControlName="priority"
-            [ngClass]="{'is-invalid': priority?.invalid && (priority?.dirty || priority?.touched)}">
-            <option value="" disabled selected>Select a priority</option>
-            <option value="LOW">low</option>
-            <option value="MEDIUM">meduim</option>
-            <option value="HIGH">high</option>
-            <option value="CRICITAL">critical</option>
-          </select>
-          <div *ngIf="priority?.invalid && (priority?.dirty || priority?.touched)" class="invalid-feedback">
-            Category is required
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="category" class="form-label">Category</label>
-          <select 
-            class="form-select" 
-            id="category" 
-            formControlName="category"
-            [ngClass]="{'is-invalid': category?.invalid && (category?.dirty || category?.touched)}">
-            <option value="" disabled selected>Select a category</option>
-            <option value="TECHNICAL">Technical</option>
-            <option value="PURCHASE">Purchase</option>
-            <option value="COMMUNITY_CONTENT">Community</option>
-            <option value="ACCOUNT">Account</option>
-          </select>
-          <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="invalid-feedback">
-            Category is required
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-end gap-2">
-          <button 
-            *ngIf="isEditMode" 
-            type="button" 
-            class="btn btn-secondary" 
-            (click)="onCancelEdit()">
-            Cancel
-          </button>
-          <button 
-            type="submit" 
-            class="submit-btn" 
-            [disabled]="isLoading">
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
-            {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
+ 
   <!-- Sorting Dropdown -->
   <div class="form-group mt-4">
     <label for="sorting" class="form-label">Sort Tickets</label>
@@ -190,4 +89,107 @@
     </div>
     <p class="mt-2">Loading tickets...</p>
   </div>
+</div>
+<div class="container mt-4">
+ <!-- Form Section -->
+ <div class="entry-form-container" id="ticketForm">
+  <div class="card-header">
+    <h3>{{ isEditMode ? 'Edit Ticket' : 'Create New Ticket' }}</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+
+      <div class="form-group">
+        <label for="title" class="form-label">Title</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="title" 
+          formControlName="title" 
+          [ngClass]="{'is-invalid': title?.invalid && (title?.dirty || title?.touched)}"
+          placeholder="Enter ticket title">
+        <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="invalid-feedback">
+          Title is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+          class="form-control" 
+          id="description" 
+          rows="3" 
+          formControlName="description"
+          [ngClass]="{'is-invalid': description?.invalid && (description?.dirty || description?.touched)}"
+          placeholder="Enter ticket description"></textarea>
+        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="invalid-feedback">
+          Description is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="form-label">Priority</label>
+        <select 
+          class="form-select" 
+          id="priority" 
+          formControlName="priority"
+          [ngClass]="{'is-invalid': priority?.invalid && (priority?.dirty || priority?.touched)}">
+          <option value="" disabled selected>Select a priority</option>
+          <option value="LOW">low</option>
+          <option value="MEDIUM">meduim</option>
+          <option value="HIGH">high</option>
+          <option value="CRICITAL">critical</option>
+        </select>
+        <div *ngIf="priority?.invalid && (priority?.dirty || priority?.touched)" class="invalid-feedback">
+          Category is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category" class="form-label">Category</label>
+        <select 
+          class="form-select" 
+          id="category" 
+          formControlName="category"
+          [ngClass]="{'is-invalid': category?.invalid && (category?.dirty || category?.touched)}">
+          <option value="" disabled selected>Select a category</option>
+          <option value="TECHNICAL">Technical</option>
+          <option value="PURCHASE">Purchase</option>
+          <option value="COMMUNITY_CONTENT">Community</option>
+          <option value="ACCOUNT">Account</option>
+        </select>
+        <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="invalid-feedback">
+          Category is required
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <button 
+          *ngIf="isEditMode" 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="onCancelEdit()">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="submit-btn" 
+          [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          {{ isEditMode ? 'Update Ticket' : 'Create Ticket' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 </div>
