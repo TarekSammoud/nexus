@@ -1,6 +1,11 @@
 <div class="admin-jams-container">
   <h2>🛠️ Game Jam Management Panel</h2>
 
+  <div class="text-end mb-3">
+    <button class="btn btn-outline-info" (click)="exportPDF()">📄 Export as PDF</button>
+  </div>  
+  <img id="pdfLogo" src="assets/img/logo_white.png" style="display: none;" />
+
   <div class="table-responsive">
     <table>
       <thead>
@@ -22,7 +27,7 @@
                 'badge-upcoming': getStatus(jam) === 'upcoming',
                 'badge-active': getStatus(jam) === 'active',
                 'badge-complete': getStatus(jam) === 'completed',
-                'pulse-active': getStatus(jam) === 'active'  
+                'pulse-active': getStatus(jam) === 'active'
               }">
               {{
                 getStatus(jam) === 'upcoming' ? '📢 Upcoming' :
@@ -41,12 +46,11 @@
 
           <td class="name-cell">
             <div class="jam-name">{{ jam.name }}</div>
-            <div class="jam-id">ID: {{ jam.id }}</div>
           </td>
 
           <td>
-            <div>🛠️ {{ jam.devStartDate | date: 'dd/MM' }} → {{ jam.devEndDate | date: 'dd/MM' }}</div>
-            <div>🗳️ {{ jam.voteStartDate | date: 'dd/MM' }} → {{ jam.voteEndDate | date: 'dd/MM' }}</div>
+            <div>🛠️ {{ jam.devStartDate | date: 'dd/MM/yyyy' }} → {{ jam.devEndDate | date: 'dd/MM/yyyy' }}</div>
+            <div>🗳️ {{ jam.voteStartDate | date: 'dd/MM/yyyy' }} → {{ jam.voteEndDate | date: 'dd/MM/yyyy' }}</div>
           </td>
 
           <td>{{ jam.reward || 'None' }}</td>
@@ -62,4 +66,11 @@
   </div>
 
   <pagination-controls (pageChange)="page = $event" class="pagination"></pagination-controls>
+
+
 </div>
+
+
+
+
+
