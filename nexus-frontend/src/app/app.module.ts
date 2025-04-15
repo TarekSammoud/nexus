@@ -79,6 +79,7 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+import { LibraryComponent } from './library/library.component';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import { GameReviewListComponent } from './game-review-list/game-review-list.com
     MarketEditComponent,
     BidComponent,
     MarketDetailsComponent,
+    LibraryComponent,
 
 
     
