@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+import tn.arctic.nexus.entities.RoleType;
 import tn.arctic.nexus.entities.User;
 
 import java.security.Key;
@@ -18,14 +19,21 @@ public class JwtUtil {
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
     public String generateToken(User user) {
+        // Si le role est null, on le définit comme PLAYER
+        if (user.getRoleType() == null) {
+            user.setRoleType(RoleType.PLAYER);
+        }
+
+        // Génération du token avec le roleType
         String token = Jwts.builder()
                 .setSubject(user.getEmail())
-                .claim("id", user.getId()) // 👈 Ajouter l'ID utilisateur ici
-                .claim("role", user.getRoleType().name())
+                .claim("id", user.getId()) // Ajouter l'ID utilisateur ici
+                .claim("role", user.getRoleType().name()) // Ajouter le role dans le JWT
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(key)
                 .compact();
+
         System.out.println("Generated token: " + token); // Log pour vérifier le jeton généré
         return token;
     }

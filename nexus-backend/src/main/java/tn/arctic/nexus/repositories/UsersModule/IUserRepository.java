@@ -26,4 +26,5 @@ public interface IUserRepository  extends JpaRepository<User,Long> {
     @Query("SELECT u FROM User u WHERE u.roleType = tn.arctic.nexus.entities.RoleType.PLAYER ORDER BY u.createdAt ASC")
     List<User> findTopUsersByActivity();
 
+    User findByPhoneNumber(String phoneNumber);
 }
