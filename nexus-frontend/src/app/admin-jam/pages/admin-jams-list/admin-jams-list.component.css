@@ -4,10 +4,9 @@
   padding: 40px 30px;
   background: linear-gradient(to bottom right, #1a1c29, #202233);
   border-radius: 16px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #eaeaea;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.6s ease-in-out;
 }
 
 .admin-jams-container h2 {
@@ -15,43 +14,47 @@
   font-weight: 800;
   font-size: 28px;
   color: #ffca28;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   text-shadow: 0 0 10px #ffca2855;
-}
-
-.table-responsive {
-  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 14px;
+  border-radius: 12px;
+  overflow: hidden;
   background-color: #27293d;
-  font-size: 15px;
 }
 
 thead {
   background-color: #1e1e2f;
   color: #ffc107;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-weight: 700;
   font-size: 14px;
+  text-transform: uppercase;
 }
 
-th, td {
+thead th {
   padding: 14px;
-  text-align: center;
-  border-bottom: 1px solid #3a3a50;
+  border-bottom: 2px solid #444;
 }
 
 tbody tr {
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   background-color: #2f3044;
+  border-bottom: 1px solid #3d3d5c;
 }
 
 tbody tr:hover {
   background-color: #3a3c55;
+}
+
+td {
+  padding: 12px 14px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  color: #e0e0e0;
 }
 
 td img {
@@ -60,7 +63,7 @@ td img {
   border-radius: 10px;
   object-fit: cover;
   border: 2px solid #4a4a70;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
 td img:hover {
@@ -70,46 +73,45 @@ td img:hover {
 
 .btn {
   padding: 6px 10px;
+  font-weight: 600;
   border-radius: 8px;
   border: none;
-  font-weight: 600;
-  font-size: 14px;
   transition: all 0.2s ease;
+  font-size: 14px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.05);
+  cursor: pointer;
 }
 
 .btn-primary {
-  background-color: #343a40;
-  color: #ffffff;
+  background: #343a40;
+  color: #fff;
 }
 
 .btn-warning {
-  background-color: #ffc107;
-  color: #202020;
+  background: #ffc107;
+  color: #1f1f1f;
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  color: #ffffff;
+  background: #dc3545;
+  color: #fff;
 }
 
-.btn-outline-info {
-  background: transparent;
-  border: 2px solid #00d4ff;
-  color: #00d4ff;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border-radius: 8px;
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 
-.btn-outline-info:hover {
-  background: #00d4ff;
-  color: #101018;
-  transform: scale(1.05);
+.pagination-controls ::ng-deep .ngx-pagination .current {
+  background-color: #ffc107 !important;
+  color: #1f1f1f !important;
+  border-radius: 6px;
+  padding: 6px 12px;
 }
 
 .name-cell {
@@ -118,19 +120,20 @@ td img:hover {
 
 .jam-name {
   font-size: 17px;
-  font-weight: bold;
-  color: #ffffff;
+  font-weight: 700;
+  color: #fff;
 }
 
 .jam-id {
   font-size: 12px;
   color: #999;
+  margin-top: 4px;
 }
 
 .badge-upcoming,
 .badge-active,
 .badge-complete {
-  padding: 6px 12px;
+  padding: 4px 10px;
   font-size: 12px;
   font-weight: bold;
   border-radius: 20px;
@@ -161,25 +164,13 @@ td img:hover {
 }
 
 @keyframes glowPulse {
-  0%   { box-shadow: 0 0 0px 0px rgba(255, 193, 7, 0.4); }
-  50%  { box-shadow: 0 0 10px 5px rgba(255, 193, 7, 0.6); }
-  100% { box-shadow: 0 0 0px 0px rgba(255, 193, 7, 0.4); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.pagination-controls ::ng-deep .ngx-pagination .current {
-  background-color: #ffc107 !important;
-  color: #1f1f1f !important;
-  border-radius: 6px;
-  padding: 6px 12px;
+  0% {
+    box-shadow: 0 0 0px 0px rgba(255, 193, 7, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 10px 5px rgba(255, 193, 7, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0px 0px rgba(255, 193, 7, 0.4);
+  }
 }

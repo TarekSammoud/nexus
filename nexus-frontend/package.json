@@ -35,8 +35,6 @@
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
     "font-awesome": "^4.7.0",
-    "jspdf": "^3.0.1",
-    "jspdf-autotable": "^5.0.2",
     "ngx-pagination": "^6.0.3",
     "ngx-quill": "^20.0.1",
     "rxjs": "~7.8.0",

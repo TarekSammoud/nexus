@@ -4,6 +4,7 @@
   <table class="ratings-table">
     <thead>
       <tr>
+        <th>#</th>
         <th>🎨 Graphics</th>
         <th>🎮 Gameplay</th>
         <th>🎵 Music</th>
@@ -14,6 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let rating of ratings">
+        <td>{{ rating.id }}</td>
 
         <td>
           <div class="rating-bar">

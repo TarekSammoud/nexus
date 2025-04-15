@@ -68,9 +68,9 @@ th, td {
 .new-badge {
   background: #00ffbb;
   color: #111;
-  padding: 6px 10px;
-  border-radius: 16px;
-  font-size: 23px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
   animation: pulseBadge 1.5s infinite ease-in-out;
 }
 
@@ -132,8 +132,8 @@ th, td {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 10px solid #3f3f5c;
-  margin-bottom: 30px;
+  border-bottom: 1px solid #3f3f5c;
+  margin-bottom: 20px;
 }
 
 .entry-modal-header h3 {
