@@ -23,10 +23,15 @@ import { Router } from '@angular/router';
 export class AdminHomeComponent {
   constructor(private _router: Router) { }
   dropdownOpen = false;
+  jamDropdownOpen = false;
+
 
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
+toggleJamDropdown() {
+  this.jamDropdownOpen = !this.jamDropdownOpen;
+}
 
   navigateToGamesList(){
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);

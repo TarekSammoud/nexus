@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameKeyService } from '../core/services/game-key.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _gameKeyService : GameKeyService,private _fb: FormBuilder){
+  constructor(private _router: Router,private _gameKeyService : GameKeyService,private _fb: FormBuilder){
 
   }
   gameKeyForm!: FormGroup;
@@ -47,5 +48,9 @@ export class HeaderComponent implements OnInit {
     }
   });
     }
+  }
+
+  navigateToJams(){
+    this._router.navigate(['jams']);
   }
 }
