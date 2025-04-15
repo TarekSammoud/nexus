@@ -15,8 +15,8 @@
           <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
              href="javascript:void(0)"
              (click)="toggleDropdown()">
-            <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
-            <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpen, 'fa-chevron-up': dropdownOpen }"></i>
+             <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
+             <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpen, 'fa-chevron-up': dropdownOpen }"></i>
           </a>
         
           <!-- Use Angular's Animation directive -->
@@ -27,6 +27,27 @@
             <a class="d-block py-2 text-white" routerLink="/admin/games/reviews" routerLinkActive="active"><i class="fas fa-star me-2"></i>Game Reviews</a>
           </div>
         </div>
+
+        
+
+      <div class="dropdown-section border-top border-secondary mt-3 pt-3">
+        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
+           href="javascript:void(0)"
+           (click)="toggleJamDropdown()">
+          <span><i class="fas fa-puzzle-piece me-2"></i>Game Jams</span>
+          <i class="fas" [ngClass]="{ 'fa-chevron-down': !jamDropdownOpen, 'fa-chevron-up': jamDropdownOpen }"></i>
+        </a>
+
+        <div *ngIf="jamDropdownOpen" class="submenu ps-4">
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/list" routerLinkActive="active"><i class="fas fa-list me-2"></i>All Jams</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/entries" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Entries</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/media" routerLinkActive="active"><i class="fas fa-photo-video me-2"></i>Media</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/ratings" routerLinkActive="active"><i class="fas fa-star-half-alt me-2"></i>Ratings</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/vip" routerLinkActive="active"> <i class="fas fa-crown me-2 text-warning"></i>VIP Jam (AI)</a>
+        </div>
+      </div>
+
+
         
         
       </div>

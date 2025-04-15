@@ -1,0 +1,81 @@
+<div class="vip-jam-form-container">
+    <h2 class="form-title"> 👑 VIP Drop </h2>
+  
+    <form (ngSubmit)="submit()" #vipForm="ngForm">
+      <div class="form-group">
+        <label>🎮 Jam Title</label>
+        <input class="form-control" name="name" [(ngModel)]="vipJam.name" required />
+      </div>
+  
+      <div class="form-group">
+        <label>📝 Description</label>
+        <textarea class="form-control" name="description" [(ngModel)]="vipJam.description" required></textarea>
+      </div>
+  
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>📅 Dev Start</label>
+          <input type="date" class="form-control" name="devStartDate" [(ngModel)]="vipJam.devStartDate" required />
+        </div>
+  
+        <div class="form-group">
+          <label>⏳ Dev End</label>
+          <input type="date" class="form-control" name="devEndDate" [(ngModel)]="vipJam.devEndDate" required />
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>🏆 Reward</label>
+        <input type="text" class="form-control" name="reward" [(ngModel)]="vipJam.reward" placeholder="Optional reward" />
+      </div>
+  
+      <button class="btn-ai-submit" type="submit">
+        {{ editingJamId ? '💾 Update VIP Jam' : '✨ Create with AI' }}
+      </button>
+          </form>
+  
+    <div *ngIf="createdJam" class="ai-style-preview">
+      <h5>✅ VIP Jam Created with Style:</h5>
+      <p><b>🎨 Primary Color:</b> {{ createdJam.primaryColor }}</p>
+      <p><b>✍️ Font:</b> {{ createdJam.font }}</p>
+      <p><b>🖼️ Banner Type:</b> {{ createdJam.bannerType }}</p>
+    </div>
+  
+    <div class="vip-jam-table mt-5">
+      <h2 class="form-title">📋  All VIP Jams</h2>
+
+      <table class="table-vip">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Dev Period</th>
+            <th>Reward</th>
+            <th>Color</th>
+            <th>Font</th>
+            <th>Banner</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let jam of vipJams">
+            <td>{{ jam.name }}</td>
+            <td>{{ jam.devStartDate }} → {{ jam.devEndDate }}</td>
+            <td>{{ jam.reward || 'N/A' }}</td>
+            <td>
+              <span [style.backgroundColor]="jam.primaryColor" class="color-dot"></span>
+              {{ jam.primaryColor }}
+            </td>
+            <td>{{ jam.font }}</td>
+            <td>{{ jam.bannerType }}</td>
+            <td>
+                <button class="btn btn-warning btn-sm me-1" (click)="editJam(jam)">✏️</button>
+              <button class="btn-delete" (click)="deleteJam(jam.id!)">🗑️</button>
+              
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
