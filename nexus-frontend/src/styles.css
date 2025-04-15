@@ -97,3 +97,5 @@ html, body { height: 100%; }
   .next-btn:hover {
     background: linear-gradient(45deg, #6338B0, #8A6BD5);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
