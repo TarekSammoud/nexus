@@ -21,8 +21,6 @@ const routes: Routes = [
     component: AdminHomeComponent, // has the sidebar
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {path: 'games/keys', component: GameKeyListComponent},
-      {path: 'games/reviews', component: GameReviewListComponent},
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/list', component: AdminGameListComponent },
       {path: 'update-game/:id', component: CreateGameComponent},
