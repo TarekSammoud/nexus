@@ -3,6 +3,8 @@ import { GameCategory } from "./game-category";
 import { GameItem } from "./game-item";
 import { GameMedia } from "./game-media";
 import { GamePlatform } from "./game-platform.enum";
+import { GameReview } from "./game-review";
+import { SystemRequirements } from "./system-requirements";
 
 export class Game {
     id!: number;
@@ -16,6 +18,12 @@ export class Game {
     users!: User[];
     categories!: GameCategory[];
     gameMediaList!: GameMedia[];
+    coverPicture?: GameMedia;
+    screenshots?: GameMedia[];
+    minRequirements?: SystemRequirements; 
+    recommendedRequirements?: SystemRequirements;
+    gameReviewList?: GameReview[]; 
+
   
     constructor(data?: Partial<Game>) {
       Object.assign(this, data);

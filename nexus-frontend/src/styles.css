@@ -17,7 +17,7 @@ html, body {
     display: flex;
     flex-direction: column;
     /* Set global background color */
-      background-color: #1c1e26;  /* Dark blue-gray background */
+      background-color: #101014;  /* Dark blue-gray background */
       color: white;  /* Set default text color to white */
     
 
@@ -99,3 +99,43 @@ html, body { height: 100%; }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.back-btn {
+  background: linear-gradient(45deg, #6338B0, #9A5ED6);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  float: left;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  cursor: pointer;
+}
+
+
+.next-btn:hover {
+  background: linear-gradient(45deg, #6338B0, #8A6BD5);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+select {
+  background-color: #37373A; /* Grey background */
+  color: white; /* White text */
+  border: 1px solid #ccc; /* Optional: border color */
+  padding: 8px; /* Optional: add some padding */
+  font-size: 16px; /* Optional: adjust font size */
+}
+
+select option {
+  background-color: #37373A; /* Same grey background for options */
+  color: white; /* White text for options */
+}
+
+select:focus {
+  outline: none; /* Optional: remove focus outline */
+}

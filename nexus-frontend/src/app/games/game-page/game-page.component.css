@@ -208,3 +208,221 @@
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.thumbnail img {
+  width: 100px;
+  height: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Added transform for scaling */
+}
+
+.active-thumbnail img {
+  box-shadow: 0 0 1px 3px white;
+  border-radius: 5px;
+  transform: scale(1.1); /* Optionally, make the active thumbnail slightly larger */
+}
+
+.banner-section img {
+  width: 100%;
+  height: auto;
+}
+
+.banner-section + .btn {
+  width: 100%;
+}
+
+/* More spacing between columns */
+@media (min-width: 768px) {
+  .col-md-7 {
+    padding-right: 30px;
+  }
+
+  .col-md-4 {
+    padding-left: 30px;
+  }
+}
+
+/* Smaller Price */
+.game-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Unified Buttons */
+.action-button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #9A5ED6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.action-button-secondary{
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #333337;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.action-button:hover {
+  background-color: #7b3fb1;
+}
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0;
+}
+
+.meta-label {
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+}
+
+.meta-value span {
+  color: #dcdcdc;
+  font-size: 14px;
+}
+
+.platform-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.sys-config{
+  background-color: #202024;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+.sys-config h5 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sys-config ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: #bbb;
+}
+
+.sys-config ul li {
+  margin-bottom: 10px;
+}
+.rec-font{
+  font-size: 0.75rem;
+}
+
+.review-card {
+  width: 300px; /* Reduced width */
+  min-height: 150px; /* Reduced height */
+  border-radius: 12px;
+  background-color: #2c2c2e;
+  color: #f1f1f1;
+  padding: 15px; /* Slightly smaller padding */
+  overflow: hidden; /* Hides overflowing content */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left; /* Align text to the left */
+  
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.review-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines before truncation */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.review-form {
+  margin: auto;
+  text-align: left;
+  background-color: #2c2c2e;
+  padding: 20px;
+  border-radius: 12px;
+  color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #3c3c3e;
+  color: #fff;
+}
+
+.review-form button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-form button:hover {
+  background-color: #45a049;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 24px;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: gold;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

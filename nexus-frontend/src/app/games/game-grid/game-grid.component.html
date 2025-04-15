@@ -1,5 +1,5 @@
 <div class="title featured-container">
-  <div>{{name}} yalo ?</div>
+  <div>{{name}}</div>
 </div>
 
 
@@ -7,17 +7,21 @@
   
   <div class="games">  
     <div *ngFor="let game of games">
-      <div class="game" >
-        <div class="game-thumb-container">
-          <img
-            [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + game.gameMediaList[0].mediaUrl"
-            alt="thumbnail"
-            class="game-thumbnail"
-          />
-        <p *ngIf="!game.gameMediaList[0].mediaUrl">No image</p>
+      <div class="game" (click)="OnSelect(game)">
+        <div class="game-thumb-container" *ngIf="game">
+          <img class="game-thumbnail" 
+          [src]="game.coverPicture?.mediaUrl 
+          ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+          : './assets/default-game.jpg'"
+  alt="Game Cover"
+                              alt="{{game.name}}" />
+        
+        
+          <!-- Show 'No image' only if gameMediaList exists but is empty or first item has no mediaUrl -->
         </div>
+        
         <div class="game-description">
-          <p class="game-name">{{ game.name }}</p>
+          <p class="game-name"> test{{ game.name }}</p>
           <div class="text-muted" style="margin-bottom: 2px;">{{ game.description }}</div>
           <div class="game-platforms">
             <div style="margin-right: 5px;">{{ game.price }} TND</div> 

@@ -26,6 +26,7 @@ public class GameKey implements Serializable {
 
     private String keyCode;
 
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -34,6 +35,27 @@ public class GameKey implements Serializable {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
+    public Date getExpiresAt() {
+        return expiresAt;
+    }
+
+    public void setExpiresAt(Date expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expiresAt;
 
     @ManyToOne
     @JoinColumn(name = "game_id")

@@ -1,46 +1,43 @@
+/* Sidebar basic styles */
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #202020;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    top: 0;
-    left: 0;
-    position: sticky;
-  }
-  
-  .profile-section {
-    flex-shrink: 0;
-  }
-  
-  .profile-pic {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #fff;
-  }
-  
-  .dropdown-section a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    transition: background 0.3s;
-  }
-  
-  .dropdown-section a:hover,
-  .dropdown-section a.active {
-    background-color: #383838;
-  }
-  
-  .submenu a {
-    font-size: 0.95rem;
-    padding-left: 40px;
-  }
-  
-  .sidebar .text-white {
-    font-size: 0.95rem;
-  }
-  
+  width: 250px;
+  height: 100vh;
+  background-color: #202024 !important;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  position: sticky;
+}
+
+/* Profile section */
+.profile-section {
+  flex-shrink: 0;
+}
+
+/* Profile picture styling */
+.profile-pic {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Dropdown styles */
+.dropdown-section a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  transition: background 0.3s;
+  width: 100%; /* Ensures the link takes full width */
+
+}
+
+.dropdown-section a:hover,
+.dropdown-section a.active {
+  background-color: #383838;
+}
+

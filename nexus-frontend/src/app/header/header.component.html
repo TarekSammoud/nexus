@@ -98,7 +98,8 @@
               <li><a class="dropdown-item" href="#">Account Settings</a></li>
               <li><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
               <li><a class="dropdown-item" href="#">Payment Management</a></li>
-              <li><a class="dropdown-item" href="#">Use a Code</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button" aria-controls="redeemCodeOffcanvas">Use a Code</a></li>
+              
               <li><a class="dropdown-item" href="#">Game Library</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -134,5 +135,29 @@
       </li>
     </ul>
 
+  </div>
+</div>
+<!-- Offcanvas for Redeem Code -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="redeemCodeOffcanvas" aria-labelledby="redeemCodeOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="text-light" id="redeemCodeOffcanvasLabel">Redeem Code</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form [formGroup]="gameKeyForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="codeInput" class="form-label text-light">Enter your code:</label>
+        <input formControlName="keyCode" type="text" class="form-control" id="codeInput" placeholder="Enter the code here">
+      </div>
+      <div *ngIf="successMessage" class="text-success mb-3">
+        {{ successMessage }}
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="text-danger mb-3">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" class="btn btn-primary">Redeem</button>
+    </form>
   </div>
 </div>

@@ -8,6 +8,7 @@ import java.util.List;
 public interface IGameKeyService {
     public GameKey createGameKey(GameKey gameKey);
     public void deleteGameKey(Long id);
+    public boolean redeemGameKey(String gameKey);
     public List<GameKey> getGameKeys();
     public GameKey getGameKeyById(Long id);
     public GameKey getGameKeyByUserId(Long id);

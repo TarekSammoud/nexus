@@ -17,9 +17,6 @@ import { ForgotPasswordComponent } from './user-management/forgot-password/forgo
 
 
 import { HomeComponent } from './home/home/home.component';
-import { JamsListComponent } from './jams/jams-list/jams-list.component';
-import { JamsComponent } from './jams/jams/jams.component';
-import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
 import { GameGridComponent } from './games/game-grid/game-grid.component';
@@ -45,6 +42,8 @@ import { AdminPerformanceReviewComponent } from './admin-support/admin-performan
 import { AdminRoomComponent } from './admin-support/admin-room/admin-room.component';
 import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/admin-agent-support.component';
 
+import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
+import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -74,8 +73,6 @@ const routes: Routes = [
       { path: 'room', component: AdminRoomComponent },
       { path: 'performance-review', component: AdminPerformanceReviewComponent },
       { path: 'support/list_ticket', component: AdminSupportListComponent },
-
-
     ]
   },
   { path: '', component: HomeComponent },
