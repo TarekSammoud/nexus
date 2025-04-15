@@ -3,12 +3,14 @@ package tn.arctic.nexus.services.UsersModule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tn.arctic.nexus.controllers.UsersModule.VerificationCodeGenerator;
 import tn.arctic.nexus.entities.User;
+import tn.arctic.nexus.entities.UserVerification;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
+import tn.arctic.nexus.repositories.UsersModule.IUsersModuleUserVerificationRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @RequiredArgsConstructor
 @Service
@@ -16,62 +18,76 @@ public class AuthService {
 
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final IUsersModuleUserVerificationRepository verificationRepository;
 
+    @Autowired
+    @Qualifier("userEmailService")
+    private final EmailService emailService;
+
+    // Enregistrement de l'utilisateur avec le mot de passe crypté
     public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypte le mot de passe
+        return userRepository.save(user); // Sauvegarde l'utilisateur
     }
 
+    // Chargement d'un utilisateur par son email
     public User loadUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Utilisateur non trouvé"); // Lancer une exception si l'utilisateur n'est pas trouvé
         }
         return user;
     }
 
-
+    // Vérification du mot de passe (brut vs crypté)
     public boolean checkPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword);
+        return passwordEncoder.matches(rawPassword, encodedPassword); // Vérifie que le mot de passe correspond
     }
+
+    // Chargement de l'utilisateur par son ID
     public User loadUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElse(null); // Retourne l'utilisateur si trouvé, sinon null
     }
-/*
 
-
-
-    private final SmsService smsService;
-
-    // Temporaire : stock OTP (en prod -> Redis ou DB)
-    private Map<String, String> otpStore = new HashMap<>();
-
-    public void sendOtpBySms(String email) {
+    public void sendOtpByEmail(String email) {
         User user = userRepository.findByEmail(email);
-        if (user == null || user.getPhoneNumber() == null) {
-            throw new RuntimeException("Utilisateur introuvable ou numéro manquant");
+        if (user == null) {
+            throw new RuntimeException("Utilisateur introuvable !");
         }
 
-        String code = String.valueOf(new Random().nextInt(900000) + 100000); // 6 chiffres
-        otpStore.put(email, code);
+        String code = VerificationCodeGenerator.generateVerificationCode(); // Génère le code OTP
 
-        String message = "Votre code de réinitialisation Nexus : " + code;
-        smsService.sendSMS(user.getPhoneNumber(), message);
+        // Recherche si un code de vérification existe déjà pour cet email
+        UserVerification verification = verificationRepository.findByEmail(email);
+        if (verification == null) {
+            verification = new UserVerification(); // Crée une nouvelle instance si aucun code OTP n'existe
+            verification.setEmail(email);
+        }
+
+        verification.setVerificationCode(code); // Associe le code OTP à l'utilisateur
+        verificationRepository.save(verification); // Sauvegarde ou met à jour la vérification dans la base de données
+
+        // Logique pour envoyer l'email (prend en charge l'envoi d'un email ici)
+        emailService.sendVerificationEmail(email, code);
     }
 
-    public boolean verifyOtp(String email, String otp) {
-        return otp.equals(otpStore.get(email));
-    }
-
+    // Réinitialisation du mot de passe avec l'OTP
     public void resetPassword(String email, String otp, String newPassword) {
-        if (!verifyOtp(email, otp)) {
-            throw new RuntimeException("Code invalide");
+        // Recherche de la vérification pour cet email
+        UserVerification verification = verificationRepository.findByEmail(email);
+        if (verification == null || !verification.getVerificationCode().trim().equalsIgnoreCase(otp.trim())) {
+            throw new RuntimeException("Code de vérification invalide");
         }
 
+        // Recherche de l'utilisateur par email
         User user = userRepository.findByEmail(email);
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
+        if (user == null) {
+            throw new RuntimeException("Utilisateur non trouvé");
+        }
 
-        otpStore.remove(email); // Supprimer OTP après succès
-    }*/
+        user.setPassword(passwordEncoder.encode(newPassword)); // Mise à jour du mot de passe crypté
+        userRepository.save(user); // Sauvegarde de l'utilisateur avec le nouveau mot de passe
+
+        verificationRepository.delete(verification); // Suppression de l'OTP après la réinitialisation réussie
+    }
 }
