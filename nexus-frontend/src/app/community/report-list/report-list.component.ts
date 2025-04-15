@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ReportListComponent implements OnInit {
 
   reports: Report[] = [];
+  selectedReportIdToDelete: number | null = null;
+
 
   constructor(
     private reportService: ReportService,
@@ -40,14 +42,36 @@ export class ReportListComponent implements OnInit {
   }
 
   deleteReport(id: number): void {
-    if (confirm('Voulez-vous vraiment supprimer ce signalement ?')) {
-      this.reportService.deleteReport(id).subscribe({
+    this.selectedReportIdToDelete = id;
+  
+    // Ouvre la modal de confirmation Bootstrap
+    const modalElement = document.getElementById('deleteModal');
+    if (modalElement) {
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  confirmDelete(): void {
+    if (this.selectedReportIdToDelete !== null) {
+      this.reportService.deleteReport(this.selectedReportIdToDelete).subscribe({
         next: () => {
-          this.reports = this.reports.filter(r => r.id !== id);
+          // Mise à jour visuelle immédiate
+          this.reports = this.reports.filter(r => r.id !== this.selectedReportIdToDelete);
+  
+          // ✅ Fermer la modal APRÈS mise à jour
+          const modalEl = document.getElementById('deleteModal');
+          if (modalEl) {
+            const modalInstance = (window as any).bootstrap.Modal.getInstance(modalEl);
+            modalInstance.hide();
+          }
+  
           this.toastr.success('🗑️ Signalement supprimé.');
+          this.selectedReportIdToDelete = null;
         },
         error: () => this.toastr.error('Erreur lors de la suppression.')
       });
     }
   }
+  
 }

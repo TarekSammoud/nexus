@@ -46,3 +46,74 @@
     transform: scale(1.1);
   }
   
+  /* ================================
+   🎨 MODAL DE CONFIRMATION STYLE
+   ================================ */
+
+.modal-content {
+  background-color: #1e1e2f !important;
+  border: 1px solid #444;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+.modal-header {
+  border-bottom: 1px solid #444;
+  background-color: #2a2f45;
+}
+
+.modal-title {
+  font-weight: bold;
+  color: #ff4d4d;
+}
+
+.modal-body {
+  font-size: 16px;
+  padding: 20px;
+  background-color: #262c40;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+  color: #c5c6c7;
+}
+
+.modal-footer {
+  background-color: #2a2f45;
+  border-top: 1px solid #444;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  border: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+  transition: 0.2s ease-in-out;
+}
+
+.btn-secondary {
+  background-color: #555;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: #6c757d;
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+}
+
+.btn-close-white {
+  filter: invert(1);
+}

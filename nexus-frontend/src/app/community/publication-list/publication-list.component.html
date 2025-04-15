@@ -53,7 +53,7 @@
 
             <!-- Affichage de la catégorie -->
             <div class="mb-3">
-              <small class="text-muted">
+              <small class="fw-bold">
                 <strong>Catégorie :</strong> {{ publication.category?.name || 'Non spécifiée' }}
               </small>
             </div>
@@ -62,7 +62,7 @@
             <h4 class="fw-bold">{{ publication.title }}</h4>
 
             <!-- Contenu stylisé selon pinned -->
-            <p [ngClass]="{ 'text-dark': publication.pinned, 'text-white-50': !publication.pinned }">
+            <p [ngClass]="{ 'fw-bold': publication.pinned, 'text-white-50': !publication.pinned }">
               {{ publication.content }}
             </p>
 
