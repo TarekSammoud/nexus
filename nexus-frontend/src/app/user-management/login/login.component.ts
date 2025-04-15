@@ -39,46 +39,27 @@ export class LoginComponent {
   }
 
   // Méthode de connexion avec Facebook
-  loginWithFacebook() {
+
+
+  loginWithFacebook(): void {
     FB.login((response: any) => {
       if (response.authResponse) {
         const accessToken = response.authResponse.accessToken;
-        console.log('Facebook Access Token:', accessToken);
+        console.log('Access Token:', accessToken);
 
-        // Demander des informations publiques et l'email
-        FB.api('/me', { fields: 'id,name,email,first_name,last_name,picture' }, (userInfo: any) => {
-          console.log('Informations utilisateur récupérées:', userInfo);
-          // Ici, tu peux accéder à toutes les informations de l'utilisateur récupérées
-          const { id, name, email, first_name, last_name, picture } = userInfo;
-
-          // Appel au backend pour vérifier le token et obtenir un JWT + rôle
-          this.authService.facebookLogin(accessToken).subscribe({
-            next: (res: any) => {
-              console.log('Connexion via Facebook réussie', res);
-
-              const jwtToken = res.token;
-              const userEmail = res.email;
-              const userFirstName = res.firstName; // Le prénom
-              const userLastName = res.lastName; // Le nom
-              const userProfilePicture = res.profilePicture;
-
-              // Sauvegarde du JWT et des informations utilisateur dans localStorage
-              localStorage.setItem('auth_token', jwtToken);
-              localStorage.setItem('user_email', userEmail);
-              localStorage.setItem('user_name', userFirstName);
-              localStorage.setItem('user_picture', userProfilePicture?.data?.url);  // URL de la photo de profil
-
-              // Redirection vers la page du profil
-              this.router.navigate(['/user-profile']);
-            },
-            error: (err: any) => {
-              console.error('Erreur lors de la connexion Facebook', err);
-              this.errorMessage = 'Erreur de connexion via Facebook, veuillez réessayer.';
-            }
-          });
+        // Appel à ton backend pour valider le token Facebook et recevoir ton JWT
+        this.authService.facebookLogin(accessToken).subscribe({
+          next: (res: any) => {
+            localStorage.setItem('auth_token', res.token);
+            this.router.navigate(['/user-profile']);
+          },
+          error: (err) => {
+            console.error('Erreur backend Facebook login', err);
+          }
         });
+
       } else {
-        console.log('Utilisateur a annulé la connexion ou n’a pas autorisé l’app.');
+        console.log("Connexion Facebook annulée ou refusée.");
       }
     }, { scope: 'email,public_profile' });
   }
