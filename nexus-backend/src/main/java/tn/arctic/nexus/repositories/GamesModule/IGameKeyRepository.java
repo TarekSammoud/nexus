@@ -5,4 +5,5 @@ import tn.arctic.nexus.entities.GameKey;
 
 public interface IGameKeyRepository extends JpaRepository<GameKey,Long> {
     GameKey findGameKeyByUserId(Long id);
+    GameKey findGameKeyByKeyCode(String keyCode);
 }

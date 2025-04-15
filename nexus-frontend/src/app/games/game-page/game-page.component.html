@@ -2,46 +2,41 @@
   <div class="row">
     <!-- Game Title -->
     <div class="col-12 game-title-container">
-      <h1 class="text-light" style="        font-weight: 700;
-        font-size: 50px;">{{game.name}}</h1>
+      <h1 class="text-light" style="font-weight: 700; font-size: 50px;">{{game.name}}</h1>
     </div>
 
     <!-- Game Image Section -->
-    <div class="col-md-6 text-center">
+    <div class="col-md-7 text-center">
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <!-- Carousel Inner -->
         <div class="carousel-inner">
-          <div class="carousel-item" *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
-            <ng-container *ngIf="media.gameMediaType === 'SCREENSHOT'">
-              <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game screenshot">
-            </ng-container>
+          <div class="carousel-item" *ngFor="let media of game?.screenshots; let i = index" [class.active]="i === 0">
+            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game screenshot">
           </div>
         </div>
-      
+
         <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <button class="carousel-control-prev" (click)="prevSlide()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <button class="carousel-control-next" (click)="nextSlide()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      
+
       <!-- Thumbnails -->
       <div class="thumbnail-container d-flex justify-content-center mt-3">
-        <div class="thumbnail" *ngFor="let media of game?.gameMediaList; let i = index" (click)="setActiveSlide(i)">
-          <ng-container *ngIf="media.gameMediaType === 'SCREENSHOT'">
-            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
-          </ng-container>
+        <div class="thumbnail mx-1" *ngFor="let media of game?.screenshots; let i = index" (click)="setActiveSlide(i)" [ngClass]="{'active-thumbnail': i === activeIndex}">
+          <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
         </div>
       </div>
 
       <!-- Game Description -->
       <p class="text-start">{{ game.description }}</p>
-      
-      <!-- Categories -->
+
+      <!-- Categories and Platforms -->
       <div class="row">
         <div class="col-md-6 text-start">
           <div class="game-categories">
@@ -50,47 +45,204 @@
             <div *ngFor="let category of game.categories" class="badge bg-dark me-2 mb-2">{{ category.name }}</div>
           </div>
         </div>
-        
-        <!-- Test Section (You can replace this with real content) -->
         <div class="col-md-6 text-start">
-          <!-- Placeholder for additional content -->
-         <!-- <p>test</p>-->
-         <div class="game-categories">
-          <span>Platforms:</span>
-          <div class="game-platforms">
-          <img  *ngFor="let gamePlatform of game.platforms"  class=" me-2 mb-2"
-               src="assets/images/platforms/{{ gamePlatform }}.svg" alt="{{ gamePlatform }}" /></div>
-        </div>
+          <div class="game-categories">
+            <span>Platforms:</span>
+            <div class="game-platforms">
+              <img *ngFor="let gamePlatform of game.platforms" class="me-2 mb-2" src="assets/images/platforms/{{ gamePlatform }}.svg" alt="{{ gamePlatform }}" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- System Requirements -->
-      <div class="text-start mt-3">
-        <strong>Configuration système requise pour {{game.name}}</strong>
-        <p>Insert system requirements here</p>
+      <!-- System Requirements Section -->
+      <div class="text-start mt-3 " >
+        System Requirements for {{game.name}}
+        <div class="sys-config">
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="text-light">Minimum</h4>
+              <ul>
+                <li class="rec-font">Operating System</li>
+                <li class="text-light"> {{game.minRequirements?.os}}</li>
+                <li class="rec-font">Processor</li>
+                  <li class="text-light">  {{game.minRequirements?.cpu}}</li>
+                <li class="rec-font">Memory</li>
+                  <li class="text-light"> {{game.minRequirements?.ram}}</li>
+                <li class="rec-font">Graphics</li>
+                  <li class="text-light"> {{game.minRequirements?.gpu}}</li>
+                <li class="rec-font">Storage</li>
+                  <li class="text-light">  {{game.minRequirements?.storage}}</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h4 class="text-light">Recommended</h4>
+              <ul>
+                <li class="rec-font">Operating System </li>
+                  <li class="text-light"> {{game.recommendedRequirements?.os}}</li>
+                <li class="rec-font">Processor
+                  <li class="text-light">  {{game.recommendedRequirements?.cpu}}</li>
+                <li class="rec-font">Memory
+                  <li class="text-light">  {{game.recommendedRequirements?.ram}}</li>
+                <li class="rec-font">Graphics
+                  <li class="text-light">  {{game.recommendedRequirements?.gpu}}</li>
+                <li class="rec-font">Storage
+                  <li class="text-light">  {{game.recommendedRequirements?.storage}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+
+<!-- Reviews Carousel -->
+<ng-container *ngIf="groupedReviews && groupedReviews.length > 0">
+  <h2 class="text-light mt-4">User Reviews</h2>
+<div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div 
+      class="carousel-item" 
+      *ngFor="let group of groupedReviews; let i = index"
+      [class.active]="i === 0"
+    >
+      <div class="d-flex justify-content-center  gap-3 p-3">
+        <div 
+          class="card text-white bg-dark border-0 shadow-sm review-card" 
+          *ngFor="let review of group"
+        >
+          <div class="card-body">
+            <h5 class="card-title">
+
+              
+              {{ review.rating }} / 5</h5>
+            <p class="card-text fst-italic review-text">"{{ review.reviewText }}"</p>
+            <p class="card-subtitle text-muted text-end mt-2 small">
+              {{ review.createdAt | date: 'mediumDate' }}
+            </p>
+                          
+            <div class="star-rating">
+              <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+                <input
+                  type="radio"
+                  [id]="'star' + star + review.id"
+                  [value]="star"
+                  [checked]="review.rating === star"
+                  disabled
+                />
+                <label [for]="'star' + star + review.id">&#9733;</label>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</ng-container>
+
+<br>
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+  <label for="reviewText">Add a review:</label>
+  <textarea
+    id="reviewText"
+    rows="4"
+    formControlName="reviewText"
+    [class.invalid]="reviewForm.get('reviewText')?.invalid && reviewForm.get('reviewText')?.touched">
+  </textarea>
+
+  <label for="rating">Rating:</label>
+  <div class="star-rating">
+    <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+      <input
+        type="radio"
+        [id]="'star' + star"
+        formControlName="rating"
+        [value]="star"
+      />
+      <label [for]="'star' + star">&#9733;</label>
+    </ng-container>
+  </div>
+
+  <div *ngIf="isGenerated" class="text-danger">Our system has detected a probability of {{ response.fakeness_percentage }}% that your review has been computer generated</div>
+  <div *ngIf="!isGenerated" style="color: green">Our system has detected a probability of {{ response.original_percentage }}% that your review is written by a human</div>
+
+  <button type="submit" 
+  [class.disabled]="reviewForm.invalid || reviewForm.pristine "
+  >Submit Review</button>
+</form>
+
+
+      
+      
+
     </div>
 
     <!-- Game Details Section (Right Side) -->
-    <div class="col-md-6">
+    <div class="col-md-4 ps-md-5">
       <div *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
         <ng-container *ngIf="media.gameMediaType === 'BANNER'">
-          <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game banner">
+          <div class="banner-section">
+            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100 mb-3" alt="Game banner">
+          </div>
         </ng-container>
-      </div> 
-
-      <!-- Game Platforms -->
-
-
+      </div>
+      <div class="badge bg-dark me-2 mb-2">Base Game</div>
       <!-- Game Price -->
-      <h3 class="text-light" style="font-weight: 700; font-size: 30px;">{{ game.price }} TND</h3>
+      <h3 class="text-light game-price">{{ game.price }} TND</h3>
 
-      <!-- Buy Now Button -->
-      <button class="btn btn-primary btn-lg mt-3 buy-button">Buy Now</button>
-      <button (click)="navigateToUpdate(game)" class="btn btn-primary btn-lg mt-3 buy-button">Update</button>
+      <!-- Buttons -->
+      <div class="d-flex flex-column align-items-center gap-2">
+        <button class="btn action-button">Buy Now</button>
+        <button class="btn action-button-secondary">Add to Cart</button>
 
-      <button (click)="deleteGame(game)" class="btn btn-danger btn-lg mt-3">Delete game</button>
+        <div class="game-meta">
+          <div class="meta-item">
+            <span class="meta-label">Rewards</span>
+            <div class="meta-value">
+              <span>50</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Release Date</span>
+            <div class="meta-value">
+              <span>{{ game.createdAt | date }}</span>
+            </div>
+          </div>
 
+          <div class="meta-item">
+            <span class="meta-label">Developer</span>
+            <div class="meta-value">
+              <span>Unknown</span>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Platforms</span>
+            <div class="meta-value">
+              <span>
+                <img *ngFor="let gamePlatform of game.platforms" class="platform-icon me-1 mb-1" src="assets/images/platforms/{{ gamePlatform }}.svg" alt="{{ gamePlatform }}" />
+              </span>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Refundable</span>
+            <div class="meta-value">
+              <span>Yes</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

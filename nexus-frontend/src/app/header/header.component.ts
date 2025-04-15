@@ -4,6 +4,8 @@ import { UserProfileService } from '../core/services/user-management/userprofile
 import { DomSanitizer } from '@angular/platform-browser';
 import { TokenService } from '../core/services/user-management/token.service';  // Import de TokenService
 
+import { GameKeyService } from '../core/services/game-key.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,14 +19,25 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private _gameKeyService: GameKeyService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer,
     private tokenService: TokenService
     // Injection du TokenService
-    , private _router: Router
+    , private _router: Router,
+    private gameKeyService: GameKeyService,
+    private _fb: FormBuilder
   ) { }
+  gameKeyForm!: FormGroup;
+  successMessage: string = '';
+  errorMessage: string = '';
+
+
 
   ngOnInit(): void {
+    this.gameKeyForm= this._fb.group({
+      keyCode: ['',Validators.required]
+    })
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
         this.user = user;
@@ -59,4 +72,30 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['jams']);
   }
 
+
+  
+  onSubmit(){
+    if (this.gameKeyForm.valid){
+      this._gameKeyService.redeemGameKey(this.gameKeyForm.value).subscribe({
+    next: (res: boolean) => {
+      if (res === true) {
+        this.successMessage = 'Code redeemed successfully!';
+        this.errorMessage = '';
+        this.gameKeyForm.reset();
+
+        setTimeout(() => this.successMessage = '', 3000); // optional auto-clear
+      } else {
+        this.successMessage = '';
+        this.errorMessage = 'Invalid or already used code.';
+
+        setTimeout(() => this.errorMessage = '', 3000); // optional auto-clear
+      }
+    },
+    error: (err) => {
+      this.successMessage = '';
+      this.errorMessage = 'Something went wrong. Please try again.';
+    }
+  });
+    }
+  }
 }

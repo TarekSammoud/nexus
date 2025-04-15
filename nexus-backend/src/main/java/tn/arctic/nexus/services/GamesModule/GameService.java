@@ -61,4 +61,9 @@ public class GameService implements IGameService {
     public List<Game> getAllGamesBySingleCategory(String name) {
         return this.gameRepository.findGamesByCategoryName(name);
     }
+
+    @Override
+    public Game getLastId() {
+        return gameRepository.findTopByOrderByIdDesc();
+    }
 }

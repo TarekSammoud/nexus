@@ -59,5 +59,14 @@ public class GameController {
     public Integer getNumberOfGames(){
         return gameService.getNumberOfGames();
     }
+    @GetMapping("/last-id")
+    public Long getLastId(){
+
+        Game game = gameService.getLastId();
+        if (game!=null)
+        return game.getId();
+        Long id = 0L;
+        return id;
+    }
 
 }

@@ -33,7 +33,6 @@
     "@syncfusion/ej2-angular-grids": "^28.2.7",
     "@syncfusion/ej2-angular-layouts": "^29.1.37",
     "@syncfusion/ej2-angular-navigations": "^28.2.6",
-    "angularx-qrcode": "^15.0.1",
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
     "cors": "^2.8.5",
@@ -45,6 +44,7 @@
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

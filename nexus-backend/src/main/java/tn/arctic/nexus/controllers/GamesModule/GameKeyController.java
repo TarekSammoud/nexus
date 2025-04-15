@@ -17,7 +17,14 @@ public class GameKeyController {
 
     @PostMapping("/add")
     public GameKey addGameKey(@RequestBody GameKey gameKey) {
+
+
         return gameKeyService.createGameKey(gameKey);
+    }
+
+    @PostMapping("/redeem/{gameKey}")
+    public Boolean redeemGameKey(@PathVariable("gameKey") String gameKey){
+        return this.gameKeyService.redeemGameKey(gameKey);
     }
 
     @GetMapping("/all")

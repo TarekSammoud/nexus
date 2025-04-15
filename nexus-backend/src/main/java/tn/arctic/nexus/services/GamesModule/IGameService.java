@@ -17,6 +17,8 @@ public interface IGameService {
     public Integer getNumberOfGames() ;
 
     public List<Game> getGamesByCategoryName(String name);
+    Game getLastId();
+
 
     List<Game> getAllGamesBySingleCategory(String name);
 }

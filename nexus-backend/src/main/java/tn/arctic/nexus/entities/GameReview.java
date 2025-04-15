@@ -1,6 +1,7 @@
 package tn.arctic.nexus.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class GameReview implements Serializable {
     private Long id;
 
     private Integer rating;
+    @Column(columnDefinition = "LONGTEXT")
     private String reviewText;
 
     @CreationTimestamp
@@ -33,7 +35,7 @@ public class GameReview implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "game_id")
-    @JsonBackReference
+    @JsonIgnoreProperties({"gameReviewList", "price", "createdAt"}) // hide these fields
     private Game game;
 
 

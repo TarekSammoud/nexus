@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tn.arctic.nexus.services.GamesModule.FtpService;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/games/upload")
@@ -26,6 +27,11 @@ public class FileUploadController {
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Error uploading file: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/download/excel")
+    public List<List<String>> getExcelDataFromFTP(@RequestParam String fileName) throws IOException {
+        return ftpService.getExcelDataFromFTP(fileName);
     }
 
     @GetMapping("/download/{filename}")

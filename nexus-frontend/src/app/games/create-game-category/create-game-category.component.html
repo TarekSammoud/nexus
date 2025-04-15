@@ -1,3 +1,7 @@
+
+<div class="">
+  <button class="btn btn-primary" (click)="navigateToDashboard()">Back to dashboard</button>
+</div>
 <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg" style="width: 70vw;">
       <div class="card-body">
@@ -12,6 +16,9 @@
             <label for="gameName">Name</label>
             <input formControlName="name" type="text" class="form-control" id="gameName" placeholder="Super Mario Bros">
           </div>
+          <span *ngIf="gameCategoryForm.controls['name'].hasError('required') && gameCategoryForm.controls['name'].touched" class="login-error" style="color: red">
+            You must include a valid description element.
+          </span>
   
           <!-- Description -->
           <div class="form-group">
@@ -19,11 +26,16 @@
             <textarea formControlName="description" class="form-control" id="description" rows="3"
               placeholder="Enter game description"></textarea>
           </div>
+          <span *ngIf="gameCategoryForm.controls['description'].hasError('required') && gameCategoryForm.controls['description'].touched" class="login-error" style="color: red">
+            You must include a valid description element.
+          </span>
   
   
         </div>
 
-          <button  type="submit" class="next-btn">Submit</button>
+          <button  type="submit"
+          [class.disabled]=" gameCategoryForm.invalid || gameCategoryForm.pristine || gameCategoryForm.pending"
+          class="next-btn">Submit</button>
          
           <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
   

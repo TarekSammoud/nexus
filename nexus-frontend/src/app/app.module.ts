@@ -21,18 +21,15 @@ import { FooterComponent } from './footer/footer.component';
 // --- Composants jeux, jams, support ---
 import { HomeComponent } from './home/home/home.component';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
-import { JamsListComponent } from './jams/jams-list/jams-list.component';
-import { JamsComponent } from './jams/jams/jams.component';
-import { JamDetailsComponent } from './jams/jam-details/jam-details.component';
-import { JamFormComponent } from './jams/jam-form/jam-form.component';
-import { JamEditComponent } from './jams/jam-edit/jam-edit.component';
-import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
-import { EntryFormComponent } from './jams/entries/entry-form.component';
-import { EntryMediaFormComponent } from './jams/EntryMedia/entry-media-form/entry-media-form.component';
-import { EntryRatingFormComponent } from './jams/entry-rating-form/entry-rating-form.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipInput, MatChipsModule } from '@angular/material/chips';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { GameGridComponent } from './games/game-grid/game-grid.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
@@ -84,7 +81,11 @@ import { ChatComponent } from './user-management/chat/chat.component';
 // --- Services & Intercepteurs ---
 import { TokenService } from '../app/core/services/user-management/token.service';
 import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
-import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';
+import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+
 
 @NgModule({
   declarations: [
@@ -93,15 +94,6 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     FooterComponent,
     HomeComponent,
 
-    JamsListComponent,
-    JamsComponent,
-    JamDetailsComponent,
-    JamFormComponent,
-    JamEditComponent,
-    JamDetailsPageComponent,
-    EntryFormComponent,
-    EntryMediaFormComponent,
-    EntryRatingFormComponent,
     GamePageComponent,
     CreateGameComponent,
     CreateGameCategoryComponent,
@@ -147,6 +139,7 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     MarketDetailsComponent,
 
 
+    
   ],
   imports: [
     GamesListComponent,
@@ -155,7 +148,6 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CarouselModule,
@@ -181,9 +173,15 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
       multi: true
     },
     QuillModule.forRoot(),
-    GameCategoryListComponent
-
-
+    GameCategoryListComponent,
+    GameKeyListComponent,
+    MatFormFieldModule,
+    MatDialogModule,
+    GameReviewListComponent
+    
+    
+      
+    
 
 
   ],
