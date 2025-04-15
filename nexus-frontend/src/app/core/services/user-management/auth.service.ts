@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { SignUp } from '../../entities/user/signup.model';
 import { TokenService } from './token.service';
+import { HttpParams } from '@angular/common/http';
+
 
 @Injectable({
     providedIn: 'root'
@@ -60,25 +62,41 @@ export class AuthService {
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
-        return this.http.get<boolean>(`${this.userUrl}/check-email/${email}`, { headers });
+        return this.http.get<boolean>(`${this.baseUrl}/check-email/${email}`, { headers });
     }
 
+    checkPhoneUnique(phoneNumber: string): Observable<boolean> {
+        const token = localStorage.getItem('auth_token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<boolean>(`${this.baseUrl}/check-phone/${phoneNumber}`, { headers });
+    }
 
-
-
-
-
-
-    sendOtp(email: string) {
-        return this.http.post(`http://localhost:9000/nexus-backend/auth/forgot-password`, null, {
-            params: { email }
+    // Envoi du code OTP par email
+    sendOtp(email: string): Observable<any> {
+        return this.http.post(`${this.baseUrl}/forgot-password`, null, {
+            params: { email }, // Envoi de l'email en tant que paramètre
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         });
     }
 
-    resetPassword(email: string, otp: string, newPassword: string) {
-        return this.http.post(`http://localhost:9000/nexus-backend/auth/reset-password`, null, {
-            params: { email, otp, newPassword }
-        });
+
+    // Réinitialisation du mot de passe
+    resetPassword(email: string, otp: string, newPassword: string): Observable<any> {
+        const params = new HttpParams()
+            .set('email', email)
+            .set('otp', otp)
+            .set('newPassword', newPassword);
+
+        // Ajout de `responseType: 'text'` pour traiter la réponse en tant que chaîne de caractères
+        return this.http.post(`${this.baseUrl}/reset-password`, null, { params, responseType: 'text' });
+    }
+
+    facebookLogin(accessToken: string): Observable<any> {
+        const params = new HttpParams().set('accessToken', accessToken);
+        return this.http.post(`http://localhost:9000/nexus-backend/auth/facebook-login`, null, { params });
+
     }
 
 
