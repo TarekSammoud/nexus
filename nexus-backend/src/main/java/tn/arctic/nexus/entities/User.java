@@ -2,6 +2,7 @@ package tn.arctic.nexus.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,8 +56,7 @@ public class User implements Serializable {
     @JsonManagedReference
     private ProfilePictures profilePicture;
 
-    @OneToMany
-    @JsonManagedReference
+    @ManyToMany
     private List<Game> gameLibrary;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -70,4 +70,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviews-user")
     private List<GameReview> gameReviews;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

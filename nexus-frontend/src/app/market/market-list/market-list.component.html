@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="jam-hero">
+    <h1 class="jam-title">🛍️ Market Listings</h1>
+    <p class="jam-subtitle">Sell your in-game items and place competitive bids!</p>
+    <button class="jam-btn" (click)="toggleForm()">+ Create Market Item</button>
+  </div>
+
+  <div *ngIf="showForm" class="mt-4">
+    <app-market-create (itemCreated)="onItemCreated()"></app-market-create>
+  </div>
+
+  <div *ngIf="markets.length > 0; else noData" class="jam-cards">
+    <div *ngFor="let item of markets | paginate: { itemsPerPage: 3, currentPage: page }" class="jam-card">
+      <div class="jam-info">
+        <h3 class="card-title">🎮 Item #{{ item.id }}</h3>
+        <p><strong>💰 Start Bid:</strong> {{ item.startBid }} DT</p>
+        <p><strong>📅 Created:</strong> {{ item.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+        <p><strong>⏳ Ends:</strong> {{ item.endDate | date:'dd/MM/yyyy HH:mm' }}</p>
+        <p><strong>👤 User:</strong> {{ item.user?.firstName || 'Unknown' }}</p>
+        <p><strong>🕹️ Game Item:</strong> {{ item.item?.name || 'Unknown' }}</p>
+        <p><strong>📈 Bids:</strong> {{ item.bids?.length || 0 }}</p>
+        <p><strong>🏆 Highest Bid:</strong>
+          <span *ngIf="item.highestBidAmount !== null; else noBids">{{ item.highestBidAmount }} DT</span>
+          <ng-template #noBids>None</ng-template>
+        </p>
+      </div>
+
+      <div class="jam-actions">
+        <button class="view" title="View" (click)="viewDetails(item)">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="edit" title="Edit" (click)="editItem(item)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="delete" title="Delete" (click)="deleteItem(item.id)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+        <button class="enter" title="Bid on this item" [routerLink]="['/market', item.id, 'bid']">
+          <i class="fas fa-gavel"></i> Place Bid
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <pagination-controls (pageChange)="page = $event" class="pagination"></pagination-controls>
+
+  <ng-template #noData>
+    <p class="text-center text-muted">No Market Listings available.</p>
+  </ng-template>
+
+  <div *ngIf="selectedItem" class="jam-modal">
+    <div class="jam-modal-content">
+      <span class="close-btn" (click)="closeDetails()">×</span>
+
+      <app-market-details
+        *ngIf="!editMode"
+        [item]="selectedItem">
+      </app-market-details>
+
+      <app-market-edit
+        *ngIf="editMode"
+        [item]="selectedItem"
+        (itemUpdated)="updateItem()"
+        (cancel)="closeDetails()">
+      </app-market-edit>
+    </div>
+  </div>
+</div>
