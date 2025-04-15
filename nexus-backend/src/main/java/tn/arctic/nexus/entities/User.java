@@ -62,9 +62,9 @@ public class User implements Serializable {
     @JsonManagedReference
     private List<GameKey> gamekeyLibrary;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("user-entryrating")
-    private Set<EntryRating> ratings;
+    private Set<EntryRating> ratings;*/
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviews-user")
@@ -75,5 +75,117 @@ public class User implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public ProfilePictures getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(ProfilePictures profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public List<Game> getGameLibrary() {
+        return gameLibrary;
+    }
+
+    public void setGameLibrary(List<Game> gameLibrary) {
+        this.gameLibrary = gameLibrary;
+    }
+
+    public List<GameKey> getGamekeyLibrary() {
+        return gamekeyLibrary;
+    }
+
+    public void setGamekeyLibrary(List<GameKey> gamekeyLibrary) {
+        this.gamekeyLibrary = gamekeyLibrary;
+    }
+
+    public List<GameReview> getGameReviews() {
+        return gameReviews;
+    }
+
+    public void setGameReviews(List<GameReview> gameReviews) {
+        this.gameReviews = gameReviews;
     }
 }

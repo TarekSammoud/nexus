@@ -46,7 +46,7 @@ import { GameKeyListComponent } from './games/game-key-list/game-key-list.compon
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -61,8 +61,9 @@ const routes: Routes = [
     path: 'admin',
     component: AdminHomeComponent, // has the sidebar
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'games/categories', component: GameCategoryListComponent },
+      { path: 'games/keys', component: GameKeyListComponent },
+      { path: 'games/reviews', component: GameReviewListComponent },
       { path: 'games/list', component: AdminGameListComponent },
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
@@ -76,23 +77,14 @@ const routes: Routes = [
     ]
   },
   { path: '', component: HomeComponent },
-  { path: '', component: HomeComponent },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },
-  { path: 'admin', component: AdminHomeComponent },
-  { path: 'admin/categories', component: GameCategoriesComponent },
-  { path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet' },
   { path: 'games', component: GamesComponent },
   { path: 'support-tickets', component: SupportTicketComponent },
   { path: 'room/:roomId', component: RoomChatComponent },
   { path: 'performance-reviews', component: PerformanceReviewComponent },  // Add this route
 
-  {path: '', component: HomeComponent},
-  {path: 'games/:id', component: GamePageComponent},
-  {path: 'category/:name', component: GameGridComponent},
-  {path: 'admin', component: AdminHomeComponent},
-  {path: 'admin/categories', component: GameCategoriesComponent},
-  {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
+ 
   { path: 'market', component: MarketListComponent },
   { path: 'market/create', component: MarketCreateComponent },
   { path: 'market/edit/:id', component: MarketEditComponent },
