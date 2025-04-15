@@ -12,7 +12,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -60,9 +59,6 @@ public class User implements Serializable {
     private List<GameKey> gamekeyLibrary;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("user-entryrating")
-    private Set<EntryRating> ratings;
-
     @JsonManagedReference("reviews-user")
     private List<GameReview> gameReviews;
 
