@@ -68,9 +68,7 @@ export class JamsListComponent implements OnInit {
     });
   }
   
-  goToVipJams(): void {
-    this.router.navigate(['/vip-jams']);
-  }
+  
 
 
 }

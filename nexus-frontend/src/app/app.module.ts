@@ -48,8 +48,8 @@ import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/ad
 import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/admin-entries-list.component';
 import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
 import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
-import { VipJamFormComponent } from './admin-jam/pages/vip-jam-form/vip-jam-form.component';
-import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,8 +79,6 @@ import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.compone
     AdminEntriesListComponent,
     AdminJamMediaListComponent,
     AdminJamRatingsListComponent,
-    VipJamFormComponent,
-    VipJamsListComponent,
 
     
   ],

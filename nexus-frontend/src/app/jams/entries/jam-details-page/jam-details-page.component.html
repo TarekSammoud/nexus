@@ -31,7 +31,7 @@
     <div class="qr-floating">
       <qrcode 
         [qrdata]="'https://fedizorai.github.io/qrcodejams/?id=' + jam.id + '&nom=' + jam.name + '&date=' + (jam.devStartDate | date:'dd/MM/yyyy') + '&lieu=' + jam.description + '&reward=' + jam.reward"
-        [width]="200"
+        [width]="100"
         [errorCorrectionLevel]="'M'">
       </qrcode>
       <p class="qr-label">📱 Scan this Jam</p>
