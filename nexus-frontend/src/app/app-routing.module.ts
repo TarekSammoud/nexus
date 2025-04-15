@@ -40,9 +40,14 @@ const routes: Routes = [
       {path: 'update-game-category/:id', component: CreateGameCategoryComponent},
       {path: 'add-new-game', component: CreateGameComponent},
       {path: 'games/:id', component: GamePageComponent},
-      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
-
-
+      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent},
+    { path: 'jams/list', component: AdminJamsListComponent },
+    { path: 'jams/edit/:id', component: AdminJamEditComponent },
+    { path: 'jams/details/:id', component: AdminJamDetailsComponent },
+    { path: 'jams/entries', component: AdminEntriesListComponent },
+    { path: 'jams/media' , component: AdminJamMediaListComponent },
+   { path: 'jams/ratings' , component: AdminJamRatingsListComponent },
+   { path: 'jams/vip', component: VipJamFormComponent },
 
     ]
   },
@@ -60,6 +65,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
   {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
+  
 
 ];
 
