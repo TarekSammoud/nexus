@@ -37,7 +37,7 @@ public class VipJamService implements IVipJamService {
         if (!vipJamRepository.existsById(id)) {
             throw new RuntimeException("VIP Jam not found with ID: " + id);
         }
-        updatedVipJam.setId(id);
+        updatedVipJam.setId(id); 
         return applyAIStylingAndSave(updatedVipJam);
     }
 
