@@ -36,7 +36,6 @@ const routes: Routes = [
   {path: 'category/:name', component: GameGridComponent},
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
-  {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
 
 ];
 
