@@ -40,6 +40,11 @@ import { AdminGameListComponent } from './admin-game-list/admin-game-list.compon
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
+import { MarketListComponent } from './market/market-list/market-list.component';
+import { MarketCreateComponent } from './market/market-create/market-create.component';
+import { MarketEditComponent } from './market/market-edit/market-edit.component';
+import { BidComponent } from './market/bid/bid.component';
+import { MarketDetailsComponent } from './market/market-details/market-details.component';
 
 // --- Composants support ---
 import { SupportTicketComponent } from './support/support-ticket/support-ticket.component';
@@ -134,7 +139,14 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    ChatComponent
+    ChatComponent,
+    MarketListComponent,
+    MarketCreateComponent,
+    MarketEditComponent,
+    BidComponent,
+    MarketDetailsComponent,
+
+
   ],
   imports: [
     GamesListComponent,
@@ -167,7 +179,13 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+    QuillModule.forRoot(),
+    GameCategoryListComponent
+
+
+
+
   ],
   bootstrap: [AppComponent]
 })

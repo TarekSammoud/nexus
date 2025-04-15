@@ -1,0 +1,38 @@
+<h3 class="edit-title">✏️ Edit Market Listing</h3>
+
+<form (ngSubmit)="submitUpdate()">
+  <div class="form-group">
+    <label>💰 Start Bid</label>
+    <input type="number" [(ngModel)]="updatedData.start_bid" name="start_bid" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label>📅 End Date</label>
+    <input type="datetime-local" [(ngModel)]="updatedData.end_date" name="end_date" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label>🎮 Game Item</label>
+    <select class="form-control" [(ngModel)]="updatedData.game_item_id" name="game_item_id" required>
+      <option [ngValue]="null" disabled>Select a game item</option>
+      <option *ngFor="let item of gameItems" [ngValue]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>👤 User</label>
+    <select class="form-control" [(ngModel)]="updatedData.user_id" name="user_id" required>
+      <option [ngValue]="null" disabled>Select a user</option>
+      <option *ngFor="let user of users" [ngValue]="user.id">
+        {{ user.firstName }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-btn-group text-center mt-3">
+    <button type="submit" class="btn btn-success me-2">💾 Save</button>
+    <button type="button" class="btn btn-outline-light" (click)="cancelEdit()">❌ Cancel</button>
+  </div>
+</form>
