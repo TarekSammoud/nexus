@@ -93,5 +93,12 @@ export class AuthService {
         return this.http.post(`${this.baseUrl}/reset-password`, null, { params, responseType: 'text' });
     }
 
+    facebookLogin(accessToken: string): Observable<any> {
+        const params = new HttpParams().set('accessToken', accessToken);
+        return this.http.post(`http://localhost:9000/nexus-backend/auth/facebook-login`, null, { params });
+
+    }
+
+
 
 }

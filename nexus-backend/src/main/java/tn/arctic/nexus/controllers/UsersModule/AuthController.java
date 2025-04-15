@@ -1,6 +1,7 @@
 package tn.arctic.nexus.controllers.UsersModule;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import tn.arctic.nexus.entities.AuthResponse;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.AuthService;
+import tn.arctic.nexus.services.UsersModule.FacebookAuthService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,4 +99,78 @@ public class AuthController {
     public boolean checkPhoneUnique(@PathVariable String phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber) == null;
     }
+
+    /*FACEBOOOOOK
+    *
+    *
+    *
+    *
+    * */
+    @Autowired
+    private FacebookAuthService facebookAuthService;
+
+    /**
+     * Endpoint pour la connexion via Facebook
+     * @param accessToken Le token d'accès Facebook envoyé depuis le frontend
+     * @return ResponseEntity contenant un message de succès ou d'échec
+     */
+    @PostMapping("/facebook-login")
+    public ResponseEntity<?> facebookLogin(@RequestParam String accessToken) {
+        try {
+            // Vérifier la validité du token Facebook
+            if (!facebookAuthService.isValidFacebookToken(accessToken)) {
+                return ResponseEntity.status(400).body("Token Facebook invalide ou non valide pour cette application.");
+            }
+
+            // Authentifier l'utilisateur avec Facebook et récupérer l'utilisateur mappé
+            tn.arctic.nexus.entities.User user = facebookAuthService.authenticateWithFacebook(accessToken);
+
+            // Générer un JWT pour l'utilisateur authentifié
+            String jwtToken = jwtUtil.generateToken(user);
+
+            return ResponseEntity.ok(new AuthResponse(jwtToken)); // Retourner le JWT au frontend
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erreur lors de la connexion via Facebook: " + e.getMessage());
+        }
+    }
+
+
+    // Génération d'un JWT (exemple basique)
+    private String generateJwtForUser(User user) {
+        // Implémenter la génération du token JWT ici
+        return "some-jwt-token";
+    }
+
+    // Classe interne pour le format de la requête d'authentification via Facebook
+    public static class FacebookLoginRequest {
+        private String accessToken;
+
+        public String getAccessToken() {
+            return accessToken;
+        }
+
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
+        }
+    }
+
+    // Classe pour la réponse d'authentification
+    public static class LoginResponse {
+        private String jwt;
+        private String name;
+
+        public LoginResponse(String jwt, String name) {
+            this.jwt = jwt;
+            this.name = name;
+        }
+
+        public String getJwt() {
+            return jwt;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
 }

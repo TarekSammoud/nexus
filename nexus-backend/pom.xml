@@ -142,6 +142,13 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.1.0</version>
 		</dependency>
+<!--FACEBOOK LOGIN -->
+		<dependency>
+			<groupId>com.restfb</groupId>
+			<artifactId>restfb</artifactId>
+			<version>2.26.0</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>

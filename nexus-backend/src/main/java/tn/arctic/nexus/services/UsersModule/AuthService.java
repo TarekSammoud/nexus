@@ -1,5 +1,8 @@
 package tn.arctic.nexus.services.UsersModule;
 
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Version;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import tn.arctic.nexus.repositories.UsersModule.IUsersModuleUserVerificationRepo
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
+import org.springframework.beans.factory.annotation.Value;
 
 @RequiredArgsConstructor
 @Service
@@ -90,4 +95,8 @@ public class AuthService {
 
         verificationRepository.delete(verification); // Suppression de l'OTP après la réinitialisation réussie
     }
+
+
+
+
 }
