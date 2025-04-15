@@ -40,7 +40,7 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            //  "https://connect.facebook.net/en_US/sdk.js"
+           //   "https://connect.facebook.net/en_US/sdk.js"
             ],
             "allowedCommonJsDependencies": [
               "sockjs-client",

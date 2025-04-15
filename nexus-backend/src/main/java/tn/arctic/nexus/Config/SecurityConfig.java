@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/friendRequests/**").permitAll()
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/games/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
