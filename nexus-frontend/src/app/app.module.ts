@@ -74,6 +74,8 @@ import { SignupComponent } from './user-management/signup/signup.component';
 import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 import { ChatComponent } from './user-management/chat/chat.component';
 
+
+
 // --- Services & Intercepteurs ---
 import { TokenService } from '../app/core/services/user-management/token.service';
 import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
@@ -85,7 +87,7 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    GamesListComponent,
+
     JamsListComponent,
     JamsComponent,
     JamDetailsComponent,
@@ -101,8 +103,7 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     GameGridComponent,
     AdminHomeComponent,
     GameCategoriesComponent,
-    AdminGameListComponent,
-    GameCategoryListComponent,
+
     GamesCarouselComponent,
     GamesComponent,
     SupportTicketComponent,
@@ -136,6 +137,9 @@ import { AuthInterceptor } from '../app/core/services/user-management/auth.inter
     ChatComponent
   ],
   imports: [
+    GamesListComponent,
+    AdminGameListComponent,
+    GameCategoryListComponent,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
