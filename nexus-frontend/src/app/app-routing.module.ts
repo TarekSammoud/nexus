@@ -76,8 +76,6 @@ const routes: Routes = [
     ]
   },
   { path: '', component: HomeComponent },
-  { path: 'jams', component: JamsComponent },
-  { path: 'jam/:id', component: JamDetailsPageComponent },
   { path: '', component: HomeComponent },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },

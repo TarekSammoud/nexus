@@ -5,12 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
-import { QRCodeModule } from 'angularx-qrcode';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -149,10 +143,11 @@ import { GameReviewListComponent } from './game-review-list/game-review-list.com
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CarouselModule,
-    QRCodeModule,
     BrowserAnimationsModule,
+    CommonModule,
     MatChipsModule,
     MatIconModule,
     MatProgressBarModule,
@@ -172,7 +167,6 @@ import { GameReviewListComponent } from './game-review-list/game-review-list.com
       useClass: JwtInterceptor,
       multi: true
     },
-    QuillModule.forRoot(),
     GameCategoryListComponent,
     GameKeyListComponent,
     MatFormFieldModule,
