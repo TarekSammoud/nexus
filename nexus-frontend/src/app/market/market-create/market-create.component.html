@@ -36,7 +36,7 @@
         required
       >
         <option [ngValue]="null" disabled selected>Select a game item</option>
-        <option *ngFor="let item of gameItems" [ngValue]="item.id">
+        <option *ngFor="let item of gameItems" [value]="item.id">
           {{ item.name || ('GameItem #' + item.id) }}
         </option>
       </select>
