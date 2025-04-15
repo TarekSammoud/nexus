@@ -1,19 +1,32 @@
 package tn.arctic.nexus.controllers.GamesModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.entities.Game;
-import tn.arctic.nexus.entities.GameCategory;
 import tn.arctic.nexus.entities.GameReview;
 import tn.arctic.nexus.services.GamesModule.IGameReviewService;
+import tn.arctic.nexus.services.GamesModule.ISpamCheckService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/games/reviews")
 public class GameReviewController {
     @Autowired
     IGameReviewService gameReviewService;
+    @Autowired
+    ISpamCheckService spamCheckService;
+
+
+
+    @PostMapping("/check")
+    public ResponseEntity<?> checkReview(@RequestBody GameReview review) {
+        // Send review to Python API for spam check
+        Map<String, Object> result = spamCheckService.checkReview(review.getReviewText());
+
+        return ResponseEntity.ok(result);
+    }
 
     @PostMapping("/add")
     public GameReview addGameReview(@RequestBody GameReview gameReview){

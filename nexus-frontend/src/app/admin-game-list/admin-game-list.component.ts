@@ -76,8 +76,10 @@ export class AdminGameListComponent implements OnInit {
   }
 
   generateKey(data: Game){
+    console.log(data);
      var gameKey: any = { game: data, user: { id: 1 } };  // Initialize gameKey with required properties
 
+     console.log(gameKey);
     this._gameKeyService.addGameKey(gameKey).subscribe((response) => {
       alert("Game key generated successfully");
       this._router.navigate(['admin/games', data.id]);

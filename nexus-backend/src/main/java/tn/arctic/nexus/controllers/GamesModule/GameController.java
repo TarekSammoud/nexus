@@ -63,7 +63,10 @@ public class GameController {
     public Long getLastId(){
 
         Game game = gameService.getLastId();
+        if (game!=null)
         return game.getId();
+        Long id = 0L;
+        return id;
     }
 
 }
