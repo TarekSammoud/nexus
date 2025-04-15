@@ -1,26 +1,48 @@
 <div class="entry-media-form">
   <h4 class="form-heading">📸 Submit Entry Media</h4>
 
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #mediaForm="ngForm">
     <div class="form-group">
       <label for="entryId">🎮 Select Entry</label>
-      <select [(ngModel)]="media.entry.id" name="entryId" class="form-select" required>
+      <select
+        [(ngModel)]="media.entry.id"
+        name="entryId"
+        class="form-select"
+        required
+        [ngClass]="{ 'is-invalid': mediaForm.submitted && !media.entry.id }"
+      >
         <option value="" disabled selected>Select an entry</option>
         <option *ngFor="let entry of entries" [value]="entry.id">
-          {{ entry.nameEntry }}
+          {{ entry.nameEntry || 'Entry #' + entry.id }}
         </option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="url">🌐 Media URL</label>
-      <input type="text" [(ngModel)]="media.url" name="url" class="form-control" placeholder="https://..." required />
+      <input
+        type="text"
+        [(ngModel)]="media.url"
+        name="url"
+        class="form-control"
+        placeholder="https://..."
+        required
+        [ngClass]="{ 'is-invalid': mediaForm.submitted && !media.url }"
+      />
     </div>
 
     <div class="form-group">
       <label for="type">📁 Media Type</label>
-      <select [(ngModel)]="media.type" name="type" class="form-select" required>
-        <option *ngFor="let type of mediaTypes" [value]="type">{{ type }}</option>
+      <select
+        [(ngModel)]="media.type"
+        name="type"
+        class="form-select"
+        required
+        [ngClass]="{ 'is-invalid': mediaForm.submitted && !media.type }"
+      >
+        <option *ngFor="let type of mediaTypes" [value]="type">
+          {{ type }}
+        </option>
       </select>
     </div>
 
