@@ -44,6 +44,7 @@ import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/
 
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+import { LibraryComponent } from './library/library.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -83,13 +84,15 @@ const routes: Routes = [
   { path: 'support-tickets', component: SupportTicketComponent },
   { path: 'room/:roomId', component: RoomChatComponent },
   { path: 'performance-reviews', component: PerformanceReviewComponent },  // Add this route
-
  
   { path: 'market', component: MarketListComponent },
   { path: 'market/create', component: MarketCreateComponent },
   { path: 'market/edit/:id', component: MarketEditComponent },
   { path: 'market/:id/bid', component: BidComponent },
-  { path: 'market/:id/bid',component: BidComponent }
+  { path: 'market/:id/bid',component: BidComponent },
+
+  { path: 'library', component: LibraryComponent },
+
 
 ];
 
