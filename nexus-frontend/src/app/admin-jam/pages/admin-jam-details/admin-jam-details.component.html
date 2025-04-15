@@ -1,0 +1,63 @@
+<div class="jam-details-admin" *ngIf="jam">
+    <h2 class="jam-title">📋 Game Jam: <span class="highlight">{{ jam.name }}</span></h2>
+  
+    <nav class="jam-tabs">
+      <button *ngFor="let t of tabOptions"
+              [class.active]="tab === t"
+              (click)="tab = t">
+        {{ t | titlecase }}
+      </button>
+    </nav>
+  
+    <section *ngIf="tab === 'overview'" class="jam-panel glass">
+      <h3 class="panel-title">🔍 Overview</h3>
+      <div class="overview-header">
+        <img [src]="jam.imageUrl" *ngIf="jam.imageUrl" class="jam-cover" />
+        <div class="jam-meta">
+          <p><strong>Description:</strong> {{ jam.description }}</p>
+          <p><strong>Development Period:</strong> {{ jam.devStartDate | date }} → {{ jam.devEndDate | date }}</p>
+          <p><strong>Voting Window:</strong> {{ jam.voteStartDate | date }} → {{ jam.voteEndDate | date }}</p>
+          <p><strong>Reward:</strong> 🏆 {{ jam.reward || 'None' }}</p>
+        </div>
+      </div>
+    </section>
+  
+    <section *ngIf="tab === 'entries'" class="jam-panel">
+      <h3 class="panel-title">🎮 Game Entries <span class="badge">({{ entries.length }})</span></h3>
+      <div class="entry-grid">
+        <div class="entry-card" *ngFor="let entry of entries">
+          <h4 class="entry-title">{{ entry.nameEntry }}</h4>
+          <p class="entry-desc">{{ entry.descriptionEntry }}</p>
+        </div>
+      </div>
+    </section>
+  
+    <section *ngIf="tab === 'media'" class="jam-panel">
+      <h3 class="panel-title">🖼️ Entry Media <span class="badge">({{ mediaList.length }})</span></h3>
+      <div class="media-grid">
+        <div class="media-card" *ngFor="let media of mediaList">
+          <ng-container [ngSwitch]="media.type">
+            <img *ngSwitchCase="'SCREENSHOT'" [src]="media.url" />
+            <video *ngSwitchCase="'VIDEO'" [src]="media.url" controls></video>
+            <img *ngSwitchDefault [src]="media.url" />
+          </ng-container>
+          <small class="media-type-label">{{ media.type }}</small>
+        </div>
+      </div>
+    </section>
+  
+    <section *ngIf="tab === 'ratings'" class="jam-panel">
+      <h3 class="panel-title">⭐ Ratings Summary</h3>
+      <ul class="ratings-list">
+        <li *ngFor="let entry of entries">
+          <strong>{{ entry.nameEntry }}</strong>:  
+          🎨 Graphics: <b>{{ average(entry, 'graphicsScore') }}</b>, 
+          🎮 Gameplay: <b>{{ average(entry, 'gameplayScore') }}</b>, 
+          🎵 Music: <b>{{ average(entry, 'musicScore') }}</b>
+          <div class="overall">💯 Total Score: <b>{{ overallAverage(entry) }}</b></div>
+        </li>
+      </ul>      
+    </section>
+
+  </div>
+  

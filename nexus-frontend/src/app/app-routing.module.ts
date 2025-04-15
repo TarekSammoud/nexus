@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { HomeComponent } from './home/home/home.component';
+import { JamsListComponent } from './jams/jams-list/jams-list.component';
+import { JamsComponent } from './jams/jams/jams.component';
+import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
 import { GameGridComponent } from './games/game-grid/game-grid.component';
@@ -14,6 +17,14 @@ import { CreateGameCategoryComponent } from './games/create-game-category/create
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+import { AdminJamsListComponent } from './admin-jam/pages/admin-jams-list/admin-jams-list.component';
+import { AdminJamEditComponent } from './admin-jam/pages/admin-jam-edit/admin-jam-edit.component';
+import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/admin-jam-details.component';
+import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/admin-entries-list.component';
+import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
+import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
+import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.component';
+import { VipJamFormComponent } from './admin-jam/pages/vip-jam-form/vip-jam-form.component';
 
 const routes: Routes = [
   {
@@ -29,15 +40,32 @@ const routes: Routes = [
       {path: 'update-game-category/:id', component: CreateGameCategoryComponent},
       {path: 'add-new-game', component: CreateGameComponent},
       {path: 'games/:id', component: GamePageComponent},
-      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent}
+      {path: 'games/categories/add-new-category', component: CreateGameCategoryComponent},
+    { path: 'jams/list', component: AdminJamsListComponent },
+    { path: 'jams/edit/:id', component: AdminJamEditComponent },
+    { path: 'jams/details/:id', component: AdminJamDetailsComponent },
+    { path: 'jams/entries', component: AdminEntriesListComponent },
+    { path: 'jams/media' , component: AdminJamMediaListComponent },
+   { path: 'jams/ratings' , component: AdminJamRatingsListComponent },
+   { path: 'jams/vip', component: VipJamFormComponent },
 
     ]
   },
+  {path: '', component: HomeComponent},
+  {path: 'jams', component: JamsComponent},
+  { path: 'jam/:id', component: JamDetailsPageComponent },
+  { path: 'vip-jams', component: VipJamsListComponent },
+  
+
+
+
   {path: '', component: HomeComponent},
   {path: 'games/:id', component: GamePageComponent},
   {path: 'category/:name', component: GameGridComponent},
   {path: 'admin', component: AdminHomeComponent},
   {path: 'admin/categories', component: GameCategoriesComponent},
+  {path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet'},
+  
 
 ];
 

@@ -1,0 +1,18 @@
+<div class="vip-jam-grid">
+    <div class="vip-jam-card" *ngFor="let jam of vipJams"
+         [style.backgroundColor]="jam.primaryColor"
+         [ngStyle]="{ 'font-family': jam.font || 'sans-serif' }">
+         
+      <h2>{{ jam.name }}</h2>
+      <p>{{ jam.description }}</p>
+      <p><strong>🎯 Dev:</strong> {{ jam.devStartDate }} → {{ jam.devEndDate }}</p>
+      <p><strong>🏆 Reward:</strong> {{ jam.reward || 'N/A' }}</p>
+      <p><strong>🎨 Theme:</strong> {{ jam.bannerType }}</p>
+    </div>
+
+    <div *ngIf="vipJams.length === 0">
+        <p style="color: #ccc;">No VIP Jams found yet. Check back later!</p>
+      </div>
+      
+  </div>
+  
