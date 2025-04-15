@@ -46,30 +46,20 @@ export class LoginComponent {
         const accessToken = response.authResponse.accessToken;
         console.log('Facebook Access Token:', accessToken);
 
-        // Appel au backend pour vérifier le token et obtenir un JWT + rôle
+        // Appel au backend pour vérifier le token et obtenir un JWT
         this.authService.facebookLogin(accessToken).subscribe({
           next: (res: any) => {
             console.log('Connexion via Facebook réussie', res);
 
             const jwtToken = res.token;
-            const userRole = res.role;
+            const userRole = res.role; // Récupérer le rôle de l'utilisateur depuis la réponse
 
-            if (userRole === 'PLAYER') {
-              // Sauvegarde du JWT et du rôle dans localStorage
-              localStorage.setItem('auth_token', jwtToken);
-              localStorage.setItem('user_role', userRole);
+            // Sauvegarde du JWT et du rôle dans localStorage
+            localStorage.setItem('auth_token', jwtToken);
+            localStorage.setItem('user_role', userRole);
 
-              // Redirection vers la page du profil
-              this.router.navigate(['/user-profile']);
-            } else {
-              // Refuser l'accès aux utilisateurs non-PLAYER
-              this.errorMessage = 'Accès refusé : vous devez être un joueur pour vous connecter.';
-              console.warn('Rôle non autorisé :', userRole);
-
-              // Nettoyage du localStorage
-              localStorage.removeItem('auth_token');
-              localStorage.removeItem('user_role');
-            }
+            // Redirection vers la page du profil
+            this.router.navigate(['/user-profile']);
           },
           error: (err: any) => {
             console.error('Erreur lors de la connexion Facebook', err);
@@ -81,5 +71,7 @@ export class LoginComponent {
       }
     }, { scope: 'email,public_profile' });
   }
+
+
 
 }
