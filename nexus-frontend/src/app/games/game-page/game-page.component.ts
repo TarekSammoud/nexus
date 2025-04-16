@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { GameReview } from 'src/app/core/entities/game/game-review';
@@ -31,9 +32,11 @@ groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
 }
 
 reviewForm: FormGroup;
+inLibrary = false ; 
 
   constructor(private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
+
     if (gameId) {
       this._gameService.getGame(+gameId).subscribe(game => {
         this.game = game;
@@ -47,9 +50,25 @@ reviewForm: FormGroup;
             this.game.screenshots.push(media);
           }
         }
+
+        this._gameService.getUserGameLibrary().subscribe(games => {
+          for (let game of games) {
+            if (game.id === this.game?.id) {
+              this.inLibrary = true;
+              console.log(this.inLibrary);
+              break;
+            }
+          }
+        });
+    
       
         console.log(this.game.screenshots); 
       });
+
+      
+
+
+
     }
     this.reviewForm = this.fb.group({
       game: this.fb.group({
@@ -151,6 +170,12 @@ nextSlide() {
   navigateToUpdate(game: Game) {
     // Navigate to the update game page with the selected game ID
     this._router.navigate(['/update-game', game.id]);
+  }
+
+  addGameToLibrary(gameId: number) {
+    this._gameService.addGameToLibrary(gameId).subscribe(() => {
+      
+    })
   }
   
   

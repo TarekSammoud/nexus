@@ -55,6 +55,7 @@ import { MarketEditComponent } from './market/market-edit/market-edit.component'
 import { BidComponent } from './market/bid/bid.component';
 
 import { AuthGuard } from './core/services/user-management/auth.guard';
+import { LibraryComponent } from './library/library.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
