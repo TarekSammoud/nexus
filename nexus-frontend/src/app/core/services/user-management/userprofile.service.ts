@@ -28,6 +28,10 @@ export class UserProfileService {
         return this.http.put(`${this.apiUrl}/updateUser`, user);
     }
 
+    getUserById(userId: number): Observable<any> {
+        return this.http.get(`http://localhost:9000/nexus-backend/user/getbyid/${userId}`);
+    }
+
 
 
 }

@@ -17,6 +17,7 @@ export class FriendRequestListComponent implements OnInit {
   receivedRequests: any[] = [];
   recommendedFriends: any[] = [];
   userId!: number;
+  sentRequests: number[] = []; // IDs des demandes envoyées
 
   constructor(
     private friendRequestService: FriendRequestService,
@@ -62,7 +63,7 @@ export class FriendRequestListComponent implements OnInit {
     this.friendRequestService.sendFriendRequest(this.userId, playerId).subscribe({
       next: () => {
         alert('Demande d\'ami envoyée avec succès !');
-        this.availablePlayers = this.availablePlayers.filter(p => p.id !== playerId);
+        this.sentRequests.push(playerId); // Marque ce joueur comme déjà demandé
       },
       error: () => {
         alert('Échec de l\'envoi de la demande d\'ami.');
@@ -109,7 +110,7 @@ export class FriendRequestListComponent implements OnInit {
   loadRecommendedFriends(userId: number): void {
     this.friendRequestService.getRecommendedFriends(userId).subscribe({
       next: (friends: any[]) => {
-        this.recommendedFriends = friends;  // Remplacer availablePlayers par recommendedFriends
+        this.recommendedFriends = friends;
         friends.forEach(friend => this.loadProfilePicture(friend.id));
       },
       error: () => {
@@ -117,5 +118,4 @@ export class FriendRequestListComponent implements OnInit {
       }
     });
   }
-
 }
