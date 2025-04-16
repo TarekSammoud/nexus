@@ -25,7 +25,7 @@
 
           </div>
           <button class="btn btn-outline-primary refund-btn" 
-                  (click)="requestRefund(purchase.id)"
+                  (click)="purchase.id !== undefined && requestRefund(purchase.id)"
                   *ngIf="selectedPurchaseId !== purchase.id">
             <i class="fas fa-undo-alt"></i>
              Refund

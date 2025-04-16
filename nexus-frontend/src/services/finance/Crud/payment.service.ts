@@ -26,4 +26,8 @@ export class PaymentService {
     createPayment(payment: Payment): Observable<Payment> {
       return this.http.post<Payment>(`${this.baseUrl}/create`, payment);
     }
+    createAndAffectPayment(metamaskPublicKey: string | null, payment: Payment): Observable<Payment> {
+      const url = `${this.baseUrl}/create-affect/${metamaskPublicKey}`;
+      return this.http.post<Payment>(url, payment);
+    }
 }

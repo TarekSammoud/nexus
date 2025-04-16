@@ -64,7 +64,7 @@ export class PurchaseAdminComponent implements OnInit {
       this.filteredPurchases = [...this.purchases];
     } else {
       this.filteredPurchases = this.purchases.filter(
-        purchase => purchase.id.toString().includes(this.searchPurchaseId!.toString())
+        purchase => (purchase.id?.toString() ?? '').includes(this.searchPurchaseId!.toString())
       );
     }
   }

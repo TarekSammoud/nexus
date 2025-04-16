@@ -38,15 +38,17 @@ public class Wallet implements Serializable {
     @OneToOne
     @JsonBackReference("wallet-user")
     private User user;
+
     @OneToMany(mappedBy = "wallet")
-    @JsonManagedReference
+    @JsonIgnoreProperties("wallet")
     private List<Payment> payments;
 
     @OneToMany(mappedBy = "wallet")
-    @JsonIgnoreProperties("wallet") // Prevents serialization of the 'wallet' field in transfer
-    private List<transfer> transfers;
+    @JsonIgnoreProperties("wallet") // Prevents serialization of the 'wallet' field in Transfer
+    private List<Transfer> transfers;
 
     @OneToMany(mappedBy = "wallet")
+    @JsonIgnoreProperties("wallet") // Prevents serialization of the 'wallet' field in Transfer
     private List<Purchase> Purchase;
 
 

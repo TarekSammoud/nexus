@@ -2,12 +2,12 @@ import { Refund } from "./refund.model";
 import { NexusWallet } from "./wallet.model";
 
 export interface Purchase {
-  id: number;
+  id?: number;
   productType: productType;
   productId: number;
   price: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   wallet?: NexusWallet; 
   refund?:Refund
 }

@@ -67,7 +67,7 @@ export class TransferPopupComponent {
     amount: 0
   };
   createTransfer(): void {
-    this.transferService.createTransfer(this.transfer).subscribe({
+    this.transferService.createAndAffectTransfer(this.metamaskService.getWalletAddress(),this.transfer).subscribe({
       next: (response) => {
         console.log('Transfer created:', response);
       },
@@ -77,12 +77,16 @@ export class TransferPopupComponent {
     });
 
   }
-  sendCoins(friend: Friend) {
+ 
+  async sendCoins(friend: Friend) {
     if (this.coinAmountTosend <= 0) {
       alert('Please select amount of coins to send');
       return;
     }else{
-          this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend)
+         await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
+          this.transfer.receiverMetaMaskAddress = friend.metaMaskAddress;
+          this.transfer.amount = this.coinAmountTosend;
+          this.createTransfer();
     }
   
   }
