@@ -1,0 +1,93 @@
+.streamer-panel {
+  padding: 30px;
+  background: #1e1e2f;
+  border-radius: 20px;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.panel-title {
+  text-align: center;
+  font-size: 24px;
+  color: #ffca28;
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  font-weight: bold;
+  color: #ccc;
+  font-size: 18px;
+}
+
+.dark-input {
+  background-color: #2a2c3b;
+  border: 1px solid #444;
+  color: #fff;
+}
+
+.dark-input::placeholder {
+  color: #888;
+}
+
+.streamer-table {
+  background-color: #2f3044;
+  color: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.streamer-table thead {
+  background-color: #1c1c2b;
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.streamer-table td, .streamer-table th {
+  vertical-align: middle;
+  text-align: center;
+  padding: 12px;
+}
+
+.badge-platform {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.stream-link {
+  color: #66d9ef;
+  text-decoration: none;
+}
+
+.stream-link:hover {
+  text-decoration: underline;
+}
+/* Applique un fond sombre à toute la table */
+.streamer-table {
+  background-color: #1e1e2f !important;
+  color: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* En-tête sombre avec texte jaune */
+.streamer-table thead {
+  background-color: #2c2f45 !important;
+  color: #ffc107 !important;
+}
+
+/* Cellules normales */
+.streamer-table td,
+.streamer-table th {
+  background-color: #2b2c3c !important;
+  color: #e0e0e0 !important;
+  border-color: #3d3d5c !important;
+}
+
+/* Hover sombre pour les lignes */
+.streamer-table tbody tr:hover {
+  background-color: #3a3c55 !important;
+}

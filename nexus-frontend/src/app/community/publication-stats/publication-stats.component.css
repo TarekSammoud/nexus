@@ -1,0 +1,12 @@
+.stats-container {
+    background-color: #1e1e2f;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(234, 122, 154, 0.2);
+    margin-top: 30px;
+  }
+  canvas {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  

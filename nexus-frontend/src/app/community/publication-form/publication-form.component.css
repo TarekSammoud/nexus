@@ -1,0 +1,144 @@
+/* ====== Form Container ====== */
+.form-container {
+    background-color: #1E1E2F;
+    color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ====== Form Header ====== */
+.form-header h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #9CA3AF;
+    margin-bottom: 20px;
+}
+
+/* ====== Form Body ====== */
+.form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ====== Form Group ====== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+/* ====== Input & Textarea Styling ====== */
+.form-control {
+    background-color: #2A2A40;
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #6C63FF;
+    background-color: #32324A;
+}
+
+/* ====== Select Styling (ComboBox) ====== */
+select {
+    cursor: pointer;
+    background-color: #2A2A40;
+    color: #ffffff;
+}
+
+/* ====== Button Group ====== */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #6C63FF;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #4F47F7;
+}
+
+/* Cancel Button */
+.btn-outline-danger {
+    background-color: transparent;
+    color: #DC3545;
+    border: 2px solid #DC3545;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-outline-danger:hover {
+    background-color: #DC3545;
+    color: #ffffff;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.image-banner {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.5); /* rend l'image plus sombre pour que le texte ressorte si tu veux en mettre */
+  }
+
+  .form-title {
+    color: #ea7a9a; /* Rose élégant */
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
+  

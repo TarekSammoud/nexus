@@ -15,6 +15,7 @@ export class EntryFormComponent implements OnInit {
     nameEntry: '',
     descriptionEntry: '',
  //   user: { id: 1 },
+
     jam: { id: 0 }
   };
 

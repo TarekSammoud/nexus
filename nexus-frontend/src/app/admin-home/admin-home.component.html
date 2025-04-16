@@ -28,6 +28,7 @@
         </div>
       </div>
 
+
       <div class="dropdown-section border-top border-secondary mt-3 pt-3">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -59,9 +60,29 @@
           <a class="d-block py-2 text-white" routerLink="/admin/support-agent" routerLinkActive="active"><i class="fas fa-user me-2"></i>Support Agent</a>
           <a class="d-block py-2 text-white" routerLink="/admin/room" routerLinkActive="active"><i class="fas fa-comments me-2"></i>Room</a>
           <a class="d-block py-2 text-white" routerLink="/admin/performance-review" routerLinkActive="active"><i class="fas fa-comments me-2"></i>Performance Review</a>
+
+
+          <div class="flex-grow-1 overflow-auto">
+            <div class="dropdown-section">
+              <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
+                 href="javascript:void(0)"
+                 (click)="toggleDropdownD()">
+                 <span><i class="fas fa-folder-open me-2"></i>community</span>
+                 <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpenD, 'fa-chevron-up': dropdownOpenD }"></i>
+              </a>
+      
+              <div *ngIf="dropdownOpenD" class="submenu ps-4">
+                <a class="d-block py-2 text-white" routerLink="/admin/community/categories" routerLinkActive="active"><i class="fas fa-image me-2"></i>categories Liste</a>
+                <a class="d-block py-2 text-white" routerLink="/admin/community/categories/add" routerLinkActive="active"><i class="fas fa-tags me-2"></i> add categories</a>
+                <a class="d-block py-2 text-white" routerLink="/admin/community/reports" routerLinkActive="active"><i class="fas fa-tags me-2"></i> reports</a>
+                <a class="d-block py-2 text-white" routerLink="/admin/sondages" routerLinkActive="active"><i class="fas fa-star me-2"></i>sondage liste</a>
+                <a class="d-block py-2 text-white" routerLink="/admin/live" routerLinkActive="active"><i class="fas fa-image me-2"></i>live stream</a>
+                <a class="d-block py-2 text-white" routerLink="/admin/streamers" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>streamers</a>
+    
         </div>
       </div>
       
+
       
     </div>
   </div>

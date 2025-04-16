@@ -12,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,11 +23,14 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Serializable {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
     private String firstName;
+    @Getter
     private String lastName;
     private String email;
     private String password;
@@ -58,6 +62,17 @@ public class User implements Serializable {
     @ManyToMany
     private List<Game> gameLibrary;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Publication> publications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Commentaire> commentaires = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<GameKey> gamekeyLibrary;
@@ -72,6 +87,7 @@ public class User implements Serializable {
     public String getFirstName() {
         return firstName;
     }
+
 
     public Long getId() {
         return id;
@@ -173,6 +189,30 @@ public class User implements Serializable {
         this.gameLibrary = gameLibrary;
     }
 
+    public List<Publication> getPublications() {
+        return publications;
+    }
+
+    public void setPublications(List<Publication> publications) {
+        this.publications = publications;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
     public List<GameKey> getGamekeyLibrary() {
         return gamekeyLibrary;
     }

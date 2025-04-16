@@ -1,0 +1,48 @@
+.report-form-container {
+    padding: 40px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    color: #eaeaea;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  }
+  
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ff4f4f;
+    text-shadow: 0 0 10px rgba(255, 79, 79, 0.5);
+  }
+  
+  .section-desc {
+    font-size: 14px;
+    color: #b5b5b5;
+  }
+  
+  .report-card {
+    background-color: #2b2c3c;
+    border-radius: 16px;
+    color: #eaeaea;
+  }
+  
+  .custom-textarea {
+    background-color: #1e1e2f;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 14px;
+    resize: vertical;
+  }
+  
+  .custom-textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+  
+  .btn {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  

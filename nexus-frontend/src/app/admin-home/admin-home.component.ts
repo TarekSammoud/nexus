@@ -26,6 +26,11 @@ export class AdminHomeComponent {
   supportDropdownOpen = false; // State for support dropdown
   jamDropdownOpen = false;
 
+  dropdownOpen = false;
+  dropdownOpenD = false;
+
+
+
 
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
@@ -38,6 +43,13 @@ export class AdminHomeComponent {
   toggleSupportDropdown(){
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
+  toggleDropdownD() {
+    this.dropdownOpenD = !this.dropdownOpenD;
+  }
+
+  toggleDropdownf () {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
   navigateToGamesList(){
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
@@ -49,6 +61,7 @@ export class AdminHomeComponent {
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
+  
 
 
 
