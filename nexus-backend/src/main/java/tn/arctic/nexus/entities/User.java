@@ -204,28 +204,8 @@ public class User implements Serializable {
         this.gameReviews = gameReviews;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", address='" + address + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", last_login=" + last_login +
-                ", friends=" + friends +
-                ", role=" + role +
-                ", profilesPictures=" + profilesPictures +
-                ", gameLibrary=" + gameLibrary +
-                ", wallet=" + wallet +
-                ", gamekeyLibrary=" + gamekeyLibrary +
-                ", gameReviews=" + gameReviews +
-                '}';
-    }
+
+
 
     // Getters and setters for all properties...
 }

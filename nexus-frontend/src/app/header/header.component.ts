@@ -18,7 +18,7 @@ import { PanierService } from 'src/services/finance/panier.service';
 export class HeaderComponent implements OnInit {
   user: any = {};
   imageUrl: any = null;
-  cartCountItems : number = 2;  
+  cartCountItems : number = 0;  
   isWalletConnected: boolean = false;
 
 

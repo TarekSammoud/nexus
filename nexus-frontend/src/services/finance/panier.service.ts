@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
+import { Game } from 'src/app/core/entities/game/game';
+import { MetamaskService } from './metamask.service';
 export interface CartItem {
   id: number;
   name: string;
@@ -10,29 +13,27 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class PanierService {
-  private cartItems: CartItem[] = [];
+  private cartItems: Game[] = [];
+  private readonly storageKey = 'cart';
   total: number = 0;
   private countItem = new BehaviorSubject<number>(0);
 
   count$ = this.countItem.asObservable();
 
 
-  constructor() {
-    this.cartItems = [
-      { id: 1, name: 'Game Title 1', price: 59,  imageUrl: 'assets/game1.jpg' },
-      { id: 2, name: 'Game Title 2', price: 30,  imageUrl: 'assets/game2.jpg' },
-      { id: 3, name: 'Game Title 3', price: 20,  imageUrl: 'assets/game2.jpg' },
-      { id: 4, name: 'Game Title 4', price: 100,  imageUrl: 'assets/game2.jpg' }
-
-
-    ];
+  constructor(private metamaskService: MetamaskService) {
+    const storedItems = localStorage.getItem(this.storageKey);
+    this.cartItems = storedItems ? JSON.parse(storedItems) : [];
     this.calculateTotal();
-    // Initialize the count of items in the cart
     this.countItem.next(this.countItems());
   
   }
-
-  getItems(): CartItem[] {
+   saveCart() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
+    this.calculateTotal();
+    this.updateCount();
+  }
+  getItems(): Game[] {
     return this.cartItems;
   }
 
@@ -51,9 +52,7 @@ countItems(): number {
 
   removeItem(itemId: number): void {
     this.cartItems = this.cartItems.filter(item => item.id !== itemId);
-    this.calculateTotal();
-    //update the count after delete
-    this.updateCount();
+    this.saveCart();
 
   }
 
@@ -61,7 +60,15 @@ countItems(): number {
   private updateCount() {
     this.countItem.next(this.countItems());
   }
+
+   addItemToCart(item: Game): void {
+    this.cartItems.push(item);
+    this.saveCart();
+
+  }
   checkout(): void {
     console.log('Proceeding to checkout...', this.cartItems);
+    this.cartItems = [];
+    this.saveCart();
   }
 }

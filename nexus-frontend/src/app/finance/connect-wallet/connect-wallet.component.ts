@@ -53,7 +53,7 @@ export class ConnectWalletComponent {
    let isWalletExist = await this.metaMaskService.userExists(this.walletAddress);
     if (!isWalletExist) {
       try {
-        const addUserResult ="User added successfully" //await this.metaMaskService.addUser(this.walletAddress || '');
+        const addUserResult =await this.metaMaskService.addUser(this.walletAddress || '');
 
         // Check the result of the addUser function
         if (addUserResult === 'User added successfully') {
@@ -81,7 +81,7 @@ export class ConnectWalletComponent {
       }
     } else {
       this.router.navigate(['/wallet']); // Navigate to wallet dashboard after creating the wallet
-      //alert('user already exists!');
+      alert('user already exists!');
     }
   }
 }
