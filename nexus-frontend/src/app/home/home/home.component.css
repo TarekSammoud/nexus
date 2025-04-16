@@ -232,3 +232,31 @@ app-games-carousel:hover {
   background: rgba(20, 20, 20, 0.3); /* Background color of the scrollbar track */
   border-radius: 10px;
 }
+
+
+
+/* styles.css or component styles */
+.cover-img {
+  aspect-ratio: 2 / 3; /* classic vertical game cover ratio */
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.game-card {
+  transition: transform 0.2s ease-in-out;
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.platform-icon {
+  width: 24px;
+  height: 24px;
+}
+
