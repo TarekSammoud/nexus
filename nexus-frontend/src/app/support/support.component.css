@@ -1,0 +1,226 @@
+/* support.component.css */
+.support-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+  }
+  
+  /* Support Header */
+  .support-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .support-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+  }
+  
+  .support-header p {
+    font-size: 1.1rem;
+    color: #f1f1f1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  /* FAQ Section */
+  .faq-section {
+    margin-bottom: 50px;
+  }
+  
+  .faq-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .accordion {
+    margin-bottom: 40px;
+  }
+  
+  .faq-item {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .faq-question {
+    padding: 18px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    background-color: rgba(154, 94, 214, 0.2);
+  }
+  
+  .faq-question:hover {
+    background-color: rgba(154, 94, 214, 0.3);
+  }
+  
+  .faq-question i {
+    transition: transform 0.3s ease;
+    color: #9A5ED6;
+  }
+  
+  .faq-question[aria-expanded="true"] i {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .faq-answer p {
+    margin: 0;
+    color: #f1f1f1;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  /* Ticket Section */
+  .ticket-section {
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ticket-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .ticket-section p {
+    margin-bottom: 25px;
+    color: #f1f1f1;
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .create-ticket-btn {
+    padding: 15px 30px;
+    background-color: #9A5ED6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+  }
+  
+  .create-ticket-btn:hover {
+    background-color: #8347c7;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .create-ticket-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Ticket Form Container */
+  .ticket-form-container {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Collapse effect */
+  .collapse {
+    display: none;
+  }
+  
+  .collapse.show {
+    display: block;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .support-page {
+      padding: 20px;
+    }
+    
+    .support-header h1 {
+      font-size: 2rem;
+    }
+    
+    .faq-section h2 {
+      font-size: 1.6rem;
+    }
+    
+    .faq-question {
+      padding: 15px;
+      font-size: 1rem;
+    }
+    
+    .faq-answer {
+      padding: 15px;
+    }
+    
+    .ticket-section {
+      padding: 25px;
+    }
+    
+    .create-ticket-btn {
+      padding: 12px 25px;
+      font-size: 1rem;
+    }
+    
+    .ticket-form-container {
+      padding: 20px;
+    }
+  }
+  
+  /* Animation pour l'apparition du formulaire de ticket */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .ticket-form-container {
+    animation: slideDown 0.3s ease-out forwards;
+  }
