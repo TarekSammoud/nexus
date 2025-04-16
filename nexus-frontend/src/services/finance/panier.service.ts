@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { Game } from 'src/app/core/entities/game/game';
 import { MetamaskService } from './metamask.service';

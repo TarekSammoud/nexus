@@ -11,5 +11,5 @@ public interface IPaymentService {
     public Payment addPayment(Payment payment);
     public Payment updatePayment(Payment payment);
     public boolean deletePayment(Long id);
-    public Payment assignPaymentToWallet(Long paymentId, Long walletId) ;
-    }
+    public Payment CreateAffectPaymentToWallet(String metamaskPublicKey, Payment payment);
+}

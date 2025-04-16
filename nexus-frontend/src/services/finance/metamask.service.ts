@@ -20,6 +20,7 @@ export class MetamaskService {
     "function getContractBalance() view returns (uint256)",
     "function withdrawEther(address payable _to, uint256 _amount)",
     "function userExists(address userMetamaskAdd) view returns (bool)",
+    "function SpendVirtualCoins(address userMetamaskAdd, uint256 amount)",
 
     "event VirtualCoinAdded(address indexed userMetamaskAdd, uint256 amount)",
     "event VirtualCoinTransferred(address indexed fromUserMetamaskAdd, address indexed toUserMetamaskAdd, uint256 amount)",
@@ -212,6 +213,7 @@ payment:  Payment = {
   status: 'Pending',
   price: "0",
 };
+
 public async listenToEtherReceived() {
   console.log('Listening to EtherReceived event...');
   // Ensure the contract is initialized
@@ -228,7 +230,7 @@ public async listenToEtherReceived() {
     this.addCoins(sender, Number(localStorage.getItem('coinsToPurchase')));
     this.payment.coinAmount = Number(localStorage.getItem('coinsToPurchase'));
     this.payment.price = localStorage.getItem('n') || '0';
-    this.paymentService.createPayment(this.payment).subscribe({
+    this.paymentService.createAndAffectPayment(this.userAddress,this.payment).subscribe({
       next: (response) => {
         console.log('Payment created:', response);
         // reset form
@@ -272,12 +274,42 @@ async TransfertCoins(_to:String,amount:number) {
     console.log('Coins sended  successfully:', "from :",this. getWalletAddress() , ' to : ', _to," and amount of coin", amount);
 
   } catch (error: any) {
-    console.error('Error transfert value:', error.message || error);
-    this.errorMessage = error.message || 'Failed to transfert value.';
-    console.log(this.errorMessage);
+    if(error.reason?.includes('Not enough virtual coins')){
+      alert('Not enough virtual coins to send');
+   
+    }
+    else {
+      console.error('Error transfer value:', error.message || error);
+      this.errorMessage = error.message || 'Failed to transfer coins.';
+      console.log(this.errorMessage);
+    }
+
 
   }
 }
+async SpendCoins(amount:number) {
+  try {
+    if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
+    const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
+    console.log('Transaction sent (Spend Coins):', tx.hash);
+
+    await tx.wait();
+    console.log('Transaction mined (transfert):', tx.hash);
+    console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
+
+  } catch (error: any) {
+    if(error.reason?.includes('Not enough virtual coins')){
+      alert('Not enough virtual coins to spend');
+   
+    }
+    else {
+      console.error('Error Spend value:', error.message || error);
+      this.errorMessage = error.message || 'Failed to Spend value.';
+      console.log(this.errorMessage);
+    }
+  }
+}
+
 
 ////////// transaction functions /////////////s
 

@@ -41,9 +41,9 @@ export class RequestRefundComponent {
   sortPayments(order: string): void {
     this.purchases.sort((a, b) => {
       if (order === 'new-old') {
-        return b.createdAt.getTime() - a.createdAt.getTime();
+        return (b.createdAt?.getTime() ?? 0) - (a.createdAt?.getTime() ?? 0);
       } else {
-        return a.createdAt.getTime() - b.createdAt.getTime();
+        return (a.createdAt?.getTime() ?? 0) - (b.createdAt?.getTime() ?? 0);
       }
     });
   }

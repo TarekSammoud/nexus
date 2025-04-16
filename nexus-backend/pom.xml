@@ -131,11 +131,7 @@
 		</dependency>
 
 		<!-- Commons Net -->
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<version>3.8.0</version> <!-- Use the latest version -->
-		</dependency>
+
 
 		<!-- Spring Boot Mail -->
 		<dependency>
@@ -157,17 +153,9 @@
 			<version>2.0.2</version>
 		</dependency>
 		<!--FACEBOOK LOGIN -->
-		<dependency>
-			<groupId>com.restfb</groupId>
-			<artifactId>restfb</artifactId>
-			<version>2.26.0</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.0.2</version>
-		</dependency>
+
+
 		<!--FACEBOOK LOGIN -->
 		<dependency>
 			<groupId>com.restfb</groupId>
