@@ -1,0 +1,33 @@
+<div class="live-polls-container">
+  <h2 class="title-glow mb-2 text-center">
+    🎥 SONDAGES ÉLIGIBLES AU LIVE
+  </h2>
+  <p class="subtitle text-center mb-5">
+    Découvrez les sondages ayant atteint plus de 50% de votes positifs et déclenchez un live pour vos utilisateurs !
+  </p>
+
+  <div *ngFor="let sondage of sondages" class="poll-card card shadow border-0 mb-4">
+    <div class="card-body">
+      <h4 class="fw-bold text-info">{{ sondage.question }}</h4>
+      <p class="text-light">
+        👍 Pourcentage de Oui :
+        <span class="fw-bold text-success">{{ percentOui[sondage.id!] || 0 }}%</span>
+      </p>
+
+      <div *ngIf="percentOui[sondage.id!] >= 50 && sondage.streamer?.streamUrl" class="launch-section p-3 rounded mt-3 bg-dark border border-secondary shadow-sm">
+        <label class="form-label fw-semibold text-success">
+          🎙️ Streamer assigné : 
+          <span class="text-info">{{ sondage.streamer?.name }}</span>
+          <span class="badge bg-primary ms-2">{{ sondage.streamer?.platform }}</span>
+        </label>
+      
+        <div class="mt-3 text-end">
+          <button class="btn btn-success px-4 py-2 rounded-pill" (click)="goToLiveMenu(sondage.id!)">
+            🚀 Lancer le Live
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
