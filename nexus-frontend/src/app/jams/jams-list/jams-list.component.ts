@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JamService } from 'src/app/core/services/jam/jam.service';
 import { Router } from '@angular/router';
 import { Jam } from 'src/app/core/entities/Jam/jam';
+import { TokenService } from '../../core/services/user-management/token.service';
 
 @Component({
   selector: 'app-jams-list',
@@ -15,9 +16,11 @@ export class JamsListComponent implements OnInit {
   showForm = false;
   page = 1;
 
-   constructor(private jamService: JamService, private router: Router) {}
+   constructor(private jamService: JamService, private router: Router,private tokenService: TokenService
+   ) {}
   ngOnInit(): void {
     this.loadJams();
+    const userId = TokenService.getUserId();
   }
 
   loadJams(): void {
@@ -29,6 +32,7 @@ export class JamsListComponent implements OnInit {
   viewDetails(jam: Jam): void {
     this.selectedJam = jam;
     this.editMode = false;
+    
   }
 
   editJam(jam: Jam): void {

@@ -35,6 +35,12 @@ public class SecurityConfig {
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/games/**").permitAll()
+                        .requestMatchers("/api/entries/**").permitAll()
+                        .requestMatchers("/api/entry-ratings/**").permitAll()
+                        .requestMatchers("/api/gamejams/**").permitAll()
+                        .requestMatchers("/api/vip-jams/**").permitAll()
+
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
