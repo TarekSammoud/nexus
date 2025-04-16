@@ -127,6 +127,7 @@ import { StreamerManagementComponent } from './community/sondage/streamer-manage
 import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
 import { PublicationStatsComponent } from './community/publication-stats/publication-stats.component';
 import { NgChartsModule } from 'ng2-charts';
+import { SupportComponent } from './support/support.component';
 
 
 
@@ -199,6 +200,7 @@ import { NgChartsModule } from 'ng2-charts';
     RoomComponent,
     PerformanceReviewComponent,
     SupportAgentComponent,
+    SupportComponent,
     RoomChatComponent,
     AdminSupportListComponent,
     AdminAgentSupportComponent,
