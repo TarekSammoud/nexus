@@ -3,6 +3,7 @@ import { FriendRequestService } from '../../core/services/user-management/friend
 import { ChatService } from '../../core/services/user-management/Chat.Service';
 import { ChatMessage } from '../../core/entities/user/ChatMessage';
 import { TokenService } from '../../core/services/user-management/token.service';
+import { UserProfileService } from '../../core/services/user-management/userprofile.service';
 
 @Component({
   selector: 'app-chat',
@@ -15,11 +16,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   recipientId: number = 0;
   currentUserId: number | null = null;
   friends: any[] = [];
+  senders = new Map<number, any>(); // 💡 Pour stocker les utilisateurs envoyeurs
   private messageInterval: any;
 
   constructor(
     private friendRequestService: FriendRequestService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private userProfileService: UserProfileService
   ) { }
 
   ngOnInit(): void {
@@ -33,14 +36,18 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.friends = data;
         },
         error: (err) => {
-          console.error('Erreur lors du chargement des amis :', err);
+          console.error('Error loading friends:', err);
         }
       });
 
       this.chatService.messages$.subscribe(msg => {
         if (msg) {
           this.messages.push(msg);
-          console.log('Message ajouté à l’interface:', msg);
+          if (!this.senders.has(msg.senderId)) {
+            this.userProfileService.getUserById(msg.senderId).subscribe(user => {
+              this.senders.set(msg.senderId, user);
+            });
+          }
         }
       });
     }
@@ -62,7 +69,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           );
         },
         (error) => {
-          console.error('Erreur lors de la récupération des messages', error);
+          console.error('Error loading messages', error);
         }
       );
     }
@@ -73,12 +80,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     const message = {
       senderId: this.currentUserId,
-      sendername: 'Moi',
+      sendername: 'Me',
       content: this.messageContent,
       type: 'CHAT'
     };
 
     this.chatService.sendMessage(message.senderId, message.content);
+    this.messageContent = '';
   }
 
   trackById(index: number, item: any): number {
@@ -86,11 +94,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getUserNameById(id: number): string {
-    if (id === this.currentUserId) {
-      return 'Moi';
-    }
+    if (id === this.currentUserId) return 'Me';
 
-    const friend = this.friends.find(f => f.id === id);
-    return friend ? `${friend.firstName} ${friend.lastName}` : `Utilisateur #${id}`;
+    const user = this.senders.get(id);
+    return user ? `${user.firstName} ${user.lastName}` : '...';
   }
 }
