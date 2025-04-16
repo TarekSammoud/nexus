@@ -1,0 +1,260 @@
+/* payment.component.css */
+
+
+/* Card Styles */
+.card {
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+    margin: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(20, 53, 132, 0.1);
+    border-color: #143584;
+}
+
+.card-body {
+    padding: 1.2rem;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.badge-Completed {
+    background-color: rgb(0, 190, 44);
+    color: white;
+    animation: pulseGreen 2s infinite;
+}
+
+.badge-Pending {
+    background-color: rgb(255, 187, 0);
+    color: white;
+    animation: pulsePending 2s infinite;
+}
+
+.badge-Failed {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    animation: pulseFailed 1.5s ease-in-out;
+}
+
+/* Price Tag Styles */
+.price-tag {
+    color: #143584;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    gap: 8px;
+}
+
+.price-tag.eth i {
+    color: #627eea;
+    font-size: 1.2rem;
+}
+
+.coin-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Date Info Styles */
+.date-info {
+    color: #666;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.date-info i {
+    color: #143584;
+}
+
+/* Scrollbar Styles */
+.overflow-auto::-webkit-scrollbar {
+    width: 6px;
+}
+
+.overflow-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: #143584;
+    border-radius: 3px;
+}
+
+/* Delete Button Styles */
+.delete-btn i {
+    color: black;
+    transition: all 0.3s ease-in-out;
+}
+
+.delete-btn {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+}
+
+.delete-btn:hover i {
+    color: red;
+    transform: rotate(20deg);
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Modal Styles */
+.modal-body {
+    color: #000000;
+    font-size: 1.1rem;
+    animation: pulseText 2s infinite;
+}
+
+.modal-body strong {
+    color: #ff4444;
+    font-weight: 600;
+}
+
+/* Modal Button Styles */
+.modal-footer .btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: #5a6268;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-danger {
+    background: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    background: #c82333;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+/* Button Ripple Effect */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out;
+}
+
+.btn:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes pulseGreen {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 190, 44, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 5px rgba(0, 190, 44, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 190, 44, 0);
+    }
+}
+
+@keyframes pulsePending {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 187, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 5px rgba(255, 187, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 187, 0, 0);
+    }
+}
+
+@keyframes pulseFailed {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseText {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .user-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-dialog {
+        margin: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .price-tag {
+        font-size: 1rem;
+    }
+}

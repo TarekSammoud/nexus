@@ -4,7 +4,6 @@ import { LoginComponent } from './user-management/login/login.component';
 import { SignupComponent } from './user-management/signup/signup.component';
 import { GamesComponent } from './games/games/games.component';
 
-
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
 import { HeaderComponent } from './header/header.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
@@ -15,6 +14,10 @@ import { ChatComponent } from './user-management/chat/chat.component';
 import { AuthGuard } from '../app/core/services/user-management/auth.guard';
 import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 
+import { WalletDashboardComponent } from './finance/wallet-dashboard/wallet-dashboard.component';
+import { ConnectWalletComponent } from './finance/connect-wallet/connect-wallet.component';
+import { MakePaymentComponent } from './finance/make-payment/make-payment.component';
+import { PanierComponent } from './finance/panier/panier/panier.component';
 
 import { HomeComponent } from './home/home/home.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
@@ -26,6 +29,11 @@ import { GamesListComponent } from './games/gameslist/games-list/games-list.comp
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { WalletsComponent } from './admin-Finance/wallets/wallets.component';
+import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-admin.component';
+import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
+import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
+import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
 
 import { SupportAgentComponent } from './support/support-agent/support-agent.component';
 import { RoomComponent } from './support/room/room.component';
@@ -53,14 +61,22 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
 
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
+  { path: 'games/:id', component: GamePageComponent },
+  { path: 'category/:name', component: GameGridComponent },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'your-friends', component: FriendManagementComponent, canActivate: [AuthGuard] },
   { path: 'friend-requests', component: FriendRequestListComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+
+  { path: 'wallet', component: WalletDashboardComponent },
+  { path: 'connectWallet', component: ConnectWalletComponent },
+  { path: 'makePayment', component: MakePaymentComponent },
+  { path: 'panier', component: PanierComponent },
+
   {
     path: 'admin',
-    component: AdminHomeComponent, // has the sidebar
+    component: AdminHomeComponent,
     children: [
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/keys', component: GameKeyListComponent },
@@ -69,31 +85,27 @@ const routes: Routes = [
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
       { path: 'add-new-game', component: CreateGameComponent },
-      { path: 'games/:id', component: GamePageComponent },
       { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
+      { path: 'wallets', component: WalletsComponent },
+      { path: 'payments', component: PaymentsAdminComponent },
+      { path: 'purchases', component: PurchaseAdminComponent },
+      { path: 'transfers', component: TransfersAdminComponent },
+      { path: 'refunds', component: RefundAdminComponent },
       { path: 'support-agent', component: AdminAgentSupportComponent },
       { path: 'room', component: AdminRoomComponent },
       { path: 'performance-review', component: AdminPerformanceReviewComponent },
-      { path: 'support/list_ticket', component: AdminSupportListComponent },
+      { path: 'support/list_ticket', component: AdminSupportListComponent }
     ]
   },
-  { path: '', component: HomeComponent },
-  { path: 'games/:id', component: GamePageComponent },
-  { path: 'category/:name', component: GameGridComponent },
-  { path: 'games', component: GamesComponent },
+
   { path: 'support-tickets', component: SupportTicketComponent },
   { path: 'room/:roomId', component: RoomChatComponent },
-  { path: 'performance-reviews', component: PerformanceReviewComponent },  // Add this route
- 
+  { path: 'performance-reviews', component: PerformanceReviewComponent },
   { path: 'market', component: MarketListComponent },
   { path: 'market/create', component: MarketCreateComponent },
   { path: 'market/edit/:id', component: MarketEditComponent },
   { path: 'market/:id/bid', component: BidComponent },
-  { path: 'market/:id/bid',component: BidComponent },
-
   { path: 'library', component: LibraryComponent },
-
-
 ];
 
 @NgModule({
@@ -101,5 +113,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-

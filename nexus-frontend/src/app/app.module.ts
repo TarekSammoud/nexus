@@ -12,15 +12,33 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
-// --- Composants jeux, jams, support ---
+import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
+import { WalletDashboardComponent } from './finance/wallet-dashboard/wallet-dashboard.component';
+import { TabsComponent } from './finance/tabs/tabs.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ConnectWalletComponent } from './finance/connect-wallet/connect-wallet.component';
+import { PaymentsComponent } from './finance/tabs/Listes/payments/payments.component';
+import { PurchaseComponent } from './finance/tabs/Listes/purchase/purchase.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MakePaymentComponent } from './finance/make-payment/make-payment.component';
+import { CommonModule } from '@angular/common';
+import { PanierComponent } from './finance/panier/panier/panier.component';
+import { TransferPopupComponent } from './finance/wallet-dashboard/popUps/transfer-popup/transfer-popup.component';
+import { TasksListPopupComponent } from './finance/wallet-dashboard/popUps/tasks-list-popup/tasks-list-popup.component';
+import { RequestRefundComponent } from './finance/wallet-dashboard/popUps/request-refund/request-refund.component';
+import { TransfersComponent } from './finance/tabs/Listes/transfers/transfers.component';
+import { RefundComponent } from './finance/tabs/Listes/refund/refund.component';
+
 import { HomeComponent } from './home/home/home.component';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
 import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipInput, MatChipsModule } from '@angular/material/chips';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -29,7 +47,6 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { GameCategoriesComponent } from './game-categories/game-categories.component';
 import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
-import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesComponent } from './games/games/games.component';
 import { MarketListComponent } from './market/market-list/market-list.component';
 import { MarketCreateComponent } from './market/market-create/market-create.component';
@@ -77,16 +94,35 @@ import { TokenService } from '../app/core/services/user-management/token.service
 import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
 import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 import { LibraryComponent } from './library/library.component';
 
+import { QuillModule } from 'ngx-quill';
+import { WalletsComponent } from './admin-Finance/wallets/wallets.component';
+import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-admin.component';
+import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
+import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
+import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+
+    GamesComponent,
+    WalletDashboardComponent,
+    TabsComponent,
+    ConnectWalletComponent,
+    PaymentsComponent,
+    PurchaseComponent,
+    MakePaymentComponent,
+    PanierComponent,
+    TransferPopupComponent,
+    TasksListPopupComponent,
+    RequestRefundComponent,
+    TransfersComponent,
+    RefundComponent,
     HomeComponent,
 
     GamePageComponent,
@@ -135,27 +171,43 @@ import { LibraryComponent } from './library/library.component';
     LibraryComponent,
 
 
+    WalletsComponent,
+    PaymentsAdminComponent,
+    PurchaseAdminComponent,
+    TransfersAdminComponent,
+    RefundAdminComponent,
     
   ],
   imports: [
     GamesListComponent,
     AdminGameListComponent,
     GameCategoryListComponent,
+    QuillModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
     HttpClientModule,
     CarouselModule,
     BrowserAnimationsModule,
     CommonModule,
+    BrowserAnimationsModule,
+    TabsModule.forRoot(),
+    MatButtonModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    CarouselModule,
     MatChipsModule,
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
     AngularEditorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    GameCategoryListComponent,
+
   ],
   providers: [
     TokenService,
@@ -173,12 +225,9 @@ import { LibraryComponent } from './library/library.component';
     GameKeyListComponent,
     MatFormFieldModule,
     MatDialogModule,
-    GameReviewListComponent
-    
-    
-      
-    
-
+    GameReviewListComponent,
+    GamesListComponent,
+    AdminGameListComponent,
 
   ],
   bootstrap: [AppComponent]

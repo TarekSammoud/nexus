@@ -1,5 +1,6 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import tn.arctic.nexus.entities.FinanceModule.Wallet;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -47,6 +49,15 @@ public class User implements Serializable {
     private Date last_login;
 
 
+    @ManyToMany
+    private List<User> friends;
+
+    private RoleType role;
+
+    @OneToMany
+    private List<ProfilePictures> profilesPictures;
+
+
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
@@ -57,6 +68,10 @@ public class User implements Serializable {
 
     @ManyToMany
     private List<Game> gameLibrary;
+
+    @OneToOne(mappedBy = "user")
+    @JsonManagedReference("wallet-user")
+    private Wallet wallet;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -188,4 +203,29 @@ public class User implements Serializable {
     public void setGameReviews(List<GameReview> gameReviews) {
         this.gameReviews = gameReviews;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", last_login=" + last_login +
+                ", friends=" + friends +
+                ", role=" + role +
+                ", profilesPictures=" + profilesPictures +
+                ", gameLibrary=" + gameLibrary +
+                ", wallet=" + wallet +
+                ", gamekeyLibrary=" + gamekeyLibrary +
+                ", gameReviews=" + gameReviews +
+                '}';
+    }
+
+    // Getters and setters for all properties...
 }

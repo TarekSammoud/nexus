@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 bg-primary text-white p-3">
+      <div class="layout-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="sidebar-content">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" >
+                  <i class="fas fa-home"></i>
+                  MarketPlace
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  (click)="openTransferPopup()">
+                  <i class="fa-solid fa-share"></i>
+                     Transfer Coins
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="openRefunsPopup()" >
+                  <i class="fa-solid fa-coins"></i>
+                        Request a Refund
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="openTasksListPopup()" >
+                  <i class="fa-solid fa-list-check"></i>
+                                    Tasks
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="disconnectWallet()">
+                  <i class="fa-solid fa-unlink"></i>
+                  Disconnect wallet
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        
+        <div class="tabs-container">
+          <tabset [justified]="true">
+            <tab>
+              <ng-template tabHeading>
+                <div class="tab-header">
+                  <i class="fas fa-credit-card"></i>
+                  <span class="custom-tab-heading">Payment</span>
+                </div>
+              </ng-template>
+              <div class="tab-content-wrapper">
+                <app-payments></app-payments>
+              </div>
+            </tab>
+        
+            <tab>
+              <ng-template tabHeading>
+                <div class="tab-header">
+                  <i class="fas fa-shopping-cart"></i>
+                  <span class="custom-tab-heading">Purchase</span>
+                </div>
+              </ng-template>
+              <div class="tab-content-wrapper">
+                <app-purchase></app-purchase>        
+                </div>
+            </tab>
+        
+            <tab>
+              <ng-template tabHeading>
+                <div class="tab-header">
+                  <i class="fas fa-exchange-alt"></i>
+                  <span class="custom-tab-heading">Transfer</span>
+                </div>
+              </ng-template>
+              <div class="tab-content-wrapper">
+                <app-transfers></app-transfers> 
+              </div>
+            </tab>
+        
+            <tab>
+              <ng-template tabHeading>
+                <div class="tab-header">
+                  <i class="fas fa-undo"></i>
+                  <span class="custom-tab-heading">Refund</span>
+                </div>
+              </ng-template>
+              <div class="tab-content-wrapper">
+                <app-refund></app-refund>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

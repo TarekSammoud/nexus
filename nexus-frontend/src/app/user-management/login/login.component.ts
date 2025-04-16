@@ -40,7 +40,7 @@ export class LoginComponent {
 
   // Méthode de connexion avec Facebook
   loginWithFacebook() {
-    FB.login((response: any) => {
+    /*FB.login((response: any) => {
       if (response.authResponse) {
         const accessToken = response.authResponse.accessToken;
         console.log('Facebook Access Token:', accessToken);
@@ -80,7 +80,7 @@ export class LoginComponent {
       } else {
         console.log('Utilisateur a annulé la connexion ou n’a pas autorisé l’app.');
       }
-    }, { scope: 'email,public_profile' });
+    }, { scope: 'email,public_profile' });*/
   }
 
 

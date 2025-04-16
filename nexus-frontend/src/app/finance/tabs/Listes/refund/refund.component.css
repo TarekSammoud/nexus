@@ -1,0 +1,103 @@
+/* refund.component.css */
+/* Card Styles */
+.card {
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+    margin: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(20, 53, 132, 0.1);
+    border-color: #143584;
+}
+
+.card-body {
+    padding: 1.2rem;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.badge-Completed {
+    background-color: rgb(0, 190, 44);
+    color: white;
+    animation: pulseGreen 2s infinite;
+}
+
+.badge-Pending {
+    background-color: rgb(255, 187, 0);
+    color: white;
+    animation: pulsePending 2s infinite;
+}
+
+.badge-Failed {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    animation: pulseFailed 1.5s ease-in-out;
+}
+
+/* Price Tag Styles */
+.price-tag {
+    color: #143584;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    gap: 8px;
+}
+
+.coin-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Purchase ID and Date Info Styles */
+.purchase-id {
+    background-color: #f8f9fa;
+    padding: 4px 12px;
+    border-radius: 15px;
+    color: #143584;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.date-info {
+    color: #666;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.date-info i {
+    color: #143584;
+}
+
+/* Refund Reason Styles */
+.refund-reason {
+    color: #666;
+    font-size: 0.95rem;
+    background-color: #f8f9fa;
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.refund-reason i {
+    color: #143584;
+}
+
+/* Rest of the styles (scrollbar, delete button, modal, animations) remain the same as in the previous components */
+/* ... (copy the rest of the styles from the previous CSS) ... */

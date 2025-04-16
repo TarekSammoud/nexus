@@ -1,0 +1,179 @@
+<!-- payment-dashboard.component.html -->
+<div class="dashboard-container">
+    <!-- Statistics Section -->
+    <div class="statistics-section">
+        <div class="stat-card total-revenue">
+            <div class="stat-icon">
+                <i class="fab fa-ethereum"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Revenue</h3>
+                <p class="stat-value">{{totalRevenue}} ETH</p>
+            </div>
+        </div>
+
+        <div class="stat-card total-coins">
+            <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Coins Purchased</h3>
+                <p class="stat-value">{{totalCoinsPurchased}}</p>
+            </div>
+        </div>
+
+        <div class="stat-card payment-rates">
+            <div class="stat-content">
+                <div class="rate-item success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Success Rate: {{successRate | number:'1.0-1'}}%</span>
+                </div>
+                <div class="rate-item failure">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Failure Rate: {{failureRate | number:'1.0-1'}}%</span>
+                </div>
+                <div class="rate-item pending">
+                    <i class="fas fa-clock"></i>
+                    <span>Pending: {{pendingCount}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payments Section -->
+    <div class="payments-section">
+        <div class="section-header">
+            <h2>Payment History</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="number" 
+                        [(ngModel)]="searchPaymentId" 
+                        (input)="searchById()"
+                        placeholder="Search by Payment ID..."
+                        class="search-input"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollable-container">
+            <div class="payments-container">
+                <div class="payment-card" 
+                     *ngFor="let payment of filteredPayments"
+                     (click)="showUpdateDialog($event, payment)">
+                    <div class="payment-header">
+                        <h3>Payment ID: {{payment.id}}</h3>
+                        <span class="price">
+                            <i class="fab fa-ethereum"></i>
+                            {{payment.price}} ETH
+                        </span>
+                        <span class="coin-amount">
+                            <i class="fas fa-coins"></i>
+                            {{payment.coinAmount}} coins
+                        </span>
+                    </div>
+
+                    <div class="payment-body">
+                        <div class="status-info">
+                            <label>Status:</label>
+                            <span class="badge" [ngClass]="'badge-' + payment.status">
+                                <i class="fas" [ngClass]="{
+                                    'fa-check': payment.status === 'Completed',
+                                    'fa-clock': payment.status === 'Pending',
+                                    'fa-times': payment.status === 'Failed'
+                                }"></i>
+                                {{payment.status}}
+                            </span>
+                        </div>
+
+                        <div class="payment-dates">
+                            <div class="date-info">
+                                <i class="far fa-calendar-plus"></i>
+                                <span>Created: {{payment.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                            <div class="date-info">
+                                <i class="far fa-calendar-check"></i>
+                                <span>Updated: {{payment.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-actions">
+                        <button class="delete-btn" 
+                                *ngIf="payment.id" 
+                                (click)="showDeleteConfirmation(payment.id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="delete-confirmation" *ngIf="deleteConfirmation.show">
+    <div class="confirmation-dialog">
+        <h3>Delete Payment</h3>
+        <p>Are you sure you want to delete this payment?</p>
+        <div class="confirmation-actions">
+            <button class="confirm-btn" 
+                    (click)="deletePayment(deleteConfirmation.paymentId!)">
+                Delete
+            </button>
+            <button class="cancel-btn" 
+                    (click)="hideDeleteConfirmation()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Update Dialog -->
+<div class="update-dialog" *ngIf="updateDialogData.show">
+    <div class="dialog-content">
+        <h3>Update Payment Status</h3>
+        <form (ngSubmit)="updatePayment()" #updateForm="ngForm">
+            <div class="form-group">
+                <label>Payment Status</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Completed"
+                               [(ngModel)]="updateDialogData.payment!.status">
+                        <i class="fas fa-check"></i> Completed
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Pending"
+                               [(ngModel)]="updateDialogData.payment!.status">
+                        <i class="fas fa-clock"></i> Pending
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" 
+                               name="status" 
+                               value="Failed"
+                               [(ngModel)]="updateDialogData.payment!.status">
+                        <i class="fas fa-times"></i> Failed
+                    </label>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button type="submit" 
+                        class="update-btn" 
+                        [disabled]="!updateForm.form.valid">
+                    Update
+                </button>
+                <button type="button" 
+                        class="cancel-btn" 
+                        (click)="hideUpdateDialog()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
