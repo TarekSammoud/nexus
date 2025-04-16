@@ -174,7 +174,6 @@
 			<artifactId>restfb</artifactId>
 			<version>2.26.0</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>

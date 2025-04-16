@@ -1,0 +1,163 @@
+.balance-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  perspective: 1000px;
+}
+
+.balance-box {
+  width: 340px;
+  height: 120px;
+  background: linear-gradient(145deg, #143584, #0f2961);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(20, 53, 132, 0.2),
+              0 6px 6px rgba(20, 53, 132, 0.1);
+}
+
+/* Hover Effects */
+.balance-box:hover {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 0 15px 30px rgba(20, 53, 132, 0.3),
+              0 10px 10px rgba(20, 53, 132, 0.2);
+}
+
+
+
+@keyframes glowRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.box-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+  z-index: 1;
+}
+
+/* Add Coins Button */
+.add-coins {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-coins svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  transition: all 0.3s ease;
+}
+
+.add-coins:hover svg {
+  fill: #4CAF50;
+  transform: rotate(180deg) scale(1.2);
+}
+
+/* Balance Info */
+.balance-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: countUp 1s ease-out;
+}
+
+.token-image {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  animation: float 3s ease-in-out infinite;
+}
+
+.balance-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Animations */
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .balance-box {
+    width: 300px;
+    height: 130px;
+  }
+
+  .balance-amount {
+    font-size: 2rem;
+  }
+
+  .token-image {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Optional: Add a shine effect on hover */
+.balance-box::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.balance-box:hover::after {
+  opacity: 1;
+  animation: shine 1.5s ease-out;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}

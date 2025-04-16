@@ -1,0 +1,187 @@
+.stepper-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+}
+
+/* Stepper Customization */
+::ng-deep .mat-stepper-vertical {
+  background: transparent !important;
+}
+
+::ng-deep .mat-vertical-stepper-header {
+  padding: 24px 24px !important;
+  background: transparent !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #143584 !important;
+  color: white !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #0f2961 !important;
+  transform: scale(1.2);
+}
+
+/* Step Label Styling */
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.step-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #143584;
+  opacity: 0.8;
+}
+
+.step-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #143584;
+}
+
+/* Content Box Styling */
+.content-box {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(20, 53, 132, 0.1);
+  margin: 1rem 0;
+}
+
+.text-section {
+  max-width: 600px;
+}
+
+.text-section h3 {
+  color: #143584;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.text-section p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Image Styling */
+.feature-image {
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+.metamask {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Button Styling */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.next-btn {
+  background: #143584 !important;
+  color: white !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.next-btn:hover {
+  background: #0f2961 !important;
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  color: #143584 !important;
+  border: 1px solid #143584 !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+}
+
+.reset-btn {
+  color: #666 !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+}
+
+/* Wallet Info Styling */
+.wallet-info {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  font-weight: 500;
+  color: #143584;
+}
+
+.value {
+  color: #666;
+  word-break: break-all;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-box {
+      grid-template-columns: 1fr;
+  }
+
+  .feature-image {
+      max-width: 200px;
+      margin: 0 auto;
+  }
+
+  .button-group {
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  .button-group button {
+      width: 100%;
+  }
+}
+
+/* remove link text decoration */
+a, 
+a:hover, 
+a:visited, 
+a:active {
+  text-decoration: none;
+}

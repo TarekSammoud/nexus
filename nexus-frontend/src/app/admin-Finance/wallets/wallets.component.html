@@ -1,0 +1,146 @@
+<!-- wallet-dashboard.component.html -->
+<div class="dashboard-container">
+    <!-- Fixed Statistics Section -->
+    <div class="statistics-section">
+      <div class="stat-card total-wallets">
+        <div class="stat-icon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="stat-content">
+          <h3>Total Wallets</h3>
+          <p class="stat-value">{{totalWallets}}</p>
+        </div>
+      </div>
+  
+      <div class="stat-card total-coins">
+        <div class="stat-icon">
+          <i class="fas fa-coins"></i>
+
+        </div>
+        <div class="stat-content">
+          <h3>Total Coins</h3>
+          <p class="stat-value">{{totalCoins}}</p>
+        </div>
+      </div>
+  
+      <div class="stat-card average-balance">
+        <div class="stat-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-content">
+          <h3>Average Balance</h3>
+          <p class="stat-value">{{averageBalance}}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Scrollable Wallets Section -->
+    <div class="wallets-section">
+      <div class="section-header">
+        <h2>Wallet List</h2>
+        <!-- Search Bar -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input 
+              type="number" 
+              [(ngModel)]="searchWalletId" 
+              (input)="searchById()"
+              placeholder="Search by Wallet ID..."
+              class="search-input"
+            >
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scrollable Container -->
+      <div class="scrollable-container">
+        <div class="wallets-container">
+          <!-- Wallet Cards with ngFor -->
+          <div class="wallet-card" 
+               *ngFor="let wallet of filteredWallets" 
+               (click)="showUpdateDialog($event, wallet)">
+            <div class="wallet-header">
+              <h3>Wallet ID: {{ wallet.id }}</h3>
+              <span class="balance">
+                <img src="../../assets/img/token.png" alt="Coin" class="coin-icon-small">
+                {{ wallet.coinBalance }} coins
+              </span>
+            </div>
+            
+            <div class="wallet-body">
+              <div class="wallet-info">
+                <label>Public Key:</label>
+                <p class="metamask-key">{{ wallet.metamaskPublicKey }}</p>
+              </div>
+              
+              <div class="wallet-dates">
+                <div class="date-info">
+                  <i class="far fa-calendar-plus"></i>
+                  <span>Created: {{ wallet.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+                </div>
+                <div class="date-info">
+                  <i class="far fa-calendar-check"></i>
+                  <span>Updated: {{ wallet.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="wallet-actions">
+              <button class="delete-btn" 
+                      *ngIf="wallet.id !== undefined" 
+                      (click)="showDeleteConfirmation(wallet.id)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="delete-confirmation" *ngIf="deleteConfirmation.show">
+    <div class="confirmation-dialog">
+        <h3>Delete Wallet</h3>
+        <p>Are you sure you want to delete this wallet?</p>
+        <div class="confirmation-actions">
+            <button class="confirm-btn" (click)="deleteWallet(deleteConfirmation.walletId!)">Delete</button>
+            <button class="cancel-btn" (click)="hideDeleteConfirmation()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Update Dialog -->
+<div class="update-dialog" *ngIf="updateDialogData.show">
+    <div class="dialog-content">
+        <h3>Update Wallet ID: {{ updateDialogData.wallet?.id }}</h3>
+        <form (ngSubmit)="updateWallet()" #updateForm="ngForm">
+            <div class="form-group">
+                <label for="coinBalance">Coin Balance</label>
+                <input 
+                    type="number" 
+                    id="coinBalance"
+                    name="coinBalance"
+                    [(ngModel)]="updateDialogData.wallet!.coinBalance"
+                    required
+                    class="form-input"
+                >
+            </div>
+            <div class="form-group">
+                <label for="metamaskKey">Metamask Public Key</label>
+                <input 
+                    type="text" 
+                    id="metamaskKey"
+                    name="metamaskKey"
+                    [(ngModel)]="updateDialogData.wallet!.metamaskPublicKey"
+                    required
+                    class="form-input"
+                >
+            </div>
+            <div class="dialog-actions">
+                <button type="submit" class="update-btn" [disabled]="!updateForm.form.valid">Update</button>
+                <button type="button" class="cancel-btn" (click)="hideUpdateDialog()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

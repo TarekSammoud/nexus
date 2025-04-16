@@ -1,0 +1,264 @@
+/* Price Indicator Styles */
+.price-indicator {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  
+  .price-content {
+    background: linear-gradient(135deg, #143584, #0f2961);
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 8px 20px rgba(20, 53, 132, 0.2);
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  .price-icon img {
+    width: 40px;
+    height: 40px;
+    animation: pulse 2s infinite;
+  }
+  
+  .price-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .price-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .price-value {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .price-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4CAF50;
+    font-weight: 600;
+  }
+  
+  .price-trend i {
+    animation: bounce 2s infinite;
+  }
+  
+  /* Store Grid Layout */
+  .store {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Item Styles */
+  .item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .item-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .token-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .token-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(20, 53, 132, 0.2), transparent 70%);
+    animation: glow 2s infinite;
+  }
+  
+  .diamond-count {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #143584;
+    margin: 0;
+  }
+  
+  /* Button Styles */
+  .buy-button {
+    background: #143584;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: auto;
+    min-width: 200px;
+    justify-content: center;
+  }
+  
+  .buy-button:hover {
+    background: #0f2961;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(20, 53, 132, 0.3);
+  }
+  
+  .ethicon {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
+  }
+  
+  /* Animations */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  @keyframes glow {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+  }
+  
+  /* Hover Effects */
+  .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(20, 53, 132, 0.15);
+  }
+  
+  .item:hover .token-image img {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .store {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .store {
+      grid-template-columns: 1fr;
+    }
+  
+    .price-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+    }
+  
+    .price-value {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Loading State */
+  .item.loading {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .item.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: loading 1.5s infinite;
+  }
+  
+  @keyframes loading {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+
+
+
+  /*
+  /* Add these CSS classes to your existing styles */
+.price-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .trend-up {
+    color: #4CAF50;
+  }
+  
+  .trend-down {
+    color: #FF4444;
+  }
+  
+  .price-trend i {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }

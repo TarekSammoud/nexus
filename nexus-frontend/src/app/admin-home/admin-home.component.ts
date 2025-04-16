@@ -24,6 +24,10 @@ export class AdminHomeComponent {
   constructor(private _router: Router) { }
   gamesDropdownOpen = false;   // State for games dropdown
   supportDropdownOpen = false; // State for support dropdown
+  dropdownOpen = false;
+  walletDropdownOpen = false;  // New property for wallet dropdown
+  isCollapsed = false;  // Track whether sidebar is collapsed
+
 
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
@@ -33,17 +37,17 @@ export class AdminHomeComponent {
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
 
+  toggleWalletDropdown() {  // New method for wallet dropdown
+    this.walletDropdownOpen = !this.walletDropdownOpen;
+  }
+
   navigateToGamesList(){
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
   }
 
-  isCollapsed = false;  // Track whether sidebar is collapsed
 
   // Toggle the sidebar state
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
-
-
-
 }

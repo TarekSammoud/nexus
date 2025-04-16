@@ -51,6 +51,8 @@ html, body {
   
   
   
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -74,6 +76,7 @@ html, body { height: 100%; }
     angular-editor-toolbar button i {
       font-family: FontAwesome !important;
       color: black !important;
+<<<<<<< HEAD
       }
 
         /* Floating Next Button */
@@ -139,3 +142,7 @@ select option {
 select:focus {
   outline: none; /* Optional: remove focus outline */
 }
+    
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
