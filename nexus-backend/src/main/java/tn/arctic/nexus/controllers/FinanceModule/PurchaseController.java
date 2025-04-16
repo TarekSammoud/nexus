@@ -1,10 +1,12 @@
 package tn.arctic.nexus.controllers.FinanceModule;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.FinanceModule.Purchase;
+import tn.arctic.nexus.entities.FinanceModule.Transfer;
 import tn.arctic.nexus.services.FinanceModule.PurchaseService;
 
 import java.util.List;
@@ -44,5 +46,28 @@ public class PurchaseController {
             return ResponseEntity.ok("Deleted purchase");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Purchase not found"); // Return 404 with message
+    }
+
+    @PostMapping("/create-affect/{metamaskPublicKey}")
+    public ResponseEntity<Purchase> createAndAffectPurchase(
+            @PathVariable String metamaskPublicKey,
+            @RequestBody Purchase purchase) {
+        try {
+            Purchase savedTPurchase = purchaseService.CreateAffectPurchaseToWallet(metamaskPublicKey, purchase);
+            return ResponseEntity.ok(savedTPurchase);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    @PostMapping("/creates-affect/{metamaskPublicKey}")
+    public ResponseEntity<List<Purchase>> createAndAffectPurchases(
+            @PathVariable String metamaskPublicKey,
+            @RequestBody List<Purchase> purchases) {
+        try {
+            List<Purchase> savedTPurchases = purchaseService.CreateAffectPurchasesToWallet(metamaskPublicKey, purchases);
+            return ResponseEntity.ok(savedTPurchases);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

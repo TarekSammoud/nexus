@@ -7,4 +7,5 @@ import tn.arctic.nexus.entities.FinanceModule.Purchase;
 
 @Repository
 public interface IPurchaseRepositpry  extends JpaRepository<Purchase, Long> {
+
 }
