@@ -14,7 +14,7 @@ export class EntryFormComponent implements OnInit {
   entry: Partial<Entry> = {
     nameEntry: '',
     descriptionEntry: '',
-    user: { id: 1 },
+ //   user: { id: 1 },
     jam: { id: 0 }
   };
 

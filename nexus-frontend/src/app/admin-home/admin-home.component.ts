@@ -24,11 +24,17 @@ export class AdminHomeComponent {
   constructor(private _router: Router) { }
   gamesDropdownOpen = false;   // State for games dropdown
   supportDropdownOpen = false; // State for support dropdown
+  jamDropdownOpen = false;
+
 
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
   }
 
+  toggleJamDropdown() {
+    this.jamDropdownOpen = !this.jamDropdownOpen;
+  }
+  
   toggleSupportDropdown(){
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
