@@ -22,6 +22,7 @@ import { GameCategoryService } from '../core/services/gameCategory/game-category
 export class GameCategoryListComponent implements OnInit {
 
   totalCategories: number = 0;
+  
   mostPopularCategory: string = '';
   latestCategoryDate: string = '';
   latestEditedCategory: string = '';  
