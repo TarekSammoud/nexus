@@ -2,6 +2,7 @@ package tn.arctic.nexus.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -43,6 +44,7 @@ public class Like
 
     @ManyToOne
     @JoinColumn(name = "publication_id", nullable = false)
+    @JsonIgnoreProperties({"commentaires", "likes", "user", "category", "reports"})
     private Publication publication;
 
 }

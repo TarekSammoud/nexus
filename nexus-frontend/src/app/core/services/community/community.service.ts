@@ -47,7 +47,14 @@ export class CommunityService {
   
 
   getPublicationsVisibles(): Observable<Publication[]> {
-    return this.http.get<Publication[]>(`${this.baseUrl}/visibles`);
+    console.log('➡️ Requête envoyée vers :', `${this.baseUrl}/visibles`);
+    return this.http.get<Publication[]>(`${this.baseUrl}/visibles`).pipe(
+      tap((data) => console.log('✅ Données reçues dans getPublicationsVisibles:', data)),
+      catchError((error) => {
+        console.error('❌ Erreur dans getPublicationsVisibles:', error);
+        return throwError(() => error);
+      })
+    );
   }
   
 

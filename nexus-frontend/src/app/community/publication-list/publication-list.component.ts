@@ -36,8 +36,9 @@ export class PublicationListComponent implements OnInit {
   loadPublications(): void {
     this.communityService.getPublicationsVisibles().subscribe({
       next: (data: Publication[]) => {
+        console.log('loadPublications appelé');
         this.publications = data;
-  
+        console.log('Publications reçues : ', data);
         this.publications.forEach(pub => {
           this.showCommentForm[pub.id] = false;
           this.newCommentContent[pub.id] = '';

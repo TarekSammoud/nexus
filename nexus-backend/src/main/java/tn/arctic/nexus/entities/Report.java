@@ -61,6 +61,7 @@ public class Report {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "thread_id", nullable = false)
     @JsonIgnoreProperties({"commentaires", "likes", "user", "category", "reports"})
+
     private Publication publication;
 
 

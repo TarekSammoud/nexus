@@ -6,13 +6,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 
-@Service
+@Service("communityemail")
 public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
-
-
 
     public void sendSimpleEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();

@@ -1,5 +1,7 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +19,18 @@ public class Commentaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     @ManyToOne
     @JoinColumn(name = "publication_id", nullable = false)
+    @JsonBackReference("publication-commentaire")
     private Publication publication;
+
 
     @Getter
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({
+            "publications", "likes", "commentaires", "password", "email", "roles" // tout ce que tu veux ignorer
+    })
     private User user;
 
     @Getter

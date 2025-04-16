@@ -48,9 +48,10 @@ public class Publication {
     })
     private User user;
 
-    @Getter
     @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("publication-commentaire")
     private List<Commentaire> commentaires = new ArrayList<>();
+
 
 
 

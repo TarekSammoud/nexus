@@ -66,7 +66,7 @@ export class ReportListComponent implements OnInit {
             modalInstance.hide();
           }
   
-          this.toastr.success('🗑️ Signalement supprimé.');
+         this.toastr.success('🗑️ Signalement supprimé.');
           this.selectedReportIdToDelete = null;
         },
         error: () => this.toastr.error('Erreur lors de la suppression.')

@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { QRCodeModule } from 'angularx-qrcode';
 
 // Angular Material
@@ -34,11 +33,7 @@ import { HomeComponent } from './home/home/home.component';
 
 // Games & Game Categories
 import { GamesComponent } from './games/games/games.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
-import { GamesComponent } from './games/games/games.component';
 import { GamesCarouselComponent } from './games/games-carousel/games-carousel.component';
 import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
 import { GamePageComponent } from './games/game-page/game-page.component';
@@ -51,15 +46,9 @@ import { GameReviewListComponent } from './game-review-list/game-review-list.com
 
 // Jam Components
 import { JamsComponent } from './jams/jams/jams.component';
-import { GamePageComponent } from './games/game-page/game-page.component';
-import { CreateGameComponent } from './games/create-game/create-game.component';
-import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
-import { GameGridComponent } from './games/game-grid/game-grid.component';
 
 import { PublicationListComponent } from './community/publication-list/publication-list.component';
 import { PublicationFormComponent } from './community/publication-form/publication-form.component';
-
-import { HomeComponent } from './home/home/home.component';
 
 import { JamsListComponent } from './jams/jams-list/jams-list.component';
 import { JamDetailsComponent } from './jams/jam-details/jam-details.component';
@@ -126,8 +115,6 @@ import { LibraryComponent } from './library/library.component';
 
 import { RouterModule } from '@angular/router';
 
-
-import { PublicationFormComponent } from './community/publication-form/publication-form.component';
 import { CategoryListComponent } from './community/category-list/category-list.component';
 import { CategoryFormComponent } from './community/category-form/category-form.component';
 import { ReportListComponent } from './community/report-list/report-list.component';
@@ -139,6 +126,7 @@ import { SondageAdminComponent } from './community/sondage/sondage-admin/sondage
 import { StreamerManagementComponent } from './community/sondage/streamer-management/streamer-management.component';
 import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
 import { PublicationStatsComponent } from './community/publication-stats/publication-stats.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -166,8 +154,8 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
     EntryMediaFormComponent,
     EntryRatingFormComponent,
     VipJamsListComponent,
-   // ReportListComponent,
-  //  ReportFormComponent,
+   ReportListComponent,
+  ReportFormComponent,
     SondageCreateComponent,
     SondageListComponent,
     SondageLiveComponent,
@@ -183,6 +171,7 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
     AdminJamRatingsListComponent,
     VipJamFormComponent,
 
+    PublicationListComponent,
     AdminHomeComponent,
     HomeComponent,
     LoginComponent,
@@ -238,8 +227,6 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
     AngularEditorModule,
     BrowserAnimationsModule,
     NgChartsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
