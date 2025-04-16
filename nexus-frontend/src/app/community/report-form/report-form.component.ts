@@ -23,7 +23,7 @@ export class ReportFormComponent implements OnInit {
     public router: Router,
     private reportService: ReportService,
     private communityService: CommunityService,
-    private toastr: ToastrService
+   private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {

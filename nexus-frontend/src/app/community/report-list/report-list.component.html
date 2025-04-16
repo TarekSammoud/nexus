@@ -20,11 +20,11 @@
           <td>{{ report.id }}</td>
           <td>
             <span class="text-warning fw-bold">
-              {{ report.user?.firstName }}
+              {{ report.user.firstName }}
             </span>
           </td>
           <td>
-            {{ report.publication?.title || (report.publication?.content | slice: 0:50) + '...' }}
+            {{ report.publication.title || (report.publication.content | slice: 0:50) + '...' }}
           </td>
           <td class="text-warning fw-bold">{{ report.reason }}</td>
           <td>
