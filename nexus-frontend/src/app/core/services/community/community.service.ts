@@ -50,6 +50,15 @@ export class CommunityService {
     return this.http.get<Publication[]>(`${this.baseUrl}/visibles`);
   }
   
+
+  getPublicationStatsByCategory(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(
+      `${this.baseUrl}/stats/category`
+    );
+  }
+  
+  
+  
   
 
 

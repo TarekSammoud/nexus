@@ -86,3 +86,53 @@
   background-color: #ff6b6b;
   transform: scale(1.05);
 }
+
+/* Général */
+.community-categories-container {
+  background-color: #1e1e2f;
+  border-radius: 12px;
+  color: #ffffff;
+}
+
+.text-pink {
+  color: #ea7a9a !important;
+}
+
+.title-glow {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(234, 122, 154, 0.6);
+}
+
+/* Boutons */
+.btn-add {
+  background-color: #ea7a9a;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: #d96686;
+}
+
+/* Tableau */
+.category-table th,
+.category-table td {
+  vertical-align: middle;
+}
+
+.chart-card {
+  background-color: #252542;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.chart-card:hover {
+  transform: scale(1.02);
+}
+
+/* ChartJS Canvas */
+canvas {
+  border-radius: 16px;
+  background-color: #1f1f1f;
+}

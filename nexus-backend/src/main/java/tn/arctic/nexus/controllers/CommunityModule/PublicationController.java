@@ -90,4 +90,10 @@ public class PublicationController {
         }
     }
 
+
+    @GetMapping("/stats/category")
+    public ResponseEntity<Map<String, Long>> getStatsByCategory() {
+        return ResponseEntity.ok(publicationService.countPublicationsByCategory());
+    }
+
 }

@@ -19,6 +19,7 @@ export class PublicationListComponent implements OnInit {
   commentsByPublication: { [key: number]: Commentaire[] } = {};
   likeCounts: { [key: number]: number } = {};
   userLiked: { [key: number]: boolean } = {};
+  searchTerm: string = '';
   userId: number = 5;
 
   constructor(
@@ -52,6 +53,7 @@ export class PublicationListComponent implements OnInit {
   
   
   
+
 
   loadCommentaires(pubId: number): void {
     this.commentaireService.getCommentairesByPublicationId(pubId).subscribe({
@@ -182,6 +184,21 @@ export class PublicationListComponent implements OnInit {
 
 
 
+  
+
+
+  get filteredPublications(): Publication[] {
+    if (!this.searchTerm.trim()) return this.publications;
+  
+    const term = this.searchTerm.toLowerCase();
+    return this.publications.filter(pub =>
+      pub.title?.toLowerCase().includes(term) ||
+      pub.content?.toLowerCase().includes(term) ||
+      pub.category?.name?.toLowerCase().includes(term) ||
+      pub.user?.firstName?.toLowerCase().includes(term) ||
+      pub.user?.lastName?.toLowerCase().includes(term)
+    );
+  }
   
 
 }

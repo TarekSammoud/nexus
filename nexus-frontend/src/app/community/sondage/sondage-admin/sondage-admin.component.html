@@ -11,6 +11,7 @@
           <th>#</th>
           <th>Question</th>
           <th>Streamer</th>
+          <th>Date de fin</th>
           <th>Statut</th>
           <th>Actions</th>
         </tr>
@@ -23,25 +24,48 @@
             🎙️ <strong class="text-info">{{ sondage.streamer?.name }}</strong><br />
             <span class="text-muted small">({{ sondage.streamer?.platform }})</span>
           </td>
+
+          <!-- 🗓️ Date de fin -->
           <td>
-            <span class="badge rounded-pill fs-6 px-3 py-2"
+            <div class="end-date-box">
+              <input
+                type="datetime-local"
+                class="form-control form-control-sm date-input"
+                [(ngModel)]="sondage.endDate"
+                [disabled]="sondage.approved"
+              />
+            </div>
+          </td>
+          
+          <!-- ✅ Statut -->
+          <td>
+            <span
+              class="badge rounded-pill fs-6 px-3 py-2"
               [ngClass]="sondage.approved ? 'bg-success' : 'bg-warning text-dark'">
               {{ sondage.approved ? '✅ Approuvé' : '🕓 En attente' }}
             </span>
           </td>
+
+          <!-- 🛠️ Actions -->
           <td>
-            <button *ngIf="!sondage.approved"
+            <button
               class="btn btn-approve me-2"
-              (click)="approuverSondage(sondage.id!)">
+              *ngIf="!sondage.approved"
+              (click)="approuverSondage(sondage.id!, sondage.endDate!)">
               ✅ Approuver
             </button>
-            <button class="btn btn-delete" (click)="supprimerSondage(sondage.id!)">
+            <button
+              class="btn btn-delete"
+              (click)="supprimerSondage(sondage.id!)">
               🗑️ Supprimer
             </button>
           </td>
         </tr>
+
         <tr *ngIf="sondages.length === 0">
-          <td colspan="5" class="text-center text-muted py-4">Aucun sondage trouvé.</td>
+          <td colspan="6" class="text-center text-muted py-4">
+            Aucun sondage trouvé.
+          </td>
         </tr>
       </tbody>
     </table>
