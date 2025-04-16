@@ -10,7 +10,7 @@
       <div class="cart-item" *ngFor="let item of cartItems; let i = index" 
            [ngStyle]="{'animation-delay': i * 0.1 + 's'}">
         <div class="item-image">
-          <img [src]="item.imageUrl" [alt]="item.name">
+          <img [src]="item.coverPicture" [alt]="item.name">
         </div>
         <div class="item-details">
           <h3>{{ item.name }}</h3>

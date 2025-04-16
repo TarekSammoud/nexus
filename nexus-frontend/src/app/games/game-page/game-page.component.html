@@ -203,8 +203,8 @@
       <div class="d-flex flex-column align-items-center gap-2">
         <button class="btn action-button" (click)="addGameToLibrary(game.id)" *ngIf="!inLibrary">Buy Now</button>
         <button class="btn action-button disabled"  *ngIf="inLibrary">In Library</button>
-
-        <button class="btn action-button-secondary"  *ngIf="!inLibrary">Add to Cart</button>
+  
+        <button class="btn action-button-secondary" (click)="addGameToCart(game)" *ngIf="!inLibrary" >Add to Cart</button>
         <button class="btn action-button-secondary"  *ngIf="inLibrary" >Download</button>
 
         

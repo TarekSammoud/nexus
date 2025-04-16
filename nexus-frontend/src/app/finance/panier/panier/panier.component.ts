@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Game } from 'src/app/core/entities/game/game';
 import { CartItem, PanierService } from 'src/services/finance/panier.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CartItem, PanierService } from 'src/services/finance/panier.service';
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent {
-  cartItems: CartItem[] = [];
+  cartItems: Game[] = [];
   total: number = 0;
 
   constructor(private panierService: PanierService) {}

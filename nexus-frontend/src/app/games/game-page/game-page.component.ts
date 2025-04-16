@@ -7,6 +7,7 @@ import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { GameReview } from 'src/app/core/entities/game/game-review';
 import { GameService } from 'src/app/core/services/game/game.service';
 import { SpamCheckService } from 'src/app/core/services/spam-check.service';
+import { PanierService } from 'src/services/finance/panier.service';
 declare var bootstrap: any;
 @Component({
   selector: 'app-game-page',
@@ -21,7 +22,11 @@ export class GamePageComponent implements OnInit {
   ngOnInit(): void {
    
   }
-
+  addGameToCart(item: Game) {
+    this.panierService.addItemToCart(item);
+    this._router.navigate(['/']);
+    
+  }
   
 groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
   const result: GameReview[][] = [];
@@ -34,7 +39,7 @@ groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
 reviewForm: FormGroup;
 inLibrary = false ; 
 
-  constructor(private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+  constructor(private panierService: PanierService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
 
     if (gameId) {
