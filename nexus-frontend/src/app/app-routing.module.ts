@@ -74,6 +74,7 @@ const routes: Routes = [
   { path: 'games', component: GamesComponent },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },
+  { path: 'library', component:LibraryComponent},
 
   // 🎤 Support
   { path: 'support-tickets', component: SupportTicketComponent },
