@@ -104,6 +104,7 @@ import { MarketDetailsComponent } from './market/market-details/market-details.c
 import { TokenService } from './core/services/user-management/token.service';
 import { JwtInterceptor } from './core/services/user-management/jwt.interceptor';
 import { AuthInterceptor } from './core/services/user-management/auth.interceptor';
+import { LibraryComponent } from './library/library.component';
 
 
 @NgModule({
@@ -178,6 +179,10 @@ import { AuthInterceptor } from './core/services/user-management/auth.intercepto
     MarketEditComponent,
     BidComponent,
     MarketDetailsComponent,
+    LibraryComponent,
+
+
+    
   ],
   imports: [
     BrowserModule,

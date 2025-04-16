@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Game } from '../../entities/game/game';
 import { GameReview } from '../../entities/game/game-review';
@@ -57,5 +57,20 @@ export class GameService {
 
   deleteGame(game: Game): Observable<void> {
     return this.http.delete<void>(`${this.gamesUrl}/delete/${game.id}`);
+  }
+
+  addGameToLibrary(gameId: number): Observable<any> {
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.post(`${this.gamesUrl}/library/add/${gameId}`, null, { headers });
+  }
+
+  getUserGameLibrary(): Observable<Game[]> {
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+
+    return this.http.get<Game[]>(`${this.gamesUrl}/library`, { headers });
   }
 }
