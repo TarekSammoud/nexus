@@ -1,9 +1,12 @@
 package tn.arctic.nexus.services.FinanceModule;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.FinanceModule.Purchase;
+import tn.arctic.nexus.entities.FinanceModule.Wallet;
 import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepositpry;
+import tn.arctic.nexus.repositories.FinanceModule.IWalletRepository;
 
 import java.util.List;
 
@@ -11,6 +14,8 @@ import java.util.List;
 public class PurchaseService implements IPurchaseService {
     @Autowired
     IPurchaseRepositpry purchaseRepository;
+    @Autowired
+    IWalletRepository walletRepository;
 
     @Override
     public List<Purchase> getAllPurchases() {
@@ -40,6 +45,34 @@ public class PurchaseService implements IPurchaseService {
         } else {
             return false;
         }
+    }
+ /// one purchase
+    @Override
+    public Purchase CreateAffectPurchaseToWallet(String metamaskPublicKey, Purchase purchase) {
+        // Retrieve wallet
+        Wallet wallet = walletRepository.findByMetamaskPublicKey(metamaskPublicKey);
+
+        if (wallet == null) {
+            throw new EntityNotFoundException("Wallet with public key " + metamaskPublicKey + " not found.");
+        }
+        // Link wallet and save purchase
+        purchase.setWallet(wallet);
+        return purchaseRepository.save(purchase);
+    }
+
+    /// many purchases
+    @Override
+    public List<Purchase> CreateAffectPurchasesToWallet(String metamaskPublicKey, List<Purchase> purchases) {
+        Wallet wallet = walletRepository.findByMetamaskPublicKey(metamaskPublicKey);
+        if (wallet == null) {
+            throw new EntityNotFoundException("Wallet with public key " + metamaskPublicKey + " not found.");
+        }
+        for (Purchase purchase : purchases) {
+            purchase.setWallet(wallet);
+        }
+        return purchaseRepository.saveAll(purchases);
+
+
     }
 
 

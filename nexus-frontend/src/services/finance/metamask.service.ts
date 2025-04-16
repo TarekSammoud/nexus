@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { ethers } from 'ethers';
 import { PaymentService } from './Crud/payment.service';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
+import { productType, Purchase } from 'src/app/core/entities/finance/purchase.model';
+import { PurchaseService } from './Crud/purchase.service';
+import { Game } from 'src/app/core/entities/game/game';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +39,7 @@ export class MetamaskService {
   errorMessage: string = '';
 
 
-  constructor(private router: Router,private paymentService : PaymentService) {}
+  constructor(private router: Router,private paymentService : PaymentService,private purchaseService: PurchaseService) {}
 
 
 
@@ -287,14 +290,77 @@ async TransfertCoins(_to:String,amount:number) {
 
   }
 }
-async SpendCoins(amount:number) {
+
+purchases: Purchase[] = [];
+purchase: Purchase = {
+  productType: productType.GAME,
+  productId:0,
+  price: 0,
+}
+
+async SpendCoinsFromCart(amount:number,games: Game[]) {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
-    console.log('Transaction sent (Spend Coins):', tx.hash);
+    console.log('Transaction sent (Purchase Coins):', tx.hash);
+    for (const game of games) {
+      this.purchase.productId = game.id;
+      this.purchase.price = game.price;
+      this.purchases.push(this.purchase);
+    }
+
+    this.purchaseService.createAndAffectPurchases(this.userAddress,this.purchases).subscribe({
+      next: (response) => {
+        console.log('Purchases created:', response);
+        // reset form
+        this.purchases = [];
+      },
+      error: (err) => {
+        console.error('Error creating Purchase:', err);
+        alert('Failed to create Purchase.');
+      }
+    }); 
 
     await tx.wait();
-    console.log('Transaction mined (transfert):', tx.hash);
+    console.log('Transaction mined (spend):', tx.hash);
+    console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
+
+  } catch (error: any) {
+    if(error.reason?.includes('Not enough virtual coins')){
+      alert('Not enough virtual coins to spend');
+   
+    }
+    else {
+      console.error('Error Spend value:', error.message || error);
+      this.errorMessage = error.message || 'Failed to Spend value.';
+      console.log(this.errorMessage);
+    }
+  }
+}
+
+async SpendCoinsSingleGme(amount:number,game: Game) {
+  try {
+    if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
+    const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
+    console.log('Transaction sent (Purchase Coins):', tx.hash);
+      this.purchase.productId = game.id;
+      this.purchase.price = game.price;
+
+
+    this.purchaseService.createAndAffectPurchase(this.userAddress,this.purchase).subscribe({
+      next: (response) => {
+        console.log('1 Purchase created:', response);
+        // reset form
+        this.purchases = [];
+      },
+      error: (err) => {
+        console.error('Error creating 1 Purchase:', err);
+        alert('Failed to create 1 Purchase.');
+      }
+    }); 
+
+    await tx.wait();
+    console.log('Transaction mined (spend):', tx.hash);
     console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
 
   } catch (error: any) {

@@ -7,6 +7,7 @@ import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { GameReview } from 'src/app/core/entities/game/game-review';
 import { GameService } from 'src/app/core/services/game/game.service';
 import { SpamCheckService } from 'src/app/core/services/spam-check.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
 import { PanierService } from 'src/services/finance/panier.service';
 declare var bootstrap: any;
 @Component({
@@ -20,11 +21,11 @@ export class GamePageComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+   this.metamaskService.connectWallet();
   }
   addGameToCart(item: Game) {
     this.panierService.addItemToCart(item);
-    this._router.navigate(['/']);
+    this._router.navigate(['/category',item.categories[0].name]);
     
   }
   
@@ -39,7 +40,7 @@ groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
 reviewForm: FormGroup;
 inLibrary = false ; 
 
-  constructor(private panierService: PanierService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+  constructor(private panierService: PanierService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute,private metamaskService: MetamaskService) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
 
     if (gameId) {
@@ -178,8 +179,12 @@ nextSlide() {
   }
 
   addGameToLibrary(gameId: number) {
+    this._gameService.getGame(gameId).subscribe((game) => {
+      this.game = game;
+    })
+  this.metamaskService.SpendCoinsSingleGme(this.game.price, this.game)
     this._gameService.addGameToLibrary(gameId).subscribe(() => {
-      
+    
     })
   }
   

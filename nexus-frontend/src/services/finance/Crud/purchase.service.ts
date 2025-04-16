@@ -19,4 +19,12 @@ export class PurchaseService {
   deletePurchase(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+  createAndAffectPurchase(metamaskPublicKey: string | null, purchase: Purchase): Observable<Purchase> {
+    const url = `${this.baseUrl}/create-affect/${metamaskPublicKey}`;
+    return this.http.post<Purchase>(url, purchase);
+  }
+  createAndAffectPurchases(metamaskPublicKey: string | null, purchases: Purchase[]): Observable<Purchase[]> {
+    const url = `${this.baseUrl}/creates-affect/${metamaskPublicKey}`;
+    return this.http.post<Purchase[]>(url, purchases);
+  }
 }

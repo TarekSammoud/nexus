@@ -27,6 +27,7 @@ export class PanierService {
     this.countItem.next(this.countItems());
   
   }
+
    saveCart() {
     localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
     this.calculateTotal();
@@ -65,9 +66,17 @@ countItems(): number {
     this.saveCart();
 
   }
-  checkout(): void {
-    console.log('Proceeding to checkout...', this.cartItems);
+   async checkout(): Promise<void> {
+
+     const walletAddress: string = this.metamaskService.getWalletAddress() || '';
+     const coinsBalance: string | null = await this.metamaskService.getBalance(walletAddress) || '';
+    if(this.total > parseInt(coinsBalance)){
+  alert("not enough coins in your wallet")
+  } else {
+    console.log('Proceeding to checkout...', this.cartItems)
+    this.metamaskService.SpendCoinsFromCart(this.total,this.cartItems);
     this.cartItems = [];
     this.saveCart();
   }
+}
 }
