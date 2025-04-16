@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.entities.FinanceModule.Payment;
 import tn.arctic.nexus.entities.FinanceModule.Wallet;
+import tn.arctic.nexus.services.FinanceModule.PaymentService;
 import tn.arctic.nexus.services.FinanceModule.WalletService;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public class WalletController {
 
     @Autowired
      WalletService walletService;
+
 
     @GetMapping("getAll")
     public List<Wallet> getAll() {

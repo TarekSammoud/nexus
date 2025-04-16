@@ -1,5 +1,6 @@
 package tn.arctic.nexus.services.FinanceModule;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,24 +50,21 @@ public class PaymentService implements IPaymentService {
     }
 
     //////////////////////////////////
-
+    @Override
     @Transactional
-    public Payment assignPaymentToWallet(Long paymentId, Long walletId) {
-        Optional<Payment> paymentOpt = paymentRepository.findById(paymentId);
-        Optional<Wallet> walletOpt = walletRepository.findById(walletId);
+    public Payment CreateAffectPaymentToWallet(String metamaskPublicKey, Payment payment) {
+        // Retrieve wallet
+        Wallet wallet = walletRepository.findByMetamaskPublicKey(metamaskPublicKey);
 
-        if (paymentOpt.isPresent() && walletOpt.isPresent()) {
-            Payment payment = paymentOpt.get();
-            Wallet wallet = walletOpt.get();
-
-            // Assign the wallet to the payment
-            payment.setWallet(wallet);
-
-            // Save the payment
-            return paymentRepository.save(payment);
-        } else {
-            throw new RuntimeException("Payment or Wallet not found");
+        if (wallet == null) {
+            throw new EntityNotFoundException("Wallet with public key " + metamaskPublicKey + " not found.");
         }
-    }
+        // Link wallet and save payment
+        payment.setWallet(wallet);
+        return paymentRepository.save(payment);    }
+
+
+
+
 
 }
