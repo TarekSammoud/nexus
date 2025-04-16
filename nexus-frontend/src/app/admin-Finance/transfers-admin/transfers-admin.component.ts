@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { Transfer } from 'src/app/core/entities/finance/transfer.model';
+import { NexusWallet } from 'src/app/core/entities/finance/wallet.model';
 import { TransferService } from 'src/services/finance/Crud/transfer.service';
+import { WalletService } from 'src/services/finance/Crud/wallet.service';
 
 @Component({
   selector: 'app-transfers-admin',
@@ -13,6 +15,7 @@ export class TransfersAdminComponent {
   
   transfers: Transfer[] = [];
   filteredTransfers: Transfer[] = [];
+  senderWallet : NexusWallet | null = null;
   // Statistics
   totalTransfers: number = 0;
   totalAmountTransferred: number = 0;
@@ -22,7 +25,7 @@ export class TransfersAdminComponent {
   // Dialogs
   deleteConfirmation: { show: boolean, transferId: number | null } = { show: false, transferId: null };
 
-  constructor(private transferService: TransferService) {}
+  constructor(private transferService: TransferService,private walletService :WalletService) {}
 
   ngOnInit() {
     this.loadTransfers();

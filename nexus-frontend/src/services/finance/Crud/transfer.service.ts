@@ -22,5 +22,9 @@ export class TransferService {
   createTransfer(transfer: Transfer): Observable<Transfer> {
     return this.http.post<Transfer>(`${this.baseUrl}/create`, transfer);
   }
+      createAndAffectTransfer(metamaskPublicKey: string | null, transfer: Transfer): Observable<Transfer> {
+        const url = `${this.baseUrl}/create-affect/${metamaskPublicKey}`;
+        return this.http.post<Transfer>(url, transfer);
+      }
   
 }

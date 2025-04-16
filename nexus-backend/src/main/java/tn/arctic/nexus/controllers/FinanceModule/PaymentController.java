@@ -1,5 +1,6 @@
 package tn.arctic.nexus.controllers.FinanceModule;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,10 +48,17 @@ public class PaymentController {
     }
 
     /////////////////////////////////
-
-    @PutMapping("/{paymentId}/assign/{walletId}")
-    public ResponseEntity<Payment> assignPaymentToWallet(@PathVariable Long paymentId, @PathVariable Long walletId) {
-        Payment updatedPayment = paymentService.assignPaymentToWallet(paymentId, walletId);
-        return ResponseEntity.ok(updatedPayment);
+    @PostMapping("/create-affect/{metamaskPublicKey}")
+    public ResponseEntity<Payment> createAndAffectPayment(
+            @PathVariable String metamaskPublicKey,
+            @RequestBody Payment payment) {
+        try {
+            Payment savedPayment = paymentService.CreateAffectPaymentToWallet(metamaskPublicKey, payment);
+            return ResponseEntity.ok(savedPayment);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+
 }

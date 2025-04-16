@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { productType, Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { NexusWallet } from 'src/app/core/entities/finance/wallet.model';
 import { WalletService } from 'src/services/finance/Crud/wallet.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
@@ -31,6 +32,15 @@ async ininitializeContract() {
   navigateToPayment() {
     this.router.navigate(['/makePayment']);  // Corrected: Pass the path inside an array
   }
+
+
+   purchase: Purchase = {
+    productType: productType.GAME, // ✅ Not a string
+    productId: 0,
+    price: 0
+  };
+
+ 
 
   async fetchWallet() {
 
