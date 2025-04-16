@@ -4,7 +4,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 // UI & Libs
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -127,6 +126,8 @@ import { StreamerManagementComponent } from './community/sondage/streamer-manage
 import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
 import { PublicationStatsComponent } from './community/publication-stats/publication-stats.component';
 import { NgChartsModule } from 'ng2-charts';
+import { SupportComponent } from './support/support.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -199,6 +200,7 @@ import { NgChartsModule } from 'ng2-charts';
     RoomComponent,
     PerformanceReviewComponent,
     SupportAgentComponent,
+    SupportComponent,
     RoomChatComponent,
     AdminSupportListComponent,
     AdminAgentSupportComponent,
@@ -217,7 +219,6 @@ import { NgChartsModule } from 'ng2-charts';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
