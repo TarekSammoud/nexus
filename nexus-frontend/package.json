@@ -33,7 +33,7 @@
     "@syncfusion/ej2-angular-grids": "^28.2.7",
     "@syncfusion/ej2-angular-layouts": "^29.1.37",
     "@syncfusion/ej2-angular-navigations": "^28.2.6",
-    "angularx-qrcode": "^14.0.0",
+    "angularx-qrcode": "^15.0.0",
     "bootstrap": "^5.3.3",
     "bootswatch": "^5.3.3",
     "cors": "^2.8.5",
