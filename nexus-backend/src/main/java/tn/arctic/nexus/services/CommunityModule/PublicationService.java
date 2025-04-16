@@ -6,7 +6,9 @@ import tn.arctic.nexus.entities.Publication;
 import tn.arctic.nexus.repositories.CommunityModule.PublicationRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PublicationService {
@@ -60,6 +62,15 @@ public class PublicationService {
     }
 
 
+
+    public Map<String, Long> countPublicationsByCategory() {
+        return publicationRepository.findAll().stream()
+                .filter(pub -> pub.getCategory() != null)
+                .collect(Collectors.groupingBy(
+                        pub -> pub.getCategory().getName(),
+                        Collectors.counting()
+                ));
+    }
 
 
 

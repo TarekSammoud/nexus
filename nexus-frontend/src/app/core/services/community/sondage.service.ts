@@ -28,9 +28,11 @@ export class SondageService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  approveSondage(id: number): Observable<Sondage> {
-    return this.http.put<Sondage>(`${this.apiUrl}/${id}/approve`, {});
+  approveSondage(id: number, endDate: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/approve/${id}`, { endDate });
   }
+  
+  
 
   startLive(sondageId: number, liveUrl: string): Observable<Sondage> {
     return this.http.put<Sondage>(`${this.apiUrl}/${sondageId}/start-live`, liveUrl, {

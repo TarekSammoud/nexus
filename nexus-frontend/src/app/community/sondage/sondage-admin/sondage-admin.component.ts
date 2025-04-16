@@ -18,19 +18,43 @@ export class SondageAdminComponent implements OnInit {
 
   loadSondages(): void {
     this.sondageService.getAllSondages().subscribe({
-      next: data => this.sondages = data,
+      next: (data: Sondage[]) => {
+        this.sondages = data.map(sondage => ({
+          ...sondage,
+          approved: sondage.approved ?? false, // Définir une valeur par défaut
+          endDate: sondage.endDate ? new Date(sondage.endDate).toISOString().slice(0, 16) : undefined // Convertir en format datetime-local
+        }));
+      },
       error: err => console.error('❌ Erreur chargement sondages', err)
     });
   }
 
-  approuverSondage(id: number): void {
-    this.sondageService.approveSondage(id).subscribe({
+  approuverSondage(id: number, endDate: string | null): void {
+    if (!endDate) {
+      alert("❗ Veuillez saisir une date de fin.");
+      return;
+    }
+
+    // Vérifier que la date est valide
+    const parsedDate = new Date(endDate);
+    if (isNaN(parsedDate.getTime())) {
+      alert("❗ Date de fin invalide.");
+      return;
+    }
+
+    this.sondageService.approveSondage(id, endDate).subscribe({
       next: () => {
         const sondage = this.sondages.find(s => s.id === id);
-        if (sondage) sondage.approved = true;
-        alert('✅ Sondage approuvé avec succès !');
+        if (sondage) {
+          sondage.approved = true;
+          sondage.endDate = endDate; // Mettre à jour localement
+        }
+        alert("✅ Sondage approuvé !");
       },
-      error: err => console.error('❌ Erreur approbation', err)
+      error: err => {
+        console.error("❌ Erreur :", err);
+        alert("🚫 Erreur lors de l'approbation : " + (err.error?.message || err.message));
+      }
     });
   }
 

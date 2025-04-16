@@ -43,6 +43,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgChartsModule } from 'ng2-charts';
+
 
 // Editor / Quill / QR / Carousel
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -64,6 +66,7 @@ import { SondageLiveComponent } from './community/sondage/sondage-live/sondage-l
 import { SondageAdminComponent } from './community/sondage/sondage-admin/sondage-admin.component';
 import { StreamerManagementComponent } from './community/sondage/streamer-management/streamer-management.component';
 import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
+import { PublicationStatsComponent } from './community/publication-stats/publication-stats.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +102,8 @@ import { LiveRoomComponent } from './community/sondage/live-room/live-room.compo
     SondageLiveComponent,
     SondageAdminComponent,
     StreamerManagementComponent,
-    LiveRoomComponent
+    LiveRoomComponent,
+    PublicationStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +111,7 @@ import { LiveRoomComponent } from './community/sondage/live-room/live-room.compo
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({

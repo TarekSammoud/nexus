@@ -14,8 +14,10 @@ export class SondageListComponent implements OnInit {
   votesOui: { [key: number]: number } = {};
   votesTotal: { [key: number]: number } = {};
   hasVotedMap: { [key: number]: boolean } = {};
+  now: Date = new Date();
 
-  userId = 1; // 🔁 À rendre dynamique plus tard via auth
+  userId = 4; // À rendre dynamique plus tard avec l'authentification
+new: any;
 
   constructor(
     private sondageService: SondageService,
@@ -23,6 +25,7 @@ export class SondageListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.now = new Date(); // 🕒 utile pour comparer à endDate
     this.sondageService.getAllSondages().subscribe({
       next: data => {
         this.sondages = data.filter(s => s.approved);
@@ -38,15 +41,31 @@ export class SondageListComponent implements OnInit {
     this.voteService.hasUserVoted(sondageId, this.userId).subscribe(v => this.hasVotedMap[sondageId] = v);
   }
 
-  voter(sondageId: number, voteOui: boolean): void {
-    if (this.hasVotedMap[sondageId]) return;
+  voter(id: number, voteOui: boolean): void {
+    const sondage = this.sondages.find(s => s.id === id);
+    if (!sondage) return;
 
-    this.voteService.vote(sondageId, this.userId, voteOui).subscribe({
+    const endDate = sondage.endDate ? new Date(sondage.endDate) : null;
+
+    if (endDate && this.now > endDate) {
+      alert("🚫 Ce sondage est terminé !");
+      return;
+    }
+
+    if (this.hasVotedMap[id]) {
+      alert("⚠️ Vous avez déjà voté.");
+      return;
+    }
+
+    this.voteService.vote(id, this.userId, voteOui).subscribe({
       next: () => {
-        this.loadStats(sondageId);
-        alert('✅ Vote enregistré !');
+        this.loadStats(id);
+        alert("✅ Vote enregistré !");
       },
-      error: err => alert('❌ Erreur lors du vote : ' + err.message)
+      error: err => {
+        const message = err.error?.message || err.message || 'Erreur inconnue';
+        alert("❌ Erreur lors du vote : " + message);
+      }
     });
   }
 

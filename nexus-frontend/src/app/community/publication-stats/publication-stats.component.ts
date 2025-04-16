@@ -1,22 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/core/services/community/category.service';
 import { CommunityService } from 'src/app/core/services/community/community.service';
-import { Category } from 'src/app/core/entities/community/category';
-import { Router } from '@angular/router';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-publication-stats',
+  templateUrl: './publication-stats.component.html',
+  styleUrls: ['./publication-stats.component.css']
 })
-export class CategoryListComponent implements OnInit {
-
-  categories: Category[] = [];
-
-  // Statistiques pie chart
+export class PublicationStatsComponent implements OnInit {
   categoryLabels: string[] = [];
   categoryCounts: number[] = [];
+
   pieChartData: any;
   pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
@@ -43,41 +37,9 @@ export class CategoryListComponent implements OnInit {
     }
   };
 
-  constructor(
-    private categoryService: CategoryService,
-    private communityService: CommunityService,
-    private router: Router
-  ) {}
+  constructor(private communityService: CommunityService) {}
 
   ngOnInit(): void {
-    this.loadCategories();
-    this.loadChartData();
-  }
-
-  loadCategories(): void {
-    this.categoryService.getCategories().subscribe({
-      next: (data) => {
-        this.categories = data;
-      },
-      error: (err) => {
-        console.error('Erreur de chargement des catégories', err);
-      }
-    });
-  }
-
-  editCategory(id: number): void {
-    this.router.navigate(['/admin/community/categories/edit', id]);
-  }
-
-  deleteCategory(id: number): void {
-    if (confirm('Voulez-vous vraiment supprimer cette catégorie ?')) {
-      this.categoryService.deleteCategory(id).subscribe({
-        next: () => this.loadCategories()
-      });
-    }
-  }
-
-  loadChartData(): void {
     this.communityService.getPublicationStatsByCategory().subscribe(stats => {
       this.categoryLabels = Object.keys(stats);
       this.categoryCounts = Object.values(stats);

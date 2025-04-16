@@ -13,6 +13,7 @@
 </div>
 
 
+
 <div class="page-wrapper">
 
   
@@ -29,6 +30,15 @@
         <h2 class="title-text">📚 Publications Récentes</h2>
       </div>
       
+      <div class="search-bar-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          class="search-input"
+          placeholder="🔍 Rechercher une publication..."
+        />
+      </div>
+      
       
 
       <div *ngIf="!publications || publications.length === 0" class="alert alert-warning text-center">
@@ -36,7 +46,7 @@
       </div>
 
       <div class="publication-list">
-        <div *ngFor="let publication of publications" class="card mb-4"
+        <div *ngFor="let publication of filteredPublications" class="card mb-4"
              [ngClass]="{ 'border-start border-5 border-warning bg-light text-dark': publication.pinned, 'bg-dark text-light': !publication.pinned }">
           <div class="card-body">
 

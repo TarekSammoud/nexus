@@ -28,6 +28,7 @@ import { SondageLiveComponent } from './community/sondage/sondage-live/sondage-l
 import { SondageAdminComponent } from './community/sondage/sondage-admin/sondage-admin.component';
 import { StreamerManagementComponent } from './community/sondage/streamer-management/streamer-management.component';
 import { LiveRoomComponent } from './community/sondage/live-room/live-room.component';
+import { PublicationStatsComponent } from './community/publication-stats/publication-stats.component';
 
 
 
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path: 'sondages/create', component: SondageCreateComponent },
   { path: 'sondages/list', component: SondageListComponent },
   { path: 'live-room/:id', component: LiveRoomComponent },
+  { path: 'stats', component: PublicationStatsComponent },
+
 
 
 

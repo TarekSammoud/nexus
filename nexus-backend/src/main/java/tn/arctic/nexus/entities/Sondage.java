@@ -20,6 +20,17 @@ public class Sondage {
     private LocalDateTime createdAt;
 
 
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
     @ManyToOne
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 

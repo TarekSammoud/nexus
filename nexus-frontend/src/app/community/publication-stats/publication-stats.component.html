@@ -1,0 +1,15 @@
+<div class="stats-container">
+    <h2 class="stats-title text-center mb-4">
+      <i class="fas fa-chart-pie me-2 text-pink"></i> Statistiques des Catégories
+    </h2>
+  
+    <div class="chart-wrapper">
+      <canvas baseChart
+        [data]="pieChartData"
+        [type]="'pie'"
+        [options]="pieChartOptions"
+        class="chart-canvas">
+      </canvas>
+    </div>
+  </div>
+  

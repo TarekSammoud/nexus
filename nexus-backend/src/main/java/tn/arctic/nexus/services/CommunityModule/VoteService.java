@@ -9,6 +9,8 @@ import tn.arctic.nexus.repositories.CommunityModule.SondageRepository;
 import tn.arctic.nexus.repositories.CommunityModule.VoteRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
+import java.util.Optional;
+
 
 @Service
 public class VoteService implements IVoteService {
@@ -16,12 +18,19 @@ public class VoteService implements IVoteService {
     @Autowired
     private VoteRepository voteRepository;
 
+
+
     @Autowired private SondageRepository sondageRepository;
 
 
 
     @Autowired
     private IUserRepository userRepository;
+
+
+    public Optional<Sondage> getSondageById(Long id) {
+        return sondageRepository.findById(id);
+    }
 
 
     public Vote addVote(Long sondageId, Long userId, boolean voteOui) {
@@ -42,6 +51,7 @@ public class VoteService implements IVoteService {
 
         return voteRepository.save(vote);
     }
+
 
 
     public long countYesVotes(Long sondageId) {
