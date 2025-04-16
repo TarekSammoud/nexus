@@ -1,4 +1,4 @@
-package tn.arctic.nexus.Config;
+package tn.arctic.nexus.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
