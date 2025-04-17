@@ -56,7 +56,7 @@ export class RequestRefundComponent {
 
   refund :Refund={
     reason: "",
-    status: 'pending',
+    status: 'Pending',
     refundAmount: 0,
   }
   submitRefund(): void {

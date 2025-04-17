@@ -59,4 +59,12 @@ public class TransferService implements ITransferService {
         transfer.setWallet(wallet);
         return transferRepository.save(transfer);
     }
+
+    @Override
+    public List<Transfer> getTransfersByWalletPK(String metamaskPublicKey) {
+        return transferRepository.findByWallet_MetamaskPublicKey(metamaskPublicKey);
+
+    }
+
+
 }

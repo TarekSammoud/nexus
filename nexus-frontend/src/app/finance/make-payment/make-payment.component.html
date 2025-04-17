@@ -24,7 +24,7 @@
           <div class="glow-effect"></div>
         </div>
         <p class="diamond-count">1 Nexus Coin</p>
-        <button (click)="sendTransaction(1,oneNexusCoinPrice)" class="buy-button">
+        <button (click)="sendTransaction(1,oneNexusCoinPrice)" class="buy-button" [disabled]="!isFetched">
           <span class="price">{{1 * oneNexusCoinPrice | number:'1.6-6'}}</span>
           <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
         </button>

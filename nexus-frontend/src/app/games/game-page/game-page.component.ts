@@ -183,9 +183,9 @@ nextSlide() {
       this.game = game;
     })
   this.metamaskService.SpendCoinsSingleGme(this.game.price, this.game)
-    this._gameService.addGameToLibrary(gameId).subscribe(() => {
+   /* this._gameService.addGameToLibrary(gameId).subscribe(() => {
     
-    })
+    })*/
   }
   
   

@@ -2,6 +2,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -10,8 +11,9 @@ import { PaymentService } from 'src/services/finance/Crud/payment.service';
 export class PaymentsComponent implements OnInit {
   payments: Payment[] = [];
   selectedPaymentId: number = 0;
-
-  constructor(private paymentService: PaymentService,) {}
+  connectdWalletPk : String = '' ;
+  constructor(private paymentService: PaymentService,private metamaksService: MetamaskService,
+  ) {}
 
   ngOnInit(): void {
     this.loadPayments();
@@ -20,8 +22,10 @@ export class PaymentsComponent implements OnInit {
     this.selectedPaymentId = paymentId;
   }
 
-  loadPayments(): void {
-    this.paymentService.getAllPayments().subscribe({
+  async loadPayments(): Promise<void> {
+    this.connectdWalletPk= await this.metamaksService.getWalletAddress() || '' ;
+
+    this.paymentService.getPaymentsByWalletPK(this.connectdWalletPk).subscribe({
       next: (data) => {
         this.payments = data;
       },

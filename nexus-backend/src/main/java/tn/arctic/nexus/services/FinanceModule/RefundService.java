@@ -61,4 +61,11 @@ public class RefundService implements IRefundService {
         refund.setPurchase(purchase);
         return refundRepo.save(refund);
     }
+
+    @Override
+    public List<Refund> getRefundsByWalletPK(String metamaskPublicKey) {
+        return refundRepo.findByPurchase_Wallet_MetamaskPublicKey(metamaskPublicKey);
+    }
+
+
 }

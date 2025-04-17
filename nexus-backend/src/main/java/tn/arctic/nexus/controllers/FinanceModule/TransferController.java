@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.FinanceModule.Payment;
+import tn.arctic.nexus.entities.FinanceModule.Refund;
 import tn.arctic.nexus.entities.FinanceModule.Transfer;
 import tn.arctic.nexus.services.FinanceModule.TransferService;
 
@@ -57,5 +58,10 @@ public class TransferController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+    @GetMapping("/getByWalletPK/{metamaskPublicKey}")
+    public ResponseEntity<List<Transfer>> getPaymentsByWalletId(@PathVariable String metamaskPublicKey) {
+        List<Transfer> transfers = transferService.getTransfersByWalletPK(metamaskPublicKey);
+        return ResponseEntity.ok(transfers);
     }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Game } from 'src/app/core/entities/game/game';
 import { MetamaskService } from './metamask.service';
+import { GameService } from 'src/app/core/services/game/game.service';
 export interface CartItem {
   id: number;
   name: string;
@@ -20,7 +21,7 @@ export class PanierService {
   count$ = this.countItem.asObservable();
 
 
-  constructor(private metamaskService: MetamaskService) {
+  constructor(private metamaskService: MetamaskService,private gameService: GameService) {
     const storedItems = localStorage.getItem(this.storageKey);
     this.cartItems = storedItems ? JSON.parse(storedItems) : [];
     this.calculateTotal();
@@ -75,6 +76,13 @@ countItems(): number {
   } else {
     console.log('Proceeding to checkout...', this.cartItems)
     this.metamaskService.SpendCoinsFromCart(this.total,this.cartItems);
+    for (const item of this.cartItems) {
+      this.gameService.addGameToLibrary(item.id).subscribe(
+        response => {
+          console.log('Game added to library:', response);
+        }
+      );  
+    }
     this.cartItems = [];
     this.saveCart();
   }

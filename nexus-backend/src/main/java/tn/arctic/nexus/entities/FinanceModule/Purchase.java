@@ -37,7 +37,6 @@ public class Purchase implements Serializable {
     @OneToOne(mappedBy = "purchase",cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("purchase") // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
     private Refund refund;
-
     @ManyToOne
     @JsonIgnoreProperties({"transfers", "payments", "purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
     private Wallet wallet;

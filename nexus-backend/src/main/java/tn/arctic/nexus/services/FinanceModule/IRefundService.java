@@ -1,6 +1,7 @@
 package tn.arctic.nexus.services.FinanceModule;
 
 
+import tn.arctic.nexus.entities.FinanceModule.Purchase;
 import tn.arctic.nexus.entities.FinanceModule.Refund;
 import tn.arctic.nexus.entities.FinanceModule.Transfer;
 
@@ -14,6 +15,7 @@ public interface IRefundService {
     public Refund updateRefund(Refund refund);
     public boolean deleteRefund(Long id);
     public Refund CreateAffectRefundToPurchase(Long purchaseId, Refund refund);
+    public List<Refund> getRefundsByWalletPK(String metamaskPublicKey) ;
 
 
 }

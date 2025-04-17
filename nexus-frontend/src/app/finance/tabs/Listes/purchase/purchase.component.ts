@@ -2,6 +2,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Purchase, productType } from 'src/app/core/entities/finance/purchase.model';
 import { PurchaseService } from 'src/services/finance/Crud/purchase.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
 
 @Component({
   selector: 'app-purchase',
@@ -14,10 +15,13 @@ export class PurchaseComponent implements OnInit {
   currentUser: string = 'hamdounisabri1';
   currentDate: string = '2025-04-04 16:21:48';
   productType = productType; // For enum use in template
+  connectdWalletPk : String = '' ;
 
   constructor(
     private purchaseService: PurchaseService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private metamaksService: MetamaskService,
+    
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +32,8 @@ export class PurchaseComponent implements OnInit {
     return type === productType.GAME;
   }
   
-  loadPurchases(): void {
+  async loadPurchases(): Promise<void> {
+    this.connectdWalletPk= await this.metamaksService.getWalletAddress() || '' ;
     this.purchaseService.getAllPurchases().subscribe({
       next: (data) => {
         this.purchases = data;

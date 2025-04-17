@@ -60,4 +60,10 @@ public class RefundController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @GetMapping("/getByWalletPK/{metamaskPublicKey}")
+    public ResponseEntity<List<Refund>> getPaymentsByWalletId(@PathVariable String metamaskPublicKey) {
+        List<Refund> refunds = refundService.getRefundsByWalletPK(metamaskPublicKey);
+        return ResponseEntity.ok(refunds);
+    }
+
 }

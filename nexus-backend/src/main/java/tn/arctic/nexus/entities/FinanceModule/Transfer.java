@@ -23,8 +23,9 @@ public class Transfer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String receiverMetaMaskAddress;
+    private String senderMetaMaskAddress;
     private Long amount;
-
+    private TransferType type;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -33,7 +34,7 @@ public class Transfer implements Serializable {
     private Date updatedAt;
     @ManyToOne
     // Prevents serialization of the 'transfers' field in Wallet
-    @JsonIgnoreProperties({"transfers", "payments", "Purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
+    @JsonIgnoreProperties({"transfers", "payments", "purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
     private Wallet wallet;
 
     public Wallet getWallet() {

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.entities.FinanceModule.Payment;
 import tn.arctic.nexus.entities.FinanceModule.Purchase;
 import tn.arctic.nexus.entities.FinanceModule.Transfer;
 import tn.arctic.nexus.services.FinanceModule.PurchaseService;
@@ -69,5 +70,11 @@ public class PurchaseController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/getByWalletPK/{metamaskPublicKey}")
+    public ResponseEntity<List<Purchase>> getPaymentsByWalletId(@PathVariable String metamaskPublicKey ) {
+        List<Purchase> purchases = purchaseService.getPurchasesByWalletPK(metamaskPublicKey);
+        return ResponseEntity.ok(purchases);
     }
 }

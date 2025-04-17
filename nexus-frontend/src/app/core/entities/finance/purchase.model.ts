@@ -9,7 +9,7 @@ export interface Purchase {
   createdAt?: Date;
   updatedAt?: Date;
   wallet?: NexusWallet; 
-  refund?:Refund
+  refunds?: Refund; // List of refunds associated with this purchase
 }
   export enum productType {
     GAME= 'GAME',

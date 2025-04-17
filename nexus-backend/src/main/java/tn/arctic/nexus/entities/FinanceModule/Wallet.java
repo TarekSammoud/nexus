@@ -27,7 +27,6 @@ public class Wallet implements Serializable {
     private Long id;
     private Long coinBalance;
     private String metamaskPublicKey;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
