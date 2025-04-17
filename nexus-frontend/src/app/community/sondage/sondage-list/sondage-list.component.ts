@@ -16,7 +16,7 @@ export class SondageListComponent implements OnInit {
   hasVotedMap: { [key: number]: boolean } = {};
   now: Date = new Date();
 
-  userId = 4; // À rendre dynamique plus tard avec l'authentification
+  userId = 1; // À rendre dynamique plus tard avec l'authentification
 new: any;
 
   constructor(

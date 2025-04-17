@@ -1,10 +1,9 @@
-<app-header></app-header>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <hr>
             <div class="text-center mt-4">
-                <h4>Photo de profil</h4>
+                <h4 class="text-light">Photo de profil</h4>
 
                 <div *ngIf="imageUrl; else noImage">
                     <img [src]="imageUrl" alt="Profile Picture" class="img-thumbnail" style="max-width: 200px;">

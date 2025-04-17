@@ -23,6 +23,17 @@
   border: none;
 }
 
+tr{
+  color:white !important;
+}
+
+td{
+  color: white !important;
+}
+th{
+  color: white !important;
+}
+
 .btn-add:hover {
   transform: scale(1.05);
   background: linear-gradient(to right, #0072ff, #00c6ff);

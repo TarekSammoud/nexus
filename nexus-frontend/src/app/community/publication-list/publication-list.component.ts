@@ -20,7 +20,7 @@ export class PublicationListComponent implements OnInit {
   likeCounts: { [key: number]: number } = {};
   userLiked: { [key: number]: boolean } = {};
   searchTerm: string = '';
-  userId: number = 5;
+  userId: number = 1;
 
   constructor(
     private communityService: CommunityService,
