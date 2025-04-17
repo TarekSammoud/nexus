@@ -30,6 +30,18 @@ public class FileUploadController {
         }
     }
 
+    @PostMapping("/rar")
+    public ResponseEntity<String> uploadRARFile(@RequestParam("file") MultipartFile file) {
+        System.out.println("adding");
+        try {
+            String message = ftpService.handleZipAndExtractToFtp(file);
+
+            return ResponseEntity.ok(message);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Error uploading file: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/download/excel")
     public List<List<String>> getExcelDataFromFTP(@RequestParam String fileName) throws IOException {
         return ftpService.getExcelDataFromFTP(fileName);

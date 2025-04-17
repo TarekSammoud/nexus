@@ -30,7 +30,27 @@ export class HomeComponent {
               console.log(this.games[i].coverPicture?.mediaUrl);
             }
           }
-          console.log(this.games);
+        })
+
+        this._gameService.getBrowserGames().subscribe(games => {
+          this.browserGames = games;
+          console.log(this.browserGames);
+          for (let i = 0; i < this.browserGames.length; i++) {
+            console.log(i)
+            for (let j = 0; j < this.browserGames[i].gameMediaList.length; j++) {
+              console.log(j)
+              console.log(this.browserGames[i].gameMediaList[j].gameMediaType)
+              if (this.browserGames[i].gameMediaList[j].gameMediaType == 'FILE') {
+                this.browserGames[i].gameFile = this.browserGames[i].gameMediaList[j]; 
+                this.browserGames[i].gameFile!.mediaUrl = (this.browserGames[i].gameFile?.mediaUrl as string).replace(/\.zip$/, '');
+              }
+              if (this.browserGames[i].gameMediaList[j].gameMediaType == 'COVER') {
+                this.browserGames[i].coverPicture = this.browserGames[i].gameMediaList[j]; 
+                console.log(this.browserGames[i].coverPicture?.mediaUrl);
+              }
+
+            }
+          }
         })
        
 
@@ -68,6 +88,7 @@ export class HomeComponent {
 
     
       games: Game[] = [];
+      browserGames: Game[] = [];
       name : String = '';
     
  
@@ -77,6 +98,9 @@ export class HomeComponent {
         this._router.navigate(['/games', game.id]);
         }
     
+        OnSelectBrowser(game: Game){
+          this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
+        }
   
 
 }

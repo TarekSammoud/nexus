@@ -73,6 +73,9 @@ import { BidComponent } from './market/bid/bid.component';
 import { AuthGuard } from './core/services/user-management/auth.guard';
 import { LibraryComponent } from './library/library.component';
 import { SupportComponent } from './support/support.component';
+import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
+import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
+import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -136,6 +139,7 @@ const routes: Routes = [
       { path: 'games/reviews', component: GameReviewListComponent },
       { path: 'games/:id', component: GamePageComponent },
       { path: 'add-new-game', component: CreateGameComponent },
+      { path: 'add-new-browser-game', component: CreateBrowserGameComponent },
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
 
@@ -174,8 +178,11 @@ const routes: Routes = [
   { path: 'jam/:id', component: JamDetailsPageComponent },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },
+
+  { path: 'games/play/:name', component: BrowserGamePageComponent },
+  { path: 'keen', component: KeenGameCarouselComponent },
+
   { path: 'admin/categories', component: GameCategoriesComponent },
-  { path: 'admin/games/list', component: CreateGameComponent, outlet: 'adminOutlet' }
 
 ];
 

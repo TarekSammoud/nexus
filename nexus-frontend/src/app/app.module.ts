@@ -128,6 +128,9 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
 import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
+import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
+import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
+import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
 
 
 
@@ -213,6 +216,9 @@ import { CommonModule } from '@angular/common';
     BidComponent,
     MarketDetailsComponent,
     LibraryComponent,
+    CreateBrowserGameComponent,
+    BrowserGamePageComponent,
+    KeenGameCarouselComponent,
 
 
     

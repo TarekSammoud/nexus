@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameCategory;
+import tn.arctic.nexus.entities.GamePlatform;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface IGameRepository extends JpaRepository<Game,Long> {
     @Query("SELECT g FROM Game g JOIN g.categories c WHERE c.name = :categoryName")
     List<Game> findGamesByCategoryName(String categoryName);
     Game findTopByOrderByIdDesc();
+    List<Game> getGamesByPlatforms(List<GamePlatform> gp);
 
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameCategory;
+import tn.arctic.nexus.entities.GamePlatform;
 import tn.arctic.nexus.services.GamesModule.IGameService;
 
 import java.util.List;
@@ -28,6 +29,12 @@ public class GameController {
     public List<Game> getAllGames(){
         return  gameService.getAllGames();
     }
+
+    @GetMapping("/all-browser-games")
+    public List<Game> getAllBrowserGames(){
+        return  gameService.getBrowserGames();
+    }
+
     @GetMapping("/{id}")
     public Game getGameById(@PathVariable("id") Long id){
         return gameService.getGameById(id);

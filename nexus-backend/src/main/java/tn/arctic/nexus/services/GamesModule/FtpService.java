@@ -11,9 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 @Service
 public class FtpService {
@@ -22,6 +27,67 @@ public class FtpService {
     private static final String FTP_USER = "nexus-ftp";
     private static final String FTP_PASSWORD = "123456789";
     private static final String FTP_UPLOAD_DIR = "/";
+
+
+    public String handleZipAndExtractToFtp(MultipartFile zipFile) throws IOException {
+        Path tempDir = Files.createTempDirectory("zip-temp-");
+        Path zipPath = tempDir.resolve(zipFile.getOriginalFilename());
+        Files.copy(zipFile.getInputStream(), zipPath, StandardCopyOption.REPLACE_EXISTING);
+
+        // Step 1: Extract ZIP file
+        File extractDir = tempDir.resolve("extracted").toFile();
+        extractDir.mkdirs();
+
+        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath.toFile()))) {
+            ZipEntry zipEntry;
+            while ((zipEntry = zis.getNextEntry()) != null) {
+                File outFile = new File(extractDir, zipEntry.getName());
+                if (zipEntry.isDirectory()) {
+                    outFile.mkdirs();
+                } else {
+                    outFile.getParentFile().mkdirs();
+                    try (FileOutputStream fos = new FileOutputStream(outFile)) {
+                        byte[] buffer = new byte[1024];
+                        int len;
+                        while ((len = zis.read(buffer)) > 0) {
+                            fos.write(buffer, 0, len);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException("Failed to extract ZIP file: " + e.getMessage(), e);
+        }
+
+        // Step 2: Upload extracted files to FTP server
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect(FTP_SERVER, FTP_PORT);
+            ftpClient.login(FTP_USER, FTP_PASSWORD);
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            ftpClient.changeWorkingDirectory(FTP_UPLOAD_DIR);
+
+            Files.walk(extractDir.toPath())
+                    .filter(Files::isRegularFile)
+                    .forEach(filePath -> {
+                        try (InputStream input = Files.newInputStream(filePath)) {
+                            String relativePath = extractDir.toPath().relativize(filePath).toString().replace("\\", "/");
+                            ftpClient.makeDirectory(new File(relativePath).getParent());
+                            ftpClient.storeFile(relativePath, input);
+                        } catch (IOException e) {
+                            throw new RuntimeException("FTP upload failed for file: " + filePath, e);
+                        }
+                    });
+
+        } finally {
+            if (ftpClient.isConnected()) {
+                ftpClient.logout();
+                ftpClient.disconnect();
+            }
+        }
+
+        return "ZIP extracted and files uploaded to FTP successfully!";
+    }
 
 
     public byte[] downloadFile(String fileName) throws IOException {

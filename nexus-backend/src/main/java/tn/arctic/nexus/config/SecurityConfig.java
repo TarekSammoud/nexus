@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/games/**").permitAll()
+                        .requestMatchers("/games/media/**").permitAll()
                         .requestMatchers("/api/entries/**").permitAll()
                         .requestMatchers("/api/entry-ratings/**").permitAll()
                         .requestMatchers("/api/gamejams/**").permitAll()

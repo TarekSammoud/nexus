@@ -19,28 +19,20 @@ export class GamePageComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
-  }
 
-  
-groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
-  const result: GameReview[][] = [];
-  for (let i = 0; i < reviews.length; i += perGroup) {
-    result.push(reviews.slice(i, i + perGroup));
-  }
-  return result;
-}
-
-reviewForm: FormGroup;
-inLibrary = false ; 
-bannerUrl: string = '';
-
-  constructor(private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
-    const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
-
-    if (gameId) {
-      this._gameService.getGame(+gameId).subscribe(game => {
+    
+    if (this.gameId) {
+      this._gameService.getGame(+this.gameId).subscribe(game => {
         this.game = game;
+
+        
+    for ( let platform of this.game.platforms) {
+      if (platform == "BROWSER") {
+        this.browserGame = true ;
+        console.log(this.browserGame)
+      }
+    }
+        
         if (this.game?.gameReviewList) {
           this.groupedReviews = this.groupReviews(this.game.gameReviewList, 3);
         }
@@ -72,7 +64,6 @@ bannerUrl: string = '';
         });
     
       
-        console.log(this.game.screenshots); 
       });
 
       
@@ -80,6 +71,28 @@ bannerUrl: string = '';
 
 
     }
+
+
+   
+  }
+
+  
+groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
+  const result: GameReview[][] = [];
+  for (let i = 0; i < reviews.length; i += perGroup) {
+    result.push(reviews.slice(i, i + perGroup));
+  }
+  return result;
+}
+
+reviewForm: FormGroup;
+inLibrary = false ; 
+bannerUrl: string = '';
+browserGame = false; 
+ gameId: number | any;
+
+  constructor(private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+     this.gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
     this.reviewForm = this.fb.group({
       game: this.fb.group({
         id: [this.game?.id]
@@ -90,6 +103,7 @@ bannerUrl: string = '';
       reviewText: ['', [Validators.required, Validators.minLength(10)]],
       rating: [0, Validators.required]
     });
+
   }
 
   activeIndex: number = 0;
