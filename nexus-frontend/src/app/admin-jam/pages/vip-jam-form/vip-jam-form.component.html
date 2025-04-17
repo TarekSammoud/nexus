@@ -12,17 +12,17 @@
       <textarea class="form-control" name="description" [(ngModel)]="vipJam.description" required></textarea>
     </div>
 
-    <div class="form-group-row">
-      <div class="form-group">
-        <label>📅 Dev Start</label>
-        <input type="date" class="form-control" name="devStartDate" [(ngModel)]="vipJam.devStartDate" required />
-      </div>
+    <!-- Dev Period Date Range -->
+<mat-form-field appearance="fill" class="form-group w-100">
+  <mat-label>📅 Dev Period</mat-label>
+  <mat-date-range-input [rangePicker]="vipDevPicker">
+    <input matStartDate placeholder="Start" [(ngModel)]="vipJam.devStartDate" name="devStartDate">
+    <input matEndDate placeholder="End" [(ngModel)]="vipJam.devEndDate" name="devEndDate">
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="vipDevPicker"></mat-datepicker-toggle>
+  <mat-date-range-picker #vipDevPicker></mat-date-range-picker>
+</mat-form-field>
 
-      <div class="form-group">
-        <label>⏳ Dev End</label>
-        <input type="date" class="form-control" name="devEndDate" [(ngModel)]="vipJam.devEndDate" required />
-      </div>
-    </div>
 
     <div class="form-group">
       <label>🏆 Reward</label>
@@ -59,7 +59,10 @@
       <tbody>
         <tr *ngFor="let jam of vipJams">
           <td>{{ jam.name }}</td>
-          <td>{{ jam.devStartDate }} → {{ jam.devEndDate }}</td>
+          <td>
+            {{ jam.devStartDate | date: 'dd MMM yyyy' }} → {{ jam.devEndDate | date: 'dd MMM yyyy' }}
+          </td>
+          
           <td>{{ jam.reward || 'N/A' }}</td>
           <td>
             <span [style.backgroundColor]="jam.primaryColor" class="color-dot"></span>
@@ -78,3 +81,4 @@
     </table>
   </div>
 </div>
+
