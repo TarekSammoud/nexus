@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.gameKeyForm= this._fb.group({
-      keyCode: ['',Validators.required]
+    this.gameKeyForm = this._fb.group({
+      keyCode: ['', Validators.required]
     })
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
@@ -73,30 +73,35 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  
-  onSubmit(){
-    if (this.gameKeyForm.valid){
+
+  onSubmit() {
+    if (this.gameKeyForm.valid) {
       this._gameKeyService.redeemGameKey(this.gameKeyForm.value).subscribe({
-    next: (res: boolean) => {
-      if (res === true) {
-        this.successMessage = 'Code redeemed successfully!';
-        this.errorMessage = '';
-        this.gameKeyForm.reset();
+        next: (res: boolean) => {
+          if (res === true) {
+            this.successMessage = 'Code redeemed successfully!';
+            this.errorMessage = '';
+            this.gameKeyForm.reset();
 
-        setTimeout(() => this.successMessage = '', 3000); // optional auto-clear
-      } else {
-        this.successMessage = '';
-        this.errorMessage = 'Invalid or already used code.';
+            setTimeout(() => this.successMessage = '', 3000); // optional auto-clear
+          } else {
+            this.successMessage = '';
+            this.errorMessage = 'Invalid or already used code.';
 
-        setTimeout(() => this.errorMessage = '', 3000); // optional auto-clear
-      }
-    },
-    error: (err) => {
-      this.successMessage = '';
-      this.errorMessage = 'Something went wrong. Please try again.';
-    }
-  });
+            setTimeout(() => this.errorMessage = '', 3000); // optional auto-clear
+          }
+        },
+        error: (err) => {
+          this.successMessage = '';
+          this.errorMessage = 'Something went wrong. Please try again.';
+        }
+      });
     }
   }
+  logout(): void {
+    this.authService.logout(); // Tu peux aussi gérer les erreurs ici si besoin
+    this._router.navigate(['/login']); // Redirection vers la page de login
+  }
+
 
 }
