@@ -75,5 +75,12 @@ public class PurchaseService implements IPurchaseService {
 
     }
 
+    @Override
+    public List<Purchase> getPurchasesByWalletPK(String metamaskPublicKey) {
+        return purchaseRepository.findByWallet_MetamaskPublicKey(metamaskPublicKey);
+    }
+
+
+
 
 }

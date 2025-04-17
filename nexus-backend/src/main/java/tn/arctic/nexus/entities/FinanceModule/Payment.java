@@ -34,7 +34,7 @@ public class Payment implements Serializable {
     private Date updatedAt;
 
     @ManyToOne
-    @JsonIgnoreProperties({"transfers", "payments", "Purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
+    @JsonIgnoreProperties({"transfers", "payments", "purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
     private Wallet wallet;
 
 

@@ -30,4 +30,7 @@ export class PaymentService {
       const url = `${this.baseUrl}/create-affect/${metamaskPublicKey}`;
       return this.http.post<Payment>(url, payment);
     }
+          getPaymentsByWalletPK(metamaskPublicKey: String | null): Observable<Payment[]> {
+                    return this.http.get<Payment[]>(`${this.baseUrl}/getByWalletPK/${metamaskPublicKey}`);
+           }
 }

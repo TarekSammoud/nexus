@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Transfer } from 'src/app/core/entities/finance/transfer.model';
+import { Transfer, TransferType } from 'src/app/core/entities/finance/transfer.model';
 import { TransferService } from 'src/services/finance/Crud/transfer.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 
@@ -63,7 +63,9 @@ export class TransferPopupComponent {
   }
 
   transfer: Transfer = {
+    type: TransferType.OUT,
     receiverMetaMaskAddress: "0",
+    senderMetaMaskAddress: "0",
     amount: 0
   };
   createTransfer(): void {
@@ -75,6 +77,17 @@ export class TransferPopupComponent {
         console.error('Error creating transfer:', err);
       }
     });
+    console.log('Transfer create to the reciever:');
+    this.transfer.type = TransferType.IN;
+    this.transferService.createAndAffectTransfer(this.transfer.receiverMetaMaskAddress,this.transfer).subscribe({
+      next: (response) => {
+        console.log('Transfer created:', response);
+      },
+      error: (err) => {
+        console.error('Error creating transfer:', err);
+      }
+    });
+    
 
   }
  
@@ -85,6 +98,7 @@ export class TransferPopupComponent {
     }else{
          await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
           this.transfer.receiverMetaMaskAddress = friend.metaMaskAddress;
+          this.transfer.senderMetaMaskAddress = this.metamaskService.getWalletAddress() || '';
           this.transfer.amount = this.coinAmountTosend;
           this.createTransfer();
     }

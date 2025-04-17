@@ -59,6 +59,11 @@ public class PaymentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @GetMapping("/getByWalletPK/{metamaskPublicKey}")
+    public ResponseEntity<List<Payment>> getPaymentsByWalletId(@PathVariable String metamaskPublicKey) {
+        List<Payment> payments = paymentService.getPaymentsByWalletPK(metamaskPublicKey);
+        return ResponseEntity.ok(payments);
+    }
 
 
 }

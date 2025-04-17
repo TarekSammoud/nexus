@@ -14,6 +14,7 @@ public interface IPurchaseService{
     public boolean deletePurchase(Long id);
     public Purchase CreateAffectPurchaseToWallet(String metamaskPublicKey, Purchase purchase);
     public List<Purchase> CreateAffectPurchasesToWallet(String metamaskPublicKey, List<Purchase> purchases);
+    public List<Purchase> getPurchasesByWalletPK(String metamaskPublicKey) ;
 
 
 

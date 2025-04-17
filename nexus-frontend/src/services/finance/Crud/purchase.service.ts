@@ -27,4 +27,9 @@ export class PurchaseService {
     const url = `${this.baseUrl}/creates-affect/${metamaskPublicKey}`;
     return this.http.post<Purchase[]>(url, purchases);
   }
+        getPurchasesByWalletPK(metamaskPublicKey: String | null): Observable<Purchase[]> {
+                return this.http.get<Purchase[]>(`${this.baseUrl}/getByWalletPK/${metamaskPublicKey}`);
+             }
+  
+  
 }

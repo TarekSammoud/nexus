@@ -24,6 +24,7 @@ export class LoginComponent {
         (response) => {
           const token = response.token;
           // Sauvegarde du jeton JWT dans localStorage
+          console.log('Token JWT:', token);
           localStorage.setItem('auth_token', token);
 
           // Redirection vers la page du profil

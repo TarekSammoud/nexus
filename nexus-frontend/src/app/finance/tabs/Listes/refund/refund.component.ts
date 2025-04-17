@@ -2,6 +2,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Refund } from 'src/app/core/entities/finance/refund.model';
 import { RefundService } from 'src/services/finance/Crud/refund.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
+import { WalletDashboardService } from 'src/services/finance/wallet-dashboard.service';
 
 @Component({
   selector: 'app-refund',
@@ -11,20 +13,26 @@ import { RefundService } from 'src/services/finance/Crud/refund.service';
 export class RefundComponent implements OnInit {
   refunds: Refund[] = [];
   selectedRefundId: number = 0;
-  currentUser: string = 'hamdounisabri1';
-  currentDate: string = '2025-04-04 17:55:31';
+  connectdWalletPk : String = '' ;
+
 
   constructor(
     private refundService: RefundService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+        private metamaksService: MetamaskService,
+    
   ) {}
 
   ngOnInit(): void {
     this.loadRefunds();
   }
 
-  loadRefunds(): void {
-    this.refundService.getAllRefunds().subscribe({
+
+  async loadRefunds(): Promise<void> {
+
+    this.connectdWalletPk= await this.metamaksService.getWalletAddress() || '' ;
+
+    this.refundService.getRefundsByWalletPK(this.connectdWalletPk).subscribe({
       next: (data) => {
         this.refunds = data;
         this.cdr.detectChanges();
@@ -33,6 +41,8 @@ export class RefundComponent implements OnInit {
         console.error('Error fetching refunds:', error);
       }
     });
+
+    
   }
 
   setSelectedRefund(refundId: number): void {

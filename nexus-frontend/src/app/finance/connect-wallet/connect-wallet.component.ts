@@ -81,7 +81,6 @@ export class ConnectWalletComponent {
       }
     } else {
       this.router.navigate(['/wallet']); // Navigate to wallet dashboard after creating the wallet
-      alert('user already exists!');
     }
   }
 }

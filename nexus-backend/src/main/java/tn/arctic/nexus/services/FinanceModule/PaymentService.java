@@ -63,8 +63,10 @@ public class PaymentService implements IPaymentService {
         payment.setWallet(wallet);
         return paymentRepository.save(payment);    }
 
-
-
+    @Override
+    public List<Payment> getPaymentsByWalletPK(String metamaskPublicKey) {
+        return paymentRepository.findByWallet_MetamaskPublicKey(metamaskPublicKey);
+    }
 
 
 }

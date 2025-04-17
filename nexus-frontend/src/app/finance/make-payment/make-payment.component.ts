@@ -16,12 +16,14 @@ export class MakePaymentComponent {
   txReceiptLabel: string = ''; // Amount in Ether to send
   connectedWalletAddress : string =''; // Get the connected wallet address from the service
   
+  isFetched: boolean = false; // Flag to check if the price is fetched
   coinsAmountChosen: number = 0; // Amount in Ether to send
   priceChange: number = -2.4; // Positive for up, negative for down
   constructor(private cryptoPriceService: EthereumPriceService , private metaMaskService: MetamaskService,private paymentService : PaymentService ) {}
 
 
   ngOnInit(): void {
+  this.isFetched = false; // Reset the flag on component initialization
     // Fetch the Ethereum price on component initialization
     this.cryptoPriceService.getEthereumPrice().subscribe(
       (data) => {
@@ -29,7 +31,7 @@ export class MakePaymentComponent {
         this.ethereumPrice = data.ethereum.usd;
         this.oneNexusCoinPrice = 1 / this.ethereumPrice;
         console.log('Ethereum Price:', this.ethereumPrice);
-
+        this.isFetched = true; // Set the flag to true after fetching the price
       },
       (error) => {
         console.error('Error fetching Ethereum price:', error);

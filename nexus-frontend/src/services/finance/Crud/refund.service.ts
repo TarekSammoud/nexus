@@ -27,4 +27,7 @@ export class RefundService {
         const url = `${this.baseUrl}/create-affect/${purchaseId}`;
         return this.http.post<Refund>(url, refund);
       }
+           getRefundsByWalletPK(metamaskPublicKey: String | null): Observable<Refund[]> {
+              return this.http.get<Refund[]>(`${this.baseUrl}/getByWalletPK/${metamaskPublicKey}`);
+            }
 }
