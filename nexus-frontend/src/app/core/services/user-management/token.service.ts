@@ -36,4 +36,22 @@ export class TokenService {
         const decoded = this.getDecodedToken();
         return decoded ? decoded.roleType : null;
     }
+    hasToken(): boolean {
+        return !!localStorage.getItem('token'); // Ou sessionStorage selon ton choix
+    }
+
+
+    isTokenExpired(): boolean {
+        const token = localStorage.getItem('auth_token');
+        if (!token) return true;
+
+        const decodedToken = this.decodeToken(token);
+        const expiry = decodedToken?.exp * 1000; // Convertir en millisecondes
+        return Date.now() > expiry;
+    }
+    decodeToken(token: string): any {
+        const payload = token.split('.')[1];
+        return JSON.parse(atob(payload));
+    }
+
 }
