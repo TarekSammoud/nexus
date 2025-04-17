@@ -80,7 +80,7 @@ export class RefundAdminComponent implements OnInit, OnDestroy {
       this.filteredRefunds = [...this.refunds];
     } else {
       this.filteredRefunds = this.refunds.filter(
-        refund => refund.id.toString().includes(this.searchRefundId!.toString())
+        refund => refund.id?.toString().includes(this.searchRefundId!.toString())
       );
     }
   }

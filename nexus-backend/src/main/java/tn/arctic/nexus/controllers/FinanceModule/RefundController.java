@@ -1,12 +1,16 @@
 package tn.arctic.nexus.controllers.FinanceModule;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.entities.FinanceModule.Purchase;
 import tn.arctic.nexus.entities.FinanceModule.Refund;
+import tn.arctic.nexus.entities.FinanceModule.Transfer;
 import tn.arctic.nexus.services.FinanceModule.RefundService;
 
+import java.sql.Ref;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -44,5 +48,16 @@ public class RefundController {
             return ResponseEntity.ok("Deleted refund");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Refund not found"); // Return 404 with message
+    }
+    @PostMapping("/create-affect/{PurchaseId}")
+    public ResponseEntity<Refund> createAndAffectRefundToPayment(
+            @PathVariable Long PurchaseId,
+            @RequestBody Refund refund) {
+        try {
+            Refund savedRefund = refundService.CreateAffectRefundToPurchase(PurchaseId, refund);
+            return ResponseEntity.ok(savedRefund);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

@@ -49,7 +49,7 @@ public class Wallet implements Serializable {
 
     @OneToMany(mappedBy = "wallet")
     @JsonIgnoreProperties("wallet") // Prevents serialization of the 'wallet' field in Transfer
-    private List<Purchase> Purchase;
+    private List<Purchase> purchase;
 
 
 

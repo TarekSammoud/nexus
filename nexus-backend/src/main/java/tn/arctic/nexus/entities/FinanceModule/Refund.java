@@ -33,6 +33,11 @@ public class Refund implements Serializable  {
     private Date updatedAt;
 
     @OneToOne
-    @JsonIgnoreProperties("refund")
+    @JoinColumn(name = "purchase_id", unique = true) // Set the FK in Refund table
+    @JsonIgnoreProperties({"refund", "wallet"})
     private Purchase purchase;
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
 }
