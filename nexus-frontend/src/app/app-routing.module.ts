@@ -48,6 +48,7 @@ import { JamsComponent } from './jams/jams/jams.component';
 import { JamsListComponent } from './jams/jams-list/jams-list.component';
 import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
 import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.component';
+import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component';
 
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
@@ -119,6 +120,7 @@ const routes: Routes = [
   { path: 'live-room/:id', component: LiveRoomComponent },
   { path: 'stats', component: PublicationStatsComponent },
   { path: 'support', component: SupportComponent },
+  { path: 'calendar', component: JamCalendarComponent },
 
 
 

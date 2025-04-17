@@ -26,23 +26,26 @@ export class VipJamFormComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.editingJamId) {
-      this.vipJamService.updateVipJam(this.editingJamId, this.vipJam).subscribe({
-        next: () => {
-          this.loadAllVipJams();
-          this.resetForm();
-        }
-      });
-    } else {
-      this.vipJamService.createVipJam(this.vipJam).subscribe({
-        next: (res) => {
-          this.createdJam = res;
-          this.loadAllVipJams();
-          this.resetForm();
-        }
-      });
-    }
+  if (this.editingJamId) {
+    this.vipJamService.updateVipJam(this.editingJamId, this.vipJam).subscribe({
+      next: () => {
+        alert('✅ VIP Jam updated successfully!');
+        this.loadAllVipJams();
+        this.resetForm();
+      }
+    });
+  } else {
+    this.vipJamService.createVipJam(this.vipJam).subscribe({
+      next: (res) => {
+        alert('🎉 VIP Jam created successfully!');
+        this.createdJam = res;
+        this.loadAllVipJams();
+        this.resetForm();
+      }
+    });
   }
+}
+
 
   loadAllVipJams(): void {
     this.vipJamService.getAllVipJams().subscribe({

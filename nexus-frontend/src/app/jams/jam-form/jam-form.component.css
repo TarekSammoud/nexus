@@ -95,3 +95,71 @@
     box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
   }
   
+  /* Match dark theme background */
+/* Entire date field area - match rest of dark theme */
+mat-form-field.mat-form-field-appearance-fill {
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Inner container of the input box */
+.mat-form-field-flex {
+  background-color: #2b2b2b !important;
+  border-radius: 12px;
+  padding: 4px 12px;
+  color: #f0f0f0;
+}
+
+/* Label (floating label like "Development Dates") */
+.mat-form-field-label {
+  color: #bbb !important;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Text inside the input field */
+.mat-date-range-input-inner input {
+  color: #f0f0f0;
+  font-size: 14px;
+}
+
+/* Datepicker icon button */
+.mat-datepicker-toggle .mat-icon-button {
+  color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+/* Icon button hover effect */
+.mat-datepicker-toggle .mat-icon-button:hover {
+  background-color: #444;
+}
+
+/* Border and outline when focused */
+.mat-form-field-appearance-fill.mat-focused .mat-form-field-outline-thick {
+  color: #ff9800 !important;
+}
+
+/* The calendar popup background and text */
+.mat-calendar {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+/* Calendar cells default */
+.mat-calendar-body-cell-content {
+  color: #ccc;
+}
+
+/* Selected day style */
+.mat-calendar-body-selected {
+  background-color: #ff9800 !important;
+  color: #000 !important;
+  border-radius: 50%;
+}
+
+/* Active hover state in calendar */
+.mat-calendar-body-active {
+  background-color: #333 !important;
+}

@@ -180,3 +180,25 @@
     width: 95%;
   }
 }
+.jam-dates {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.date-label {
+  min-width: 110px;
+  font-weight: 600;
+  color: #ffcc00; /* golden yellow accent */
+}
+
+.date-range {
+  color: #ddd;
+  font-family: monospace;
+}

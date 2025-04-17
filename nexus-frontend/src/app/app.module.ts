@@ -67,6 +67,12 @@ import { AdminEntriesListComponent } from './admin-jam/pages/admin-entries-list/
 import { AdminJamMediaListComponent } from './admin-jam/pages/admin-jam-media-list/admin-jam-media-list.component';
 import { AdminJamRatingsListComponent } from './admin-jam/pages/admin-jam-ratings/admin-jam-ratings-list.component';
 import { VipJamFormComponent } from './admin-jam/pages/vip-jam-form/vip-jam-form.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDateRangePicker, MatDateRangeInput } from '@angular/material/datepicker';
 
 // User Management
 import { LoginComponent } from './user-management/login/login.component';
@@ -128,6 +134,7 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
 import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
+import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component';
 
 
 
@@ -172,6 +179,7 @@ import { CommonModule } from '@angular/common';
     AdminJamRatingsListComponent,
     VipJamFormComponent,
 
+
     PublicationListComponent,
     AdminHomeComponent,
     HomeComponent,
@@ -213,6 +221,7 @@ import { CommonModule } from '@angular/common';
     BidComponent,
     MarketDetailsComponent,
     LibraryComponent,
+    JamCalendarComponent,
 
 
     
@@ -244,10 +253,14 @@ import { CommonModule } from '@angular/common';
 
     MatChipsModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    FullCalendarModule,
   ],
   providers: [
     TokenService,
