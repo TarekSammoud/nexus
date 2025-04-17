@@ -16,7 +16,7 @@ export class ReportFormComponent implements OnInit {
   publicationId!: number;
   publication!: Publication;
   reason: string = '';
-  userId: number = 6; // à remplacer par l'utilisateur connecté
+  userId: number = 1; // à remplacer par l'utilisateur connecté
 
   constructor(
     private route: ActivatedRoute,

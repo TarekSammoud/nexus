@@ -19,6 +19,7 @@ export class Game {
     categories!: GameCategory[];
     gameMediaList!: GameMedia[];
     coverPicture?: GameMedia;
+    bannerPicture?: GameMedia;
     screenshots?: GameMedia[];
     minRequirements?: SystemRequirements; 
     recommendedRequirements?: SystemRequirements;

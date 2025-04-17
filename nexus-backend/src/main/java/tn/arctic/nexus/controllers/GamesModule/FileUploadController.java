@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tn.arctic.nexus.services.GamesModule.FtpService;
 
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.List;
 
 @RestController
@@ -40,9 +41,14 @@ public class FileUploadController {
             // Get the file data from the FTP server
             byte[] fileData = ftpService.downloadFile(filename);
 
+            // Guess the content type based on the filename (extension)
+            String contentType = URLConnection.guessContentTypeFromName(filename);
+            if (contentType == null) {
+                contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE; // fallback
+            }
+
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            headers.setContentDispositionFormData("attachment", filename);
+            headers.setContentType(MediaType.parseMediaType(contentType));
 
             return ResponseEntity.ok()
                     .headers(headers)
@@ -51,4 +57,5 @@ public class FileUploadController {
             return ResponseEntity.status(500).body(("Error downloading file: " + e.getMessage()).getBytes());
         }
     }
+
 }

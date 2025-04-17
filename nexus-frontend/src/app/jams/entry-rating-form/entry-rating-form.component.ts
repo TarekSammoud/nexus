@@ -16,7 +16,7 @@ export class EntryRatingFormComponent {
     graphicsScore: 5,
     gameplayScore: 5,
     musicScore: 5,
-    entry: { id: this.entry.id },
+    entry: { id: 0 },
     user: { id: 1 } // 🔐 Replace with the actual connected user's ID dynamically later
   };
 

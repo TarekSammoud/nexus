@@ -67,4 +67,9 @@ export class GameCategoryListComponent implements OnInit {
     this._router.navigate(['/admin/games/categories/add-new-category']);
    }
 
+   goToPage(category: GameCategory) {
+    // Navigate to the game grid page with the selected category
+    window.location.href = `/category/${category.name}`;
+  }
+
 }
