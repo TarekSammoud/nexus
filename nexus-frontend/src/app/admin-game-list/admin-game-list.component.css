@@ -1,164 +1,82 @@
-/* General Grid Styling */
-/*
-.e-game-cell {
-    font-weight: bold;
-    font-size: 16px;
+.admin-games-container {
+    max-width: 95%;
+    margin: auto;
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eaeaea;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .admin-games-container h2 {
     text-align: center;
-    background: #171a21; 
-    color: #ffffff; 
-    padding: 8px;
-
-}*/
-
-/* Row Layout */
-.e-game-info-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: #171a21; /* Dark row background */
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transition */
-    min-height: 60px; /* Reduced row height */
-    text-align: left;
-    cursor: pointer;
-}
-
-.no-styling {
-    border: none;
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    font: inherit;
-    color: inherit;
-}
-
-
-.e-game-info-container:hover {
-    background-color: #2c3038; /* Lighter shade or another color on hover */
-}
-
-
-/* Game Image */
-.e-game-image-layout {
-    flex: 0 0 80px; /* Smaller image */
-    margin-right: 12px;
-}
-
-.e-game-image {
+    font-weight: 800;
+    font-size: 28px;
+    color: #4fc3f7;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #4fc3f777;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  table {
     width: 100%;
+    border-collapse: collapse;
+    background-color: #27293d;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  thead {
+    background-color: #333652;
+    color: #ffffff;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+  
+  td img.img-thumbnail {
+    max-width: 90px;
     height: auto;
-    border-radius: 6px;
-    object-fit: cover;
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
-}
+    border: none;
+  }
 
-/* Game Info */
-.e-game-info-layout {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    color: #c5c6c7; /* Softer text color */
-    width: 100%;
-
-}
-
-/* Game Title */
-.e-game-title {
-    font-size: 18px;
+  .img-thumbnail {
+    border: none !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  
+  tr:nth-child(even) {
+    background-color: #2f3145;
+  }
+  
+  tr:hover {
+    background-color: #3b3e5a;
+    transition: background-color 0.3s;
+  }
+  
+  .game-name {
     font-weight: bold;
     color: #ffffff;
-}
-
-/* Description */
-.e-info-text-separator {
-    font-size: 13px;
-    color: #b0b3b8;
-}
-
-/* Platform */
-.e-game-platform {
-    font-size: 13px;
-    font-style: italic;
-    color: #66c0f4;
-}
-
-/* Scrollbar Track */
-ejs-grid ::-webkit-scrollbar {
-    width: 8px;  /* Adjust scrollbar width */
-    height: 8px; /* Adjust scrollbar height for horizontal scrolling */
-}
-
-/* Scrollbar Handle */
-ejs-grid ::-webkit-scrollbar-thumb {
-    background: #555; /* Grey handle */
-    border-radius: 4px; /* Rounded corners */
-}
-
-/* Scrollbar Track */
-ejs-grid ::-webkit-scrollbar-track {
-    background: #222; /* Dark grey track */
-    border-radius: 4px;
-}
-
-/* Hover Effect */
-ejs-grid ::-webkit-scrollbar-thumb:hover {
-    background: #777; /* Lighter grey on hover */
-}
-
-/* For Firefox */
-ejs-grid {
-    scrollbar-color: #555 #222;
-    scrollbar-width: thin;
-}
-
-.e-hide{
-    display: none;
-}
-
-
-/* Price */
-.e-game-price-min-layout {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    font-weight: bold;
-    color: #4caf50;
-}
-
-.e-game-price-text {
-    color: #cccccc;
-    font-weight: normal;
-}
-
-.e-game-price {
-    font-size: 17px;
-    font-weight: bold;
-    color: #ff5733;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .e-game-info-container {
-        flex-direction: column;
-        align-items: left;
-        text-align: left;
-        min-height: 80px; /* Slightly larger for mobile */
-    }
-
-    .e-game-image-layout {
-        margin-right: 0;
-        margin-bottom: 8px;
-    }
-
-    .e-game-image {
-        width: 10%;
-        height: auto;
-        border-radius: 6px;
-        object-fit: cover;
-        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
-    }
-}
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .game-name:hover {
+    color: #03a9f4;
+  }
+  
+  .btn {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  
