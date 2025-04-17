@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -77,9 +78,9 @@ public class User implements Serializable {
     @JsonManagedReference
     private List<GameKey> gamekeyLibrary;
 
-    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("user-entryrating")
-    private Set<EntryRating> ratings;*/
+    private Set<EntryRating> ratings;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviews-user")
