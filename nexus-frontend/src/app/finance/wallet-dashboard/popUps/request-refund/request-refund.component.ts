@@ -2,8 +2,10 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { Purchase } from 'src/app/core/entities/finance/purchase.model';
+import { Refund } from 'src/app/core/entities/finance/refund.model';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
 import { PurchaseService } from 'src/services/finance/Crud/purchase.service';
+import { RefundService } from 'src/services/finance/Crud/refund.service';
 
 @Component({
   selector: 'app-request-refund',
@@ -18,7 +20,7 @@ export class RequestRefundComponent {
   selectedPurchaseId: number | null = null;
   refundReason: string = '';
 
-  constructor(public activeModal: NgbActiveModal , private purchaseService: PurchaseService,    private cdr: ChangeDetectorRef) {}
+  constructor(public activeModal: NgbActiveModal , private purchaseService: PurchaseService,    private cdr: ChangeDetectorRef,private refundService :RefundService) {}
 
 
   loadPurchases(): void {
@@ -52,6 +54,11 @@ export class RequestRefundComponent {
     this.selectedPurchaseId = purchasetId;
   }
 
+  refund :Refund={
+    reason: "",
+    status: 'pending',
+    refundAmount: 0,
+  }
   submitRefund(): void {
     if (this.selectedPurchaseId && this.refundReason.trim()) {
       // Handle refund submission
@@ -59,6 +66,10 @@ export class RequestRefundComponent {
         paymentId: this.selectedPurchaseId,
         reason: this.refundReason
       });
+      this.refund.reason = this.refundReason;
+      this.refund.refundAmount = this.purchases.find(p => p.id === this.selectedPurchaseId)?.price || 0;
+      // Call the refund service to create the refund
+      this.refundService.createAndAffectToPurchases(this.selectedPurchaseId,this.refund).subscribe({});
       this.activeModal.close('refund_submitted');
     }
   }

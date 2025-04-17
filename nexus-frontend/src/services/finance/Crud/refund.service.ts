@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { Refund } from 'src/app/core/entities/finance/refund.model';
 
 @Injectable({
@@ -22,4 +23,8 @@ export class RefundService {
     updateRefund(refund: Refund): Observable<Refund> {
       return this.http.put<Refund>(`${this.baseUrl}/update`, refund);
     }
+      createAndAffectToPurchases(purchaseId: Number , refund: Refund): Observable<Refund> {
+        const url = `${this.baseUrl}/create-affect/${purchaseId}`;
+        return this.http.post<Refund>(url, refund);
+      }
 }

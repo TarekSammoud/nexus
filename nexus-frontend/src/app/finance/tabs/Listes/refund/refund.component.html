@@ -43,7 +43,7 @@
           <!-- Delete Button Column -->
           <div class="col-md-1 d-flex justify-content-center align-items-center">
             <button class="btn btn-link delete-btn" data-bs-toggle="modal" data-bs-target="#deleteRefundModal"
-              (click)="setSelectedRefund(refund.id)">
+              (click)="refund.id !== undefined && setSelectedRefund(refund.id)">
               <i class="far fa-trash-can fa-2x"></i>
             </button>
           </div>
