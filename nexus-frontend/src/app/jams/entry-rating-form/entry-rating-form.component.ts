@@ -20,7 +20,7 @@ export class EntryRatingFormComponent {
     user: { id: 1 } // 🔐 Replace with the actual connected user's ID dynamically later
   };
 
-  constructor(private ratingService: EntryRatingService) {}
+  constructor(private ratingService: EntryRatingService) { }
 
   submitRating(): void {
     if (!this.entry || !this.entry.id) return;
@@ -45,6 +45,6 @@ export class EntryRatingFormComponent {
       user: { id: 1 } // reinitialize user id
     };
   }
-  
-  
+
+
 }
