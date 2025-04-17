@@ -17,6 +17,11 @@ export class GameService {
     return this.http.get<Game[]>(`${this.gamesUrl}/all-games`);
   }
 
+  getBrowserGames(): Observable<Game[]> {  // ✅ Fix the return type
+
+    return this.http.get<Game[]>(`${this.gamesUrl}/all-browser-games`);
+  }
+
   getLastGameId(): Observable<number> {
     return this.http.get<number>(`${this.gamesUrl}/last-id`);
   }

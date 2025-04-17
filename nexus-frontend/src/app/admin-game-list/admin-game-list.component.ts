@@ -77,6 +77,8 @@ export class AdminGameListComponent implements OnInit {
 
   generateKey(data: Game){
     console.log(data);
+    const token = localStorage.getItem('token');
+    
      var gameKey: any = { game: data, user: { id: 1 } };  // Initialize gameKey with required properties
 
      console.log(gameKey);

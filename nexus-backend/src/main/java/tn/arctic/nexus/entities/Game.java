@@ -29,6 +29,8 @@ public class Game implements Serializable {
 
     private String name;
 
+    private GameType type;
+
     private String description;
 
     private BigDecimal price;

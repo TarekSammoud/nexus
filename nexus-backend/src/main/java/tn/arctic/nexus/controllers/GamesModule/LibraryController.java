@@ -35,6 +35,9 @@ public class LibraryController {
         this.authService = authService;
     }
 
+
+
+
     @PostMapping("/add/{gameId}")
     public ResponseEntity<?> addGameToLibrary(@PathVariable Long gameId, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer ", "");
