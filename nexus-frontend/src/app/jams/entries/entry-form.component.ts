@@ -15,13 +15,13 @@ export class EntryFormComponent implements OnInit {
   entry: Partial<Entry> = {
     nameEntry: '',
     descriptionEntry: '',
- //   user: { id: 1 },
+    // user: { id: 1 },
 
 
     jam: { id: 0 }
   };
 
-  constructor(private entryService: EntryService, private tokenService: TokenService) {}
+  constructor(private entryService: EntryService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.entry.jam = { id: this.jamId };
