@@ -1,4 +1,3 @@
-<!-- transfer-admin.component.html -->
 <div class="dashboard-container">
     <!-- Statistics Section -->
     <div class="statistics-section">
@@ -68,18 +67,20 @@
                         <div class="wallet-info">
                             <label>Transfer Details</label>
                             <div class="wallet-transfer">
-                                <div class="wallet-id">
+                                <div class="wallet-id sender">
                                     <i class="fas fa-wallet"></i>
-                                    {{transfer.wallet?.id}}
+                                    {{transfer.wallet?.metamaskPublicKey}}
                                 </div>
-                                <i class="fas fa-arrow-right transfer-arrow"></i>
-                                <div class="wallet-id">
+                                <div class="arrow-container">
+                                    <i class="fas fa-arrow-down transfer-arrow"></i>
+                                </div>
+                                <div class="wallet-id receiver">
                                     <i class="fas fa-wallet"></i>
                                     {{transfer.receiverMetaMaskAddress}}
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div class="transfer-dates">
                             <div class="date-info">
                                 <i class="far fa-calendar-plus"></i>
