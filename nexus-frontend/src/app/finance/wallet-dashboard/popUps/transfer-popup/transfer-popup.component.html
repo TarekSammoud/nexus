@@ -50,7 +50,7 @@
                    class="friend-avatar">
               <span class="ms-3">{{ friend.name }}</span>
             </div>
-            <button class="btn btn-primary btn-sm" (click)="sendCoins(friend)">
+            <button class="btn btn-primary btn-sm" (click)="sendCoins(friend)" (click)="activeModal.close('Close click')">
               <i class="fas fa-paper-plane me-1"></i>
               Send
             </button>

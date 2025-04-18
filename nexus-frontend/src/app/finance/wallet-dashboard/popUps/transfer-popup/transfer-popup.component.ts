@@ -102,6 +102,7 @@ export class TransferPopupComponent {
           this.transfer.senderMetaMaskAddress = this.metamaskService.getWalletAddress() || '';
           this.transfer.amount = this.coinAmountTosend;
           this.createTransfer();
+          this.activeModal.close('Coins sent successfully!');
     }
   
   }
