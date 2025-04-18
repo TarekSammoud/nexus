@@ -4,6 +4,7 @@ import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
 import { EthereumPriceService } from 'src/services/finance/ethereum-price.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
+import { NotificationService } from 'src/services/finance/notification.service';
 
 @Component({
   selector: 'app-make-payment',
@@ -19,7 +20,10 @@ export class MakePaymentComponent {
   isFetched: boolean = false; // Flag to check if the price is fetched
   coinsAmountChosen: number = 0; // Amount in Ether to send
   priceChange: number = -2.4; // Positive for up, negative for down
-  constructor(private cryptoPriceService: EthereumPriceService , private metaMaskService: MetamaskService,private paymentService : PaymentService ) {}
+  constructor(private cryptoPriceService: EthereumPriceService , 
+    private metaMaskService: MetamaskService,
+    private notificationService: NotificationService,
+     ) {}
 
 
   ngOnInit(): void {
@@ -37,10 +41,13 @@ export class MakePaymentComponent {
         console.error('Error fetching Ethereum price:', error);
       }
     );
+
     this.lsitenToEtherReceived();
+    
   }
 
   async lsitenToEtherReceived() {
+    this.metaMaskService.connectWallet()
     this.connectedWalletAddress = await this.metaMaskService.getWalletAddress() || '';
     console.log("this.connectedWalletAddress",this.connectedWalletAddress)
     if(this.connectedWalletAddress =='') {console.log("adrres null") } else{// Get the connected wallet address from the service
