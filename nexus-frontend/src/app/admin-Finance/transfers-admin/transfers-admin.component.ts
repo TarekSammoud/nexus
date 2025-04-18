@@ -36,8 +36,9 @@ export class TransfersAdminComponent {
   loadTransfers(): void {
     this.transferService.getAllTransfers().subscribe({
       next: (data) => {
-        this.transfers = data;
-        this.filteredTransfers = data;
+        // Only keep transfers where type is 'OUT'
+        this.transfers = data.filter(transfer => transfer.type === 'OUT');
+        this.filteredTransfers = [...this.transfers];
         this.calculateStatistics();
       },
       error: (error) => {
@@ -45,6 +46,7 @@ export class TransfersAdminComponent {
       }
     });
   }
+
 
   calculateStatistics(): void {
     this.totalTransfers = this.transfers.length;

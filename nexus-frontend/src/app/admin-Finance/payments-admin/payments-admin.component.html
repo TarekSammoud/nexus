@@ -21,23 +21,25 @@
                 <p class="stat-value">{{totalCoinsPurchased}}</p>
             </div>
         </div>
-
-        <div class="stat-card payment-rates">
-            <div class="stat-content">
-                <div class="rate-item success">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Success Rate: {{successRate | number:'1.0-1'}}%</span>
+        <div class="stat-card total-revenue">
+            <div class="card-content">
+                <!-- Original Content -->
+                <div class="stat-icon">
+                    <i class="fab fa-ethereum"></i>
                 </div>
-                <div class="rate-item failure">
-                    <i class="fas fa-times-circle"></i>
-                    <span>Failure Rate: {{failureRate | number:'1.0-1'}}%</span>
-                </div>
-                <div class="rate-item pending">
-                    <i class="fas fa-clock"></i>
-                    <span>Pending: {{pendingCount}}</span>
+                <div class="stat-content">
+                    <h3>Contract Balance</h3>
+                    <p class="stat-value">{{contractBalance}} ETH</p>
                 </div>
             </div>
+            
+            <!-- Button that appears on hover -->
+            <button class="hover-button" (click)="withdraw()">
+                <i class="fab fa-ethereum"></i>
+                <span>withdraw Ether</span>
+            </button>
         </div>
+
     </div>
 
     <!-- Payments Section -->

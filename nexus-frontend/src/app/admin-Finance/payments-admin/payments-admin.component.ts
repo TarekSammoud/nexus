@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ethers } from 'ethers';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
+import { MetamaskService } from 'src/services/finance/metamask.service';
 
 @Component({
   selector: 'app-payments-admin',
@@ -19,20 +21,28 @@ export class PaymentsAdminComponent {
   // Statistics
   totalRevenue: number = 0;
   totalCoinsPurchased: number = 0;
-  successRate: number = 0;
-  failureRate: number = 0;
-  pendingCount: number = 0;
+  contractBalance: String = "";
 
   // Dialogs
   deleteConfirmation: { show: boolean, paymentId: number | null } = { show: false, paymentId: null };
   updateDialogData: { show: boolean, payment: Payment | null } = { show: false, payment: null };
 
-  constructor(private paymentService: PaymentService) {}
+  constructor(private paymentService: PaymentService,private metamaskService:MetamaskService) {}
 
   ngOnInit(): void {
     this.loadPayments();
+    this.getContractBalnce()
   }
 
+  async getContractBalnce() {
+   await this.metamaskService.connectWallet()
+
+   const get= await this.metamaskService.getContractBalance()
+   const GETether = ethers.formatEther(get.toString())
+   this.contractBalance = GETether
+   console.log("contract balance",GETether)
+
+  }
   loadPayments(): void {
     this.paymentService.getAllPayments().subscribe({
       next: (data) => {
@@ -50,13 +60,7 @@ export class PaymentsAdminComponent {
     this.totalRevenue = this.payments.reduce((sum, payment) => sum + Number(payment.price), 0);
     this.totalCoinsPurchased = this.payments.reduce((sum, payment) => sum + payment.coinAmount, 0);
     
-    const totalPayments = this.payments.length;
-    const successfulPayments = this.payments.filter(p => p.status === 'Completed').length;
-    const failedPayments = this.payments.filter(p => p.status === 'Failed').length;
-    this.pendingCount = this.payments.filter(p => p.status === 'Pending').length;
-    
-    this.successRate = (successfulPayments / totalPayments) * 100;
-    this.failureRate = (failedPayments / totalPayments) * 100;
+
   }
 
   showUpdateDialog(event: MouseEvent, payment: Payment): void {
@@ -132,5 +136,8 @@ export class PaymentsAdminComponent {
       );
     }
   }
-
+  async withdraw() {
+    const tx = await this.metamaskService.withdrawEther()
+}
+  // withdraw contract balance to the owner address
 }

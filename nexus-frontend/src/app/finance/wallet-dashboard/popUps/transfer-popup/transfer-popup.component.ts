@@ -90,6 +90,7 @@ export class TransferPopupComponent {
     
 
   }
+  
  
   async sendCoins(friend: Friend) {
     if (this.coinAmountTosend <= 0) {

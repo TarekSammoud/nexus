@@ -14,14 +14,14 @@ export class MetamaskService {
   private provider: ethers.BrowserProvider | ethers.JsonRpcProvider | null = null;
   private signer: ethers.Signer | null = null;
   private contract: ethers.Contract | null = null;
-  private contractAddress = '0xF3D2109c12f133D16bEa33fc98f135E09C91d665'; // Replace with actual contract address
+  private contractAddress = '0x99CaC4A7DD3c6495329d95ac3a1FdC42b399a389'; // Replace with actual contract address
   private contractABI = [
     "function getBalance(address userMetamaskAdd) view returns (uint256)",
     "function addVirtualCoins(address userMetamaskAdd, uint256 amount)",
     "function transferVirtualCoins(address fromUserMetamaskAdd, address toUserMetamaskAdd, uint256 amount)",
     "function addUser(address userMetamaskAdd)",
     "function getContractBalance() view returns (uint256)",
-    "function withdrawEther(address payable _to, uint256 _amount)",
+    "function withdrawEther(address payable _to) public",
     "function userExists(address userMetamaskAdd) view returns (bool)",
     "function SpendVirtualCoins(address userMetamaskAdd, uint256 amount)",
 
@@ -373,6 +373,37 @@ async SpendCoinsSingleGme(amount:number,game: Game) {
       this.errorMessage = error.message || 'Failed to Spend value.';
       console.log(this.errorMessage);
     }
+  }
+}
+
+async getContractBalance(): Promise<BigInt> {
+  try {
+    if (!this.contract) throw new Error('Contract not initialized');
+    const value = await this.contract['getContractBalance']();
+    const balance: BigInt = BigInt(value);
+    return balance;
+  } catch (error: any) {
+    console.log('Error gettong contract balance user:', error.message || error);
+    this.errorMessage = error.message || 'Failed to fetch value.';
+    return BigInt(-1);
+
+  }
+}
+
+async withdrawEther() {
+  try {
+    if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
+    const tx = await this.contract['withdrawEther']("0x9375f2d84f9843Df4BC29260219B7B25E73a92d1");
+    console.log('Transaction sent (withdrawEther):', tx.hash);
+
+    await tx.wait();
+    console.log('Transaction mined (withdrawEther):', tx.hash);
+
+  } catch (error: any) {
+    console.error('Error setting value:', error.message || error);
+    this.errorMessage = error.message || 'Failed to set value.';
+    console.log(this.errorMessage);
+
   }
 }
 

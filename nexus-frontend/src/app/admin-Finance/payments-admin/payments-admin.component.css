@@ -623,3 +623,112 @@
         padding: 1rem;
     }
 }
+
+.stat-card {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-icon {
+    background: #143584;
+    padding: 1rem;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-icon i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-content {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-content h3 {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: #143584;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hover Button Styles */
+.hover-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: #143584;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.hover-button i {
+    font-size: 1.25rem;
+}
+
+/* Hover Effects */
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(20, 53, 132, 0.2);
+}
+
+.stat-card:hover .card-content {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.stat-card:hover .hover-button {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+/* Button Hover Effect */
+.hover-button:hover {
+    background: #0f2961;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 5px 15px rgba(20, 53, 132, 0.3);
+}
