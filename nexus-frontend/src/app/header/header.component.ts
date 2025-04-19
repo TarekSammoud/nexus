@@ -7,8 +7,6 @@ import { TokenService } from '../core/services/user-management/token.service';  
 import { GameKeyService } from '../core/services/game-key.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MetamaskService } from 'src/services/finance/metamask.service';
-import { PanierService } from 'src/services/finance/panier.service';
 
 @Component({
   selector: 'app-header',
@@ -18,9 +16,6 @@ import { PanierService } from 'src/services/finance/panier.service';
 export class HeaderComponent implements OnInit {
   user: any = {};
   imageUrl: any = null;
-  cartCountItems : number = 0;  
-  isWalletConnected: boolean = false;
-
 
   constructor(
     private authService: AuthService,
@@ -31,7 +26,6 @@ export class HeaderComponent implements OnInit {
     // Injection du TokenService
     , private _router: Router,
     private gameKeyService: GameKeyService,
-    private router: Router,private panierService: PanierService,private metaMaskService: MetamaskService,
     private _fb: FormBuilder
   ) { }
   gameKeyForm!: FormGroup;
@@ -41,16 +35,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.metaMaskService.isWalletConnected().then(isConnected => {
-      this.isWalletConnected = isConnected;
-    });
-  
-    this.panierService.countItems();
-    this.panierService.count$.subscribe(newCount => {
-      this.cartCountItems = newCount;
-    });
-    this.gameKeyForm= this._fb.group({
-      keyCode: ['',Validators.required]
+    this.gameKeyForm = this._fb.group({
+      keyCode: ['', Validators.required]
     })
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
@@ -68,9 +54,6 @@ export class HeaderComponent implements OnInit {
         console.error('Erreur lors de la récupération du profil utilisateur', err);
       }
     });
-
-   ///Finanace Management
-
   }
 
   loadProfilePicture(userId: number): void {
@@ -89,35 +72,36 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['jams']);
   }
 
-  goToWallet() {
-    
-    this.router.navigate([this.isWalletConnected ? '/wallet' : '/connectWallet']);
 
-  }
-  
-  
-  onSubmit(){
-    if (this.gameKeyForm.valid){
+
+  onSubmit() {
+    if (this.gameKeyForm.valid) {
       this._gameKeyService.redeemGameKey(this.gameKeyForm.value).subscribe({
-    next: (res: boolean) => {
-      if (res === true) {
-        this.successMessage = 'Code redeemed successfully!';
-        this.errorMessage = '';
-        this.gameKeyForm.reset();
+        next: (res: boolean) => {
+          if (res === true) {
+            this.successMessage = 'Code redeemed successfully!';
+            this.errorMessage = '';
+            this.gameKeyForm.reset();
 
-        setTimeout(() => this.successMessage = '', 3000); // optional auto-clear
-      } else {
-        this.successMessage = '';
-        this.errorMessage = 'Invalid or already used code.';
+            setTimeout(() => this.successMessage = '', 3000); // optional auto-clear
+          } else {
+            this.successMessage = '';
+            this.errorMessage = 'Invalid or already used code.';
 
-        setTimeout(() => this.errorMessage = '', 3000); // optional auto-clear
-      }
-    },
-    error: (err) => {
-      this.successMessage = '';
-      this.errorMessage = 'Something went wrong. Please try again.';
-    }
-  });
+            setTimeout(() => this.errorMessage = '', 3000); // optional auto-clear
+          }
+        },
+        error: (err) => {
+          this.successMessage = '';
+          this.errorMessage = 'Something went wrong. Please try again.';
+        }
+      });
     }
   }
+  logout(): void {
+    this.authService.logout(); // Tu peux aussi gérer les erreurs ici si besoin
+    this._router.navigate(['/login']); // Redirection vers la page de login
+  }
+
+
 }

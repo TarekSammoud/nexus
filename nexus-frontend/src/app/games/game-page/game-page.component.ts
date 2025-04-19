@@ -38,6 +38,7 @@ groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
 
 reviewForm: FormGroup;
 inLibrary = false ; 
+bannerUrl: string = '';
 
   constructor(private panierService: PanierService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
@@ -49,6 +50,15 @@ inLibrary = false ;
           this.groupedReviews = this.groupReviews(this.game.gameReviewList, 3);
         }
         this.game.screenshots = []; // ✅ Initialize
+
+        for (let media of this.game.gameMediaList) {
+          if (media.gameMediaType === 'BANNER') {
+            console.log("FOUND BANNER")
+            this.game.bannerPicture = media;
+            this.bannerUrl= this.game.bannerPicture.mediaUrl
+            console.log(this.game.bannerPicture);
+          }
+        }
 
         for (let media of this.game.gameMediaList) {
           if (media.gameMediaType === 'SCREENSHOT') {

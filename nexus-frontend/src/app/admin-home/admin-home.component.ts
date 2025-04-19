@@ -27,14 +27,29 @@ export class AdminHomeComponent {
   dropdownOpen = false;
   walletDropdownOpen = false;  // New property for wallet dropdown
   isCollapsed = false;  // Track whether sidebar is collapsed
+  jamDropdownOpen = false;
+
+  dropdownOpenD = false;
+
 
 
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
   }
 
+  toggleJamDropdown() {
+    this.jamDropdownOpen = !this.jamDropdownOpen;
+  }
+  
   toggleSupportDropdown(){
     this.supportDropdownOpen = !this.supportDropdownOpen;
+  }
+  toggleDropdownD() {
+    this.dropdownOpenD = !this.dropdownOpenD;
+  }
+
+  toggleDropdownf () {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   toggleWalletDropdown() {  // New method for wallet dropdown
@@ -51,3 +66,4 @@ export class AdminHomeComponent {
     this.isCollapsed = !this.isCollapsed;
   }
 }
+  

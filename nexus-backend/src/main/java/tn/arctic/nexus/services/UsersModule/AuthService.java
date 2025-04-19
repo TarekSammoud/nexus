@@ -25,7 +25,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final IUsersModuleUserVerificationRepository verificationRepository;
 
-    @Autowired
     @Qualifier("userEmailService")
     private final EmailService emailService;
 

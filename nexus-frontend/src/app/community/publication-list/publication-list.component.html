@@ -1,0 +1,152 @@
+
+<div class="hero-banner position-relative text-center text-white d-flex align-items-center justify-content-center">
+  <img src="assets/images/communityimg.png" alt="Community Banner" class="banner-img" />
+
+  <div class="hero-content position-absolute">
+    <h1 class="display-4 fw-bold glow-text">🎮 COMMUNITY ON NEXUS</h1>
+    <p class="lead mb-4">Engage with fellow gamers, share your experiences, and contribute to discussions!</p>
+    <button class="btn btn-neon" routerLink="/community/add">
+      <i class="bi bi-plus-circle-dotted me-2"></i> Ajouter une Publication
+    </button>
+    
+      </div>
+</div>
+
+
+
+<div class="page-wrapper">
+
+  
+  <div class="content-wrapper container">
+    <div class="publication-list-container shadow">
+      <button class="btn btn-neon" routerLink="/sondages/list">
+        <i class="bi bi-plus-circle-dotted me-2"></i> voting for your favourite streamer
+      </button>
+      <div class="title-box my-5 text-center">
+        
+        <div class="icon-box mx-auto mb-2">
+          <i class="bi bi-chat-right-text-fill fs-3 text-pink"></i>
+        </div>
+        <h2 class="title-text">📚 Publications Récentes</h2>
+      </div>
+      
+      <div class="search-bar-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          class="search-input"
+          placeholder="🔍 Rechercher une publication..."
+        />
+      </div>
+      
+      
+
+      <div *ngIf="!publications || publications.length === 0" class="alert alert-warning text-center">
+        🚨 Aucune publication trouvée.
+      </div>
+
+      <div class="publication-list">
+        <div *ngFor="let publication of filteredPublications" class="card mb-4"
+             [ngClass]="{ 'border-start border-5 border-warning bg-light text-dark': publication.pinned, 'bg-dark text-light': !publication.pinned }">
+          <div class="card-body">
+
+            <!-- Badge Épinglé -->
+            <div *ngIf="publication.pinned" class="mb-2">
+              <span class="badge bg-danger text-light fw-bold">📌 Publication Épinglée</span>
+            </div>
+
+            <!-- En-tête : nom de l'utilisateur -->
+            <div class="d-flex align-items-center mb-2">
+              <img src="assets/images/user-avatar.jpg" class="rounded-circle me-3 user-avatar" alt="avatar" />
+              <h5 class="mb-0 fw-bold">{{ publication.user?.firstName || 'Utilisateur' }} {{ publication.user?.lastName || '' }}</h5>
+            </div>
+
+            <!-- Affichage de la catégorie -->
+            <div class="mb-3">
+              <small class="fw-bold">
+                <strong>Catégorie :</strong> {{ publication.category?.name || 'Non spécifiée' }}
+              </small>
+            </div>
+
+            <!-- Titre de la publication -->
+            <h4 class="fw-bold">{{ publication.title }}</h4>
+
+            <!-- Contenu stylisé selon pinned -->
+            <p [ngClass]="{ 'fw-bold': publication.pinned, 'text-white-50': !publication.pinned }">
+              {{ publication.content }}
+            </p>
+
+            <!-- Actions -->
+            <div class="d-flex justify-content-between flex-wrap mt-3 gap-2">
+              <!-- Like -->
+              <button
+                class="btn btn-like d-flex align-items-center gap-1"
+                [ngClass]="{ 'btn-outline-danger': !userLiked[publication.id], 'btn-danger': userLiked[publication.id] }"
+                (click)="toggleLike(publication.id)"
+              >
+                <i class="bi bi-heart-fill"></i>
+                <span class="fw-semibold">J’aime</span>
+                <span class="badge bg-light text-dark ms-1">{{ likeCounts[publication.id] || 0 }}</span>
+              </button>
+
+              <!-- Boutons -->
+              <button class="btn btn-outline-info btn-sm" (click)="toggleCommentForm(publication.id)">💬 Commenter</button>
+              <button class="btn btn-outline-warning btn-sm" [routerLink]="['/community/edit', publication.id]">✏️ Modifier</button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deletePublication(publication.id)">🗑️ Supprimer</button>
+              <button class="btn btn-outline-primary btn-sm" (click)="togglePin(publication)">
+                {{ publication.pinned ? '📍 Désépingler' : '📍 Épingler' }}
+              </button>
+              <button class="btn btn-outline-danger btn-sm" [routerLink]="['/report/create', publication.id]">
+                🚩 Signaler
+              </button>
+              
+            </div>
+
+            <!-- Formulaire de commentaire -->
+            <div *ngIf="showCommentForm[publication.id]" class="mt-3">
+              <textarea [(ngModel)]="newCommentContent[publication.id]" rows="3"
+                class="form-control bg-dark text-white border-secondary"
+                placeholder="✍️ Écris ton commentaire ici..."></textarea>
+              <div class="d-flex gap-2 mt-2 justify-content-end">
+                <button class="btn btn-success btn-sm" (click)="addComment(publication.id)">➕ Ajouter</button>
+                <button class="btn btn-secondary btn-sm" (click)="toggleCommentForm(publication.id)">❌ Annuler</button>
+              </div>
+            </div>
+
+            <!-- Liste des commentaires -->
+     
+<ng-container *ngIf="publication.id as pubId">
+<p></p>
+
+
+  <div *ngFor="let comment of commentsByPublication?.[pubId]" class="comment-bubble shadow-sm">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <p class="fw-semibold mb-1 text-primary">
+          {{ comment.user?.firstName || 'Utilisateur' }} :
+        </p>
+        <p class="mb-1 text-body">{{ comment.content }}</p>
+        <small class="text-muted">{{ comment.createdAt | date:'short' }}</small>
+      </div>
+  
+      <button
+        class="btn btn-sm btn-light border text-danger ms-2 mt-1 delete-comment-btn"
+        (click)="deleteComment(pubId!, comment.id!)"
+      >
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>
+  
+</ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+</div>

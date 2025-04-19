@@ -25,3 +25,47 @@
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.rating-form-popup {
+    background-color: #1e1e2f;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    color: white;
+}
+
+.popup-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+    color: #ccc;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

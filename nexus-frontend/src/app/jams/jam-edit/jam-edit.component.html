@@ -1,0 +1,50 @@
+<h3 class="edit-title">✏️ Edit Game Jam</h3>
+
+<form (ngSubmit)="submit()">
+  <div class="form-group">
+    <label>📝 Name</label>
+    <input type="text" [(ngModel)]="jam.name" name="name" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label>📘 Description</label>
+    <textarea [(ngModel)]="jam.description" name="description" class="form-control" rows="3" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>🖼️ Image URL</label>
+    <input type="text" [(ngModel)]="jam.imageUrl" name="imageUrl" class="form-control" />
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>📅 Start</label>
+      <input type="date" [(ngModel)]="jam.devStartDate" name="devStartDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label>⏳ End</label>
+      <input type="date" [(ngModel)]="jam.devEndDate" name="devEndDate" class="form-control" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>🗳️ Vote Start</label>
+      <input type="date" [(ngModel)]="jam.voteStartDate" name="voteStartDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>🗳️ Vote End</label>
+      <input type="date" [(ngModel)]="jam.voteEndDate" name="voteEndDate" class="form-control" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>🏆 Reward</label>
+    <input type="text" [(ngModel)]="jam.reward" name="reward" class="form-control" />
+  </div>
+
+  <div class="form-btn-group text-center mt-3">
+    <button type="submit" class="btn btn-success me-2">💾 Save</button>
+    <button type="button" class="btn btn-outline-light" (click)="cancelEdit()">❌ Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,35 @@
+###### Create a new category
+POST http://localhost:9000/nexus-backend/api/categories/add
+Content-Type: application/json
+
+{
+  "name": "Technology",
+  "description": "All about tech topics"
+}
+#### Get all categories
+GET http://localhost:9000/nexus-backend/api/categories
+
+#### Get all users
+GET http://localhost:9000/nexus-backend/api/users
+
+#
+####
+#
+#### Get category by ID
+#GET http://localhost:8080/api/categories/1
+#
+####
+#
+#### Update category
+#PUT http://localhost:8080/api/categories/1
+#Content-Type: application/json
+#
+#{
+#  "name": "Tech & Gadgets",
+#  "description": "Updated description for tech category"
+#}
+#
+####
+#
+#### Delete category
+#DELETE http://localhost:8080/api/categories/1

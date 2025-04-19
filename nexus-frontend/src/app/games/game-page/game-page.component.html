@@ -188,10 +188,10 @@
 
     <!-- Game Details Section (Right Side) -->
     <div class="col-md-4 ps-md-5">
-      <div *ngFor="let media of game?.gameMediaList; let i = index" [class.active]="i === 0">
-        <ng-container *ngIf="media.gameMediaType === 'BANNER'">
+      <div >
+        <ng-container>
           <div class="banner-section">
-            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100 mb-3" alt="Game banner">
+            <img src="http://localhost:9000/nexus-backend/games/upload/download/{{bannerUrl}}" class="d-block w-100 mb-3" alt="Game banner">
           </div>
         </ng-container>
       </div>

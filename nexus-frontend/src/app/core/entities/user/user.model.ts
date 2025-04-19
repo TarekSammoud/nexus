@@ -1,4 +1,3 @@
-
 import { RoleType } from './enums';
 
 export class User {
