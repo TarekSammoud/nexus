@@ -1,18 +1,16 @@
-<app-header></app-header>
 <div class="container mt-4">
-    <!-- SECTION 1 : Joueurs recommandés -->
+    <!-- SECTION 1: Recommended Players -->
     <div class="row">
-        <!-- SECTION 1 : Joueurs recommandés -->
         <div class="row">
             <div class="col-md-6">
-                <h2>Joueurs recommandés</h2>
+                <h2>Recommended Players</h2>
 
                 <div *ngIf="isLoading" class="text-center">
-                    <p>Chargement des joueurs recommandés...</p>
+                    <p>Loading recommended players...</p>
                 </div>
 
                 <div *ngIf="!isLoading && recommendedFriends.length === 0" class="text-center">
-                    <p>Aucun joueur recommandé pour le moment.</p>
+                    <p>No recommended players at the moment.</p>
                 </div>
 
                 <div *ngIf="!isLoading && recommendedFriends.length > 0">
@@ -23,11 +21,12 @@
                             <div class="ms-3">
                                 <h5 class="card-title">{{ player.firstName }} {{ player.lastName }}</h5>
                                 <p class="mb-0 text-muted" *ngIf="player.mutualFriendsCount > 0">
-                                    {{ player.mutualFriendsCount }} ami(s) en commun
+                                    {{ player.mutualFriendsCount }} mutual friend(s)
                                 </p>
                             </div>
-                            <button class="btn btn-primary ms-auto" (click)="sendFriendRequest(player.id)">
-                                Ajouter
+                            <button class="btn btn-primary ms-auto" (click)="sendFriendRequest(player.id)"
+                                [disabled]="sentRequests.includes(player.id)">
+                                {{ sentRequests.includes(player.id) ? 'Sent' : 'Add' }}
                             </button>
                         </div>
                     </div>
@@ -35,12 +34,12 @@
             </div>
         </div>
 
-        <!-- SECTION 2 : Invitations reçues -->
+        <!-- SECTION 2: Received Invitations -->
         <div class="col-md-6">
-            <h2>Invitations reçues</h2>
+            <h2>Received Invitations</h2>
 
             <div *ngIf="receivedRequests.length === 0" class="text-center">
-                <p>Aucune invitation reçue.</p>
+                <p>No invitations received.</p>
             </div>
 
             <div *ngIf="receivedRequests.length > 0">
@@ -52,9 +51,8 @@
                             <h5 class="card-title">{{ req.sender.firstName }} {{ req.sender.lastName }}</h5>
                         </div>
                         <div class="ms-auto d-flex gap-2">
-                            <button class="btn btn-success"
-                                (click)="acceptRequest(req.idFriendRequest)">Accepter</button>
-                            <button class="btn btn-danger" (click)="rejectRequest(req.idFriendRequest)">Rejeter</button>
+                            <button class="btn btn-success" (click)="acceptRequest(req.idFriendRequest)">Accept</button>
+                            <button class="btn btn-danger" (click)="rejectRequest(req.idFriendRequest)">Reject</button>
                         </div>
                     </div>
                 </div>

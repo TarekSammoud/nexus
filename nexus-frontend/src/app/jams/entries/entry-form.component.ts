@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { EntryService } from 'src/app/core/services/jam/entry.service';
 import { Entry } from 'src/app/core/entities/Jam/entry';
+import { TokenService } from '../../core/services/user-management/token.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -14,14 +15,18 @@ export class EntryFormComponent implements OnInit {
   entry: Partial<Entry> = {
     nameEntry: '',
     descriptionEntry: '',
-    user: { id: 1 },
+    // user: { id: 1 },
+
+
     jam: { id: 0 }
   };
 
-  constructor(private entryService: EntryService) {}
+  constructor(private entryService: EntryService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.entry.jam = { id: this.jamId };
+    const userId = TokenService.getUserId();
+
   }
 
   onSubmit(): void {

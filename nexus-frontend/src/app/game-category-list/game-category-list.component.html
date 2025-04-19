@@ -1,46 +1,41 @@
-<div class="container">
-<div class="button-grid-wrapper">
-    <button class="next-btn" (click)="navigateToCreate()">Create Game Category</button>
-</div>
-<div class="control-section">
-    <ejs-grid #grid [dataSource]='data' height=500 width="100%">
-        <e-columns>
-            <e-column headerText='GAME CATEGORY LIST' textAlign='Center' field='name' [customAttributes]="{ class: 'e-game-cell' }"></e-column>
-        </e-columns>
-        <ng-template #rowTemplate let-data>
-            <tr>
-                <td class="details">
-                    <div class="e-game-info-container">
-                        <div class="e-game-image-layout">
+<div class="admin-games-container">
+    <h2>📂 Game Category Panel</h2>
+  
+    <div class="text-end mb-3">
+      <button class="btn btn-outline-success" (click)="navigateToCreate()">➕ Create Game Category</button>
+    </div>
+  
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Games</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let category of data">
 
-                        </div>
-                        <div class="e-game-info-layout">
-                            <div class="e-info-text-separator">
-                                <span (click)="OnSelect(data)" class="e-game-title">{{data.name}}</span>
-                            </div>
-                            <div class="e-info-text-separator">
-                                <span>{{data.description}}</span>
-                            </div>
-
-                            <div class="e-game-price-min-layout e-info-text-separator">
-                                <span class="e-game-price-text">Number of games:&nbsp;</span>
-                                <span class="e-game-price"></span>
-                            </div>
-                            <div>{{data.createdAt}}</div>
-                        </div>
-                        <div class="e-flex-grow"></div>
-                        <div class="button-container d-flex justify-content-start">
-                            <button class="btn btn-warning btn-sm me-2" (click)="editGameCategory(data)">
-                                <i class="fas fa-edit me-1"></i>Edit
-                            </button>
-                            <button class="btn btn-danger btn-sm" (click)="deleteGameCategory(data)">
-                                <i class="fas fa-trash-alt me-1"></i>Delete
-                            </button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </ejs-grid>
-</div>
-</div>
+  
+            <td>
+              <span class="game-name" (click)="OnSelect(category)">
+                {{ category.name }}
+              </span>
+            </td>
+  
+            <td >{{ category.description }}</td>
+            <td (click)="goToPage(category)" style="cursor: pointer;">Check Game Page</td>
+  
+            <td>
+              <button class="btn btn-primary btn-sm me-1" (click)="editGameCategory(category)" title="Edit">✏️</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteGameCategory(category)" title="Delete">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

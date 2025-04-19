@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserRepository  extends JpaRepository<User,Long> {
+
     //ProfilePictures findByUserId(Long id);
     User findByEmail(String email);
 

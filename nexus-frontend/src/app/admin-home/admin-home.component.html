@@ -7,12 +7,16 @@
     <div class="profile-section text-center d-flex flex-column align-items-center p-4 border-bottom border-secondary">
       <img src="assets/img/profilepic.jpg" alt="Admin" class="profile-pic mb-2" 
            style="width: 80px; height: 80px; border-radius: 50%;">
+    <div class="profile-section text-center d-flex flex-column align-items-center p-4 border-bottom">
+      <img src="assets/img/profilepic.jpg" alt="Admin" class="profile-pic mb-2" style="width: 80px; height: 80px; border-radius: 50%;">
       <div class="text-white fw-semibold">Admin</div>
     </div>
 
     <!-- Scrollable Links -->
     <div class="flex-grow-1 overflow-auto">
       <!-- Games Management Dropdown -->
+
+      <!-- Games Dropdown -->
       <div class="dropdown-section">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -37,6 +41,32 @@
       </div>
 
       <!-- Support Management Dropdown -->
+        <div *ngIf="gamesDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/list" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Games</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/categories" routerLinkActive="active"><i class="fas fa-tags me-2"></i>Game Categories</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/keys" routerLinkActive="active"><i class="fas fa-key me-2"></i>Game Keys</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/reviews" routerLinkActive="active"><i class="fas fa-star me-2"></i>Game Reviews</a>
+        </div>
+      </div>
+
+      <!-- Jam Dropdown -->
+      <div class="dropdown-section border-top border-secondary mt-3 pt-3">
+        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
+           href="javascript:void(0)"
+           (click)="toggleJamDropdown()">
+          <span><i class="fas fa-puzzle-piece me-2"></i>Game Jams</span>
+          <i class="fas" [ngClass]="{ 'fa-chevron-down': !jamDropdownOpen, 'fa-chevron-up': jamDropdownOpen }"></i>
+        </a>
+        <div *ngIf="jamDropdownOpen" class="submenu ps-4">
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/list" routerLinkActive="active"><i class="fas fa-list me-2"></i>All Jams</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/entries" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Entries</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/media" routerLinkActive="active"><i class="fas fa-photo-video me-2"></i>Media</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/ratings" routerLinkActive="active"><i class="fas fa-star-half-alt me-2"></i>Ratings</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/jams/vip" routerLinkActive="active"><i class="fas fa-crown me-2 text-warning"></i>VIP Jam (AI)</a>
+        </div>
+      </div>
+
+      <!-- Support Dropdown -->
       <div class="dropdown-section">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -83,6 +113,32 @@
             <i class="fas fa-tasks me-2"></i>Tasks & Rewards</a>
         </div>
       </div>
+        <div *ngIf="supportDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
+          <a class="d-block py-2 text-white" routerLink="/admin/support/list_ticket" routerLinkActive="active"><i class="fas fa-list-alt me-2"></i>List Tickets</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/support-agent" routerLinkActive="active"><i class="fas fa-user me-2"></i>Support Agent</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/room" routerLinkActive="active"><i class="fas fa-comments me-2"></i>Room</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/performance-review" routerLinkActive="active"><i class="fas fa-chart-line me-2"></i>Performance Review</a>
+        </div>
+      </div>
+
+      <!-- Community Dropdown -->
+      <div class="dropdown-section">
+        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
+           href="javascript:void(0)"
+           (click)="toggleDropdownD()">
+          <span><i class="fas fa-users me-2"></i>Community</span>
+          <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpenD, 'fa-chevron-up': dropdownOpenD }"></i>
+        </a>
+        <div *ngIf="dropdownOpenD" class="submenu ps-4">
+          <a class="d-block py-2 text-white" routerLink="/admin/community/categories" routerLinkActive="active"><i class="fas fa-list me-2"></i>Categories List</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/community/categories/add" routerLinkActive="active"><i class="fas fa-plus me-2"></i>Add Category</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/community/reports" routerLinkActive="active"><i class="fas fa-flag me-2"></i>Reports</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/sondages" routerLinkActive="active"><i class="fas fa-poll me-2"></i>Sondages</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/live" routerLinkActive="active"><i class="fas fa-video me-2"></i>Live Stream</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/streamers" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Streamers</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -91,4 +147,3 @@
     <router-outlet></router-outlet>
   </div>
 
-</div>

@@ -1,0 +1,73 @@
+<div class="admin-poll-container">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <h2 class="admin-title">📋 Tableau de bord des sondages</h2>
+    <p class="admin-subtext">Visualisez et gérez les sondages proposés par les utilisateurs.</p>
+  </div>
+
+  <div class="table-responsive custom-table-wrapper">
+    <table class="table table-dark table-hover align-middle mb-0 custom-table shadow-sm">
+      <thead class="table-header">
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Streamer</th>
+          <th>Date de fin</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sondage of sondages">
+          <td>{{ sondage.id }}</td>
+          <td class="fw-semibold text-light">{{ sondage.question }}</td>
+          <td>
+            🎙️ <strong class="text-info">{{ sondage.streamer?.name }}</strong><br />
+            <span class="text-muted small">({{ sondage.streamer?.platform }})</span>
+          </td>
+
+          <!-- 🗓️ Date de fin -->
+          <td>
+            <div class="end-date-box">
+              <input
+                type="datetime-local"
+                class="form-control form-control-sm date-input"
+                [(ngModel)]="sondage.endDate"
+                [disabled]="sondage.approved"
+              />
+            </div>
+          </td>
+          
+          <!-- ✅ Statut -->
+          <td>
+            <span
+              class="badge rounded-pill fs-6 px-3 py-2"
+              [ngClass]="sondage.approved ? 'bg-success' : 'bg-warning text-dark'">
+              {{ sondage.approved ? '✅ Approuvé' : '🕓 En attente' }}
+            </span>
+          </td>
+
+          <!-- 🛠️ Actions -->
+          <td>
+            <button
+              class="btn btn-approve me-2"
+              *ngIf="!sondage.approved"
+              (click)="approuverSondage(sondage.id!, sondage.endDate!)">
+              ✅ Approuver
+            </button>
+            <button
+              class="btn btn-delete"
+              (click)="supprimerSondage(sondage.id!)">
+              🗑️ Supprimer
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="sondages.length === 0">
+          <td colspan="6" class="text-center text-muted py-4">
+            Aucun sondage trouvé.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

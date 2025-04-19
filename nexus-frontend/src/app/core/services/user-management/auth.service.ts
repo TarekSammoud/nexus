@@ -17,7 +17,7 @@ export class AuthService {
     private baseUrl = 'http://localhost:9000/nexus-backend/auth';
     private userUrl = 'http://localhost:9000/nexus-backend/user';
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
     login(email: string, password: string): Observable<any> {
         const body = { email, password };
@@ -101,4 +101,7 @@ export class AuthService {
 
 
 
+    isLoggedIn(): boolean {
+        return this.tokenService.hasToken();  // Tu peux utiliser hasToken() de TokenService
+    }
 }
