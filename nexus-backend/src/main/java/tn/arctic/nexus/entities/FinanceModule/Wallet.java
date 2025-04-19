@@ -51,5 +51,11 @@ public class Wallet implements Serializable {
     private List<Purchase> purchase;
 
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
