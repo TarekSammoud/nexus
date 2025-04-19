@@ -2,6 +2,7 @@ package tn.arctic.nexus.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -69,8 +70,8 @@ public class User implements Serializable {
     @ManyToMany
     private List<Game> gameLibrary;
 
-    @OneToOne(mappedBy = "user")
-    @JsonManagedReference("wallet-user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"user", "transfers", "payments", "purchase"})
     private Wallet wallet;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -204,7 +205,13 @@ public class User implements Serializable {
         this.gameReviews = gameReviews;
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
 
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
 
 
     // Getters and setters for all properties...

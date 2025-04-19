@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { productType, Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { NexusWallet } from 'src/app/core/entities/finance/wallet.model';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
 import { WalletService } from 'src/services/finance/Crud/wallet.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 
@@ -11,21 +12,21 @@ import { MetamaskService } from 'src/services/finance/metamask.service';
   styleUrls: ['./wallet-dashboard.component.css']
 })
 export class WalletDashboardComponent {
-  constructor(private router: Router,private walletService: WalletService ,private metamaskService :MetamaskService) {}
+  constructor(private router: Router,private walletService: WalletService ,private metamaskService :MetamaskService,private tokenService:TokenService) {}
   connectedwallet: NexusWallet | undefined;
   error: string | undefined;
 connectedWalletAddress: string = ''
 UserBalance: string = '0';
 ngOnInit() {
-  this.ininitializeContract();
-  this.connectedWalletAddress = this.metamaskService.getWalletAddress() || ''; // Get the connected wallet address from the service
   this.fetchWallet(); // Fetch the wallet when the component initializes
+  this.ininitializeContract();
   
 }
 
 async ininitializeContract() {
   await this.metamaskService.connectWallet();
-   this.UserBalance = (await this.metamaskService.getBalance(this.connectedWalletAddress)) || '0';
+   const publicKey = this.connectedwallet?.metamaskPublicKey || '';
+   this.UserBalance = (await this.metamaskService.getBalance(publicKey)) || '0';
 
 }
 
@@ -43,9 +44,9 @@ async ininitializeContract() {
  
 
   async fetchWallet() {
+const userId = TokenService.getUserId(); // Get the user ID from the token service
 
-
-    this.walletService.getWalletByPublicKey( this.connectedWalletAddress).subscribe({
+    this.walletService.getWalletByUserId( userId).subscribe({
       next: (data) => {
         this.connectedwallet = data;
         this.error = '';

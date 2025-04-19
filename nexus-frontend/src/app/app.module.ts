@@ -103,6 +103,7 @@ import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-
 import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
 import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
 import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
+import { NotificationBannerComponent } from './finance/notification-banner/notification-banner.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +177,7 @@ import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.
     PurchaseAdminComponent,
     TransfersAdminComponent,
     RefundAdminComponent,
+    NotificationBannerComponent,
     
   ],
   imports: [

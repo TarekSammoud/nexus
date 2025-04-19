@@ -6,6 +6,7 @@ import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { productType, Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { PurchaseService } from './Crud/purchase.service';
 import { Game } from 'src/app/core/entities/game/game';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,10 @@ export class MetamaskService {
   errorMessage: string = '';
 
 
-  constructor(private router: Router,private paymentService : PaymentService,private purchaseService: PurchaseService) {}
+  constructor(private router: Router,private paymentService : PaymentService,
+    private purchaseService: PurchaseService,
+    private notificationService: NotificationService,
+  ) {}
 
 
 
@@ -213,7 +217,7 @@ async userExists(addrese:string): Promise<boolean> {
 
 payment:  Payment = {
   coinAmount: 0,
-  status: 'Pending',
+  status: 'Completed',
   price: "0",
 };
 
@@ -238,7 +242,7 @@ public async listenToEtherReceived() {
         console.log('Payment created:', response);
         // reset form
         this.payment = {   coinAmount: 0,
-          status: 'Pending',
+          status: 'Completed',
           price: "0",
         };
       },
@@ -256,6 +260,7 @@ async addCoins(addrese:string,amount:number) {
     console.log('Transaction sent:', tx.hash);
 
     await tx.wait();
+    this.notificationService.show("Coins added successfully",5000);
     console.log('Transaction mined:', tx.hash);
     console.log('Coins added successfully:', 'to : ', addrese," and amount of coin", amount);
 
@@ -266,25 +271,29 @@ async addCoins(addrese:string,amount:number) {
 
   }
 }
-async TransfertCoins(_to:String,amount:number) {
+async TransfertCoins(_to:String,amount:number): Promise<boolean> {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['transferVirtualCoins'](this. getWalletAddress(),_to, amount);
     console.log('Transaction sent (transfert):', tx.hash);
 
     await tx.wait();
+    this.notificationService.show("Coins sended successfully",5000);
+
     console.log('Transaction mined (transfert):', tx.hash);
     console.log('Coins sended  successfully:', "from :",this. getWalletAddress() , ' to : ', _to," and amount of coin", amount);
-
+    return true;
   } catch (error: any) {
     if(error.reason?.includes('Not enough virtual coins')){
       alert('Not enough virtual coins to send');
-   
+   return false;
     }
     else {
       console.error('Error transfer value:', error.message || error);
       this.errorMessage = error.message || 'Failed to transfer coins.';
       console.log(this.errorMessage);
+      return false;
+
     }
 
 
@@ -322,6 +331,7 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
     }); 
 
     await tx.wait();
+    this.notificationService.show("Success! Your purchase has been confirmed.",5000);
     console.log('Transaction mined (spend):', tx.hash);
     console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
 
