@@ -53,13 +53,16 @@ import { AdminAgentSupportComponent } from './admin-support/admin-agent-support/
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
 import { LibraryComponent } from './library/library.component';
+import { WsNotificationsService } from 'src/services/finance/ws-notifications.service';
+import { TestComponent } from './finance/test/test/test.component';
 
 const routes: Routes = [
+  { path: 'testNotif', component: TestComponent },
+
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },

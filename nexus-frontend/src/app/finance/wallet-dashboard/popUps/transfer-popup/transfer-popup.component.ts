@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Transfer, TransferType } from 'src/app/core/entities/finance/transfer.model';
 import { TransferService } from 'src/services/finance/Crud/transfer.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
+import { NotificationService } from 'src/services/finance/notification.service';
 
 interface Friend {
   id: number;
@@ -16,7 +17,12 @@ interface Friend {
   styleUrls: ['./transfer-popup.component.css']
 })
 export class TransferPopupComponent {
-  constructor(public activeModal: NgbActiveModal,private metamaskService :MetamaskService,private transferService :TransferService) {
+  constructor(public activeModal: NgbActiveModal,
+    private metamaskService :MetamaskService,
+    private transferService :TransferService,
+    private notificationService: NotificationService
+  
+  ) {
     this.filteredFriends = [...this.friends];
 
   }
@@ -28,7 +34,7 @@ export class TransferPopupComponent {
 
   friends: Friend[] = [
     {
-      id: 1,
+      id: 3,
       metaMaskAddress: '0x9375f2d84f9843Df4BC29260219B7B25E73a92d1',
       name: 'nexus',
       profilePic: 'https://i.pravatar.cc/150?img=1'
@@ -97,16 +103,18 @@ export class TransferPopupComponent {
       alert('Please select amount of coins to send');
       return;
     }else{
-       const flag =  await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
-        if (flag) {
-          this.transfer.receiverMetaMaskAddress = friend.metaMaskAddress;
+         await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
+
+         //notficating the reciever
+  console.log(friend.id.toString());
+         this.notificationService.showNotification(friend.id.toString(),"you have recived " + this.coinAmountTosend+ "coins");
+       
+       
+         this.transfer.receiverMetaMaskAddress = friend.metaMaskAddress;
           this.transfer.senderMetaMaskAddress = this.metamaskService.getWalletAddress() || '';
           this.transfer.amount = this.coinAmountTosend;
           this.createTransfer();
           this.activeModal.close('Coins sent successfully!');
-        }else{
-          alert('Transaction failed!');
-        }
     }
   
   }
