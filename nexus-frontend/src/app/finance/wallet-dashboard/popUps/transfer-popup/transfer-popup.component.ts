@@ -97,12 +97,16 @@ export class TransferPopupComponent {
       alert('Please select amount of coins to send');
       return;
     }else{
-         await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
+       const flag =  await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
+        if (flag) {
           this.transfer.receiverMetaMaskAddress = friend.metaMaskAddress;
           this.transfer.senderMetaMaskAddress = this.metamaskService.getWalletAddress() || '';
           this.transfer.amount = this.coinAmountTosend;
           this.createTransfer();
           this.activeModal.close('Coins sent successfully!');
+        }else{
+          alert('Transaction failed!');
+        }
     }
   
   }

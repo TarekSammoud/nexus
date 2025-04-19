@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { PanierService } from 'src/services/finance/panier.service';
+import { WalletService } from 'src/services/finance/Crud/wallet.service';
 
 @Component({
   selector: 'app-header',
@@ -27,9 +28,10 @@ export class HeaderComponent implements OnInit {
     private _gameKeyService: GameKeyService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private walletService: WalletService,
     // Injection du TokenService
-    , private _router: Router,
+    private _router: Router,
     private gameKeyService: GameKeyService,
     private router: Router,private panierService: PanierService,private metaMaskService: MetamaskService,
     private _fb: FormBuilder
@@ -41,10 +43,12 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.metaMaskService.isWalletConnected().then(isConnected => {
+
+
+   /* this.metaMaskService.isWalletConnected().then(isConnected => {
       this.isWalletConnected = isConnected;
-    });
-  
+    });*/
+     this.isUserhaveWallet(); // Call the method to check wallet connection
     this.panierService.countItems();
     this.panierService.count$.subscribe(newCount => {
       this.cartCountItems = newCount;
@@ -69,7 +73,20 @@ export class HeaderComponent implements OnInit {
       }
     });
 
-   ///Finanace Management
+
+  }
+
+  isUserhaveWallet(): void {   
+    const userId = TokenService.getUserId();  
+
+    this.walletService.getWalletByUserId( userId).subscribe({
+      next: (data) => {
+      this.isWalletConnected= data.metamaskPublicKey !== null;
+      },
+      error: (err) => {
+        console.error('Error fetching wallet: on the header component', err);
+      }
+    });
 
   }
 

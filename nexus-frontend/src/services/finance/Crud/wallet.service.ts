@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NexusWallet } from 'src/app/core/entities/finance/wallet.model';
 import { MetamaskService } from '../metamask.service';
-import { N } from 'ethers';
+import { N, Wallet } from 'ethers';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,11 @@ export class WalletService {
   getWalletByPublicKey(publicKey: String | null): Observable<NexusWallet> {
     return this.http.get<NexusWallet>(`${this.baseUrl}/findByPublicKey/${publicKey}`);
   }
-
+  getWalletByUserId(userId: Number | null): Observable<NexusWallet> {
+    return this.http.get<NexusWallet>(`${this.baseUrl}/findByUserId/${userId}`);
+  }
+  createAndAssignWallet(userId: number, wallet: NexusWallet): Observable<Wallet> {
+    return this.http.post<Wallet>(`${this.baseUrl}/create-affect/${userId}`, wallet);
+  }
   
 }

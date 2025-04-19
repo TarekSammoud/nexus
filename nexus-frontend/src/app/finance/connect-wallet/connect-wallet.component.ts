@@ -5,6 +5,7 @@ import { WalletService } from 'src/services/finance/Crud/wallet.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
 
 @Component({
   selector: 'app-connect-wallet',
@@ -26,9 +27,9 @@ export class ConnectWalletComponent {
   newWallet: NexusWallet = {
     coinBalance: 0,
   };   
-  constructor(private metaMaskService: MetamaskService, private walletService: WalletService, private router: Router   ) {
-    
-  }
+  constructor(private metaMaskService: MetamaskService,
+     private walletService: WalletService, private router: Router,
+    private tokenService: TokenService)  { }
 
 
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class ConnectWalletComponent {
   }
   
   async createNewWallet(): Promise<void> {
+    const userId = TokenService.getUserId() ?? 0; // Ensure userId is a number, default to 0 if null
 
    let isWalletExist = await this.metaMaskService.userExists(this.walletAddress);
     if (!isWalletExist) {
@@ -61,7 +63,7 @@ export class ConnectWalletComponent {
           // Proceed with creating the wallet after the user is added
           this.newWallet.metamaskPublicKey = this.walletAddress || '0';
 
-          this.walletService.createWallet(this.newWallet).subscribe({
+          this.walletService.createAndAssignWallet(userId,this.newWallet).subscribe({
             next: (wallet) => {
               console.log('Wallet created successfully:', wallet);
 

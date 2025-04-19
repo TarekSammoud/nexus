@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface IWalletRepository extends JpaRepository<Wallet, Long> {
 
     Wallet findByMetamaskPublicKey(String metamask_public_key);
+    Wallet findByUser_Id(Long userId);
 
 }
