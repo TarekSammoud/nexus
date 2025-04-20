@@ -1,0 +1,216 @@
+.close {
+    font-size: 1.4rem;
+    opacity: 0.1;
+    transition: opacity 0.3s;
+}
+.nav-link:hover > .close {
+    opacity: 0.8;
+}
+
+.nav-container{
+    position: sticky;
+}
+/* Style for the search container */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container input {
+    background-color: #202024; /* Search bar background color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    width: 200px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .search-container input:focus {
+    background-color: #404044; /* Apply background color on hover */
+  }
+  
+  
+  .search-container i {
+    position: absolute;
+    right: 10px;
+    color: #fff; /* White icon color */
+  }
+  
+  /* Style for the navigation tabs */
+  .nav-tabs {
+    display: flex;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .nav-tabs .nav-item {
+    list-style: none;
+    margin-right: 15px;
+  }
+  
+  /* Default tab style - text-muted */
+  .nav-tabs .nav-link {
+    color: #6c757d; /* Muted text color */
+    background-color: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Tab selected (active) style - text-light */
+  .nav-tabs .nav-link.active {
+    color: #f8f9fa !important; /* Light text color */
+  }
+  
+  /* Hover effect on tab */
+  .nav-tabs .nav-link:hover {
+    color: #f8f9fa; /* Light text on hover */
+  }
+  
+  /* Style for the button to add new tabs */
+  .nav-tabs .nav-item button {
+    color: #6c757d; /* Muted text color */
+    background-color: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Adjustments for the content area below the tabs */
+  .mt-2 {
+    margin-top: 1rem;
+  }
+  
+  /* Optional: Remove underline on the active tab */
+  .nav-tabs .nav-item .active {
+    text-decoration: none;
+  }
+  
+
+  .cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Optional: adds space between cards */
+  }
+  .card img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .card {
+    width: 23%; /* Adjust the width so that 4 cards fit in a row */
+    transition: transform 0.3s ease-in-out;
+    border-color: none !important;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #404044;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+
+  }
+
+  .card:hover{
+    background-color: #202024;
+  }
+
+  .categories{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .section-title {
+    font-size: 2rem;          /* Bigger */
+    font-weight: 700;         /* Bolder */
+    margin-bottom: 1rem;
+  }
+  
+  ng-template{
+    margin-top: 2rem;
+  }
+
+  nav{
+    margin: 3rem;
+  }
+
+
+  
+.featured-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  /* Title Styling */
+  .featured-container > div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+  }
+  
+  .featured-container > div:first-child::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #9A5ED6; /* Steam Blue */
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+
+  
+
+/* styles.css or component styles */
+.cover-img {
+    aspect-ratio: 2 / 3; /* classic vertical game cover ratio */
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .game-card {
+    transition: transform 0.2s ease-in-out;
+    border-radius: 8px;
+    overflow: hidden;
+    background: transparent;
+  }
+  
+  .game-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .games-section {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .games-list {
+    flex: 3 !important ; /* takes 75% width roughly */
+  }
+  
+  .filter-panel {
+    flex: 1 !important ;  /* takes 25% width roughly */
+    background-color: #202024;
+    color: white;
+  }
+  
+  

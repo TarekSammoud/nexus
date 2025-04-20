@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // UI & Libs
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -131,6 +131,8 @@ import { CommonModule } from '@angular/common';
 import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
 import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
 import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
+import { GamesNavComponent } from './games-nav/games-nav.component';
+import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
 
 
 
@@ -219,6 +221,8 @@ import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carous
     CreateBrowserGameComponent,
     BrowserGamePageComponent,
     KeenGameCarouselComponent,
+    GamesNavComponent,
+    EmulatedGameComponent,
 
 
     
@@ -253,7 +257,8 @@ import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carous
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbNavModule
   ],
   providers: [
     TokenService,

@@ -76,6 +76,7 @@ import { SupportComponent } from './support/support.component';
 import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
 import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
 import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
+import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -173,6 +174,8 @@ const routes: Routes = [
     ]
   },
 
+  { path: 'games/emulated/play/:name', component: EmulatedGameComponent },
+
   { path: '', component: HomeComponent },
   { path: 'jams', component: JamsComponent },
   { path: 'jam/:id', component: JamDetailsPageComponent },
@@ -180,6 +183,7 @@ const routes: Routes = [
   { path: 'category/:name', component: GameGridComponent },
 
   { path: 'games/play/:name', component: BrowserGamePageComponent },
+
   { path: 'keen', component: KeenGameCarouselComponent },
 
   { path: 'admin/categories', component: GameCategoriesComponent },

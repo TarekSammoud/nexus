@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import KeenSlider, { KeenSliderInstance, KeenSliderPlugin } from 'keen-slider';
 import { GameService } from '../core/services/game/game.service';
 import { Game } from '../core/entities/game/game';
+import { Router } from '@angular/router';
 
 function ThumbnailPlugin(main: KeenSliderInstance): KeenSliderPlugin {
   return (slider) => {
@@ -41,7 +42,7 @@ function ThumbnailPlugin(main: KeenSliderInstance): KeenSliderPlugin {
   templateUrl: './keen-game-carousel.component.html',
   styleUrls: ['./keen-game-carousel.component.css'],
 })
-export class KeenGameCarouselComponent implements AfterViewInit, OnDestroy, OnInit {
+export class KeenGameCarouselComponent implements AfterViewInit, OnInit {
   @ViewChild('sliderRef') sliderRef!: ElementRef<HTMLElement>;
   @ViewChild('thumbnailRef') thumbnailRef!: ElementRef<HTMLElement>;
 
@@ -53,8 +54,11 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnDestroy, OnIn
 
   games: Game[] = [];
 
-  constructor(private _gameService: GameService, private cdr: ChangeDetectorRef) {}
+  constructor(private _gameService: GameService, private cdr: ChangeDetectorRef, private _router:Router) {}
 
+  goToGame(id: number) {
+    this._router.navigate(['/games', id]);
+  }
   ngOnInit(): void {
     this._gameService.getGames().subscribe((games) => {
       this.games = games;
@@ -103,8 +107,5 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnDestroy, OnIn
     console.log(this.slider.slides);
   }
 
-  ngOnDestroy() {
-    this.slider?.destroy();
-    this.thumbnailSlider?.destroy();
-  }
+
 }

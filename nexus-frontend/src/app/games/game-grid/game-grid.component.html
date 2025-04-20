@@ -1,39 +1,33 @@
-<div class="title featured-container">
+<div class="featured-container">
   <div>{{name}}</div>
-</div>
 
+  <div class="container py-4">
 
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col" *ngFor="let game of games">
+        <div (click)="OnSelect(game)" style="cursor: pointer;" class="card h-100 border-0 shadow-sm game-card">
+          <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl 
+          ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+          : '../../../../assets/img/missing.jpg'" [alt]="game.name" class="card-img-top cover-img" />
+          <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />
 
-  
-  <div class="games">  
-    <div *ngFor="let game of games">
-      <div class="game" (click)="OnSelect(game)">
-        <div class="game-thumb-container" *ngIf="game">
-          <img class="game-thumbnail" 
-          [src]="game.coverPicture?.mediaUrl 
-          ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
-          : './assets/default-game.jpg'"
-  alt="Game Cover"
-                              alt="{{game.name}}" />
-        
-        
-          <!-- Show 'No image' only if gameMediaList exists but is empty or first item has no mediaUrl -->
-        </div>
-        
-        <div class="game-description">
-          <p class="game-name"> test{{ game.name }}</p>
-          <div class="text-muted" style="margin-bottom: 2px;">{{ game.description }}</div>
-          <div class="game-platforms">
-            <div style="margin-right: 5px;">{{ game.price }} TND</div> 
-            <img
-             *ngFor="let gamePlatform of game.platforms"            
-              class="game-platform"
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5 class="text-light " style="text-align: left;">{{ game.name }}</h5>
+            <h3 class="text-light " style="text-align: left;">{{ game.price }} TND</h3>
 
-              src="assets/images/platforms/{{ gamePlatform }}.svg"
-              alt="{{ gamePlatform }}"
-            />
-          </div> 
+            <div class="mt-auto">
+              <div class="d-flex flex-wrap">
+                <img *ngFor="let platform of game.platforms" class="platform-icon me-2 mb-2"
+                  [src]="'assets/images/platforms/' + (platform | uppercase) + '.svg'" [alt]="platform" width="24"
+                  height="24" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
+
+
+
+</div>

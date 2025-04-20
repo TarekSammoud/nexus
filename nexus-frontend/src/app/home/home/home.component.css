@@ -69,8 +69,13 @@ body {
 .carousel-container {
   width: 100%;
   max-width: 1200px; /* Limits max width */
-
 }
+
+
+
+
+
+
 
 .home-container{
   display: flex;
