@@ -67,5 +67,13 @@ public class RefundService implements IRefundService {
         return refundRepo.findByPurchase_Wallet_MetamaskPublicKey(metamaskPublicKey);
     }
 
+    @Override
+    public Refund updateRefundStatus(Long refundId) {
+        Refund refund = refundRepo.findById(refundId).orElseThrow(() -> new RuntimeException("Refund not found"));
+        refund.setStatus("Accepted");
+        refundRepo.save(refund);
+        return refund;
+    }
+
 
 }

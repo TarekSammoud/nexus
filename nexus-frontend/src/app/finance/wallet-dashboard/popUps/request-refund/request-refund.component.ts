@@ -1,11 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { switchMap } from 'rxjs';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { Refund } from 'src/app/core/entities/finance/refund.model';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
 import { PurchaseService } from 'src/services/finance/Crud/purchase.service';
 import { RefundService } from 'src/services/finance/Crud/refund.service';
+import { GeminiService, RefundAnalysisResponse } from 'src/services/finance/gemini.service';
+import { NotificationService } from 'src/services/finance/notification.service';
 
 @Component({
   selector: 'app-request-refund',
@@ -20,7 +23,14 @@ export class RequestRefundComponent {
   selectedPurchaseId: number | null = null;
   refundReason: string = '';
 
-  constructor(public activeModal: NgbActiveModal , private purchaseService: PurchaseService,    private cdr: ChangeDetectorRef,private refundService :RefundService) {}
+  constructor(public activeModal: NgbActiveModal ,
+     private purchaseService: PurchaseService, 
+        private cdr: ChangeDetectorRef,
+        private refundService :RefundService,
+        private geminiService :GeminiService,
+        private notificationService :NotificationService
+      
+      ) {}
 
 
   loadPurchases(): void {
@@ -56,21 +66,59 @@ export class RequestRefundComponent {
 
   refund :Refund={
     reason: "",
-    status: 'Pending',
+    status: 'Failed',
     refundAmount: 0,
   }
-  submitRefund(): void {
+  updatePayload : Refund={
+    reason: "",
+    status: 'Failed',
+    refundAmount: 0,
+  }
+
+  response?: RefundAnalysisResponse;
+  error?: string;
+
+  async submitRefund(): Promise<void> {
     if (this.selectedPurchaseId && this.refundReason.trim()) {
-      // Handle refund submission
-      console.log('Refund submitted:', {
-        paymentId: this.selectedPurchaseId,
-        reason: this.refundReason
-      });
       this.refund.reason = this.refundReason;
       this.refund.refundAmount = this.purchases.find(p => p.id === this.selectedPurchaseId)?.price || 0;
-      // Call the refund service to create the refund
-      this.refundService.createAndAffectToPurchases(this.selectedPurchaseId,this.refund).subscribe({});
-      this.activeModal.close('refund_submitted');
+  
+      this.refundService.createAndAffectToPurchases(this.selectedPurchaseId, this.refund)
+        .pipe(
+          switchMap((createdRefund) => {
+            if (createdRefund.id === undefined) {
+              throw new Error('Refund creation did not return an id');
+            }
+            this.refund.id = createdRefund.id;
+            console.log('Refund created:', createdRefund);
+            return this.geminiService.analyzeRefund(createdRefund.id);
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            this.response = res;
+            console.log('Analysis response:', res);
+            this.notificationService.show("Your refund has been " + res.decision);
+  
+            if (res.decision === "APPROVED" && this.refund.id) {
+              this.refundService.updateRefundStatus(this.refund.id).subscribe({
+                next: () => {
+                  console.log("Refund status updated!");
+                  // Optionally update UI or state here
+                },
+                error: (err) => {
+                  console.error("Failed to update refund status:", err);
+                }
+              });
+            } else {
+              console.log("Refund failed or id undefined");
+            }
+          },
+          error: (err) => {
+            this.error = 'Failed to process refund: ' + (err.error?.message || err.statusText);
+            console.error(err);
+          }
+        });
     }
-  }
+  }  
 }

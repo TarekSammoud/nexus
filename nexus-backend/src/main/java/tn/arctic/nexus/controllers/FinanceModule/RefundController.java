@@ -66,4 +66,10 @@ public class RefundController {
         return ResponseEntity.ok(refunds);
     }
 
+    @PutMapping("/update-status/{refundId}")
+    public ResponseEntity<Refund> updateRefundStatus(@PathVariable Long refundId) {
+        Refund updatedRefund = refundService.updateRefundStatus(refundId);
+        return ResponseEntity.ok(updatedRefund);
+    }
+
 }

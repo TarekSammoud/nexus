@@ -23,11 +23,15 @@ export class RefundService {
     updateRefund(refund: Refund): Observable<Refund> {
       return this.http.put<Refund>(`${this.baseUrl}/update`, refund);
     }
-      createAndAffectToPurchases(purchaseId: Number , refund: Refund): Observable<Refund> {
+    createAndAffectToPurchases(purchaseId: Number , refund: Refund): Observable<Refund> {
         const url = `${this.baseUrl}/create-affect/${purchaseId}`;
         return this.http.post<Refund>(url, refund);
+    }
+     getRefundsByWalletPK(metamaskPublicKey: String | null): Observable<Refund[]> {
+        return this.http.get<Refund[]>(`${this.baseUrl}/getByWalletPK/${metamaskPublicKey}`);
       }
-           getRefundsByWalletPK(metamaskPublicKey: String | null): Observable<Refund[]> {
-              return this.http.get<Refund[]>(`${this.baseUrl}/getByWalletPK/${metamaskPublicKey}`);
-            }
+
+      updateRefundStatus(refundId: number): Observable<any> {
+        return this.http.put<any>(`${this.baseUrl}/update-status/${refundId}`, {});
+      }
 }

@@ -16,6 +16,7 @@ public interface IRefundService {
     public boolean deleteRefund(Long id);
     public Refund CreateAffectRefundToPurchase(Long purchaseId, Refund refund);
     public List<Refund> getRefundsByWalletPK(String metamaskPublicKey) ;
+    public Refund updateRefundStatus(Long refundId);
 
 
 }
