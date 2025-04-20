@@ -14,6 +14,7 @@ export class BrowserGamePageComponent implements OnInit{
   constructor(private sanitizer: DomSanitizer, private _route:ActivatedRoute) 
   {
     this.gameName = this._route.snapshot.paramMap.get('name') || '';
+    
   }
 
   ngOnInit(): void {

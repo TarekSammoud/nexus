@@ -16,7 +16,12 @@ declare var bootstrap: any;
 export class GamePageComponent implements OnInit {
   game! : Game;
   groupedReviews: GameReview[][] = [];
+  browser: string ='BROWSER';
+  matchesPlatform: boolean = false;
 
+  OnSelectBrowser(game: Game){
+    this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
+  }
 
   ngOnInit(): void {
 
@@ -24,6 +29,10 @@ export class GamePageComponent implements OnInit {
     if (this.gameId) {
       this._gameService.getGame(+this.gameId).subscribe(game => {
         this.game = game;
+        console.log(game);
+
+         this.matchesPlatform = !this.browser || 
+        game.platforms?.includes(this.browser);
 
         
     for ( let platform of this.game.platforms) {
@@ -44,6 +53,12 @@ export class GamePageComponent implements OnInit {
             this.game.bannerPicture = media;
             this.bannerUrl= this.game.bannerPicture.mediaUrl
             console.log(this.game.bannerPicture);
+          }
+
+          if (media.gameMediaType === 'FILE') {
+            console.log("FOUND FILE")
+            this.game.gameFile = media;
+            this.game.gameFile.mediaUrl = (this.game.gameFile?.mediaUrl as string).replace(/\.zip$/, '');
           }
         }
 

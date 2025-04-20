@@ -1,29 +1,22 @@
-<div class="featured-container">
-  <div>Browse by category</div>
-
-  <ul class="glassmorphic-list list-group list-group-horizontal position-relative overflow-auto w-75">
-    <li class="list-group-item" (click)="goToPage(category)" *ngFor="let category of availableCategories">{{
-      category.name }}</li>
-  </ul>
-
-</div>
-
+<app-games-nav></app-games-nav>
+<!--
 <video autoplay loop muted class="background-video">
   <source src="../../../assets/webm/webm_page_bg_english.mp4" type="video/webm">
   Your browser does not support the video tag.
 </video>
+-->
+<!--
+<br>
+<app-keen-game-carousel [ngClass]="'keen'"></app-keen-game-carousel>
+<br>
+-->
+
 
 <div class="featured-container">
 
 
-  <div class="featured-container">
-    <div>Featured Games</div>
-    <div class="carousel-container">
-      <app-keen-game-carousel></app-keen-game-carousel>
-    </div>
-  </div>
 
-  <div class="featured-container">
+  <!--<div class="featured-container">
     <div>All Games</div>
 
     <div class="container py-4">
@@ -55,7 +48,7 @@
 
 
 
-  </div>
+  </div> -->
 
 
   <div class="featured-container">

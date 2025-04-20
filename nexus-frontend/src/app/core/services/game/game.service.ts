@@ -12,6 +12,17 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
+
+
+  vncUrl: string | null = null;
+
+playGame(romName: string): Observable<string> {
+  return this.http.post(`${this.gamesUrl}/emulated/launch`, null, {
+    params: { romName },
+    responseType: 'text',
+  });
+}
+
   getGames(): Observable<Game[]> {  // ✅ Fix the return type
 
     return this.http.get<Game[]>(`${this.gamesUrl}/all-games`);

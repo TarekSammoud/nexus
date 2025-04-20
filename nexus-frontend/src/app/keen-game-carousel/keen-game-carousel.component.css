@@ -10,9 +10,13 @@
   display: grid;
   grid-template-columns: 3fr 1fr; /* Main slide takes more space, thumbnails on the right */
   grid-gap: 10px;
-  height: 100vh;
-  background-color: #1a1a1a; /* Dark background */
-  font-family: 'Arial', sans-serif; /* Fallback font */
+  width: 80%; /* Adjust width as needed */
+  max-width: 1200px; /* Set a max width to avoid stretching */
+  height: 500px; /* Set a height based on the available space */
+  background-color: #1a1a1a;
+  font-family: 'Arial', sans-serif;
+  margin: 0 auto; /* Center the carousel */
+  overflow: hidden; /* To prevent overflow from child elements */
 }
 
 /* Main slider styles */
@@ -20,6 +24,7 @@
   display: flex;
   overflow: hidden;
   height: 100%;
+  border-radius: 25px;
 }
 
 .keen-slider__slide {
@@ -41,15 +46,32 @@
 }
 
 .slide-media {
+  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden; /* ensures the overlay doesn't spill out */
 }
 
+.slide-media picture,
 .slide-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+
+/* Overlay with dark-to-transparent tint */
+.slide-media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none;
+}
+
 
 /* Overlay content */
 .slide-overlay {
@@ -69,6 +91,7 @@
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 10px;
+  text-align: left !important;
 }
 
 .slide-info {
@@ -138,8 +161,8 @@
 }
 
 .play-button {
-  background-color: #0078f2;
-  color: #fff;
+  background-color: white;
+  color: black;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
@@ -188,9 +211,20 @@
   align-items: left;
 }
 
+.number-slide:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light gray background on hover */
+}
+
+.number-slide{
+  transition: background-color 0.3s ease; /* Add transition for smooth effect */
+
+}
+
+
+
 .thumbnail-image img {
   width: auto;
-  height: 128px;
+  height: 80px;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -198,7 +232,7 @@
 .thumbnail-title {
   font-size: 0.9rem;
   margin-top: 5px;
-  text-align: center;
+  text-align: left;
 }
 
 .progress-bar {
