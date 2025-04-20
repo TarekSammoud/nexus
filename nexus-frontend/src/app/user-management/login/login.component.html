@@ -1,31 +1,44 @@
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card p-4 shadow">
+<div class="container-fluid fusion-container">
+    <div class="row fusion-wrapper">
+
+        <!-- Partie gauche : Présentation -->
+        <div class="col-md-6 p-5 d-flex flex-column justify-content-center align-items-center text-white intro-zone">
+            <img src="assets/img/logo_white.png" alt="Nexus Logo" class="logo mb-4">
+            <h1 class="display-5 glow-text">Welcome to Nexus</h1>
+            <p class="typewriter-container">
+                <span class="typewriter-text">Your next-generation platform for discovering, buying, and sharing
+                    games.</span>
+            </p>
+
+
+
+        </div>
+
+        <!-- Partie droite : Formulaire -->
+        <div class="col-md-6 p-5 d-flex flex-column justify-content-center align-items-center form-zone">
+            <div class="w-100" style="max-width: 400px;">
                 <h2 class="text-center mb-4">Login</h2>
                 <form (ngSubmit)="onLogin()">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email"
-                            placeholder="Enter your email" required>
+                        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password"
-                            placeholder="Enter your password" required>
+                            required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
-                    <div *ngIf="errorMessage" class="text-danger mt-2">
-                        {{ errorMessage }}
-                    </div>
+                    <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
                 </form>
                 <div class="text-center mt-3">
-                    <button (click)="loginWithFacebook()" class="btn btn-info w-100">Se connecter avec Facebook</button>
-
-                    <a routerLink="/signup" class="btn btn-link">Sign Up</a>
-                    <a routerLink="/forgot-password" class="btn btn-link">Forgot Password?</a>
+                    <button (click)="loginWithFacebook()" class="btn btn-info w-100 mb-2">Se connecter avec
+                        Facebook</button>
+                    <a routerLink="/signup" class="btn btn-link text-white">Sign Up</a>
+                    <a routerLink="/forgot-password" class="btn btn-link text-white">Forgot Password?</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

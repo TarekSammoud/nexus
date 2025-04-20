@@ -1,56 +1,175 @@
-/* Signup Form Styling */
-
-.card {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+/* Global styles */
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-h2 {
-    font-size: 2.5rem;
-    color: #333;
+.container {
+    margin-top: 50px;
+}
+
+/* Card style */
+.card {
+    background: #1a1a2e;
+    border: 1px solid #0f3460;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2);
+    padding: 30px;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #0f3460;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #16213e;
+}
+
+.btn-info {
+    background-color: #00adb5;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-info:hover {
+    background-color: #007b8a;
+}
+
+input.form-control {
+    background-color: #121212;
+    border: 1px solid #00adb5;
+    color: #fff;
+    padding: 10px;
+}
+
+input.form-control::placeholder {
+    color: #aaa;
+}
+
+input.form-control:focus {
+    border-color: #00fff7;
+    box-shadow: 0 0 10px #00fff7;
+}
+
+label.form-label {
+    color: #00fff7;
     font-weight: 600;
 }
 
-.form-label {
-    font-size: 1rem;
+/* Error styles */
+.text-danger {
+    color: #ff4c4c;
+}
+
+/* Link button styles */
+a.btn-link {
+    color: #00fff7;
     font-weight: 500;
-    color: #333;
 }
 
-.form-control {
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+a.btn-link:hover {
+    color: #00adb5;
+    text-decoration: underline;
 }
 
-button[type="submit"] {
-    background-color: #0b315a;
-    color: white;
-    font-size: 1.1rem;
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-button[type="submit"]:hover {
-    background-color: #3c5268;
-}
-
-a {
-    text-decoration: none;
-    color: #0b315a;
-}
-
-a:hover {
-    color: #08ec26;
-}
-
-.mb-3 {
-    margin-bottom: 1.5rem;
-}
-
-.text-center {
+.typewriter-container {
     text-align: center;
+    /* Centrer le texte horizontalement */
+    padding: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    /* Utiliser flexbox pour un meilleur centrage */
+    justify-content: center;
+    /* Centrer horizontalement */
+    align-items: center;
+    /* Centrer verticalement */
+    height: auto;
+    /* S'assurer que la hauteur est adaptée à son contenu */
+}
+
+/* Typewriter text */
+.typewriter-text {
+    font-size: 1.8rem;
+    color: #00fff7;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid #00fff7;
+    animation: typing 4s steps(50, end) 1s forwards, blink-caret 0.75s step-end infinite;
+    margin: 0;
+    /* Éviter les marges indésirables autour du texte */
+}
+
+
+
+
+/* Typewriter animation keyframes */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+
+    0%,
+    100% {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: #00fff7;
+    }
+}
+
+/* Layout styling for larger screens */
+@media (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .col-md-5,
+    .col-md-6 {
+        padding: 15px;
+    }
+
+    .text-center img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 768px) {
+    .typewriter-container {
+        text-align: center;
+    }
+
+    .col-md-6,
+    .col-md-5 {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
 }

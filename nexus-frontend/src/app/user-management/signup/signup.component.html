@@ -1,10 +1,24 @@
 <div class="container my-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-between">
+        <!-- Text Invitation with Typewriter Animation and Image (à gauche) -->
+        <div class="col-md-5">
+            <div class="typewriter-container mb-4">
+                <p class="typewriter-text">Join Nexus today! 🎮</p>
+            </div>
+            <!-- Image section -->
+            <div class="text-center">
+                <img src="assets/img/logo_white.png" alt="Gaming" class="img-fluid mb-4">
+            </div>
+            <p class="text-center">Nexus is your gateway to the ultimate gaming experience. Whether you're a seasoned
+                player or just starting out, we have something for everyone. Join now and connect with gamers worldwide!
+            </p>
+        </div>
+
+        <!-- Formulaire (à droite) -->
         <div class="col-md-6">
             <div class="card p-4 shadow">
                 <h2 class="text-center mb-4">Sign Up</h2>
                 <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
-
                     <!-- First Name and Last Name (side by side) -->
                     <div class="row mb-3">
                         <div class="col-md-6">
