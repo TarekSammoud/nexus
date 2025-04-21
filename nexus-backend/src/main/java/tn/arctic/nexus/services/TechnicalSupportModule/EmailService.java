@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import tn.arctic.nexus.entities.FinanceModule.GeminiApiModels.RefundAnalysisResponse;
 
 @Service
 public class EmailService {
@@ -86,4 +87,50 @@ public class EmailService {
             e.printStackTrace();
         }
     }
-}
+    public void sendRefundEmail(String toEmail, RefundAnalysisResponse refundAnalysisResponse) {
+        MimeMessage message = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setTo(toEmail);
+            helper.setSubject("🛠️ Nexus — Refund Update");
+
+            String decisionText = "";
+            String statusColor = "";
+            if ("APPROVED".equalsIgnoreCase(refundAnalysisResponse.getDecision())) {
+                decisionText = "Approved";
+                statusColor = "#4CAF50"; // Green
+            } else  {
+                decisionText = "Rejected";
+                statusColor = "#F44336"; // Red
+            }
+
+            String htmlContent = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;'>" +
+                    "  <div style='text-align: center; margin-bottom: 20px;'>" +
+                    "    <img src='https://i.imgur.com/tk3esg8.png' alt='Nexus Logo' style='width: 120px; height: auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);'>" +
+                    "    <h2 style='color: #333; margin-top: 10px;'>Your Refund Request Update</h2>" +
+                    "  </div>" +
+                    "  <p style='color: #555; line-height: 1.6;'>Dear User,</p>" +
+                    "  <p style='color: #555; line-height: 1.6;'>We have processed your refund request and have an update for you:</p>" +
+                    "  <div style='background-color: #e9e9e9; padding: 15px; border-radius: 6px; margin-bottom: 20px;'>" +
+                    "    <h3 style='color: #333; margin-top: 0;'>Refund Status: <span style='color: " + statusColor + "; font-weight: bold;'>" + decisionText + "</span></h3>" +
+                    "    <p style='color: #555; line-height: 1.6; margin-bottom: 0;'><strong>Reason for Decision:</strong></p>" +
+                    "    <p style='color: #555; line-height: 1.6;'>" + refundAnalysisResponse.getJustification() + "</p>" +
+                    "  </div>" +
+                    "  <p style='color: #555; line-height: 1.6;'>If your refund was approved, please allow a few business days for the funds to be processed and reflected in your account.</p>" +
+                    "  <p style='color: #555; line-height: 1.6;'>If you have any questions or concerns, please do not hesitate to contact our support team.</p>" +
+                    "  <div style='margin-top: 30px; text-align: center; color: #777; font-size: 0.9em;'>" +
+                    "    <p>Thank you for being a part of the Nexus community.</p>" +
+                    "    <p>Sincerely,</p>" +
+                    "    <p>The Nexus Team</p>" +
+                    "  </div>" +
+                    "</div>";
+
+            helper.setText(htmlContent, true); // true = HTML content
+
+            mailSender.send(message);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }}

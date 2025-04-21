@@ -18,8 +18,11 @@ export class GeminiService {
 
   constructor(private http: HttpClient) {}
 
-  analyzeRefund(refundId: number): Observable<RefundAnalysisResponse> {
-    // POST request, with no body
-    return this.http.post<RefundAnalysisResponse>(`${this.apiUrl}/${refundId}`, {});
+  analyzeRefund(refundId: number, email: string): Observable<RefundAnalysisResponse> {
+    return this.http.post<RefundAnalysisResponse>(
+      `${this.apiUrl}/${refundId}?email=${encodeURIComponent("hamdounisabri2@gmail.com")}`,
+      {
+}
+    );
   }
 }
