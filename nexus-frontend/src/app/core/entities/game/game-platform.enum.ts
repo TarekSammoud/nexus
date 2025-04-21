@@ -2,7 +2,8 @@ export enum GamePlatform {
     WINDOWS = 'WINDOWS',
     LINUX = 'LINUX',
     MACOS = 'MACOS',
-    BROWSER = 'BROWSER'
+    BROWSER = 'BROWSER',
+    N64 = 'N64'
 
   }
   

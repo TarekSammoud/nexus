@@ -77,6 +77,7 @@ import { CreateBrowserGameComponent } from './create-browser-game/create-browser
 import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
 import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
 import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
+import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -141,6 +142,7 @@ const routes: Routes = [
       { path: 'games/:id', component: GamePageComponent },
       { path: 'add-new-game', component: CreateGameComponent },
       { path: 'add-new-browser-game', component: CreateBrowserGameComponent },
+      { path: 'add-new-emulated-game', component: CreateEmulatedGameComponent },
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
 

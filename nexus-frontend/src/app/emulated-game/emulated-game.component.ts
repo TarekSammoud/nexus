@@ -28,8 +28,5 @@ export class EmulatedGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.safeGameUrl = this.sanitizer.bypassSecurityTrustResourceUrl("http://192.168.83.130:6080/vnc.html");
-
-    // Fetch VNC URL asynchronously after component initialization
-
   }
 }

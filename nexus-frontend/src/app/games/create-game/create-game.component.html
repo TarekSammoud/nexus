@@ -116,9 +116,9 @@
         <br>
         <div class="image-grid">
 
-        <div *ngFor="let image of images; index as i" class="image-wrapper" >
+        <div *ngFor="let image of imagesCover; index as i" class="image-wrapper" >
         <img [src]="image" height="200" class="preview-image">
-        <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+        <button type="button" class="remove-btn" (click)="removeImageCover(i)">✖</button>
       </div>
 
         <br/>
@@ -138,9 +138,9 @@
               <br>
               <div class="image-grid">
       
-              <div *ngFor="let image of images; index as i" class="image-wrapper" >
+              <div *ngFor="let image of imagesBanner; index as i" class="image-wrapper" >
               <img [src]="image" height="200" class="preview-image">
-              <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+              <button type="button" class="remove-btn" (click)="removeImageBanner(i)">✖</button>
             </div>
       
               <br/>
@@ -158,9 +158,9 @@
         <br>
         <div class="image-grid">
 
-        <div *ngFor="let image of images; index as i" class="image-wrapper" >
+        <div *ngFor="let image of imagesScreenshots; index as i" class="image-wrapper" >
         <img [src]="image" height="200" class="preview-image">
-        <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+        <button type="button" class="remove-btn" (click)="removeImageScreenshots(i)">✖</button>
       </div>
 
         <br/>

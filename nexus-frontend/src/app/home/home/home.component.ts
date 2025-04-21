@@ -52,6 +52,27 @@ export class HomeComponent {
             }
           }
         })
+
+        this._gameService.getEmulatedGames().subscribe(games => {
+          this.emulatedGames = games;
+          console.log(this.browserGames);
+          for (let i = 0; i < this.browserGames.length; i++) {
+            console.log(i)
+            for (let j = 0; j < this.browserGames[i].gameMediaList.length; j++) {
+              console.log(j)
+              console.log(this.browserGames[i].gameMediaList[j].gameMediaType)
+              if (this.browserGames[i].gameMediaList[j].gameMediaType == 'FILE') {
+                this.browserGames[i].gameFile = this.browserGames[i].gameMediaList[j]; 
+                this.browserGames[i].gameFile!.mediaUrl = (this.browserGames[i].gameFile?.mediaUrl as string).replace(/\.zip$/, '');
+              }
+              if (this.browserGames[i].gameMediaList[j].gameMediaType == 'COVER') {
+                this.browserGames[i].coverPicture = this.browserGames[i].gameMediaList[j]; 
+                console.log(this.browserGames[i].coverPicture?.mediaUrl);
+              }
+
+            }
+          }
+        })
        
 
 
@@ -89,6 +110,7 @@ export class HomeComponent {
     
       games: Game[] = [];
       browserGames: Game[] = [];
+      emulatedGames: Game[] = [];
       name : String = '';
     
  
@@ -98,6 +120,11 @@ export class HomeComponent {
         this._router.navigate(['/games', game.id]);
         }
     
+        OnSelectEmulated(game: Game){
+          console.log(game)
+        //  this._router.navigate(['/games/emulated/play', game.gameFile?.mediaUrl]);
+        }
+
         OnSelectBrowser(game: Game){
           this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
         }

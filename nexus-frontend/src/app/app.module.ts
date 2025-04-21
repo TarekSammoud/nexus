@@ -133,6 +133,7 @@ import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.
 import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
 import { GamesNavComponent } from './games-nav/games-nav.component';
 import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
+import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
 
 
 
@@ -223,6 +224,7 @@ import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
     KeenGameCarouselComponent,
     GamesNavComponent,
     EmulatedGameComponent,
+    CreateEmulatedGameComponent,
 
 
     

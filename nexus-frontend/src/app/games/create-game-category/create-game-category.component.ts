@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameCategoryService } from 'src/app/core/services/gameCategory/game-category.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create-game-category',
@@ -9,7 +10,7 @@ import { GameCategoryService } from 'src/app/core/services/gameCategory/game-cat
   styleUrls: ['./create-game-category.component.css']
 })
 export class CreateGameCategoryComponent implements OnInit {
-  constructor(private _router: Router,private _route: ActivatedRoute,private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
+  constructor(public modalService: NgbModal,private _router: Router,private _route: ActivatedRoute,private _gameCategoryService: GameCategoryService,private fb: FormBuilder) { }
   gameCategoryForm!: FormGroup;
   gameCategoryId? : number; 
   isEditMode: boolean = false;
@@ -66,5 +67,15 @@ export class CreateGameCategoryComponent implements OnInit {
       });
       }
 
+}
+
+open(content: any) {
+  this.modalService.open(content);
+}
+
+
+
+closeModal() {
+  this.modalService.dismissAll();
 }
 }

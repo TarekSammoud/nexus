@@ -10,20 +10,19 @@ import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
 @Component({
-  selector: 'app-create-browser-game',
-  templateUrl: './create-browser-game.component.html',
-  styleUrls: ['./create-browser-game.component.css']
+  selector: 'app-create-emulated-game',
+  templateUrl: './create-emulated-game.component.html',
+  styleUrls: ['./create-emulated-game.component.css']
 })
-export class CreateBrowserGameComponent implements OnInit{
+export class CreateEmulatedGameComponent implements OnInit {
+
 
 
     gameForm!: FormGroup;
     editorContent: string = '';  
     
-    availablePlatforms = ["BROWSER"];
+    availablePlatforms = ["N64"];
     selectedPlatforms: Set<string> = new Set();
     selectedUpdatePlatforms: Set<string> = new Set();
     selectedUpdateCategories: Set<number> = new Set();
@@ -31,6 +30,33 @@ export class CreateBrowserGameComponent implements OnInit{
     selectedCategories: Set<GameCategory> = new Set();
     numberOfGames!: number; 
   
+
+    
+
+
+
+
+removeImageBanner(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesBanner.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageScreenshots(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesScreenshots.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageCover(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesCover.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
   
   
     constructor(public modalService: NgbModal,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
@@ -82,11 +108,10 @@ export class CreateBrowserGameComponent implements OnInit{
   
   url = '';
   images: any[] = [];
-
   imagesScreenshots: any[] = [];
-  imagesBanner: any[] = [];
-  imagesCover: any[] = [];
-  imagesFile: any[] = [];
+imagesBanner: any[] = [];
+imagesCover: any[] = [];
+imagesFile: any[] = [];
   
   
   filesToUpload: FormGroup[] = [];
@@ -230,6 +255,57 @@ export class CreateBrowserGameComponent implements OnInit{
     }
   }
   
+
+  onSelectFileFile(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+  
+      var reader = new FileReader();
+  
+      reader.readAsDataURL(event.target.files[0]); 
+  
+      reader.onload = () => {
+        this.images.push(reader.result); 
+        this.imagesFile.push(reader.result); 
+
+      };
+  
+      const mediaUrl = file.name;
+  
+      const fileType = file.type;
+      const fileSize = file.size;
+  
+  
+       const newForm = this.fb.group({
+        mediaUrl: [mediaUrl, Validators.required],
+        fileType: [fileType, Validators.required],
+        fileSize: [fileSize, Validators.required],
+        gameMediaType: ['BANNER', Validators.required],
+        game: this.fb.group({
+          id: [this.numberOfGames + 1 , Validators.required]
+        })
+      });
+  
+  
+      const formData = new FormData();
+      formData.append('file', event.target.files[0], event.target.files[0].name);
+  
+      this.filesToUpload.push(newForm);
+      this.ftpFiles.push(formData);
+
+      this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
+        next: (response) => {
+          console.log('Upload success:', response);
+          // You can store the result or update the form as needed
+        },
+        error: (err) => {
+          console.error('Upload failed:', err);
+        }
+        
+      })
+  
+    }
+  }
   onSelectFileScreenShots(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -286,7 +362,6 @@ export class CreateBrowserGameComponent implements OnInit{
   }
   
   
-
   removeImage(index: number) {
     this.filesToUpload.splice(index, 1);
     this.ftpFiles.splice(index, 1);
@@ -301,39 +376,10 @@ export class CreateBrowserGameComponent implements OnInit{
     this.imagesFile.splice(index, 1);
     console.log(this.filesToUpload.length); 
   }
-
-  removeImageCover(index: number) {
-    this.filesToUpload.splice(index, 1);
-    this.ftpFiles.splice(index, 1);
-    this.images.splice(index, 1);
-    this.imagesCover.splice(index, 1);
-    console.log(this.filesToUpload.length); 
-  }
-
-  removeImageBanner(index: number) {
-    this.filesToUpload.splice(index, 1);
-    this.ftpFiles.splice(index, 1);
-    this.images.splice(index, 1);
-    this.imagesBanner.splice(index, 1);
-    console.log(this.filesToUpload.length); 
-  }
-
-  removeImageScreenshots(index: number) {
-    this.filesToUpload.splice(index, 1);
-    this.ftpFiles.splice(index, 1);
-    this.images.splice(index, 1);
-    this.imagesScreenshots.splice(index, 1);
-    console.log(this.filesToUpload.length); 
-  }
-
-
-
   
-
-
   gameId? : number; 
   isEditMode: boolean = false;
-  title: string = 'Create Browser Game';
+  title: string = 'Create Emulated Game';
   
   
   
@@ -502,6 +548,7 @@ export class CreateBrowserGameComponent implements OnInit{
       this._router.navigate(['/games', n]); 
       this.modalService.dismissAll(); 
     }
+  
 
 
 }

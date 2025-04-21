@@ -48,4 +48,10 @@ export class GameMediaService {
       headers: this.getAuthHeaders()
     });
   }
+
+  uploadN64FileToFtp(file: any): Observable<String> {
+    return this.http.post<String>(`${this.ftpUrl}/n64`, file, {
+      headers: this.getAuthHeaders()
+    });
+  }
 }

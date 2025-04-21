@@ -23,4 +23,6 @@ public interface IGameService {
 
 
     List<Game> getAllGamesBySingleCategory(String name);
+
+    public List<Game> getEmulatedGames();
 }
