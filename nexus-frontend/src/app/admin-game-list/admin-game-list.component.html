@@ -1,9 +1,19 @@
 <div class="admin-games-container">
     <h2>🎮 Game Management Panel</h2>
   
+    <div style="display: flex; justify-content: flex-end;">
     <div class="text-end mb-3">
       <button class="btn btn-outline-success" (click)="navigateToCreate()">➕ Create Game</button>
     </div>
+
+    <div class="text-end mb-3">
+      <button class="btn btn-outline-success" (click)="navigateToCreateBrowser()">➕ Create Browser Game</button>
+    </div>
+
+    <div class="text-end mb-3">
+      <button class="btn btn-outline-success" (click)="navigateToCreateEmulated()">➕ Create Emulated Game</button>
+    </div>
+  </div>
   
     <div class="table-responsive">
       <table>

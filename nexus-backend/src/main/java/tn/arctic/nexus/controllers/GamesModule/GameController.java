@@ -43,6 +43,11 @@ public class GameController {
         return  gameService.getBrowserGames();
     }
 
+    @GetMapping("/all-emulated-games")
+    public List<Game> getAllEmulatedGames(){
+        return  gameService.getEmulatedGames();
+    }
+
     @GetMapping("/{id}")
     public Game getGameById(@PathVariable("id") Long id){
         return gameService.getGameById(id);

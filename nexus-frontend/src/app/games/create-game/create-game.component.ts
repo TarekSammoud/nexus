@@ -110,6 +110,9 @@ prevStep() {
 
 url = '';
 images: any[] = [];
+imagesScreenshots: any[] = [];
+imagesBanner: any[] = [];
+imagesCover: any[] = [];
 
 
 filesToUpload: FormGroup[] = [];
@@ -130,6 +133,7 @@ onSelectFileCover(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesCover.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -155,6 +159,17 @@ onSelectFileCover(event: any): void {
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
 
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
+
   }
 }
 onSelectFileBanner(event: any): void {
@@ -167,6 +182,7 @@ onSelectFileBanner(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesBanner.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -192,6 +208,17 @@ onSelectFileBanner(event: any): void {
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
 
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
+
   }
 }
 
@@ -205,6 +232,7 @@ onSelectFileScreenShots(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesScreenshots.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -230,6 +258,17 @@ onSelectFileScreenShots(event: any): void {
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
 
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
+
   }
 }
 
@@ -245,6 +284,31 @@ removeImage(index: number) {
   this.images.splice(index, 1);
   console.log(this.filesToUpload.length); 
 }
+
+
+removeImageBanner(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesBanner.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageScreenshots(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesScreenshots.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageCover(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesCover.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+
+
 
 gameId? : number; 
 isEditMode: boolean = false;

@@ -62,7 +62,7 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this._gameService.getGames().subscribe((games) => {
       this.games = games;
-      this.games = games.slice(0, 6);
+      this.games = games.slice(0, 4);
       for (let game of this.games) {
         for (let media of game.gameMediaList) {
           if (media.gameMediaType === 'COVER') {
@@ -97,7 +97,7 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnInit {
         initial: 0,
         vertical: true,
         slides: {
-          perView: 6,
+          perView: 5,
           spacing: 10,
         },
       },

@@ -58,6 +58,14 @@ export class AdminGameListComponent implements OnInit {
     this._router.navigate(['admin/add-new-game']);
   }
 
+  navigateToCreateBrowser(){
+    this._router.navigate(['admin/add-new-browser-game']);
+  }
+
+  navigateToCreateEmulated(){
+    this._router.navigate(['admin/add-new-emulated-game']);
+  }
+
   editGame(data: Game){
     this._router.navigate(['admin/update-game', data.id]);
   }

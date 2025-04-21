@@ -52,6 +52,13 @@ public class GameService implements IGameService {
     }
 
     @Override
+    public List<Game> getEmulatedGames() {
+        List<GamePlatform> gp = new ArrayList<>();
+        gp.add(GamePlatform.N64);
+        return gameRepository.getGamesByPlatforms(gp);
+    }
+
+    @Override
     public Game updateGame(Game game) {
         return gameRepository.save(game);
     }

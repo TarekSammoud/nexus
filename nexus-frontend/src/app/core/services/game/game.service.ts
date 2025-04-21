@@ -33,6 +33,11 @@ playGame(romName: string): Observable<string> {
     return this.http.get<Game[]>(`${this.gamesUrl}/all-browser-games`);
   }
 
+  getEmulatedGames(): Observable<Game[]> {  // ✅ Fix the return type
+
+    return this.http.get<Game[]>(`${this.gamesUrl}/all-emulated-games`);
+  }
+
   getLastGameId(): Observable<number> {
     return this.http.get<number>(`${this.gamesUrl}/last-id`);
   }

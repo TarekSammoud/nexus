@@ -12,7 +12,7 @@
   grid-gap: 10px;
   width: 80%; /* Adjust width as needed */
   max-width: 1200px; /* Set a max width to avoid stretching */
-  height: 500px; /* Set a height based on the available space */
+  height: 550px; /* Set a height based on the available space */
   background-color: #1a1a1a;
   font-family: 'Arial', sans-serif;
   margin: 0 auto; /* Center the carousel */

@@ -152,6 +152,31 @@ public class FtpService {
         }
     }
 
+    public String uploadN64File(MultipartFile file) throws IOException {
+        FTPClient ftpClient = new FTPClient();
+
+        try {
+            ftpClient.connect(FTP_SERVER, FTP_PORT);
+            ftpClient.login(FTP_USER, FTP_PASSWORD);
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            ftpClient.changeWorkingDirectory("/n64");
+
+            boolean success = ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
+
+            if (success) {
+                return "File uploaded successfully!";
+            } else {
+                return "File upload failed!";
+            }
+
+        } finally {
+            ftpClient.logout();
+            ftpClient.disconnect();
+        }
+    }
+
     public List<List<String>> readExcelFromBytes(byte[] fileData) throws IOException {
         List<List<String>> data = new ArrayList<>();
 
