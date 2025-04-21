@@ -80,10 +80,27 @@ public class Game implements Serializable {
     private List<GameCategory> categories;
 
 
+
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JsonManagedReference
-    private List<GameMedia> gameMediaList;
+    @JsonManagedReference("game-screenshots")
+    private List<GameMedia> screenshots;
+
+    @OneToOne(mappedBy = "gameCover", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonManagedReference("game-cover")
+    private GameMedia coverPicture;
+
+    @OneToOne(mappedBy = "gameBanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonManagedReference("game-banner")
+    private GameMedia bannerPicture;
+
+    @OneToOne(mappedBy = "gameFile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonManagedReference("game-file")
+    private GameMedia gameFile;
+
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -176,13 +193,7 @@ public class Game implements Serializable {
         this.categories = categories;
     }
 
-    public List<GameMedia> getGameMediaList() {
-        return gameMediaList;
-    }
 
-    public void setGameMediaList(List<GameMedia> gameMediaList) {
-        this.gameMediaList = gameMediaList;
-    }
 
     public List<GameReview> getGameReviewList() {
         return gameReviewList;
@@ -215,5 +226,45 @@ public class Game implements Serializable {
 
     public void setRecommendedRequirements(SystemRequirements recommendedRequirements) {
         this.recommendedRequirements = recommendedRequirements;
+    }
+
+    public GameType getType() {
+        return type;
+    }
+
+    public void setType(GameType type) {
+        this.type = type;
+    }
+
+    public List<GameMedia> getScreenshots() {
+        return screenshots;
+    }
+
+    public void setScreenshots(List<GameMedia> screenshots) {
+        this.screenshots = screenshots;
+    }
+
+    public GameMedia getCoverPicture() {
+        return coverPicture;
+    }
+
+    public void setCoverPicture(GameMedia coverPicture) {
+        this.coverPicture = coverPicture;
+    }
+
+    public GameMedia getBannerPicture() {
+        return bannerPicture;
+    }
+
+    public void setBannerPicture(GameMedia bannerPicture) {
+        this.bannerPicture = bannerPicture;
+    }
+
+    public GameMedia getGameFile() {
+        return gameFile;
+    }
+
+    public void setGameFile(GameMedia gameFile) {
+        this.gameFile = gameFile;
     }
 }

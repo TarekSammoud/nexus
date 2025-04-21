@@ -20,6 +20,14 @@ export class EmulatedGameComponent implements OnInit {
   ) {
     // Get the game name from the route parameters
     this.gameName = this._route.snapshot.paramMap.get('name') || '';
+    if (this.gameName.includes('.iso')) {
+      console.log("PSP");
+      this._gameService.playPSPGame(this.gameName).subscribe((vnc: string) => {
+        this.vncUrl = vnc;
+        console.log(this.vncUrl);
+      });
+    }
+    else
     this._gameService.playGame(this.gameName).subscribe((vnc: string) => {
       this.vncUrl = vnc;
       console.log(this.vncUrl);

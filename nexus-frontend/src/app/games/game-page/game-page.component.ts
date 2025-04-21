@@ -17,12 +17,24 @@ export class GamePageComponent implements OnInit {
   game! : Game;
   groupedReviews: GameReview[][] = [];
   browser: string ='BROWSER';
+  n64: string ='N64';
+  psp: string ='N64';
   matchesPlatform: boolean = false;
+  matchesPlatformEmulated: boolean = false;
+  matchesPlatformPSP: boolean = false;
 
   OnSelectBrowser(game: Game){
     this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
   }
 
+  OnSelectEmulated(game: Game){
+    this._router.navigate(['/games/emulated/play', game.gameFile?.mediaUrl]);
+  }
+
+  
+
+  emulatedGame= false;
+  emulatedPSPGame= false;
   ngOnInit(): void {
 
     
@@ -34,38 +46,28 @@ export class GamePageComponent implements OnInit {
          this.matchesPlatform = !this.browser || 
         game.platforms?.includes(this.browser);
 
-        
+        this.matchesPlatformEmulated = !this.n64 || 
+        game.platforms?.includes(this.n64);
+
     for ( let platform of this.game.platforms) {
       if (platform == "BROWSER") {
         this.browserGame = true ;
         console.log(this.browserGame)
       }
+
+      if (platform == "N64") {
+        this.emulatedGame = true ;
+        console.log(this.emulatedGame)
+      }
+
+      if (platform == "PSP") {
+        this.emulatedPSPGame = true ;
+        console.log(this.emulatedPSPGame)
+      }
     }
         
         if (this.game?.gameReviewList) {
           this.groupedReviews = this.groupReviews(this.game.gameReviewList, 3);
-        }
-        this.game.screenshots = []; // ✅ Initialize
-
-        for (let media of this.game.gameMediaList) {
-          if (media.gameMediaType === 'BANNER') {
-            console.log("FOUND BANNER")
-            this.game.bannerPicture = media;
-            this.bannerUrl= this.game.bannerPicture.mediaUrl
-            console.log(this.game.bannerPicture);
-          }
-
-          if (media.gameMediaType === 'FILE') {
-            console.log("FOUND FILE")
-            this.game.gameFile = media;
-            this.game.gameFile.mediaUrl = (this.game.gameFile?.mediaUrl as string).replace(/\.zip$/, '');
-          }
-        }
-
-        for (let media of this.game.gameMediaList) {
-          if (media.gameMediaType === 'SCREENSHOT') {
-            this.game.screenshots.push(media);
-          }
         }
 
         this._gameService.getUserGameLibrary().subscribe(games => {

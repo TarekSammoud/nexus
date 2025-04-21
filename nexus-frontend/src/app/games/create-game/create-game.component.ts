@@ -147,7 +147,7 @@ onSelectFileCover(event: any): void {
       fileType: [fileType, Validators.required],
       fileSize: [fileSize, Validators.required],
       gameMediaType: ['COVER', Validators.required],
-      game: this.fb.group({
+      gameCover: this.fb.group({
         id: [this.numberOfGames + 1 , Validators.required]
       })
     });
@@ -196,7 +196,7 @@ onSelectFileBanner(event: any): void {
       fileType: [fileType, Validators.required],
       fileSize: [fileSize, Validators.required],
       gameMediaType: ['BANNER', Validators.required],
-      game: this.fb.group({
+      gameBanner: this.fb.group({
         id: [this.numberOfGames + 1 , Validators.required]
       })
     });

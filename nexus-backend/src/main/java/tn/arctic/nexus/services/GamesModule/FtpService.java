@@ -177,6 +177,33 @@ public class FtpService {
         }
     }
 
+
+    public String uploadPSPFile(MultipartFile file) throws IOException {
+        FTPClient ftpClient = new FTPClient();
+
+        try {
+            ftpClient.connect(FTP_SERVER, FTP_PORT);
+            ftpClient.login(FTP_USER, FTP_PASSWORD);
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            ftpClient.changeWorkingDirectory("/psp");
+
+            boolean success = ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
+
+            if (success) {
+                return "File uploaded successfully!";
+            } else {
+                return "File upload failed!";
+            }
+
+        } finally {
+            ftpClient.logout();
+            ftpClient.disconnect();
+        }
+    }
+
+
     public List<List<String>> readExcelFromBytes(byte[] fileData) throws IOException {
         List<List<String>> data = new ArrayList<>();
 
@@ -205,4 +232,6 @@ public class FtpService {
         byte[] fileData = downloadFile(fileName);
         return readExcelFromBytes(fileData);
     }
+
+
 }

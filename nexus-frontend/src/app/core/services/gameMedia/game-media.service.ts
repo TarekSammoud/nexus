@@ -54,4 +54,10 @@ export class GameMediaService {
       headers: this.getAuthHeaders()
     });
   }
+
+  uploadPSPFileToFtp(file: any): Observable<String> {
+    return this.http.post<String>(`${this.ftpUrl}/psp`, file, {
+      headers: this.getAuthHeaders()
+    });
+  }
 }

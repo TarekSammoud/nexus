@@ -63,16 +63,6 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnInit {
     this._gameService.getGames().subscribe((games) => {
       this.games = games;
       this.games = games.slice(0, 4);
-      for (let game of this.games) {
-        for (let media of game.gameMediaList) {
-          if (media.gameMediaType === 'COVER') {
-            game.coverPicture = media;
-          }
-          if (media.gameMediaType === 'BANNER') {
-            game.bannerPicture = media;
-          }
-        }
-      }
 
       // Trigger change detection so *ngFor renders
       this.cdr.detectChanges();

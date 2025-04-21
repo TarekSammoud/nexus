@@ -42,6 +42,17 @@ public class FileUploadController {
         }
     }
 
+    @PostMapping("/psp")
+    public ResponseEntity<String> uploadPSPFile(@RequestParam("file") MultipartFile file) {
+        System.out.println("adding");
+        try {
+            String message = ftpService.uploadPSPFile(file);
+            return ResponseEntity.ok(message);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Error uploading file: " + e.getMessage());
+        }
+    }
+
     @PostMapping("/rar")
     public ResponseEntity<String> uploadRARFile(@RequestParam("file") MultipartFile file) {
         System.out.println("adding");

@@ -32,14 +32,6 @@ export class GamesNavComponent {
 
     this._gameService.getGames().subscribe(games => {
       this.games = games;
-      for (let i = 0; i < this.games.length; i++) {
-        for (let j = 0; j < this.games[i].gameMediaList.length; j++) {
-          if (this.games[i].gameMediaList[j].gameMediaType == 'COVER') {
-            this.games[i].coverPicture = this.games[i].gameMediaList[j]; 
-            break; 
-          }
-        }
-      }
       this.filteredGames = this.games; 
 
     })

@@ -148,4 +148,64 @@ public class GameController {
     }
 
 
+
+    @PostMapping("/emulated/launch/psp")
+    public ResponseEntity<String> launchPSPGame(@RequestParam String romName) {
+        String remoteHost = "192.168.83.130"; // Remote machine IP
+        String user = "nexus-emu"; // SSH username
+        String password = "123456789"; // SSH password
+        String remoteScriptPath = "/home/nexus-emu/launch_game_psp.sh";
+
+        try {
+            JSch jsch = new JSch();
+            Session session = jsch.getSession(user, remoteHost, 22); // 22 is the default SSH port
+            session.setPassword(password);
+
+            // Disable strict host key checking (not recommended for production)
+            session.setConfig("StrictHostKeyChecking", "no");
+
+            // Connect to the remote machine
+            session.connect();
+
+            // Create an SSH channel to execute the script
+            Channel channel = session.openChannel("exec");
+            ((ChannelExec) channel).setCommand(remoteScriptPath + " " + romName);
+
+            // Get the input stream to read the output of the command
+            InputStream inputStream = channel.getInputStream();
+
+            // Start the command
+            channel.connect();
+
+            // Read the command output (optional)
+            byte[] buffer = new byte[1024];
+            while (true) {
+                while (inputStream.available() > 0) {
+                    int i = inputStream.read(buffer, 0, 1024);
+                    if (i < 0) {
+                        break;
+                    }
+                    System.out.print(new String(buffer, 0, i));
+                }
+                if (channel.isClosed()) {
+                    if (inputStream.available() > 0) continue;
+                    break;
+                }
+            }
+
+            // Disconnect the channel and session after use
+            channel.disconnect();
+            session.disconnect();
+
+            // Return noVNC URL
+            String vncUrl = "http://192.168.83.130:6080/vnc.html";
+            return ResponseEntity.ok(vncUrl);
+
+        } catch (JSchException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to launch game");
+        }
+    }
+
+
 }

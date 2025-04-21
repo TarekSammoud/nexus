@@ -9,7 +9,10 @@ export class GameMedia {
   createdAt!: Date;
   updatedAt!: Date;
   gameMediaType!: GameMediaType;
-  game_id!: Number;
+  game?: Game;
+  gameCover?: Game;
+  gameBanner?: Game;
+  gameFile?: Game;
 
   constructor(
     mediaUrl: string,
