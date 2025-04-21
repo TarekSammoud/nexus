@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { JwtPayload } from 'jwt-decode';
 import { switchMap } from 'rxjs';
 import { Payment } from 'src/app/core/entities/finance/payment.model';
 import { Purchase } from 'src/app/core/entities/finance/purchase.model';
 import { Refund } from 'src/app/core/entities/finance/refund.model';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
 import { PaymentService } from 'src/services/finance/Crud/payment.service';
 import { PurchaseService } from 'src/services/finance/Crud/purchase.service';
 import { RefundService } from 'src/services/finance/Crud/refund.service';
@@ -28,8 +30,7 @@ export class RequestRefundComponent {
         private cdr: ChangeDetectorRef,
         private refundService :RefundService,
         private geminiService :GeminiService,
-        private notificationService :NotificationService
-      
+        private notificationService :NotificationService,      
       ) {}
 
 
@@ -91,7 +92,9 @@ export class RequestRefundComponent {
             }
             this.refund.id = createdRefund.id;
             console.log('Refund created:', createdRefund);
-            return this.geminiService.analyzeRefund(createdRefund.id);
+            const email: string = TokenService.getUserEmail() ?? '';
+            console.log("emailllll :"+email)
+            return this.geminiService.analyzeRefund(createdRefund.id,email);
           })
         )
         .subscribe({
