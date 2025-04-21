@@ -40,8 +40,24 @@ public class GameMedia implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "game_id")
-    @JsonBackReference
-    private Game game;
+    @JsonBackReference("game-screenshots")
+    private Game game; // for screenshots
+
+    @OneToOne
+    @JoinColumn(name = "cover_id")
+    @JsonBackReference("game-cover")
+    private Game gameCover;
+
+    @OneToOne
+    @JoinColumn(name = "banner_id")
+    @JsonBackReference("game-banner")
+    private Game gameBanner;
+
+    @OneToOne
+    @JoinColumn(name = "file_id")
+    @JsonBackReference("game-file")
+    private Game gameFile;
+
 
     private GameMediaType gameMediaType;
 

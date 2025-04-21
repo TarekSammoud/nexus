@@ -22,7 +22,7 @@ export class CreateEmulatedGameComponent implements OnInit {
     gameForm!: FormGroup;
     editorContent: string = '';  
     
-    availablePlatforms = ["N64"];
+    availablePlatforms = ["N64","PSP"];
     selectedPlatforms: Set<string> = new Set();
     selectedUpdatePlatforms: Set<string> = new Set();
     selectedUpdateCategories: Set<number> = new Set();
@@ -146,7 +146,7 @@ imagesFile: any[] = [];
         fileType: [fileType, Validators.required],
         fileSize: [fileSize, Validators.required],
         gameMediaType: ['COVER', Validators.required],
-        game: this.fb.group({
+        gameCover: this.fb.group({
           id: [this.numberOfGames + 1 , Validators.required]
         })
       });
@@ -181,7 +181,7 @@ imagesFile: any[] = [];
       fileType: [file.type, Validators.required],
       fileSize: [file.size, Validators.required],
       gameMediaType: ['FILE', Validators.required],
-      game: this.fb.group({
+      gameFile: this.fb.group({
         id: [this.numberOfGames + 1, Validators.required]
       })
     });
@@ -229,7 +229,7 @@ imagesFile: any[] = [];
         fileType: [fileType, Validators.required],
         fileSize: [fileSize, Validators.required],
         gameMediaType: ['BANNER', Validators.required],
-        game: this.fb.group({
+        gameBanner: this.fb.group({
           id: [this.numberOfGames + 1 , Validators.required]
         })
       });
@@ -280,8 +280,8 @@ imagesFile: any[] = [];
         mediaUrl: [mediaUrl, Validators.required],
         fileType: [fileType, Validators.required],
         fileSize: [fileSize, Validators.required],
-        gameMediaType: ['BANNER', Validators.required],
-        game: this.fb.group({
+        gameMediaType: ['FILE', Validators.required],
+        gameFile: this.fb.group({
           id: [this.numberOfGames + 1 , Validators.required]
         })
       });
@@ -293,16 +293,33 @@ imagesFile: any[] = [];
       this.filesToUpload.push(newForm);
       this.ftpFiles.push(formData);
 
-      this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
-        next: (response) => {
-          console.log('Upload success:', response);
-          // You can store the result or update the form as needed
-        },
-        error: (err) => {
-          console.error('Upload failed:', err);
-        }
-        
-      })
+      if (this.selectedPlatforms.has('PSP')) {
+        this._gameMediaService.uploadPSPFileToFtp(formData).subscribe( {
+          next: (response) => {
+            console.log('Upload success:', response);
+            // You can store the result or update the form as needed
+          },
+          error: (err) => {
+            console.error('Upload failed:', err);
+          }
+          
+        })
+      }
+
+      if (this.selectedPlatforms.has('N64')) {
+        this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
+          next: (response) => {
+            console.log('Upload success:', response);
+            // You can store the result or update the form as needed
+          },
+          error: (err) => {
+            console.error('Upload failed:', err);
+          }
+          
+        })
+      }
+
+
   
     }
   }

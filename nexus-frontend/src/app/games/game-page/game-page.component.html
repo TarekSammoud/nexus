@@ -191,7 +191,7 @@
       <div >
         <ng-container>
           <div class="banner-section">
-            <img src="http://localhost:9000/nexus-backend/games/upload/download/{{bannerUrl}}" class="d-block w-100 mb-3" alt="Game banner">
+            <img src="http://localhost:9000/nexus-backend/games/upload/download/{{game.bannerPicture?.mediaUrl}}" class="d-block w-100 mb-3" alt="Game banner">
           </div>
         </ng-container>
       </div>
@@ -204,6 +204,8 @@
         
         <button class="btn action-button" (click)="addGameToLibrary(game.id)" *ngIf="!inLibrary">Buy Now</button>
         <button class="btn action-button" *ngIf="browserGame" (click)="OnSelectBrowser(game)">Play Now</button>
+        <button class="btn action-button" *ngIf="emulatedGame" (click)="OnSelectEmulated(game)">Play Emulator Now</button>
+        <button class="btn action-button" *ngIf="emulatedPSPGame" (click)="OnSelectEmulated(game)">Play Emulator Now</button>
         <button class="btn action-button disabled"  *ngIf="inLibrary">In Library</button>
 
         <button class="btn action-button-secondary"  *ngIf="!inLibrary">Add to Cart</button>

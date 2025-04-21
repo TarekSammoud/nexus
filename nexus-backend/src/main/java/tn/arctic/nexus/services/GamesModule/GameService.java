@@ -55,6 +55,7 @@ public class GameService implements IGameService {
     public List<Game> getEmulatedGames() {
         List<GamePlatform> gp = new ArrayList<>();
         gp.add(GamePlatform.N64);
+        gp.add(GamePlatform.PSP);
         return gameRepository.getGamesByPlatforms(gp);
     }
 

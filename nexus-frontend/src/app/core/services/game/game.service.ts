@@ -23,6 +23,13 @@ playGame(romName: string): Observable<string> {
   });
 }
 
+playPSPGame(romName: string): Observable<string> {
+  return this.http.post(`${this.gamesUrl}/emulated/launch/psp`, null, {
+    params: { romName },
+    responseType: 'text',
+  });
+}
+
   getGames(): Observable<Game[]> {  // ✅ Fix the return type
 
     return this.http.get<Game[]>(`${this.gamesUrl}/all-games`);

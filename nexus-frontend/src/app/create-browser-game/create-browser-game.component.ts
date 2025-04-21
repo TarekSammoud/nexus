@@ -121,7 +121,7 @@ export class CreateBrowserGameComponent implements OnInit{
         fileType: [fileType, Validators.required],
         fileSize: [fileSize, Validators.required],
         gameMediaType: ['COVER', Validators.required],
-        game: this.fb.group({
+        gameCover: this.fb.group({
           id: [this.numberOfGames + 1 , Validators.required]
         })
       });
@@ -156,7 +156,7 @@ export class CreateBrowserGameComponent implements OnInit{
       fileType: [file.type, Validators.required],
       fileSize: [file.size, Validators.required],
       gameMediaType: ['FILE', Validators.required],
-      game: this.fb.group({
+      gameFile: this.fb.group({
         id: [this.numberOfGames + 1, Validators.required]
       })
     });
@@ -204,7 +204,7 @@ export class CreateBrowserGameComponent implements OnInit{
         fileType: [fileType, Validators.required],
         fileSize: [fileSize, Validators.required],
         gameMediaType: ['BANNER', Validators.required],
-        game: this.fb.group({
+        gameBanner: this.fb.group({
           id: [this.numberOfGames + 1 , Validators.required]
         })
       });
