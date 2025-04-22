@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/user-management/auth.service';  // Service d'authentification
-import { TokenService } from '../../core/services/user-management/token.service';  // Service pour gérer les tokens
+import { AuthService } from '../../core/services/user-management/auth.service';
+import { TokenService } from '../../core/services/user-management/token.service';
 
+declare global {
+  interface Window { fbAsyncInit: () => void; }
+}
 declare const FB: any;
 
 @Component({
@@ -10,23 +13,48 @@ declare const FB: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private tokenService: TokenService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private tokenService: TokenService
+  ) { }
 
-  // Méthode de connexion avec email et mot de passe
+  ngOnInit(): void {
+    this.loadFacebookSDK();
+  }
+
+  loadFacebookSDK(): void {
+    if (document.getElementById('facebook-jssdk')) return;
+
+    window.fbAsyncInit = () => {
+      FB.init({
+        appId: '1021564546008110',
+        cookie: true,
+        xfbml: true,
+        version: 'v15.0'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    const script = document.createElement('script');
+    script.id = 'facebook-jssdk';
+    script.src = 'https://connect.facebook.net/en_US/sdk.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }
+
   onLogin(): void {
     if (this.email && this.password) {
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
           const token = response.token;
-          // Sauvegarde du jeton JWT dans localStorage
           localStorage.setItem('auth_token', token);
-
-          // Redirection vers la page du profil
           this.router.navigate(['/user-profile']);
         },
         (error) => {
@@ -38,16 +66,12 @@ export class LoginComponent {
     }
   }
 
-  // Méthode de connexion avec Facebook
-
-
   loginWithFacebook(): void {
     FB.login((response: any) => {
       if (response.authResponse) {
         const accessToken = response.authResponse.accessToken;
         console.log('Access Token:', accessToken);
 
-        // Appel à ton backend pour valider le token Facebook et recevoir ton JWT
         this.authService.facebookLogin(accessToken).subscribe({
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
@@ -63,9 +87,4 @@ export class LoginComponent {
       }
     }, { scope: 'email,public_profile' });
   }
-
-
-
-
-
 }
