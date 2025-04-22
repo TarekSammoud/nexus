@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/friendRequests/**").permitAll()
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/api/face-animer/**").permitAll()
+
                         .requestMatchers("/games/**").permitAll()
                         .requestMatchers("/api/entries/**").permitAll()
                         .requestMatchers("/api/entry-ratings/**").permitAll()
