@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.FinanceModule.Purchase;
 import tn.arctic.nexus.entities.FinanceModule.Refund;
-import tn.arctic.nexus.entities.FinanceModule.Wallet;
-import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepositpry;
+import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepository;
 import tn.arctic.nexus.repositories.FinanceModule.IRefundRepository;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class RefundService implements IRefundService {
     @Autowired
     IRefundRepository refundRepo;
     @Autowired
-    IPurchaseRepositpry purchaseRepository;
+    IPurchaseRepository purchaseRepository;
 
     @Override
     public List<Refund> getRefunds() {

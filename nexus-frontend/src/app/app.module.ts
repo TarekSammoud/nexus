@@ -28,7 +28,6 @@ import { MakePaymentComponent } from './finance/make-payment/make-payment.compon
 import { CommonModule } from '@angular/common';
 import { PanierComponent } from './finance/panier/panier/panier.component';
 import { TransferPopupComponent } from './finance/wallet-dashboard/popUps/transfer-popup/transfer-popup.component';
-import { TasksListPopupComponent } from './finance/wallet-dashboard/popUps/tasks-list-popup/tasks-list-popup.component';
 import { RequestRefundComponent } from './finance/wallet-dashboard/popUps/request-refund/request-refund.component';
 import { TransfersComponent } from './finance/tabs/Listes/transfers/transfers.component';
 import { RefundComponent } from './finance/tabs/Listes/refund/refund.component';
@@ -105,6 +104,7 @@ import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfe
 import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
 import { NotificationBannerComponent } from './finance/notification-banner/notification-banner.component';
 import { TestComponent } from './finance/test/test/test.component';
+import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate-pdf/generate-pdf.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +121,6 @@ import { TestComponent } from './finance/test/test/test.component';
     MakePaymentComponent,
     PanierComponent,
     TransferPopupComponent,
-    TasksListPopupComponent,
     RequestRefundComponent,
     TransfersComponent,
     RefundComponent,
@@ -180,6 +179,7 @@ import { TestComponent } from './finance/test/test/test.component';
     RefundAdminComponent,
     NotificationBannerComponent,
     TestComponent,
+    GeneratePdfComponent,
     
   ],
   imports: [

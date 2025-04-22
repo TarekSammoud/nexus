@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TransferPopupComponent } from '../wallet-dashboard/popUps/transfer-popup/transfer-popup.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TasksListPopupComponent } from '../wallet-dashboard/popUps/tasks-list-popup/tasks-list-popup.component';
 import { RequestRefundComponent } from '../wallet-dashboard/popUps/request-refund/request-refund.component';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { Router } from '@angular/router';
+import { GeneratePdfComponent } from '../wallet-dashboard/popUps/generate-pdf/generate-pdf.component';
 interface ITab {
   title: string;
   content: string;
@@ -29,9 +29,7 @@ export class TabsComponent {
   openTransferPopup() {
     const modalRef = this.modalService.open(TransferPopupComponent);
   }
-  openTasksListPopup() {
-    const modalRef = this.modalService.open(TasksListPopupComponent);
-  }
+
   openRefunsPopup() {
     const modalRef = this.modalService.open(RequestRefundComponent);
   }

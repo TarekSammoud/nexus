@@ -57,7 +57,6 @@ import { WsNotificationsService } from 'src/services/finance/ws-notifications.se
 import { TestComponent } from './finance/test/test/test.component';
 
 const routes: Routes = [
-  { path: 'testNotif', component: TestComponent },
 
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
