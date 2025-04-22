@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.FinanceModule.Purchase;
 import tn.arctic.nexus.entities.FinanceModule.Wallet;
-import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepositpry;
+import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepository;
 import tn.arctic.nexus.repositories.FinanceModule.IWalletRepository;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class PurchaseService implements IPurchaseService {
     @Autowired
-    IPurchaseRepositpry purchaseRepository;
+    IPurchaseRepository purchaseRepository;
     @Autowired
     IWalletRepository walletRepository;
 

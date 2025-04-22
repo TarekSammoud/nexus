@@ -30,8 +30,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS(); // <- pour SockJS
-
-      registry.addEndpoint("/ws-notifications").setAllowedOriginPatterns("*").addInterceptors(handshakeInterceptor);
+        registry.addEndpoint("/ws-notifications").setAllowedOriginPatterns("*").addInterceptors(handshakeInterceptor);
 
 
     }

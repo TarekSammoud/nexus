@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TasksListPopupComponent } from './tasks-list-popup.component';
+import { GeneratePdfComponent } from './generate-pdf.component';
 
-describe('TasksListPopupComponent', () => {
-  let component: TasksListPopupComponent;
-  let fixture: ComponentFixture<TasksListPopupComponent>;
+describe('GeneratePdfComponent', () => {
+  let component: GeneratePdfComponent;
+  let fixture: ComponentFixture<GeneratePdfComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksListPopupComponent ]
+      declarations: [ GeneratePdfComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TasksListPopupComponent);
+    fixture = TestBed.createComponent(GeneratePdfComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

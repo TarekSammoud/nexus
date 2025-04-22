@@ -79,8 +79,8 @@
             <i class="fas fa-exchange-alt me-2"></i>Transfers</a>
           <a class="d-block py-2 text-white" routerLink="/admin/refunds" routerLinkActive="active">
             <i class="fas fa-undo-alt me-2"></i>Refunds</a>
-          <a class="d-block py-2 text-white" routerLink="/admin/wallet/settings" routerLinkActive="active">
-            <i class="fas fa-tasks me-2"></i>Tasks & Rewards</a>
+          <a class="d-block py-2 text-white" (click)="openGeneratePdfPopup()">
+            <i class="fas fa-tasks me-2"></i>Generate pdf</a>
         </div>
       </div>
     </div>
