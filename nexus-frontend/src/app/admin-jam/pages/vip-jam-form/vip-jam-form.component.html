@@ -4,15 +4,14 @@
   <form (ngSubmit)="submit()" #vipForm="ngForm">
     <div class="form-group">
       <label>🎮 Jam Title</label>
-      <input class="form-control" name="name" [(ngModel)]="vipJam.name" required />
+      <input class="form-control" name="name" [(ngModel)]="vipJam.name" (input)="checkSuggestions()" required />
     </div>
-
+    
     <div class="form-group">
       <label>📝 Description</label>
       <textarea class="form-control" name="description" [(ngModel)]="vipJam.description" required></textarea>
     </div>
-
-    <!-- Dev Period Date Range -->
+    
 <mat-form-field appearance="fill" class="form-group w-100">
   <mat-label>📅 Dev Period</mat-label>
   <mat-date-range-input [rangePicker]="vipDevPicker">

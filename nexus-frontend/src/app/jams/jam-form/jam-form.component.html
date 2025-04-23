@@ -2,17 +2,7 @@
   <h2 class="form-title">🚀 Create a New Game Jam</h2>
 
   <form (ngSubmit)="createJam()" class="jam-form">
-    <div class="form-group">
-      <label for="imageUrl">🖼️ Image URL</label>
-      <input
-        id="imageUrl"
-        type="text"
-        [(ngModel)]="jam.imageUrl"
-        name="imageUrl"
-        class="form-control"
-        placeholder="Paste an image URL"
-      />
-    </div>
+   
 
     <div class="form-group">
       <label for="name">📛 Jam Name</label>
@@ -20,12 +10,24 @@
         id="name"
         type="text"
         [(ngModel)]="jam.name"
+        (blur)="fetchUnsplashImage()"
         name="name"
         class="form-control"
-        placeholder="Name of your Game Jam"
+        placeholder="Name your Game Jam"
         required
       />
     </div>
+    
+    <div *ngIf="isLoadingImage" class="ai-loading-spinner">
+      🤖 AI is imagining your world...
+    </div>
+    
+    <div *ngIf="imagePreview && !isLoadingImage" class="ai-suggestion-box">
+      <h4 class="ai-suggestion-title">✨ AI Visual Suggestion ✨</h4>
+      <img [src]="imagePreview" alt="AI Suggested Jam Image" class="ai-suggestion-img" />
+      <p class="ai-suggestion-note">🔍 Inspired by: <strong>{{ jam.name }}</strong></p>
+    </div>
+    
 
     <div class="form-group">
       <label for="description">📝 Description</label>
@@ -39,7 +41,6 @@
       ></textarea>
     </div>
 
-   <!-- Development Dates -->
 <mat-form-field appearance="fill">
   <mat-label>📅 Development Dates</mat-label>
   <mat-date-range-input [rangePicker]="devPicker">
@@ -50,7 +51,6 @@
   <mat-date-range-picker #devPicker></mat-date-range-picker>
 </mat-form-field>
 
-<!-- Voting Dates -->
 <mat-form-field appearance="fill">
   <mat-label>🗳️ Voting Dates</mat-label>
   <mat-date-range-input [rangePicker]="votePicker">

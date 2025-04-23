@@ -23,6 +23,7 @@ export class JamCalendarComponent implements OnInit {
       right: ''
     },
     events: [],
+    displayEventTime: false,
     eventClick: this.handleEventClick.bind(this),
     eventDidMount: (info) => {
       const tooltip = info.event.extendedProps['tooltip'];
@@ -31,6 +32,10 @@ export class JamCalendarComponent implements OnInit {
       }
     }
   };
+
+  fluidBar: any[] = [];
+  selectedJam: any = null;
+
 
   constructor(
     private jamService: JamService,
@@ -86,14 +91,21 @@ export class JamCalendarComponent implements OnInit {
 
     const allEvents = [...regularEvents, ...vipEvents];
 
-    // ⭐ Pick one jam to be the sparkle star!
     const randomIndex = Math.floor(Math.random() * allEvents.length);
     allEvents[randomIndex].classNames.push('star-jam');
 
     this.calendarOptions.events = allEvents;
+
+    this.fluidBar = [...regularJams, ...vipJams].map((jam, i) => ({
+      label: jam.name,
+      color: i % 3 === 0 ? '#7e57c2' : i % 3 === 1 ? '#ff9800' : '#42a5f5',
+      width: 100 + (i % 3) * 30,
+      offset: i * 80
+    }));
   }
 
   handleEventClick(info: any): void {
+    this.selectedJam = info.event.extendedProps.jam || info.event.extendedProps.vip;
     const jam = info.event.extendedProps.jam || info.event.extendedProps.vip;
     const name = jam.name;
     const devStart = jam.devStartDate;

@@ -43,4 +43,13 @@ public class EntryRatingController {
         ratingService.deleteRating(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/has-rated/{entryId}/{userId}")
+    public ResponseEntity<Boolean> hasUserRated(
+            @PathVariable Long entryId,
+            @PathVariable Long userId) {
+        boolean hasRated = ratingService.hasUserRatedEntry(userId, entryId);
+        return ResponseEntity.ok(hasRated);
+    }
+
 }

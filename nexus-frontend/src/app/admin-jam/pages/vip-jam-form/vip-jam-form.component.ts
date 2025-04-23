@@ -26,26 +26,25 @@ export class VipJamFormComponent implements OnInit {
   }
 
   submit(): void {
-  if (this.editingJamId) {
-    this.vipJamService.updateVipJam(this.editingJamId, this.vipJam).subscribe({
-      next: () => {
-        alert('✅ VIP Jam updated successfully!');
-        this.loadAllVipJams();
-        this.resetForm();
-      }
-    });
-  } else {
-    this.vipJamService.createVipJam(this.vipJam).subscribe({
-      next: (res) => {
-        alert('🎉 VIP Jam created successfully!');
-        this.createdJam = res;
-        this.loadAllVipJams();
-        this.resetForm();
-      }
-    });
+    if (this.editingJamId) {
+      this.vipJamService.updateVipJam(this.editingJamId, this.vipJam).subscribe({
+        next: () => {
+          alert('✅ VIP Jam updated successfully!');
+          this.loadAllVipJams();
+          this.resetForm();
+        }
+      });
+    } else {
+      this.vipJamService.createVipJam(this.vipJam).subscribe({
+        next: (res) => {
+          alert('🎉 VIP Jam created successfully!');
+          this.createdJam = res;
+          this.loadAllVipJams();
+          this.resetForm();
+        }
+      });
+    }
   }
-}
-
 
   loadAllVipJams(): void {
     this.vipJamService.getAllVipJams().subscribe({
@@ -80,4 +79,23 @@ export class VipJamFormComponent implements OnInit {
       });
     }
   }
+  suggestions: { [key: string]: string } = {
+    pizza: "🍕 Create the most delicious pizza-themed game! Compete for the cheesiest design.",
+    boy: "👦 A jam focused on action-packed, adventurous gameplay.",
+    girl: "👧 Embrace magical, colorful themes with creativity and flair.",
+    space: "🚀 Launch into space with cosmic themes and intergalactic adventures.",
+    battle: "⚔️ Engage in epic battles and strategy challenges!"
+  };
+  
+  checkSuggestions(): void {
+    const lowerTitle = this.vipJam.name.toLowerCase();
+  
+    for (const key in this.suggestions) {
+      if (lowerTitle.includes(key)) {
+        this.vipJam.description = this.suggestions[key];
+        break;
+      }
+    }
+  }
+  
 }

@@ -15,9 +15,8 @@ export class EntryFormComponent implements OnInit {
   entry: Partial<Entry> = {
     nameEntry: '',
     descriptionEntry: '',
-    // user: { id: 1 },
-
-
+    zipUrl: '',
+    agree: false,
     jam: { id: 0 }
   };
 
@@ -26,20 +25,39 @@ export class EntryFormComponent implements OnInit {
   ngOnInit(): void {
     this.entry.jam = { id: this.jamId };
     const userId = TokenService.getUserId();
-
   }
 
   onSubmit(): void {
+    if (!this.entry.agree || !this.entry.zipUrl || !this.isValidZipUrl(this.entry.zipUrl)) {
+      alert('🚫 Please enter a valid Google Drive or Dropbox URL and agree to the terms.');
+      return;
+    }
+  
     this.entryService.createEntry(this.entry as Entry).subscribe({
       next: (createdEntry) => {
         this.entryCreated.emit(createdEntry);
         this.resetForm();
+        alert('🎉 Entry submitted successfully!');
       }
     });
   }
+  
+  
+  isValidZipUrl(url: string): boolean {
+    const googleDrivePattern = /^https?:\/\/(drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=|drive\.google\.com\/uc\?id=)[\w-]+/;
+    const dropboxPattern = /^https?:\/\/(www\.)?dropbox\.com\/s\/[\w\d]+\/.+/;
+    return googleDrivePattern.test(url) || dropboxPattern.test(url);
+  }
+  
+  
 
   resetForm(): void {
-    this.entry.nameEntry = '';
-    this.entry.descriptionEntry = '';
+    this.entry = {
+      nameEntry: '',
+      descriptionEntry: '',
+      zipUrl: '',
+      agree: false,
+      jam: { id: this.jamId }
+    };
   }
 }

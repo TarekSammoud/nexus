@@ -12,4 +12,7 @@ public interface IEntryRatingService {
     EntryRating createRating(EntryRating rating);
     void deleteRating(Long id);
     public EntryRating updateRating(EntryRating entryRating);
+
+    boolean hasUserRatedEntry(Long userId, Long entryId);
+
 }

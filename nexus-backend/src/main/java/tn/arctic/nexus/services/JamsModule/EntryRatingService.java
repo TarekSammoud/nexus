@@ -33,9 +33,17 @@ public class EntryRatingService implements IEntryRatingService {
 
     @Override
     public EntryRating createRating(EntryRating rating) {
+        boolean alreadyRated = ratingRepository
+                .findByEntryIdAndUserId(rating.getEntry().getId(), rating.getUser().getId())
+                .isPresent();
+
+        if (alreadyRated) {
+            throw new RuntimeException("You have already rated this entry.");
+        }
 
         return ratingRepository.save(rating);
     }
+
 
     @Override
     public EntryRating updateRating(EntryRating entryRating) {
@@ -45,4 +53,12 @@ public class EntryRatingService implements IEntryRatingService {
     public void deleteRating(Long id) {
         ratingRepository.deleteById(id);
     }
+
+
+
+    @Override
+    public boolean hasUserRatedEntry(Long userId, Long entryId) {
+        return ratingRepository.findByEntryIdAndUserId(entryId, userId).isPresent();
+    }
+
 }

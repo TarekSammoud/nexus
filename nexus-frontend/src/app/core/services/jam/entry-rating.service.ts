@@ -34,5 +34,10 @@ export class EntryRatingService {
   getRatingsByEntry(entryId: number): Observable<EntryRating[]> {
     return this.http.get<EntryRating[]>(`${this.baseUrl}/entry/${entryId}`);
   }
+
+hasUserRated(entryId: number, userId: number): Observable<boolean> {
+  return this.http.get<boolean>(`http://localhost:9000/nexus-backend/api/entry-ratings/has-rated/${entryId}/${userId}`);
+}
+
   
 }
