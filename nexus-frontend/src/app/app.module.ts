@@ -21,6 +21,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
+
+
 // Core Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -128,6 +134,7 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
 import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
+import { AvatarGeneratorComponent } from './user-management/avatar-generator/avatar-generator.component';
 
 
 
@@ -155,8 +162,8 @@ import { CommonModule } from '@angular/common';
     EntryMediaFormComponent,
     EntryRatingFormComponent,
     VipJamsListComponent,
-   ReportListComponent,
-  ReportFormComponent,
+    ReportListComponent,
+    ReportFormComponent,
     SondageCreateComponent,
     SondageListComponent,
     SondageLiveComponent,
@@ -213,9 +220,10 @@ import { CommonModule } from '@angular/common';
     BidComponent,
     MarketDetailsComponent,
     LibraryComponent,
+    AvatarGeneratorComponent,
 
 
-    
+
   ],
   imports: [
     BrowserModule,
@@ -247,7 +255,11 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
   ],
   providers: [
     TokenService,
@@ -264,4 +276,4 @@ import { CommonModule } from '@angular/common';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

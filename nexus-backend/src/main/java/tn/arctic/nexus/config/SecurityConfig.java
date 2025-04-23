@@ -1,4 +1,4 @@
-package tn.arctic.nexus.Config;
+package tn.arctic.nexus.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,8 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/friendRequests/**").permitAll()
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
-                        .requestMatchers("/api/face-animer/**").permitAll()
-
+                        .requestMatchers("/api/avatar/**").permitAll()
+                        .requestMatchers("/games/**").permitAll()
                         .requestMatchers("/games/**").permitAll()
                         .requestMatchers("/api/entries/**").permitAll()
                         .requestMatchers("/api/entry-ratings/**").permitAll()

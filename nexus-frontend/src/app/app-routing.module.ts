@@ -54,7 +54,7 @@ import { EditProfileComponent } from './user-management/edit-profile/edit-profil
 import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
 import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component';
 import { ChatComponent } from './user-management/chat/chat.component';
-
+import { AvatarGeneratorComponent } from './user-management/avatar-generator/avatar-generator.component';
 import { SupportAgentComponent } from './support/support-agent/support-agent.component';
 import { RoomComponent } from './support/room/room.component';
 import { SupportTicketComponent } from './support/support-ticket/support-ticket.component';
@@ -85,13 +85,15 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'your-friends', component: FriendManagementComponent, canActivate: [AuthGuard] },
   { path: 'friend-requests', component: FriendRequestListComponent, canActivate: [AuthGuard] },
+  { path: 'avatar', component: AvatarGeneratorComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+
 
   // 🎮 Games
   { path: 'games', component: GamesComponent },
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },
-  { path: 'library', component:LibraryComponent},
+  { path: 'library', component: LibraryComponent },
 
   // 🎤 Support
   { path: 'support-tickets', component: SupportTicketComponent },
@@ -183,4 +185,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

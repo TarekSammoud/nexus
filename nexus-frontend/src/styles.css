@@ -215,3 +215,6 @@ select:focus {
   outline: none; /* Optional: remove focus outline */
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
