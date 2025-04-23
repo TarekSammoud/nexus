@@ -68,14 +68,46 @@ public class PublicationController {
     }
 
     @PutMapping("/{id}")
-    public Publication updatePublication(@PathVariable Long id, @RequestBody Publication updatedPublication) {
-        return publicationService.updatePublication(id, updatedPublication);
+    public ResponseEntity<Publication> updatePublication(@PathVariable Long id, @RequestBody Publication updatedPublication, @RequestParam Long userId) {
+        try {
+            // Récupérer la publication par ID
+            Publication publication = publicationService.getPublicationById(id)
+                    .orElseThrow(() -> new RuntimeException("Publication non trouvée"));
+
+            // Vérifier si l'utilisateur est le propriétaire de la publication
+            if (!publication.getUser().getId().equals(userId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();  // 403 Forbidden si l'utilisateur n'est pas le propriétaire
+            }
+
+            // Mise à jour de la publication
+            updatedPublication.setId(id); // Assurez-vous que l'ID de la publication est conservé
+            Publication updated = publicationService.updatePublication(id, updatedPublication);
+
+            return ResponseEntity.ok(updated); // Retourner la publication mise à jour
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // 404 Not Found si la publication n'est pas trouvée
+        }
     }
 
+
     @DeleteMapping("/{id}")
-    public void deletePublication(@PathVariable Long id) {
-        publicationService.deletePublication(id);
+    public ResponseEntity<Void> deletePublication(@PathVariable Long id, @RequestParam Long userId) {
+        try {
+            Publication publication = publicationService.getPublicationById(id)
+                    .orElseThrow(() -> new RuntimeException("Publication non trouvée"));
+
+            // Vérifier si l'utilisateur est le propriétaire de la publication
+            if (!publication.getUser().getId().equals(userId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();  // 403 Forbidden si ce n'est pas le propriétaire
+            }
+
+            publicationService.deletePublication(id, userId);            return ResponseEntity.noContent().build();  // 204 No Content si la suppression réussit
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // 404 Not Found si la publication n'est pas trouvée
+        }
     }
+
+
 
 
     @GetMapping("/visibles")

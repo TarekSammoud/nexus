@@ -1,8 +1,10 @@
 package tn.arctic.nexus.services.CommunityModule;
 
 import tn.arctic.nexus.entities.Sondage;
+import tn.arctic.nexus.entities.Streamer;
 import tn.arctic.nexus.entities.Vote;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IVoteService {
@@ -13,5 +15,6 @@ public interface IVoteService {
     boolean hasUserVoted(Long sondageId, Long userId);
 
     Optional<Sondage> getSondageById(Long id);
+    public List<Streamer> getTopStreamers();
 
 }

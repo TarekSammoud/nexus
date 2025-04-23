@@ -128,6 +128,8 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
 import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
+import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
+
 
 
 
@@ -213,6 +215,7 @@ import { CommonModule } from '@angular/common';
     BidComponent,
     MarketDetailsComponent,
     LibraryComponent,
+    TopStreamerComponent,
 
 
     

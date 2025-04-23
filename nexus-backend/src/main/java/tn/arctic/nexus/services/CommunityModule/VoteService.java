@@ -3,13 +3,18 @@ package tn.arctic.nexus.services.CommunityModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.Sondage;
+import tn.arctic.nexus.entities.Streamer;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.entities.Vote;
 import tn.arctic.nexus.repositories.CommunityModule.SondageRepository;
+import tn.arctic.nexus.repositories.CommunityModule.StreamerRepository;
 import tn.arctic.nexus.repositories.CommunityModule.VoteRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -21,6 +26,10 @@ public class VoteService implements IVoteService {
 
 
     @Autowired private SondageRepository sondageRepository;
+
+
+    @Autowired
+    private StreamerRepository streamerRepository;
 
 
 
@@ -65,4 +74,21 @@ public class VoteService implements IVoteService {
     public boolean hasUserVoted(Long sondageId, Long userId) {
         return voteRepository.existsBySondageIdAndUserId(sondageId, userId);
     }
+
+
+    public List<Streamer> getTopStreamers() {
+        List<Streamer> allStreamers = streamerRepository.findAll();
+
+        // Tri des streamers en fonction du nombre de sondages associés
+        allStreamers.sort((s1, s2) -> {
+            long count1 = sondageRepository.countByStreamerId(s1.getId());
+            long count2 = sondageRepository.countByStreamerId(s2.getId());
+            return Long.compare(count2, count1); // Tri par ordre décroissant
+        });
+
+        // Limiter aux 3 premiers streamers
+        return allStreamers.size() > 3 ? allStreamers.subList(0, 3) : allStreamers;
+    }
 }
+
+
