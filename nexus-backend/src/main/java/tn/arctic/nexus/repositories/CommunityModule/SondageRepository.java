@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface SondageRepository extends JpaRepository<Sondage, Long> {
     List<Sondage> findByActiveTrue();
+
+
+    long countByStreamerId(Long streamerId);
+
 }

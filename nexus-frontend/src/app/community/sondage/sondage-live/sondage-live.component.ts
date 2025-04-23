@@ -5,6 +5,8 @@ import { Streamer } from 'src/app/core/entities/community/streamer';
 import { SondageService } from 'src/app/core/services/community/sondage.service';
 import { StreamerService } from 'src/app/core/services/community/streamer.service';
 import { VoteService } from 'src/app/core/services/community/vote.service';
+import { ToastrService } from 'ngx-toastr'; 
+
 
 @Component({
   selector: 'app-sondage-live',
@@ -21,7 +23,8 @@ export class SondageLiveComponent implements OnInit {
     private sondageService: SondageService,
     private voteService: VoteService,
     private streamerService: StreamerService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {

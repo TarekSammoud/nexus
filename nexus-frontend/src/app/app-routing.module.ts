@@ -88,6 +88,9 @@ import { LibraryComponent } from './library/library.component';
 import { SupportComponent } from './support/support.component';
 import { WsNotificationsService } from 'src/services/finance/ws-notifications.service';
 import { TestComponent } from './finance/test/test/test.component';
+import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
+
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -135,6 +138,10 @@ const routes: Routes = [
   { path: 'sondages/list', component: SondageListComponent },
   { path: 'live-room/:id', component: LiveRoomComponent },
   { path: 'stats', component: PublicationStatsComponent },
+  { path: 'support', component: SupportComponent },
+  { path: 'top-streamer', component:TopStreamerComponent},
+
+
 
   // 💳 Finance
   { path: 'wallet', component: WalletDashboardComponent },
@@ -163,6 +170,7 @@ const routes: Routes = [
       { path: 'community/categories/add', component: CategoryFormComponent },
       { path: 'community/categories/edit/:id', component: CategoryFormComponent },
       { path: 'community/reports', component: ReportListComponent },
+      { path: 'streamers', component: StreamerManagementComponent },
 
       // 🗳 Admin Sondages
       { path: 'sondages', component: SondageAdminComponent },

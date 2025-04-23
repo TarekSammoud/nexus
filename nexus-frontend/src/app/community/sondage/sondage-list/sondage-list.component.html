@@ -6,6 +6,10 @@
     <button class="btn btn-create shadow" routerLink="/sondages/create">
       <i class="bi bi-plus-circle-dotted me-2"></i> Créer un sondage
     </button>
+    <button class="btn btn-create shadow" routerLink="/top-streamer">
+      <i class="bi bi-plus-circle-dotted me-2"></i> View Top Streamer
+    </button>
+
   </div>
 
   <p class="polls-description">
@@ -72,6 +76,7 @@
           <ng-template #voteSection>
             <div class="d-flex justify-content-center gap-3">
               <button class="btn btn-outline-success vote-btn" (click)="voter(sondage.id!, true)">
+                
                 👍 Oui
               </button>
               <button class="btn btn-outline-danger vote-btn" (click)="voter(sondage.id!, false)">
@@ -101,4 +106,12 @@
       <i class="fas fa-info-circle me-2"></i> Aucun sondage trouvé.
     </div>
   </ng-template>
+
+  
+<ng-template #activePoll>
+  <!-- Ce contenu s'affiche si le sondage est actif -->
+  <div class="alert alert-success">
+    Ce sondage est actif.
+  </div>
+</ng-template>
 </div>

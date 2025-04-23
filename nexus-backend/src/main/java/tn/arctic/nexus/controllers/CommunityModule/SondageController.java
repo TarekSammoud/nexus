@@ -1,18 +1,21 @@
 package tn.arctic.nexus.controllers.CommunityModule;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.entities.Sondage;
-import tn.arctic.nexus.repositories.CommunityModule.SondageRepository;
-import tn.arctic.nexus.services.CommunityModule.EmailService;
-import tn.arctic.nexus.services.CommunityModule.ISondageService;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.http.HttpStatus;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.web.bind.annotation.*;
+        import tn.arctic.nexus.entities.Sondage;
+        import tn.arctic.nexus.entities.Streamer;
+        import tn.arctic.nexus.repositories.CommunityModule.SondageRepository;
+        import tn.arctic.nexus.services.CommunityModule.EmailService;
+        import tn.arctic.nexus.services.CommunityModule.ISondageService;
+        import tn.arctic.nexus.services.CommunityModule.VoteService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+        import java.time.LocalDateTime;
+        import java.time.format.DateTimeParseException;
+        import java.util.List;
+        import java.util.Map;
+        import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sondages")
@@ -27,6 +30,9 @@ public class SondageController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private VoteService voteService;
 
     @PostMapping("/create")
     public ResponseEntity<Sondage> create(@RequestBody Sondage sondage) {
@@ -87,7 +93,7 @@ public class SondageController {
                         + "Cordialement,\nL'équipe de modération";
 
                 emailService.sendSimpleEmail(
-                        "medalilahmar00@gmail.com", // Destinataire
+                        "design.freelance2000@gmail.com", // Destinataire
                         subject,
                         content
                 );
@@ -114,5 +120,14 @@ public class SondageController {
     }
 
 
+
+    @GetMapping("/top-streamers")
+    public ResponseEntity<List<Streamer>> getTopStreamers() {
+        List<Streamer> topStreamers = voteService.getTopStreamers();
+        if (topStreamers.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Aucun top streamer trouvé
+        }
+        return ResponseEntity.ok(topStreamers);
+    }
 
 }

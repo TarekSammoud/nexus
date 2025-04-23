@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Streamer } from 'src/app/core/entities/community/streamer';
 import { StreamerService } from 'src/app/core/services/community/streamer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr'; 
+
 
 @Component({
   selector: 'app-streamer-management',
@@ -15,7 +17,8 @@ export class StreamerManagementComponent implements OnInit {
 
   constructor(
     private streamerService: StreamerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +38,10 @@ export class StreamerManagementComponent implements OnInit {
   loadStreamers(): void {
     this.streamerService.getAllStreamers().subscribe({
       next: data => this.streamers = data,
-      error: err => console.error('Erreur chargement streamers', err)
+      error: err => {
+        console.error('Erreur chargement streamers', err);
+        this.toastr.error('Erreur lors du chargement des streamers.', 'Erreur'); // Ajoutez un message d'erreur
+      }
     });
   }
 
@@ -49,17 +55,27 @@ export class StreamerManagementComponent implements OnInit {
           this.loadStreamers();
           this.streamerForm.reset({ available: true });
           this.editingStreamerId = null;
+          this.toastr.success('Le streamer a été mis à jour avec succès.', 'Succès'); // Notification de succès
+
         },
-        error: err => console.error('Erreur maj streamer', err)
-      });
+        error: err => {
+          console.error('Erreur maj streamer', err);
+          this.toastr.error('Une erreur est survenue lors de la mise à jour du streamer.', 'Erreur');
+        }
+            });
     } else {
       this.streamerService.createStreamer(streamer).subscribe({
         next: () => {
           this.loadStreamers();
           this.streamerForm.reset({ available: true });
+          this.toastr.success('Le streamer a été ajouté avec succès.', 'Succès');
+
         },
-        error: err => console.error('Erreur ajout streamer', err)
-      });
+        error: err => {
+          console.error('Erreur ajout streamer', err);
+          this.toastr.error('Une erreur est survenue lors de l\'ajout du streamer.', 'Erreur');
+        }
+            });
     }
   }
 
@@ -68,7 +84,7 @@ export class StreamerManagementComponent implements OnInit {
       name: streamer.name,
       platform: streamer.platform,
       streamUrl: streamer.streamUrl,
-      available: streamer.available // ✅ Récupération correcte
+      available: streamer.available
     });
     this.editingStreamerId = streamer.id!;
   }
@@ -76,8 +92,14 @@ export class StreamerManagementComponent implements OnInit {
   onDelete(id: number): void {
     if (confirm('❌ Supprimer ce streamer ?')) {
       this.streamerService.deleteStreamer(id).subscribe({
-        next: () => this.loadStreamers(),
-        error: err => console.error('Erreur suppression streamer', err)
+        next: () => {
+          this.loadStreamers();
+          this.toastr.success('Le streamer a été supprimé avec succès.', 'Succès'); // Notification de succès
+        },
+        error: err => {
+          console.error('Erreur suppression streamer', err);
+          this.toastr.error('Une erreur est survenue lors de la suppression du streamer.', 'Erreur');
+        }
       });
     }
   }

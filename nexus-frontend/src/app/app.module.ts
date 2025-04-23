@@ -150,6 +150,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
 import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component';
+import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
+
 
 
 
@@ -268,6 +270,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     MarketDetailsComponent,
     LibraryComponent,
     JamCalendarComponent,
+    TopStreamerComponent,
 
 
     WalletsComponent,
