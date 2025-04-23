@@ -130,32 +130,12 @@ export class AdminSupportListComponent implements OnInit {
 
     if (this.isEditMode) {
       this.updateTicket(this.ticketForm.value);
-    } else {
-      this.createTicket(this.ticketForm.value);
+
     }
   }
 
   // Create a ticket
-  createTicket(ticketData: any): void {
-    const newTicket: SupportTicket = {
-      ...ticketData
-      // Don't set the 'id' here, as it will be returned by the backend
-    };
-  
-    this.supportService.createTicket(newTicket)
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe(
-        (createdTicket: SupportTicket) => {
-          this.tickets.push(createdTicket);
-          this.finalizeAction('🎉 Ticket created successfully!');
-        },
-        (error: any) => {
-          console.error('Error creating ticket:', error);
-          this.errorMessage = 'Failed to create ticket. Please try again.';
-        }
-      );
-  }
-  
+ 
   // Update a ticket
   updateTicket(ticketData: any): void {
     const updatedTicket: SupportTicket = {

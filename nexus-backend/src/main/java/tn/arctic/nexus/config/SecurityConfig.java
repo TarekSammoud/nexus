@@ -49,10 +49,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
-
-                        .requestMatchers("/support/**").permitAll()
+                        .requestMatchers("/performancereviews/**").permitAll()
+                        .requestMatchers("/rooms/**").permitAll()
+                        .requestMatchers("/agents/**").permitAll()
+                        .requestMatchers("/tickets/**").permitAll()
+                        .requestMatchers("/ws-support").permitAll()
                         .requestMatchers("/**").permitAll()
-
 
                         .anyRequest().authenticated()
                 )

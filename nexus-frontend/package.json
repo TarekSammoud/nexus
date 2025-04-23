@@ -29,6 +29,7 @@
     "@kolkov/angular-editor": "^3.0.0-beta.2",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@popperjs/core": "^2.11.8",
+    "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^7.1.1",
     "@syncfusion/ej2": "^28.2.7",
     "@syncfusion/ej2-angular-buttons": "^28.2.7",

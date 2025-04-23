@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface IMessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByRoom(Room room);
+
+    List<Message> findMessagesByRoomId(long roomId);
     // You can add custom queries here if necessary, e.g., for fetching messages by room ID
 }
