@@ -33,11 +33,11 @@
           <div class="price-section" *ngIf="game.price">
             <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
             <div class="price-details">
-              <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" alt="TND"></span>
+              <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></span>
               <span class="current-price" *ngIf="game.gameDiscount">
-                {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" alt="TND">
+                {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" width="24" height="auto" alt="TND">
               </span>
-                            <span class="current-price" *ngIf="!game.gameDiscount">{{ game.price  }} <img src="assets/img/token.png" alt="TND"></span>
+                            <span class="current-price" *ngIf="!game.gameDiscount">{{ game.price  }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></span>
             </div>
           </div>
         </div>
