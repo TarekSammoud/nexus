@@ -1,0 +1,40 @@
+<div class="leaderboard-container">
+    <!-- Header Section -->
+    <div class="leaderboard-header">
+      <h1 class="header-title">Top 3 Streamers Leaderboard</h1>
+      <p class="header-description">
+        Discover the most popular streamers voted by our community! Watch their live streams and join the excitement.
+      </p>
+    </div>
+  
+    <!-- Leaderboard Content -->
+    <div *ngIf="topStreamers.length > 0; else noStreamers" class="leaderboard-grid">
+      <div *ngFor="let streamer of topStreamers; let i = index" class="rank-card" [ngClass]="getRankClass(i)">
+        <!-- Rank Badge -->
+        <div class="rank-badge">
+          <span class="rank-number">{{ i + 1 }}</span>
+          <img [src]="getTrophyImage(i)" alt="Trophy" class="trophy-img" />
+        </div>
+  
+        <!-- Streamer Details -->
+        <div class="rank-details">
+          <h3 class="streamer-name">{{ streamer.name }}</h3>
+          <p class="streamer-platform">{{ streamer.platform }}</p>
+          <p class="streamer-description">
+            {{ getStreamerDescription(i) }}
+          </p>
+          <a [href]="streamer.streamUrl" target="_blank" class="watch-live-btn">
+            Watch Live Now
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- No Streamers Template -->
+    <ng-template #noStreamers>
+      <div class="no-streamer-container">
+        <p class="no-streamer">No top streamers found at the moment.</p>
+        <p class="no-streamer-subtext">Check back later to see who's leading the charts!</p>
+      </div>
+    </ng-template>
+  </div>

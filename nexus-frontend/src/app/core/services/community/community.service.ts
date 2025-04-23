@@ -46,13 +46,18 @@ export class CommunityService {
     return this.http.post<Publication>(this.baseUrl, publication, { headers: this.getHeaders() });
   }
 
-  updatePublication(id: number, publication: Publication): Observable<Publication> {
-    return this.http.put<Publication>(`${this.baseUrl}/${id}`, publication, { headers: this.getHeaders() });
+  updatePublication(id: number, userId: number, updatedPublication: Publication): Observable<Publication> {
+    const url = `${this.baseUrl}/${id}?userId=${userId}`;
+    return this.http.put<Publication>(url, updatedPublication, { headers: this.getHeaders() });
   }
+  
 
-  deletePublication(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
+
+  deletePublication(id: number, userId: number): Observable<void> {
+    const url = `${this.baseUrl}/${id}?userId=${userId}`;
+    return this.http.delete<void>(url, { headers: this.getHeaders() });
   }
+  
 
 
   getPublicationById(id: number): Observable<Publication> {

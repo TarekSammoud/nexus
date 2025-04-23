@@ -73,6 +73,9 @@ import { BidComponent } from './market/bid/bid.component';
 import { AuthGuard } from './core/services/user-management/auth.guard';
 import { LibraryComponent } from './library/library.component';
 import { SupportComponent } from './support/support.component';
+import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
+
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -119,6 +122,8 @@ const routes: Routes = [
   { path: 'live-room/:id', component: LiveRoomComponent },
   { path: 'stats', component: PublicationStatsComponent },
   { path: 'support', component: SupportComponent },
+  { path: 'top-streamer', component:TopStreamerComponent},
+
 
 
 

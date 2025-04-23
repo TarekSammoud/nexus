@@ -7,7 +7,7 @@ import { Commentaire } from '../../core/entities/community/commentaire';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from 'src/app/core/services/user-management/token.service';  
 import {  HttpHeaders } from '@angular/common/http';
-
+import { Router } from '@angular/router';  
 
 
 @Component({
@@ -31,7 +31,8 @@ export class PublicationListComponent implements OnInit {
     private commentaireService: CommentaireService,
     private likeService: LikeService,
     private toastr: ToastrService,
-    private tokenService: TokenService  
+    private tokenService: TokenService,
+    private router: Router
 
   ) {}
 
@@ -161,21 +162,42 @@ export class PublicationListComponent implements OnInit {
     });
   }
 
-  // Supprimer une publication
   deletePublication(id: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette publication ?')) {
-      this.communityService.deletePublication(id).subscribe({
-        next: () => {
-          this.publications = this.publications.filter(pub => pub.id !== id);
-          delete this.commentsByPublication[id];
-          this.toastr.success('🗑️ Publication supprimée avec succès.');
-        },
-        error: () => {
-          this.toastr.error('Erreur lors de la suppression de la publication.');
-        }
-      });
+    if (this.userId === null) {
+      this.toastr.error('Utilisateur non authentifié.');
+      return;  // Si l'utilisateur n'est pas authentifié, on arrête ici.
+    }
+  
+    if (this.canEditOrDelete(id)) {  // Vérifiez si l'utilisateur est le propriétaire
+      if (confirm('Êtes-vous sûr de vouloir supprimer cette publication ?')) {
+        this.communityService.deletePublication(id, this.userId).subscribe({
+          next: () => {
+            this.publications = this.publications.filter(pub => pub.id !== id);
+            delete this.commentsByPublication[id];
+            this.toastr.success('🗑️ Publication supprimée avec succès.');
+          },
+          error: () => {
+            this.toastr.error('Erreur lors de la suppression de la publication.');
+          }
+        });
+      }
+    } else {
+      this.toastr.error("❌ Vous ne pouvez pas supprimer cette publication.");
     }
   }
+  
+
+  canEditOrDelete(pubId: number): boolean {
+    const publication = this.publications.find(pub => pub.id === pubId);
+    return !!publication && publication.user.id === this.userId;  // Retourne un booléen
+  }
+  
+  
+  
+  
+  
+  
+  
 
   // Supprimer un commentaire
   deleteComment(pubId: number | undefined, commentId: number): void {
@@ -200,21 +222,22 @@ export class PublicationListComponent implements OnInit {
     return !!this.commentsByPublication[pubId]?.length;
   }
 
-  // Epingler ou désépingler une publication
-  togglePin(pub: Publication): void {
-    const updated = { ...pub, pinned: !pub.pinned };
+ 
+togglePin(publication: Publication): void {
+  const updated = { ...publication, pinned: !publication.pinned };
 
-    this.communityService.updatePublication(pub.id, updated).subscribe({
-      next: () => {
-        pub.pinned = !pub.pinned;
-        this.publications = this.publications.sort((a, b) => Number(b.pinned) - Number(a.pinned));
-        this.toastr.info(pub.pinned ? '📌 Publication épinglée.' : '📍 Publication désépinglée.');
-      },
-      error: () => {
-        this.toastr.error('Erreur lors de l’action épingler/désépingler.');
-      }
-    });
-  }
+  this.communityService.updatePublication(publication.id, this.userId!, updated).subscribe({
+    next: () => {
+      publication.pinned = !publication.pinned; // Mettre à jour localement la publication
+      this.publications = this.publications.sort((a, b) => Number(b.pinned) - Number(a.pinned)); // Re-trier les publications
+      this.toastr.info(publication.pinned ? '📌 Publication épinglée.' : '📍 Publication désépinglée.');
+    },
+    error: () => {
+      this.toastr.error('Erreur lors de l’action épingler/désépingler.');
+    }
+  });
+}
+
 
   // Filtrer les publications en fonction du terme de recherche
   get filteredPublications(): Publication[] {
@@ -229,4 +252,14 @@ export class PublicationListComponent implements OnInit {
       pub.user?.lastName?.toLowerCase().includes(term)
     );
   }
+
+
+ 
+  canEdit(pubId: number): boolean {
+    const publication = this.publications.find(pub => pub.id === pubId);
+    return publication !== undefined && publication.user.id === this.userId;
+  }
+  
+
+  
 }

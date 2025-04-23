@@ -120,7 +120,7 @@ export class PublicationFormComponent implements OnInit {
   // Sauvegarder la publication
   savePublication(publication: Publication): void {
     if (this.isEditMode) {
-      this.communityService.updatePublication(this.publicationId, publication).subscribe({
+      this.communityService.updatePublication(this.publicationId, this.userId!, publication).subscribe({
         next: () => {
           this.toastr.success('✅ Publication mise à jour avec succès');
           this.router.navigate(['/community']);

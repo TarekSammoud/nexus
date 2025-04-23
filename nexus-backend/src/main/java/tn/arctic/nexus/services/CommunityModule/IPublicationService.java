@@ -9,7 +9,7 @@ public interface IPublicationService {
     List<Publication> getAllPublications();
     Publication getPublicationById(Long id);
     Publication updatePublication(Long id, Publication updatedPublication);
-    void deletePublication(Long id);
+    void deletePublication(Long id, Long userId);
 
     List<Publication> getAllPublicationsSorted();
 

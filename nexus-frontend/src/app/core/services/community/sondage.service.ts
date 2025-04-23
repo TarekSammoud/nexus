@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sondage } from '../../entities/community/sondage';
-import { TokenService } from '../user-management/token.service';  
+import { TokenService } from '../user-management/token.service'; 
+import { Streamer } from 'src/app/core/entities/community/streamer';
+
 
 
 @Injectable({
@@ -58,6 +60,11 @@ export class SondageService {
     return this.http.put<Sondage>(`${this.apiUrl}/${sondageId}/start-live`, liveUrl, {
       headers: headersWithContentType
     });
+  }
+
+
+  getTopStreamers(): Observable<Streamer[]> {
+    return this.http.get<Streamer[]>(`${this.apiUrl}/top-streamers`);
   }
   
 

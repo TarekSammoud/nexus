@@ -30,18 +30,33 @@ public class PublicationService {
     }
 
     public Publication updatePublication(Long id, Publication updatedPublication) {
-        // Assume that we fetch, update, and save the publication
+        // Vérifiez si la publication existe
         Publication publication = publicationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Publication not found"));
+                .orElseThrow(() -> new RuntimeException("Publication non trouvée"));
+
+        // Mettez à jour les champs de la publication
         publication.setTitle(updatedPublication.getTitle());
         publication.setContent(updatedPublication.getContent());
         publication.setPinned(updatedPublication.isPinned());
         publication.setLocked(updatedPublication.isLocked());
         publication.setImageUrl(updatedPublication.getImageUrl());
+
+        // Sauvegardez et renvoyez la publication mise à jour
         return publicationRepository.save(publication);
     }
 
-    public void deletePublication(Long id) {
+
+    public void deletePublication(Long id, Long userId) {
+        // Récupérer la publication
+        Publication publication = publicationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Publication non trouvée"));
+
+        // Vérifier si l'utilisateur est le propriétaire
+        if (!publication.getUser().getId().equals(userId)) {
+            throw new RuntimeException("Vous n'êtes pas autorisé à supprimer cette publication.");
+        }
+
+        // Supprimer la publication
         publicationRepository.deleteById(id);
     }
 
