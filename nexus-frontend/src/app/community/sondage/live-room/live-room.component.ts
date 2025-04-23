@@ -28,6 +28,8 @@ platformName: string = '';
         if (rawUrl.includes('twitch.tv')) {
           const username = rawUrl.split('/').pop();
           rawUrl = `https://player.twitch.tv/?channel=${username}&parent=localhost`;
+          this.streamerName = username || 'Twitch Streamer';
+          this.platformName = 'Twitch';
         } else if (rawUrl.includes('youtube.com/watch')) {
           const videoId = rawUrl.split('v=')[1];
           rawUrl = `https://www.youtube.com/embed/${videoId}`;

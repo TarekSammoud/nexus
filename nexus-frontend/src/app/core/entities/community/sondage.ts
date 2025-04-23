@@ -1,4 +1,6 @@
 import { Streamer } from './streamer';
+import { User } from '../user/user.model';
+
 
 export interface Sondage {
   id?: number;
@@ -9,5 +11,7 @@ export interface Sondage {
   streamer?: Streamer;
   liveUrl?: string;
   endDate?: string;
+  user?: User;
+  
 
 }

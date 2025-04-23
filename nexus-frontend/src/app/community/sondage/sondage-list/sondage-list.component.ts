@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Sondage } from 'src/app/core/entities/community/sondage';
 import { SondageService } from 'src/app/core/services/community/sondage.service';
 import { VoteService } from 'src/app/core/services/community/vote.service';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-sondage-list',
@@ -16,30 +20,53 @@ export class SondageListComponent implements OnInit {
   hasVotedMap: { [key: number]: boolean } = {};
   now: Date = new Date();
 
-  userId = 1; // À rendre dynamique plus tard avec l'authentification
+    userId: number | null = null;
+
 new: any;
 
   constructor(
     private sondageService: SondageService,
-    private voteService: VoteService
+    private voteService: VoteService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.now = new Date(); // 🕒 utile pour comparer à endDate
+    this.now = new Date(); 
+
+    this.userId = TokenService.getUserId();
+    if (this.userId === null) {
+      console.error("Utilisateur non authentifié !");
+     
+      return;
+    }
+
+    
     this.sondageService.getAllSondages().subscribe({
       next: data => {
-        this.sondages = data.filter(s => s.approved);
+        this.sondages = data.filter(s => s.approved); 
         this.sondages.forEach(s => this.loadStats(s.id!));
       },
       error: err => console.error('Erreur chargement sondages', err)
     });
   }
 
+  
+
   loadStats(sondageId: number): void {
+    if (this.userId === null) {
+      this.toastr.error("Utilisateur non authentifié !");
+      return;
+    }
+  
     this.voteService.countYesVotes(sondageId).subscribe(v => this.votesOui[sondageId] = v);
     this.voteService.countTotalVotes(sondageId).subscribe(v => this.votesTotal[sondageId] = v);
-    this.voteService.hasUserVoted(sondageId, this.userId).subscribe(v => this.hasVotedMap[sondageId] = v);
+  
+    // Utiliser une vérification pour éviter l'erreur
+    if (this.userId !== null) {
+      this.voteService.hasUserVoted(sondageId, this.userId).subscribe(v => this.hasVotedMap[sondageId] = v);
+    }
   }
+  
 
   voter(id: number, voteOui: boolean): void {
     const sondage = this.sondages.find(s => s.id === id);
@@ -48,23 +75,23 @@ new: any;
     const endDate = sondage.endDate ? new Date(sondage.endDate) : null;
 
     if (endDate && this.now > endDate) {
-      alert("🚫 Ce sondage est terminé !");
+      this.toastr.warning("🚫 Ce sondage est terminé !");
       return;
     }
 
     if (this.hasVotedMap[id]) {
-      alert("⚠️ Vous avez déjà voté.");
+      this.toastr.info("⚠️ Vous avez déjà voté.");
       return;
     }
 
-    this.voteService.vote(id, this.userId, voteOui).subscribe({
+    this.voteService.vote(id, this.userId!, voteOui).subscribe({
       next: () => {
         this.loadStats(id);
-        alert("✅ Vote enregistré !");
+        this.toastr.success("✅ Vote enregistré !");
       },
       error: err => {
         const message = err.error?.message || err.message || 'Erreur inconnue';
-        alert("❌ Erreur lors du vote : " + message);
+        this.toastr.error("❌ Erreur lors du vote : " + message);
       }
     });
   }
@@ -73,5 +100,13 @@ new: any;
     const total = this.votesTotal[id] || 0;
     const oui = this.votesOui[id] || 0;
     return total === 0 ? 0 : Math.round((oui / total) * 100);
+  }
+
+
+
+  isPollEnded(endDate: string | null): boolean {
+    if (!endDate) return false;
+    const end = new Date(endDate);
+    return this.now > end;
   }
 }

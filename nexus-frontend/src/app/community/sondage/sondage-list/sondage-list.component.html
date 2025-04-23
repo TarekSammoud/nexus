@@ -72,6 +72,7 @@
           <ng-template #voteSection>
             <div class="d-flex justify-content-center gap-3">
               <button class="btn btn-outline-success vote-btn" (click)="voter(sondage.id!, true)">
+                
                 👍 Oui
               </button>
               <button class="btn btn-outline-danger vote-btn" (click)="voter(sondage.id!, false)">
@@ -101,4 +102,12 @@
       <i class="fas fa-info-circle me-2"></i> Aucun sondage trouvé.
     </div>
   </ng-template>
+
+  
+<ng-template #activePoll>
+  <!-- Ce contenu s'affiche si le sondage est actif -->
+  <div class="alert alert-success">
+    Ce sondage est actif.
+  </div>
+</ng-template>
 </div>
