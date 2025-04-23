@@ -1,0 +1,260 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main container */
+.carousel-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* Main slide takes more space, thumbnails on the right */
+  grid-gap: 10px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 1200px; /* Set a max width to avoid stretching */
+  height: 550px; /* Set a height based on the available space */
+  background-color: #1a1a1a;
+  font-family: 'Arial', sans-serif;
+  margin: 0 auto; /* Center the carousel */
+  overflow: hidden; /* To prevent overflow from child elements */
+}
+
+/* Main slider styles */
+.keen-slider {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.keen-slider__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* ensures the overlay doesn't spill out */
+}
+
+.slide-media picture,
+.slide-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay with dark-to-transparent tint */
+.slide-media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none;
+}
+
+
+/* Overlay content */
+.slide-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  max-width: 50%;
+}
+
+.slide-description {
+  margin-bottom: 20px;
+}
+
+.slide-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-align: left !important;
+}
+
+.slide-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.slide-details {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Offer section (price and buttons) */
+.slide-offer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.discount-tag {
+  background-color: #0078f2;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.current-price {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.free-label {
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.play-button {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.wishlist-button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+.wishlist-icon {
+  fill: #fff;
+}
+
+/* Thumbnail slider styles */
+.keen-slider.thumbnail {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #1a1a1a;
+}
+
+.thumbnail .keen-slider__slide {
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.thumbnail-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.thumbnail-content {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+}
+
+.number-slide:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light gray background on hover */
+}
+
+.number-slide{
+  transition: background-color 0.3s ease; /* Add transition for smooth effect */
+
+}
+
+
+
+.thumbnail-image img {
+  width: auto;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.thumbnail-title {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  margin-top: 5px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #0078f2;
+  width: 0;
+  transition: width 0.3s;
+}
+
+.progress-fill.active {
+  width: 100%;
+}
+
+/* Remove old gradient backgrounds */
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: none;
+}

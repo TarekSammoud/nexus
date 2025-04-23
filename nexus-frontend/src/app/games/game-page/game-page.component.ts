@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
+import { GamePlatform } from 'src/app/core/entities/game/game-platform.enum';
 import { GameReview } from 'src/app/core/entities/game/game-review';
 import { GameService } from 'src/app/core/services/game/game.service';
+import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.service';
 import { SpamCheckService } from 'src/app/core/services/spam-check.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { NotificationService } from 'src/services/finance/notification.service';
@@ -19,60 +21,65 @@ declare var bootstrap: any;
 export class GamePageComponent implements OnInit {
   game! : Game;
   groupedReviews: GameReview[][] = [];
+  browser: string ='BROWSER';
+  n64: string ='N64';
+  psp: string ='N64';
+  matchesPlatform: boolean = false;
+  matchesPlatformEmulated: boolean = false;
+  matchesPlatformPSP: boolean = false;
 
+  OnSelectBrowser(game: Game){
+    this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
+  }
 
+  OnSelectEmulated(game: Game){
+    this._router.navigate(['/games/emulated/play', game.gameFile?.mediaUrl]);
+  }
+
+  
+
+  emulatedGame= false;
+  emulatedPSPGame= false;
   ngOnInit(): void {
-   this.metamaskService.connectWallet();
+    this.metamaskService.connectWallet();
   }
   addGameToCart(item: Game) {
     this.panierService.addItemToCart(item);
     this._router.navigate(['/category',item.categories[0].name]);
     
-  }
-  
-groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
-  const result: GameReview[][] = [];
-  for (let i = 0; i < reviews.length; i += perGroup) {
-    result.push(reviews.slice(i, i + perGroup));
-  }
-  return result;
-}
-
-reviewForm: FormGroup;
-inLibrary = false ; 
-bannerUrl: string = '';
-
-  constructor(private panierService: PanierService,
-    private _spamCheckService: SpamCheckService,private fb: FormBuilder,
-    private _gameService: GameService, private _router:Router,private route: ActivatedRoute,
-    private metamaskService: MetamaskService,
-        private notificationService: NotificationService,
     
-  
-  ) {
-    const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
-
-    if (gameId) {
-      this._gameService.getGame(+gameId).subscribe(game => {
+    if (this.gameId) {
+      this._gameService.getGame(+this.gameId).subscribe(game => {
         this.game = game;
+        for (let platform of game.platforms) {
+          this.gamePlatforms.push(platform);
+        }
+
+         this.matchesPlatform = !this.browser || 
+        game.platforms?.includes(this.browser);
+
+        this.matchesPlatformEmulated = !this.n64 || 
+        game.platforms?.includes(this.n64);
+
+    for ( let platform of this.game.platforms) {
+      if (platform == "BROWSER") {
+        this.browserGame = true ;
+        console.log(this.browserGame)
+      }
+
+      if (platform == "N64") {
+        this.emulatedGame = true ;
+        console.log(this.emulatedGame)
+      }
+
+      if (platform == "PSP") {
+        this.emulatedPSPGame = true ;
+        console.log(this.emulatedPSPGame)
+      }
+    }
+        
         if (this.game?.gameReviewList) {
           this.groupedReviews = this.groupReviews(this.game.gameReviewList, 3);
-        }
-        this.game.screenshots = []; // ✅ Initialize
-
-        for (let media of this.game.gameMediaList) {
-          if (media.gameMediaType === 'BANNER') {
-            console.log("FOUND BANNER")
-            this.game.bannerPicture = media;
-            this.bannerUrl= this.game.bannerPicture.mediaUrl
-            console.log(this.game.bannerPicture);
-          }
-        }
-
-        for (let media of this.game.gameMediaList) {
-          if (media.gameMediaType === 'SCREENSHOT') {
-            this.game.screenshots.push(media);
-          }
         }
 
         this._gameService.getUserGameLibrary().subscribe(games => {
@@ -86,7 +93,6 @@ bannerUrl: string = '';
         });
     
       
-        console.log(this.game.screenshots); 
       });
 
       
@@ -94,6 +100,42 @@ bannerUrl: string = '';
 
 
     }
+
+
+   
+>>>>>>> GameManagement-postProd
+  }
+  
+groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
+  const result: GameReview[][] = [];
+  for (let i = 0; i < reviews.length; i += perGroup) {
+    result.push(reviews.slice(i, i + perGroup));
+  }
+  return result;
+}
+
+reviewForm: FormGroup;
+inLibrary = false ; 
+bannerUrl: string = '';
+browserGame = false; 
+ gameId: number | any;
+ gamePlatforms: String[] = [];
+
+<<<<<<< HEAD
+  constructor(private panierService: PanierService,
+    private _spamCheckService: SpamCheckService,private fb: FormBuilder,
+    private _gameService: GameService, private _router:Router,private route: ActivatedRoute,
+    private metamaskService: MetamaskService,
+        private notificationService: NotificationService,
+    
+  
+  ) {
+    const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
+=======
+  constructor(private _gameMediaService :GameMediaService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+>>>>>>> GameManagement-postProd
+
+     this.gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
     this.reviewForm = this.fb.group({
       game: this.fb.group({
         id: [this.game?.id]
@@ -104,6 +146,7 @@ bannerUrl: string = '';
       reviewText: ['', [Validators.required, Validators.minLength(10)]],
       rating: [0, Validators.required]
     });
+
   }
 
   activeIndex: number = 0;
@@ -189,6 +232,37 @@ nextSlide() {
         alert("Error deleting game: " + error.message);
       });
     }
+  }
+
+
+  downloadFile(game : Game) {
+    var type = "full";
+    for (let pl of game.platforms) {
+      if (pl === 'N64') {
+        type = "n64";
+        break; 
+    }
+      if (pl === 'PSP') {
+        type = "psp";
+        break;
+      }
+    }
+
+    if (game.gameFile?.mediaUrl){
+      const filename = game.gameFile?.mediaUrl;
+
+      this._gameMediaService.downloadGameFile(type, filename).subscribe((blob) => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      }, error => {
+        console.error('Download failed:', error);
+      });
+    }
+    
   }
 
   navigateToUpdate(game: Game) {

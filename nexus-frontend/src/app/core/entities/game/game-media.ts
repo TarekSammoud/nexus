@@ -1,3 +1,4 @@
+import { GameMediaType } from "src/app/game-media-type";
 import { Game } from "./game";
 
 export class GameMedia {
@@ -7,8 +8,11 @@ export class GameMedia {
   fileSize!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  gameMediaType!: string;
-  game_id!: Number;
+  gameMediaType!: GameMediaType;
+  game?: Game;
+  gameCover?: Game;
+  gameBanner?: Game;
+  gameFile?: Game;
 
   constructor(
     mediaUrl: string,

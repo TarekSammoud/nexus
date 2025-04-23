@@ -1,3 +1,4 @@
+import { GameDiscount } from "../game-discount";
 import { User } from "../user/user.model";
 import { GameCategory } from "./game-category";
 import { GameItem } from "./game-item";
@@ -15,15 +16,18 @@ export class Game {
     createdAt!: Date;
     updatedAt!: Date;
     gameItems!: GameItem[];
-    users!: User[];
     categories!: GameCategory[];
     gameMediaList!: GameMedia[];
     coverPicture?: GameMedia;
+    gameFile?: GameMedia;
     bannerPicture?: GameMedia;
     screenshots?: GameMedia[];
     minRequirements?: SystemRequirements; 
     recommendedRequirements?: SystemRequirements;
     gameReviewList?: GameReview[]; 
+    developer? : User;
+    gameDiscount? : GameDiscount;
+
 
   
     constructor(data?: Partial<Game>) {

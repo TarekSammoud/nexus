@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExcelService } from 'src/app/core/services/excel.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
@@ -30,14 +31,19 @@ export class CreateGameComponent implements OnInit {
   availableCategories!: GameCategory[];
   selectedCategories: Set<GameCategory> = new Set();
   numberOfGames!: number; 
-
+  userId = 1;
 
 
   constructor(public modalService: NgbModal,private _excelService: ExcelService,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
     
-      
+      const token = localStorage.getItem('auth_token'); 
 
+      if (token) {
+        const decodedToken: any = jwtDecode(token);
+        const userId = decodedToken.id; 
+        console.log('User ID:', userId);
+      }
     
       this._gameCategoryService.getGameCategories().subscribe((data) => {
       this.availableCategories = data.map((category) => {
@@ -110,10 +116,90 @@ prevStep() {
 
 url = '';
 images: any[] = [];
+imagesScreenshots: any[] = [];
+imagesBanner: any[] = [];
+imagesCover: any[] = [];
+imagesFile: any[] = [];
 
 
 filesToUpload: FormGroup[] = [];
 ftpFiles: FormData[] = [];
+
+onSelectFileFile(event: any): void {
+  if (event.target.files && event.target.files[0]) {
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); 
+
+    reader.onload = () => {
+      this.images.push(reader.result); 
+      this.imagesFile.push(reader.result); 
+
+    };
+
+    const mediaUrl = file.name;
+
+    const fileType = file.type;
+    const fileSize = file.size;
+
+
+     const newForm = this.fb.group({
+      mediaUrl: [mediaUrl, Validators.required],
+      fileType: [fileType, Validators.required],
+      fileSize: [fileSize, Validators.required],
+      gameMediaType: ['FILE', Validators.required],
+      gameFile: this.fb.group({
+        id: [this.numberOfGames + 1 , Validators.required]
+      })
+    });
+
+
+    const formData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.filesToUpload.push(newForm);
+    this.ftpFiles.push(formData);
+
+    if (this.selectedPlatforms.has('PSP')) {
+      this._gameMediaService.uploadPSPFileToFtp(formData).subscribe( {
+        next: (response) => {
+          console.log('Upload success:', response);
+          // You can store the result or update the form as needed
+        },
+        error: (err) => {
+          console.error('Upload failed:', err);
+        }
+        
+      })
+    }
+
+    if (this.selectedPlatforms.has('N64')) {
+      this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
+        next: (response) => {
+          console.log('Upload success:', response);
+          // You can store the result or update the form as needed
+        },
+        error: (err) => {
+          console.error('Upload failed:', err);
+        }
+        
+      })
+    }
+
+
+
+  }
+}
+
+removeImageFile(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.images.splice(index, 1);
+  this.imagesFile.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
 
 isPlatformSelected(platform: string): boolean {
   return this.selectedPlatforms.has(platform);
@@ -130,6 +216,7 @@ onSelectFileCover(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesCover.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -143,7 +230,7 @@ onSelectFileCover(event: any): void {
       fileType: [fileType, Validators.required],
       fileSize: [fileSize, Validators.required],
       gameMediaType: ['COVER', Validators.required],
-      game: this.fb.group({
+      gameCover: this.fb.group({
         id: [this.numberOfGames + 1 , Validators.required]
       })
     });
@@ -154,6 +241,17 @@ onSelectFileCover(event: any): void {
 
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
+
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
 
   }
 }
@@ -167,6 +265,7 @@ onSelectFileBanner(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesBanner.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -180,7 +279,7 @@ onSelectFileBanner(event: any): void {
       fileType: [fileType, Validators.required],
       fileSize: [fileSize, Validators.required],
       gameMediaType: ['BANNER', Validators.required],
-      game: this.fb.group({
+      gameBanner: this.fb.group({
         id: [this.numberOfGames + 1 , Validators.required]
       })
     });
@@ -191,6 +290,17 @@ onSelectFileBanner(event: any): void {
 
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
+
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
 
   }
 }
@@ -205,6 +315,7 @@ onSelectFileScreenShots(event: any): void {
 
     reader.onload = () => {
       this.images.push(reader.result); 
+      this.imagesScreenshots.push(reader.result);
     };
 
     const mediaUrl = file.name;
@@ -230,6 +341,17 @@ onSelectFileScreenShots(event: any): void {
     this.filesToUpload.push(newForm);
     this.ftpFiles.push(formData);
 
+    this._gameMediaService.uploadFileToFtp(formData).subscribe({
+      next: (response) => {
+        console.log('Upload success:', response);
+        // You can store the result or update the form as needed
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+      
+    })
+
   }
 }
 
@@ -245,6 +367,31 @@ removeImage(index: number) {
   this.images.splice(index, 1);
   console.log(this.filesToUpload.length); 
 }
+
+
+removeImageBanner(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesBanner.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageScreenshots(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesScreenshots.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+removeImageCover(index: number) {
+  this.filesToUpload.splice(index, 1);
+  this.ftpFiles.splice(index, 1);
+  this.imagesCover.splice(index, 1);
+  console.log(this.filesToUpload.length); 
+}
+
+
+
 
 gameId? : number; 
 isEditMode: boolean = false;
@@ -269,6 +416,9 @@ get recommendedRequirements() {
     this.gameId = Number(this._route.snapshot.paramMap.get('id'));
     this.isEditMode = !!this.gameId;  // If ID exists, it's edit mode
     this.gameForm = this.fb.group({
+      developer: this.fb.group({
+        id: [this.userId , Validators.required]
+      }),
       name: ['', [Validators.required, Validators.minLength(3)]],  // Name should be at least 3 characters long
       description: ['', [Validators.required, Validators.minLength(10)]],  // Description should be at least 10 characters long
       price: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],  // Price should be a positive number, optional decimal with two digits

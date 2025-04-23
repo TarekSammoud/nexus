@@ -1,0 +1,73 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h5 id="exampleModalLabel">Your game discount has been successfully added</h5>
+    </div>
+    <div class="modal-body">
+      <p class="text-center text-dark">
+        Your game discount has been successfully added to the database. You can now view it on the dashboard or continue adding more game discounts.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      <button type="button" class="btn btn-primary" (click)="navigateToDashboard()">Go to dashboard</button>
+    </div>
+  </ng-template>
+  
+  <div class="">
+    <button class="btn btn-primary" (click)="navigateToDashboard()">Back to dashboard</button>
+  </div>
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="width: 70vw;">
+      <div class="card-body">
+        <h4 class="card-title text-center mb-4 text-light">{{title}}</h4>
+        <img src="../../assets/img/symbol_only_white.svg" style="width:20px; display:flex; margin-left: auto; margin-right:auto;" alt="">
+  
+        <form class="background-dark" [formGroup]="gameDiscountForm" (ngSubmit)="onSubmit()">
+          <!-- Game Selection -->
+  
+          <!-- Discount Percentage -->
+          <div class="form-group">
+            <label for="discountPercentage">Discount Percentage (%)</label>
+            <input formControlName="discountPercentage" type="number" class="form-control" id="discountPercentage" placeholder="" min="0" max="100">
+            <span *ngIf="gameDiscountForm.controls['discountPercentage'].hasError('required') && gameDiscountForm.controls['discountPercentage'].touched" class="login-error" style="color: red">
+              You must include a valid discount percentage.
+            </span>
+            <span *ngIf="gameDiscountForm.controls['discountPercentage'].hasError('min') || gameDiscountForm.controls['discountPercentage'].hasError('max')" class="login-error" style="color: red">
+              Discount percentage must be between 0 and 100.
+            </span>
+          </div>
+  
+          <!-- Sale Start Date -->
+          <div class="form-group">
+            <label for="saleStartDate">Sale Start Date</label>
+            <input formControlName="saleStartDate" type="datetime-local" class="form-control" id="saleStartDate">
+            <span *ngIf="gameDiscountForm.controls['saleStartDate'].hasError('required') && gameDiscountForm.controls['saleStartDate'].touched" class="login-error" style="color: red">
+              You must include a valid start date.
+            </span>
+          </div>
+  
+          <!-- Sale End Date -->
+          <div class="form-group">
+            <label for="saleEndDate">Sale End Date</label>
+            <input formControlName="saleEndDate" type="datetime-local" class="form-control" id="saleEndDate">
+            <span *ngIf="gameDiscountForm.controls['saleEndDate'].hasError('required') && gameDiscountForm.controls['saleEndDate'].touched" class="login-error" style="color: red">
+              You must include a valid end date.
+            </span>
+            <div style="color:red;" *ngIf="gameDiscountForm.errors?.['invalidDateRange'] && gameDiscountForm.touched">
+                {{ gameDiscountForm.errors?.['invalidDateRange'] }}
+              </div>
+          </div>
+  
+          <!-- Is Active -->
+
+  
+          <button type="submit"
+                  (click)="open(content)"
+                  [class.disabled]="gameDiscountForm.invalid || gameDiscountForm.pristine || gameDiscountForm.pending"
+                  class="next-btn">Submit</button>
+  
+          <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+        </form>
+      </div>
+    </div>
+  </div>
