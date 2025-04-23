@@ -8,14 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.entities.Message;
-import tn.arctic.nexus.entities.RoleType;
-import tn.arctic.nexus.entities.Room;
-import tn.arctic.nexus.entities.User;
+import tn.arctic.nexus.entities.*;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
-import tn.arctic.nexus.services.TechnicalSupportModule.EmailService;
-import tn.arctic.nexus.services.TechnicalSupportModule.MessageService;
-import tn.arctic.nexus.services.TechnicalSupportModule.RoomService;
+import tn.arctic.nexus.services.TechnicalSupportModule.*;
 
 import java.util.List;
 import org.slf4j.Logger;
@@ -31,7 +26,13 @@ public class RoomController {
     private RoomService roomService;
 
     @Autowired
+    private AIService aiService;
+
+    @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private SupportTicketService   supportTicketService;
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
@@ -48,18 +49,45 @@ public class RoomController {
     @PostMapping("/create/{ticketId}")
     public ResponseEntity<String> creerRoom(@PathVariable Long ticketId) {
         try {
-            logger.debug("CreerRoom called with ticketId: {}", ticketId);
-            // Création de la room sans l'email
+            // 1) create the room
             Room room = roomService.creerRoom(ticketId);
-            logger.debug("Room created with link: {}", room.getLien());
-            emailService.sendVerificationEmail("abdouhanafi090@gmail.com", room.getLien());
-            return new ResponseEntity<>("Room créée avec le lien : " + room.getLien(), HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            // Gestion des erreurs : Ticket non trouvé ou room déjà existante
-            logger.error("Error creating room for ticketId {}: {}", ticketId, e.getMessage());
-            return new ResponseEntity<>("Erreur : " + e.getMessage(), HttpStatus.BAD_REQUEST);
+
+            // 2) fetch the ticket to get its persisted analysisResult
+            SupportTicket ticket = supportTicketService
+                    .getTicketById(ticketId)
+                    .orElseThrow(() ->
+                            new RuntimeException("Ticket not found: " + ticketId)
+                    );
+
+            String analysis = ticket.getAnalysisResult();
+            if (analysis == null) {
+                // (optionally) fallback to on-the-fly analysis
+                analysis = aiService.analyzeText(ticket.getDescription());
+                //—and re-persist if you like:
+                ticket.setAnalysisResult(analysis);
+                supportTicketService.updateTicket(ticket);
+            }
+
+            // 3) send the email with the real analysis
+            emailService.sendVerificationEmail(
+                    "abdouhanafi090@gmail.com",
+                    room.getLien(),
+                    analysis
+            );
+
+            return new ResponseEntity<>(
+                    "Room créée avec le lien : " + room.getLien(),
+                    HttpStatus.CREATED
+            );
+        }
+        catch (RuntimeException e) {
+            return new ResponseEntity<>(
+                    "Erreur : " + e.getMessage(),
+                    HttpStatus.BAD_REQUEST
+            );
         }
     }
+
 
     // Fermer la room associée à un ticket
     @PostMapping("/close/{ticketId}")

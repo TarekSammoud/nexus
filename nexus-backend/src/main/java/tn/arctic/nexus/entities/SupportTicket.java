@@ -44,7 +44,8 @@ public class SupportTicket {
 
 
 
-
+    @Column(length = 2000)
+    private String analysisResult;
 
 
     @ManyToOne

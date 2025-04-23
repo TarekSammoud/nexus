@@ -13,9 +13,11 @@ import tn.arctic.nexus.entities.RoleType;
 import tn.arctic.nexus.entities.SupportTicket;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
+import tn.arctic.nexus.services.TechnicalSupportModule.AIService;
 import tn.arctic.nexus.services.TechnicalSupportModule.SupportTicketService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,6 +27,9 @@ public class SupportTicketController {
 
     @Autowired
     private SupportTicketService supportTicketService;
+
+    @Autowired
+    private AIService aiService;
 
     @Autowired
     private IUserRepository userRepository;
@@ -67,8 +72,19 @@ public class SupportTicketController {
         // Set the user on the ticket and save it
         ticket.setUser(user);
         SupportTicket savedTicket = supportTicketService.createTicket(ticket);
-
+        String analysis = aiService.analyzeText(savedTicket.getDescription());
+        savedTicket.setAnalysisResult(analysis);
+        supportTicketService.updateTicket(savedTicket);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTicket);
+    }
+    @GetMapping("/{id}/analysis")
+    public ResponseEntity<?> getAnalysis(@PathVariable Long id) {
+        Optional<SupportTicket> opt = supportTicketService.getTicketById(id);
+        if (opt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        String analysis = opt.get().getAnalysisResult();
+        return ResponseEntity.ok(Map.of("analysis", analysis));
     }
 
 
