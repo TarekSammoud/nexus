@@ -25,6 +25,24 @@ public class Entry implements Serializable {
     private String nameEntry;
     private String descriptionEntry;
 
+    public String getZipUrl() {
+        return zipUrl;
+    }
+
+    public void setZipUrl(String zipUrl) {
+        this.zipUrl = zipUrl;
+    }
+
+    public Set<EntryRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<EntryRating> ratings) {
+        this.ratings = ratings;
+    }
+
+    private String zipUrl;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -73,6 +91,8 @@ public class Entry implements Serializable {
     public void setDescriptionEntry(String descriptionEntry) {
         this.descriptionEntry = descriptionEntry;
     }
+
+
 
     public Date getCreatedAt() {
         return createdAt;

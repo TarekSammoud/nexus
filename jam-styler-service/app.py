@@ -34,6 +34,20 @@ def style_jam():
             "banner_type": "food-fun",
             "mood_class": "tasty"
         }
+    elif "space" in title:
+        style = {
+            "primary_color": "#0D47A1",  # Deep Space Blue
+            "font": "Roboto Mono",
+            "banner_type": "galactic",
+            "mood_class": "futuristic"
+        }
+    elif "battle" in title:
+        style = {
+            "primary_color": "#B71C1C",  # Blood Red
+            "font": "Bangers",
+            "banner_type": "combat-arena",
+            "mood_class": "intense"
+        }
     else:
         style = {
             "primary_color": "#9E9E9E",  # Default gray

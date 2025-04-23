@@ -31,7 +31,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col" *ngFor="let game of games">
           <div (click)="OnSelect(game)" style="cursor: pointer;" class="card h-100 border-0 shadow-sm game-card">
-            <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl 
+            <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl
             ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
             : '../../../../assets/img/missing.jpg'" [alt]="game.name" class="card-img-top cover-img" />
             <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />

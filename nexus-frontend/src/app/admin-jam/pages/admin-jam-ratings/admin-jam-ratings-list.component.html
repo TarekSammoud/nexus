@@ -36,8 +36,13 @@
           <span class="emoji-score">{{ getStars(rating.musicScore) }}</span>
         </td>
 
-        <td class="total-score">{{ getTotal(rating) }}/15</td>
-        <td>{{ rating.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="total-score">
+          <span class="score-number">{{ getWeightedTotal(rating) }}/10</span>
+          <span [ngClass]="getScoreClass(getWeightedTotal(rating))" class="score-badge">
+            {{ getScoreLabel(getWeightedTotal(rating)) }}
+          </span>
+        </td>
+                <td>{{ rating.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
 
         <td>
           <button class="btn-delete" (click)="deleteRating(rating.id!)">

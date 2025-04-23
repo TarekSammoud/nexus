@@ -29,10 +29,34 @@ export class AdminJamRatingsListComponent implements OnInit {
     });
   }
 
-  getTotal(rating: EntryRating): number {
-    return rating.graphicsScore + rating.gameplayScore + rating.musicScore;
-  }
+ // getTotal(rating: EntryRating): number {
+    //return rating.graphicsScore + rating.gameplayScore + rating.musicScore;
+  //}
 
+  getWeightedTotal(rating: EntryRating): number {
+    const graphicsWeight = 0.4;
+    const gameplayWeight = 0.4;
+    const musicWeight = 0.2;
+  
+    const total = (rating.graphicsScore * graphicsWeight) +
+                  (rating.gameplayScore * gameplayWeight) +
+                  (rating.musicScore * musicWeight);
+    
+    return parseFloat(total.toFixed(2)); // Rounded to 2 decimals
+  }
+  getScoreClass(score: number): string {
+    if (score >= 8) return 'badge-excellent';
+    if (score >= 5) return 'badge-good';
+    return 'badge-poor';
+  }
+  
+  getScoreLabel(score: number): string {
+    if (score >= 8) return 'Excellent';
+    if (score >= 5) return 'Good';
+    return 'Poor';
+  }
+  
+  
  getStars(score: number): string {
   const safeScore = Math.max(0, Math.min(5, score));
   return '★'.repeat(safeScore) + '☆'.repeat(5 - safeScore);

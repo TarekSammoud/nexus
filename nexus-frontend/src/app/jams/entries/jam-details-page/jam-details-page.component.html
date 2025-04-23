@@ -8,6 +8,9 @@
   <button [class.active]="activeTab === 'media'" (click)="setTab('media')">
     <i class="fas fa-photo-video"></i> Entry Media
   </button>
+  <button [class.active]="activeTab === 'leaderboard'" (click)="setTab('leaderboard')">
+    <i class="fas fa-trophy"></i> Leaderboard
+  </button>
 </div>
 
 <div *ngIf="activeTab === 'overview' && jam" class="jam-details-container">
@@ -44,26 +47,36 @@
 <div *ngIf="activeTab === 'submissions'" class="submissions-tab">
   <h2 class="section-heading">🎮 Game Jam Entries <span class="badge-count">{{ entries.length }}</span></h2>
 
-  <app-entry-form [jamId]="jamId" (entryCreated)="onEntryCreated($event)"></app-entry-form>
-
-  <ng-container *ngIf="entries.length > 0; else noEntries">
-    <div class="entry-gallery">
-      <div *ngFor="let entry of entries" class="entry-tile">
-        <div class="entry-image">
-          <img src="assets/img/default-entry.png" alt="Entry Cover" />
-        </div>
-        <div class="entry-header">
-          <h5 class="entry-title">{{ entry.nameEntry }}</h5>
-          <span class="entry-time">🕓 {{ entry.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
-        </div>
-        <p class="entry-description">{{ entry.descriptionEntry }}</p>
-        <div class="entry-footer">
-          <span class="entry-user">👤 {{ entry.user }}</span>
-         
-        </div>
-      </div>
-    </div>
+  <ng-container *ngIf="isSubmissionOpen(); else submissionClosed">
+    <app-entry-form [jamId]="jamId" (entryCreated)="onEntryCreated($event)"></app-entry-form>
   </ng-container>
+  
+  <ng-template #submissionClosed>
+    <div class="submission-closed-warning">
+      ❌ Submissions are closed for this jam.
+    </div>
+      </ng-template>
+  
+      <ng-container *ngIf="entries.length > 0; else noEntries">
+        <div class="entry-gallery">
+          <div *ngFor="let entry of entries" class="entry-tile">
+            <div class="entry-image">
+              <img src="assets/img/default-entry.png" alt="Entry Cover" />
+            </div>
+            <div class="entry-header">
+              <h5 class="entry-title">{{ entry.nameEntry }}</h5>
+              <span class="entry-time">🕓 {{ entry.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <p class="entry-description">{{ entry.descriptionEntry }}</p>
+      
+            <div *ngIf="entry.zipUrl" class="entry-zip-link">
+              <a [href]="entry.zipUrl" target="_blank" rel="noopener noreferrer">
+                📦 Download Game ZIP
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
 
   <ng-template #noEntries>
     <p class="no-entry-message">No entries yet. Be the first to submit your creation!</p>
@@ -106,7 +119,16 @@
 
         <div class="toggle-btn-wrapper mt-2">
           <button class="btn btn-outline-primary" (click)="openMediaModal(entry)">🎞️ Show Media</button>
-          <button class="btn btn-outline-warning" (click)="openRatingModal(entry)">🌟 Rate</button>
+          <button
+  class="btn btn-outline-warning"
+  (click)="openRatingModal(entry)"
+  [disabled]="!isVotingOpen()"
+  [ngClass]="{ 'disabled-btn': !isVotingOpen() }">
+  🌟 Rate
+</button>
+<small class="text-muted" *ngIf="!isVotingOpen()">Voting not open for this jam.</small>
+
+
         </div>
       </div>
     </div>
@@ -151,3 +173,47 @@
     No entries available yet. Add an entry first to submit media.
   </div>
 </div>
+
+
+<div *ngIf="activeTab === 'leaderboard'" class="leaderboard-tab">
+  <h2 class="section-heading text-warning text-center mt-4 mb-4">
+    🏆 Top Rated Entries
+  </h2>
+
+  <div *ngIf="getSortedEntries().length > 0; else noLeaderboard">
+    <div *ngFor="let entry of getSortedEntries(); index as i" class="leaderboard-entry"
+         [ngClass]="{
+           'glow-gold': i === 0,
+           'glow-silver': i === 1,
+           'glow-bronze': i === 2
+         }">
+      <div class="rank-icon">
+        {{ getRankEmoji(i) }}
+      </div>
+
+      <div class="entry-content">
+        <div class="entry-title-line">
+          <strong class="entry-name text-light">{{ entry.nameEntry }}</strong>
+          <span class="entry-stars text-warning ms-3">
+            {{ getStars(getTotalScore(entry)) }}
+          </span>
+        </div>
+
+        <p class="entry-description text-muted small mb-1">
+          {{ entry.descriptionEntry }}
+        </p>
+
+        <div class="badge-zone">
+          <span *ngFor="let badge of getBadges(entry)" class="badge badge-custom">
+            {{ badge }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noLeaderboard>
+    <p class="text-muted text-center">No ratings yet to generate a leaderboard.</p>
+  </ng-template>
+</div>
+
