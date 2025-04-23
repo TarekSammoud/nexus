@@ -1,4 +1,4 @@
-package tn.arctic.nexus.config;
+package tn.arctic.nexus.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

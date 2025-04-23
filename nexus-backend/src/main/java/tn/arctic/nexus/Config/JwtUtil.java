@@ -1,4 +1,4 @@
-package tn.arctic.nexus.config;
+package tn.arctic.nexus.Config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

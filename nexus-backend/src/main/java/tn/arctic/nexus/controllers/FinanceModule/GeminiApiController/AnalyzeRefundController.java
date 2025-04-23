@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.config.JwtUtil;
+import tn.arctic.nexus.Config.JwtUtil;
 import tn.arctic.nexus.entities.FinanceModule.GeminiApiModels.RefundAnalysisRequest;
 import tn.arctic.nexus.entities.FinanceModule.GeminiApiModels.RefundAnalysisResponse;
 import tn.arctic.nexus.services.FinanceModule.GeminiApiService.GeminiRefundAnalysisService;

@@ -1,0 +1,91 @@
+/* Container and Form Styles */
+.container-fluid {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input.form-control {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input.form-control::placeholder {
+  color: #aaa;
+}
+
+/* Button Styles */
+button.btn {
+  background-color: #ea7a9a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  width: 100%; /* Full-width button */
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+button.btn:hover {
+  background-color: #d86b88;
+}
+
+/* Title and Text Colors */
+h2, h3 {
+  color: #ea7a9a;
+}
+
+.text-white {
+  color: white !important;
+}
+
+/* Recommended items list */
+ul.list-group {
+  margin-top: 20px;
+}
+
+li.list-group-item {
+  background-color: #444;
+  border: none;
+  color: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+li.list-group-item:hover {
+  background-color: #555;
+}
+
+/* SVM Section */
+.svm-section {
+  padding: 20px;
+  background-color: #333;
+  margin-top: 20px;
+}
+
+.svm-section p {
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  .col-md-8 {
+    width: 100%;
+  }
+
+  button.btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

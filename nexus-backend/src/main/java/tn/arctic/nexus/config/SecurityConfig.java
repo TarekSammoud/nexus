@@ -1,8 +1,9 @@
-package tn.arctic.nexus.config;
+package tn.arctic.nexus.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter) {
+
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -49,6 +51,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
+
+                        .requestMatchers("/marketlistings/**").permitAll()
+
+
+
                         .requestMatchers("/support/**").permitAll()
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()

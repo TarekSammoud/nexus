@@ -3,6 +3,9 @@
     <h1 class="jam-title">🛍️ Market Listings</h1>
     <p class="jam-subtitle">Sell your in-game items and place competitive bids!</p>
     <button class="jam-btn" (click)="toggleForm()">+ Create Market Item</button>
+
+    <!-- Button to navigate to AI Recommendation component -->
+    <button class="jam-btn" routerLink="/ai-recommendation"> + Get Market Recommendations</button>
   </div>
 
   <div *ngIf="showForm" class="mt-4">

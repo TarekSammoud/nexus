@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.User;
-import tn.arctic.nexus.config.JwtUtil;
+import tn.arctic.nexus.Config.JwtUtil;
 import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.AuthService;

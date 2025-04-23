@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarketService } from '../services/market.service';
+import { Router } from '@angular/router';  // Add this import
 
 @Component({
   selector: 'app-market-list',
@@ -13,7 +14,7 @@ export class MarketListComponent implements OnInit {
   editMode = false;
   page = 1;
 
-  constructor(private marketService: MarketService) {}
+  constructor(private marketService: MarketService, private router: Router) {} // Inject Router here
 
   ngOnInit(): void {
     this.loadMarketItems();
@@ -21,7 +22,6 @@ export class MarketListComponent implements OnInit {
 
   loadMarketItems(): void {
     this.marketService.getAllListings().subscribe(data => {
-      // Add highestBidAmount to each listing
       this.markets = data.map(item => {
         const highestBid = item.bids?.length
           ? Math.max(...item.bids.map((bid: any) => bid.amount))
@@ -67,5 +67,9 @@ export class MarketListComponent implements OnInit {
         this.loadMarketItems();
       });
     }
+  }
+
+  viewRecommendations(item: any): void {
+    this.router.navigate(['/ai-recommendation'], { state: { item } });  // Fix router navigation here
   }
 }
