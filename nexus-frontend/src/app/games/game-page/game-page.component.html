@@ -173,7 +173,7 @@
   </div>
 
   <div *ngIf="isGenerated" class="text-danger">Our system has detected a probability of {{ response.fakeness_percentage }}% that your review has been computer generated</div>
-  <div *ngIf="!isGenerated" style="color: green">Our system has detected a probability of {{ response.original_percentage }}% that your review is written by a human</div>
+  <div *ngIf="!isGenerated" style="color: green">Our system has detected a probability of {{ response?.original_percentage }}% that your review is written by a human</div>
 
   <button type="submit" 
   [class.disabled]="reviewForm.invalid || reviewForm.pristine "
