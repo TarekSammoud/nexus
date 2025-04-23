@@ -37,6 +37,7 @@ public class PublicationService {
         publication.setContent(updatedPublication.getContent());
         publication.setPinned(updatedPublication.isPinned());
         publication.setLocked(updatedPublication.isLocked());
+        publication.setImageUrl(updatedPublication.getImageUrl());
         return publicationRepository.save(publication);
     }
 

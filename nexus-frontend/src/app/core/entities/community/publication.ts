@@ -10,6 +10,7 @@ export class Publication {
   pinned!: boolean; 
   locked!: boolean; 
   category!: Category;
+  imageUrl?: string;
   user!: User;
   commentaires: Commentaire[] = [];
   reports: Report[] = []; 

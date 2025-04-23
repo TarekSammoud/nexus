@@ -5,6 +5,8 @@ import { CommunityService } from '../../core/services/community/community.servic
 import { ToastrService } from 'ngx-toastr';
 import { Report } from 'src/app/core/entities/community/report';
 import { Publication } from 'src/app/core/entities/community/publication';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
+
 
 @Component({
   selector: 'app-report-form',
@@ -16,21 +18,36 @@ export class ReportFormComponent implements OnInit {
   publicationId!: number;
   publication!: Publication;
   reason: string = '';
-  userId: number = 1; // à remplacer par l'utilisateur connecté
+  userId: number | null = null; 
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     private reportService: ReportService,
     private communityService: CommunityService,
-   private toastr: ToastrService
+   private toastr: ToastrService,
+   private tokenService: TokenService
+   
   ) {}
 
   ngOnInit(): void {
-    this.publicationId = +this.route.snapshot.paramMap.get('publicationId')!;
+    const idFromRoute = this.route.snapshot.paramMap.get('publicationId');
+    if (!idFromRoute) {
+      this.toastr.error('Publication non trouvée.');
+      this.router.navigate(['/community']);
+      return;
+    }
+    this.publicationId = +idFromRoute;  
+
+    this.userId = TokenService.getUserId();  
+    if (!this.userId) {
+      this.toastr.error('Utilisateur non authentifié.');
+      this.router.navigate(['/login']);
+      return;  
+    }
+
     this.loadPublication();
   }
-
   loadPublication(): void {
     this.communityService.getPublicationById(this.publicationId).subscribe({
       next: (data) => this.publication = data,
@@ -47,8 +64,8 @@ export class ReportFormComponent implements OnInit {
     const report: Report = {
       reason: this.reason,
       status: 'PENDING',
-      publication: { id: this.publicationId } as Publication, // ✅ uniquement l'id
-      user: { id: this.userId } as any // à remplacer plus tard par l'utilisateur connecté
+      publication: { id: this.publicationId } as Publication, 
+      user: { id: this.userId } as any 
     };
   
     this.reportService.createReport(report).subscribe({

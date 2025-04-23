@@ -5,6 +5,8 @@ import { StreamerService } from 'src/app/core/services/community/streamer.servic
 import { Streamer } from 'src/app/core/entities/community/streamer';
 import { Sondage } from 'src/app/core/entities/community/sondage';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'; 
+
 
 @Component({
   selector: 'app-sondage-create',
@@ -20,7 +22,8 @@ export class SondageCreateComponent implements OnInit {
     private fb: FormBuilder,
     private sondageService: SondageService,
     private streamerService: StreamerService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +37,10 @@ export class SondageCreateComponent implements OnInit {
         this.streamers = data;
         console.log("✅ Streamers chargés :", data);
       },
-      error: (err) => console.error('❌ Erreur chargement streamers :', err)
+      error: (err) => {
+        console.error('❌ Erreur chargement streamers :', err);
+        this.toastr.error('Erreur lors du chargement des streamers.'); // Utiliser Toastr pour l'erreur
+      }
     });
   }
 
@@ -52,12 +58,12 @@ export class SondageCreateComponent implements OnInit {
 
     this.sondageService.createSondage(newSondage).subscribe({
       next: () => {
-        alert('✅ Sondage créé avec succès !');
-        this.router.navigate(['/community']);
+        this.toastr.success('✅ Sondage créé avec succès !'); 
+        this.router.navigate(['/sondages/list']);
       },
       error: (err) => {
         console.error('❌ Erreur création sondage :', err);
-        alert('Une erreur est survenue lors de la création du sondage.');
+        this.toastr.error('Une erreur est survenue lors de la création du sondage.'); // Remplacer alert() par toastr.error
       }
     });
   }

@@ -491,3 +491,99 @@ textarea.form-control {
   font-style: italic;
 }
 
+/* 🌑 Page générale */
+.page-wrapper {
+  min-height: 100vh;
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  padding: 40px 15px;
+}
+
+/* 📦 Contenu centré */
+.content-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* 🧱 Conteneur principal */
+.publication-list-container {
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid #333;
+}
+
+/* 🧾 Titre principal */
+.header-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* 🖼️ Image publication */
+.publication-image {
+  margin: 20px 0;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #222;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+
+.publication-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet de zoom pour l'image */
+.publication-image:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid #6c63ff;
+}
+
+.comment-bubble {
+  background-color: #fdfdfd;
+  color: #212529;
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #0d6efd;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: 0.2s ease-in-out;
+}
+
+.comment-bubble:hover {
+  transform: translateY(-2px);
+}
+
+.comment-bubble p {
+  margin-bottom: 6px;
+}
+
+.comment-bubble small {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.toast-top-right {
+  top: 20px !important;
+  right: 20px !important;
+  position: fixed !important;
+}

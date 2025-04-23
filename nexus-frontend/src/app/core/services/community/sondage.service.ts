@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sondage } from '../../entities/community/sondage';
+import { TokenService } from '../user-management/token.service';  
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +14,49 @@ export class SondageService {
 
   constructor(private http: HttpClient) {}
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('auth_token');  
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);  
+    }
+
+    return headers;
+  }
+
   getAllSondages(): Observable<Sondage[]> {
-    return this.http.get<Sondage[]>(this.apiUrl);
+    const headers = this.getAuthHeaders();  
+    return this.http.get<Sondage[]>(this.apiUrl, { headers });
   }
 
   getSondageById(id: number): Observable<Sondage> {
-    return this.http.get<Sondage>(`${this.apiUrl}/${id}`);
+    const headers = this.getAuthHeaders(); 
+    return this.http.get<Sondage>(`${this.apiUrl}/${id}`, { headers });
   }
 
   createSondage(sondage: Partial<Sondage>): Observable<Sondage> {
-    return this.http.post<Sondage>(`${this.apiUrl}/create`, sondage);
+    const headers = this.getAuthHeaders(); 
+    return this.http.post<Sondage>(`${this.apiUrl}/create`, sondage, { headers });
   }
-  
 
   deleteSondage(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const headers = this.getAuthHeaders();  
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 
   approveSondage(id: number, endDate: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/approve/${id}`, { endDate });
+    const headers = this.getAuthHeaders();  
+    return this.http.put(`${this.apiUrl}/approve/${id}`, { endDate }, { headers });
   }
-  
-  
 
   startLive(sondageId: number, liveUrl: string): Observable<Sondage> {
+    const headers = this.getAuthHeaders();
+  
+    const headersWithContentType = headers.set('Content-Type', 'text/plain');
+  
     return this.http.put<Sondage>(`${this.apiUrl}/${sondageId}/start-live`, liveUrl, {
-      headers: { 'Content-Type': 'text/plain' }
+      headers: headersWithContentType
     });
   }
   

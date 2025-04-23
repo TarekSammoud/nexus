@@ -5,6 +5,10 @@ import { LikeService } from '../../core/services/community/like.service';
 import { Publication } from '../../core/entities/community/publication';
 import { Commentaire } from '../../core/entities/community/commentaire';
 import { ToastrService } from 'ngx-toastr';
+import { TokenService } from 'src/app/core/services/user-management/token.service';  
+import {  HttpHeaders } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-publication-list',
@@ -20,25 +24,39 @@ export class PublicationListComponent implements OnInit {
   likeCounts: { [key: number]: number } = {};
   userLiked: { [key: number]: boolean } = {};
   searchTerm: string = '';
-  userId: number = 1;
+  userId: number | null = null;
 
   constructor(
     private communityService: CommunityService,
     private commentaireService: CommentaireService,
     private likeService: LikeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tokenService: TokenService  
+
   ) {}
 
   ngOnInit(): void {
+    // Récupérer le userId depuis le token JWT
+    this.userId = TokenService.getUserId();  
+    if (!this.userId) {
+      this.toastr.error('Utilisateur non authentifié.');
+      return;  
+    }
+
     this.loadPublications();
   }
 
   loadPublications(): void {
-    this.communityService.getPublicationsVisibles().subscribe({
+    const token = localStorage.getItem('auth_token');  // Récupérer le token
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);  // Ajouter le token dans les en-têtes
+    }
+  
+    this.communityService.getPublicationsVisibles(headers).subscribe({
       next: (data: Publication[]) => {
-        console.log('loadPublications appelé');
         this.publications = data;
-        console.log('Publications reçues : ', data);
         this.publications.forEach(pub => {
           this.showCommentForm[pub.id] = false;
           this.newCommentContent[pub.id] = '';
@@ -53,9 +71,7 @@ export class PublicationListComponent implements OnInit {
   }
   
   
-  
-
-
+  // Chargement des commentaires pour chaque publication
   loadCommentaires(pubId: number): void {
     this.commentaireService.getCommentairesByPublicationId(pubId).subscribe({
       next: (comments: Commentaire[]) => {
@@ -67,26 +83,38 @@ export class PublicationListComponent implements OnInit {
     });
   }
 
+  // Chargement des likes pour chaque publication
   loadLikes(pubId: number): void {
+    if (this.userId === null) {
+      this.toastr.error('Utilisateur non authentifié.');
+      return; // Arrêter si l'utilisateur n'est pas authentifié
+    }
+  
     this.likeService.countLikes(pubId).subscribe({
       next: (count) => this.likeCounts[pubId] = count,
       error: () => this.likeCounts[pubId] = 0
     });
-
+  
     this.likeService.checkIfUserLiked(this.userId, pubId).subscribe({
       next: (liked) => this.userLiked[pubId] = liked,
       error: () => this.userLiked[pubId] = false
     });
   }
 
+  
   toggleLike(pubId: number): void {
+    if (this.userId === null) {
+      this.toastr.error('Utilisateur non authentifié.');
+      return; 
+    }
+  
     if (this.userLiked[pubId]) return;
-
+  
     const likeData = {
-      user: { id: this.userId },
+      user: { id: this.userId }, 
       publication: { id: pubId }
     };
-
+  
     this.likeService.addLike(likeData).subscribe({
       next: () => {
         this.userLiked[pubId] = true;
@@ -98,11 +126,12 @@ export class PublicationListComponent implements OnInit {
       }
     });
   }
-
+  // Toggle visibility du formulaire de commentaire
   toggleCommentForm(pubId: number): void {
     this.showCommentForm[pubId] = !this.showCommentForm[pubId];
   }
 
+  // Ajouter un commentaire
   addComment(pubId: number): void {
     const content = this.newCommentContent[pubId]?.trim();
     if (!content) {
@@ -132,6 +161,7 @@ export class PublicationListComponent implements OnInit {
     });
   }
 
+  // Supprimer une publication
   deletePublication(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette publication ?')) {
       this.communityService.deletePublication(id).subscribe({
@@ -147,6 +177,7 @@ export class PublicationListComponent implements OnInit {
     }
   }
 
+  // Supprimer un commentaire
   deleteComment(pubId: number | undefined, commentId: number): void {
     if (!pubId) return;
 
@@ -164,10 +195,12 @@ export class PublicationListComponent implements OnInit {
     }
   }
 
+  // Vérifier si une publication a des commentaires
   hasComments(pubId: number): boolean {
     return !!this.commentsByPublication[pubId]?.length;
   }
 
+  // Epingler ou désépingler une publication
   togglePin(pub: Publication): void {
     const updated = { ...pub, pinned: !pub.pinned };
 
@@ -183,14 +216,10 @@ export class PublicationListComponent implements OnInit {
     });
   }
 
-
-
-  
-
-
+  // Filtrer les publications en fonction du terme de recherche
   get filteredPublications(): Publication[] {
     if (!this.searchTerm.trim()) return this.publications;
-  
+
     const term = this.searchTerm.toLowerCase();
     return this.publications.filter(pub =>
       pub.title?.toLowerCase().includes(term) ||
@@ -200,6 +229,4 @@ export class PublicationListComponent implements OnInit {
       pub.user?.lastName?.toLowerCase().includes(term)
     );
   }
-  
-
 }
