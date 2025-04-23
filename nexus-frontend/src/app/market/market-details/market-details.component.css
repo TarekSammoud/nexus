@@ -1,0 +1,35 @@
+.market-panel-header {
+  background: #1e1e1e;
+  color: white;
+}
+
+.text-glow-blue {
+  color: #c4e0ff;
+  text-shadow: 0 0 6px #45aaf2, 0 0 10px #1b6cc9;
+}
+
+.table-header-dark {
+  background: #2a2a2a;
+  color: #cfd9e2;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-action {
+  background-color: #2e2e2e;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-action:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.pagination .ngx-pagination {
+  color: white;
+}

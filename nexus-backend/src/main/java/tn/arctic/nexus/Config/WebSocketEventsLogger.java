@@ -1,4 +1,4 @@
-package tn.arctic.nexus.config;
+package tn.arctic.nexus.Config;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;

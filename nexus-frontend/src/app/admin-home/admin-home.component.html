@@ -53,6 +53,19 @@
       </div>
 
       <!-- Support Management Dropdown -->
+<!-- Jam Dropdown -->
+<div class="dropdown-section border-top border-secondary mt-3 pt-3">
+  <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
+     href="javascript:void(0)"
+     (click)="toggleMarketDropdown()">
+    <span><i class="fas fa-puzzle-piece me-2"></i>Market-Listing</span>
+    <i class="fas" [ngClass]="{ 'fa-chevron-down': !MarketDropdownOpen, 'fa-chevron-up': MarketDropdownOpen }"></i>
+  </a>
+  <div *ngIf="MarketDropdownOpen" class="submenu ps-4">
+    <a class="d-block py-2 text-white" routerLink="/market-details" routerLinkActive="active"><i class="fas fa-crown me-2 text-warning"></i>market</a>
+  </div>
+</div>
+      <!-- Support Dropdown -->
       <div class="dropdown-section">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -122,6 +135,9 @@
   <!-- Main Content Area -->
   <div class="flex-grow-1 p-4 overflow-auto">
     <router-outlet></router-outlet>
+
+
+
   </div>
 
 </div>

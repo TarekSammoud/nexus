@@ -1,4 +1,4 @@
-package tn.arctic.nexus.config;
+package tn.arctic.nexus.Config;
 
 
 import org.springframework.http.server.ServerHttpRequest;

@@ -1,0 +1,3484 @@
+{
+  "users": [
+    {
+      "user_id": 1,
+      "username": "qhayden"
+    },
+    {
+      "user_id": 2,
+      "username": "ahampton"
+    },
+    {
+      "user_id": 3,
+      "username": "marktaylor"
+    },
+    {
+      "user_id": 4,
+      "username": "anthonypowers"
+    },
+    {
+      "user_id": 5,
+      "username": "emilywall"
+    },
+    {
+      "user_id": 6,
+      "username": "emiranda"
+    },
+    {
+      "user_id": 7,
+      "username": "kelsey54"
+    },
+    {
+      "user_id": 8,
+      "username": "yjenkins"
+    },
+    {
+      "user_id": 9,
+      "username": "stewartlynn"
+    },
+    {
+      "user_id": 10,
+      "username": "handrade"
+    },
+    {
+      "user_id": 11,
+      "username": "christine19"
+    },
+    {
+      "user_id": 12,
+      "username": "brownjennifer"
+    },
+    {
+      "user_id": 13,
+      "username": "erika68"
+    },
+    {
+      "user_id": 14,
+      "username": "stephanie61"
+    },
+    {
+      "user_id": 15,
+      "username": "kennedyeric"
+    },
+    {
+      "user_id": 16,
+      "username": "cookmaria"
+    },
+    {
+      "user_id": 17,
+      "username": "lisa15"
+    },
+    {
+      "user_id": 18,
+      "username": "kylecollins"
+    },
+    {
+      "user_id": 19,
+      "username": "fdavis"
+    },
+    {
+      "user_id": 20,
+      "username": "sherri09"
+    },
+    {
+      "user_id": 21,
+      "username": "megan90"
+    },
+    {
+      "user_id": 22,
+      "username": "benjamin24"
+    },
+    {
+      "user_id": 23,
+      "username": "marcia80"
+    },
+    {
+      "user_id": 24,
+      "username": "owaller"
+    },
+    {
+      "user_id": 25,
+      "username": "edwardsnyder"
+    },
+    {
+      "user_id": 26,
+      "username": "teresa90"
+    },
+    {
+      "user_id": 27,
+      "username": "michele48"
+    },
+    {
+      "user_id": 28,
+      "username": "fpatrick"
+    },
+    {
+      "user_id": 29,
+      "username": "jacksonvincent"
+    },
+    {
+      "user_id": 30,
+      "username": "everettjohn"
+    }
+  ],
+  "market_listings": [
+    {
+      "listing_id": 100,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "starter",
+        "powerful",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 101,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Wand",
+      "rarity": "Rare",
+      "tags": [
+        "starter",
+        "arcane",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 102,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 103,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 104,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "starter",
+        "arcane",
+        "melee",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 105,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "magic",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 106,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Outfit",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 107,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 108,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Outfit",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "powerful",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 109,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 110,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "heavy",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 111,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Gun",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 112,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Gun",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "stealth",
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 113,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 114,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "starter",
+        "arcane",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 115,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Shield",
+      "rarity": "Epic",
+      "tags": [
+        "melee",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 116,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "magic",
+        "melee",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 117,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "light",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 118,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "light",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 119,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "arcane",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 120,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "defense",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 121,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 122,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "stealth",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 123,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 124,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Outfit",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "starter",
+        "defense",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 125,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "ranged",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 126,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "heavy",
+        "melee",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 127,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Legendary",
+      "tags": [
+        "powerful",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 128,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "magic",
+        "light",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 129,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Rare",
+      "tags": [
+        "melee",
+        "stealth",
+        "light",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 130,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 131,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "defense",
+        "starter",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 132,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "defense",
+        "heavy",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 133,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "magic",
+        "stealth",
+        "defense",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 134,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Shield",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "starter",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 135,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Gun",
+      "rarity": "Rare",
+      "tags": [
+        "heavy",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 136,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Potion",
+      "rarity": "Common",
+      "tags": [
+        "defense",
+        "arcane",
+        "magic",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 137,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "heavy",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 138,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "ranged",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 139,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 140,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 141,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Shield",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "heavy",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 142,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Gun",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 143,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 144,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "melee",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 145,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "light",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 146,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "defense",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 147,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 148,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "melee",
+        "magic",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 149,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "heavy",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 150,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 151,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "heavy",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 152,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "powerful",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 153,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Shield",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "melee",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 154,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Gun",
+      "rarity": "Epic",
+      "tags": [
+        "starter",
+        "heavy",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 155,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "ranged",
+        "starter",
+        "magic",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 156,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 157,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Shield",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 158,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 159,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 160,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "heavy",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 161,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Armor",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "defense",
+        "stealth",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 162,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "heavy",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 163,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "powerful",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 164,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Bow",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "stealth",
+        "powerful",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 165,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Epic",
+      "tags": [
+        "heavy",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 166,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "light",
+        "melee",
+        "stealth",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 167,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "melee",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 168,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "melee",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 169,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "arcane",
+        "ranged",
+        "magic",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 170,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Armor",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 171,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Potion",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 172,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "melee",
+        "starter",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 173,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Epic",
+      "tags": [
+        "heavy",
+        "powerful",
+        "light",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 174,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 175,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 176,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "melee",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 177,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "ranged",
+        "arcane",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 178,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 179,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "powerful",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 180,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "melee",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 181,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "ranged",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 182,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 183,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "starter",
+        "arcane",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 184,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "arcane",
+        "ranged",
+        "light",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 185,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "starter",
+        "arcane",
+        "defense",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 186,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Epic",
+      "tags": [
+        "arcane",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 187,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "arcane",
+        "defense",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 188,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "ranged",
+        "magic",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 189,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Shield",
+      "rarity": "Legendary",
+      "tags": [
+        "light",
+        "melee",
+        "magic",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 190,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "arcane",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 191,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Rare",
+      "tags": [
+        "light",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 192,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "ranged",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 193,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Potion",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "heavy",
+        "defense",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 194,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Shield",
+      "rarity": "Epic",
+      "tags": [
+        "arcane",
+        "powerful",
+        "stealth",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 195,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "magic",
+        "heavy",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 196,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "magic",
+        "starter",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 197,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Rare",
+      "tags": [
+        "powerful",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 198,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Rare",
+      "tags": [
+        "starter",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 199,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Shield",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 200,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "heavy",
+        "magic",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 201,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Shield",
+      "rarity": "Common",
+      "tags": [
+        "arcane",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 202,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "heavy",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 203,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "light",
+        "powerful",
+        "defense",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 204,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "melee",
+        "heavy",
+        "starter",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 205,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Gun",
+      "rarity": "Epic",
+      "tags": [
+        "stealth",
+        "starter",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 206,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "stealth",
+        "magic",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 207,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 208,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 209,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "defense",
+        "stealth",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 210,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "light",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 211,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "melee",
+        "defense",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 212,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "magic",
+        "arcane",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 213,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Armor",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "starter",
+        "arcane",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 214,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "heavy",
+        "light",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 215,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "ranged",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 216,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Gun",
+      "rarity": "Epic",
+      "tags": [
+        "heavy",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 217,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 218,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "ranged",
+        "starter",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 219,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Common",
+      "tags": [
+        "magic",
+        "arcane",
+        "light",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 220,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "melee",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 221,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "light",
+        "starter",
+        "heavy",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 222,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 223,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "light",
+        "powerful",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 224,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 225,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "light",
+        "starter",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 226,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Shield",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 227,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "powerful",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 228,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "melee",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 229,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "melee",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 230,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Epic",
+      "tags": [
+        "arcane",
+        "stealth",
+        "powerful",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 231,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "melee",
+        "light",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 232,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Potion",
+      "rarity": "Rare",
+      "tags": [
+        "starter",
+        "stealth",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 233,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Shield",
+      "rarity": "Common",
+      "tags": [
+        "magic",
+        "heavy",
+        "starter",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 234,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 235,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "ranged",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 236,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "heavy",
+        "melee",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 237,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "melee",
+        "arcane",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 238,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Shield",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 239,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "melee",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 240,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "light",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 241,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "starter",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 242,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "magic",
+        "powerful",
+        "light",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 243,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "melee",
+        "light",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 244,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "melee",
+        "light",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 245,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Common",
+      "tags": [
+        "stealth",
+        "heavy",
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 246,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Rare",
+      "tags": [
+        "powerful",
+        "melee",
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 247,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Axe",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "magic",
+        "starter",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 248,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "magic",
+        "light",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 249,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Bow",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "heavy",
+        "powerful",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 250,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Potion",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "arcane",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 251,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Wand",
+      "rarity": "Epic",
+      "tags": [
+        "stealth",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 252,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "stealth",
+        "light",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 253,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 254,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "arcane",
+        "stealth",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 255,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "ranged",
+        "starter",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 256,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "stealth",
+        "powerful",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 257,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Potion",
+      "rarity": "Common",
+      "tags": [
+        "melee",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 258,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Axe",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "light",
+        "starter",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 259,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Epic",
+      "tags": [
+        "arcane",
+        "starter",
+        "light"
+      ]
+    },
+    {
+      "listing_id": 260,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Legendary",
+      "tags": [
+        "starter",
+        "heavy",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 261,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Outfit",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "defense",
+        "light",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 262,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Epic",
+      "tags": [
+        "magic",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 263,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Common",
+      "tags": [
+        "stealth",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 264,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Shield",
+      "rarity": "Epic",
+      "tags": [
+        "arcane",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 265,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "ranged",
+        "stealth",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 266,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "stealth",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 267,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "heavy",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 268,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 269,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Armor",
+      "rarity": "Common",
+      "tags": [
+        "stealth",
+        "light",
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 270,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 271,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Epic",
+      "tags": [
+        "defense",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 272,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Sword",
+      "rarity": "Common",
+      "tags": [
+        "melee",
+        "heavy",
+        "magic",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 273,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "magic",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 274,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "ranged",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 275,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "powerful",
+        "light",
+        "stealth",
+        "defense"
+      ]
+    },
+    {
+      "listing_id": 276,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Potion",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "arcane",
+        "defense",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 277,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Armor",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "defense",
+        "powerful",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 278,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Axe",
+      "rarity": "Common",
+      "tags": [
+        "starter",
+        "arcane",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 279,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Sword",
+      "rarity": "Legendary",
+      "tags": [
+        "ranged",
+        "starter",
+        "defense",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 280,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Wand",
+      "rarity": "Rare",
+      "tags": [
+        "defense",
+        "starter",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 281,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Shield",
+      "rarity": "Common",
+      "tags": [
+        "melee",
+        "starter",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 282,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Sword",
+      "rarity": "Rare",
+      "tags": [
+        "powerful",
+        "defense",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 283,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Epic",
+      "tags": [
+        "ranged",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 284,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "heavy",
+        "stealth",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 285,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "powerful",
+        "magic",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 286,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "melee",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 287,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Gun",
+      "rarity": "Rare",
+      "tags": [
+        "ranged",
+        "starter",
+        "magic"
+      ]
+    },
+    {
+      "listing_id": 288,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Potion",
+      "rarity": "Rare",
+      "tags": [
+        "ranged",
+        "starter",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 289,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "defense",
+        "powerful"
+      ]
+    },
+    {
+      "listing_id": 290,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "stealth",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 291,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Outfit",
+      "rarity": "Rare",
+      "tags": [
+        "magic",
+        "arcane",
+        "heavy"
+      ]
+    },
+    {
+      "listing_id": 292,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Legendary",
+      "tags": [
+        "light",
+        "magic",
+        "powerful",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 293,
+      "game": "God of War",
+      "genre": "Action",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "arcane",
+        "defense",
+        "stealth"
+      ]
+    },
+    {
+      "listing_id": 294,
+      "game": "Fortnite",
+      "genre": "Battle Royale",
+      "item_type": "Axe",
+      "rarity": "Rare",
+      "tags": [
+        "arcane",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 295,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Outfit",
+      "rarity": "Common",
+      "tags": [
+        "powerful",
+        "ranged",
+        "starter"
+      ]
+    },
+    {
+      "listing_id": 296,
+      "game": "Zelda",
+      "genre": "Fantasy",
+      "item_type": "Gun",
+      "rarity": "Common",
+      "tags": [
+        "magic",
+        "light",
+        "starter",
+        "ranged"
+      ]
+    },
+    {
+      "listing_id": 297,
+      "game": "Overwatch",
+      "genre": "Shooter",
+      "item_type": "Bow",
+      "rarity": "Common",
+      "tags": [
+        "light",
+        "arcane"
+      ]
+    },
+    {
+      "listing_id": 298,
+      "game": "Apex Legends",
+      "genre": "Shooter",
+      "item_type": "Wand",
+      "rarity": "Epic",
+      "tags": [
+        "powerful",
+        "arcane",
+        "melee"
+      ]
+    },
+    {
+      "listing_id": 299,
+      "game": "Tomb Raider",
+      "genre": "Adventure",
+      "item_type": "Bow",
+      "rarity": "Legendary",
+      "tags": [
+        "heavy",
+        "ranged",
+        "light",
+        "stealth"
+      ]
+    }
+  ],
+  "bids": [
+    {
+      "user_id": 1,
+      "listing_id": 231
+    },
+    {
+      "user_id": 1,
+      "listing_id": 111
+    },
+    {
+      "user_id": 1,
+      "listing_id": 121
+    },
+    {
+      "user_id": 1,
+      "listing_id": 195
+    },
+    {
+      "user_id": 1,
+      "listing_id": 265
+    },
+    {
+      "user_id": 1,
+      "listing_id": 250
+    },
+    {
+      "user_id": 1,
+      "listing_id": 202
+    },
+    {
+      "user_id": 1,
+      "listing_id": 201
+    },
+    {
+      "user_id": 1,
+      "listing_id": 182
+    },
+    {
+      "user_id": 1,
+      "listing_id": 180
+    },
+    {
+      "user_id": 2,
+      "listing_id": 117
+    },
+    {
+      "user_id": 2,
+      "listing_id": 299
+    },
+    {
+      "user_id": 2,
+      "listing_id": 146
+    },
+    {
+      "user_id": 2,
+      "listing_id": 281
+    },
+    {
+      "user_id": 2,
+      "listing_id": 155
+    },
+    {
+      "user_id": 2,
+      "listing_id": 255
+    },
+    {
+      "user_id": 2,
+      "listing_id": 154
+    },
+    {
+      "user_id": 2,
+      "listing_id": 181
+    },
+    {
+      "user_id": 3,
+      "listing_id": 136
+    },
+    {
+      "user_id": 3,
+      "listing_id": 116
+    },
+    {
+      "user_id": 3,
+      "listing_id": 205
+    },
+    {
+      "user_id": 3,
+      "listing_id": 238
+    },
+    {
+      "user_id": 3,
+      "listing_id": 190
+    },
+    {
+      "user_id": 3,
+      "listing_id": 122
+    },
+    {
+      "user_id": 3,
+      "listing_id": 171
+    },
+    {
+      "user_id": 3,
+      "listing_id": 260
+    },
+    {
+      "user_id": 4,
+      "listing_id": 121
+    },
+    {
+      "user_id": 4,
+      "listing_id": 106
+    },
+    {
+      "user_id": 4,
+      "listing_id": 156
+    },
+    {
+      "user_id": 4,
+      "listing_id": 113
+    },
+    {
+      "user_id": 4,
+      "listing_id": 196
+    },
+    {
+      "user_id": 4,
+      "listing_id": 195
+    },
+    {
+      "user_id": 4,
+      "listing_id": 122
+    },
+    {
+      "user_id": 4,
+      "listing_id": 245
+    },
+    {
+      "user_id": 4,
+      "listing_id": 189
+    },
+    {
+      "user_id": 4,
+      "listing_id": 153
+    },
+    {
+      "user_id": 5,
+      "listing_id": 137
+    },
+    {
+      "user_id": 5,
+      "listing_id": 220
+    },
+    {
+      "user_id": 5,
+      "listing_id": 230
+    },
+    {
+      "user_id": 5,
+      "listing_id": 110
+    },
+    {
+      "user_id": 5,
+      "listing_id": 247
+    },
+    {
+      "user_id": 5,
+      "listing_id": 150
+    },
+    {
+      "user_id": 6,
+      "listing_id": 153
+    },
+    {
+      "user_id": 6,
+      "listing_id": 161
+    },
+    {
+      "user_id": 6,
+      "listing_id": 279
+    },
+    {
+      "user_id": 6,
+      "listing_id": 131
+    },
+    {
+      "user_id": 6,
+      "listing_id": 255
+    },
+    {
+      "user_id": 6,
+      "listing_id": 259
+    },
+    {
+      "user_id": 6,
+      "listing_id": 117
+    },
+    {
+      "user_id": 7,
+      "listing_id": 188
+    },
+    {
+      "user_id": 7,
+      "listing_id": 252
+    },
+    {
+      "user_id": 7,
+      "listing_id": 108
+    },
+    {
+      "user_id": 7,
+      "listing_id": 109
+    },
+    {
+      "user_id": 7,
+      "listing_id": 110
+    },
+    {
+      "user_id": 7,
+      "listing_id": 153
+    },
+    {
+      "user_id": 8,
+      "listing_id": 290
+    },
+    {
+      "user_id": 8,
+      "listing_id": 204
+    },
+    {
+      "user_id": 8,
+      "listing_id": 283
+    },
+    {
+      "user_id": 8,
+      "listing_id": 103
+    },
+    {
+      "user_id": 8,
+      "listing_id": 193
+    },
+    {
+      "user_id": 8,
+      "listing_id": 161
+    },
+    {
+      "user_id": 8,
+      "listing_id": 274
+    },
+    {
+      "user_id": 8,
+      "listing_id": 155
+    },
+    {
+      "user_id": 9,
+      "listing_id": 283
+    },
+    {
+      "user_id": 9,
+      "listing_id": 121
+    },
+    {
+      "user_id": 9,
+      "listing_id": 237
+    },
+    {
+      "user_id": 9,
+      "listing_id": 247
+    },
+    {
+      "user_id": 9,
+      "listing_id": 141
+    },
+    {
+      "user_id": 9,
+      "listing_id": 137
+    },
+    {
+      "user_id": 9,
+      "listing_id": 221
+    },
+    {
+      "user_id": 9,
+      "listing_id": 267
+    },
+    {
+      "user_id": 9,
+      "listing_id": 100
+    },
+    {
+      "user_id": 9,
+      "listing_id": 282
+    },
+    {
+      "user_id": 10,
+      "listing_id": 144
+    },
+    {
+      "user_id": 10,
+      "listing_id": 196
+    },
+    {
+      "user_id": 10,
+      "listing_id": 229
+    },
+    {
+      "user_id": 10,
+      "listing_id": 226
+    },
+    {
+      "user_id": 10,
+      "listing_id": 168
+    },
+    {
+      "user_id": 10,
+      "listing_id": 291
+    },
+    {
+      "user_id": 10,
+      "listing_id": 100
+    },
+    {
+      "user_id": 11,
+      "listing_id": 201
+    },
+    {
+      "user_id": 11,
+      "listing_id": 227
+    },
+    {
+      "user_id": 11,
+      "listing_id": 295
+    },
+    {
+      "user_id": 11,
+      "listing_id": 120
+    },
+    {
+      "user_id": 11,
+      "listing_id": 287
+    },
+    {
+      "user_id": 11,
+      "listing_id": 147
+    },
+    {
+      "user_id": 11,
+      "listing_id": 291
+    },
+    {
+      "user_id": 11,
+      "listing_id": 228
+    },
+    {
+      "user_id": 12,
+      "listing_id": 167
+    },
+    {
+      "user_id": 12,
+      "listing_id": 101
+    },
+    {
+      "user_id": 12,
+      "listing_id": 135
+    },
+    {
+      "user_id": 12,
+      "listing_id": 133
+    },
+    {
+      "user_id": 12,
+      "listing_id": 255
+    },
+    {
+      "user_id": 12,
+      "listing_id": 218
+    },
+    {
+      "user_id": 12,
+      "listing_id": 276
+    },
+    {
+      "user_id": 13,
+      "listing_id": 197
+    },
+    {
+      "user_id": 13,
+      "listing_id": 117
+    },
+    {
+      "user_id": 13,
+      "listing_id": 273
+    },
+    {
+      "user_id": 13,
+      "listing_id": 108
+    },
+    {
+      "user_id": 13,
+      "listing_id": 176
+    },
+    {
+      "user_id": 13,
+      "listing_id": 110
+    },
+    {
+      "user_id": 13,
+      "listing_id": 250
+    },
+    {
+      "user_id": 13,
+      "listing_id": 276
+    },
+    {
+      "user_id": 13,
+      "listing_id": 296
+    },
+    {
+      "user_id": 14,
+      "listing_id": 245
+    },
+    {
+      "user_id": 14,
+      "listing_id": 101
+    },
+    {
+      "user_id": 14,
+      "listing_id": 280
+    },
+    {
+      "user_id": 14,
+      "listing_id": 231
+    },
+    {
+      "user_id": 14,
+      "listing_id": 108
+    },
+    {
+      "user_id": 14,
+      "listing_id": 228
+    },
+    {
+      "user_id": 14,
+      "listing_id": 208
+    },
+    {
+      "user_id": 14,
+      "listing_id": 197
+    },
+    {
+      "user_id": 14,
+      "listing_id": 149
+    },
+    {
+      "user_id": 15,
+      "listing_id": 171
+    },
+    {
+      "user_id": 15,
+      "listing_id": 183
+    },
+    {
+      "user_id": 15,
+      "listing_id": 195
+    },
+    {
+      "user_id": 15,
+      "listing_id": 119
+    },
+    {
+      "user_id": 15,
+      "listing_id": 229
+    },
+    {
+      "user_id": 15,
+      "listing_id": 153
+    },
+    {
+      "user_id": 15,
+      "listing_id": 164
+    },
+    {
+      "user_id": 15,
+      "listing_id": 162
+    },
+    {
+      "user_id": 16,
+      "listing_id": 253
+    },
+    {
+      "user_id": 16,
+      "listing_id": 147
+    },
+    {
+      "user_id": 16,
+      "listing_id": 151
+    },
+    {
+      "user_id": 16,
+      "listing_id": 149
+    },
+    {
+      "user_id": 16,
+      "listing_id": 152
+    },
+    {
+      "user_id": 16,
+      "listing_id": 270
+    },
+    {
+      "user_id": 16,
+      "listing_id": 115
+    },
+    {
+      "user_id": 16,
+      "listing_id": 150
+    },
+    {
+      "user_id": 16,
+      "listing_id": 178
+    },
+    {
+      "user_id": 17,
+      "listing_id": 228
+    },
+    {
+      "user_id": 17,
+      "listing_id": 141
+    },
+    {
+      "user_id": 17,
+      "listing_id": 293
+    },
+    {
+      "user_id": 17,
+      "listing_id": 231
+    },
+    {
+      "user_id": 17,
+      "listing_id": 270
+    },
+    {
+      "user_id": 17,
+      "listing_id": 190
+    },
+    {
+      "user_id": 17,
+      "listing_id": 225
+    },
+    {
+      "user_id": 17,
+      "listing_id": 235
+    },
+    {
+      "user_id": 18,
+      "listing_id": 149
+    },
+    {
+      "user_id": 18,
+      "listing_id": 219
+    },
+    {
+      "user_id": 18,
+      "listing_id": 110
+    },
+    {
+      "user_id": 18,
+      "listing_id": 116
+    },
+    {
+      "user_id": 18,
+      "listing_id": 252
+    },
+    {
+      "user_id": 18,
+      "listing_id": 166
+    },
+    {
+      "user_id": 18,
+      "listing_id": 151
+    },
+    {
+      "user_id": 19,
+      "listing_id": 213
+    },
+    {
+      "user_id": 19,
+      "listing_id": 209
+    },
+    {
+      "user_id": 19,
+      "listing_id": 120
+    },
+    {
+      "user_id": 19,
+      "listing_id": 144
+    },
+    {
+      "user_id": 19,
+      "listing_id": 125
+    },
+    {
+      "user_id": 19,
+      "listing_id": 287
+    },
+    {
+      "user_id": 19,
+      "listing_id": 211
+    },
+    {
+      "user_id": 20,
+      "listing_id": 113
+    },
+    {
+      "user_id": 20,
+      "listing_id": 228
+    },
+    {
+      "user_id": 20,
+      "listing_id": 146
+    },
+    {
+      "user_id": 20,
+      "listing_id": 297
+    },
+    {
+      "user_id": 20,
+      "listing_id": 261
+    },
+    {
+      "user_id": 20,
+      "listing_id": 187
+    },
+    {
+      "user_id": 20,
+      "listing_id": 126
+    },
+    {
+      "user_id": 20,
+      "listing_id": 175
+    },
+    {
+      "user_id": 20,
+      "listing_id": 200
+    },
+    {
+      "user_id": 21,
+      "listing_id": 241
+    },
+    {
+      "user_id": 21,
+      "listing_id": 285
+    },
+    {
+      "user_id": 21,
+      "listing_id": 147
+    },
+    {
+      "user_id": 21,
+      "listing_id": 118
+    },
+    {
+      "user_id": 21,
+      "listing_id": 208
+    },
+    {
+      "user_id": 22,
+      "listing_id": 227
+    },
+    {
+      "user_id": 22,
+      "listing_id": 161
+    },
+    {
+      "user_id": 22,
+      "listing_id": 143
+    },
+    {
+      "user_id": 22,
+      "listing_id": 239
+    },
+    {
+      "user_id": 22,
+      "listing_id": 157
+    },
+    {
+      "user_id": 22,
+      "listing_id": 136
+    },
+    {
+      "user_id": 22,
+      "listing_id": 135
+    },
+    {
+      "user_id": 23,
+      "listing_id": 240
+    },
+    {
+      "user_id": 23,
+      "listing_id": 171
+    },
+    {
+      "user_id": 23,
+      "listing_id": 130
+    },
+    {
+      "user_id": 23,
+      "listing_id": 205
+    },
+    {
+      "user_id": 23,
+      "listing_id": 159
+    },
+    {
+      "user_id": 23,
+      "listing_id": 165
+    },
+    {
+      "user_id": 23,
+      "listing_id": 241
+    },
+    {
+      "user_id": 23,
+      "listing_id": 134
+    },
+    {
+      "user_id": 23,
+      "listing_id": 243
+    },
+    {
+      "user_id": 23,
+      "listing_id": 256
+    },
+    {
+      "user_id": 24,
+      "listing_id": 101
+    },
+    {
+      "user_id": 24,
+      "listing_id": 244
+    },
+    {
+      "user_id": 24,
+      "listing_id": 294
+    },
+    {
+      "user_id": 24,
+      "listing_id": 245
+    },
+    {
+      "user_id": 24,
+      "listing_id": 165
+    },
+    {
+      "user_id": 24,
+      "listing_id": 275
+    },
+    {
+      "user_id": 24,
+      "listing_id": 182
+    },
+    {
+      "user_id": 24,
+      "listing_id": 288
+    },
+    {
+      "user_id": 24,
+      "listing_id": 212
+    },
+    {
+      "user_id": 24,
+      "listing_id": 268
+    },
+    {
+      "user_id": 25,
+      "listing_id": 248
+    },
+    {
+      "user_id": 25,
+      "listing_id": 251
+    },
+    {
+      "user_id": 25,
+      "listing_id": 105
+    },
+    {
+      "user_id": 25,
+      "listing_id": 166
+    },
+    {
+      "user_id": 25,
+      "listing_id": 253
+    },
+    {
+      "user_id": 25,
+      "listing_id": 197
+    },
+    {
+      "user_id": 25,
+      "listing_id": 130
+    },
+    {
+      "user_id": 25,
+      "listing_id": 165
+    },
+    {
+      "user_id": 25,
+      "listing_id": 284
+    },
+    {
+      "user_id": 25,
+      "listing_id": 283
+    },
+    {
+      "user_id": 26,
+      "listing_id": 278
+    },
+    {
+      "user_id": 26,
+      "listing_id": 298
+    },
+    {
+      "user_id": 26,
+      "listing_id": 222
+    },
+    {
+      "user_id": 26,
+      "listing_id": 142
+    },
+    {
+      "user_id": 26,
+      "listing_id": 205
+    },
+    {
+      "user_id": 26,
+      "listing_id": 237
+    },
+    {
+      "user_id": 26,
+      "listing_id": 129
+    },
+    {
+      "user_id": 27,
+      "listing_id": 209
+    },
+    {
+      "user_id": 27,
+      "listing_id": 206
+    },
+    {
+      "user_id": 27,
+      "listing_id": 116
+    },
+    {
+      "user_id": 27,
+      "listing_id": 253
+    },
+    {
+      "user_id": 27,
+      "listing_id": 170
+    },
+    {
+      "user_id": 27,
+      "listing_id": 137
+    },
+    {
+      "user_id": 28,
+      "listing_id": 168
+    },
+    {
+      "user_id": 28,
+      "listing_id": 173
+    },
+    {
+      "user_id": 28,
+      "listing_id": 236
+    },
+    {
+      "user_id": 28,
+      "listing_id": 193
+    },
+    {
+      "user_id": 28,
+      "listing_id": 101
+    },
+    {
+      "user_id": 28,
+      "listing_id": 191
+    },
+    {
+      "user_id": 28,
+      "listing_id": 167
+    },
+    {
+      "user_id": 28,
+      "listing_id": 181
+    },
+    {
+      "user_id": 28,
+      "listing_id": 234
+    },
+    {
+      "user_id": 28,
+      "listing_id": 162
+    },
+    {
+      "user_id": 29,
+      "listing_id": 238
+    },
+    {
+      "user_id": 29,
+      "listing_id": 105
+    },
+    {
+      "user_id": 29,
+      "listing_id": 199
+    },
+    {
+      "user_id": 29,
+      "listing_id": 179
+    },
+    {
+      "user_id": 29,
+      "listing_id": 123
+    },
+    {
+      "user_id": 29,
+      "listing_id": 246
+    },
+    {
+      "user_id": 29,
+      "listing_id": 186
+    },
+    {
+      "user_id": 29,
+      "listing_id": 248
+    },
+    {
+      "user_id": 30,
+      "listing_id": 118
+    },
+    {
+      "user_id": 30,
+      "listing_id": 103
+    },
+    {
+      "user_id": 30,
+      "listing_id": 293
+    },
+    {
+      "user_id": 30,
+      "listing_id": 109
+    },
+    {
+      "user_id": 30,
+      "listing_id": 156
+    },
+    {
+      "user_id": 30,
+      "listing_id": 202
+    },
+    {
+      "user_id": 30,
+      "listing_id": 231
+    },
+    {
+      "user_id": 30,
+      "listing_id": 163
+    }
+  ]
+}

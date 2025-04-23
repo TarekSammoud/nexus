@@ -151,6 +151,7 @@ import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
 import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component';
 import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
+import { AiRecommendationComponent } from './market/ai-recommendation/ai-recommendation.component';
 
 
 
@@ -271,6 +272,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     LibraryComponent,
     JamCalendarComponent,
     TopStreamerComponent,
+    AiRecommendationComponent,
 
 
     WalletsComponent,
@@ -281,7 +283,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     NotificationBannerComponent,
     TestComponent,
     GeneratePdfComponent,
-    
+
   ],
   imports: [
     // Core Angular modules
@@ -291,7 +293,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-  
+
     // Angular Material modules
     MatButtonModule,
     MatStepperModule,
@@ -304,7 +306,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     MatProgressBarModule,
     MatTooltipModule,
     MatDialogModule,
-  
+
     // External libraries
     NgbModule,
     CarouselModule,
@@ -321,7 +323,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     NgChartsModule,
     CommonModule,
     RouterModule,
-  
+
     // App components
     GamesListComponent,
     AdminGameListComponent,
@@ -329,7 +331,7 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     GameReviewListComponent,
     GameKeyListComponent,
   ],
-  
+
 providers: [
   TokenService,
   {

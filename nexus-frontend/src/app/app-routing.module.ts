@@ -91,6 +91,8 @@ import { TestComponent } from './finance/test/test/test.component';
 import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
 
 
+import { MarketDetailsComponent } from './market/market-details/market-details.component';
+import { AiRecommendationComponent } from './market/ai-recommendation/ai-recommendation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -122,6 +124,8 @@ const routes: Routes = [
   { path: 'market/create', component: MarketCreateComponent },
   { path: 'market/edit/:id', component: MarketEditComponent },
   { path: 'market/:id/bid', component: BidComponent },
+  { path: 'market-details', component: MarketDetailsComponent },
+  { path: 'ai-recommendation', component: AiRecommendationComponent },
 
   // 🧩 Jams
   { path: 'jams', component: JamsComponent },

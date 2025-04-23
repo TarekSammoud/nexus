@@ -24,10 +24,13 @@ import { GeneratePdfComponent } from '../finance/wallet-dashboard/popUps/generat
 })
 export class AdminHomeComponent {
   constructor(private _router: Router, private modalService: NgbModal) { }
-  
+
   gamesDropdownOpen = false;   // State for games dropdown
   supportDropdownOpen = false; // State for support dropdown
   jamDropdownOpen = false;
+
+  MarketDropdownOpen=false;
+
   dropdownOpen = false;
   dropdownOpenD = false;
 
@@ -41,7 +44,10 @@ export class AdminHomeComponent {
   toggleJamDropdown() {
     this.jamDropdownOpen = !this.jamDropdownOpen;
   }
-  
+  toggleMarketDropdown() {
+    this.MarketDropdownOpen = !this.MarketDropdownOpen;
+  }
+
   toggleSupportDropdown(){
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
@@ -71,3 +77,4 @@ export class AdminHomeComponent {
     this.isCollapsed = !this.isCollapsed;
   }
 }
+
