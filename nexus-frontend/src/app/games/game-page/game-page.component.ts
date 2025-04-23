@@ -29,7 +29,8 @@ export class GamePageComponent implements OnInit {
   matchesPlatformPSP: boolean = false;
 
   OnSelectBrowser(game: Game){
-    this._router.navigate(['/games/play', game.gameFile?.mediaUrl]);
+    var url = game.gameFile?.mediaUrl?.replace(/\.zip$/, '');
+    this._router.navigate(['/games/play', url]);
   }
 
   OnSelectEmulated(game: Game){
