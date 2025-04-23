@@ -127,6 +127,52 @@ public class FtpService {
         }
     }
 
+
+
+    public byte[] downloadFileGame(String fileName,String type) throws IOException {
+        FTPClient ftpClient = new FTPClient();
+
+        String path;
+        try {
+            ftpClient.connect(FTP_SERVER, FTP_PORT);
+            ftpClient.login(FTP_USER, FTP_PASSWORD);
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            if (type.equals("full"))
+                path = FTP_UPLOAD_DIR;
+            else
+             path = FTP_UPLOAD_DIR+"/"+type;
+
+            ftpClient.changeWorkingDirectory(path);
+            System.out.println("FTP working directory: " + ftpClient.printWorkingDirectory());
+
+
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            InputStream inputStream = ftpClient.retrieveFileStream(fileName);
+            if (inputStream != null) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    byteArrayOutputStream.write(buffer, 0, bytesRead);
+                }
+                inputStream.close();
+
+                boolean success = ftpClient.completePendingCommand();
+                if (success) {
+                    return byteArrayOutputStream.toByteArray();
+                } else {
+                    throw new IOException("Failed to download file: " + fileName);
+                }
+            } else {
+                throw new IOException("File not found: " + fileName);
+            }
+        } finally {
+            ftpClient.logout();
+            ftpClient.disconnect();
+        }
+    }
     public String uploadFile(MultipartFile file) throws IOException {
         FTPClient ftpClient = new FTPClient();
 

@@ -202,6 +202,8 @@
           <button *ngIf="step === 6"
            type="submit" class="next-btn"
            (click)="open(content)" 
+           [class.disabled]="imagesFile.length == 0 || imagesFile.length > 1 ">
+
         >
            Submit</button>
           <div [ngSwitch]="step">
@@ -210,7 +212,7 @@
             <a *ngSwitchCase="1" 
                (click)="nextStep()" 
                class="next-btn" 
-               [class.disabled]="selectedPlatforms.size === 0 || gameForm.controls['platforms'].invalid || gameForm.controls['name'].invalid || gameForm.controls['price'].invalid || gameForm.controls['description'].invalid">
+               [class.disabled]="selectedPlatforms.size === 0 || selectedPlatforms.size > 1  || gameForm.controls['platforms'].invalid || gameForm.controls['name'].invalid || gameForm.controls['price'].invalid || gameForm.controls['description'].invalid">
                Next →
             </a>
           
@@ -226,7 +228,7 @@
             <a *ngSwitchCase="3" 
                (click)="nextStep()" 
                class="next-btn" 
-               [class.disabled]="ftpFiles.length === 0 "
+               [class.disabled]="imagesCover.length === 0 "
                >
               Next →
             </a>
@@ -235,6 +237,8 @@
             <a *ngSwitchCase="4" 
                (click)="nextStep()" 
                class="next-btn" 
+               [class.disabled]="imagesBanner.length === 0 "
+
                >
               Next →
             </a>
@@ -244,7 +248,7 @@
                (click)="nextStep()" 
                class="next-btn" 
       
-               [class.disabled]="filesToUpload.length === 0 "
+               [class.disabled]="imagesScreenshots.length === 0 "
                >
               Next →
             </a>

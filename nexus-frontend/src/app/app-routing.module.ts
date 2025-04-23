@@ -78,6 +78,9 @@ import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.
 import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
 import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
 import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutComponent } from './about/about.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -138,6 +141,8 @@ const routes: Routes = [
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
       { path: 'games/keys', component: GameKeyListComponent },
+      { path: 'games/create-discount/:id', component: CreateDiscountComponent },
+      { path: 'games/create-discount/:id/:discount', component: CreateDiscountComponent },
       { path: 'games/reviews', component: GameReviewListComponent },
       { path: 'games/:id', component: GamePageComponent },
       { path: 'add-new-game', component: CreateGameComponent },
@@ -189,6 +194,10 @@ const routes: Routes = [
   { path: 'keen', component: KeenGameCarouselComponent },
 
   { path: 'admin/categories', component: GameCategoriesComponent },
+  { path: 'about', component: AboutComponent },
+
+  { path: '**', component: NotFoundComponent }, 
+
 
 ];
 

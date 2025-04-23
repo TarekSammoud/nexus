@@ -1,5 +1,6 @@
 <div class="container my-5">
   <div class="row">
+    
     <!-- Game Title -->
     <div class="col-12 game-title-container">
       <h1 class="text-light" style="font-weight: 700; font-size: 50px;">{{game.name}}</h1>
@@ -172,9 +173,10 @@
     </ng-container>
   </div>
 
+  <div *ngIf="response">
   <div *ngIf="isGenerated" class="text-danger">Our system has detected a probability of {{ response.fakeness_percentage }}% that your review has been computer generated</div>
   <div *ngIf="!isGenerated" style="color: green">Our system has detected a probability of {{ response.original_percentage }}% that your review is written by a human</div>
-
+</div>
   <button type="submit" 
   [class.disabled]="reviewForm.invalid || reviewForm.pristine "
   >Submit Review</button>
@@ -197,8 +199,16 @@
       </div>
       <div class="badge bg-dark me-2 mb-2">Base Game</div>
       <!-- Game Price -->
-      <h3 class="text-light game-price">{{ game.price }} TND</h3>
-
+      <div class="price-section" *ngIf="game.price">
+        <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
+        <div class="price-details">
+          <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" alt="TND"> </span>
+          <span class="current-price" *ngIf="game.gameDiscount">
+            {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" alt="TND">
+          </span>
+          <h3 class="text-light" style="text-align: left;"  *ngIf="!game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" alt="TND"></h3>
+         </div>
+      </div>
       <!-- Buttons -->
       <div class="d-flex flex-column align-items-center gap-2">
         
@@ -209,7 +219,7 @@
         <button class="btn action-button disabled"  *ngIf="inLibrary">In Library</button>
 
         <button class="btn action-button-secondary"  *ngIf="!inLibrary">Add to Cart</button>
-        <button class="btn action-button-secondary"  *ngIf="inLibrary" >Download</button>
+        <button class="btn action-button-secondary"  *ngIf="inLibrary" (click)="downloadFile(game)" >Download</button>
         
 
         <div class="game-meta">
@@ -229,7 +239,7 @@
           <div class="meta-item">
             <span class="meta-label">Developer</span>
             <div class="meta-value">
-              <span>Unknown</span>
+              <span >{{ game.developer?.firstName }} {{ game.developer?.lastName }}</span>
             </div>
           </div>
 
@@ -237,8 +247,14 @@
             <span class="meta-label">Platforms</span>
             <div class="meta-value">
               <span>
-                <img *ngFor="let gamePlatform of game.platforms" class="platform-icon me-1 mb-1" src="assets/images/platforms/{{ gamePlatform }}.svg" alt="{{ gamePlatform }}" />
+                <img
+                  *ngFor="let platform of game.platforms"
+                  class="platform-icon me-1 mb-1"
+                  [attr.src]="'assets/images/platforms/' + platform + '.svg'"
+                  [attr.alt]="platform"
+                />
               </span>
+              
             </div>
           </div>
 

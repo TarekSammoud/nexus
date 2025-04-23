@@ -40,7 +40,7 @@ playPSPGame(romName: string): Observable<string> {
     return this.http.get<Game[]>(`${this.gamesUrl}/all-browser-games`);
   }
 
-  getEmulatedGames(): Observable<Game[]> {  // ✅ Fix the return type
+  getEmulatedGames(): Observable<Game[]> { 
 
     return this.http.get<Game[]>(`${this.gamesUrl}/all-emulated-games`);
   }
@@ -101,4 +101,7 @@ playPSPGame(romName: string): Observable<string> {
 
     return this.http.get<Game[]>(`${this.gamesUrl}/library`, { headers });
   }
+
+
+  
 }

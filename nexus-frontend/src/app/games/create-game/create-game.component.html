@@ -172,7 +172,26 @@
       </div>
             </div>
 
-            <div *ngIf="step === 6" >
+            <div *ngIf="step === 6" class="form-group">
+              <label>Game File</label>
+              <br>
+              <div class="image-grid">
+      
+                <div *ngFor="let image of imagesFile; index as i" class="image-wrapper" >
+                  <img src="assets/img/tar.png" height="200" class="preview-image">
+                  <button type="button" class="remove-btn" (click)="removeImageFile(i)">✖</button>
+                </div>
+      
+              <br/>
+            </div>
+      
+            <div class="file-upload-wrapper">
+              <input type="file" id="fileInput" (change)="onSelectFileFile($event)" multiple hidden>
+              <label for="fileInput" class="file-upload-btn">+ Add Files</label>
+            </div>
+                  </div>
+
+            <div *ngIf="step === 7" >
               <!-- System Requirements -->
               <div class="form-group">
                 <label for="systemRequirements">System Requirements</label>
@@ -310,7 +329,7 @@
 
 
       
-        <button *ngIf="step === 6"
+        <button *ngIf="step === 7"
          type="submit" class="next-btn"
          (click)="open(content)" 
          [class.disabled]=" gameForm.invalid || gameForm.pristine || gameForm.pending">
@@ -337,7 +356,7 @@
           <a *ngSwitchCase="3" 
              (click)="nextStep()" 
              class="next-btn" 
-             [class.disabled]="ftpFiles.length === 0 "
+             [class.disabled]="imagesCover.length === 0 "
              >
             Next →
           </a>
@@ -346,6 +365,8 @@
           <a *ngSwitchCase="4" 
              (click)="nextStep()" 
              class="next-btn" 
+             [class.disabled]="imagesBanner.length === 0 "
+
              >
             Next →
           </a>
@@ -355,10 +376,19 @@
              (click)="nextStep()" 
              class="next-btn" 
     
-             [class.disabled]="filesToUpload.length === 0 "
+             [class.disabled]="imagesScreenshots.length === 0 "
              >
             Next →
           </a>
+
+          <a *ngSwitchCase="6" 
+          (click)="nextStep()" 
+          class="next-btn" 
+ 
+          [class.disabled]="imagesFile.length === 0"
+          >
+         Next →
+       </a>
           </div>
           <a *ngIf="step> 1 " (click) = prevStep() class="next-btn">Back</a>
 

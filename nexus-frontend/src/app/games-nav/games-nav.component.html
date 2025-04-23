@@ -1,8 +1,18 @@
 <nav class="nav-container">
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <div class="search-container mb-3">
-      <input type="text" class="form-control" placeholder="Search in store" />
+      <input type="text" class="form-control" placeholder="Search in store"  [(ngModel)]="searchTextBar" (input)="filterResultsTop(searchTextBar)"/>
       <i class="fa fa-search"></i>
+      <div class="search-results" *ngIf="searchTextBar && filteredGamesTop.length > 0">
+        <div *ngFor="let game of filteredGamesTop" class="search-result-item" (click)="OnSelect(game)">
+          <img [src]="game.coverPicture?.mediaUrl 
+            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+            : '../../../../assets/img/missing.jpg'"
+            [alt]="game.name" class="result-img" />
+          <span class="result-name">{{ game.name }}</span>
+          <span class="result-price">{{ game.price }} TND</span>
+        </div>
+      </div>
     </div>
   
     <!-- Discover Tab -->
