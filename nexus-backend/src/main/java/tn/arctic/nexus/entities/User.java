@@ -1,6 +1,8 @@
 package tn.arctic.nexus.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import tn.arctic.nexus.entities.FinanceModule.Wallet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -52,6 +55,15 @@ public class User implements Serializable {
     private Date last_login;
 
 
+    @ManyToMany
+    private List<User> friends;
+
+    private RoleType role;
+
+    @OneToMany
+    private List<ProfilePictures> profilesPictures;
+
+
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
@@ -74,6 +86,11 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commentaire> commentaires = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"user", "transfers", "payments", "purchase"})
+    private Wallet wallet;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<GameKey> gamekeyLibrary;
@@ -229,4 +246,15 @@ public class User implements Serializable {
     public void setGameReviews(List<GameReview> gameReviews) {
         this.gameReviews = gameReviews;
     }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+
+    // Getters and setters for all properties...
 }

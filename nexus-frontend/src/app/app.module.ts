@@ -27,6 +27,21 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { WalletDashboardComponent } from './finance/wallet-dashboard/wallet-dashboard.component';
+import { TabsComponent } from './finance/tabs/tabs.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ConnectWalletComponent } from './finance/connect-wallet/connect-wallet.component';
+import { PaymentsComponent } from './finance/tabs/Listes/payments/payments.component';
+import { PurchaseComponent } from './finance/tabs/Listes/purchase/purchase.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MakePaymentComponent } from './finance/make-payment/make-payment.component';
+import { PanierComponent } from './finance/panier/panier/panier.component';
+import { TransferPopupComponent } from './finance/wallet-dashboard/popUps/transfer-popup/transfer-popup.component';
+import { RequestRefundComponent } from './finance/wallet-dashboard/popUps/request-refund/request-refund.component';
+import { TransfersComponent } from './finance/tabs/Listes/transfers/transfers.component';
+import { RefundComponent } from './finance/tabs/Listes/refund/refund.component';
+
 import { HomeComponent } from './home/home/home.component';
 
 
@@ -42,6 +57,10 @@ import { CreateGameCategoryComponent } from './games/create-game-category/create
 import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+
+import { GameCategoriesComponent } from './game-categories/game-categories.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
+
 
 // Jam Components
 import { JamsComponent } from './jams/jams/jams.component';
@@ -113,10 +132,6 @@ import { BidComponent } from './market/bid/bid.component';
 import { MarketDetailsComponent } from './market/market-details/market-details.component';
 
 // Services & Interceptors
-import { TokenService } from './core/services/user-management/token.service';
-import { JwtInterceptor } from './core/services/user-management/jwt.interceptor';
-import { AuthInterceptor } from './core/services/user-management/auth.interceptor';
-import { LibraryComponent } from './library/library.component';
 
 import { RouterModule } from '@angular/router';
 
@@ -138,6 +153,22 @@ import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component
 
 
 
+
+// --- Services & Intercepteurs ---
+import { TokenService } from '../app/core/services/user-management/token.service';
+import { JwtInterceptor } from '../app/core/services/user-management/jwt.interceptor';
+import { AuthInterceptor } from '../app/core/services/user-management/auth.interceptor';
+import { LibraryComponent } from './library/library.component';
+
+import { WalletsComponent } from './admin-Finance/wallets/wallets.component';
+import { PaymentsAdminComponent } from './admin-Finance/payments-admin/payments-admin.component';
+import { PurchaseAdminComponent } from './admin-Finance/purchase-admin/purchase-admin.component';
+import { TransfersAdminComponent } from './admin-Finance/transfers-admin/transfers-admin.component';
+import { RefundAdminComponent } from './admin-Finance/refund-admin/refund-admin.component';
+import { NotificationBannerComponent } from './finance/notification-banner/notification-banner.component';
+import { TestComponent } from './finance/test/test/test.component';
+import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate-pdf/generate-pdf.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,6 +176,21 @@ import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component
     FooterComponent,
     GamesComponent,
     GamesCarouselComponent,
+
+    GamesComponent,
+    WalletDashboardComponent,
+    TabsComponent,
+    ConnectWalletComponent,
+    PaymentsComponent,
+    PurchaseComponent,
+    MakePaymentComponent,
+    PanierComponent,
+    TransferPopupComponent,
+    RequestRefundComponent,
+    TransfersComponent,
+    RefundComponent,
+    HomeComponent,
+
     GamePageComponent,
     CreateGameComponent,
     CreateGameCategoryComponent,
@@ -224,57 +270,85 @@ import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component
     JamCalendarComponent,
 
 
+    WalletsComponent,
+    PaymentsAdminComponent,
+    PurchaseAdminComponent,
+    TransfersAdminComponent,
+    RefundAdminComponent,
+    NotificationBannerComponent,
+    TestComponent,
+    GeneratePdfComponent,
     
   ],
   imports: [
+    // Core Angular modules
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+  
+    // Angular Material modules
+    MatButtonModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    MatDialogModule,
+  
+    // External libraries
     NgbModule,
     CarouselModule,
+    TabsModule.forRoot(),
     AngularEditorModule,
-    BrowserAnimationsModule,
-    NgChartsModule,
+    NgxPaginationModule,
+    QRCodeModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
-    NgxPaginationModule,
-    QRCodeModule,
+    FullCalendarModule,
+    NgChartsModule,
+    CommonModule,
     RouterModule,
-
+  
+    // App components
+    GamesListComponent,
+    AdminGameListComponent,
+    GameCategoryListComponent,
     GameReviewListComponent,
     GameKeyListComponent,
-    GameCategoryListComponent,
-    GamesListComponent,
+  ],
+  
+providers: [
+  TokenService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  },
 
-    MatChipsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    MatDialogModule,
-    FullCalendarModule,
-  ],
-  providers: [
-    TokenService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+  // Additional providers from FinanceManagement-postProd
+  GameCategoryListComponent,
+  GameKeyListComponent,
+  GameReviewListComponent,
+  GamesListComponent,
+  AdminGameListComponent,
+  MatFormFieldModule,
+  MatDialogModule,
+],
+bootstrap: [AppComponent]
 })
 export class AppModule {}
