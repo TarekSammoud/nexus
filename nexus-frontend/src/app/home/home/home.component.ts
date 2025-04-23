@@ -20,17 +20,16 @@ export class HomeComponent {
 
         this._gameService.getGames().subscribe(games => {
           this.games = games;
-          for (let i = 0; i < this.games.length; i++) {
-            for (let j = 0; j < this.games[i].gameMediaList.length; j++) {
-              if (this.games[i].gameMediaList[j].gameMediaType == 'COVER') {
-                this.games[i].coverPicture = this.games[i].gameMediaList[j]; 
-                console.log(this.games[i].coverPicture?.mediaUrl);
-                break; 
-              }
-              console.log(this.games[i].coverPicture?.mediaUrl);
-            }
-          }
-          console.log(this.games);
+        })
+
+        this._gameService.getBrowserGames().subscribe(games => {
+          this.browserGames = games;
+          console.log(this.browserGames);
+        })
+
+        this._gameService.getEmulatedGames().subscribe(games => {
+          this.emulatedGames = games;
+          console.log(this.browserGames);
         })
        
 
@@ -68,6 +67,8 @@ export class HomeComponent {
 
     
       games: Game[] = [];
+      browserGames: Game[] = [];
+      emulatedGames: Game[] = [];
       name : String = '';
     
  
@@ -77,6 +78,14 @@ export class HomeComponent {
         this._router.navigate(['/games', game.id]);
         }
     
+        OnSelectEmulated(game: Game){
+          console.log(game)
+          this._router.navigate(['/games', game.id]);
+        }
+
+        OnSelectBrowser(game: Game){
+          this._router.navigate(['/games', game.id]);
+        }
   
 
 }

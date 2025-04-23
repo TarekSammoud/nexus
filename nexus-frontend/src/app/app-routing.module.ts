@@ -86,6 +86,14 @@ import { BidComponent } from './market/bid/bid.component';
 
 import { LibraryComponent } from './library/library.component';
 import { SupportComponent } from './support/support.component';
+import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
+import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
+import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
+import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
+import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutComponent } from './about/about.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 import { WsNotificationsService } from 'src/services/finance/ws-notifications.service';
 import { TestComponent } from './finance/test/test/test.component';
 import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
@@ -163,9 +171,13 @@ const routes: Routes = [
       { path: 'games/categories', component: GameCategoryListComponent },
       { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
       { path: 'games/keys', component: GameKeyListComponent },
+      { path: 'games/create-discount/:id', component: CreateDiscountComponent },
+      { path: 'games/create-discount/:id/:discount', component: CreateDiscountComponent },
       { path: 'games/reviews', component: GameReviewListComponent },
       { path: 'games/:id', component: GamePageComponent },
       { path: 'add-new-game', component: CreateGameComponent },
+      { path: 'add-new-browser-game', component: CreateBrowserGameComponent },
+      { path: 'add-new-emulated-game', component: CreateEmulatedGameComponent },
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
 
@@ -193,18 +205,34 @@ const routes: Routes = [
       { path: 'jams/entries', component: AdminEntriesListComponent },
       { path: 'jams/media', component: AdminJamMediaListComponent },
       { path: 'jams/ratings', component: AdminJamRatingsListComponent },
-      { path: 'jams/vip', component: VipJamFormComponent },
-
-      // 💳 Admin Finance
-      { path: 'wallets', component: WalletsComponent },
-      { path: 'payments', component: PaymentsAdminComponent },
-      { path: 'purchases', component: PurchaseAdminComponent },
-      { path: 'transfers', component: TransfersAdminComponent },
-      { path: 'refunds', component: RefundAdminComponent }
+      { path: 'jams/vip', component: VipJamFormComponent }
     ]
-  }
-];
+  },
 
+  { path: 'games/emulated/play/:name', component: EmulatedGameComponent },
+
+  { path: '', component: HomeComponent },
+  { path: 'jams', component: JamsComponent },
+  { path: 'jam/:id', component: JamDetailsPageComponent },
+  { path: 'games/:id', component: GamePageComponent },
+  { path: 'category/:name', component: GameGridComponent },
+
+  { path: 'games/play/:name', component: BrowserGamePageComponent },
+
+  { path: 'keen', component: KeenGameCarouselComponent },
+
+  { path: 'admin/categories', component: GameCategoriesComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'wallets', component: WalletsComponent },
+  { path: 'payments', component: PaymentsAdminComponent },
+  { path: 'purchases', component: PurchaseAdminComponent },
+  { path: 'transfers', component: TransfersAdminComponent },
+  { path: 'refunds', component: RefundAdminComponent }
+
+  { path: '**', component: NotFoundComponent }, 
+
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

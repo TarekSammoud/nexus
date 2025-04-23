@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { GameKeyService } from '../core/services/game-key.service';
 import { GameKey } from '../core/entities/game-key';
 import { User } from '@syncfusion/ej2/interactive-chat';
+import { GameDiscountService } from '../core/services/game-discount.service';
 
 @Component({
   selector: 'app-admin-game-list',
@@ -26,7 +27,7 @@ import { User } from '@syncfusion/ej2/interactive-chat';
 export class AdminGameListComponent implements OnInit {
 
       data? : Game[];
-      constructor(private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
+      constructor(private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
           for (let i = 0; i < this.data.length; i++) {
@@ -46,6 +47,22 @@ export class AdminGameListComponent implements OnInit {
   @ViewChild('grid')
   public grid?: GridComponent;
 
+  createDiscount(game: Game){
+    this._router.navigate(['admin/games/create-discount', game.id]);
+  }
+
+  deleteDiscount(game: Game){
+    const choice = confirm("Are you sure you want to delete this discount?");
+    if (game.gameDiscount)
+    this._gameDiscountService.deleteGameDiscount(game.gameDiscount.id).subscribe(() => {
+      
+    })
+  }
+
+  updateDiscount(game: Game){
+    this._router.navigate(['admin/games/create-discount', game.id,game.gameDiscount?.id]);
+  }
+
   ngOnInit(): void {
       this.data = [];
   }
@@ -56,6 +73,14 @@ export class AdminGameListComponent implements OnInit {
 
   navigateToCreate(){
     this._router.navigate(['admin/add-new-game']);
+  }
+
+  navigateToCreateBrowser(){
+    this._router.navigate(['admin/add-new-browser-game']);
+  }
+
+  navigateToCreateEmulated(){
+    this._router.navigate(['admin/add-new-emulated-game']);
   }
 
   editGame(data: Game){
@@ -77,6 +102,8 @@ export class AdminGameListComponent implements OnInit {
 
   generateKey(data: Game){
     console.log(data);
+    const token = localStorage.getItem('token');
+    
      var gameKey: any = { game: data, user: { id: 1 } };  // Initialize gameKey with required properties
 
      console.log(gameKey);

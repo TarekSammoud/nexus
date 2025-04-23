@@ -1,4 +1,20 @@
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5  id="exampleModalLabel">Your game category has been successfully added</h5>
+
+  </div>
+  <div class="modal-body">
+<p class="text-center text-dark">
+    Your game category has been successfully added to the database. You can now view it on the dashboard or continue adding more game categories.
+</p>    ...
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="navigateToDashboard()">Go to dashboard</button>
+  </div>
+</ng-template>
+
 <div class="">
   <button class="btn btn-primary" (click)="navigateToDashboard()">Back to dashboard</button>
 </div>
@@ -34,6 +50,7 @@
         </div>
 
           <button  type="submit"
+          (click)="open(content)" 
           [class.disabled]=" gameCategoryForm.invalid || gameCategoryForm.pristine || gameCategoryForm.pending"
           class="next-btn">Submit</button>
          

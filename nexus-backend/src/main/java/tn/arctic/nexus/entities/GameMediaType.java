@@ -4,5 +4,6 @@ public enum GameMediaType {
     SCREENSHOT,
     VIDEO,
     BANNER,
-    COVER
+    COVER,
+    FILE
 }

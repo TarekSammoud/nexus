@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // UI & Libs
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -149,6 +149,15 @@ import { PublicationStatsComponent } from './community/publication-stats/publica
 import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
+import { CreateBrowserGameComponent } from './create-browser-game/create-browser-game.component';
+import { BrowserGamePageComponent } from './browser-game-page/browser-game-page.component';
+import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carousel.component';
+import { GamesNavComponent } from './games-nav/games-nav.component';
+import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
+import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutComponent } from './about/about.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 import { JamCalendarComponent } from './jams/jam-calendar/jam-calendar.component';
 import { TopStreamerComponent } from './community/sondage/top-streamer/top-streamer.component';
 import { AiRecommendationComponent } from './market/ai-recommendation/ai-recommendation.component';
@@ -270,6 +279,15 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     BidComponent,
     MarketDetailsComponent,
     LibraryComponent,
+    CreateBrowserGameComponent,
+    BrowserGamePageComponent,
+    KeenGameCarouselComponent,
+    GamesNavComponent,
+    EmulatedGameComponent,
+    CreateEmulatedGameComponent,
+    NotFoundComponent,
+    AboutComponent,
+    CreateDiscountComponent,
     JamCalendarComponent,
     TopStreamerComponent,
     AiRecommendationComponent,
@@ -330,6 +348,16 @@ import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate
     GameCategoryListComponent,
     GameReviewListComponent,
     GameKeyListComponent,
+    GameCategoryListComponent,
+    GamesListComponent,
+
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    MatDialogModule,
+    NgbNavModule
   ],
 
 providers: [

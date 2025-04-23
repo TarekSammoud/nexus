@@ -1,0 +1,259 @@
+/* Dark Glassmorphic Background */
+/* Dark Glassmorphic Background */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: flex-start; /* Align content at the top */
+    align-items: flex-start; /* Align content at the top */
+    padding-top: 20px; /* Add top padding to create space */
+    font-family: 'Poppins', sans-serif;
+    min-height: auto; /* Removes full screen height, making it natural height */
+  }
+  
+    
+    /* Card with Glass Effect */
+    .card {
+      background: #202024;
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+      max-width: 600px;
+      margin-top: -50px; /* Adjust this value to move the card higher */
+    }
+    
+    .card:hover {
+    }
+  
+  
+    
+    /* Form Styling */
+    form {
+      background: transparent;
+      padding: 20px;
+      border-radius: 12px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    /* Labels */
+    .form-group label {
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+    
+    /* Inputs */
+    .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .form-control::placeholder {
+      color: #bbbbbb;
+    }
+    
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.15);
+      outline: none;
+      border: 1px solid white;
+    }
+    
+    /* Select */
+    select {
+      cursor: pointer;
+    }
+    
+    /* Animated Chips */
+    mat-chip-option {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      margin: 3px;
+      border-radius: 20px;
+      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    mat-chip:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Chip Remove Icon */
+    mat-chip mat-icon {
+      color: #ff5252;
+      cursor: pointer;
+    }
+    
+    /* Floating Next Button */
+    .next-btn {
+      background: linear-gradient(45deg, #6338B0, #9A5ED6);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease-in-out;
+      float: right;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      margin: 10px;
+      cursor: pointer;
+    }
+    
+    
+    .next-btn:hover {
+      background: linear-gradient(45deg, #6338B0, #8A6BD5);
+  }
+    
+    /* Progress Bar */
+    mat-progress-bar {
+      margin-top: 20px;
+      height: 5px;
+    }
+  
+    
+    
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+  
+    .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Auto-sizing columns */
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .preview-image {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent !important;;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .file-upload-btn {
+    background: linear-gradient(45deg, #6338B0, #9A5ED6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    outline: none;
+  }
+  
+  .file-upload-btn:hover {
+    background: linear-gradient(45deg, #6338B0, #8A6BD5);
+  }
+  
+  .file-upload-btn:active {
+    transform: scale(0.98);
+  }
+  
+  /* Flexbox layout for form columns */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  /* Each column takes equal width */
+  .form-column {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  /* Labels */
+  .form-group label {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Form controls */
+  .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+  }
+  
+  .form-control::placeholder {
+    color: #bbbbbb;
+  }
+  
+  .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    border: 1px solid white;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column; /* Stack columns vertically on smaller screens */
+    }
+  
+    .form-column {
+      margin-bottom: 10px;
+    }
+  }
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  

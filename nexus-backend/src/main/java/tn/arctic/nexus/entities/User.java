@@ -32,6 +32,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "developer")
+    @JsonIgnore
+    private List<Game> developedGames;
+
     @Getter
     private String firstName;
     @Getter

@@ -7,8 +7,10 @@ import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameCategory;
 
 
+import tn.arctic.nexus.entities.GamePlatform;
 import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,6 +42,21 @@ public class GameService implements IGameService {
     @Override
     public void deleteGameById(Long id) {
         gameRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Game> getBrowserGames() {
+        List<GamePlatform> gp = new ArrayList<>();
+        gp.add(GamePlatform.BROWSER);
+        return gameRepository.findGamesByPlatforms(gp);
+    }
+
+    @Override
+    public List<Game> getEmulatedGames() {
+        List<GamePlatform> gp = new ArrayList<>();
+        gp.add(GamePlatform.N64);
+        gp.add(GamePlatform.PSP);
+        return gameRepository.findGamesByPlatforms(gp);
     }
 
     @Override
