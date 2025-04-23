@@ -227,7 +227,7 @@ const routes: Routes = [
   { path: 'payments', component: PaymentsAdminComponent },
   { path: 'purchases', component: PurchaseAdminComponent },
   { path: 'transfers', component: TransfersAdminComponent },
-  { path: 'refunds', component: RefundAdminComponent }
+  { path: 'refunds', component: RefundAdminComponent },
 
   { path: '**', component: NotFoundComponent }, 
 

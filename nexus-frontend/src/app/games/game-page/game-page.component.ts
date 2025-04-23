@@ -42,6 +42,63 @@ export class GamePageComponent implements OnInit {
   emulatedPSPGame= false;
   ngOnInit(): void {
     this.metamaskService.connectWallet();
+    
+    
+    if (this.gameId) {
+      this._gameService.getGame(+this.gameId).subscribe(game => {
+        this.game = game;
+        for (let platform of game.platforms) {
+          this.gamePlatforms.push(platform);
+        }
+
+         this.matchesPlatform = !this.browser || 
+        game.platforms?.includes(this.browser);
+
+        this.matchesPlatformEmulated = !this.n64 || 
+        game.platforms?.includes(this.n64);
+
+    for ( let platform of this.game.platforms) {
+      if (platform == "BROWSER") {
+        this.browserGame = true ;
+        console.log(this.browserGame)
+      }
+
+      if (platform == "N64") {
+        this.emulatedGame = true ;
+        console.log(this.emulatedGame)
+      }
+
+      if (platform == "PSP") {
+        this.emulatedPSPGame = true ;
+        console.log(this.emulatedPSPGame)
+      }
+    }
+        
+        if (this.game?.gameReviewList) {
+          this.groupedReviews = this.groupReviews(this.game.gameReviewList, 3);
+        }
+
+        this._gameService.getUserGameLibrary().subscribe(games => {
+          for (let game of games) {
+            if (game.id === this.game?.id) {
+              this.inLibrary = true;
+              console.log(this.inLibrary);
+              break;
+            }
+          }
+        });
+    
+      
+      });
+
+      
+
+
+
+    }
+
+
+   
   }
   addGameToCart(item: Game) {
     this.panierService.addItemToCart(item);
@@ -103,7 +160,6 @@ export class GamePageComponent implements OnInit {
 
 
    
->>>>>>> GameManagement-postProd
   }
   
 groupReviews(reviews: GameReview[], perGroup: number): GameReview[][] {
@@ -121,19 +177,16 @@ browserGame = false;
  gameId: number | any;
  gamePlatforms: String[] = [];
 
-<<<<<<< HEAD
   constructor(private panierService: PanierService,
     private _spamCheckService: SpamCheckService,private fb: FormBuilder,
     private _gameService: GameService, private _router:Router,private route: ActivatedRoute,
     private metamaskService: MetamaskService,
         private notificationService: NotificationService,
+        private _gameMediaService :GameMediaService
     
   
   ) {
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
-=======
-  constructor(private _gameMediaService :GameMediaService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
->>>>>>> GameManagement-postProd
 
      this.gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
     this.reviewForm = this.fb.group({
