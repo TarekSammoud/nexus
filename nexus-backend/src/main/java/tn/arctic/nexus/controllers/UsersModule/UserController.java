@@ -1,4 +1,5 @@
 package tn.arctic.nexus.controllers.UsersModule;
+import com.sun.jdi.PrimitiveValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,19 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final tn.arctic.nexus.config.JwtUtil jwtUtil;
+
     @Autowired
     private IUserService userService;
 
     @Autowired
     private IProfilePicturesService profilePictureService;
+
+    @Autowired
+    public UserController(tn.arctic.nexus.config.JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
 
 
     @GetMapping("/allUser")
@@ -107,6 +116,10 @@ public class UserController {
     @GetMapping("/check-email/{email}")
     public boolean checkEmailUnique(@PathVariable String email) {
         return userRepository.findByEmail(email) == null; // Renvoie true si l'email est unique, sinon false
+    }
+    @GetMapping("/getUserIdFroToken/{token}")
+    public Long getUserIdFroToken(@PathVariable String token) {
+        return this.jwtUtil.extractUserId(token);
     }
 
 

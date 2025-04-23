@@ -15,7 +15,7 @@ import java.util.Optional;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("agents")
+@RequestMapping("/agents")
 public class SupportAgentController {
 
     @Autowired

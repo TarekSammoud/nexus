@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SupportService } from 'src/app/core/services/support/support-ticket.service'; // Fix the import path
+import { SupportService } from 'src/app/core/services/support/support-ticket.service'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SupportTicket } from 'src/app/core/entities/support/SupportTicket.model';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/services/user-management/auth.service';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-support-ticket',
@@ -12,67 +15,33 @@ import { finalize } from 'rxjs/operators';
 export class SupportTicketComponent implements OnInit {
   tickets: SupportTicket[] = [];
   ticketForm: FormGroup;
-  isEditMode: boolean = false;  // Indicator for editing a ticket
+  isEditMode: boolean = false;
   successMessage: string = '';
   errorMessage: string = '';
   currentTicketId: number | null = null;
   isLoading: boolean = false;
   isSubmitting: boolean = false;
-  priority:any;
 
   constructor(
     private supportService: SupportService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private router: Router // Inject Router to navigate
   ) {
-    // Initialize the form
     this.ticketForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
       priority: ['', Validators.required],
       category: ['', Validators.required]
-     // Added status field
     });
   }
 
-  private finalizeAction(message: string): void {
-    this.successMessage = message;
-    this.resetForm();
-    this.loadTickets();
-    
-    // Auto-hide success message after 5 seconds
-    setTimeout(() => {
-      this.successMessage = '';
-    }, 5000);
-  }
-
-  public resetForm(): void {
-    this.ticketForm.reset();
-    this.isEditMode = false;
-    this.currentTicketId = null;
-    this.errorMessage = '';
-  }
-
   ngOnInit(): void {
-    // Load tickets from the service
     this.loadTickets();
   }
 
-  // Accessors
-  get title() { 
-    return this.ticketForm.get('title'); 
-  }
-
-  get description() { 
-    return this.ticketForm.get('description'); 
-  }
-
- 
-
-  get category() { 
-    return this.ticketForm.get('category'); 
-  }
-
-  // Load tickets via the service
+  // Load tickets
   loadTickets(): void {
     this.isLoading = true;
     this.supportService.getAllTickets()
@@ -86,61 +55,68 @@ export class SupportTicketComponent implements OnInit {
       );
   }
 
-  // Methods for creating, deleting, and updating tickets
+  // Submit ticket
   onSubmit(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     if (this.ticketForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
-      Object.keys(this.ticketForm.controls).forEach(field => {
-        const control = this.ticketForm.get(field);
-        control?.markAsTouched();
-      });
+      return;
+    }
+
+    const ticketData = this.ticketForm.value;
+    const userId = TokenService.getUserId();
+
+    if (!userId) {
+      this.errorMessage = 'User not authenticated. Please log in again.';
       return;
     }
 
     this.isSubmitting = true;
-    this.errorMessage = '';
-
-    if (this.isEditMode) {
-      this.updateTicket(this.ticketForm.value);
-    } else {
-      this.createTicket(this.ticketForm.value);
-    }
+    this.supportService.createTicket(userId, ticketData).subscribe(
+      (createdTicket) => {
+        this.successMessage = 'Ticket created successfully!';
+        this.ticketForm.reset();
+        this.loadTickets();
+      },
+      (error) => {
+        console.error('Error creating ticket:', error);
+        this.errorMessage = 'Failed to create ticket. Please try again.';
+      },
+      () => {
+        this.isSubmitting = false;
+      }
+    );
   }
 
-  // Create a ticket
-  createTicket(ticketData: any): void {
-    const newTicket: SupportTicket = {
-      ...ticketData
-      // Don't set the 'id' here, as it will be returned by the backend
-    };
-  
-    this.supportService.createTicket(newTicket)
-      .pipe(finalize(() => this.isSubmitting = false))
-      .subscribe(
-        (createdTicket: SupportTicket) => {
-          this.tickets.push(createdTicket);
-          this.finalizeAction('🎉 Ticket created successfully!');
-        },
-        (error: any) => {
-          console.error('Error creating ticket:', error);
-          this.errorMessage = 'Failed to create ticket. Please try again.';
-        }
-      );
+  // Modify ticket for editing
+  onModify(ticket: SupportTicket): void {
+    this.ticketForm.setValue({
+      title: ticket.title,
+      description: ticket.description,
+      priority: ticket.priority,
+      category: ticket.category
+    });
+    this.isEditMode = true;
+    this.currentTicketId = ticket.id;
+    document.querySelector('.ticket-form')?.scrollIntoView({ behavior: 'smooth' });
   }
-  
-  // Update a ticket
+
+  // Update ticket
   updateTicket(ticketData: any): void {
     if (!this.currentTicketId) return;
-    
+
     const updatedTicket = {
       ...ticketData,
-      id: this.currentTicketId // Ensure correct ticket ID
+      id: this.currentTicketId
     };
-    
+
     this.supportService.updateTicket(updatedTicket)
       .pipe(finalize(() => this.isSubmitting = false))
       .subscribe(
-        () => this.finalizeAction('🎉 Ticket updated successfully!'),
+        () => this.finalizeAction('Ticket updated successfully!'),
         (error: any) => {
           console.error('Error updating ticket:', error);
           this.errorMessage = 'Failed to update ticket. Please try again.';
@@ -148,23 +124,19 @@ export class SupportTicketComponent implements OnInit {
       );
   }
 
-  // Delete a ticket
+  // Delete ticket
   onDelete(ticket: SupportTicket): void {
     if (!ticket.id) return;
-    
+
     if (confirm(`Are you sure you want to delete ticket "${ticket.title}"?`)) {
       this.isLoading = true;
-      
       this.supportService.deleteTicket(ticket.id)
         .pipe(finalize(() => this.isLoading = false))
         .subscribe(
           () => {
             this.tickets = this.tickets.filter(t => t.id !== ticket.id);
-            this.successMessage = '🗑️ Ticket deleted successfully!';
-            
-            setTimeout(() => {
-              this.successMessage = '';
-            }, 5000);
+            this.successMessage = 'Ticket deleted successfully!';
+            setTimeout(() => this.successMessage = '', 5000);
           },
           (error: any) => {
             console.error('Error deleting ticket:', error);
@@ -174,28 +146,17 @@ export class SupportTicketComponent implements OnInit {
     }
   }
 
-  // Modify a ticket (switch to edit mode)
-  onModify(ticket: SupportTicket): void {
-    this.ticketForm.setValue({
-      title: ticket.title,
-      description: ticket.description,
-      category: ticket.category
-    });
-    this.isEditMode = true;
-    this.currentTicketId = ticket.id;
-    
-    // Scroll to form
-    document.querySelector('.ticket-form')?.scrollIntoView({ behavior: 'smooth' });
+  // Finalize action (show success message)
+  private finalizeAction(message: string): void {
+    this.successMessage = message;
+    this.ticketForm.reset();
+    this.loadTickets();
+    setTimeout(() => this.successMessage = '', 5000);
   }
 
-  getCharacterCount(field: string): number {
-    const control = this.ticketForm.get(field);
-    return control?.value?.length || 0;
-  }
-
-  getMaxLength(field: string): number {
-    if (field === 'title') return 100;
-    if (field === 'description') return 500;
-    return 0;
-  }
+  // Getters for form fields
+  get title() { return this.ticketForm.get('title'); }
+  get description() { return this.ticketForm.get('description'); }
+  get priority() { return this.ticketForm.get('priority'); }
+  get category() { return this.ticketForm.get('category'); }
 }

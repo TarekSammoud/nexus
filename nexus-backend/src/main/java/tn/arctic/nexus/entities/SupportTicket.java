@@ -60,6 +60,8 @@ public class SupportTicket {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User   user;
+
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

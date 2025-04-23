@@ -64,4 +64,9 @@ public class UserService implements IUserService {
         return userRepository.findByEmail(email);
     }
 
+
+    public List<User> getSupportAgents() {
+        return userRepository.findAllSupportAgents();
+    }
+
 }
