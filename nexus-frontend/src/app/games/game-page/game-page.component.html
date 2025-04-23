@@ -206,7 +206,7 @@
           <span class="current-price" *ngIf="game.gameDiscount">
             {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" width="24" height="auto" alt="TND">
           </span>
-          <h3 class="text-light" style="text-align: left;"  *ngIf="!game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" alt="TND"></h3>
+          <h3 class="text-light" style="text-align: left;"  *ngIf="!game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></h3>
          </div>
       </div>
       <!-- Buttons -->
