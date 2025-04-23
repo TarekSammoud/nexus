@@ -15,6 +15,13 @@ export class PanierComponent {
   constructor(private panierService: PanierService,private metamaskService:MetamaskService) {}
 
   ngOnInit() {
+    
+    for (let item of this.panierService.getItems()) {
+      if (item.gameDiscount){
+        if (item.gameDiscount.discountPercentage)
+        item.price = item.price - (item.price * item.gameDiscount.discountPercentage / 100)
+      }
+    }
     this.cartItems = this.panierService.getItems();
     this.total = this.panierService.getTotal();
     this.metamaskService.connectWallet();

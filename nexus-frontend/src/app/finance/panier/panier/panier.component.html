@@ -10,8 +10,10 @@
       <div class="cart-item" *ngFor="let item of cartItems; let i = index" 
            [ngStyle]="{'animation-delay': i * 0.1 + 's'}">
         <div class="item-image">
-          <img [src]="item.coverPicture" [alt]="item.name">
-        </div>
+          <img [src]="item.coverPicture?.mediaUrl 
+            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + item.coverPicture?.mediaUrl 
+            : '../../../../assets/img/missing.jpg'"
+            [alt]="item.name" class="result-img" />        </div>
         <div class="item-details">
           <h3>{{ item.name }}</h3>
           <button class="remove-btn" (click)="removeItem(item.id)">
