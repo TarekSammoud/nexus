@@ -93,7 +93,7 @@ public class SondageController {
                         + "Cordialement,\nL'équipe de modération";
 
                 emailService.sendSimpleEmail(
-                        "medalilahmar00@gmail.com", // Destinataire
+                        "design.freelance2000@gmail.com", // Destinataire
                         subject,
                         content
                 );
