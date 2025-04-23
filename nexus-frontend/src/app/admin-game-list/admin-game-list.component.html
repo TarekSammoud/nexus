@@ -25,6 +25,7 @@
             <th>Platform</th>
             <th>Price</th>
             <th>Created</th>
+            <th>Discount</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -49,6 +50,18 @@
             <td>{{ game.price | currency }}</td>
             <td>{{ game.createdAt | date: 'shortDate' }}</td>
   
+            <td>
+              <div *ngIf="game.gameDiscount">
+                <span class="discount-label">
+                  {{ game.gameDiscount.discountPercentage }}%
+                  <button class="btn btn-warning btn-sm" (click)="updateDiscount(game)" title="Create Discount">✏️</button>
+                  <button class="btn btn-warning btn-sm" (click)="deleteDiscount(game)" title="Update Discount">🗑️</button>
+                </span>
+              </div>
+              <div *ngIf="!game.gameDiscount">
+                <button class="btn btn-warning btn-sm" (click)="createDiscount(game)" title="Create Discount">%</button>
+              </div>
+            </td>
             <td>
               <button class="btn btn-primary btn-sm me-1" (click)="editGame(game)" title="Edit">✏️</button>
               <button class="btn btn-danger btn-sm me-1" (click)="deleteGame(game)" title="Delete">🗑️</button>

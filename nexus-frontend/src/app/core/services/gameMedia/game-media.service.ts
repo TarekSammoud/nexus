@@ -60,4 +60,16 @@ export class GameMediaService {
       headers: this.getAuthHeaders()
     });
   }
+
+  downloadGameFile(type: string, filename: string): Observable<Blob> {
+    const url = `${this.ftpUrl}/download/${type}/${filename}`;
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.get(url, {
+      headers,
+      responseType: 'blob'
+    });
+  }
+  
 }

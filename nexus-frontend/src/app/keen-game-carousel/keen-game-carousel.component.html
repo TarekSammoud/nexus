@@ -2,8 +2,7 @@
 <div class="carousel-container">
 <div class="keen-slider" #sliderRef>
   <div *ngFor="let game of games; let i = index" class="keen-slider__slide" [ngClass]="'number-slide' + game.id">
-    <div class="slide-content">
-      <a href="" class="slide-link">
+    <div class="slide-content"  (click)="goToGame(game.id)" style="cursor: pointer;">
         <div class="slide-media">
           <picture (click)="goToGame(game.id)">
             <source media="(min-width: 1280px)" [srcset]="game.coverPicture?.mediaUrl 
@@ -17,7 +16,6 @@
             />
           </picture>
         </div>
-      </a>
 
       <!-- Overlay content -->
       <div class="slide-overlay">
@@ -33,10 +31,13 @@
         <!-- Updated offer layout -->
         <div class="slide-offer">
           <div class="price-section" *ngIf="game.price">
-            <span class="discount-tag">60%</span>
+            <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
             <div class="price-details">
-              <span class="original-price">{{ game.price }}$</span>
-              <span class="current-price">{{ game.price }}$</span>
+              <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" alt="TND"></span>
+              <span class="current-price" *ngIf="game.gameDiscount">
+                {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" alt="TND">
+              </span>
+                            <span class="current-price" *ngIf="!game.gameDiscount">{{ game.price  }} <img src="assets/img/token.png" alt="TND"></span>
             </div>
           </div>
         </div>

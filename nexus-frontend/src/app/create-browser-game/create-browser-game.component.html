@@ -202,6 +202,7 @@
       
         <button *ngIf="step === 6"
          type="submit" class="next-btn"
+         [class.disabled]="imagesFile.length == 0 || imagesFile.length > 1 "
          (click)="open(content)" 
       >
          Submit</button>
@@ -227,7 +228,7 @@
           <a *ngSwitchCase="3" 
              (click)="nextStep()" 
              class="next-btn" 
-             [class.disabled]="ftpFiles.length === 0 "
+             [class.disabled]="imagesCover.length === 0 "
              >
             Next →
           </a>
@@ -236,6 +237,8 @@
           <a *ngSwitchCase="4" 
              (click)="nextStep()" 
              class="next-btn" 
+             [class.disabled]="imagesBanner.length === 0 "
+
              >
             Next →
           </a>
@@ -245,7 +248,7 @@
              (click)="nextStep()" 
              class="next-btn" 
     
-             [class.disabled]="filesToUpload.length === 0 "
+             [class.disabled]="imagesScreenshots.length === 0 "
              >
             Next →
           </a>

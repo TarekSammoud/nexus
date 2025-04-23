@@ -93,4 +93,29 @@ public class FileUploadController {
         }
     }
 
+
+
+    @GetMapping("/download/{type}/{filename}")
+    public ResponseEntity<byte[]> downloadGameFile(@PathVariable("filename") String filename, @PathVariable("type") String type) {
+        try {
+            // Get the file data from the FTP server
+            byte[] fileData = ftpService.downloadFileGame(filename,type);
+
+            // Guess the content type based on the filename (extension)
+            String contentType = URLConnection.guessContentTypeFromName(filename);
+            if (contentType == null) {
+                contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE; // fallback
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(contentType));
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(fileData);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(("Error downloading file: " + e.getMessage()).getBytes());
+        }
+    }
+
 }

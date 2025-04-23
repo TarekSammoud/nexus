@@ -33,10 +33,17 @@ public class Game implements Serializable {
 
     private String description;
 
+    @ManyToOne
+    private User developer;
+
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     private List<GamePlatform> platforms;
+
+    @OneToOne(mappedBy = "game", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference("game-discount") // Manages the back reference to GameDiscount
+    private GameDiscount gameDiscount;
 
     public List<GameKey> getGameKeys() {
         return gameKeys;
@@ -72,9 +79,9 @@ public class Game implements Serializable {
     @ManyToMany
     private List<GameItem> gameItems;
 
-    @ManyToOne
+    @ManyToMany
     @JsonBackReference  // This prevents serialization of the game field in GameMedia
-    private User user;
+    private List<User> user;
 
     @ManyToMany
     private List<GameCategory> categories;
@@ -177,13 +184,7 @@ public class Game implements Serializable {
         this.gameItems = gameItems;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<GameCategory> getCategories() {
         return categories;

@@ -48,7 +48,7 @@ public class GameService implements IGameService {
     public List<Game> getBrowserGames() {
         List<GamePlatform> gp = new ArrayList<>();
         gp.add(GamePlatform.BROWSER);
-        return gameRepository.getGamesByPlatforms(gp);
+        return gameRepository.findGamesByPlatforms(gp);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class GameService implements IGameService {
         List<GamePlatform> gp = new ArrayList<>();
         gp.add(GamePlatform.N64);
         gp.add(GamePlatform.PSP);
-        return gameRepository.getGamesByPlatforms(gp);
+        return gameRepository.findGamesByPlatforms(gp);
     }
 
     @Override

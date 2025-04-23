@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Game } from 'src/app/core/entities/game/game';
 import { GameMedia } from 'src/app/core/entities/game/game-media';
+import { GamePlatform } from 'src/app/core/entities/game/game-platform.enum';
 import { GameReview } from 'src/app/core/entities/game/game-review';
 import { GameService } from 'src/app/core/services/game/game.service';
+import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.service';
 import { SpamCheckService } from 'src/app/core/services/spam-check.service';
 declare var bootstrap: any;
 @Component({
@@ -41,7 +43,9 @@ export class GamePageComponent implements OnInit {
     if (this.gameId) {
       this._gameService.getGame(+this.gameId).subscribe(game => {
         this.game = game;
-        console.log(game);
+        for (let platform of game.platforms) {
+          this.gamePlatforms.push(platform);
+        }
 
          this.matchesPlatform = !this.browser || 
         game.platforms?.includes(this.browser);
@@ -107,8 +111,10 @@ inLibrary = false ;
 bannerUrl: string = '';
 browserGame = false; 
  gameId: number | any;
+ gamePlatforms: String[] = [];
 
-  constructor(private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+  constructor(private _gameMediaService :GameMediaService,private _spamCheckService: SpamCheckService,private fb: FormBuilder,private _gameService: GameService, private _router:Router,private route: ActivatedRoute) {
+
      this.gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
     this.reviewForm = this.fb.group({
       game: this.fb.group({
@@ -206,6 +212,37 @@ nextSlide() {
         alert("Error deleting game: " + error.message);
       });
     }
+  }
+
+
+  downloadFile(game : Game) {
+    var type = "full";
+    for (let pl of game.platforms) {
+      if (pl === 'N64') {
+        type = "n64";
+        break; 
+    }
+      if (pl === 'PSP') {
+        type = "psp";
+        break;
+      }
+    }
+
+    if (game.gameFile?.mediaUrl){
+      const filename = game.gameFile?.mediaUrl;
+
+      this._gameMediaService.downloadGameFile(type, filename).subscribe((blob) => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      }, error => {
+        console.error('Download failed:', error);
+      });
+    }
+    
   }
 
   navigateToUpdate(game: Game) {

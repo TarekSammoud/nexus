@@ -83,7 +83,25 @@ export class GamesNavComponent {
     });
   
   }
+
+
+  filteredGamesTop: Game[] = [];
   
+  searchTextBar: string = '';
+
+  filterResultsTop(search: string): void {
+    if (!search) {
+      this.filteredGamesTop = [];
+      return;
+    }
+    
+
+    const lowerSearch = search.toLowerCase();
+    this.filteredGamesTop = this.games.filter(game => 
+      game.name.toLowerCase().includes(lowerSearch)
+    );
+    console.log(this.filteredGamesTop)
+  }
   
 
   // Track the tab by its unique id

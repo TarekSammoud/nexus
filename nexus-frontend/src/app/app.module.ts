@@ -134,6 +134,9 @@ import { KeenGameCarouselComponent } from './keen-game-carousel/keen-game-carous
 import { GamesNavComponent } from './games-nav/games-nav.component';
 import { EmulatedGameComponent } from './emulated-game/emulated-game.component';
 import { CreateEmulatedGameComponent } from './create-emulated-game/create-emulated-game.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutComponent } from './about/about.component';
+import { CreateDiscountComponent } from './create-discount/create-discount.component';
 
 
 
@@ -225,6 +228,9 @@ import { CreateEmulatedGameComponent } from './create-emulated-game/create-emula
     GamesNavComponent,
     EmulatedGameComponent,
     CreateEmulatedGameComponent,
+    NotFoundComponent,
+    AboutComponent,
+    CreateDiscountComponent,
 
 
     
