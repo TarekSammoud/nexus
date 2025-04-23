@@ -255,3 +255,34 @@
     color: #ccc;
   }
   
+  
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.discount-tag {
+  background-color: #0078f2;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.current-price {
+  font-size: 1rem;
+  font-weight: bold;
+}
