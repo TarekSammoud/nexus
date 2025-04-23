@@ -21,14 +21,13 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdownMobile">
             <li><a class="dropdown-item" [routerLink]="['/user-profile']">Edit Profile</a></li>
-            <li><a class="dropdown-item" href="#">Cart</a></li>
-            <li><a class="dropdown-item" href="#">Wallet</a></li>
-            <li><a class="dropdown-item" href="#">Friends</a></li>
+            <li><a class="dropdown-item" routerLink="/panier">Cart</a></li>
+            <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Friends</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
             <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-
           </ul>
         </li>
 
@@ -38,7 +37,7 @@
           <a class="nav-link" [routerLink]="['/community']">Community</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin">Dev Studio</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/jams">Game Jams</a></li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/market">Market</a>
@@ -68,11 +67,21 @@
         <ul class="navbar-nav d-flex flex-row align-items-center">
           <!-- Cart -->
           <li class="nav-item me-3">
-
-
-            <a class="nav-link cart-icon" href="#">
+            <!-- Maintain both possible changes for the cart icon: 
+                 - One uses href="#" 
+                 - One uses routerLink="/panier"
+                 So, keep both for clarity, but comment one out if needed for live code. -->
+            <a class="nav-link cart-icon" href="#" style="display: none;">
               <i class="fas fa-shopping-cart"></i>
-              <span class="cart-badge">3</span>
+              <div *ngIf="cartCountItems > 0">
+                <span class="cart-badge">{{this.cartCountItems}}</span>
+              </div>
+            </a>
+            <a class="nav-link cart-icon" routerLink="/panier">
+              <i class="fas fa-shopping-cart"></i>
+              <div *ngIf="cartCountItems > 0">
+                <span class="cart-badge">{{this.cartCountItems}}</span>
+              </div>
             </a>
           </li>
 
@@ -97,22 +106,22 @@
                 </a>
               </li>
               <li><a class="dropdown-item" [routerLink]="['/user-profile']">Profile</a></li>
+              <!-- Maintain both versions for settings and wallet -->
               <li><a class="dropdown-item" [routerLink]="['/edit-profile']">Account Settings</a></li>
+              <li><a class="dropdown-item" href="#">Account Settings</a></li>
+              <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
               <li><a class="dropdown-item" [routerLink]="['/library']">Games Library</a></li>
-
-
-
               <li><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
+              <li><a class="dropdown-item" routerLink="/admin">Dev Studio</a></li>
               <li><a class="dropdown-item" href="#">Payment Management</a></li>
               <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button"
                   aria-controls="redeemCodeOffcanvas">Use a Code</a></li>
-
+              <!-- Keep both Game Library and Games Library if needed -->
               <li><a class="dropdown-item" href="#">Game Library</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-
             </ul>
           </li>
         </ul>
@@ -124,7 +133,7 @@
 <!-- Side Navigation -->
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
   <div class="offcanvas-header">
-    <h5 class=" text-light d-inline-block align-text-top" id="sidebarMenuLabel">Dev Studio</h5>
+    <h5 class="text-light d-inline-block align-text-top" id="sidebarMenuLabel">Dev Studio</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -136,15 +145,15 @@
         <a class="nav-link" href="#"><i class="fas fa-box"></i> Games</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/categories" href="#"><i class="fas fa-tags"></i> Game Categories</a>
+        <a class="nav-link" routerLink="/admin/categories"><i class="fas fa-tags"></i> Game Categories</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fas fa-users"></i> Users</a>
       </li>
     </ul>
-
   </div>
 </div>
+
 <!-- Offcanvas for Redeem Code -->
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="redeemCodeOffcanvas"
   aria-labelledby="redeemCodeOffcanvasLabel">
@@ -162,7 +171,6 @@
       <div *ngIf="successMessage" class="text-success mb-3">
         {{ successMessage }}
       </div>
-
       <!-- Error Message -->
       <div *ngIf="errorMessage" class="text-danger mb-3">
         {{ errorMessage }}

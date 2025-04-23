@@ -12,10 +12,8 @@ import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.AuthService;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/games/library")
@@ -68,4 +66,30 @@ public class LibraryController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
+
+
+    /// ///////delete Game from Game Library
+    @DeleteMapping("/deleteGame/{gameId}")
+    public ResponseEntity<?> deleteGameFromUserLibrary(@RequestHeader("Authorization") String authHeader,
+                                                       @PathVariable Long gameId) {
+        String token = authHeader.replace("Bearer ", "");
+        Long userId = jwtUtil.extractUserId(token); // extract "id" from token
+
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
+        User user = userOpt.get();
+        List<Game> gameLibrary = user.getGameLibrary();
+
+        boolean removed = gameLibrary.removeIf(game -> game.getId().equals(gameId));
+        if (!removed) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found in user library");
+        }
+
+        userRepository.save(user); // save changes
+        return ResponseEntity.ok("Game removed from user library");
+    }
+
 }

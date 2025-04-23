@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <h4 class="modal-title">Generate Transaction Report</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  
+  <div class="modal-body">
+    <div class="report-form">
+      <form [formGroup]="form" (ngSubmit)="downloadPdf()">
+        <!-- Transaction Type -->
+        <div class="mb-4">
+          <label for="type" class="form-label">Transaction Type</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white">
+              <i class="fas fa-exchange-alt text-muted"></i>
+            </span>
+            <select class="form-select" formControlName="transactionType" id="type">
+              <option value="" disabled>Select transaction type</option>
+              <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- Date Range -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="from" class="form-label">From Date</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="fas fa-calendar-alt text-muted"></i>
+              </span>
+              <input type="date" 
+                     class="form-control" 
+                     id="from" 
+                     formControlName="fromDate">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="to" class="form-label">To Date</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="fas fa-calendar-alt text-muted"></i>
+              </span>
+              <input type="date" 
+                     class="form-control" 
+                     id="to" 
+                     formControlName="toDate">
+            </div>
+          </div>
+        </div>
+  
+        <!-- Loading State Message -->
+        <div *ngIf="loading" class="text-center mb-3">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="text-muted mt-2">Generating your report...</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" 
+            class="btn btn-secondary" 
+            (click)="activeModal.close('Close click')">
+      Cancel
+    </button>
+    <button type="button" 
+            class="btn btn-primary" 
+            (click)="downloadPdf()"
+            [disabled]="loading || !form.valid">
+      <i class="fas fa-file-pdf me-2"></i>
+      Generate PDF
+    </button>
+  </div>

@@ -1,0 +1,47 @@
+package tn.arctic.nexus.entities.FinanceModule;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Purchase implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private ProductType productType;
+    private Long productId;
+    private Long price;
+
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @OneToOne(mappedBy = "purchase",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("purchase") // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
+    private Refund refund;
+    @ManyToOne
+    @JsonIgnoreProperties({"transfers", "payments", "purchase"}) // Prevents serialization of the 'transfers' field in Wallet// Prevents serialization of the 'transfers' field in Wallet
+    private Wallet wallet;
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+}

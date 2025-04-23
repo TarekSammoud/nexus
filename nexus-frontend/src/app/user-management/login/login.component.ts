@@ -24,6 +24,7 @@ export class LoginComponent {
         (response) => {
           const token = response.token;
           // Sauvegarde du jeton JWT dans localStorage
+          console.log('Token JWT:', token);
           localStorage.setItem('auth_token', token);
 
           // Redirection vers la page du profil
@@ -41,7 +42,8 @@ export class LoginComponent {
   // Méthode de connexion avec Facebook
 
 
-  loginWithFacebook(): void {
+
+  loginWithFacebook() {
     FB.login((response: any) => {
       if (response.authResponse) {
         const accessToken = response.authResponse.accessToken;

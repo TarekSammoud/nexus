@@ -20,10 +20,12 @@ import org.springframework.beans.factory.annotation.Value;
 @RequiredArgsConstructor
 @Service
 public class AuthService {
-
-    private final IUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final IUsersModuleUserVerificationRepository verificationRepository;
+    @Autowired
+    private  IUserRepository userRepository;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
+    @Autowired
+    private  IUsersModuleUserVerificationRepository verificationRepository;
 
     @Qualifier("userEmailService")
     private final EmailService emailService;

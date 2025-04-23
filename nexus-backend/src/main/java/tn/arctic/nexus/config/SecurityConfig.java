@@ -1,9 +1,8 @@
-package tn.arctic.nexus.Config;
+package tn.arctic.nexus.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import tn.arctic.nexus.config.JwtAuthenticationFilter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,9 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final tn.arctic.nexus.config.JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(@Lazy tn.arctic.nexus.config.JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -36,25 +35,22 @@ public class SecurityConfig {
                         .requestMatchers("/api/likes/**").permitAll()
                         .requestMatchers("/api/reports/**").permitAll()
                         .requestMatchers("/api/commentaires/**").permitAll()
-                        .requestMatchers(("/api/sondages/**")).permitAll()
-                        .requestMatchers(("/api/streamers/**")).permitAll()
-                        .requestMatchers(("/api/votes/**")).permitAll()
+                        .requestMatchers("/api/sondages/**").permitAll()
+                        .requestMatchers("/api/streamers/**").permitAll()
+                        .requestMatchers("/api/votes/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/friendRequests/**").permitAll()
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/games/**").permitAll()
                         .requestMatchers("/games/categories**").permitAll()
-
                         .requestMatchers("/api/entries/**").permitAll()
                         .requestMatchers("/api/entry-ratings/**").permitAll()
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
-
                         .requestMatchers("/support/**").permitAll()
-
-
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

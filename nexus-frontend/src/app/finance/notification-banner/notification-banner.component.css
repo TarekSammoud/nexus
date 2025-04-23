@@ -1,0 +1,54 @@
+.notification-banner {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    min-width: 250px;
+    max-width: 350px;
+    background: rgba(50, 50, 50, 0.8); /* semi-transparent */
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-size: 1.05em;
+    display: flex;
+    align-items: center;
+    animation: fadeInNotification 0.4s;
+    transition: opacity 0.4s, transform 0.4s;
+    opacity: 1;
+  }
+  
+  .notification-banner.ng-leave,
+  .notification-banner.ng-animating-leave,
+  .notification-banner.leave {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 0.4s, transform 0.4s;
+    pointer-events: none;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    margin-left: 18px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  
+  @keyframes fadeInNotification {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .notification-icon {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+  
