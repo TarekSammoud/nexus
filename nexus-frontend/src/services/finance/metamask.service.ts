@@ -349,6 +349,7 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
 }
 
 async SpendCoinsSingleGme(amount:number,game: Game) {
+
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
@@ -370,6 +371,7 @@ async SpendCoinsSingleGme(amount:number,game: Game) {
     }); 
 
     await tx.wait();
+    this.notificationService.show("Success! Your purchase has been confirmed.",5000);
     console.log('Transaction mined (spend):', tx.hash);
     console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
 
