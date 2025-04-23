@@ -4,7 +4,7 @@ import { User } from '../user/user.model';
 export interface Vote {
   id?: number;
   voteOui: boolean;
-  user: User;
+  user?: User;
   sondage: Sondage;
 }
 

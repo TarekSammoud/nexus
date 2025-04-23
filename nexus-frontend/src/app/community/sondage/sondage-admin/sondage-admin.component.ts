@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SondageService } from 'src/app/core/services/community/sondage.service';
 import { Sondage } from 'src/app/core/entities/community/sondage';
+import { ToastrService } from 'ngx-toastr'; 
+
 
 @Component({
   selector: 'app-sondage-admin',
@@ -10,7 +12,7 @@ import { Sondage } from 'src/app/core/entities/community/sondage';
 export class SondageAdminComponent implements OnInit {
   sondages: Sondage[] = [];
 
-  constructor(private sondageService: SondageService) {}
+  constructor(private sondageService: SondageService,  private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadSondages();
@@ -25,20 +27,22 @@ export class SondageAdminComponent implements OnInit {
           endDate: sondage.endDate ? new Date(sondage.endDate).toISOString().slice(0, 16) : undefined // Convertir en format datetime-local
         }));
       },
-      error: err => console.error('❌ Erreur chargement sondages', err)
+      error: err => {
+        console.error('❌ Erreur chargement sondages', err);
+        this.toastr.error('Erreur lors du chargement des sondages.'); // Remplacer alert() par toastr.error
+      }
     });
   }
 
   approuverSondage(id: number, endDate: string | null): void {
     if (!endDate) {
-      alert("❗ Veuillez saisir une date de fin.");
+      this.toastr.warning("❗ Veuillez saisir une date de fin."); 
       return;
     }
 
-    // Vérifier que la date est valide
     const parsedDate = new Date(endDate);
     if (isNaN(parsedDate.getTime())) {
-      alert("❗ Date de fin invalide.");
+      this.toastr.warning("❗ Date de fin invalide.");
       return;
     }
 
@@ -49,11 +53,11 @@ export class SondageAdminComponent implements OnInit {
           sondage.approved = true;
           sondage.endDate = endDate; // Mettre à jour localement
         }
-        alert("✅ Sondage approuvé !");
+        this.toastr.success("✅ Sondage approuvé !");
       },
       error: err => {
         console.error("❌ Erreur :", err);
-        alert("🚫 Erreur lors de l'approbation : " + (err.error?.message || err.message));
+        this.toastr.error("🚫 Erreur lors de l'approbation : " + (err.error?.message || err.message)); 
       }
     });
   }
@@ -64,9 +68,12 @@ export class SondageAdminComponent implements OnInit {
     this.sondageService.deleteSondage(id).subscribe({
       next: () => {
         this.sondages = this.sondages.filter(s => s.id !== id);
-        alert('🗑️ Sondage supprimé avec succès.');
+        this.toastr.success('🗑️ Sondage supprimé avec succès.'); 
       },
-      error: err => console.error('❌ Erreur suppression sondage', err)
-    });
+      error: err => {
+        console.error('❌ Erreur suppression sondage', err);
+        this.toastr.error('🚫 Erreur lors de la suppression du sondage.'); // Remplacer alert() par toastr.error
+      }
+        });
   }
 }

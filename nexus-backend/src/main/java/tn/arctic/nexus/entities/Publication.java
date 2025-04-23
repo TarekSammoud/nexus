@@ -26,6 +26,14 @@ public class Publication {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Getter
+    private String imageUrl;
+
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({
