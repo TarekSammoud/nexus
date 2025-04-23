@@ -101,6 +101,11 @@ export class GamePageComponent implements OnInit {
    
   }
   addGameToCart(item: Game) {
+      if (item.gameDiscount){
+        if (item.gameDiscount.discountPercentage)
+        item.price = item.price - (item.price * item.gameDiscount.discountPercentage / 100)
+      }
+    
     this.panierService.addItemToCart(item);
     this._router.navigate(['/category',item.categories[0].name]);
     
