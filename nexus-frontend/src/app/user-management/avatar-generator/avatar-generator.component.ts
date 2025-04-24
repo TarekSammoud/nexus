@@ -43,15 +43,26 @@ export class AvatarGeneratorComponent {
   generatedImageUrl: string | null = null;
 
   generateAvatar(): void {
-    this.avatarService.generateAvatar(this.avatarData).subscribe({
-      next: (response) => {
-        this.generatedImageUrl = response.image; // ✅ C'est maintenant une URL
+    this.isLoading = true;
+    this.generatedImageUrl = null;
+
+    this.avatarService.generateAvatar(this.model).subscribe({
+      next: () => {
+        // L'image est maintenant dans les assets, on la charge directement
+        this.generatedImageUrl = '/assets/avatar-generated.png?t=' + new Date().getTime(); // Cache-busting
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Erreur lors de la génération de l\'avatar :', err);
+        this.generatedImageUrl = '/assets/avatar-generated.png?t=' + new Date().getTime();
+        //console.error("Erreur lors de la génération :", err);
+        this.isLoading = false;
       }
     });
   }
+
+
+
+
 
 
 }
