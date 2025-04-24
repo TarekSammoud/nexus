@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.arctic.nexus.entities.Message;
+import tn.arctic.nexus.entities.MessageType;
 import tn.arctic.nexus.entities.Room;
 import tn.arctic.nexus.entities.SupportTicket;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.IMessageRepository;
@@ -93,8 +94,8 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Message sendMessageToRoom(Long roomId, String sender, String content) {
-        return messageService.sendMessage(roomId, sender, content);
+    public Message sendMessageToRoom(Long roomId, String senderName, Long senderId, String content, MessageType type) {
+        return messageService.sendMessage(roomId, senderName, senderId, content, type);
     }
 
     @Override

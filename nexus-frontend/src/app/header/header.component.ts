@@ -37,8 +37,13 @@ export class HeaderComponent implements OnInit {
     private panierService: PanierService,
     private metaMaskService: MetamaskService,
     private _fb: FormBuilder,
-    private _router: Router
-  ) {}
+    private _router: Router,
+ 
+    // Injection du TokenService
+  ) { }
+  
+
+
 
   ngOnInit(): void {
     this.gameKeyForm = this._fb.group({
@@ -66,6 +71,7 @@ export class HeaderComponent implements OnInit {
     this.panierService.count$.subscribe(newCount => {
       this.cartCountItems = newCount;
     });
+
   }
 
   loadProfilePicture(userId: number): void {

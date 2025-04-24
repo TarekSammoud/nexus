@@ -37,6 +37,7 @@ export class AdminHomeComponent {
   walletDropdownOpen = false;  // State for wallet dropdown
   isCollapsed = false;         // Track whether sidebar is collapsed
 
+
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
   }

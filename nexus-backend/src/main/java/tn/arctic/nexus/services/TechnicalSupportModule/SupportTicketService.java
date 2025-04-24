@@ -3,6 +3,7 @@ package tn.arctic.nexus.services.TechnicalSupportModule;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,13 @@ import java.util.stream.Collectors;
 public class SupportTicketService {
     @Autowired
     private ISupportAgentRepository supportAgentRepository;
+
+    private final AIService aiService;
+
+    @Autowired
+    public SupportTicketService(@Lazy AIService aiService) {
+        this.aiService = aiService;
+    }
 
     @Autowired
     private ISupportTicketRepository supportTicketRepository;
@@ -88,7 +96,7 @@ public class SupportTicketService {
             case LOW -> 4;
             default -> 5;
         };
+
+
     }
-
-
 }

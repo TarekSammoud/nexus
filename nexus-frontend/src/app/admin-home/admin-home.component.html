@@ -5,6 +5,10 @@
 
     <!-- Fixed Profile Section -->
     <div class="profile-section text-center d-flex flex-column align-items-center p-4 border-bottom border-secondary">
+
+      <img src="assets/img/profilepic.jpg" alt="Admin" class="profile-pic mb-2" 
+           style="width: 80px; height: 80px; border-radius: 50%;">
+    <div class="profile-section text-center d-flex flex-column align-items-center p-4 border-bottom">
       <img src="assets/img/profilepic.jpg" alt="Admin" class="profile-pic mb-2" style="width: 80px; height: 80px; border-radius: 50%;">
       <div class="text-white fw-semibold">Admin</div>
     </div>
@@ -12,7 +16,6 @@
     <!-- Scrollable Links -->
     <div class="flex-grow-1 overflow-auto">
 
-      <!-- Games Management Dropdown -->
       <div class="dropdown-section">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -20,7 +23,7 @@
           <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
           <i class="fas" [ngClass]="{ 'fa-chevron-down': !gamesDropdownOpen, 'fa-chevron-up': gamesDropdownOpen }"></i>
         </a>
-        <!-- Games Submenu (combining both variants) -->
+
         <div *ngIf="gamesDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/games/media" routerLinkActive="active">
             <i class="fas fa-image me-2"></i>Game Media</a>
@@ -35,7 +38,17 @@
         </div>
       </div>
 
-      <!-- Jam Dropdown (from HEAD, optional: if you want to keep it) -->
+
+      <!-- Support Management Dropdown -->
+        <div *ngIf="gamesDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/list" routerLinkActive="active"><i class="fas fa-gamepad me-2"></i>Games</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/categories" routerLinkActive="active"><i class="fas fa-tags me-2"></i>Game Categories</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/keys" routerLinkActive="active"><i class="fas fa-key me-2"></i>Game Keys</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/games/reviews" routerLinkActive="active"><i class="fas fa-star me-2"></i>Game Reviews</a>
+        </div>
+      </div>
+
+      <!-- Jam Dropdown -->
       <div class="dropdown-section border-top border-secondary mt-3 pt-3">
         <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
            href="javascript:void(0)"
@@ -73,6 +86,7 @@
           <span><i class="fas fa-headset me-2"></i>Manage Support</span>
           <i class="fas" [ngClass]="{ 'fa-chevron-down': !supportDropdownOpen, 'fa-chevron-up': supportDropdownOpen }"></i>
         </a>
+
         <!-- Support Submenu -->
         <div *ngIf="supportDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/support/list_ticket" routerLinkActive="active">
@@ -108,6 +122,15 @@
             <i class="fas fa-undo-alt me-2"></i>Refunds</a>
           <a class="d-block py-2 text-white" (click)="openGeneratePdfPopup()">
             <i class="fas fa-tasks me-2"></i>Generate pdf</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/wallet/settings" routerLinkActive="active">
+            <i class="fas fa-tasks me-2"></i>Tasks & Rewards</a>
+        </div>
+      </div>
+        <div *ngIf="supportDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
+          <a class="d-block py-2 text-white" routerLink="/admin/support/list_ticket" routerLinkActive="active"><i class="fas fa-list-alt me-2"></i>List Tickets</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/support-agent" routerLinkActive="active"><i class="fas fa-user me-2"></i>Support Agent</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/room" routerLinkActive="active"><i class="fas fa-comments me-2"></i>Room</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/performance-review" routerLinkActive="active"><i class="fas fa-chart-line me-2"></i>Performance Review</a>
         </div>
       </div>
 
@@ -140,4 +163,3 @@
 
   </div>
 
-</div>
