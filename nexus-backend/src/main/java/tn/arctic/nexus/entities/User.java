@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import tn.arctic.nexus.entities.FinanceModule.Wallet;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,6 +81,11 @@ public class User implements Serializable {
     private List<Game> gameLibrary;
 
 
+    @OneToOne(mappedBy = "user")
+    @JsonManagedReference("wallet-user")
+    private Wallet wallet;
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Publication> publications = new ArrayList<>();
@@ -93,7 +99,8 @@ public class User implements Serializable {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"user", "transfers", "payments", "purchase"})
-    private Wallet wallet;
+    private Wallet wallet2;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -106,6 +113,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reviews-user")
     private List<GameReview> gameReviews;
+
+
+    @ManyToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    private Room room;
+
     public String getFirstName() {
         return firstName;
     }

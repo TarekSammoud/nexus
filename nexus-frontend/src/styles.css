@@ -50,10 +50,12 @@ html, body {
 }
   
 /* Importation des styles Syncfusion et FontAwesome */
+
   
   
 /*html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 @import "../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 @import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -104,6 +106,11 @@ angular-editor-toolbar button i {
       font: "Fira Sans", sans-serif !important;
     }
 
+
+    angular-editor-toolbar button i {
+      font-family: FontAwesome !important;
+      color: black !important;
+      }
 /* Style pour les icônes dans angular-editor */
 angular-editor-toolbar button i {
   font-family: FontAwesome !important;
@@ -113,6 +120,7 @@ angular-editor-toolbar button i {
       font-family: FontAwesome !important;
       color: black !important;
       }
+
 
 /* Floating Next Button */
 .next-btn {
@@ -176,6 +184,11 @@ select option {
 select:focus {
   outline: none; /* Optional: remove focus outline */
 }
+
+    
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .next-btn:hover {
   background: linear-gradient(45deg, #6338B0, #8A6BD5);

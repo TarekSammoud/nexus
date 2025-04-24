@@ -44,7 +44,8 @@ public class SupportTicket {
 
 
 
-
+    @Column(length = 2000)
+    private String analysisResult;
 
 
     @ManyToOne
@@ -60,6 +61,8 @@ public class SupportTicket {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User   user;
+
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

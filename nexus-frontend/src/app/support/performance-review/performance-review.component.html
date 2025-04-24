@@ -1,14 +1,58 @@
-
-  
-  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
-    <label for="rating">Rating:</label>
-    <input id="rating" formControlName="rating" type="number">
-  
-    <label for="feedback">Feedback:</label>
-    <textarea id="feedback" formControlName="feedback"></textarea>
-  
-    <button type="submit" [disabled]="reviewForm.invalid">
-      {{ currentReview ? 'Update Review' : 'Add Review' }}
-    </button>
+<div class="gaming-review-form-container">
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="gaming-review-form">
+    <h2 class="form-title">{{ currentReview ? 'Update Performance Review' : 'Add Performance Review' }}</h2>
+    
+    <div class="form-group">
+      <label for="rating" class="form-label">Rating <span class="required">*</span></label>
+      <div class="rating-input-group">
+        <!-- Hidden input that still works with Angular form -->
+        <input 
+          id="rating" 
+          formControlName="rating" 
+          type="number" 
+          min="1" 
+          max="5" 
+          class="form-control"
+          [ngClass]="{'is-invalid': reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched}">
+          
+        <!-- Star rating display -->
+        <div class="rating-icons">
+          <span class="star-icon" *ngFor="let star of [1,2,3,4,5]" 
+                [ngClass]="{'active': reviewForm.get('rating')?.value >= star}"
+                (click)="reviewForm.get('rating')?.setValue(star)">★</span>
+        </div>
+      </div>
+      
+      <div class="error-message" *ngIf="reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched">
+        Please select a rating
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="feedback" class="form-label">Feedback <span class="required">*</span></label>
+      <textarea 
+        id="feedback" 
+        formControlName="feedback" 
+        class="form-control" 
+        rows="4"
+        placeholder="Enter your detailed feedback here"
+        [ngClass]="{'is-invalid': reviewForm.get('feedback')?.invalid && reviewForm.get('feedback')?.touched}"></textarea>
+      <div class="error-message" *ngIf="reviewForm.get('feedback')?.invalid && reviewForm.get('feedback')?.touched">
+        Feedback is required
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" class="btn btn-cancel" *ngIf="currentReview" (click)="resetForm()">
+        <span class="btn-icon">✖</span> Cancel
+      </button>
+      <button 
+        type="submit" 
+        class="btn btn-submit" 
+        [disabled]="reviewForm.invalid || reviewForm.pristine">
+        <span class="btn-icon">{{ currentReview ? '✓' : '+' }}</span>
+        {{ currentReview ? 'Update Review' : 'Add Review' }}
+      </button>
+    </div>
   </form>
-  
+</div>

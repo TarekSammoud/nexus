@@ -24,7 +24,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String roomId;
 
     @OneToOne
     @JoinColumn(name = "ticket_id")
