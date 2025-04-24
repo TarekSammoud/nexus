@@ -81,7 +81,9 @@ import { ForgotPasswordComponent } from './user-management/forgot-password/forgo
 import { UserListComponent } from './user-management/user-list/user-list.component';
 import { UserDetailsComponent } from './user-management/user-details/user-details.component';
 import { UserFormComponent } from './user-management/user-form/user-form.component';
-import { UserAvatarComponent } from './user-management/user-avatar/user-avatar.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+
+
 import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component';
 import { FriendRequestActionsComponent } from './user-management/friend-request-actions/friend-request-actions.component';
 import { BlockedUsersComponent } from './user-management/blocked-users/blocked-users.component';
@@ -189,7 +191,7 @@ import { GithubCallbackComponent } from './user-management/github-callback/githu
     UserListComponent,
     UserDetailsComponent,
     UserFormComponent,
-    UserAvatarComponent,
+
     FriendRequestListComponent,
     FriendRequestActionsComponent,
     BlockedUsersComponent,
@@ -228,6 +230,8 @@ import { GithubCallbackComponent } from './user-management/github-callback/githu
 
   ],
   imports: [
+    RecaptchaModule,
+    RecaptchaFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

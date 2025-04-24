@@ -74,6 +74,9 @@ import { AuthGuard } from './core/services/user-management/auth.guard';
 import { LibraryComponent } from './library/library.component';
 import { SupportComponent } from './support/support.component';
 
+import { GithubCallbackComponent } from './user-management/github-callback/github-callback.component';
+
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -87,7 +90,7 @@ const routes: Routes = [
   { path: 'friend-requests', component: FriendRequestListComponent, canActivate: [AuthGuard] },
   { path: 'avatar', component: AvatarGeneratorComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-
+  { path: 'github-callback', component: GithubCallbackComponent },
 
   // 🎮 Games
   { path: 'games', component: GamesComponent },
