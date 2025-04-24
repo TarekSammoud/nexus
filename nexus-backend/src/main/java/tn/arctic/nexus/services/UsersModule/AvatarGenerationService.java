@@ -1,5 +1,4 @@
 package tn.arctic.nexus.services.UsersModule;
-
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -46,10 +45,12 @@ public class AvatarGenerationService {
 
             byte[] imageBytes = Base64.getDecoder().decode(base64Image);
 
+
             // 📁 Sauvegarde temporaire de l'image
             File tempFile = File.createTempFile("avatar_", ".png");
             try (FileOutputStream fos = new FileOutputStream(tempFile)) {
                 fos.write(imageBytes);
+
             }
 
             // ☁️ Upload vers Cloudinary
@@ -65,20 +66,30 @@ public class AvatarGenerationService {
         }
     }
 
+
     private String buildPrompt(AvatarRequestDto request) {
         StringBuilder prompt = new StringBuilder();
+
+        // Ajout du texte de description
         if (request.getDescription() != null && !request.getDescription().isEmpty()) {
             prompt.append(request.getDescription());
         }
+
+        // Ajout du style artistique
         if (request.getArtStyle() != null && !request.getArtStyle().isEmpty()) {
             prompt.append(", style ").append(request.getArtStyle());
         }
+
+        // Ajout des traits faciaux
         if (request.getFacialFeatures() != null && !request.getFacialFeatures().isEmpty()) {
             prompt.append(", ").append(String.join(", ", request.getFacialFeatures()));
         }
+
+        // Ajout du prompt négatif
         if (request.getNegativePrompt() != null && !request.getNegativePrompt().isEmpty()) {
             prompt.append(", avoid: ").append(request.getNegativePrompt());
         }
+
         return prompt.toString();
     }
 }

@@ -28,4 +28,9 @@ public interface IUserRepository  extends JpaRepository<User,Long> {
     List<User> findTopUsersByActivity();
 
     User findByPhoneNumber(String phoneNumber);
+
+
+
+
+
 }

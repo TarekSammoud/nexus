@@ -34,14 +34,15 @@ export class AuthService {
 
     register(user: SignUp): Observable<any> {
         const token = localStorage.getItem('auth_token');
+        console.log('Retrieved token:', token);
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` })
         });
+        console.log('Request Headers:', headers);  // Vérifier les headers envoyés
 
         return this.http.post<any>(`${this.baseUrl}/register`, user, { headers });
     }
-
     isAuthenticated(): boolean {
         return localStorage.getItem('auth_token') !== null;
     }
@@ -98,6 +99,16 @@ export class AuthService {
         return this.http.post(`http://localhost:9000/nexus-backend/auth/facebook-login`, null, { params });
 
     }
+
+
+    githubLogin(code: string) {
+        console.log('Making GitHub login request with code:', code);
+        return this.http.post<{ token: string }>('http://localhost:9000/nexus-backend/auth/github-login', {
+            code: code
+        });
+
+    }
+
 
 
 

@@ -26,7 +26,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFacebookSDK();
+
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+      this.authService.githubLogin(code).subscribe({
+        next: (res: any) => {
+          localStorage.setItem('auth_token', res.token);
+          this.router.navigate(['/user-profile']);
+        },
+        error: (err) => {
+          console.error('Erreur backend GitHub login', err);
+          this.errorMessage = 'Échec de l’authentification GitHub.';
+        }
+      });
+    }
   }
+
 
   loadFacebookSDK(): void {
     if (document.getElementById('facebook-jssdk')) return;
@@ -87,4 +102,17 @@ export class LoginComponent implements OnInit {
       }
     }, { scope: 'email,public_profile' });
   }
+
+
+  loginWithGithub(): void {
+    const clientId = 'Ov23li0qwXhIrPaTVfkg'; // Replace with your actual GitHub client ID
+    const redirectUri = encodeURIComponent('http://localhost:4200/github-callback'); // Callback URL should match exactly
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
+
+    console.log('Redirecting to GitHub OAuth: ', githubAuthUrl); // Add a log to verify the URL
+    window.location.href = githubAuthUrl;
+  }
+
+
+
 }

@@ -135,6 +135,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './support/support.component';
 import { CommonModule } from '@angular/common';
 import { AvatarGeneratorComponent } from './user-management/avatar-generator/avatar-generator.component';
+import { GithubCallbackComponent } from './user-management/github-callback/github-callback.component';
 
 
 
@@ -221,6 +222,7 @@ import { AvatarGeneratorComponent } from './user-management/avatar-generator/ava
     MarketDetailsComponent,
     LibraryComponent,
     AvatarGeneratorComponent,
+    GithubCallbackComponent,
 
 
 
