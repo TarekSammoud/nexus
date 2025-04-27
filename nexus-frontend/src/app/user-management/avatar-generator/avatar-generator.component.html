@@ -1,6 +1,23 @@
 <div class="container">
-    <h1>Générateur d'avatar</h1>
+    <h1>Avatar Generator</h1>
 
+    <!-- WAITING TIMER during generation -->
+    <div *ngIf="isLoading" style="text-align: center; margin-bottom: 20px;">
+        <h3>Generation in Progress...</h3>
+        <p>Estimated time remaining: {{ formatCountdown() }}</p>
+        <p>Please wait while your avatar is being created (it can take up to 15 minutes).</p>
+    </div>
+
+    <!-- GENERATED AVATAR -->
+    <div *ngIf="generatedImageUrl && !isLoading" style="text-align: center; margin-bottom: 20px;">
+        <h3>Your Avatar:</h3>
+        <img [src]="generatedImageUrl" alt="Generated Avatar"
+            style="max-width: 300px; border-radius: 8px; margin-bottom: 10px;">
+        <br>
+        <button mat-raised-button color="accent" (click)="printAvatar()">Print Avatar</button>
+    </div>
+
+    <!-- FORM -->
     <form (ngSubmit)="generateAvatar()">
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
@@ -8,36 +25,31 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Style artistique</mat-label>
+            <mat-label>Art Style</mat-label>
             <mat-select [(ngModel)]="model.artStyle" name="artStyle">
                 <mat-option *ngFor="let style of artStyles" [value]="style.value">
-                    {{style.display}}
+                    {{ style.display }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Traits du visage</mat-label>
+            <mat-label>Facial Features</mat-label>
             <mat-select [(ngModel)]="model.facialFeatures" name="facialFeatures" multiple>
                 <mat-option *ngFor="let feature of facialFeatures" [value]="feature.value">
-                    {{feature.display}}
+                    {{ feature.display }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Éléments à éviter</mat-label>
+            <mat-label>Elements to Avoid</mat-label>
             <input matInput [(ngModel)]="model.negativePrompt" name="negativePrompt">
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
-            <span *ngIf="!isLoading">Générer l'avatar</span>
-            <span *ngIf="isLoading">Génération en cours...</span>
+            <span *ngIf="!isLoading">Generate Avatar</span>
+            <span *ngIf="isLoading">Generating...</span>
         </button>
     </form>
-    <div *ngIf="generatedImageUrl">
-        <h3>Generated Avatar:</h3>
-        <img [src]="generatedImageUrl" alt="Generated Avatar" style="max-width: 300px;">
-    </div>
-
 </div>
