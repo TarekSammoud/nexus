@@ -14,7 +14,7 @@ public class AIService {
     private SupportTicketService supportTicketService;
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String FASTAPI_URL = "http://localhost:8000/analyze"; // update as needed
+    private final String FASTAPI_URL = "http://localhost:8000/analyze";  // or the actual URL of your FastAPI endpoint
 
     public String analyzeText(String inputText) {
         HttpHeaders headers = new HttpHeaders();
