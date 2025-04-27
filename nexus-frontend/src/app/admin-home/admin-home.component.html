@@ -109,17 +109,22 @@
         <div *ngIf="userSpaceDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
 
           <a class="d-block py-2 text-white" routerLink="/admin/signup" routerLinkActive="active">
-            <i class="fas fa-user-plus me-2"></i>Create New Account
-          </a>
-          <a class="d-block py-2 text-white" routerLink="/admin/adminDashboard" routerLinkActive="active">
-            <i class="fas fa-user-plus me-2"></i>Get Users
-          </a>
-          <a class="d-block py-2 text-white" routerLink="/admin/blockedUsers" routerLinkActive="active">
-            <i class="fas fa-user-plus me-2"></i>blocked Users
+            <!-- Create New Account Icon -->
+            <i class="fas fa-user-circle me-2"></i>Create New Account
           </a>
 
+          <a class="d-block py-2 text-white" routerLink="/admin/adminDashboard" routerLinkActive="active">
+            <!-- Get Users Icon -->
+            <i class="fas fa-users me-2"></i>Get Users
+          </a>
+
+          <a class="d-block py-2 text-white" routerLink="/admin/blockedUsers" routerLinkActive="active">
+            <!-- Blocked Users Icon -->
+            <i class="fas fa-ban me-2"></i>Blocked Users
+          </a>
 
         </div>
+
       </div>
 
 
