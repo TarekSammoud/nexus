@@ -1,7 +1,6 @@
 <div class="container-fluid fusion-container">
     <div class="row fusion-wrapper">
-
-        <!-- Partie gauche : Présentation -->
+        <!-- Partie gauche -->
         <div class="col-md-6 p-5 d-flex flex-column justify-content-center align-items-center text-white intro-zone">
             <img src="assets/img/logo_white.png" alt="Nexus Logo" class="logo mb-4">
             <h1 class="display-5 glow-text">Welcome to Nexus</h1>
@@ -9,12 +8,9 @@
                 <span class="typewriter-text">Your next-generation platform for discovering, buying, and sharing
                     games.</span>
             </p>
-
-
-
         </div>
 
-        <!-- Partie droite : Formulaire -->
+        <!-- Partie droite -->
         <div class="col-md-6 p-5 d-flex flex-column justify-content-center align-items-center form-zone">
             <div class="w-100" style="max-width: 400px;">
                 <h2 class="text-center mb-4">Login</h2>
@@ -29,20 +25,27 @@
                             required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
-                    <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
                 </form>
-                <div class="text-center mt-3">
-                    <button (click)="loginWithFacebook()" class="btn btn-info w-100 mb-2">Se connecter avec
-                        Facebook</button>
+
+                <!-- 🔥 Message affiché dynamiquement -->
+                <div *ngIf="blockedMessage" class="alert alert-warning mt-3 text-center">
+                    {{ blockedMessage }}
+                </div>
+                <div *ngIf="!blockedMessage && errorMessage" class="alert alert-danger mt-3 text-center">
+                    {{ errorMessage }}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button (click)="loginWithFacebook()" class="btn btn-info w-100 mb-2">
+                        Se connecter avec Facebook
+                    </button>
                     <button (click)="loginWithGithub()" class="btn btn-dark w-100 mb-2">
                         <i class="bi bi-github me-2"></i> Se connecter avec GitHub
                     </button>
-
                     <a routerLink="/signup" class="btn btn-link text-white">Sign Up</a>
                     <a routerLink="/forgot-password" class="btn btn-link text-white">Forgot Password?</a>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

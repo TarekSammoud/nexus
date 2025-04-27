@@ -15,6 +15,7 @@ import tn.arctic.nexus.services.UsersModule.AuthService;
 
 import tn.arctic.nexus.services.UsersModule.FacebookAuthService;
 import tn.arctic.nexus.services.UsersModule.GitHubAuthService;
+import tn.arctic.nexus.services.UsersModule.IBlockListService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,16 +46,32 @@ public class AuthController {
         String token = jwtUtil.generateToken(savedUser);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+    @Autowired
+    private IBlockListService iBlockListService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         User user = authService.loadUserByEmail(request.getEmail());
+
+        // Vérification si l'utilisateur existe
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+
+        // Vérification si l'utilisateur est bloqué via BlockListService
+        if (iBlockListService.isUserBlocked(user.getId())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Votre compte est bloqué jusqu'à une date ultérieure.");
+        }
+
+        // Vérification du mot de passe
         if (authService.checkPassword(request.getPassword(), user.getPassword())) {
             String token = jwtUtil.generateToken(user);
             return ResponseEntity.ok(new AuthResponse(token));
         }
-        return ResponseEntity.status(401).body("Invalid credentials");
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestParam String email) {

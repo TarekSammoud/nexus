@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-5 admin-games-container">
     <h1 class="text-center mb-4">Admin Dashboard - All Users</h1>
 
     <!-- Loading message -->
@@ -13,37 +13,39 @@
 
     <!-- Users table -->
     <div *ngIf="!loading && users.length > 0">
-        <table class="table table-dark">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Creation Date</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phoneNumber || 'N/A' }}</td>
-                    <td>{{ user.address || 'N/A' }}</td>
-                    <td>{{ user.createdAt | date: 'short' }}</td>
-                    <td>{{ user.roleType }}</td>
+        <div class="table-responsive">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Creation Date</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phoneNumber || 'N/A' }}</td>
+                        <td>{{ user.address || 'N/A' }}</td>
+                        <td>{{ user.createdAt | date: 'short' }}</td>
+                        <td>{{ user.roleType }}</td>
 
-                    <td>
-                        <button class="btn btn-danger" (click)="openBlockModal(user)">Block</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <td>
+                            <button class="btn btn-outline-success" (click)="openBlockModal(user)">Block</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Message if no users are found -->
