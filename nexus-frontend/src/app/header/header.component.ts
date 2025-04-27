@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.gameKeyForm = this._fb.group({
@@ -43,7 +43,8 @@ export class HeaderComponent implements OnInit {
         this.user = user;
 
         const userId = TokenService.getUserId();  // Récupérer l'ID depuis le TokenService
-
+        const role = localStorage.getItem('user_role');
+        this.isAdmin = role === 'ADMIN';
         if (userId) {
           this.loadProfilePicture(userId);
         } else {
@@ -101,6 +102,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.authService.logout(); // Tu peux aussi gérer les erreurs ici si besoin
     this._router.navigate(['/login']); // Redirection vers la page de login
+    window.location.reload();
   }
 
 

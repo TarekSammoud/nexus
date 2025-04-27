@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/user-management/auth.service';
 import { TokenService } from '../../core/services/user-management/token.service';
+import { UserProfileService } from '../../core/services/user-management/userprofile.service';
 
 declare global {
   interface Window { fbAsyncInit: () => void; }
@@ -21,7 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userProfileService: UserProfileService
+    // Injecter le service
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class LoginComponent implements OnInit {
       this.authService.githubLogin(code).subscribe({
         next: (res: any) => {
           localStorage.setItem('auth_token', res.token);
+          this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
           this.router.navigate(['/user-profile']);
         },
         error: (err) => {
@@ -41,7 +45,6 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
 
   loadFacebookSDK(): void {
     if (document.getElementById('facebook-jssdk')) return;
@@ -66,20 +69,44 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     if (this.email && this.password) {
-      this.authService.login(this.email, this.password).subscribe(
-        (response) => {
+      this.authService.login(this.email, this.password).subscribe({
+        next: (response) => {
           const token = response.token;
+
+          // Stocker le token
           localStorage.setItem('auth_token', token);
-          this.router.navigate(['/user-profile']);
+
+          // 🔥 Extraire l'ID de l'utilisateur à partir du token
+          const userId = TokenService.getUserId();
+          if (userId) {
+            // 🔥 Appeler getUserById pour récupérer le roleType
+            this.userProfileService.getUserById(userId).subscribe({
+              next: (user) => {
+                const roleType = user.roleType;
+                localStorage.setItem('user_role', roleType);
+
+                this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
+                this.router.navigate(['/user-profile']);
+              },
+              error: (error) => {
+                console.error('Erreur lors de la récupération de l\'utilisateur', error);
+                this.errorMessage = 'Erreur lors de la récupération du rôle utilisateur.';
+              }
+            });
+          } else {
+            console.error('Impossible d\'extraire l\'ID utilisateur du token');
+            this.errorMessage = 'Erreur lors de la connexion.';
+          }
         },
-        (error) => {
+        error: (error) => {
           this.errorMessage = 'Identifiants invalides. Veuillez réessayer.';
         }
-      );
+      });
     } else {
       this.errorMessage = 'Veuillez remplir l\'email et le mot de passe.';
     }
   }
+
 
   loginWithFacebook(): void {
     FB.login((response: any) => {
@@ -90,19 +117,18 @@ export class LoginComponent implements OnInit {
         this.authService.facebookLogin(accessToken).subscribe({
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
+            this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
             this.router.navigate(['/user-profile']);
           },
           error: (err) => {
             console.error('Erreur backend Facebook login', err);
           }
         });
-
       } else {
         console.log("Connexion Facebook annulée ou refusée.");
       }
     }, { scope: 'email,public_profile' });
   }
-
 
   loginWithGithub(): void {
     const clientId = 'Ov23li0qwXhIrPaTVfkg'; // Replace with your actual GitHub client ID
@@ -112,7 +138,4 @@ export class LoginComponent implements OnInit {
     console.log('Redirecting to GitHub OAuth: ', githubAuthUrl); // Add a log to verify the URL
     window.location.href = githubAuthUrl;
   }
-
-
-
 }

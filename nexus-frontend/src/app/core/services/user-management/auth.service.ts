@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../entities/user/user.model';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -16,6 +16,8 @@ export class AuthService {
 
     private baseUrl = 'http://localhost:9000/nexus-backend/auth';
     private userUrl = 'http://localhost:9000/nexus-backend/user';
+
+
 
     constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
@@ -114,5 +116,20 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         return this.tokenService.hasToken();  // Tu peux utiliser hasToken() de TokenService
+    }
+
+    /**
+     * 
+     * 
+     * 
+     */
+    private userLoggedInSubject = new BehaviorSubject<boolean>(false);
+
+    // Observable pour abonner le HeaderComponent
+    userLoggedIn$ = this.userLoggedInSubject.asObservable();
+
+    // Méthode pour mettre à jour l'état de connexion
+    updateUserLoginStatus(isLoggedIn: boolean): void {
+        this.userLoggedInSubject.next(isLoggedIn);
     }
 }

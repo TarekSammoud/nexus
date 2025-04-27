@@ -25,10 +25,12 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.getUserDetails();
   }
 
   getUserDetails(): void {
+
     const userId = TokenService.getUserId();
     if (userId) {
       this.authService.getLoggedInUserProfile().subscribe(
