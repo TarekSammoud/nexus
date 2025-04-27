@@ -28,6 +28,7 @@ public class UserController {
     private IProfilePicturesService profilePictureService;
 
 
+
     @GetMapping("/allUser")
     public List<User> getAllUsers() {
         return userService.retrieveAllUser();
@@ -107,6 +108,8 @@ public class UserController {
     public boolean checkEmailUnique(@PathVariable String email) {
         return userRepository.findByEmail(email) == null; // Renvoie true si l'email est unique, sinon false
     }
+
+
 
 
 }

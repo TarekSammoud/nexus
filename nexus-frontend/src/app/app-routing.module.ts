@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './user-management/login/login.component';
 import { SignupComponent } from './user-management/signup/signup.component';
 import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
+import { BlockedUsersComponent } from './user-management/blocked-users/blocked-users.component'
+
 
 import { GamePageComponent } from './games/game-page/game-page.component';
 import { CreateGameComponent } from './games/create-game/create-game.component';
@@ -49,6 +51,7 @@ import { JamsListComponent } from './jams/jams-list/jams-list.component';
 import { JamDetailsPageComponent } from './jams/entries/jam-details-page/jam-details-page.component';
 import { VipJamsListComponent } from './jams/vip-jams-list/vip-jams-list.component';
 
+import { AdminDashboardComponent } from './user-management/admin-dashboard/admin-dashboard.component';
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
 import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
@@ -133,6 +136,11 @@ const routes: Routes = [
     component: AdminHomeComponent,
 
     children: [
+      { path: 'signup', component: SignupComponent },
+      { path: 'adminDashboard', component: AdminDashboardComponent },
+      { path: 'blockedUsers', component: BlockedUsersComponent },
+
+
       { path: '', redirectTo: 'games/list', pathMatch: 'full' },
       { path: 'games/list', component: AdminGameListComponent },
       { path: 'games/categories', component: GameCategoryListComponent },

@@ -1,0 +1,90 @@
+/* Fond général */
+body {
+    background-color: #121212;
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal */
+.featured-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+/* Carte style Glassmorphism */
+.glassmorphic-list {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Effet au survol */
+.glassmorphic-list:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Vidéo d'avatar */
+.background-video {
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Image de profil */
+.cover-img {
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Bouton */
+.btn-primary {
+    background-color: #1f8ef1;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0d6efd;
+}
+
+/* List-group personnalisée */
+.list-group-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+/* Animation d’apparition */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glassmorphic-list {
+    animation: fadeInUp 0.8s ease forwards;
+}

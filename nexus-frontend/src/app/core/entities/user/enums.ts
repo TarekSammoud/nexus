@@ -2,6 +2,7 @@ export enum RoleType {
     ADMIN = "ADMIN",
     DEVELOPER = "DEVELOPER",
     PLAYER = "PLAYER",
+    SUPPORTAGENT = "SUPPORTAGENT",
 }
 
 export enum StatusFriendRequest {

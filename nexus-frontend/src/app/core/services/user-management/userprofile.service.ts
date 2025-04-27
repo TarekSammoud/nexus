@@ -46,7 +46,9 @@ export class UserProfileService {
         return this.http.get(`${this.apiUrl3}/task-info/${taskId}`);
     }
 
-
-
+    private getallUser = 'http://localhost:9000/nexus-backend/user/allUser';
+    getAllUsers(): Observable<any[]> {
+        return this.http.get<any[]>(this.getallUser);
+    }
 
 }

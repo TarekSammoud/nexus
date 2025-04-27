@@ -8,12 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-home.component.css'],
   animations: [
     trigger('dropdownAnimation', [
-      // Dropdown closed state
       transition(':enter', [
         style({ opacity: 0, height: 0 }),
         animate('300ms ease-out', style({ opacity: 1, height: '*' }))
       ]),
-      // Dropdown open state
       transition(':leave', [
         animate('200ms ease-in', style({ opacity: 0, height: 0 }))
       ])
@@ -22,15 +20,13 @@ import { Router } from '@angular/router';
 })
 export class AdminHomeComponent {
   constructor(private _router: Router) { }
-  gamesDropdownOpen = false;   // State for games dropdown
-  supportDropdownOpen = false; // State for support dropdown
+
+  gamesDropdownOpen = false;
+  supportDropdownOpen = false;
   jamDropdownOpen = false;
 
-  dropdownOpen = false;
-  dropdownOpenD = false;
-
-
-
+  communityDropdownOpen = false;    // Nouvelle variable pour Community
+  userSpaceDropdownOpen = false;    // Nouvelle variable pour Personal Space
 
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
@@ -39,30 +35,26 @@ export class AdminHomeComponent {
   toggleJamDropdown() {
     this.jamDropdownOpen = !this.jamDropdownOpen;
   }
-  
-  toggleSupportDropdown(){
+
+  toggleSupportDropdown() {
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
-  toggleDropdownD() {
-    this.dropdownOpenD = !this.dropdownOpenD;
+
+  toggleCommunityDropdown() {
+    this.communityDropdownOpen = !this.communityDropdownOpen;
   }
 
-  toggleDropdownf () {
-    this.dropdownOpen = !this.dropdownOpen;
+  toggleUserSpaceDropdown() {
+    this.userSpaceDropdownOpen = !this.userSpaceDropdownOpen;
   }
 
-  navigateToGamesList(){
+  navigateToGamesList() {
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
   }
 
-  isCollapsed = false;  // Track whether sidebar is collapsed
+  isCollapsed = false;
 
-  // Toggle the sidebar state
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
-  
-
-
-
 }

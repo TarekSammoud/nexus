@@ -1,1 +1,82 @@
-<p>admin-dashboard works!</p>
+<div class="container my-5">
+    <h1 class="text-center mb-4">Admin Dashboard - All Users</h1>
+
+    <!-- Loading message -->
+    <div *ngIf="loading" class="loading-message">
+        Loading users...
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    <!-- Users table -->
+    <div *ngIf="!loading && users.length > 0">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Creation Date</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phoneNumber || 'N/A' }}</td>
+                    <td>{{ user.address || 'N/A' }}</td>
+                    <td>{{ user.createdAt | date: 'short' }}</td>
+                    <td>{{ user.roleType }}</td>
+
+                    <td>
+                        <button class="btn btn-danger" (click)="openBlockModal(user)">Block</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Message if no users are found -->
+    <div *ngIf="!loading && users.length === 0" class="no-users">
+        No users found
+    </div>
+</div>
+
+<!-- Block Modal -->
+<div *ngIf="isModalOpen" class="modal fade show" style="display: block;" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Block User</h5>
+                <button type="button" class="btn-close" (click)="closeBlockModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onBlockSubmit()">
+                    <div class="mb-3">
+                        <label for="blockReason" class="form-label">Block Reason</label>
+                        <textarea id="blockReason" [(ngModel)]="blockReason" name="reason" class="form-control"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="blockUntilDate" class="form-label">Block End Date</label>
+                        <input type="date" id="blockUntilDate" [(ngModel)]="blockUntilDate" name="blockedUntil"
+                            class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-secondary" (click)="closeBlockModal()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

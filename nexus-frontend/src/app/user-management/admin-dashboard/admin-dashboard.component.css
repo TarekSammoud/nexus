@@ -1,0 +1,92 @@
+/* Style de base pour le tableau */
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    border-radius: 8px;
+}
+
+.table-dark {
+    background-color: #1a1a1a;
+    /* Fond sombre */
+    color: #fff;
+    /* Texte blanc */
+}
+
+.table-dark th,
+.table-dark td {
+    padding: 12px 20px;
+    text-align: center;
+}
+
+.table-dark th {
+    background-color: #333;
+    /* En-tête sombre */
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.table-dark tbody tr {
+    border-bottom: 1px solid #444;
+    /* Bordure entre les lignes */
+}
+
+.table-dark tbody tr:hover {
+    background-color: #3a3a3a;
+    /* Effet de survol */
+    cursor: pointer;
+}
+
+.table-dark tbody tr td {
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style des messages d'erreur et de chargement */
+.loading-message,
+.no-users,
+.alert {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Style de l'alerte d'erreur */
+.alert-danger {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Style pour les boutons */
+.btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+    /* Effet d'agrandissement au survol */
+}
+
+/* Style pour la section "Aucun utilisateur n'est bloqué" */
+.no-users {
+    font-size: 20px;
+    color: #95a5a6;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}

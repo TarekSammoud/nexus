@@ -88,8 +88,6 @@ import { FriendRequestListComponent } from './user-management/friend-request-lis
 import { FriendRequestActionsComponent } from './user-management/friend-request-actions/friend-request-actions.component';
 import { BlockedUsersComponent } from './user-management/blocked-users/blocked-users.component';
 import { NotificationsComponent } from './user-management/notifications/notifications.component';
-import { GameLibraryComponent } from './user-management/game-library/game-library.component';
-import { RoleManagementComponent } from './user-management/role-management/role-management.component';
 import { UserDashboardComponent } from './user-management/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './user-management/admin-dashboard/admin-dashboard.component';
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
@@ -195,8 +193,7 @@ import { GithubCallbackComponent } from './user-management/github-callback/githu
     FriendRequestActionsComponent,
     BlockedUsersComponent,
     NotificationsComponent,
-    GameLibraryComponent,
-    RoleManagementComponent,
+
 
     UserDashboardComponent,
     AdminDashboardComponent,

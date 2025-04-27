@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         next: (res: any) => {
           localStorage.setItem('auth_token', res.token);
           this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
-          this.router.navigate(['/user-profile']);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.error('Erreur backend GitHub login', err);
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('user_role', roleType);
 
                 this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
-                this.router.navigate(['/user-profile']);
+                this.router.navigate(['/']);
               },
               error: (error) => {
                 console.error('Erreur lors de la récupération de l\'utilisateur', error);
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
             this.authService.updateUserLoginStatus(true); // Mettre à jour le statut de connexion
-            this.router.navigate(['/user-profile']);
+            this.router.navigate(['/']);
           },
           error: (err) => {
             console.error('Erreur backend Facebook login', err);

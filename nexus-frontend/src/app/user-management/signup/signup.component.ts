@@ -15,6 +15,9 @@ export class SignupComponent implements OnInit {
   emailError: string | null = null;
   phoneError: string | null = null;
 
+  isAdmin: boolean = false; // tu l'avais mis mais on va l'initialiser bien
+
+
   constructor(private authService: AuthService, private router: Router) {
     this.user = new SignUp({
       firstName: '',
@@ -25,65 +28,81 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const role = localStorage.getItem('user_role');
+    this.isAdmin = role === 'ADMIN';  // ✅
+  }
 
   onSubmit(): void {
     if (!this.user.email || !this.user.password) {
-      alert('Email et mot de passe sont requis');
+      alert('Email and password are required');
       return;
     }
 
-    // Vérification de l'unicité de l'email
+    // Check for unique email
     this.authService.checkEmailUnique(this.user.email).subscribe({
       next: (isUnique) => {
         if (!isUnique) {
-          this.emailError = 'Cet email est déjà utilisé. Veuillez en choisir un autre.';
-          return;  // Arrêter l'exécution si l'email n'est pas unique
+          this.emailError = 'This email is already taken. Please choose another one.';
+          return;  // Stop if the email is not unique
         }
 
-        // Vérification de l'unicité du numéro de téléphone (si défini)
-        if (this.user.phoneNumber) {  // Vérification que phoneNumber existe
+        // Check for unique phone number (if provided)
+        if (this.user.phoneNumber) {
           this.authService.checkPhoneUnique(this.user.phoneNumber).subscribe({
             next: (isPhoneUnique) => {
               if (!isPhoneUnique) {
-                this.phoneError = 'Le numéro de téléphone est déjà utilisé.';
-                return;  // Arrêter l'exécution si le numéro de téléphone n'est pas unique
+                this.phoneError = 'The phone number is already taken.';
+                return;  // Stop if the phone number is not unique
               }
 
-              // Si tout est valide, inscrire l'utilisateur
+              // If everything is valid, register the user
               this.authService.register(this.user).subscribe({
                 next: () => {
-                  console.log('Inscription réussie');
-                  this.router.navigate(['/login']);
+                  console.log('Signup successful');
+                  if (this.isAdmin) {
+                    // If admin, stay on the current page
+                    alert('User successfully signed up');
+                  } else {
+                    // If not an admin, redirect to login page
+                    this.router.navigate(['/login']);
+                  }
                 },
                 error: (err) => {
-                  console.error("Erreur lors de l'inscription", err);
-                  alert('Erreur lors de l\'inscription.');
+                  console.error('Error during signup', err);
+                  alert('Error during signup.');
                 }
               });
             },
             error: () => {
-              this.phoneError = 'Erreur lors de la vérification du numéro de téléphone.';
+              this.phoneError = 'Error checking the phone number uniqueness.';
             }
           });
         } else {
-          // Si phoneNumber est vide ou non défini, continuer sans vérifier l'unicité du numéro
+          // If no phone number is provided, proceed with registration without checking phone number
           this.authService.register(this.user).subscribe({
             next: () => {
-              console.log('Inscription réussie');
-              this.router.navigate(['/login']);
+              console.log('Signup successful');
+              if (this.isAdmin) {
+                // If admin, stay on the current page
+                alert('User successfully signed up');
+              } else {
+                // If not an admin, redirect to login page
+                this.router.navigate(['/login']);
+              }
             },
             error: (err) => {
-              console.error("Erreur lors de l'inscription", err);
-              alert('Erreur lors de l\'inscription.');
+              console.error('Error during signup', err);
+              alert('Error during signup.');
             }
           });
         }
       },
       error: () => {
-        this.emailError = 'Erreur lors de la vérification de l\'email.';
+        this.emailError = 'Error checking email uniqueness.';
       }
     });
   }
+
 
 }
