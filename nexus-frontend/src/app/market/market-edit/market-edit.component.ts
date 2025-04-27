@@ -13,7 +13,6 @@ export class MarketEditComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
 
   updatedData: any = {};
-  users: any[] = [];
   gameItems: any[] = [];
 
   constructor(private marketService: MarketService, private http: HttpClient) {}
@@ -23,11 +22,10 @@ export class MarketEditComponent implements OnInit {
       id: this.item.id,
       start_bid: this.item.startBid,
       end_date: this.item.endDate,
-      user_id: this.item.user?.id,
-      game_item_id: this.item.item?.id
+      game_item_id: this.item.item?.id,
+      user_id: this.item.user?.id // ✅ store it internally but do NOT modify it
     };
 
-    this.http.get<any[]>('http://localhost:9000/nexus-backend/users').subscribe(data => this.users = data);
     this.http.get<any[]>('http://localhost:9000/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
   }
 
@@ -36,7 +34,7 @@ export class MarketEditComponent implements OnInit {
       id: this.updatedData.id,
       startBid: this.updatedData.start_bid,
       endDate: this.updatedData.end_date,
-      user: { id: this.updatedData.user_id },
+      user: { id: this.updatedData.user_id }, // ✅ re-send the same user
       item: { id: this.updatedData.game_item_id }
     };
 

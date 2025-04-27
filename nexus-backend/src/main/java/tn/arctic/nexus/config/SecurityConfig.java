@@ -60,6 +60,8 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
 
                         .requestMatchers("/marketlistings/**").permitAll()
+                        .requestMatchers("/bids/**").permitAll()
+                        .requestMatchers("/gameitem/**").permitAll()
 
 
 
