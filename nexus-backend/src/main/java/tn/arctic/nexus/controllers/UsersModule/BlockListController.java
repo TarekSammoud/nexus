@@ -36,4 +36,9 @@ public class BlockListController {
     public void deleteBlockList(@PathVariable Long id) {
         iBlockListService.removeBlockList(id);
     }
+
+    @GetMapping("/isBlocked/{userId}")
+    public boolean isUserBlocked(@PathVariable Long userId) {
+        return iBlockListService.isUserBlocked(userId);
+    }
 }

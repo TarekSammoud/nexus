@@ -5,13 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.Config.JwtUtil;
+import tn.arctic.nexus.config.JwtUtil;
 import tn.arctic.nexus.entities.AuthRequest;
 import tn.arctic.nexus.entities.AuthResponse;
+import tn.arctic.nexus.entities.GitHubCodeRequest;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.UsersModule.AuthService;
+
 import tn.arctic.nexus.services.UsersModule.FacebookAuthService;
+import tn.arctic.nexus.services.UsersModule.GitHubAuthService;
+import tn.arctic.nexus.services.UsersModule.IBlockListService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +29,12 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final IUserRepository userRepository;
 
+
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
+
+
+
         if (!checkEmailUnique(user.getEmail())) {
             return ResponseEntity.badRequest().body(new AuthResponse("L'email est déjà utilisé."));
         }
@@ -38,16 +46,32 @@ public class AuthController {
         String token = jwtUtil.generateToken(savedUser);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+    @Autowired
+    private IBlockListService iBlockListService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         User user = authService.loadUserByEmail(request.getEmail());
+
+        // Vérification si l'utilisateur existe
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+
+        // Vérification si l'utilisateur est bloqué via BlockListService
+        if (iBlockListService.isUserBlocked(user.getId())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Votre compte est bloqué jusqu'à une date ultérieure.");
+        }
+
+        // Vérification du mot de passe
         if (authService.checkPassword(request.getPassword(), user.getPassword())) {
             String token = jwtUtil.generateToken(user);
             return ResponseEntity.ok(new AuthResponse(token));
         }
-        return ResponseEntity.status(401).body("Invalid credentials");
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestParam String email) {
@@ -101,11 +125,11 @@ public class AuthController {
     }
 
     /*FACEBOOOOOK
-    *
-    *
-    *
-    *
-    * */
+     *
+     *
+     *
+     *
+     * */
     @Autowired
     private FacebookAuthService facebookAuthService;
 
@@ -172,5 +196,45 @@ public class AuthController {
             return name;
         }
     }
+
+    @Autowired
+    private GitHubAuthService gitHubAuthService;
+
+    // Endpoint pour l'authentification avec GitHub
+    // Endpoint pour l'authentification avec GitHub
+    // Endpoint pour l'authentification avec GitHub
+    @PostMapping("/github-login")
+    public ResponseEntity<?> githubLogin(@RequestBody GitHubCodeRequest request) {
+        try {
+            String code = request.getCode();
+
+            // Afficher le code reçu pour le débogage
+            System.out.println("Code GitHub reçu: " + code);
+
+            // Authentifier l'utilisateur avec le code GitHub et récupérer l'objet User
+            User user = gitHubAuthService.authenticateWithGitHub(code);
+
+            // Afficher les informations de l'utilisateur récupéré
+            System.out.println("Utilisateur authentifié avec GitHub: " + user.getEmail());
+
+            // Générer un JWT pour l'utilisateur authentifié
+            String jwt = jwtUtil.generateToken(user);
+
+            // Afficher le token généré
+            System.out.println("JWT généré: " + jwt);
+
+            // Retourner le JWT dans la réponse
+            return ResponseEntity.ok(new AuthResponse(jwt));
+        } catch (Exception e) {
+            // Afficher l'erreur pour aider au débogage
+            System.out.println("Erreur lors de la connexion via GitHub: " + e.getMessage());
+
+            // Retourner une erreur si l'authentification échoue
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("GitHub login failed: " + e.getMessage());
+        }
+    }
+
+
 
 }
