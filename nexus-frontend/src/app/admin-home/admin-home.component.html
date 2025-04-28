@@ -1,8 +1,8 @@
-<div class="d-flex" style="height: 100vh; overflow: hidden;">
+<div class="d-flex flex-column" style="height: 100vh;">
 
-  <!-- Sidebar (fixed width) -->
-  <div class="sidebar d-flex flex-column bg-dark text-white" style="width: 300px;">
-
+  <!-- Sidebar (fixed width and fixed position) -->
+  <div class="sidebar d-flex flex-column bg-dark text-white"
+    style="width: 300px; position: fixed; height: 100vh; overflow-y: auto; z-index: 100;">
     <!-- Fixed Profile Section -->
     <div class="profile-section text-center d-flex flex-column align-items-center p-4 border-bottom">
       <img src="assets/img/profilepic.jpg" alt="Admin" class="profile-pic mb-2"
@@ -11,15 +11,16 @@
     </div>
 
     <!-- Scrollable Links -->
-    <div class="flex-grow-1 overflow-auto">
+    <div class="flex-grow-1">
 
       <!-- Games Dropdown -->
-      <div class="dropdown-section">
-        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
-          href="javascript:void(0)" (click)="toggleGamesDropdown()">
+      <div class="dropdown-section border-top border-secondary mt-3 pt-3">
+        <button
+          class="btn w-100 text-start text-white p-3 d-flex justify-content-between align-items-center bg-transparent border border-white"
+          (click)="toggleGamesDropdown()">
           <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
           <i class="fas" [ngClass]="{ 'fa-chevron-down': !gamesDropdownOpen, 'fa-chevron-up': gamesDropdownOpen }"></i>
-        </a>
+        </button>
         <div *ngIf="gamesDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/games/list" routerLinkActive="active"><i
               class="fas fa-gamepad me-2"></i>Games</a>
@@ -31,15 +32,15 @@
               class="fas fa-star me-2"></i>Game Reviews</a>
         </div>
       </div>
-
       <!-- Jam Dropdown -->
       <div class="dropdown-section border-top border-secondary mt-3 pt-3">
-        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
-          href="javascript:void(0)" (click)="toggleJamDropdown()">
+        <button
+          class="btn w-100 text-start text-white p-3 d-flex justify-content-between align-items-center bg-transparent border border-white"
+          (click)="toggleJamDropdown()">
           <span><i class="fas fa-puzzle-piece me-2"></i>Game Jams</span>
           <i class="fas" [ngClass]="{ 'fa-chevron-down': !jamDropdownOpen, 'fa-chevron-up': jamDropdownOpen }"></i>
-        </a>
-        <div *ngIf="jamDropdownOpen" class="submenu ps-4">
+        </button>
+        <div *ngIf="jamDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/jams/list" routerLinkActive="active"><i
               class="fas fa-list me-2"></i>All Jams</a>
           <a class="d-block py-2 text-white" routerLink="/admin/jams/entries" routerLinkActive="active"><i
@@ -54,13 +55,14 @@
       </div>
 
       <!-- Support Dropdown -->
-      <div class="dropdown-section">
-        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
-          href="javascript:void(0)" (click)="toggleSupportDropdown()">
+      <div class="dropdown-section border-top border-secondary mt-3 pt-3">
+        <button
+          class="btn w-100 text-start text-white p-3 d-flex justify-content-between align-items-center bg-transparent border border-white"
+          (click)="toggleSupportDropdown()">
           <span><i class="fas fa-folder-open me-2"></i>Manage Support</span>
           <i class="fas"
             [ngClass]="{ 'fa-chevron-down': !supportDropdownOpen, 'fa-chevron-up': supportDropdownOpen }"></i>
-        </a>
+        </button>
         <div *ngIf="supportDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/support/list_ticket" routerLinkActive="active"><i
               class="fas fa-list-alt me-2"></i>List Tickets</a>
@@ -74,14 +76,14 @@
       </div>
 
       <!-- Community Dropdown -->
-      <!-- Community Dropdown -->
-      <div class="dropdown-section">
-        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
-          href="javascript:void(0)" (click)="toggleCommunityDropdown()">
+      <div class="dropdown-section border-top border-secondary mt-3 pt-3">
+        <button
+          class="btn w-100 text-start text-white p-3 d-flex justify-content-between align-items-center bg-transparent border border-white"
+          (click)="toggleCommunityDropdown()">
           <span><i class="fas fa-users me-2"></i>Community</span>
           <i class="fas"
             [ngClass]="{ 'fa-chevron-down': !communityDropdownOpen, 'fa-chevron-up': communityDropdownOpen }"></i>
-        </a>
+        </button>
         <div *ngIf="communityDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
           <a class="d-block py-2 text-white" routerLink="/admin/community/categories" routerLinkActive="active"><i
               class="fas fa-list me-2"></i>Categories List</a>
@@ -98,42 +100,30 @@
         </div>
       </div>
 
-      <!-- User Space Dropdown -->
+      <!-- Personal Space Dropdown -->
       <div class="dropdown-section border-top border-secondary mt-3 pt-3">
-        <a class="d-flex align-items-center justify-content-between p-3 text-white dropdown-toggle"
-          href="javascript:void(0)" (click)="toggleUserSpaceDropdown()">
+        <button
+          class="btn w-100 text-start text-white p-3 d-flex justify-content-between align-items-center bg-transparent border border-white"
+          (click)="toggleUserSpaceDropdown()">
           <span><i class="fas fa-user-cog me-2"></i>Personal Space</span>
           <i class="fas"
             [ngClass]="{ 'fa-chevron-down': !userSpaceDropdownOpen, 'fa-chevron-up': userSpaceDropdownOpen }"></i>
-        </a>
+        </button>
         <div *ngIf="userSpaceDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
-
-          <a class="d-block py-2 text-white" routerLink="/admin/signup" routerLinkActive="active">
-            <!-- Create New Account Icon -->
-            <i class="fas fa-user-circle me-2"></i>Create New Account
-          </a>
-
-          <a class="d-block py-2 text-white" routerLink="/admin/adminDashboard" routerLinkActive="active">
-            <!-- Get Users Icon -->
-            <i class="fas fa-users me-2"></i>Get Users
-          </a>
-
-          <a class="d-block py-2 text-white" routerLink="/admin/blockedUsers" routerLinkActive="active">
-            <!-- Blocked Users Icon -->
-            <i class="fas fa-ban me-2"></i>Blocked Users
-          </a>
-
+          <a class="d-block py-2 text-white" routerLink="/admin/signup" routerLinkActive="active"><i
+              class="fas fa-user-circle me-2"></i>Create New Account</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/adminDashboard" routerLinkActive="active"><i
+              class="fas fa-users me-2"></i>Get Users</a>
+          <a class="d-block py-2 text-white" routerLink="/admin/blockedUsers" routerLinkActive="active"><i
+              class="fas fa-ban me-2"></i>Blocked Users</a>
         </div>
-
       </div>
-
-
 
     </div>
   </div>
 
   <!-- Main Content Area -->
-  <div class="flex-grow-1 p-4 overflow-auto">
+  <div class="flex-grow-1 p-4" style="margin-left: 300px; overflow-y: auto;">
     <router-outlet></router-outlet>
   </div>
 
