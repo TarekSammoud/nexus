@@ -3,7 +3,7 @@ package tn.arctic.nexus.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-
+import tn.arctic.nexus.Config.JwtAuthenticationFilter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +21,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthenticationFilter) {
-
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -32,41 +31,30 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/user/BlockList/**").permitAll()
                         .requestMatchers("/api/publications/**").permitAll()
                         .requestMatchers("/api/categories/**").permitAll()
                         .requestMatchers("/api/likes/**").permitAll()
                         .requestMatchers("/api/reports/**").permitAll()
                         .requestMatchers("/api/commentaires/**").permitAll()
-                        .requestMatchers("/api/sondages/**").permitAll()
-                        .requestMatchers("/api/streamers/**").permitAll()
-                        .requestMatchers("/api/votes/**").permitAll()
+                        .requestMatchers(("/api/sondages/**")).permitAll()
+                        .requestMatchers(("/api/streamers/**")).permitAll()
+                        .requestMatchers(("/api/votes/**")).permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/friendRequests/**").permitAll()
                         .requestMatchers("/pic/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/api/avatar/**").permitAll()
                         .requestMatchers("/games/**").permitAll()
-                        .requestMatchers("/games/media/**").permitAll()
-                        .requestMatchers("/games/categories**").permitAll()
+                        .requestMatchers("/games/**").permitAll()
                         .requestMatchers("/api/entries/**").permitAll()
                         .requestMatchers("/api/entry-ratings/**").permitAll()
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
-                        .requestMatchers("/performancereviews/**").permitAll()
-                        .requestMatchers("/rooms/**").permitAll()
-                        .requestMatchers("/agents/**").permitAll()
-                        .requestMatchers("/tickets/**").permitAll()
-                        .requestMatchers("/ws-support").permitAll()
-                        .requestMatchers("/**").permitAll()
-
-                        .requestMatchers("/marketlistings/**").permitAll()
-                        .requestMatchers("/bids/**").permitAll()
-                        .requestMatchers("/gameitem/**").permitAll()
-
-
 
                         .requestMatchers("/support/**").permitAll()
-                        .requestMatchers("/**").permitAll()
+
 
                         .anyRequest().authenticated()
                 )
@@ -83,4 +71,4 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-} 
+}

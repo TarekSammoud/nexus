@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.arctic.nexus.config.JwtUtil;
+import tn.arctic.nexus.Config.JwtUtil;
 import tn.arctic.nexus.entities.AuthRequest;
 import tn.arctic.nexus.entities.AuthResponse;
 import tn.arctic.nexus.entities.GitHubCodeRequest;

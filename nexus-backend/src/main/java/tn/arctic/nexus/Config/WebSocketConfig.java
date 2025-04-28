@@ -21,10 +21,10 @@ import java.util.ArrayList;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    private final tn.arctic.nexus.Config.JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
     @Autowired
     private WebSocketHandshakeInterceptor handshakeInterceptor;
-    public WebSocketConfig(tn.arctic.nexus.Config.JwtUtil jwtUtil) {
+    public WebSocketConfig(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
