@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (performance.navigation.type !== 1) { // Not a reload
+      window.location.reload();
+    }
+
+
     this.loadFacebookSDK();
 
     const code = new URLSearchParams(window.location.search).get('code');
