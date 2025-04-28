@@ -41,16 +41,13 @@
         <li class="nav-item"><a class="nav-link" [routerLink]="'/support'">Support</a></li>
 
         <!-- Friends Dropdown -->
-        <li class="nav-item dropdown d-none d-md-block" *ngIf="user?.id  || isAdmin">
-          <a class="nav-link dropdown-toggle" href="#" id="friendsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Friends
+        <!-- Friend Requests Link (without dropdown) -->
+        <li class="nav-item d-none d-md-block" *ngIf="user?.id || isAdmin">
+          <a class="nav-link" [routerLink]="['/friend-requests']">
+            Friend Requests
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="friendsDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Your Friends</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/friend-requests']">Friend Requests</a></li>
-          </ul>
         </li>
+
 
         <!-- Chat -->
         <li class="nav-item" *ngIf="user?.id"><a class="nav-link" [routerLink]="['/chat']">Chat</a></li>

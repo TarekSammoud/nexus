@@ -1,4 +1,13 @@
 <div class="chat-container">
+
+    <!-- Message de bienvenue -->
+    <div class="welcome-message section-card">
+        <h2 class="section-title" style="color: bisque;">Welcome to the Public Chat!</h2>
+        <p class="welcome-text">This is the public space of our platform. Please respect others, stay kind, and enjoy
+            your conversations!</p>
+    </div>
+
+    <!-- Liste des messages -->
     <ul class="message-list">
         <li *ngFor="let msg of messages; trackBy: trackById"
             [ngClass]="{ 'sent': msg.senderId === currentUserId, 'received': msg.senderId !== currentUserId }">
@@ -16,8 +25,10 @@
         </li>
     </ul>
 
+    <!-- Zone d'envoi de message -->
     <div class="message-input">
         <textarea id="messageContent" [(ngModel)]="messageContent" placeholder="Type your message..."></textarea>
-        <button (click)="sendMessage()">Send</button>
+        <button class="btn btn-send" (click)="sendMessage()">Send</button>
     </div>
+
 </div>

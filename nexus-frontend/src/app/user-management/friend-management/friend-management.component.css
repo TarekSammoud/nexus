@@ -1,0 +1,172 @@
+.players-container {
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    color: #eaeaea;
+}
+
+.section-card {
+    background-color: #252542;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.section-card:hover {
+    transform: scale(1.02);
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ea7a9a;
+    text-shadow: 0 0 8px rgba(234, 122, 154, 0.6);
+}
+
+.loading-text,
+.empty-text {
+    font-size: 1rem;
+    color: #a0a0b0;
+}
+
+.player-card {
+    background-color: #2b2d42;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.player-card:hover {
+    background-color: #353759;
+}
+
+.player-body {
+    padding: 14px;
+}
+
+.profile-img {
+    object-fit: cover;
+}
+
+.player-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.mutual-friends {
+    font-size: 0.9rem;
+    color: #ffc107;
+}
+
+.btn {
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+    border: none;
+}
+
+.btn-add-friend {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+}
+
+.btn-add-friend:hover {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    transform: scale(1.05);
+}
+
+.btn-accept {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-accept:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.btn-reject {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-reject:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.friend-list {
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    color: #eaeaea;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+/* Titre principal */
+.friend-list h3 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffc107;
+    text-shadow: 0 0 12px #ffc10766;
+    margin-bottom: 20px;
+}
+
+/* Message "aucun ami" */
+.friend-list .text-center p {
+    color: #ea7a9a;
+    font-weight: bold;
+}
+
+/* Carte d'un ami */
+.friend-list .card {
+    background-color: #2b2d42;
+    border-radius: 12px;
+    overflow: hidden;
+    color: #e0e0e0;
+    width: 200px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: none;
+}
+
+/* Effet au survol de la carte */
+.friend-list .card:hover {
+    background-color: #353759;
+    transform: scale(1.05);
+}
+
+/* Contenu de la carte */
+.friend-list .card-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Image de profil */
+.friend-list .profile-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ffc107;
+}
+
+/* Nom de l'ami */
+.friend-list .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffc107;
+    margin: 0;
+}
+
+/* Flexbox pour l'ensemble des amis */
+.friend-list .d-flex.flex-wrap {
+    gap: 15px;
+}

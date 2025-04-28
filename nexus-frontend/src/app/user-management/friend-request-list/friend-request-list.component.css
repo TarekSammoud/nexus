@@ -1,71 +1,102 @@
+.players-container {
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    color: #eaeaea;
+}
+
+.section-card {
+    background-color: #252542;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.section-card:hover {
+    transform: scale(1.02);
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ea7a9a;
+    text-shadow: 0 0 8px rgba(234, 122, 154, 0.6);
+}
+
+.loading-text,
+.empty-text {
+    font-size: 1rem;
+    color: #a0a0b0;
+}
+
+.player-card {
+    background-color: #2b2d42;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.player-card:hover {
+    background-color: #353759;
+}
+
+.player-body {
+    padding: 14px;
+}
+
 .profile-img {
     object-fit: cover;
-    border: 2px solid #ddd;
 }
 
-.card {
-    border: 1px solid #ddd;
-}
-
-.card-title {
+.player-name {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-.card-text {
-    font-size: 1rem;
-    color: #6c757d;
+.mutual-friends {
+    font-size: 0.9rem;
+    color: #ffc107;
 }
 
-.btn-primary {
-    background-color: #007bff;
+.btn {
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
     border: none;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.rating-form-popup {
-    background-color: #1e1e2f;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
+.btn-add-friend {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
     color: white;
 }
 
-.popup-title {
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 15px;
+.btn-add-friend:hover {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    transform: scale(1.05);
 }
 
-.form-group {
-    margin-bottom: 12px;
-    color: #ccc;
+.btn-accept {
+    background-color: #28a745;
+    color: white;
 }
 
-input[type="range"] {
-    width: 100%;
+.btn-accept:hover {
+    background-color: #218838;
+    transform: scale(1.05);
 }
 
-.btn-group {
-    display: flex;
-    justify-content: end;
-    gap: 10px;
+.btn-reject {
+    background-color: #dc3545;
+    color: white;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.btn-reject:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
 }
