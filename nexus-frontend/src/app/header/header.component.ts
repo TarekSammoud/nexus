@@ -100,10 +100,12 @@ export class HeaderComponent implements OnInit {
     }
   }
   logout(): void {
-    this.authService.logout(); // Tu peux aussi gérer les erreurs ici si besoin
-    this._router.navigate(['/login']); // Redirection vers la page de login
-    window.location.reload();
+    this.authService.logout();
+    this._router.navigate(['/login']).then(() => {
+      window.location.reload(); // Force à recharger toute la page après la redirection
+    });
   }
+
 
 
 }
