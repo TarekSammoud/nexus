@@ -29,8 +29,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class AdminGameListComponent implements OnInit {
   page = 1;
 
-      data? : Game[];
-      constructor(private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
+  data: Game[] = []; // Initialize as an empty array
+  constructor(private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
           for (let i = 0; i < this.data.length; i++) {
