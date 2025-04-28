@@ -18,4 +18,6 @@ public interface IFriendRequestService {
      FriendRequest acceptRequest(Long requestId);
     List<User> recommendFriends(Long userId);
     public Map<User, Long> getRecommendedUsersWithMutualCount(Long userId);
+
+    void removeFriendship(Long userId1, Long userId2);
 }

@@ -3,7 +3,6 @@ package tn.arctic.nexus.services.UsersModule;
 import tn.arctic.nexus.entities.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IUserService {
     List<User> retrieveAllUser();

@@ -1,9 +1,7 @@
 package tn.arctic.nexus.services.UsersModule;
 
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Version;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.controllers.UsersModule.VerificationCodeGenerator;
@@ -12,20 +10,13 @@ import tn.arctic.nexus.entities.UserVerification;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.repositories.UsersModule.IUsersModuleUserVerificationRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import org.springframework.beans.factory.annotation.Value;
-
 @RequiredArgsConstructor
 @Service
 public class AuthService {
-    @Autowired
-    private  IUserRepository userRepository;
-    @Autowired
-    private  PasswordEncoder passwordEncoder;
-    @Autowired
-    private  IUsersModuleUserVerificationRepository verificationRepository;
+
+    private final IUserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final IUsersModuleUserVerificationRepository verificationRepository;
 
     @Qualifier("userEmailService")
     private final EmailService emailService;

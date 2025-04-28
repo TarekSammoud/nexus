@@ -63,11 +63,6 @@ public class User implements Serializable {
     @ManyToMany
     private List<User> friends;
 
-    private RoleType role;
-
-    @OneToMany
-    private List<ProfilePictures> profilesPictures;
-
 
 
     @Enumerated(EnumType.STRING)

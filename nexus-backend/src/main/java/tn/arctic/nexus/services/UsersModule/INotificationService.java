@@ -1,6 +1,5 @@
 package tn.arctic.nexus.services.UsersModule;
 
-import tn.arctic.nexus.entities.FriendRequest;
 import tn.arctic.nexus.entities.Notification;
 
 import java.util.List;

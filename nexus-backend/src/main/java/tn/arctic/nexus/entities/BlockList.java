@@ -15,19 +15,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlockList implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idBlockList;
-
 
     @ManyToOne
     @JoinColumn(name = "blocked_id", nullable = false)
     private User blockedUser;
 
     @Temporal(TemporalType.DATE)
-    private Date BlockedAt ;
-    private String reason;
+    private Date blockedAt;  // Date de début du blocage
 
+    @Temporal(TemporalType.DATE)
+    private Date blockedUntil;  // Date de fin du blocage (nouveau champ)
 
-
+    private String reason;  // Raison du blocage
 }

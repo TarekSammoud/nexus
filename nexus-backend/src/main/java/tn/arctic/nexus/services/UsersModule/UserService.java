@@ -6,7 +6,6 @@ import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -62,11 +61,6 @@ public class UserService implements IUserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
-    }
-
-
-    public List<User> getSupportAgents() {
-        return userRepository.findAllSupportAgents();
     }
 
 }

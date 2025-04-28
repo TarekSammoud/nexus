@@ -5,11 +5,10 @@ import com.restfb.FacebookClient;
 import com.restfb.Version;
 import com.restfb.types.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.RoleType;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
-import com.restfb.types.User;  // Facebook User
+
 @Service
 public class FacebookAuthService {
     @Autowired
