@@ -176,5 +176,21 @@ public class FriendRequestService implements IFriendRequestService{
     }
 
 
+    @Override
+    public void removeFriendship(Long userId1, Long userId2) {
+        // Trouver les deux demandes d'amis acceptées entre ces deux utilisateurs
+        FriendRequest request1 = friendRequestRepository.findBySenderIdAndRecipientIdAndStatus(userId1, userId2, StatusFriendRequest.ACCEPTED);
+        FriendRequest request2 = friendRequestRepository.findBySenderIdAndRecipientIdAndStatus(userId2, userId1, StatusFriendRequest.ACCEPTED);
+
+        if (request1 != null) {
+            friendRequestRepository.delete(request1);
+        }
+
+        if (request2 != null) {
+            friendRequestRepository.delete(request2);
+        }
+    }
+
+
 
 }

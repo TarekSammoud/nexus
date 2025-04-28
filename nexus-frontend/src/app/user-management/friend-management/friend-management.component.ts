@@ -11,10 +11,10 @@ import { User } from '../../core/entities/user/user.model';
   styleUrls: ['./friend-management.component.css']
 })
 export class FriendManagementComponent implements OnInit {
-  userId!: number; // ID de l'utilisateur
-  friends: User[] = []; // Liste des amis
-  imageUrls: { [userId: number]: any } = {}; // Pour stocker les URLs des images
-  isLoading = false; // Indicateur de chargement
+  userId!: number; // Utilisation de l'opérateur ! pour indiquer que userId ne sera jamais null
+  friends: User[] = [];
+  imageUrls: { [userId: number]: any } = {};
+  isLoading = false;
 
   constructor(
     private friendRequestService: FriendRequestService,
@@ -23,26 +23,22 @@ export class FriendManagementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const userId = TokenService.getUserId(); // Récupérer l'ID de l'utilisateur connecté
-    if (userId) {
-      this.userId = userId; // Assigner à userId si ce n'est pas null
+    this.userId = TokenService.getUserId()!; // Utilisation de ! pour garantir que userId est un nombre non null
+    if (this.userId) { // Assurez-vous que userId est un nombre valide
       this.loadFriends();
     } else {
       console.error('Utilisateur non authentifié');
-      // Vous pouvez rediriger vers la page de connexion si nécessaire
     }
   }
 
-
-  // Charger les amis de l'utilisateur
   loadFriends(): void {
     this.isLoading = true;
     this.friendRequestService.getFriends(this.userId).subscribe(
       (friends: User[]) => {
         this.friends = friends;
         friends.forEach(friend => {
-          if (friend.id !== null) { // Vérifier que l'ID n'est pas null
-            this.loadProfilePicture(friend.id); // Charger les images de profil
+          if (friend.id !== null) {
+            this.loadProfilePicture(friend.id);
           }
         });
         this.isLoading = false;
@@ -54,17 +50,30 @@ export class FriendManagementComponent implements OnInit {
     );
   }
 
-
-  // Charger l'image de profil d'un utilisateur
   loadProfilePicture(userId: number): void {
     this.userProfileService.getProfilePicture(userId).subscribe({
       next: (blob: Blob) => {
         const objectURL = URL.createObjectURL(blob);
-        this.imageUrls[userId] = this.sanitizer.bypassSecurityTrustUrl(objectURL); // Sécuriser l'URL
+        this.imageUrls[userId] = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       error: () => {
-        this.imageUrls[userId] = null; // Si pas d'image, ne pas afficher
+        this.imageUrls[userId] = null;
       }
     });
+  }
+
+  removeFriend(userId1: number, userId2: number): void {
+    if (userId1 && userId2) {
+      this.friendRequestService.removeFriend(userId1, userId2).subscribe(
+        () => {
+          this.friends = this.friends.filter(friend => friend.id !== userId2);
+        },
+        error => {
+          console.error('Erreur lors de la suppression de l\'ami:', error);
+        }
+      );
+    } else {
+      console.error('Erreur: un ou plusieurs IDs sont invalides');
+    }
   }
 }

@@ -108,5 +108,14 @@ public class FriendRequestController {
     }
 
 
+    @DeleteMapping("/remove/{userId1}/{userId2}")
+    public ResponseEntity<String> removeFriendship(@PathVariable Long userId1, @PathVariable Long userId2) {
+        try {
+            friendRequestService.removeFriendship(userId1, userId2);
+            return new ResponseEntity<>("Friendship removed successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to remove friendship", HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
