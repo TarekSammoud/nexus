@@ -57,12 +57,4 @@ export class AdminHomeComponent {
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
-
-  sidebarOpen = true;
-
-
-  closeSidebar() {
-    this.sidebarOpen = false;
-  }
-
 }
