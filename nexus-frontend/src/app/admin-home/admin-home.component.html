@@ -18,12 +18,12 @@
            href="javascript:void(0)"
            (click)="toggleGamesDropdown()">
           <span><i class="fas fa-folder-open me-2"></i>Manage Games</span>
-          <i class="fas" [ngClass]="{ 'fa-chevron-down': !gamesDropdownOpen, 'fa-chevron-up': gamesDropdownOpen }"></i>
+          <i class="fas" ></i>
         </a>
         <!-- Games Submenu (combining both variants) -->
         <div *ngIf="gamesDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
-          <a class="d-block py-2 text-white" routerLink="/admin/games/media" routerLinkActive="active">
-            <i class="fas fa-image me-2"></i>Game Media</a>
+          <!--<a class="d-block py-2 text-white" routerLink="/admin/games/media" routerLinkActive="active">
+            <i class="fas fa-image me-2"></i>Game Media</a> -->
           <a class="d-block py-2 text-white" routerLink="/admin/games/list" routerLinkActive="active">
             <i class="fas fa-gamepad me-2"></i>Games</a>
           <a class="d-block py-2 text-white" routerLink="/admin/games/categories" routerLinkActive="active">
@@ -41,7 +41,7 @@
            href="javascript:void(0)"
            (click)="toggleJamDropdown()">
           <span><i class="fas fa-puzzle-piece me-2"></i>Game Jams</span>
-          <i class="fas" [ngClass]="{ 'fa-chevron-down': !jamDropdownOpen, 'fa-chevron-up': jamDropdownOpen }"></i>
+          <i class="fas" ></i>
         </a>
         <div *ngIf="jamDropdownOpen" class="submenu ps-4">
           <a class="d-block py-2 text-white" routerLink="/admin/jams/list" routerLinkActive="active"><i class="fas fa-list me-2"></i>All Jams</a>
@@ -59,7 +59,7 @@
      href="javascript:void(0)"
      (click)="toggleMarketDropdown()">
     <span><i class="fas fa-puzzle-piece me-2"></i>Market-Listing</span>
-    <i class="fas" [ngClass]="{ 'fa-chevron-down': !MarketDropdownOpen, 'fa-chevron-up': MarketDropdownOpen }"></i>
+    <i class="fas" ></i>
   </a>
   <div *ngIf="MarketDropdownOpen" class="submenu ps-4">
     <a class="d-block py-2 text-white" routerLink="/market-details" routerLinkActive="active"><i class="fas fa-crown me-2 text-warning"></i>market</a>
@@ -71,7 +71,7 @@
            href="javascript:void(0)"
            (click)="toggleSupportDropdown()">
           <span><i class="fas fa-headset me-2"></i>Manage Support</span>
-          <i class="fas" [ngClass]="{ 'fa-chevron-down': !supportDropdownOpen, 'fa-chevron-up': supportDropdownOpen }"></i>
+          <i class="fas" ></i>
         </a>
         <!-- Support Submenu -->
         <div *ngIf="supportDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
@@ -92,7 +92,7 @@
            href="javascript:void(0)"
            (click)="toggleWalletDropdown()">
           <span><i class="fas fa-wallet me-2"></i>Wallets Management</span>
-          <i class="fas" [ngClass]="{ 'fa-chevron-down': !walletDropdownOpen, 'fa-chevron-up': walletDropdownOpen }"></i>
+          <i class="fas" ></i>
         </a>
         <!-- Wallet Submenu -->
         <div *ngIf="walletDropdownOpen" class="submenu ps-4" [@dropdownAnimation]>
@@ -117,7 +117,7 @@
            href="javascript:void(0)"
            (click)="toggleDropdownD()">
           <span><i class="fas fa-users me-2"></i>Community</span>
-          <i class="fas" [ngClass]="{ 'fa-chevron-down': !dropdownOpenD, 'fa-chevron-up': dropdownOpenD }"></i>
+          <i class="fas" ></i>
         </a>
         <div *ngIf="dropdownOpenD" class="submenu ps-4">
           <a class="d-block py-2 text-white" routerLink="/admin/community/categories" routerLinkActive="active"><i class="fas fa-list me-2"></i>Categories List</a>

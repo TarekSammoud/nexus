@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { MarketService } from '../services/market.service';
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from 'src/app/core/services/user-management/token.service';
 
 @Component({
   selector: 'app-market-create',
@@ -13,38 +14,40 @@ export class MarketCreateComponent implements OnInit {
   market = {
     start_bid: 0,
     end_date: '',
-    user_id: null,
     game_item_id: null
   };
 
-  users: any[] = [];
+  currentUserId!: number; // ✅ Store the connected user's ID
+
   gameItems: any[] = [];
 
-  constructor(private marketService: MarketService, private http: HttpClient) {}
+  constructor(
+    private marketService: MarketService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:9000/nexus-backend/users').subscribe(data => this.users = data);
+    this.currentUserId = TokenService.getUserId()!; // ✅ Get the logged-in user ID
     this.http.get<any[]>('http://localhost:9000/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
   }
 
   createItem(): void {
-    // Validation to make sure both are selected
-    if (!this.market.user_id || !this.market.game_item_id) {
-      alert("Please select both a user and a game item.");
+    // Validation to make sure a game item is selected
+    if (!this.market.game_item_id) {
+      alert("Please select a game item.");
       return;
     }
 
     const payload = {
       startBid: this.market.start_bid,
       endDate: this.market.end_date,
-      user: { id: this.market.user_id },
+      user: { id: this.currentUserId }, // ✅ Automatically set user from TokenService
       item: { id: this.market.game_item_id }
     };
 
     this.marketService.createListing(payload).subscribe(() => {
       this.itemCreated.emit();
-      this.market = { start_bid: 0, end_date: '', user_id: null, game_item_id: null };
+      this.market = { start_bid: 0, end_date: '', game_item_id: null };
     });
   }
-
 }

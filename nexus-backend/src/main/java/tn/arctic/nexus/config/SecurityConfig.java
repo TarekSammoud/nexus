@@ -52,13 +52,22 @@ public class SecurityConfig {
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
+                        .requestMatchers("/performancereviews/**").permitAll()
+                        .requestMatchers("/rooms/**").permitAll()
+                        .requestMatchers("/agents/**").permitAll()
+                        .requestMatchers("/tickets/**").permitAll()
+                        .requestMatchers("/ws-support").permitAll()
+                        .requestMatchers("/**").permitAll()
 
                         .requestMatchers("/marketlistings/**").permitAll()
+                        .requestMatchers("/bids/**").permitAll()
+                        .requestMatchers("/gameitem/**").permitAll()
 
 
 
                         .requestMatchers("/support/**").permitAll()
                         .requestMatchers("/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -74,4 +83,4 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-}
+} 

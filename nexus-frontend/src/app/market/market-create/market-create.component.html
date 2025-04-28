@@ -42,22 +42,6 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="userId">👤 User</label>
-      <select
-        id="userId"
-        class="form-control"
-        [(ngModel)]="market.user_id"
-        name="user_id"
-        required
-      >
-        <option [ngValue]="null" disabled selected>Select a user</option>
-        <option *ngFor="let user of users" [ngValue]="user.id">
-          {{ user.firstName || ('User #' + user.id) }}
-        </option>
-      </select>
-    </div>
-
     <button type="submit" class="submit-btn">📦 Create Listing</button>
   </form>
 </div>

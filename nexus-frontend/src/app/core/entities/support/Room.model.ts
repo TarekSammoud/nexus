@@ -8,5 +8,5 @@ export interface Room {
   dateCreation: Date;
   dernierMessage: Date;
   active: boolean;
-  user: string;
+  user: { firstname: string}; 
 }
