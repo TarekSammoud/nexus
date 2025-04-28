@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import tn.arctic.nexus.entities.ProfilePictures;
-import tn.arctic.nexus.entities.RoleType;
 import tn.arctic.nexus.entities.User;
 
 import java.util.List;
@@ -30,11 +29,8 @@ public interface IUserRepository  extends JpaRepository<User,Long> {
 
     User findByPhoneNumber(String phoneNumber);
 
-    @Query("SELECT u FROM User u WHERE u.roleType = tn.arctic.nexus.entities.RoleType.SUPPORTAGENT")
-    List<User> findAllSupportAgents();
 
-    @Query("SELECT u FROM User u WHERE u.roleType = :roleType AND u.room.id = :roomId")
-    List<User> findUsersByRoomIdAndRole(@Param("roomId") Long roomId, @Param("roleType") RoleType roleType);
 
-    List<User> findUsersByRoomId(Long roomId);
+
+
 }
