@@ -59,7 +59,7 @@ export class JamFormComponent {
   
     const keyword = this.jam.name.trim().split(' ')[0].toLowerCase();
     const cleanKeyword = keyword.substring(0, 20);
-    const clientId = ''; 
+    const clientId = '3cnVt9ILfsW9g9QGbU3o_DW-RtHjP90YllElZNZxEGs'; 
     this.isLoadingImage = true;
   
     this.http.get(`https://api.unsplash.com/search/photos?query=${cleanKeyword}&per_page=1&client_id=${clientId}`)

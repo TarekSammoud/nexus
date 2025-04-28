@@ -34,7 +34,7 @@ export class TransferPopupComponent {
 
   friends: Friend[] = [
     {
-      id: 1,
+      id: 3,
       metaMaskAddress: '0x9375f2d84f9843Df4BC29260219B7B25E73a92d1',
       name: 'nexus',
       profilePic: 'https://i.pravatar.cc/150?img=1'

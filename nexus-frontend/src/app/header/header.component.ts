@@ -98,7 +98,8 @@ export class HeaderComponent implements OnInit {
   }
 
   goToWallet() {
-    this._router.navigate([this.isWalletConnected ? '/wallet' : '/connectWallet']);
+    //console.log("wallet ", this.iswall)
+   this._router.navigate([this.isWalletConnected ? '/wallet' : '/connectWallet']);
   }
 
   onSubmit() {

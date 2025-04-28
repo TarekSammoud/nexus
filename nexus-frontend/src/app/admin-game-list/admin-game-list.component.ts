@@ -9,6 +9,7 @@ import { GameKeyService } from '../core/services/game-key.service';
 import { GameKey } from '../core/entities/game-key';
 import { User } from '@syncfusion/ej2/interactive-chat';
 import { GameDiscountService } from '../core/services/game-discount.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-admin-game-list',
@@ -18,6 +19,7 @@ import { GameDiscountService } from '../core/services/game-discount.service';
       CommonModule,  // Required for built-in directives like *ngIf, *ngFor
       GridModule,
       ChipListModule,
+      NgxPaginationModule
   
     ],
   
@@ -25,6 +27,7 @@ import { GameDiscountService } from '../core/services/game-discount.service';
   styleUrls: ['./admin-game-list.component.css']
 })
 export class AdminGameListComponent implements OnInit {
+  page = 1;
 
       data? : Game[];
       constructor(private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {

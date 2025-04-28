@@ -1,75 +1,80 @@
 <div class="admin-games-container">
-    <h2>🎮 Game Management Panel</h2>
-  
-    <div style="display: flex; justify-content: flex-end;">
-    <div class="text-end mb-3">
-      <button class="btn btn-outline-success"  style="margin-left: 5px;" (click)="navigateToCreate()">➕ Create Game</button>
-    </div>
+  <h2>🎮 Game Management Panel</h2>
 
-    <div class="text-end mb-3">
-      <button class="btn btn-outline-success" style="margin-left: 5px;" (click)="navigateToCreateBrowser()">➕ Create Browser Game</button>
-    </div>
-
-    <div class="text-end mb-3">
-      <button class="btn btn-outline-success" style="margin-left: 5px;" (click)="navigateToCreateEmulated()">➕ Create Emulated Game</button>
-    </div>
+  <div style="display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 5px;">
+    <button class="btn btn-outline-success" (click)="navigateToCreate()">➕ Create Game</button>
+    <button class="btn btn-outline-success" (click)="navigateToCreateBrowser()">➕ Create Browser Game</button>
+    <button class="btn btn-outline-success" (click)="navigateToCreateEmulated()">➕ Create Emulated Game</button>
   </div>
-  
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Cover</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Platform</th>
-            <th>Price</th>
-            <th>Created</th>
-            <th>Discount</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-  
-        <tbody>
-          <tr *ngFor="let game of data">
-            <td>
-              <img [src]="game.coverPicture?.mediaUrl 
-                ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
-                : './assets/default-game.jpg'" 
-                alt="{{ game.name }}" class="img-thumbnail" />
-            </td>
-  
-            <td>
-              <span class="game-name" (click)="OnSelect(game)">
-                {{ game.name }}
+
+  <div class="table-responsive">
+    <table class="  w-100">
+      <thead>
+        <tr>
+          <th style="width: 80px;">Cover</th>
+          <th>Name</th>
+          <th style="width: 200px;">Description</th>
+          <th>Platform</th>
+          <th style="width: 80px;">Price</th>
+          <th style="width: 120px;">Created</th>
+          <th style="width: 150px;">Discount</th>
+          <th style="width: 220px;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let game of data">
+          <td>
+            <img [src]="game.coverPicture?.mediaUrl 
+              ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+              : './assets/default-game.jpg'" 
+              alt="{{ game.name }}" 
+              class="img-thumbnail" 
+              style="max-width: 70px;" />
+          </td>
+
+          <td>
+            <span class="game-name" (click)="OnSelect(game)" style="word-break: break-word;">
+              {{ game.name }}
+            </span>
+          </td>
+
+          <td style="word-break: break-word;">
+            {{ game.description }}
+          </td>
+
+          <td style="word-break: break-word;">
+            {{ game.platforms }}
+          </td>
+
+          <td>{{ game.price }}</td>
+
+          <td>{{ game.createdAt | date: 'shortDate' }}</td>
+
+          <td>
+            <div *ngIf="game.gameDiscount; else noDiscount">
+              <span class="badge bg-warning text-dark">
+                {{ game.gameDiscount.discountPercentage }}%
               </span>
-            </td>
-  
-            <td>{{ game.description }}</td>
-            <td>{{ game.platforms }}</td>
-            <td>{{ game.price | currency }}</td>
-            <td>{{ game.createdAt | date: 'shortDate' }}</td>
-  
-            <td>
-              <div *ngIf="game.gameDiscount">
-                <span class="discount-label">
-                  {{ game.gameDiscount.discountPercentage }}%
-                  <button class="btn btn-warning btn-sm" (click)="updateDiscount(game)" title="Create Discount">✏️</button>
-                  <button class="btn btn-warning btn-sm" (click)="deleteDiscount(game)" title="Update Discount">🗑️</button>
-                </span>
+              <div class="mt-2 d-flex flex-column gap-1">
+                <button class="btn btn-warning btn-sm" (click)="updateDiscount(game)" title="Update Discount">✏️ Update</button>
+                <button class="btn btn-warning btn-sm" (click)="deleteDiscount(game)" title="Delete Discount">🗑️ Delete</button>
               </div>
-              <div *ngIf="!game.gameDiscount">
-                <button class="btn btn-warning btn-sm" (click)="createDiscount(game)" title="Create Discount">%</button>
-              </div>
-            </td>
-            <td>
-              <button class="btn btn-primary btn-sm me-1" (click)="editGame(game)" title="Edit">✏️</button>
-              <button class="btn btn-danger btn-sm me-1" (click)="deleteGame(game)" title="Delete">🗑️</button>
-              <button class="btn btn-warning btn-sm" (click)="generateKey(game)" title="Generate Key">🔑</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div>
+            <ng-template #noDiscount>
+              <button class="btn btn-warning btn-sm" (click)="createDiscount(game)" title="Create Discount">➕ Create Discount</button>
+            </ng-template>
+          </td>
+
+          <td>
+            <div class="d-flex flex-wrap justify-content-center gap-1">
+              <button class="btn btn-primary btn-sm" (click)="editGame(game)" title="Edit Game">✏️ Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteGame(game)" title="Delete Game">🗑️ Delete</button>
+              <button class="btn btn-warning btn-sm" (click)="generateKey(game)" title="Generate Key">🔑 Key</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
