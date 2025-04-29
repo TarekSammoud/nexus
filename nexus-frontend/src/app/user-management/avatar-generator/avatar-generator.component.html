@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>Avatar Generator</h1>
+
+    <!-- WAITING TIMER during generation -->
+    <div *ngIf="isLoading" style="text-align: center; margin-bottom: 20px;">
+        <h3>Generation in Progress...</h3>
+        <p>Estimated time remaining: {{ formatCountdown() }}</p>
+        <p>Please wait while your avatar is being created (it can take up to 15 minutes).</p>
+    </div>
+
+    <!-- GENERATED AVATAR -->
+    <div *ngIf="generatedImageUrl && !isLoading" style="text-align: center; margin-bottom: 20px;">
+        <h3>Your Avatar:</h3>
+        <img [src]="generatedImageUrl" alt="Generated Avatar"
+            style="max-width: 300px; border-radius: 8px; margin-bottom: 10px;">
+        <br>
+        <button (click)="printAvatar()" class="btn btn-primary">Print Avatar</button>
+    </div>
+
+    <!-- FORM -->
+    <form (ngSubmit)="generateAvatar()">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea [(ngModel)]="model.description" name="description" id="description" class="form-control"
+                required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="artStyle">Art Style</label>
+            <select [(ngModel)]="model.artStyle" name="artStyle" id="artStyle" class="form-control">
+                <option *ngFor="let style of artStyles" [value]="style.value">
+                    {{ style.display }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="facialFeatures">Facial Features</label>
+            <select [(ngModel)]="model.facialFeatures" name="facialFeatures" id="facialFeatures" class="form-control"
+                multiple>
+                <option *ngFor="let feature of facialFeatures" [value]="feature.value">
+                    {{ feature.display }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="negativePrompt">Elements to Avoid</label>
+            <input [(ngModel)]="model.negativePrompt" name="negativePrompt" id="negativePrompt" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Generate Avatar</span>
+            <span *ngIf="isLoading">Generating...</span>
+        </button>
+    </form>
+</div>

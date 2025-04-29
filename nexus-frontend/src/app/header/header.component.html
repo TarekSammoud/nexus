@@ -1,162 +1,167 @@
+<!-- Navbar principale -->
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" data-bs-toggle="offcanvas" href="#sidebarMenu" role="button" aria-controls="sidebarMenu">
-      <img src="../../assets/img/symbol_only_white.svg" alt="x" width="30" height="24"
-        class="d-inline-block align-text-top">
-    </a>
 
+    <!-- Bouton Sidebar : visible seulement si connecté -->
+    <ng-container *ngIf="user?.id || isAdmin">
+      <a class="navbar-brand" data-bs-toggle="offcanvas" href="#sidebarMenu" role="button" aria-controls="sidebarMenu">
+        <img src="../../assets/img/symbol_only_white.svg" alt="x" width="30" height="24"
+          class="d-inline-block align-text-top">
+      </a>
+    </ng-container>
+
+    <!-- Bouton hamburger mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Contenu Navbar -->
     <div class="collapse navbar-collapse justify-content-between" id="navbarColor01">
       <ul class="navbar-nav">
-        <!-- Mobile Profile Dropdown -->
-        <li class="nav-item d-xl-none d-lg-none">
-          <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdownMobile" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile" class="profile-img">
-            <span class="ms-2">{{ user.username }}</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdownMobile">
-            <li><a class="dropdown-item" [routerLink]="['/user-profile']">Edit Profile</a></li>
-            <li><a class="dropdown-item" href="#">Cart</a></li>
-            <li><a class="dropdown-item" href="#">Wallet</a></li>
-            <li><a class="dropdown-item" href="#">Friends</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-          </ul>
-        </li>
 
-        <!-- Navigation -->
-        <li class="nav-item"><a class="nav-link active" href="#">Store</a></li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/community']">Community</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+        <!-- Si l'utilisateur est connecté -->
+        <ng-container *ngIf="user?.id || isAdmin; else guestLinks">
 
-        <li class="nav-item"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/jams">Game Jams</a></li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/market">Market</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="'/support'">Support</a></li>
-
-        <!-- Friends Dropdown (Desktop only) -->
-        <li class="nav-item dropdown d-none d-md-block">
-          <a class="nav-link dropdown-toggle" href="#" id="friendsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Friends
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="friendsDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/your-friends']">Your Friends</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/friend-requests']">Friend Requests</a></li>
-          </ul>
-        </li>
-
-        <!-- Messagerie -->
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/chat']">Chat</a>
-        </li>
-      </ul>
-
-      <!-- Right-side desktop section -->
-      <div class="d-none d-xl-block d-lg-block">
-        <ul class="navbar-nav d-flex flex-row align-items-center">
-          <!-- Cart -->
-          <li class="nav-item me-3">
-
-            <!-- Maintain both possible changes for the cart icon: 
-                 - One uses href="#" 
-                 - One uses routerLink="/panier"
-                 So, keep both for clarity, but comment one out if needed for live code. -->
-            <a class="nav-link cart-icon" href="#" style="display: none;">
-              <i class="fas fa-shopping-cart"></i>
-              <div *ngIf="cartCountItems > 0">
-                <span class="cart-badge">{{this.cartCountItems}}</span>
-              </div>
-            </a>
-            <a class="nav-link cart-icon" routerLink="/panier">
-
-
-            
-            </a>
-          </li>
-
-          <!-- Desktop Profile Dropdown -->
-          <li class="nav-item dropdown d-none d-md-block">
-            <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdown" role="button"
+          <!-- Dropdown Mobile -->
+          <li class="nav-item d-xl-none d-lg-none">
+            <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdownMobile" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile" class="profile-img">
+              <span class="ms-2">{{ user.username }}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-width customdropdownmenu"
-              aria-labelledby="profileDropdown">
-              <li>
-                <a class="dropdown-item" [routerLink]="['/user-profile']">
-                  <div class="d-flex align-items-center">
-                    <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile"
-                      class="profile-img-dropdown">
-                    <div class="ms-3">
-                      <div class="fw-bold">{{ user.displayName }}</div>
-                      <div class="text-muted">{{ user.username }}</div>
-                    </div>
-                  </div>
-                </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdownMobile">
+              <li><a class="dropdown-item" [routerLink]="['/user-profile']"><i class="fas fa-user"></i> Edit Profile</a>
               </li>
-              <li><a class="dropdown-item" [routerLink]="['/user-profile']">Profile</a></li>
-              <!-- Maintain both versions for settings and wallet -->
-              <li><a class="dropdown-item" [routerLink]="['/edit-profile']">Account Settings</a></li>
-              <li><a class="dropdown-item" href="#">Account Settings</a></li>
-              <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/library']">Games Library</a></li>
-
-              <li><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
-              <li><a class="dropdown-item" routerLink="/admin">Dev Studio</a></li>
-              <li><a class="dropdown-item" href="#">Payment Management</a></li>
-              <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button"
-                  aria-controls="redeemCodeOffcanvas">Use a Code</a></li>
-              <!-- Keep both Game Library and Games Library if needed -->
-              <li><a class="dropdown-item" href="#">Game Library</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fas fa-wallet"></i> Wallet</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fas fa-users"></i> Friends</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
           </li>
+        </ng-container>
+        <!-- Liens Navigation -->
+        <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-store"></i> Store</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/community']"><i class="fas fa-users"></i>
+            Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="nav-item" *ngIf="isAdmin"><a class="nav-link" routerLink="/admin"><i class="fas fa-cogs"></i> Dev
+            Studio</a></li>
+        <li class="nav-item" *ngIf="user?.id || isAdmin"><a class="nav-link" routerLink="/jams"><i
+              class="fas fa-gamepad"></i> Game Jams</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/market"><i class="fas fa-shopping-cart"></i> Market</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="'/support'"><i class="fas fa-life-ring"></i>
+            Support</a></li>
+
+        <li class="nav-item d-none d-md-block" *ngIf="user?.id && !isAdmin">
+          <a class="nav-link" [routerLink]="['/friend-requests']"><i class="fas fa-user-friends"></i> Friend
+            Requests</a>
+        </li>
+
+        <li class="nav-item" *ngIf="user?.id"><a class="nav-link" [routerLink]="['/chat']"><i
+              class="fas fa-comments"></i> Chat</a></li>
+
+
+        <!-- Si l'utilisateur n'est pas connecté -->
+        <ng-template #guestLinks>
+          <!-- rien dans la liste -->
+        </ng-template>
+      </ul>
+
+      <!-- Côté droit Navbar -->
+      <div class="d-flex">
+        <ul class="navbar-nav d-flex flex-row align-items-center">
+          <!-- Utilisateur connecté -->
+          <ng-container *ngIf="user?.id || isAdmin; else guestButtons">
+            <!-- Cart -->
+            <li class="nav-item me-3">
+              <a class="nav-link cart-icon" href="#">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">3</span>
+              </a>
+            </li>
+
+            <!-- Profile Dropdown -->
+            <li class="nav-item dropdown d-none d-md-block">
+              <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile" class="profile-img">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end custom-dropdown-width customdropdownmenu"
+                aria-labelledby="profileDropdown">
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/user-profile']">
+                    <div class="d-flex align-items-center">
+                      <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile"
+                        class="profile-img-dropdown">
+                      <div class="ms-3">
+                        <div class="fw-bold">{{ user.displayName }}</div>
+                        <div class="text-muted">{{ user.username }}</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li><a class="dropdown-item" [routerLink]="['/user-profile']"><i class="fas fa-user"></i> Profile</a>
+                </li>
+                <li><a class="dropdown-item" [routerLink]="['/edit-profile']"><i class="fas fa-cogs"></i> Account
+                    Settings</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/library']"><i class="fas fa-gamepad"></i> Games
+                    Library</a></li>
+                <li *ngIf="isAdmin"><a class="dropdown-item" routerLink="/admin"><i class="fas fa-cogs"></i> Dev
+                    Studio</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-credit-card"></i> Payment Management</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button"
+                    aria-controls="redeemCodeOffcanvas">
+                    <i class="fas fa-gift"></i> Use a Code
+                  </a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-archive"></i> Game Library</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+              </ul>
+            </li>
+          </ng-container>
+
+          <!-- Utilisateur invité -->
+          <ng-template #guestButtons>
+            <li class="nav-item me-2">
+              <a class="btn btn-outline-light" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-light" routerLink="/signup"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </li>
+          </ng-template>
         </ul>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- Side Navigation -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-  <div class="offcanvas-header">
-    <h5 class=" text-light d-inline-block align-text-top" id="sidebarMenuLabel">Dev Studio</h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!-- Sidebar (offcanvas) : visible uniquement si connecté -->
+<ng-container *ngIf="user?.id || isAdmin">
+  <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+      <h5 class="text-light" id="sidebarMenuLabel">Dev Studio</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-box"></i> Games</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/categories"><i class="fas fa-tags"></i> Game
+            Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-users"></i> Users</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="offcanvas-body">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-box"></i> Games</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/categories" href="#"><i class="fas fa-tags"></i> Game Categories</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-users"></i> Users</a>
-      </li>
-    </ul>
+</ng-container>
 
-  </div>
-</div>
-<!-- Offcanvas for Redeem Code -->
+<!-- Offcanvas pour Redeem Code -->
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="redeemCodeOffcanvas"
   aria-labelledby="redeemCodeOffcanvasLabel">
   <div class="offcanvas-header">
@@ -170,14 +175,8 @@
         <input formControlName="keyCode" type="text" class="form-control" id="codeInput"
           placeholder="Enter the code here">
       </div>
-      <div *ngIf="successMessage" class="text-success mb-3">
-        {{ successMessage }}
-      </div>
-
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="text-danger mb-3">
-        {{ errorMessage }}
-      </div>
+      <div *ngIf="successMessage" class="text-success mb-3">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="text-danger mb-3">{{ errorMessage }}</div>
       <button type="submit" class="btn btn-primary">Redeem</button>
     </form>
   </div>

@@ -94,15 +94,18 @@ import { FriendRequestListComponent } from './user-management/friend-request-lis
 import { FriendRequestActionsComponent } from './user-management/friend-request-actions/friend-request-actions.component';
 import { BlockedUsersComponent } from './user-management/blocked-users/blocked-users.component';
 import { NotificationsComponent } from './user-management/notifications/notifications.component';
-import { GameLibraryComponent } from './user-management/game-library/game-library.component';
-import { RoleManagementComponent } from './user-management/role-management/role-management.component';
-import { ChangePasswordComponent } from './user-management/change-password/change-password.component';
 import { UserDashboardComponent } from './user-management/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './user-management/admin-dashboard/admin-dashboard.component';
 import { UserProfileComponent } from './user-management/user-profile/user-profile.component';
 import { EditProfileComponent } from './user-management/edit-profile/edit-profile.component';
 import { FriendManagementComponent } from './user-management/friend-management/friend-management.component';
 import { ChatComponent } from './user-management/chat/chat.component';
+
+
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+
+
 
 // Market & Support
 import { MarketListComponent } from './market/market-list/market-list.component';
@@ -152,20 +155,23 @@ import { NotificationBannerComponent } from './finance/notification-banner/notif
 import { TestComponent } from './finance/test/test/test.component';
 import { GeneratePdfComponent } from './finance/wallet-dashboard/popUps/generate-pdf/generate-pdf.component';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatInputModule } from '@angular/material/input';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { SupportComponent } from './support/support.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -223,7 +229,7 @@ import { SupportComponent } from './support/support.component';
     LoginComponent,
     SignupComponent,
     SupportComponent,
-    
+
     ForgotPasswordComponent,
     UserListComponent,
     UserDetailsComponent,
@@ -233,9 +239,6 @@ import { SupportComponent } from './support/support.component';
     FriendRequestActionsComponent,
     BlockedUsersComponent,
     NotificationsComponent,
-    GameLibraryComponent,
-    RoleManagementComponent,
-    ChangePasswordComponent,
     UserDashboardComponent,
     AdminDashboardComponent,
     UserProfileComponent,
@@ -279,6 +282,11 @@ import { SupportComponent } from './support/support.component';
     GeneratePdfComponent
   ],
   imports: [
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -320,4 +328,4 @@ import { SupportComponent } from './support/support.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

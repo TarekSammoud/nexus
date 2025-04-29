@@ -23,9 +23,12 @@ export class HeaderComponent implements OnInit {
   cartCountItems: number = 0;
   isWalletConnected: boolean = false;
 
+
+
   gameKeyForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
+  isAdmin: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -38,10 +41,10 @@ export class HeaderComponent implements OnInit {
     private metaMaskService: MetamaskService,
     private _fb: FormBuilder,
     private _router: Router,
- 
+
     // Injection du TokenService
   ) { }
-  
+
 
 
 
@@ -54,7 +57,8 @@ export class HeaderComponent implements OnInit {
       next: (user: any) => {
         this.user = user;
         const userId = TokenService.getUserId();
-
+        const role = localStorage.getItem('user_role');
+        this.isAdmin = role === 'ADMIN';
         if (userId) {
           this.loadProfilePicture(userId);
           this.isUserHaveWallet();
@@ -132,6 +136,8 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this._router.navigate(['/login']);
+    this._router.navigate(['/login']).then(() => {
+      window.location.reload(); // Force à recharger toute la page après la redirection
+    });
   }
 }

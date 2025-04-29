@@ -10,12 +10,10 @@ import { GeneratePdfComponent } from '../finance/wallet-dashboard/popUps/generat
   styleUrls: ['./admin-home.component.css'],
   animations: [
     trigger('dropdownAnimation', [
-      // Dropdown closed state
       transition(':enter', [
         style({ opacity: 0, height: 0 }),
         animate('300ms ease-out', style({ opacity: 1, height: '*' }))
       ]),
-      // Dropdown open state
       transition(':leave', [
         animate('200ms ease-in', style({ opacity: 0, height: 0 }))
       ])
@@ -25,57 +23,75 @@ import { GeneratePdfComponent } from '../finance/wallet-dashboard/popUps/generat
 export class AdminHomeComponent {
   constructor(private _router: Router, private modalService: NgbModal) { }
 
-  gamesDropdownOpen = false;   // State for games dropdown
-  supportDropdownOpen = false; // State for support dropdown
+  // Dropdown state variables
+  gamesDropdownOpen = false;
+  supportDropdownOpen = false;
   jamDropdownOpen = false;
+  MarketDropdownOpen = false;
+  walletDropdownOpen = false;
+  communityDropdownOpen = false;     // Ajouté depuis l'ancienne version
+  userSpaceDropdownOpen = false;     // Ajouté depuis l'ancienne version
 
-  MarketDropdownOpen=false;
+  dropdownOpen = false;    // Pour un autre dropdown
+  dropdownOpenD = false;   // Pour un autre dropdown
 
-  dropdownOpen = false;
-  dropdownOpenD = false;
+  // Sidebar state variables
+  isCollapsed = false;
+  sidebarOpen = true;      // Ajouté depuis l'ancienne version
 
-  walletDropdownOpen = false;  // State for wallet dropdown
-  isCollapsed = false;         // Track whether sidebar is collapsed
-
-
+  // Methods to toggle dropdowns
   toggleGamesDropdown(): void {
     this.gamesDropdownOpen = !this.gamesDropdownOpen;
   }
 
-  toggleJamDropdown() {
+  toggleJamDropdown(): void {
     this.jamDropdownOpen = !this.jamDropdownOpen;
   }
-  toggleMarketDropdown() {
+
+  toggleMarketDropdown(): void {
     this.MarketDropdownOpen = !this.MarketDropdownOpen;
   }
 
-  toggleSupportDropdown(){
+  toggleSupportDropdown(): void {
     this.supportDropdownOpen = !this.supportDropdownOpen;
   }
 
-  toggleDropdownD() {
-    this.dropdownOpenD = !this.dropdownOpenD;
-  }
-
-  toggleDropdownf () {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  toggleWalletDropdown() {  // Method for wallet dropdown
+  toggleWalletDropdown(): void {
     this.walletDropdownOpen = !this.walletDropdownOpen;
   }
 
-  openGeneratePdfPopup() {
-    const modalRef = this.modalService.open(GeneratePdfComponent);
+  toggleCommunityDropdown(): void {
+    this.communityDropdownOpen = !this.communityDropdownOpen;
   }
 
-  navigateToGamesList(){
+  toggleUserSpaceDropdown(): void {
+    this.userSpaceDropdownOpen = !this.userSpaceDropdownOpen;
+  }
+
+  toggleDropdownf(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleDropdownD(): void {
+    this.dropdownOpenD = !this.dropdownOpenD;
+  }
+
+  // Navigation
+  navigateToGamesList(): void {
     this._router.navigate([{ outlets: { modal: 'admin/games/list' } }]);
   }
 
-  // Toggle the sidebar state
-  toggleSidebar() {
+  // Open modal to generate PDF
+  openGeneratePdfPopup(): void {
+    const modalRef = this.modalService.open(GeneratePdfComponent);
+  }
+
+  // Sidebar methods
+  toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
-}
 
+  closeSidebar(): void {
+    this.sidebarOpen = false;
+  }
+}

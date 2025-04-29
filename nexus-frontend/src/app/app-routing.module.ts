@@ -8,12 +8,23 @@ import { PublicationListComponent } from './community/publication-list/publicati
 import { PublicationFormComponent } from './community/publication-form/publication-form.component';
 import { ReportFormComponent } from './community/report-form/report-form.component';
 
+import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './user-management/login/login.component';
 import { SignupComponent } from './user-management/signup/signup.component';
+import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 
+import { GamePageComponent } from './games/game-page/game-page.component';
+import { CreateGameComponent } from './games/create-game/create-game.component';
+import { GameGridComponent } from './games/game-grid/game-grid.component';
+import { GamesListComponent } from './games/gameslist/games-list/games-list.component';
+import { GameCategoriesComponent } from './game-categories/game-categories.component';
+import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
+import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
 import { GameKeyListComponent } from './games/game-key-list/game-key-list.component';
 import { GameReviewListComponent } from './game-review-list/game-review-list.component';
+import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
 
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminJamsListComponent } from './admin-jam/pages/admin-jams-list/admin-jams-list.component';
 import { AdminJamEditComponent } from './admin-jam/pages/admin-jam-edit/admin-jam-edit.component';
 import { AdminJamDetailsComponent } from './admin-jam/pages/admin-jam-details/admin-jam-details.component';
@@ -90,16 +101,6 @@ import { TopStreamerComponent } from './community/sondage/top-streamer/top-strea
 
 import { MarketDetailsComponent } from './market/market-details/market-details.component';
 import { AiRecommendationComponent } from './market/ai-recommendation/ai-recommendation.component';
-import { HomeComponent } from './home/home/home.component';
-import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
-import { GamePageComponent } from './games/game-page/game-page.component';
-import { GameGridComponent } from './games/game-grid/game-grid.component';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { AdminGameListComponent } from './admin-game-list/admin-game-list.component';
-import { GameCategoryListComponent } from './game-category-list/game-category-list.component';
-import { CreateGameCategoryComponent } from './games/create-game-category/create-game-category.component';
-import { CreateGameComponent } from './games/create-game/create-game.component';
-import { GameCategoriesComponent } from './game-categories/game-categories.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -107,9 +108,6 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
 
-  { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
-  { path: 'games/:id', component: GamePageComponent },
-  { path: 'category/:name', component: GameGridComponent },
   // 🧍‍♂️ User
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
@@ -117,16 +115,6 @@ const routes: Routes = [
   { path: 'friend-requests', component: FriendRequestListComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
 
-
-  { path: 'wallet', component: WalletDashboardComponent },
-  { path: 'connectWallet', component: ConnectWalletComponent },
-  { path: 'makePayment', component: MakePaymentComponent },
-  { path: 'panier', component: PanierComponent },
-
-  {
-    path: 'admin',
-    component: AdminHomeComponent,
-  },
   // 🎮 Games
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'games/:id', component: GamePageComponent },
@@ -163,7 +151,7 @@ const routes: Routes = [
   { path: 'live-room/:id', component: LiveRoomComponent },
   { path: 'stats', component: PublicationStatsComponent },
   { path: 'support', component: SupportComponent },
-  { path: 'top-streamer', component:TopStreamerComponent},
+  { path: 'top-streamer', component: TopStreamerComponent },
 
 
 
@@ -193,31 +181,7 @@ const routes: Routes = [
       { path: 'update-game/:id', component: CreateGameComponent },
       { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
 
-
-      { path: 'update-game/:id', component: CreateGameComponent },
-      { path: 'update-game-category/:id', component: CreateGameCategoryComponent },
-      { path: 'add-new-game', component: CreateGameComponent },
-      { path: 'games/categories/add-new-category', component: CreateGameCategoryComponent },
-      { path: 'wallets', component: WalletsComponent },
-      { path: 'payments', component: PaymentsAdminComponent },
-      { path: 'purchases', component: PurchaseAdminComponent },
-      { path: 'transfers', component: TransfersAdminComponent },
-      { path: 'refunds', component: RefundAdminComponent },
-      { path: 'support-agent', component: AdminAgentSupportComponent },
-      { path: 'room', component: AdminRoomComponent },
-      { path: 'performance-review', component: AdminPerformanceReviewComponent },
-      { path: 'support/list_ticket', component: AdminSupportListComponent }
-    ]
-  },
-
-  { path: 'support-tickets', component: SupportTicketComponent },
-  { path: 'room/:roomId', component: RoomChatComponent },
-  { path: 'performance-reviews', component: PerformanceReviewComponent },
-  { path: 'market', component: MarketListComponent },
-  { path: 'market/create', component: MarketCreateComponent },
-  { path: 'market/edit/:id', component: MarketEditComponent },
-  { path: 'market/:id/bid', component: BidComponent },
-  { path: 'library', component: LibraryComponent },
+      // 🧑‍🤝‍🧑 Admin Community
       { path: 'community/categories', component: CategoryListComponent },
       { path: 'community/categories/add', component: CategoryFormComponent },
       { path: 'community/categories/edit/:id', component: CategoryFormComponent },
@@ -243,6 +207,13 @@ const routes: Routes = [
       { path: 'jams/ratings', component: AdminJamRatingsListComponent },
       { path: 'jams/vip', component: VipJamFormComponent },
 
+      { path: 'wallets', component: WalletsComponent },
+      { path: 'payments', component: PaymentsAdminComponent },
+      { path: 'purchases', component: PurchaseAdminComponent },
+      { path: 'transfers', component: TransfersAdminComponent },
+      { path: 'refunds', component: RefundAdminComponent },
+    ]
+  },
 
   { path: 'games/emulated/play/:name', component: EmulatedGameComponent },
 
@@ -258,13 +229,9 @@ const routes: Routes = [
 
   { path: 'admin/categories', component: GameCategoriesComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'wallets', component: WalletsComponent },
-  { path: 'payments', component: PaymentsAdminComponent },
-  { path: 'purchases', component: PurchaseAdminComponent },
-  { path: 'transfers', component: TransfersAdminComponent },
-  { path: 'refunds', component: RefundAdminComponent },
 
-  { path: '**', component: NotFoundComponent }, 
+
+  { path: '**', component: NotFoundComponent },
 
 
 ];
@@ -273,6 +240,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
-
-
+export class AppRoutingModule { }

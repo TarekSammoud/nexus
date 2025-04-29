@@ -1,0 +1,86 @@
+.featured-container {
+    padding: 40px 20px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    color: #eaeaea;
+}
+
+/* Titre principal (Profile Picture) */
+.featured-container h4,
+.featured-container h2 {
+    font-weight: 800;
+    color: #ffc107;
+    text-shadow: 0 0 12px #ffc10766;
+}
+
+/* Animation et image de profil */
+.glassmorphic-list {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect sur les blocs glassmorphic */
+.glassmorphic-list:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+/* Bouton "Generate Animated Avatar" */
+.featured-container .btn-primary {
+    background-color: #ffc107;
+    color: #1a1c29;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.featured-container .btn-primary:hover {
+    background-color: #e0a800;
+}
+
+/* Vidéo avatar animée */
+.background-video {
+    border-radius: 16px;
+    width: 200px;
+    height: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Image de profil */
+.cover-img {
+    border-radius: 16px;
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Liste des informations utilisateur */
+.list-group-item {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Détail de l'utilisateur */
+.list-group-item strong {
+    color: #ffc107;
+}
+
+/* Gestion des messages d'erreur */
+.text-danger {
+    color: #ff6b6b;
+    font-weight: bold;
+}

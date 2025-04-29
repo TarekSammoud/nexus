@@ -32,6 +32,23 @@ export class UserProfileService {
         return this.http.get(`http://localhost:9000/nexus-backend/user/getbyid/${userId}`);
     }
 
+    private apiUrl3 = 'http://localhost:9000/nexus-backend/api/face-animer'; // adapte selon ton backend
 
+
+
+    uploadAvatar(file: File) {
+        const formData = new FormData();
+        formData.append('file', file);
+        return this.http.post(`${this.apiUrl3}/upload`, formData);
+    }
+
+    getTaskInfo(taskId: string) {
+        return this.http.get(`${this.apiUrl3}/task-info/${taskId}`);
+    }
+
+    private getallUser = 'http://localhost:9000/nexus-backend/user/allUser';
+    getAllUsers(): Observable<any[]> {
+        return this.http.get<any[]>(this.getallUser);
+    }
 
 }

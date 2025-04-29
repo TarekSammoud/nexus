@@ -1,21 +1,21 @@
 <div class="friend-list">
-    <h3>Liste des amis</h3>
 
     <div *ngIf="friends.length === 0" class="text-center">
-        <p>Aucun ami trouvé.</p>
+        <p>No friends found.</p>
     </div>
 
     <div *ngIf="friends.length > 0">
-        <!-- Conteneur Flex pour afficher les amis en ligne -->
+        <!-- Flex container to display online friends -->
         <div class="d-flex flex-wrap">
-            <div *ngFor="let friend of friends" class="card mb-3 me-3" style="width: 200px;">
-                <div class="card-body d-flex align-items-center">
-                    <!-- Vérification que friend.id n'est pas null avant d'accéder à imageUrls -->
+            <div *ngFor="let friend of friends" class="card mb-3 me-3" style="width: 250px; min-width: 220px;">
+                <div class="card-body d-flex flex-column align-items-start justify-content-between"
+                    style="height: 100%;">
+                    <!-- Check if friend.id is not null before accessing imageUrls -->
                     <img *ngIf="friend.id !== null; else defaultImage"
                         [src]="imageUrls[friend.id] || '../../assets/img/profilepic.jpg'" alt="Profile"
                         class="profile-img rounded-circle" width="50" height="50">
 
-                    <!-- Si friend.id est null, afficher une image par défaut -->
+                    <!-- If friend.id is null, show a default image -->
                     <ng-template #defaultImage>
                         <img [src]="'../../assets/img/profilepic.jpg'" alt="Profile" class="profile-img rounded-circle"
                             width="50" height="50">
@@ -24,6 +24,13 @@
                     <div class="ms-3">
                         <h5 class="card-title">{{ friend.firstName }} {{ friend.lastName }}</h5>
                     </div>
+
+                    <!-- Button to remove friend -->
+                    <button class="btn btn-danger ms-auto mt-2" (click)="removeFriend(userId!, friend.id!)"
+                        *ngIf="userId !== null && friend.id !== null">
+                        Remove Friend
+                    </button>
+
                 </div>
             </div>
         </div>

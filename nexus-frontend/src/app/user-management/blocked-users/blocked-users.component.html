@@ -1,1 +1,44 @@
-<p>blocked-users works!</p>
+<div *ngIf="loading" class="loading-message">
+    Loading blocked users...
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+
+<!-- Blocked Users Table -->
+<div *ngIf="!loading && blockedUsers.length > 0" class="admin-games-container">
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Block Date</th>
+                    <th>Until (End Date)</th>
+                    <th>Block Reason</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of blockedUsers; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.blockedUser.firstName || 'Unknown User' }}</td>
+                    <td>{{ user.blockedAt | date: 'short' }}</td>
+                    <td>{{ user.blockedUntil | date: 'short' }}</td>
+                    <td>{{ user.reason || 'No reason specified' }}</td>
+                    <td>
+                        <button class="btn btn-outline-success" (click)="deleteBlockedUser(user.idBlockList)">
+                            Remove from block list
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- No Users Message -->
+<div *ngIf="blockedUsers.length === 0 && !loading && !errorMessage" class="no-users">
+    No users are blocked.
+</div>

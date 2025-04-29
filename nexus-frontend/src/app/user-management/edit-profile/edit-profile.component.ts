@@ -3,7 +3,9 @@ import { AuthService } from '../../core/services/user-management/auth.service';
 import { UserProfileService } from '../../core/services/user-management/userprofile.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TokenService } from '../../core/services/user-management/token.service';
+// Import du service UserService
 
+import { UserService } from '../../core/services/user-management/UserService';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -15,13 +17,14 @@ export class EditProfileComponent implements OnInit {
   selectedFile!: File;
   imageUrl: any;
 
-  constructor(
+  constructor(private userService: UserService,
     private authService: AuthService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
+    const user = this.userService.getUser();
     this.authService.getLoggedInUserProfile().subscribe({
       next: (data: any) => {
         this.user = data;

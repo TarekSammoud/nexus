@@ -43,4 +43,8 @@ export class FriendRequestService {
     getRecommendedFriends(userId: number): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/friendRequests/recommendations2/${userId}`);
     }
+
+    removeFriend(userId1: number, userId2: number): Observable<any> {
+        return this.http.delete(`${this.baseUrl}/friendRequests/remove/${userId1}/${userId2}`);
+    }
 }

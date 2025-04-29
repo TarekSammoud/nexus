@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../entities/user/user.model';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -16,6 +16,8 @@ export class AuthService {
 
     private baseUrl = 'http://localhost:9000/nexus-backend/auth';
     private userUrl = 'http://localhost:9000/nexus-backend/user';
+
+
 
     constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
@@ -34,19 +36,21 @@ export class AuthService {
 
     register(user: SignUp): Observable<any> {
         const token = localStorage.getItem('auth_token');
+        console.log('Retrieved token:', token);
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` })
         });
+        console.log('Request Headers:', headers);  // Vérifier les headers envoyés
 
         return this.http.post<any>(`${this.baseUrl}/register`, user, { headers });
     }
-
     isAuthenticated(): boolean {
         return localStorage.getItem('auth_token') !== null;
     }
 
     logout(): void {
+        localStorage.removeItem('user_role');
         localStorage.removeItem('auth_token');
         this.router.navigate(['/login']);
     }
@@ -100,8 +104,33 @@ export class AuthService {
     }
 
 
+    githubLogin(code: string) {
+        console.log('Making GitHub login request with code:', code);
+        return this.http.post<{ token: string }>('http://localhost:9000/nexus-backend/auth/github-login', {
+            code: code
+        });
+
+    }
+
+
+
 
     isLoggedIn(): boolean {
         return this.tokenService.hasToken();  // Tu peux utiliser hasToken() de TokenService
+    }
+
+    /**
+     * 
+     * 
+     * 
+     */
+    private userLoggedInSubject = new BehaviorSubject<boolean>(false);
+
+    // Observable pour abonner le HeaderComponent
+    userLoggedIn$ = this.userLoggedInSubject.asObservable();
+
+    // Méthode pour mettre à jour l'état de connexion
+    updateUserLoginStatus(isLoggedIn: boolean): void {
+        this.userLoggedInSubject.next(isLoggedIn);
     }
 }

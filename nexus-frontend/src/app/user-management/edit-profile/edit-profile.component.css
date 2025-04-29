@@ -1,0 +1,92 @@
+.container {
+    padding: 40px 20px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    color: #eaeaea;
+}
+
+/* Titre du formulaire */
+.container h2 {
+    font-weight: 800;
+    color: #ffc107;
+    text-shadow: 0 0 12px #ffc10766;
+    margin-bottom: 30px;
+}
+
+/* Fond glassmorphic pour le formulaire */
+form {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 30px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effet pour le form */
+form:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+/* Labels */
+.form-label {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+/* Champs de saisie */
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.form-control::placeholder {
+    color: #bdbdbd;
+}
+
+/* Boutons */
+.btn-primary {
+    background-color: #ffc107;
+    color: #1a1c29;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e0a800;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Message d'erreur */
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #ff6b6b;
+    border: none;
+    font-weight: bold;
+}
+
+/* Image du profil */
+img.rounded {
+    border: 2px solid #ffc107;
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
