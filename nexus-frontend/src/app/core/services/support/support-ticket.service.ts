@@ -34,4 +34,12 @@ export class SupportService {
   getTicketsSortedByPriorityAndCreatedAt(): Observable<SupportTicket[]> {
     return this.http.get<SupportTicket[]>(`${this.baseUrl}/sorted`);
   }
+  getMostCommonCategory(): Observable<{ category: string, count: number }> {
+    return this.http.get<{ category: string, count: number }>(`${this.baseUrl}/most-common-category`);
+  }
+  getCategoryCounts(): Observable<Record<string, number>> {
+    return this.http.get<Record<string, number>>(`${this.baseUrl}/count-by-category`);
+  }
+  
+  
 }

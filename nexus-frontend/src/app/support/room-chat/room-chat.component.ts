@@ -70,13 +70,13 @@ export class RoomChatComponent implements OnInit, OnDestroy {
         console.log('User ID from token:', this.userIdFromToken);
   
          if(this.userIdFromToken == this.userId){
-          const message = { userId: this.supportAgentId, message: this.newMessage,roomId: "10"  };///badl room id 
+          const message = { userId: this.supportAgentId, message: this.newMessage,roomId: "19"  };///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';
           console.log('message:', this.messages);
          }else{
-          const message = { userId: this.userId, message: this.newMessage,roomId: "10" }; ///badl room id 
+          const message = { userId: this.userId, message: this.newMessage,roomId: "19" }; ///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';

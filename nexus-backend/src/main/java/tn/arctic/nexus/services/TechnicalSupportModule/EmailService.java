@@ -80,51 +80,35 @@ public class EmailService {
      */
     private String cleanAiResponse(String jsonResponse) {
         try {
-            // Handle the specific pattern in the example
-            if (jsonResponse.contains("{\"generated_text\":[{\"generated_text\":")) {
-                // Find where the actual content starts after the JSON prefix
-                int startIndex = jsonResponse.indexOf("\"generated_text\":[{\"generated_text\":\"");
-                if (startIndex >= 0) {
-                    startIndex += 32; // Length of the prefix to skip
+            // First, clean up the response by removing the static text if present
+            String cleanedResponse = jsonResponse.replace( "As a customer support agent, please carefully read and respond to the following inquiry with clear instructions on the steps the user should take. The user has reported an issue regarding a ban on their account and the support process. Here is the user's query: "
+, "").trim();
 
-                    // Find where the content ends
-                    int endIndex = jsonResponse.lastIndexOf("\"}]}");
+            // Check for the specific JSON pattern with "generated_text"
+            if (cleanedResponse.contains("\"generated_text\":")) {
+                // Extract content between "generated_text":" and the closing quote
+                int startIndex = cleanedResponse.indexOf("\"generated_text\":\"");
+                if (startIndex >= 0) {
+                    startIndex += 18; // Skip past "{\"generated_text\":\""
+
+                    int endIndex = cleanedResponse.indexOf("\"}", startIndex); // Find where the text ends
                     if (endIndex > startIndex) {
-                        // Extract just the content between the JSON markers
-                        return jsonResponse.substring(startIndex, endIndex)
-                                .replace("\\n", "<br>")  // Convert newlines to HTML breaks
+                        // Extract the content between the markers
+                        return cleanedResponse.substring(startIndex, endIndex)
+                                .replace("\\n", "<br>")  // Replace newlines with <br> tags for HTML
                                 .replace("\\\"", "\"");  // Handle escaped quotes
                     }
                 }
             }
 
-            // Handle simpler JSON format if present
-            if (jsonResponse.contains("{\"generated_text\":\"")) {
-                int startIndex = jsonResponse.indexOf("{\"generated_text\":\"");
-                if (startIndex >= 0) {
-                    startIndex += 18; // Skip past "{\"generated_text\":\""
-                    int endIndex = jsonResponse.lastIndexOf("\"}");
-                    if (endIndex > startIndex) {
-                        return jsonResponse.substring(startIndex, endIndex)
-                                .replace("\\n", "<br>")
-                                .replace("\\\"", "\"");
-                    }
-                }
-            }
+            // If no specific JSON pattern was found, return the cleaned response
+            return cleanedResponse.replace("\\n", "<br>").replace("\\\"", "\"").trim();
 
-            // Fallback if the patterns don't match exactly
-            return jsonResponse
-                    .replaceAll("\\{\"generated_text\":\\[\\{\"generated_text\":\"", "")
-                    .replaceAll("\"}]}", "")
-                    .replaceAll("\\{\"generated_text\":\"", "")
-                    .replaceAll("\"\\}", "")
-                    .replace("\\n", "<br>")
-                    .replace("\\\"", "\"")
-                    .trim();
         } catch (Exception e) {
-            // If any error occurs during parsing, return a cleaned version or the original
+            // In case of an error, print and return the original response
             System.err.println("Error cleaning AI response: " + e.getMessage());
             return jsonResponse;
         }
     }
+
 }
