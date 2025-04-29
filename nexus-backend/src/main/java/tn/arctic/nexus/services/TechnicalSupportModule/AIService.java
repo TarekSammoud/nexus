@@ -21,8 +21,9 @@ public class AIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> payload = new HashMap<>();
+        String texto = "As a customer support agent, please carefully read and respond to the following inquiry with clear instructions on the steps the user should take. The user has reported an issue regarding a ban on their account and the support process. Here is the user's query: " + inputText;
 
-        payload.put("text", inputText);
+        payload.put("text", texto);
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(payload, headers);
 
