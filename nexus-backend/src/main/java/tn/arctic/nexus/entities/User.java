@@ -77,7 +77,6 @@ public class User implements Serializable {
 
 
     @OneToOne(mappedBy = "user")
-    @JsonManagedReference("wallet-user")
     private Wallet wallet;
 
 

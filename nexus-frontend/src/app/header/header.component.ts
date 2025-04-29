@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { PanierService } from 'src/services/finance/panier.service';
 import { WalletService } from 'src/services/finance/Crud/wallet.service';
+import { User } from '@syncfusion/ej2/interactive-chat';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   gameKeyForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
+  role: string = 'visitor';
 
   constructor(
     private authService: AuthService,
@@ -40,19 +42,22 @@ export class HeaderComponent implements OnInit {
     private _router: Router,
  
     // Injection du TokenService
-  ) { }
+  ) { 
+
+  }
   
 
 
 
   ngOnInit(): void {
-    this.gameKeyForm = this._fb.group({
-      keyCode: ['', Validators.required]
-    });
 
+    
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
         this.user = user;
+        console.log('User profile:', this.user);
+        console.log('User role:', this.user.roleType);
+        this.role = this.user.roleType 
         const userId = TokenService.getUserId();
 
         if (userId) {
@@ -66,6 +71,11 @@ export class HeaderComponent implements OnInit {
         console.error('Erreur lors de la récupération du profil utilisateur', err);
       }
     });
+
+    this.gameKeyForm = this._fb.group({
+      keyCode: ['', Validators.required]
+    });
+
 
     this.panierService.countItems();
     this.panierService.count$.subscribe(newCount => {

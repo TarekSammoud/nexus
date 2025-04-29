@@ -56,7 +56,6 @@ import { FriendManagementComponent } from './user-management/friend-management/f
 import { FriendRequestListComponent } from './user-management/friend-request-list/friend-request-list.component';
 import { ChatComponent } from './user-management/chat/chat.component';
 
-import { AuthGuard } from '../app/core/services/user-management/auth.guard';
 
 import { WalletDashboardComponent } from './finance/wallet-dashboard/wallet-dashboard.component';
 import { ConnectWalletComponent } from './finance/connect-wallet/connect-wallet.component';
@@ -101,6 +100,9 @@ import { TopStreamerComponent } from './community/sondage/top-streamer/top-strea
 
 import { MarketDetailsComponent } from './market/market-details/market-details.component';
 import { AiRecommendationComponent } from './market/ai-recommendation/ai-recommendation.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -165,6 +167,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminHomeComponent,
+    canActivate: [RoleGuard],
     children: [
       { path: '', redirectTo: 'games/list', pathMatch: 'full' },
       { path: 'games/list', component: AdminGameListComponent },
@@ -215,7 +218,7 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'games/emulated/play/:name', component: EmulatedGameComponent },
+  { path: 'games/emulated/play/:name', component: EmulatedGameComponent, canActivate: [AuthGuard] },
 
   { path: '', component: HomeComponent },
   { path: 'jams', component: JamsComponent },
@@ -223,12 +226,14 @@ const routes: Routes = [
   { path: 'games/:id', component: GamePageComponent },
   { path: 'category/:name', component: GameGridComponent },
 
-  { path: 'games/play/:name', component: BrowserGamePageComponent },
+  { path: 'games/play/:name', component: BrowserGamePageComponent, canActivate: [AuthGuard] },
 
-  { path: 'keen', component: KeenGameCarouselComponent },
 
-  { path: 'admin/categories', component: GameCategoriesComponent },
   { path: 'about', component: AboutComponent },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent
+  },
 
 
   { path: '**', component: NotFoundComponent }, 

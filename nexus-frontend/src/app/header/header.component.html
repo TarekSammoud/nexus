@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
 
-        <li class="nav-item"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
+        <li class="nav-item" *ngIf="role === 'DEVELOPER'"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/jams">Game Jams</a></li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/market">Market</a>
@@ -87,7 +87,7 @@
           </li>
 
           <!-- Desktop Profile Dropdown -->
-          <li class="nav-item dropdown d-none d-md-block">
+          <li *ngIf="role !== 'visitor'" class="nav-item dropdown d-none d-md-block">
             <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile" class="profile-img">
@@ -100,8 +100,8 @@
                     <img [src]="imageUrl || '../../assets/img/profilepic.jpg'" alt="Profile"
                       class="profile-img-dropdown">
                     <div class="ms-3">
-                      <div class="fw-bold">{{ user.displayName }}</div>
-                      <div class="text-muted">{{ user.username }}</div>
+                      <div class="fw-bold">{{user.firstName}} {{user.lastName}}</div>
+                      <div class="text-muted">{{user.roleType}}</div>
                     </div>
                   </div>
                 </a>
@@ -109,22 +109,21 @@
               <li><a class="dropdown-item" [routerLink]="['/user-profile']">Profile</a></li>
               <!-- Maintain both versions for settings and wallet -->
               <li><a class="dropdown-item" [routerLink]="['/edit-profile']">Account Settings</a></li>
-              <li><a class="dropdown-item" href="#">Account Settings</a></li>
               <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
               <li><a class="dropdown-item" [routerLink]="['/library']">Games Library</a></li>
 
-              <li><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
-              <li><a class="dropdown-item" routerLink="/admin">Dev Studio</a></li>
-              <li><a class="dropdown-item" href="#">Payment Management</a></li>
+              <li *ngIf="role === 'DEVELOPER'"><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
               <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button"
                   aria-controls="redeemCodeOffcanvas">Use a Code</a></li>
               <!-- Keep both Game Library and Games Library if needed -->
-              <li><a class="dropdown-item" href="#">Game Library</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
+          </li>
+          <li *ngIf="role == 'visitor'" class="nav-item">
+              <a href="" class="nav-link" routerLink="/login">Login</a>
           </li>
         </ul>
       </div>
@@ -133,7 +132,7 @@
 </nav>
 
 <!-- Side Navigation -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+<!--<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
   <div class="offcanvas-header">
     <h5 class=" text-light d-inline-block align-text-top" id="sidebarMenuLabel">Dev Studio</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -155,7 +154,7 @@
     </ul>
 
   </div>
-</div>
+</div> -->
 <!-- Offcanvas for Redeem Code -->
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="redeemCodeOffcanvas"
   aria-labelledby="redeemCodeOffcanvasLabel">

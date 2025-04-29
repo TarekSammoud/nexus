@@ -88,6 +88,8 @@ export class GamesNavComponent {
   filteredGamesTop: Game[] = [];
   
   searchTextBar: string = '';
+  page = 1;
+
 
   filterResultsTop(search: string): void {
     if (!search) {

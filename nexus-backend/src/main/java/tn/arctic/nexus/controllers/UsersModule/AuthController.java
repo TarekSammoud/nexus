@@ -23,6 +23,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class AuthController {
 
     private final AuthService authService;
@@ -34,6 +36,7 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody User user) {
 
 
+        System.out.println("INPUT USER : "+ user.getFirstName());
 
         if (!checkEmailUnique(user.getEmail())) {
             return ResponseEntity.badRequest().body(new AuthResponse("L'email est déjà utilisé."));

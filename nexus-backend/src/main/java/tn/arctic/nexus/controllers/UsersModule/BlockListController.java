@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/BlockList")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class BlockListController {
     @Autowired
     private IBlockListService   iBlockListService ;

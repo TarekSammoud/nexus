@@ -88,7 +88,12 @@
         </tr>
       </tbody>
     </table>
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
-
+    <div class="my-pagination">
+    <pagination-controls 
+    (pageChange)="page = $event" 
+    class="custom-pagination">
+  </pagination-controls>
+</div>
+  
   </div>
 </div>

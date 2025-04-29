@@ -166,6 +166,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { SupportComponent } from './support/support.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -276,7 +277,8 @@ import { SupportComponent } from './support/support.component';
     RefundAdminComponent,
     NotificationBannerComponent,
     TestComponent,
-    GeneratePdfComponent
+    GeneratePdfComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

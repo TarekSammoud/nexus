@@ -9,6 +9,7 @@ import { GameReview } from 'src/app/core/entities/game/game-review';
 import { GameService } from 'src/app/core/services/game/game.service';
 import { GameMediaService } from 'src/app/core/services/gameMedia/game-media.service';
 import { SpamCheckService } from 'src/app/core/services/spam-check.service';
+import { AuthService } from 'src/app/core/services/user-management/auth.service';
 import { MetamaskService } from 'src/services/finance/metamask.service';
 import { NotificationService } from 'src/services/finance/notification.service';
 import { PanierService } from 'src/services/finance/panier.service';
@@ -39,9 +40,15 @@ export class GamePageComponent implements OnInit {
 
   
 
+  user: any = {};
+  role: string = 'visitor';
+  isAuthenticated: boolean = false;
   emulatedGame= false;
   emulatedPSPGame= false;
   ngOnInit(): void {
+
+   this.isAuthenticated = this.authService.isAuthenticated();
+
     this.metamaskService.connectWallet();
     
     
@@ -184,6 +191,7 @@ browserGame = false;
  gamePlatforms: String[] = [];
 
   constructor(private panierService: PanierService,
+    private authService: AuthService,
     private _spamCheckService: SpamCheckService,private fb: FormBuilder,
     private _gameService: GameService, private _router:Router,private route: ActivatedRoute,
     private metamaskService: MetamaskService,
@@ -192,6 +200,10 @@ browserGame = false;
     
   
   ) {
+
+
+     // Get the game ID from the route parameters
+     //
     const gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL
 
      this.gameId = this.route.snapshot.paramMap.get('id'); // Get ID from URL

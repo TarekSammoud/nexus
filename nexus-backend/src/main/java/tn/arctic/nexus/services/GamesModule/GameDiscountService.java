@@ -1,12 +1,14 @@
 package tn.arctic.nexus.services.GamesModule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameDiscount;
 import tn.arctic.nexus.repositories.GamesModule.IGameDiscountRepository;
 import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -45,5 +47,11 @@ public class GameDiscountService implements IGameDiscountService{
 
     public GameDiscount getDiscountById(Long discountid) {
         return gameDiscountRepository.findById(discountid).orElse(null);
+    }
+
+    @Scheduled(cron = "0 0 * * * *")
+    public void removeExpiredDiscounts() {
+        List<GameDiscount> expiredDiscounts = gameDiscountRepository.findBySaleEndDateBefore(LocalDateTime.now());
+        gameDiscountRepository.deleteAll(expiredDiscounts);
     }
 }

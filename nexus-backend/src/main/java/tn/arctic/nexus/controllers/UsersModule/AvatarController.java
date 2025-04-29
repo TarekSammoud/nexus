@@ -15,6 +15,8 @@ import org.springframework.http.*;
 
 @RestController
 @RequestMapping("/api/avatar")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class AvatarController {
 
     private final AvatarGenerationService avatarService;

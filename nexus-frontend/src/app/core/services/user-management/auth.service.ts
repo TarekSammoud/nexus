@@ -39,7 +39,7 @@ export class AuthService {
             ...(token && { 'Authorization': `Bearer ${token}` })
         });
 
-        return this.http.post<any>(`${this.baseUrl}/register`, user, { headers });
+        return this.http.post<any>(`${this.baseUrl}/register`, user);
     }
 
     isAuthenticated(): boolean {

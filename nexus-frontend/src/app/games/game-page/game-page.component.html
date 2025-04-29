@@ -151,7 +151,7 @@
 </ng-container>
 
 <br>
-<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+<form  *ngIf ="isAuthenticated" [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
   <label for="reviewText">Add a review:</label>
   <textarea
     id="reviewText"

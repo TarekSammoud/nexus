@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(): void {
+    console.log("form is : ", this.user)
     if (!this.user.email || !this.user.password) {
       alert('Email et mot de passe sont requis');
       return;
