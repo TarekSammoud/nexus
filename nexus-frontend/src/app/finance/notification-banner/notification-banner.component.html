@@ -1,0 +1,7 @@
+<div *ngIf="notification$ | async as notification" class="notification-banner">
+    <span class="notification-icon">
+      <i class="fas fa-bell"></i> <!-- Using Font Awesome for the icon -->
+    </span>
+    {{ notification }}
+    <button class="close-btn" (click)="clear()">×</button>
+  </div>

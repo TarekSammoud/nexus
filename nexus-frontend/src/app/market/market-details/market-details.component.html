@@ -1,0 +1,72 @@
+<div class="d-flex" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <div style="width: 250px;">
+    <app-admin-home></app-admin-home>
+  </div>
+
+  <!-- Main Panel -->
+  <div class="flex-grow-1 px-4 py-4">
+    <!-- Header -->
+    <div class="market-panel-header mb-4 px-4 py-3 rounded-4 shadow d-flex justify-content-between align-items-center">
+      <div>
+        <h2 class="text-glow-blue m-0">
+          <i class="fas fa-store me-2"></i> MARKETPLACE PANEL
+        </h2>
+        <p class="text-muted mt-2">View and manage all available market listings!</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-success btn-sm" (click)="exportToExcel()">
+          <i class="fas fa-file-excel me-1"></i> Export Excel
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="exportToPDF()">
+          <i class="fas fa-file-pdf me-1"></i> Export PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive bg-dark rounded-4 p-3 shadow-lg">
+      <table class="table table-dark table-borderless text-white align-middle mb-0">
+        <thead class="table-header-dark">
+          <tr>
+            <th>#</th>
+            <th>Game Item</th>
+            <th>Start Bid</th>
+            <th>Highest Bid</th>
+            <th>End Date</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Owner</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let listing of markets | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+            <td>{{ i + 1 + (page - 1) * 5 }}</td>
+            <td>{{ listing.item?.title || 'Untitled' }}</td>
+            <td>{{ listing.startBid || '—' }}</td>
+            <td>{{ listing.highestBidAmount || '—' }}</td>
+            <td>{{ listing.endDate | date: 'short' }}</td>
+            <td>{{ listing.createdAt | date: 'short' }}</td>
+            <td>{{ listing.updatedAt | date: 'short' }}</td>
+            <td>{{ listing.user?.username || 'N/A' }}</td>
+            <td>
+              <button class="btn btn-action me-1" title="View">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteItem(listing.id)" title="Supprimer">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <pagination-controls
+      (pageChange)="page = $event"
+      class="pagination mt-4 d-flex justify-content-center"
+    ></pagination-controls>
+  </div>
+</div>

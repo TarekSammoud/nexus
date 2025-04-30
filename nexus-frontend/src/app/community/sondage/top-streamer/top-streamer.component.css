@@ -1,0 +1,175 @@
+/* Leaderboard Container */
+.leaderboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Header Section */
+  .leaderboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .header-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .header-description {
+    font-size: 1.2rem;
+    color: #d1d5db;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Leaderboard Grid */
+  .leaderboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+  
+  /* Rank Card */
+  .rank-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .rank-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Rank-specific styles */
+  .rank-0 {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1f2937;
+  }
+  
+  .rank-1 {
+    background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+    color: #1f2937;
+  }
+  
+  .rank-2 {
+    background: linear-gradient(135deg, #CD7F32, #B87333);
+    color: #1f2937;
+  }
+  
+  /* Rank Badge */
+  .rank-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .rank-number {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .trophy-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  
+  .trophy-img:hover {
+    transform: scale(1.15);
+  }
+  
+  /* Streamer Details */
+  .rank-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .streamer-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .streamer-platform {
+    font-size: 1rem;
+    color: #6b7280;
+  }
+  
+  .streamer-description {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  /* Watch Live Button */
+  .watch-live-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #3b82f6;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  .watch-live-btn:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+  }
+  
+  /* No Streamers */
+  .no-streamer-container {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+  }
+  
+  .no-streamer {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 700;
+  }
+  
+  .no-streamer-subtext {
+    font-size: 1rem;
+    color: #d1d5db;
+    margin-top: 10px;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

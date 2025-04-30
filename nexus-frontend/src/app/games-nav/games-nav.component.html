@@ -1,0 +1,194 @@
+<nav class="nav-container">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <div class="search-container mb-3">
+      <input type="text" class="form-control" placeholder="Search in store"  [(ngModel)]="searchTextBar" (input)="filterResultsTop(searchTextBar)"/>
+      <i class="fa fa-search"></i>
+      <div class="search-results" *ngIf="searchTextBar && filteredGamesTop.length > 0">
+        <div *ngFor="let game of filteredGamesTop" class="search-result-item" (click)="OnSelect(game)">
+          <img [src]="game.coverPicture?.mediaUrl 
+            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+            : '../../../../assets/img/missing.jpg'"
+            [alt]="game.name" class="result-img" />
+          <span class="result-name">{{ game.name }}</span>
+          <div class="price-section" *ngIf="game.price">
+            <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
+            <div class="price-details">
+              <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"> </span>
+              <span class="current-price" *ngIf="game.gameDiscount">
+                {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" width="24" height="auto" alt="TND">
+              </span>
+              <h3 class="text-light" style="text-align: left;"  *ngIf="!game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></h3>
+             </div>
+          </div>
+                </div>
+      </div>
+    </div>
+  
+    <!-- Discover Tab -->
+    <li [ngbNavItem]="0">
+      <button ngbNavLink class="text-muted">
+        Discover
+      </button>
+      <ng-template ngbNavContent>
+        <app-keen-game-carousel></app-keen-game-carousel>
+
+      </ng-template>
+    </li>
+  
+    <!-- Browse Tab -->
+    <li [ngbNavItem]="1">
+      <button ngbNavLink class="text-muted">
+        Browse
+      </button>
+      <ng-template ngbNavContent>
+
+
+
+          <div class="categories">
+            <div class="section-title">Popular Categories</div>
+<!-- Controls above carousel -->
+<div class="d-flex justify-content-end mb-2">
+    <button class="btn btn-outline-light me-2" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <i class="fa-solid fa-arrow-left"></i>      
+    </button>
+    <button class="btn btn-outline-light" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+  
+  <!-- Carousel -->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let group of chunkedCategories; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="d-flex justify-content-center">
+          <div *ngFor="let category of group" class="card mx-2" style="width: 18rem;">
+            <!-- <img [src]="category.image" class="card-img-top" alt="..."> -->
+            <div class="card-body" style="cursor: pointer;" (click)="goToCategory(category)">
+              <h5 class="card-title">{{ category.name }}</h5>
+              <p class="card-text">{{ category.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+        </div>
+
+ <!-- ALL GAMES SECTION -->
+
+ <br>
+ <br>
+<!-- ALL GAMES SECTION -->
+<div class="">
+    <div class="section-title">All Games</div>
+  
+    <div class="games-section d-flex gap-4 w-100 justify-content-between">
+        <!-- LEFT SIDE: Games -->
+        <div class="games-list flex-grow-1" style="min-width: 0;">
+          <div class="container py-10">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
+              <div class="col" *ngFor="let game of filteredGames | paginate: { itemsPerPage: 9, currentPage: page }">
+                <div (click)="OnSelect(game)" style="cursor: pointer;" class="card-gm h-100 border-0 shadow-sm game-card">
+                  <img *ngIf="game.coverPicture"
+                       [src]="game.coverPicture?.mediaUrl 
+                         ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+                         : '../../../../assets/img/missing.jpg'"
+                       [alt]="game.name" class="card-img-top cover-img" />
+                  <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />
+      
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="text-light" style="text-align: left;">{{ game.name }}</h5>
+                    <div class="price-section" *ngIf="game.price">
+                      <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
+                      <div class="price-details">
+                        <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"> </span>
+                        <span class="current-price" *ngIf="game.gameDiscount">
+                          {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" width="24" height="auto" alt="TND">
+                        </span>
+                        <h3 class="text-light" style="text-align: left;"  *ngIf="!game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></h3>
+                       </div>
+                    </div>      
+                    <div class="mt-auto">
+                      <div class="d-flex flex-wrap">
+                        <img *ngFor="let platform of game.platforms"
+                             class="platform-icon me-2 mb-2"
+                             [src]="'assets/images/platforms/' + (platform | uppercase) + '.svg'"
+                             [alt]="platform"
+                             width="24" height="24" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div  class="my-pagination">
+            <pagination-controls 
+            (pageChange)="page = $event" 
+           >
+          </pagination-controls>
+        </div>
+          </div>
+        </div>
+      
+    <!-- RIGHT SIDE: Filters -->
+<div class="filter-panel p-3 rounded shadow">
+  <h5 class="text-white mb-3">Filter Search</h5>
+
+  <!-- Search by name -->
+  <input
+    class="form-control mb-3"
+    type="text"
+    placeholder="Search by name"
+    [(ngModel)]="searchText"
+    (input)="filterResults(searchText)"
+    name="searchText"
+  />
+
+  <!-- Filter by category -->
+  <select
+    class="form-select mb-3"
+    [(ngModel)]="filterCategory"
+    (change)="filterResults(searchText)"
+    name="filterCategory"
+  >
+    <option [ngValue]="null" disabled>Choose Genre</option>
+    <option *ngFor="let category of availableCategories" [ngValue]="category">
+      {{ category.name }}
+    </option>
+  </select>
+
+
+
+          
+  <select class="form-select mb-3" [(ngModel)]="platform" (change)="filterResults(searchText)">
+    <option [ngValue]="null" disabled selected>Choose Platform</option>
+    <option [ngValue]="'WINDOWS'">Windows</option>
+    <option [ngValue]="'BROWSER'">Browser</option>
+    <option [ngValue]="'N64'">N64</option>
+    <option [ngValue]="'MACOS'">MacOS</option>
+    <option [ngValue]="'LINUX'">Linux</option>
+  </select>
+          <button class="btn btn-primary w-100" (click)="filterResults(searchText)">Apply Filters</button>
+        </div>
+      </div>
+      
+  </div>
+  
+          
+        
+      </ng-template>
+    </li>
+  
+    <li class="nav-item" role="presentation">
+      <!--<button type="button" class="nav-link" (click)="add($event)">...</button>-->
+    </li>
+  </ul>
+  
+  <!-- Use ngbNavOutlet here to keep the content active -->
+  <div [ngbNavOutlet]="nav" class="mt-2">         <app-keen-game-carousel></app-keen-game-carousel>
+
+</div>
+  
+</nav>

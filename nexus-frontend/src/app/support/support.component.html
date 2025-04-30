@@ -1,0 +1,42 @@
+<!-- support.component.html -->
+<div class="support-page">
+  <!-- En-tête -->
+  <div class="support-header">
+    <h1>Centre de Support</h1>
+    <p>Trouvez des réponses à vos questions ou créez un ticket pour notre équipe technique.</p>
+  </div>
+  
+  <!-- Section FAQ -->
+  <div class="faq-section">
+    <h2>Foire Aux Questions</h2>
+    
+    <div class="accordion" id="faqAccordion">
+      <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+        <div class="faq-question" data-bs-toggle="collapse" [attr.data-bs-target]="'#faqCollapse' + i">
+          {{ faq.question }}
+          <i class="fa fa-chevron-down"></i>
+        </div>
+        <div [id]="'faqCollapse' + i" class="collapse faq-answer">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section Ticket de Support -->
+  <div class="ticket-section">
+    <h2>Besoin d'aide supplémentaire ?</h2>
+    <p>Si vous ne trouvez pas la réponse à votre question, créez un ticket de support et notre équipe vous répondra dès que possible.</p>
+    
+    <div class="text-center">
+      <button class="create-ticket-btn" (click)="toggleTicketForm()">
+        {{ showTicketForm ? 'Fermer le formulaire' : 'Créer un ticket de support' }}
+      </button>
+    </div>
+    
+    <!-- Formulaire de ticket -->
+    <div class="ticket-form-container" *ngIf="showTicketForm">
+      <app-support-ticket></app-support-ticket>
+    </div>
+  </div>
+</div>

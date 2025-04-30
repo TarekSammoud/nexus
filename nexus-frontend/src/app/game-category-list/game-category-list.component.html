@@ -1,0 +1,41 @@
+<div class="admin-games-container">
+    <h2>📂 Game Category Panel</h2>
+  
+    <div class="text-end mb-3">
+      <button class="btn btn-outline-success" (click)="navigateToCreate()">➕ Create Game Category</button>
+    </div>
+  
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Games</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let category of data">
+
+  
+            <td>
+              <span class="game-name" (click)="OnSelect(category)">
+                {{ category.name }}
+              </span>
+            </td>
+  
+            <td >{{ category.description }}</td>
+            <td (click)="goToPage(category)" style="cursor: pointer;">Check Game Page</td>
+  
+            <td>
+              <button class="btn btn-primary btn-sm me-1" (click)="editGameCategory(category)" title="Edit">✏️</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteGameCategory(category)" title="Delete">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

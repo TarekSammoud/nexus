@@ -1,0 +1,52 @@
+<div class="category-form-wrapper">
+  <div class="category-card shadow">
+    <div class="category-header d-flex justify-content-between align-items-center">
+      <h3 class="title-glow mb-0">
+        <i class="fas fa-layer-group me-2"></i>
+        {{ isEdit ? '✏️ Modifier une Catégorie' : '➕ Ajouter une Catégorie' }}
+      </h3>
+      <button class="btn btn-warning btn-sm rounded-pill px-3" (click)="router.navigate(['/admin/community/categories'])">
+        ⬅ Retour
+      </button>
+    </div>
+
+    <form (ngSubmit)="saveCategory()" #form="ngForm" class="category-form">
+      <!-- Nom -->
+      <div class="mb-4">
+        <label for="name" class="form-label text-light fw-semibold">📂 Nom de la Catégorie</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="category.name"
+          class="form-control dark-field"
+          placeholder="Ex: Tutoriels, Débats, Conseils..."
+          required
+        >
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="description" class="form-label text-light fw-semibold">📝 Description</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="category.description"
+          class="form-control dark-field"
+          rows="4"
+          placeholder="Décrivez brièvement cette catégorie..."
+        ></textarea>
+      </div>
+
+      <!-- Boutons -->
+      <div class="text-end">
+        <button type="submit" class="btn btn-success rounded-pill px-4 me-2">
+          💾 {{ isEdit ? 'Mettre à jour' : 'Créer' }}
+        </button>
+        <button type="button" class="btn btn-outline-light rounded-pill px-4" (click)="router.navigate(['/admin/community/categories'])">
+          ❌ Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h5 class="modal-title">
+      <i class="fas fa-undo-alt me-2"></i>Request a Refund
+    </h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  
+
+  
+  <div class="modal-body">
+    <!-- Payments List -->
+    <div class="payments-list">
+      <!-- Payment Item -->
+      <div class="payment-item" *ngFor="let purchase of purchases">
+        <div class="payment-info" [class.selected]="selectedPurchaseId === purchase.id">
+          <div class="payment-details">
+            <h6>Purchase #{{purchase.id}}</h6>
+          </div>
+          <div class="amount-info">
+            <div class="coin-amount">
+              <i class="fas fa-coins"></i>
+              <span>{{purchase.price}}</span>
+              <span class="coins-text">coins</span>
+            </div>
+
+          </div>
+          <button class="btn btn-outline-primary refund-btn" 
+                  (click)="purchase.id !== undefined && requestRefund(purchase.id)"
+                  *ngIf="selectedPurchaseId !== purchase.id">
+            <i class="fas fa-undo-alt"></i>
+             Refund
+          </button>
+        </div>
+  
+        <!-- Refund Form -->
+        <div class="refund-form" *ngIf="selectedPurchaseId === purchase.id">
+          <textarea 
+            [(ngModel)]="refundReason" 
+            placeholder="Please explain why you're requesting a refund..."
+            class="form-control"
+            rows="3"
+          ></textarea>
+          <div class="form-actions">
+            <button class="btn btn-secondary" (click)="selectedPurchaseId = null">
+              Cancel
+            </button>
+            <button class="btn btn-primary" 
+                    [disabled]="!refundReason.trim()"
+                    (click)="submitRefund()">
+              Submit Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

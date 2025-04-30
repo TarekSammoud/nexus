@@ -1,0 +1,61 @@
+<div class="entry-form-container">
+  <h3 class="form-title">📝 Submit Your Entry</h3>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nameEntry">Game Title</label>
+      <input
+        type="text"
+        id="nameEntry"
+        [(ngModel)]="entry.nameEntry"
+        name="nameEntry"
+        class="form-control"
+        placeholder="Enter your game's title"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="descriptionEntry">Short Description</label>
+      <textarea
+        id="descriptionEntry"
+        [(ngModel)]="entry.descriptionEntry"
+        name="descriptionEntry"
+        class="form-control"
+        placeholder="Describe your game"
+        rows="3"
+        required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>📦 Game ZIP URL</label>
+      <input
+        type="url"
+        class="form-control"
+        [(ngModel)]="entry.zipUrl"
+        name="zipUrl"
+        placeholder="https://drive.google.com/..."
+        [ngClass]="{'is-invalid': entry.zipUrl && !isValidZipUrl(entry.zipUrl)}"
+        required />
+      <div *ngIf="entry.zipUrl && !isValidZipUrl(entry.zipUrl)" class="invalid-feedback">
+        Please enter a valid Google Drive or Dropbox link.
+      </div>
+    </div>
+    
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        [(ngModel)]="entry.agree"
+        name="agree"
+        id="agree"
+        class="form-check-input"
+        required />
+      <label for="agree" class="form-check-label">
+        I agree this entry is my original creation.
+      </label>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="!entry.agree || !entry.zipUrl">
+      🚀 Submit Entry
+    </button>
+  </form>
+</div>

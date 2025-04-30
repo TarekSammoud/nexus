@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/BlockList")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class BlockListController {
     @Autowired
     private IBlockListService   iBlockListService ;
@@ -35,5 +37,10 @@ public class BlockListController {
     @DeleteMapping("/delete/{id}")
     public void deleteBlockList(@PathVariable Long id) {
         iBlockListService.removeBlockList(id);
+    }
+
+    @GetMapping("/isBlocked/{userId}")
+    public boolean isUserBlocked(@PathVariable Long userId) {
+        return iBlockListService.isUserBlocked(userId);
     }
 }

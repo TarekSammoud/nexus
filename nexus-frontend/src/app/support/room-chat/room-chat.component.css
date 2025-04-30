@@ -1,0 +1,252 @@
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.messages-container {
+  flex: 1;
+  min-height: 100px; /* Minimum height when empty */
+  max-height: 70vh; /* Maximum height constraint */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 12px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Empty state styling */
+.messages-container:empty {
+  min-height: 60px; /* Even smaller when truly empty */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.messages-container:empty::after {
+  content: "No messages yet";
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  font-size: 14px;
+}
+
+.message-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.message-wrapper.input {
+  justify-content: flex-start;
+}
+
+.message-wrapper.output {
+  justify-content: flex-end;
+}
+
+.message {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message-wrapper.input .message {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e6e6e6;
+  border-top-left-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-wrapper.output .message {
+  background-color: #4d5bf9;
+  color: white;
+  border-top-right-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(77, 91, 249, 0.4);
+}
+
+button {
+  padding: 0 25px;
+  border-radius: 12px;
+  border: none;
+  background-color: #4d5bf9;
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #5969ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(77, 91, 249, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* Add auto-grow behavior */
+.messages-container {
+  transition: min-height 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .message {
+    max-width: 85%;
+  }
+  
+  .input-container {
+    padding: 12px;
+  }
+  
+  input {
+    padding: 12px 16px;
+  }
+  
+  button {
+    padding: 0 20px;
+  }
+  
+  .messages-container:empty {
+    min-height: 50px;
+  }
+}
+/* Header section for the chat room */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Close Room Button Styling */
+.close-room-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.close-room-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(231, 76, 60, 0.4);
+}
+
+.close-room-btn:active {
+  transform: translateY(0);
+}
+
+/* If you want to add an icon */
+.close-room-btn i {
+  margin-right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .close-room-btn {
+    align-self: flex-end;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}

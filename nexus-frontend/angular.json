@@ -22,16 +22,35 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "output": "./assets/fonts/"
+              }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
 
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/custom-theme.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+               "node_modules/font-awesome/css/font-awesome.min.css",
+                "src/styles.css",
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+            
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "sockjs-client",
+              "rxjs-compat",
+              "rxjs"
             ]
           },
           "configurations": {
@@ -91,9 +110,16 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "output": "./assets/fonts/"
+              }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -101,5 +127,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c095febb-ca6d-416d-a865-414e458abe9d"
   }
 }

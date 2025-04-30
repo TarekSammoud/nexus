@@ -1,0 +1,66 @@
+<div class="image-banner">
+  <img src="assets/images/communityimg.png" alt="Community Banner" class="banner-img" />
+</div>
+
+<div class="form-container">
+  <div class="form-header text-light">
+    <h2 class="form-title">
+      {{ isEditMode ? '✏️ Modifier la Publication' : '➕ Ajouter une Nouvelle Publication' }}
+    </h2>
+    <p>Remplissez les champs ci-dessous pour enregistrer votre publication.</p>
+  </div>
+  
+  <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" class="form-body">
+      
+    <!-- Titre -->
+    <div class="form-group">
+      <label for="title">🖋️ Titre de la publication</label>
+      <input 
+        id="title"
+        type="text"
+        formControlName="title"
+        class="form-control"
+        placeholder="Ex : Les secrets de la programmation"
+      />
+    </div>
+
+    <!-- Contenu -->
+    <div class="form-group">
+      <label for="content">📝 Contenu de la publication</label>
+      <textarea
+        id="content"
+        formControlName="content"
+        class="form-control"
+        rows="5"
+        placeholder="Ex : Découvrez les bases du développement web avec Angular..."
+      ></textarea>
+    </div>
+
+    <!-- Catégorie (ComboBox dynamique) -->
+    <div class="form-group">
+      <label for="category">📂 Catégorie</label>
+      <select id="category" formControlName="category" class="form-control">
+        <option value="" disabled selected>-- Sélectionnez une catégorie --</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+
+    <!-- Image URL (si vous souhaitez ajouter une image) -->
+    <div class="form-group">
+      <label for="imageUrl">📸 URL de l'image</label>
+      <input 
+        id="imageUrl"
+        type="text"
+        formControlName="imageUrl"
+        class="form-control"
+        placeholder="Entrez l'URL de l'image"
+      />
+    </div>
+
+    <!-- Boutons -->
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}</button>
+      <button type="button" class="btn btn-outline-danger" (click)="cancel()">Annuler</button>
+    </div>
+  </form>
+</div>

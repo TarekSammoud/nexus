@@ -1,0 +1,50 @@
+<div class="admin-games-container">
+    <h2>🔑 Game Key Panel</h2>
+  
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Key Code</th>
+            <th>Game</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Expires At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let key of data">
+            <td>
+              <img [src]="getImageUrl(key)" 
+                   alt="{{ key.keyCode | uppercase }}" 
+                   class="img-thumbnail" />
+            </td>
+  
+            <td>
+              {{ key.keyCode | uppercase }}
+              <button class="no-style" (click)="copyToClipboard(key.keyCode)" title="Copy">
+                <i class="fa-regular fa-paste" style="color: grey;"></i>
+              </button>
+            </td>
+  
+            <td>{{ key.game.name }}</td>
+            <td>{{ key.user }}</td>
+            <td>{{ key.status }}</td>
+            <td>{{ key.createdAt | date: 'short' }}</td>
+            <td class="text-danger">{{ key.expiresAt | date: 'short' }}</td>
+  
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteGame(key)">
+                🗑️ Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

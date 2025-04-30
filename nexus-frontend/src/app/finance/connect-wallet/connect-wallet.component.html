@@ -1,0 +1,135 @@
+
+
+
+
+
+<div class="stepper-container">
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <!-- Step 1 -->
+    <mat-step>
+      <ng-template matStepLabel>
+        <div class="step-label">
+          <span class="step-number">01</span>
+          <span class="step-title">Nexus Wallet</span>
+        </div>
+      </ng-template>
+      <div class="step-content">
+        <div class="content-box">
+          <div class="text-section">
+            <h3>Welcome to Nexus Wallet</h3>
+            <p>Nexus Wallet lets you buy Nexus Coins with crypto, which you can use for in-platform purchases.</p>
+            <button mat-flat-button class="next-btn" matStepperNext>
+              Let's Start
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          <div class="image-section">
+            <img src="../../assets/img/token.png" alt="Nexus Token" class="feature-image">
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Step 2 -->
+    <mat-step>
+      <ng-template matStepLabel>
+        <div class="step-label">
+          <span class="step-number">02</span>
+          <span class="step-title">MetaMask Extension</span>
+        </div>
+      </ng-template>
+      <div class="step-content">
+        <div class="content-box">
+          <div class="text-section">
+            <h3>Install MetaMask</h3>
+            <p>Install the MetaMask extension to securely manage your Nexus Coins in your browser</p>
+            <div class="button-group">
+              <a href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">
+                <button mat-flat-button  matStepperNext class="next-btn">
+                  <i class="fas fa-download"></i>
+                  Install MetaMask
+                </button>
+              </a>
+              <button mat-button class="back-btn" matStepperPrevious>
+                <i class="fas fa-arrow-left"></i>
+                Back
+              </button>
+            </div>
+          </div>
+          <div class="image-section">
+            <img src="../../assets/img/MetaMask_Fox.svg.png" alt="MetaMask" class="feature-image metamask">
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Step 3 -->
+    <mat-step>
+      <ng-template matStepLabel>
+        <div class="step-label">
+          <span class="step-number">03</span>
+          <span class="step-title">Connect Wallet</span>
+        </div>
+      </ng-template>
+      <div class="step-content">
+        <div class="content-box">
+          <div class="text-section">
+            <h3>Connect Your Wallet</h3>
+            <p>Connect your MetaMask wallet to Nexus Wallet to start using your Nexus Coins</p>
+            <div class="button-group">
+              <button mat-flat-button class="next-btn" (click)="connectWallet()" matStepperNext>
+                <i class="fas fa-link"></i>
+                Connect Wallet
+              </button>
+              <button mat-button class="back-btn" matStepperPrevious>
+                <i class="fas fa-arrow-left"></i>
+                Back
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Step 4 -->
+    <mat-step>
+      <ng-template matStepLabel>
+        <div class="step-label">
+          <span class="step-number">04</span>
+          <span class="step-title">First Payment</span>
+        </div>
+      </ng-template>
+      <div class="step-content">
+        <div class="content-box">
+          <div class="text-section">
+            <h3>Ready to Start</h3>
+            <div *ngIf="walletAddress" class="wallet-info">
+              <div class="info-item">
+                <span class="label">Wallet Address:</span>
+                <span class="value">{{ walletAddress }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Balance:</span>
+                <span class="value">{{ walletBalance }} ETH</span>
+              </div>
+            </div>
+            <div class="button-group">
+              <button mat-flat-button class="next-btn" (click)="createNewWallet()"  >
+                <i class="fas fa-wallet"></i>
+                Go to Wallet
+              </button>
+              <button mat-button class="back-btn" matStepperPrevious>
+                <i class="fas fa-arrow-left"></i>
+                Back
+              </button>
+              <button mat-button class="reset-btn" (click)="stepper.reset()">
+                <i class="fas fa-redo"></i>
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

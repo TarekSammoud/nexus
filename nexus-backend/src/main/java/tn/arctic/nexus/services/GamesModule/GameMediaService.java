@@ -13,6 +13,7 @@ public class GameMediaService implements IGameMediaService{
     IGameMediaRepository gameMediaRepository;
     @Override
     public GameMedia addGameMedia(GameMedia gameMedia) {
+
         return gameMediaRepository.save(gameMedia);
     }
 

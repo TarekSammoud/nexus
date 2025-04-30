@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Support Tickets</h2>
+
+  <!-- Success/Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Ticket Form -->
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" class="form-control" placeholder="Ticket Title" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Ticket Description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select id="priority" formControlName="priority" class="form-control">
+        <option value="CRITICAL">critical</option>
+        <option value="HIGH">high</option>
+        <option value="MEDIUM">medium</option>
+        <option value="LOW">low</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" formControlName="category" class="form-control">
+        <option value="PURCHASE">purchase</option>
+        <option value="TECHNICAL">technical</option>
+        <option value="ACCOUNT">account</option>
+        <option value="COMMUNITY_CONTENT">community content</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid || isSubmitting">
+      <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      {{ isEditMode ? 'Update' : 'Submit' }}
+    </button>
+  </form>
+
+  
+
+  <!-- No tickets message -->
+  <div *ngIf="tickets.length === 0">
+    <p>No tickets found.</p>
+  </div>
+</div>

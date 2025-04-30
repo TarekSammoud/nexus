@@ -1,0 +1,115 @@
+.admin-games-container {
+    max-width: 95%;
+    margin: auto;
+    padding: 40px 30px;
+    background: linear-gradient(to bottom right, #1a1c29, #202233);
+    border-radius: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eaeaea;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .admin-games-container h2 {
+    text-align: center;
+    font-weight: 800;
+    font-size: 28px;
+    color: #4fc3f7;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #4fc3f777;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #27293d;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  thead {
+    background-color: #333652;
+    color: #ffffff;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+  
+  td img.img-thumbnail {
+    max-width: 90px;
+    height: auto;
+    border: none;
+  }
+
+  .img-thumbnail {
+    border: none !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  
+  tr:nth-child(even) {
+    background-color: #2f3145;
+  }
+  
+  tr:hover {
+    background-color: #3b3e5a;
+    transition: background-color 0.3s;
+  }
+  
+  .game-name {
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .game-name:hover {
+    color: #03a9f4;
+  }
+  
+  .btn {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  
+  .my-pagination ::ng-deep .ngx-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .my-pagination ::ng-deep .ngx-pagination a,
+  .my-pagination ::ng-deep .ngx-pagination button {
+    background-color: transparent;
+    border: none;
+    color: #aaa;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .my-pagination ::ng-deep .ngx-pagination .current {
+    background-color: #0d6efd;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(13, 110, 253, 0.5);
+  }
+  
+  .my-pagination ::ng-deep .ngx-pagination a:hover,
+  .my-pagination ::ng-deep .ngx-pagination button:hover {
+    background-color: #343a40;
+    color: #fff;
+    transform: scale(1.05);
+  }
+  
+  

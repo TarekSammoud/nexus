@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="jam-hero">
+    <h1 class="jam-title">🎮 Game Jams on Nexus 🎮</h1>
+    <p class="jam-subtitle">Join or create exciting game jams and showcase your creativity!</p>
+    <button class="jam-btn" (click)="toggleForm()">+ Host a Game Jam</button>
+    <button class="jam-btn vip" (click)="goToVipJams()">🌟 VIP Jams</button>
+
+  </div>
+
+  <div *ngIf="showForm" class="mt-4">
+    <app-jam-form (jamCreated)="onJamCreated($event)"></app-jam-form>
+  </div>
+
+  <div *ngIf="jams.length > 0; else noData" class="jam-cards">
+    <div *ngFor="let jam of jams | paginate: { itemsPerPage: 3, currentPage: page }" class="jam-card">
+      <div class="jam-img-wrapper">
+        <img *ngIf="jam.imageUrl" [src]="jam.imageUrl" alt="Jam Image" class="jam-img" />
+      </div>
+
+      <div class="jam-info">
+        <h3 class="card-title">{{ jam.name }}</h3>      
+        <p>{{ jam.description }}</p>
+        
+        <div class="jam-dates">
+          <div class="date-row">
+            <span class="date-label">📅 Development:</span>
+            <span class="date-range">
+              {{ jam.devStartDate | date:'dd MMM yyyy' }} → {{ jam.devEndDate | date:'dd MMM yyyy' }}
+            </span>
+          </div>
+          <div class="date-row">
+            <span class="date-label">🗳️ Voting:</span>
+            <span class="date-range">
+              {{ jam.voteStartDate | date:'dd MMM yyyy' }} → {{ jam.voteEndDate | date:'dd MMM yyyy' }}
+            </span>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="jam-actions">
+        <button class="view" title="View" (click)="viewDetails(jam)">
+          <i class="fas fa-eye"></i>
+        </button>
+
+        <button class="enter" title="Enter" [routerLink]="['/jam', jam.id]">
+          <i class="fas fa-gamepad"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <pagination-controls (pageChange)="page = $event" class="pagination"></pagination-controls>
+
+  <ng-template #noData>
+    <p class="text-center text-muted">No Game Jams available.</p>
+  </ng-template>
+
+  <div *ngIf="selectedJam" class="jam-modal">
+    <div class="jam-modal-content">
+      <span class="close-btn" (click)="closeDetails()">×</span>
+
+      <app-jam-details *ngIf="!editMode" [jam]="selectedJam"></app-jam-details>
+
+      <app-jam-edit
+        *ngIf="editMode"
+        [jam]="selectedJam"
+        (jamUpdated)="updateJam()"
+        (cancel)="closeDetails()">
+      </app-jam-edit>
+    </div>
+  </div>
+   
+</div>

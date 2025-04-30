@@ -1,0 +1,33 @@
+<div *ngIf="jam" class="jam-details-view">
+  <h2 class="card-title text-center">{{ jam.name }}</h2>
+
+  <div class="jam-image-wrapper">
+    <img *ngIf="jam.imageUrl" [src]="jam.imageUrl" class="modal-img" />
+  </div>
+
+  <ul class="jam-details-list">
+    <li>
+      <i class="fas fa-calendar-day icon"></i>
+      <span class="label">Start:</span>
+      <span>{{ jam.devStartDate | date:'dd MMM yyyy' }}</span>
+    </li>
+
+    <li>
+      <i class="fas fa-hourglass-end icon"></i>
+      <span class="label">End:</span>
+      <span>{{ jam.devEndDate | date:'dd MMM yyyy' }}</span>
+    </li>
+
+    <li>
+      <i class="fas fa-poll icon"></i>
+      <span class="label">Voting:</span>
+      <span>{{ jam.voteStartDate | date:'dd MMM yyyy' }} → {{ jam.voteEndDate | date:'dd MMM yyyy' }}</span>
+    </li>
+
+    <li *ngIf="jam.reward">
+      <i class="fas fa-trophy icon"></i>
+      <span class="label">Reward:</span>
+      <span>{{ jam.reward }}</span>
+    </li>
+  </ul>
+</div>

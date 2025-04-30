@@ -40,8 +40,26 @@ public class GameMedia implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "game_id")
-    private Game game;
+    @JsonBackReference("game-screenshots")
+    private Game game; // for screenshots
 
+    @OneToOne
+    @JoinColumn(name = "cover_id")
+    @JsonBackReference("game-cover")
+    private Game gameCover;
+
+    @OneToOne
+    @JoinColumn(name = "banner_id")
+    @JsonBackReference("game-banner")
+    private Game gameBanner;
+
+    @OneToOne
+    @JoinColumn(name = "file_id")
+    @JsonBackReference("game-file")
+    private Game gameFile;
+
+
+    private GameMediaType gameMediaType;
 
     public Long getId() {
         return id;
@@ -97,5 +115,13 @@ public class GameMedia implements Serializable {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public GameMediaType getGameMediaType() {
+        return gameMediaType;
+    }
+
+    public void setGameMediaType(GameMediaType gameMediaType) {
+        this.gameMediaType = gameMediaType;
     }
 }

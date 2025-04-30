@@ -5,12 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.arctic.nexus.entities.Game;
 import tn.arctic.nexus.entities.GameCategory;
+
+
+import tn.arctic.nexus.entities.GamePlatform;
 import tn.arctic.nexus.repositories.GamesModule.IGameRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GameService implements IGameService{
+public class GameService implements IGameService {
     @Autowired
     IGameRepository gameRepository;
 
@@ -21,7 +25,7 @@ public class GameService implements IGameService{
 
     @Override
     public List<Game> getAllGames() {
-        return (List<Game>) this.gameRepository.findAll();
+        return this.gameRepository.findAll();
     }
 
     @Override
@@ -41,7 +45,47 @@ public class GameService implements IGameService{
     }
 
     @Override
+    public List<Game> getBrowserGames() {
+        List<GamePlatform> gp = new ArrayList<>();
+        gp.add(GamePlatform.BROWSER);
+        return gameRepository.findGamesByPlatforms(gp);
+    }
+
+    @Override
+    public List<Game> getEmulatedGames() {
+        List<GamePlatform> gp = new ArrayList<>();
+        gp.add(GamePlatform.N64);
+        gp.add(GamePlatform.PSP);
+        return gameRepository.findGamesByPlatforms(gp);
+    }
+
+    @Override
     public Game updateGame(Game game) {
         return gameRepository.save(game);
+    }
+
+    @Override
+    public Integer getNumberOfGames(){
+        return gameRepository.findAll().size();
+    }
+
+    @Override
+    public List<Game> getGamesByCategoryName(String name) {
+        return gameRepository.findGamesByCategoryName(name);
+    }
+
+    @Override
+    public List<Game> getAllGamesBySingleCategory(String name) {
+        return this.gameRepository.findGamesByCategoryName(name);
+    }
+
+    @Override
+    public Game getLastId() {
+        return gameRepository.findTopByOrderByIdDesc();
+    }
+
+    @Override
+    public List<Game> findDeveloperGames(Long id){
+        return gameRepository.findGamesByDeveloperId(id);
     }
 }

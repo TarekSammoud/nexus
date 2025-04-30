@@ -1,0 +1,23 @@
+<div class="chat-container">
+    <ul class="message-list">
+        <li *ngFor="let msg of messages; trackBy: trackById"
+            [ngClass]="{ 'sent': msg.senderId === currentUserId, 'received': msg.senderId !== currentUserId }">
+            <div class="message-card">
+                <div class="message-header">
+                    <strong>{{ getUserNameById(msg.senderId) }}</strong>
+                </div>
+                <div class="message-content">
+                    {{ msg.content }}
+                </div>
+                <div class="message-timestamp">
+                    <small>{{ msg.timestamp | date:'short' }}</small>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="message-input">
+        <textarea id="messageContent" [(ngModel)]="messageContent" placeholder="Type your message..."></textarea>
+        <button (click)="sendMessage()">Send</button>
+    </div>
+</div>

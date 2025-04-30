@@ -1,0 +1,25 @@
+<full-calendar [options]="calendarOptions"></full-calendar>
+
+<div class="jam-fluid-bar">
+  <div class="jam-fluid-track">
+    <div
+      class="jam-fluid-block"
+      *ngFor="let block of fluidBar"
+      [style.backgroundColor]="block.color"
+      [style.width.px]="block.width"
+      [style.left.px]="block.offset"
+    >
+      <span class="label">🧃 {{ block.label }}</span>
+    </div>
+  </div>
+</div>
+<div class="jam-modal" *ngIf="selectedJam">
+    <div class="jam-modal-content">
+      <span class="close-btn" (click)="selectedJam = null">×</span>
+      <h3>📌 {{ selectedJam.name }}</h3>
+      <p>🛠️ Dev: {{ selectedJam.devStartDate | date:'dd MMM yyyy' }} → {{ selectedJam.devEndDate | date:'dd MMM yyyy' }}</p>
+      <p *ngIf="selectedJam.voteStartDate">🗳️ Voting: {{ selectedJam.voteStartDate | date:'dd MMM yyyy' }} → {{ selectedJam.voteEndDate | date:'dd MMM yyyy' }}</p>
+      <p>🏆 Reward: {{ selectedJam.reward || 'No reward' }}</p>
+    </div>
+  </div>
+  

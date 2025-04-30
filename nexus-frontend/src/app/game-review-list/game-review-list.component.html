@@ -1,0 +1,42 @@
+<div class="admin-games-container">
+    <h2>📝 Game Review Panel</h2>
+  
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Review</th>
+            <th>Rating</th>
+            <th>Game</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let review of data">
+            <td>
+              <img [src]="review.game.coverPicture?.mediaUrl 
+                ? 'http://localhost:9000/nexus-backend/games/upload/download/' + review.game.coverPicture?.mediaUrl 
+                : './assets/default-game.jpg'"
+                alt="{{ review.game.name }}"
+                class="img-thumbnail" />
+            </td>
+  
+            <td class="text-wrap">{{ review.reviewText }}</td>
+            <td>⭐ {{ review.rating }}</td>
+            <td>{{ review.game.name }}</td>
+            <td>{{ review.createdAt | date: 'shortDate' }}</td>
+  
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteGameReview(review)" title="Delete">
+                🗑️ Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

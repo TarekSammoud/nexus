@@ -1,0 +1,30 @@
+<div class="chat-room">
+  <!-- Add the header section with the close button -->
+  <div class="chat-header">
+    <h2 class="chat-title">Support Chat</h2>
+    <button class="close-room-btn" (click)="closeRoom()">
+      <!-- Optional icon -->
+      <i class="fas fa-times"></i> Close Room
+    </button>
+  </div>
+
+  <!-- Your existing messages container -->
+  <div class="messages-container">
+    <div *ngFor="let msg of messages" class="message-wrapper" [ngClass]="msg.type">
+      <div class="message">
+        {{ msg.message }}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Your existing input container -->
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      placeholder="Type your message..."
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>

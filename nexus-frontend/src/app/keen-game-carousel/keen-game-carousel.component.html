@@ -1,0 +1,78 @@
+<!-- Main Slider -->
+<div class="carousel-container">
+<div class="keen-slider" #sliderRef>
+  <div *ngFor="let game of games; let i = index" class="keen-slider__slide" [ngClass]="'number-slide' + game.id">
+    <div class="slide-content"  (click)="goToGame(game.id)" style="cursor: pointer;">
+        <div class="slide-media">
+          <picture (click)="goToGame(game.id)">
+            <source media="(min-width: 1280px)" [srcset]="game.coverPicture?.mediaUrl 
+              ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl 
+              : './assets/default-game.jpg'">
+            <img 
+              [src]="game.coverPicture?.mediaUrl 
+                ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl
+                : './assets/default-game.jpg'" 
+              [alt]="game.name"
+            />
+          </picture>
+        </div>
+
+      <!-- Overlay content -->
+      <div class="slide-overlay">
+        <div class="slide-description">
+          <h6 class="slide-title text-light">
+            {{ game.name }}</h6>
+          <div class="slide-info">
+            <span class="slide-status">Available</span>
+            <span class="slide-details">{{ game.description }}</span>
+          </div>
+        </div>
+
+        <!-- Updated offer layout -->
+        <div class="slide-offer">
+          <div class="price-section" *ngIf="game.price">
+            <span class="discount-tag" *ngIf="game.gameDiscount">{{ game.gameDiscount.discountPercentage }}%</span>
+            <div class="price-details">
+              <span class="original-price"  *ngIf="game.gameDiscount">{{ game.price }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></span>
+              <span class="current-price" *ngIf="game.gameDiscount">
+                {{ game.price - (game.price * (game.gameDiscount?.discountPercentage || 0) / 100) | number:'1.2-2' }} <img src="assets/img/token.png" width="24" height="auto" alt="TND">
+              </span>
+                            <span class="current-price" *ngIf="!game.gameDiscount">{{ game.price  }} <img src="assets/img/token.png" width="24" height="auto" alt="TND"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Separated button row -->
+        <div class="action-buttons">
+          <a href="" class="play-button">
+            <span>Buy Now</span>
+          </a>
+          <button class="wishlist-button" aria-label="Add to Wishlist">
+            <svg class="wishlist-icon" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M12.75 8.5a.75.75 0 0 0-1.5 0v2.75H8.5a.75.75 0 0 0 0 1.5h2.75v2.75a.75.75 0 0 0 1.5 0v-2.75h2.75a.75.75 0 0 0 0-1.5h-2.75z"></path>
+              <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25M3.75 12a8.25 8.25 0 1 1 16.5 0 8.25 8.25 0 0 1-16.5 0" clip-rule="evenodd" fill-rule="evenodd"></path>
+            </svg>
+            <span>Add to Wishlist</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thumbnail Slider -->
+<div class="keen-slider thumbnail" #thumbnailRef>
+  <div *ngFor="let game of games; let i = index" class="keen-slider__slide" [ngClass]="'number-slide'">
+    <div class="thumbnail-content">
+      <div class="thumbnail-image">
+        <img class="e-game-image" 
+             [src]="game.coverPicture?.mediaUrl 
+             ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+             : './assets/default-game.jpg'"
+             [alt]="game.name" />
+        <span class="thumbnail-title">&nbsp;&nbsp;{{ game.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

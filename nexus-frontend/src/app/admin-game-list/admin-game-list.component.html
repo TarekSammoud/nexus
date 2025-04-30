@@ -1,0 +1,99 @@
+<div class="admin-games-container">
+  <h2>🎮 Game Management Panel</h2>
+
+  <div style="display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 5px;">
+    <button class="btn btn-outline-success" (click)="navigateToCreate()">➕ Create Game</button>
+    <button class="btn btn-outline-success" (click)="navigateToCreateBrowser()">➕ Create Browser Game</button>
+    <button class="btn btn-outline-success" (click)="navigateToCreateEmulated()">➕ Create Emulated Game</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="  w-100">
+      <thead>
+        <tr>
+          <th style="width: 80px;">Cover</th>
+          <th>Name</th>
+          <th style="width: 200px;">Description</th>
+          <th>Platform</th>
+          <th style="width: 80px;">Price</th>
+          <th style="width: 120px;">Created</th>
+          <th style="width: 150px;">Discount</th>
+          <th style="width: 220px;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let game of data  | paginate: { itemsPerPage: 3, currentPage: page }">
+          <td>
+            <img [src]="game.coverPicture?.mediaUrl 
+              ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+              : './assets/default-game.jpg'" 
+              alt="{{ game.name }}" 
+              class="img-thumbnail" 
+              style="max-width: 70px;" />
+          </td>
+
+          <td>
+            <span class="game-name" (click)="OnSelect(game)" style="word-break: break-word;">
+              {{ game.name }}
+            </span>
+          </td>
+
+          <td style="word-break: break-word;">
+            {{ game.description }}
+          </td>
+
+          <td style="word-break: break-word;">
+            {{ game.platforms }}
+          </td>
+
+          <td>{{ game.price }}</td>
+
+          <td>{{ game.createdAt | date: 'shortDate' }}</td>
+
+          <td>
+            <div *ngIf="game.gameDiscount; else noDiscount">
+              <span class="badge bg-warning text-dark" style="margin-bottom: 5px;">
+                {{ game.gameDiscount.discountPercentage }}%
+              </span>
+
+              <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ⋮
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" (click)="updateDiscount(game)" style="cursor:pointer">Edit</a></li>
+                  <li><a class="dropdown-item" (click)="deleteDiscount(game)" style="cursor:pointer">Delete</a></li>
+                </ul>
+              </div>
+
+            </div>
+            <ng-template #noDiscount>
+              <button class="btn btn-primary" (click)="createDiscount(game)" title="Create Discount">Create Discount</button>
+            </ng-template>
+          </td>
+
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ⋮
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="editGame(game)" style="cursor:pointer">Edit</a></li>
+                <li><a class="dropdown-item" (click)="deleteGame(game)" style="cursor:pointer">Delete</a></li>
+                <li><a class="dropdown-item" (click)="generateKey(game)" style="cursor:pointer">Generate Key</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="my-pagination">
+    <pagination-controls 
+    (pageChange)="page = $event" 
+    class="custom-pagination">
+  </pagination-controls>
+</div>
+  
+  </div>
+</div>

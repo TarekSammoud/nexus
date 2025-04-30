@@ -1,0 +1,104 @@
+<!-- Ethereum Price Indicator -->
+<div class="price-indicator">
+    <div class="price-content">
+      <div class="price-icon">
+        <img src="../../assets/img/finance/ethICON.png" alt="ETH">
+      </div>
+      <div class="price-details">
+        <span class="price-label">ETH Price</span>
+        <span class="price-value">{{ethereumPrice | currency:'USD':'symbol':'1.2-2'}}</span>
+      </div>
+      <div class="price-trend" [ngClass]="{'trend-up': priceChange >= 0, 'trend-down': priceChange < 0}">
+        <i class="fas" [ngClass]="{'fa-arrow-up': priceChange >= 0, 'fa-arrow-down': priceChange < 0}"></i>
+        <span>{{priceChange}}%</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Store Grid -->
+  <div class="store">
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/token.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">1 Nexus Coin</p>
+        <button (click)="sendTransaction(1,oneNexusCoinPrice)" class="buy-button" [disabled]="!isFetched">
+          <span class="price">{{1 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/finance/10.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">10 Nexus Coins</p>
+        <button (click)="sendTransaction(10,10 * oneNexusCoinPrice)" class="buy-button">
+          <span class="price">{{10 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+  
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/finance/30Coinss.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">30 Nexus Coins</p>
+        <button (click)="sendTransaction(30,30 * oneNexusCoinPrice)" class="buy-button">
+          <span class="price">{{30 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+  
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/finance/50.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">50 Nexus Coins</p>
+        <button (click)="sendTransaction(50,50 * oneNexusCoinPrice)" class="buy-button">
+          <span class="price">{{50 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+  
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/finance/200Coins.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">200 Nexus Coins</p>
+        <button (click)="sendTransaction(200,200 * oneNexusCoinPrice)" class="buy-button">
+          <span class="price">{{200 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+  
+    <div class="item">
+      <div class="item-content">
+        <div class="token-image">
+          <img src="../../assets/img/finance/500Coins.png" alt="ETH Icon">
+          <div class="glow-effect"></div>
+        </div>
+        <p class="diamond-count">500 Nexus Coins</p>
+        <button (click)="sendTransaction(500,500 * oneNexusCoinPrice)" class="buy-button">
+          <span class="price">{{500 * oneNexusCoinPrice | number:'1.6-6'}}</span>
+          <img class="ethicon" src="../../assets/img/finance/ethICON.png" alt="ETH Icon">
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,301 @@
+/* Dark Gaming Review Form - Complete CSS */
+:root {
+  --primary-color: #8a2be2; /* Vibrant purple */
+  --primary-hover: #9d4edd;
+  --accent-color: #00e676; /* Neon green */
+  --text-color: #ffffff;
+  --text-secondary: #b0b7c4;
+  --dark-bg: #151821;
+  --card-bg: #1e2130;
+  --input-bg: #2a2d3e;
+  --border-color: #373e5a;
+  --error-color: #ff3e5e;
+  --success-color: #00e676;
+  --cancel-color: #414a67;
+  --cancel-hover: #505a7d;
+  --disabled-color: #414a67;
+  --glow-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
+  --star-inactive: #4b4e61; /* Darker color for inactive stars */
+  --star-hover: #ffd700; /* Yellow for hover state */
+  --star-active: #ffcc00; /* Slightly darker yellow for active state */
+}
+
+body {
+  background-color: var(--dark-bg);
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', sans-serif; /* Highly readable fonts */
+  color: var(--text-color);
+}
+
+/* Container */
+.gaming-review-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* Form */
+.gaming-review-form {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(138, 43, 226, 0.05);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gaming accent border at top */
+.gaming-review-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+}
+
+/* Form title */
+.form-title {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 25px;
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.required {
+  color: var(--primary-color);
+  margin-left: 2px;
+}
+
+/* Inputs styling */
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
+}
+
+.form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Rating input group */
+.rating-input-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Hide the number input when using stars */
+.rating-input-group input[type="number"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Star rating container */
+.rating-icons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Individual star styling */
+.star-icon {
+  color: var(--star-inactive);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Star hover effect */
+.star-icon:hover {
+  color: var(--star-hover);
+  transform: scale(1.1);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* Active star state */
+.star-icon.active {
+  color: var(--star-active);
+  text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+/* Star animation when clicked */
+@keyframes star-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.star-icon.active {
+  color: #ffd700;
+  animation: star-pulse 0.3s ease-in-out;
+}
+
+/* Error message */
+.is-invalid {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 5px;
+  padding-left: 5px;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* Buttons */
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+.btn-submit {
+  background-color: var(--primary-color);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit:hover:not([disabled]) {
+  background-color: var(--primary-hover);
+  box-shadow: var(--glow-shadow);
+  transform: translateY(-2px);
+}
+
+.btn-submit::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  top: 0;
+  right: -40px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover::after {
+  right: calc(100% + 40px);
+}
+
+.btn-submit:active:not([disabled]) {
+  transform: translateY(1px);
+}
+
+.btn-submit[disabled] {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-cancel {
+  background-color: var(--cancel-color);
+  color: var(--text-color);
+}
+
+.btn-cancel:hover {
+  background-color: var(--cancel-hover);
+}
+
+/* For enhanced readability in gaming theme */
+@media (min-width: 768px) {
+  .gaming-review-form {
+    padding: 35px;
+  }
+}
+
+/* Dark mode focus states for accessibility */
+input:focus, textarea:focus, button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Gaming decorative elements */
+.gaming-review-form::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Enhanced contrast for better readability */
+::selection {
+  background-color: var(--primary-color);
+  color: rgb(255, 255, 255);
+}

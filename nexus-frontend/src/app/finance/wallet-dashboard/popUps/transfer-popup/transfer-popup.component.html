@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h4 class="modal-title">Send Coins to a Friend</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <!-- Coin Amount Selector -->
+    <div class="coin-selector">
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <button class="btn btn-outline-primary" (click)="decrementCoins()">
+          <i class="fas fa-minus"></i>
+        </button>
+        <div class="coin-amount mx-4">
+          <span class="h3">{{ coinAmountTosend }}</span>
+          <small class="text-muted ms-2">coins</small>
+        </div>
+        <button class="btn btn-outline-primary" (click)="incrementCoins()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Search Bar -->
+    <div class="search-container mb-3">
+      <div class="input-group">
+        <span class="input-group-text bg-white">
+          <i class="fas fa-search text-muted"></i>
+        </span>
+        <input type="text" 
+               class="form-control" 
+               placeholder="Search friends..." 
+               [(ngModel)]="searchText" 
+               (input)="searchFriends()">
+        <button *ngIf="searchText" 
+                class="btn btn-outline-secondary" 
+                type="button"
+                (click)="clearSearch()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Friends List -->
+    <div class="friends-list">
+      <div class="list-group">
+        <div *ngFor="let friend of filteredFriends" class="list-group-item list-group-item-action">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <img [src]="friend.profilePic" 
+                   [alt]="friend.name" 
+                   class="friend-avatar">
+              <span class="ms-3">{{ friend.name }}</span>
+            </div>
+            <button class="btn btn-primary btn-sm" (click)="sendCoins(friend)" (click)="activeModal.close('Close click')">
+              <i class="fas fa-paper-plane me-1"></i>
+              Send
+            </button>
+          </div>
+        </div>
+      
+        <!-- No Results Message -->
+        <div *ngIf="filteredFriends.length === 0" class="text-center p-3 text-muted">
+          <i class="fas fa-user-friends fa-2x mb-2"></i>
+          <p>No friends found matching "{{searchText}}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+  </div>

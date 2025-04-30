@@ -1,0 +1,53 @@
+<div class="poll-create-container">
+  <div class="poll-card">
+    <h2 class="poll-title">
+      🗳️ Lancer un Sondage Communautaire
+    </h2>
+    <p class="poll-description">
+      Engage ta communauté en leur posant une question stratégique. 
+      Choisis un streamer et vois ce que pense ton public.
+    </p>
+
+    <form [formGroup]="sondageForm" (ngSubmit)="onSubmit()">
+      <!-- Question -->
+      <div class="form-group">
+        <label for="question" class="form-label">
+          ❓ Question du sondage
+        </label>
+        <input
+          type="text"
+          id="question"
+          class="form-control input-dark"
+          placeholder="Ex: Souhaitez-vous un live de StreamerX ?"
+          formControlName="question"
+        />
+      </div>
+
+      <!-- Streamer -->
+      <div class="form-group">
+        <label for="streamerId" class="form-label">
+          🎮 Choisir un streamer
+        </label>
+        <select
+          id="streamerId"
+          class="form-select input-dark"
+          formControlName="streamerId"
+        >
+          <option value="" disabled selected>-- Sélectionnez un streamer --</option>
+          <option *ngFor="let streamer of streamers" [value]="streamer.id">
+            {{ streamer.name }} - {{ streamer.platform }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-primary poll-submit-btn"
+        [disabled]="sondageForm.invalid"
+      >
+        🚀 Créer le sondage
+      </button>
+    </form>
+  </div>
+</div>

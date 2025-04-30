@@ -1,0 +1,75 @@
+package tn.arctic.nexus.controllers.FinanceModule;
+
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tn.arctic.nexus.entities.FinanceModule.Purchase;
+import tn.arctic.nexus.entities.FinanceModule.Refund;
+import tn.arctic.nexus.entities.FinanceModule.Transfer;
+import tn.arctic.nexus.services.FinanceModule.RefundService;
+
+import java.sql.Ref;
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("refund")
+public class RefundController {
+
+    @Autowired
+    RefundService refundService;
+
+    @GetMapping("getAll")
+    public List<Refund> getAll() {
+        return refundService.getRefunds();
+    }
+
+    @GetMapping("{id}")
+    public Refund getRefundById(@PathVariable Long id) {
+        return refundService.getRefund(id);
+    }
+
+    @PostMapping("create")
+    public Refund createRefund(@RequestBody Refund refund) {
+        return refundService.addRefund(refund);
+    }
+
+    @PutMapping("update")
+    public Refund updateRefund(@RequestBody Refund refund) {
+        return refundService.updateRefund(refund);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteRefund(@PathVariable Long id) {
+        boolean flag = refundService.deleteRefund(id);
+        if (flag) {
+            return ResponseEntity.ok("Deleted refund");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Refund not found"); // Return 404 with message
+    }
+    @PostMapping("/create-affect/{PurchaseId}")
+    public ResponseEntity<Refund> createAndAffectRefundToPayment(
+            @PathVariable Long PurchaseId,
+            @RequestBody Refund refund) {
+        try {
+            Refund savedRefund = refundService.CreateAffectRefundToPurchase(PurchaseId, refund);
+            return ResponseEntity.ok(savedRefund);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    @GetMapping("/getByWalletPK/{metamaskPublicKey}")
+    public ResponseEntity<List<Refund>> getPaymentsByWalletId(@PathVariable String metamaskPublicKey) {
+        List<Refund> refunds = refundService.getRefundsByWalletPK(metamaskPublicKey);
+        return ResponseEntity.ok(refunds);
+    }
+
+    @PutMapping("/update-status/{refundId}")
+    public ResponseEntity<Refund> updateRefundStatus(@PathVariable Long refundId) {
+        Refund updatedRefund = refundService.updateRefundStatus(refundId);
+        return ResponseEntity.ok(updatedRefund);
+    }
+
+}
