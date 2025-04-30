@@ -52,6 +52,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/gamejams/**").permitAll()
                         .requestMatchers("/api/vip-jams/**").permitAll()
                         .requestMatchers("/api/entry-media/**").permitAll()
+                        .requestMatchers("/marketlistings/**").permitAll()
+
+                        .requestMatchers("/bids/**").permitAll()
+                        .requestMatchers("/gameitem/**").permitAll()
+
 
                         .requestMatchers("/support/**").permitAll()
 

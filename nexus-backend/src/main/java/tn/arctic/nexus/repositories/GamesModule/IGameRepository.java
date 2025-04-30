@@ -21,5 +21,6 @@ public interface IGameRepository extends JpaRepository<Game,Long> {
     List<Game> findGamesByPlatforms(@Param("platforms") List<GamePlatform> platforms);
 
     Game findByGameDiscountId(Long id);
+    List<Game> findGamesByDeveloperId(Long id);
 
 }

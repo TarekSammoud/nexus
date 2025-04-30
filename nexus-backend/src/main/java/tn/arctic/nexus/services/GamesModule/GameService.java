@@ -83,4 +83,9 @@ public class GameService implements IGameService {
     public Game getLastId() {
         return gameRepository.findTopByOrderByIdDesc();
     }
+
+    @Override
+    public List<Game> findDeveloperGames(Long id){
+        return gameRepository.findGamesByDeveloperId(id);
+    }
 }

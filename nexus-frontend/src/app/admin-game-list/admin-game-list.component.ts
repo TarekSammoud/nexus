@@ -10,6 +10,7 @@ import { GameKey } from '../core/entities/game-key';
 import { User } from '@syncfusion/ej2/interactive-chat';
 import { GameDiscountService } from '../core/services/game-discount.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AuthService } from '../core/services/user-management/auth.service';
 
 @Component({
   selector: 'app-admin-game-list',
@@ -28,9 +29,30 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class AdminGameListComponent implements OnInit {
   page = 1;
+  isAuthentificated = false;
+  devId?: number | null;
+  role: string = 'visitor';
+  user: any= {};
 
   data: Game[] = []; // Initialize as an empty array
-  constructor(private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
+  constructor(private authService: AuthService,private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
+
+    
+        this.authService.getLoggedInUserProfile().subscribe({
+          next: (user: any) => {
+            this.user = user;
+
+            this.role = this.user.roleType 
+       
+          },
+          error: (err: any) => {
+            console.error('Erreur lors de la récupération du profil utilisateur', err);
+          }
+        });
+    
+
+      this.isAuthentificated = this.authService.isAuthenticated();
+      if (this.role === 'ADMIN') {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
           for (let i = 0; i < this.data.length; i++) {
@@ -43,6 +65,27 @@ export class AdminGameListComponent implements OnInit {
             }
           }
         });
+      }
+      else {this.authService.getLoggedInUserProfile().subscribe(user => {
+        this.devId = user.id;
+        console.log(this.devId);
+      
+        this.gameService.getDeveloperGames(this.devId!).subscribe(games => {
+          this.data = games; 
+          for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
+              if (this.data[i].gameMediaList[j].gameMediaType === 'COVER') {
+                this.data[i].coverPicture = this.data[i].gameMediaList[j]; 
+                break;
+              }
+            }
+          }
+        }, error => {
+          console.error('Unauthorized or error fetching developer games:', error);
+        });
+      });
+      
+      }
   
       }
 

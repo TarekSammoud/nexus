@@ -38,6 +38,14 @@ public class GameController {
         return  gameService.getAllGames();
     }
 
+
+    @Operation(description = "get all games from database")
+    @GetMapping("/all-games/{id}")
+    public List<Game> allDeveloperGames(@PathVariable("id") Long id)
+    {
+        return  gameService.findDeveloperGames(id);
+    }
+
     @GetMapping("/all-browser-games")
     public List<Game> getAllBrowserGames(){
         return  gameService.getBrowserGames();

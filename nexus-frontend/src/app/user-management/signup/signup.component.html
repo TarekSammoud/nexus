@@ -81,6 +81,8 @@
                                 #role="ngModel">
                                 <option [ngValue]="RoleType.PLAYER">Player</option>
                                 <option [ngValue]="RoleType.DEVELOPER">Developer</option>
+                                <option [ngValue]="RoleType.SUPPORTAGENT">Support Agent</option>
+                                <option [ngValue]="RoleType.ADMIN">Admin</option>
                             </select>
                             <div *ngIf="role.invalid && role.touched" class="text-danger">
                                 Role is required.
