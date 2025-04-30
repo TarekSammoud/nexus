@@ -35,6 +35,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
 
         //support
+        registry.addEndpoint("/ws-notifications").setAllowedOriginPatterns("*").addInterceptors(handshakeInterceptor);
 
         registry.addEndpoint("/ws-support")
                 .setAllowedOriginPatterns("http://localhost:4200").addInterceptors(handshakeInterceptor);  // WebSocket endpoint

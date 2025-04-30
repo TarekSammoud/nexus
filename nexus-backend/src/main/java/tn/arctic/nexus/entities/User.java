@@ -76,8 +76,8 @@ public class User implements Serializable {
     private List<Game> gameLibrary;
 
 
-    @OneToOne(mappedBy = "user")
-    private Wallet wallet;
+ /*   @OneToOne(mappedBy = "user")
+    private Wallet wallet;*/
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -93,7 +93,7 @@ public class User implements Serializable {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"user", "transfers", "payments", "purchase"})
-    private Wallet wallet2;
+    private Wallet wallet;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

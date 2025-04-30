@@ -17,6 +17,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/games/library")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class LibraryController {
 
     @Autowired

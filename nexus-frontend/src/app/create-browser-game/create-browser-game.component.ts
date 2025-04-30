@@ -10,6 +10,7 @@ import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../core/services/user-management/auth.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CreateBrowserGameComponent implements OnInit{
 
     gameForm!: FormGroup;
     editorContent: string = '';  
+    userId: number = 0;
     
     availablePlatforms = ["BROWSER"];
     selectedPlatforms: Set<string> = new Set();
@@ -33,7 +35,7 @@ export class CreateBrowserGameComponent implements OnInit{
   
   
   
-    constructor(public modalService: NgbModal,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
+    constructor(public authService: AuthService,public modalService: NgbModal,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
       ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
       
         
@@ -376,6 +378,17 @@ export class CreateBrowserGameComponent implements OnInit{
           storage: ['50 GB', [Validators.required]]  // Storage should be a number with "GB" suffix
         })
       });
+
+      this.authService.getLoggedInUserProfile().subscribe({
+        next: (user: any) => {
+          this.userId = user.id;
+          console.log('User profile: id from create', this.userId);
+          this.gameForm.patchValue({
+            developer: {id: this.userId}
+          });
+  
+        }});
+      
       
   
   

@@ -36,13 +36,13 @@ export class AdminGameListComponent implements OnInit {
 
   data: Game[] = []; // Initialize as an empty array
   constructor(private authService: AuthService,private _gameDiscountService: GameDiscountService,private _gameKeyService: GameKeyService,private _router : Router,private gameService: GameService) {
-
+/*
     
         this.authService.getLoggedInUserProfile().subscribe({
           next: (user: any) => {
             this.user = user;
 
-            this.role = this.user.roleType 
+            this.role = user.roleType;
        
           },
           error: (err: any) => {
@@ -52,6 +52,9 @@ export class AdminGameListComponent implements OnInit {
     
 
       this.isAuthentificated = this.authService.isAuthenticated();
+      console.log(this.isAuthentificated);
+      console.log(this.role," from game list");
+      console.log("this role is :",this.role)
       if (this.role === 'ADMIN') {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
@@ -66,12 +69,14 @@ export class AdminGameListComponent implements OnInit {
           }
         });
       }
-      else {this.authService.getLoggedInUserProfile().subscribe(user => {
+      else {
+        this.authService.getLoggedInUserProfile().subscribe(user => {
         this.devId = user.id;
         console.log(this.devId);
       
         this.gameService.getDeveloperGames(this.devId!).subscribe(games => {
           this.data = games; 
+          console.log(this.data);
           for (let i = 0; i < this.data.length; i++) {
             for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
               if (this.data[i].gameMediaList[j].gameMediaType === 'COVER') {
@@ -85,7 +90,34 @@ export class AdminGameListComponent implements OnInit {
         });
       });
       
-      }
+      }*/
+      this.authService.getLoggedInUserProfile().subscribe({
+        next: (user: any) => {
+          this.user = user;
+          this.role = user.roleType;
+          this.isAuthentificated = this.authService.isAuthenticated();
+          console.log(this.isAuthentificated);
+          console.log(this.role, " from game list");
+          console.log("this role is :", this.role);
+      
+          if (this.role === 'ADMIN') {
+            this.gameService.getGames().subscribe(games => {
+              this.data = games;
+            });
+          } else {
+            this.devId = user.id;
+            this.gameService.getDeveloperGames(this.devId!).subscribe(games => {
+              this.data = games;
+            }, error => {
+              console.error('Unauthorized or error fetching developer games:', error);
+            });
+          }
+        },
+        error: (err: any) => {
+          console.error('Erreur lors de la récupération du profil utilisateur', err);
+        }
+      });
+      
   
       }
 

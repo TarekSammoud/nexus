@@ -331,8 +331,7 @@
       
         <button *ngIf="step === 7"
          type="submit" class="next-btn"
-         (click)="open(content)" 
-         [class.disabled]=" gameForm.invalid || gameForm.pristine || gameForm.pending">
+         (click)="open(content)" >
          Submit</button>
         <div [ngSwitch]="step">
   

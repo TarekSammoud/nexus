@@ -12,6 +12,7 @@ import { ExcelService } from 'src/app/core/services/excel.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from 'src/app/core/services/user-management/auth.service';
 
 
 @Component({
@@ -31,20 +32,12 @@ export class CreateGameComponent implements OnInit {
   availableCategories!: GameCategory[];
   selectedCategories: Set<GameCategory> = new Set();
   numberOfGames!: number; 
-  userId = 1;
+  userId? : number ;
 
 
-  constructor(public modalService: NgbModal,private _excelService: ExcelService,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
+  constructor(private authService: AuthService,public modalService: NgbModal,private _excelService: ExcelService,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
-    
-      const token = localStorage.getItem('auth_token'); 
 
-      if (token) {
-        const decodedToken: any = jwtDecode(token);
-        const userId = decodedToken.id; 
-        console.log('User ID:', userId);
-      }
-    
       this._gameCategoryService.getGameCategories().subscribe((data) => {
       this.availableCategories = data.map((category) => {
         return {
@@ -415,6 +408,9 @@ get recommendedRequirements() {
     if (this._route.snapshot.paramMap.get('id'))
     this.gameId = Number(this._route.snapshot.paramMap.get('id'));
     this.isEditMode = !!this.gameId;  // If ID exists, it's edit mode
+    
+
+
     this.gameForm = this.fb.group({
       developer: this.fb.group({
         id: [this.userId , Validators.required]
@@ -441,7 +437,17 @@ get recommendedRequirements() {
         storage: ['50 GB', [Validators.required]]  // Storage should be a number with "GB" suffix
       })
     });
-    
+
+    this.authService.getLoggedInUserProfile().subscribe({
+      next: (user: any) => {
+        this.userId = user.id;
+        console.log('User profile: id from create', this.userId);
+        this.gameForm.patchValue({
+          developer: {id: this.userId}
+        });
+
+      }});
+  
 
 
     if (this.isEditMode) {
@@ -451,6 +457,9 @@ get recommendedRequirements() {
           name: game.name,
           description: game.description,
           price: game.price,
+          developer: {
+            id: this.userId
+          }
         });
         this.selectedUpdatePlatforms = new Set(game.platforms);
         for (let i = 0; i < game.categories.length; i++) {
@@ -514,6 +523,7 @@ loadExcelData(fileName: string): void {
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
     console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+   // this.gameForm.value.developer.id = this.userId;
 
 
     if (this.gameForm.invalid) {

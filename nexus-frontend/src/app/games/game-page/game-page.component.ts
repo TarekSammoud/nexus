@@ -345,14 +345,24 @@ nextSlide() {
    this._gameService.getGame(gameId).subscribe((game) => {
       this.game = game;
     })
-    if (!this.game.gameDiscount)
+    if (!this.game.gameDiscount){
   this.metamaskService.SpendCoinsSingleGme(this.game.price, this.game)
+  this._gameService.addGameToLibrary(gameId).subscribe(() => {
+    this.inLibrary = true;
+    console.log(this.inLibrary);
+    this.notificationService.showNotification("Game added to library", "success");
+  })}
 else
 {
   newPrice = this.game.price
   if (this.game.gameDiscount.discountPercentage){
   var newPrice = this.game.price - (this.game.price * this.game.gameDiscount.discountPercentage / 100)
   this.metamaskService.SpendCoinsSingleGme(newPrice, this.game)
+  this._gameService.addGameToLibrary(gameId).subscribe(() => {
+    this.inLibrary = true;
+    console.log(this.inLibrary);
+    this.notificationService.showNotification("Game added to library", "success");
+  })
 }
 
 }

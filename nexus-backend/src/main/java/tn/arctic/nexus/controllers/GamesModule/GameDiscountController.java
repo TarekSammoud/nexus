@@ -9,6 +9,8 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/games/discount")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class GameDiscountController {
 
     @Autowired

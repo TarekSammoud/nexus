@@ -56,7 +56,15 @@ public class SecurityConfig {
 
                         .requestMatchers("/bids/**").permitAll()
                         .requestMatchers("/gameitem/**").permitAll()
+                        .requestMatchers("/wallet/**").permitAll()
+                        .requestMatchers("/refund/**").permitAll()
+                        .requestMatchers("/transfer/**").permitAll()
+                        .requestMatchers("/purchase/**").permitAll()
+                        .requestMatchers("/payment/**").permitAll()
+                        .requestMatchers("/**").permitAll()
 
+
+                        .requestMatchers("/games/library/**").permitAll()
 
                         .requestMatchers("/support/**").permitAll()
 

@@ -10,6 +10,7 @@ import { GameMedia } from 'src/app/core/entities/game/game-media';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../core/services/user-management/auth.service';
 @Component({
   selector: 'app-create-emulated-game',
   templateUrl: './create-emulated-game.component.html',
@@ -59,7 +60,7 @@ removeImageCover(index: number) {
 
   
   
-    constructor(public modalService: NgbModal,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
+    constructor(private authService: AuthService,public modalService: NgbModal,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
       ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
       
         
@@ -112,6 +113,7 @@ removeImageCover(index: number) {
 imagesBanner: any[] = [];
 imagesCover: any[] = [];
 imagesFile: any[] = [];
+userId: number = 0;
   
   
   filesToUpload: FormGroup[] = [];
@@ -439,6 +441,17 @@ imagesFile: any[] = [];
           storage: ['50 GB', [Validators.required]]  // Storage should be a number with "GB" suffix
         })
       });
+
+      this.authService.getLoggedInUserProfile().subscribe({
+        next: (user: any) => {
+          this.userId = user.id;
+          console.log('User profile: id from create', this.userId);
+          this.gameForm.patchValue({
+            developer: {id: this.userId}
+          });
+  
+        }});
+      
       
   
   

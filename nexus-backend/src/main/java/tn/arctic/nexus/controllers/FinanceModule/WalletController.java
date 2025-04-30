@@ -12,10 +12,11 @@ import tn.arctic.nexus.services.FinanceModule.PaymentService;
 import tn.arctic.nexus.services.FinanceModule.WalletService;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping("wallet")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class WalletController {
 
     @Autowired

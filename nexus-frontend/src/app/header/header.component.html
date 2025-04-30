@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
 
-        <li class="nav-item" *ngIf="role === 'DEVELOPER'"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
+        <li class="nav-item" *ngIf="role !== 'visitor'"><a class="nav-link" routerLink="/admin" href="#">Dev Studio</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/jams">Game Jams</a></li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/market">Market</a>
@@ -112,7 +112,7 @@
               <li><a class="dropdown-item" (click)="goToWallet()">Wallet</a></li>
               <li><a class="dropdown-item" [routerLink]="['/library']">Games Library</a></li>
 
-              <li *ngIf="role === 'DEVELOPER'"><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
+              <li *ngIf="role !== 'visitor'"><a class="dropdown-item" routerLink="/admin" href="#">Dev Studio</a></li>
               <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#redeemCodeOffcanvas" role="button"
                   aria-controls="redeemCodeOffcanvas">Use a Code</a></li>
               <!-- Keep both Game Library and Games Library if needed -->
