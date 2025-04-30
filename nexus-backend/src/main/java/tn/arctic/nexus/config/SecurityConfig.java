@@ -55,11 +55,14 @@ public class SecurityConfig {
                         .requestMatchers("/marketlistings/**").permitAll()
 
                         .requestMatchers("/bids/**").permitAll()
+                        .requestMatchers("/pdf/**").permitAll()
                         .requestMatchers("/gameitem/**").permitAll()
                         .requestMatchers("/wallet/**").permitAll()
                         .requestMatchers("/refund/**").permitAll()
                         .requestMatchers("/transfer/**").permitAll()
                         .requestMatchers("/purchase/**").permitAll()
+                        .requestMatchers("/games/reviews/**").permitAll()
+
                         .requestMatchers("/payment/**").permitAll()
                         .requestMatchers("/**").permitAll()
 
@@ -67,6 +70,7 @@ public class SecurityConfig {
                         .requestMatchers("/games/library/**").permitAll()
 
                         .requestMatchers("/support/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
 
 
                         .anyRequest().authenticated()

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.RoleType;
 import tn.arctic.nexus.entities.SupportTicket;
+import tn.arctic.nexus.entities.TicketCategory;
 import tn.arctic.nexus.entities.User;
 import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 import tn.arctic.nexus.services.TechnicalSupportModule.AIService;
@@ -33,7 +34,7 @@ public class SupportTicketController {
 
     @Autowired
     private IUserRepository userRepository;
-    
+
   /*  @Autowired
     private OpenAiApiService openAiApiService;
     */
@@ -113,11 +114,11 @@ public class SupportTicketController {
     }
 
     @DeleteMapping("/tickets")
-public ResponseEntity<Void> deleteAllTickets() {
+    public ResponseEntity<Void> deleteAllTickets() {
 
-    supportTicketService.deleteAllTickets();
-    return ResponseEntity.noContent().build();
-}
+        supportTicketService.deleteAllTickets();
+        return ResponseEntity.noContent().build();
+    }
 
 
     @GetMapping("/by-room/{roomId}")
@@ -131,5 +132,19 @@ public ResponseEntity<Void> deleteAllTickets() {
     public List<SupportTicket> getTicketsSortedByPriorityAndCreatedAt() {
         return supportTicketService.getTicketsSortedByPriorityAndCreatedAt();
     }
-}
+    @GetMapping("/count-by-category")
+    public ResponseEntity<Map<TicketCategory, Long>> countTicketsByCategory() {
+        Map<TicketCategory, Long> counts = supportTicketService.countTicketsByCategory();
+        return ResponseEntity.ok(counts);
+    }
 
+    @GetMapping("/most-common-category")
+    public ResponseEntity<?> getMostCommonCategory() {
+        Optional<Map.Entry<TicketCategory, Long>> result = supportTicketService.getMostCommonCategory();
+        return result.map(entry -> ResponseEntity.ok(Map.of(
+                "category", entry.getKey(),
+                "count", entry.getValue()
+        ))).orElse(ResponseEntity.noContent().build());
+    }
+
+}

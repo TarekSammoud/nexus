@@ -54,8 +54,8 @@ export class RoomChatComponent implements OnInit, OnDestroy {
   newMessage: string = ''; //message to be sent fom the input
 
 // hedhum bch tintilisihum bel room (user id w el supprt id fl backend )
-  userId: number = 4;
-  supportAgentId: number = 3;
+  userId: number = 9;
+  supportAgentId: number = 11;
 
 
   tokenToId : string = '';
@@ -70,13 +70,13 @@ export class RoomChatComponent implements OnInit, OnDestroy {
         console.log('User ID from token:', this.userIdFromToken);
   
          if(this.userIdFromToken == this.userId){
-          const message = { userId: this.supportAgentId, message: this.newMessage,roomId: "10"  };///badl room id 
+          const message = { userId: this.supportAgentId, message: this.newMessage,roomId: "5"  };///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';
           console.log('message:', this.messages);
          }else{
-          const message = { userId: this.userId, message: this.newMessage,roomId: "10" }; ///badl room id 
+          const message = { userId: this.userId, message: this.newMessage,roomId: "5" }; ///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';

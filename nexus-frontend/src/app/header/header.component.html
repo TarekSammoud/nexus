@@ -67,18 +67,19 @@
       <div class="d-none d-xl-block d-lg-block">
         <ul class="navbar-nav d-flex flex-row align-items-center">
           <!-- Cart -->
-          <li class="nav-item me-3">
+          <li *ngIf="role !== 'visitor'"  class="nav-item me-3">
 
             <!-- Maintain both possible changes for the cart icon: 
                  - One uses href="#" 
                  - One uses routerLink="/panier"
                  So, keep both for clarity, but comment one out if needed for live code. -->
-            <a class="nav-link cart-icon" href="#" style="display: none;">
-              <i class="fas fa-shopping-cart"></i>
-              <div *ngIf="cartCountItems > 0">
-                <span class="cart-badge">{{this.cartCountItems}}</span>
-              </div>
-            </a>
+                 <a class="nav-link cart-icon" routerLink="/panier">
+                  <i class="fas fa-shopping-cart"></i>
+                  <div *ngIf="cartCountItems > 0">
+                    <span class="cart-badge">{{ cartCountItems }}</span>
+                  </div>
+                </a>
+                
             <a class="nav-link cart-icon" routerLink="/panier">
 
 
@@ -87,6 +88,7 @@
           </li>
 
           <!-- Desktop Profile Dropdown -->
+         
           <li *ngIf="role !== 'visitor'" class="nav-item dropdown d-none d-md-block">
             <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="profileDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">

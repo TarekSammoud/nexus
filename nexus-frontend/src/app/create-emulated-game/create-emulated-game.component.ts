@@ -113,7 +113,7 @@ removeImageCover(index: number) {
 imagesBanner: any[] = [];
 imagesCover: any[] = [];
 imagesFile: any[] = [];
-userId: number = 0;
+userId: number = 1;
   
   
   filesToUpload: FormGroup[] = [];
@@ -424,7 +424,9 @@ userId: number = 0;
         price: ['', [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],  // Price should be a positive number, optional decimal with two digits
         platforms: [this.selectedPlatforms, [Validators.required]],  // Platforms should be required
         categories: [this.selectedCategories ,Validators.required],  // Categories should be required
-      
+        developer: this.fb.group({
+          id: [this.userId, Validators.required] // Initialize with null, will be set later
+        }),
         minRequirements: this.fb.group({
           os: ['Windows 10', [Validators.required, Validators.minLength(3)]],  // OS should be at least 3 characters long
           cpu: ['', [Validators.required, Validators.minLength(3)]],  // CPU should be at least 3 characters long
@@ -451,17 +453,19 @@ userId: number = 0;
           });
   
         }});
-      
-      
+    
   
   
       if (this.isEditMode) {
-        this.title = 'Update Browser Game';
+        this.title = 'Update Game';
         this._gameService.getGame(this.gameId).subscribe((game) => {
           this.gameForm.patchValue({
             name: game.name,
             description: game.description,
             price: game.price,
+            developer: {
+              id: this.userId
+            }
           });
           this.selectedUpdatePlatforms = new Set(game.platforms);
           for (let i = 0; i < game.categories.length; i++) {

@@ -11,7 +11,11 @@ import { finalize } from 'rxjs/operators';
 })
 export class AdminSupportListComponent implements OnInit {
 
+  mostCommonCategory: string = '';
+  mostCommonCount: number = 0;
+  categoryRanking: { category: string, count: number }[] = [];
 
+  
   tickets: SupportTicket[] = [];
   ticketForm: FormGroup;
   isEditMode: boolean = false;  // Indicator for editing a ticket
@@ -56,6 +60,20 @@ export class AdminSupportListComponent implements OnInit {
   ngOnInit(): void {
     // Load tickets from the service
     this.loadTickets();
+    this.loadCategoryRanking(); 
+  }
+  loadCategoryRanking(): void {
+    this.supportService.getCategoryCounts().subscribe({
+      next: data => {
+        // Convert to sorted array
+        this.categoryRanking = Object.entries(data)
+          .map(([category, count]) => ({ category, count }))
+          .sort((a, b) => b.count - a.count); // Descending
+      },
+      error: () => {
+        this.categoryRanking = [];
+      }
+    });
   }
 
   // Accessors

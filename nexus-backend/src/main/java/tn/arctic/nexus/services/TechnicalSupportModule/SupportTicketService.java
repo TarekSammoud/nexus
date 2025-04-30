@@ -7,17 +7,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import tn.arctic.nexus.entities.PerformanceReview;
-import tn.arctic.nexus.entities.SupportAgent;
-import tn.arctic.nexus.entities.SupportTicket;
-import tn.arctic.nexus.entities.TicketPriority;
+import tn.arctic.nexus.entities.*;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.ISupportAgentRepository;
 import tn.arctic.nexus.repositories.TechnicalSupportModule.ISupportTicketRepository;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -99,4 +93,14 @@ public class SupportTicketService {
 
 
     }
+    public Map<TicketCategory, Long> countTicketsByCategory() {
+        return supportTicketRepository.findAll().stream()
+                .collect(Collectors.groupingBy(SupportTicket::getCategory, Collectors.counting()));
+    }
+
+    public Optional<Map.Entry<TicketCategory, Long>> getMostCommonCategory() {
+        return countTicketsByCategory().entrySet().stream()
+                .max(Map.Entry.comparingByValue());
+    }
+
 }

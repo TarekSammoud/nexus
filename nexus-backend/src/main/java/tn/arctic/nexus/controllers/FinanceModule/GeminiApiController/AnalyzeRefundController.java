@@ -12,6 +12,8 @@ import tn.arctic.nexus.services.FinanceModule.GeminiApiService.GeminiRefundAnaly
 import tn.arctic.nexus.services.TechnicalSupportModule.EmailService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class AnalyzeRefundController {
 
     @Autowired

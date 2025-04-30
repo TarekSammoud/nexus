@@ -3,10 +3,7 @@ package tn.arctic.nexus.controllers.FinanceModule.pdf;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tn.arctic.nexus.entities.FinanceModule.TransactionReportRequest;
 import tn.arctic.nexus.repositories.FinanceModule.IPaymentRepository;
 import tn.arctic.nexus.repositories.FinanceModule.IPurchaseRepository;
@@ -17,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pdf/transactions")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class TransactionReportController {
     @Autowired
     private IPaymentRepository paymentRepository;
