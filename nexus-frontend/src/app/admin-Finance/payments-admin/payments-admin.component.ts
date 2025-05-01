@@ -40,7 +40,7 @@ export class PaymentsAdminComponent {
    const get= await this.metamaskService.getContractBalance()
    const GETether = ethers.formatEther(get.toString())
    this.contractBalance = GETether
-   console.log("contract balance",GETether)
+   //console.log("contract balance",GETether)
 
   }
   loadPayments(): void {

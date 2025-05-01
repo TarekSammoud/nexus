@@ -67,7 +67,7 @@ playPSPGame(romName: string): Observable<string> {
   }
 
   getGamesByCategory(category: string): Observable<Game[]> {
-    console.log(category);
+    //console.log(category);
     return this.http.get<Game[]>(`${this.gamesUrl}/filter-by-category/${category}`);
   }
 

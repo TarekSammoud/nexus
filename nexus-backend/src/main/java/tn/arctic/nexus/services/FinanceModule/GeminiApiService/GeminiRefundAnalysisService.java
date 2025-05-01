@@ -158,7 +158,7 @@ public class GeminiRefundAnalysisService {
         long hours = totalHours % 24;
 
         String timeSincePurchase = days + " days, " + hours + " hours";
-        System.out.println("////////////////////////// :"+timeSincePurchase);
+        //System.out.println("////////////////////////// :"+timeSincePurchase);
         request.setTimeSincePurchase(timeSincePurchase);
         /// refund policy
         request.setPlatformRefundPolicy("Refunds are generally accepted within 7 days of purchase, especially for technical issues or if the game is significantly different from expectations. Exceptions may be considered on a case-by-case basis");

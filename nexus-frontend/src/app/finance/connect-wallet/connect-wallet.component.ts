@@ -59,13 +59,13 @@ export class ConnectWalletComponent {
 
         // Check the result of the addUser function
         if (addUserResult === 'User added successfully') {
-          console.log('User added successfully:', this.walletAddress);
+          //console.log('User added successfully:', this.walletAddress);
           // Proceed with creating the wallet after the user is added
           this.newWallet.metamaskPublicKey = this.walletAddress || '0';
 
           this.walletService.createAndAssignWallet(userId,this.newWallet).subscribe({
             next: (wallet) => {
-              console.log('Wallet created successfully:', wallet);
+              //console.log('Wallet created successfully:', wallet);
 
             },
             error: (error) => {

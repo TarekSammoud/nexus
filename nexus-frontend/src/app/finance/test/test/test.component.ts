@@ -18,7 +18,7 @@ export class TestComponent {
      // Connect to the WebSocket server and listen for notifications
      this.wsNotificationsService.connect(this.token, (notification: any) => {
       // Handle the incoming notification
-      console.log('Received notification:', notification);
+      //console.log('Received notification:', notification);
       this.notificationService.show(notification.message, 5000); // Show the notification for 5 seconds
     });}
     sendNotification(): void {

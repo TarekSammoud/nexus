@@ -20,7 +20,7 @@ export class GamesCarouselComponent implements OnInit{
 
     }
     ngOnInit(): void {
-      console.log(this.Games);
+      //console.log(this.Games);
     }
 
     

@@ -36,8 +36,8 @@ public class BidService {
 
 
     public Bid save(Bid bid) {
-        System.out.println("🟡 BID DEBUG - MarketListing: " + bid.getMarketListing());
-        System.out.println("🟡 BID DEBUG - User: " + bid.getUser());
+        //System.out.println("🟡 BID DEBUG - MarketListing: " + bid.getMarketListing());
+        //System.out.println("🟡 BID DEBUG - User: " + bid.getUser());
 
         if (bid.getMarketListing() == null || bid.getUser() == null) {
             throw new IllegalArgumentException("MarketListing or User is null in incoming Bid.");

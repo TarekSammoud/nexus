@@ -28,7 +28,7 @@ export class GameKeyListComponent implements OnInit {
   constructor(private _router : Router,private _gameKeyService: GameKeyService) {
     this._gameKeyService.getGameKeys().subscribe(games => {
       this.data = games; 
-      console.log(this.data);
+      //console.log(this.data);
 
     });
 
@@ -84,7 +84,7 @@ copyToClipboard(text: string): void {
   if (navigator.clipboard) {
     // Using Clipboard API to write text to clipboard
     navigator.clipboard.writeText(text).then(() => {
-      console.log('Text successfully copied to clipboard');
+      //console.log('Text successfully copied to clipboard');
       // You can show a message to the user indicating the text was copied
     }).catch(err => {
       console.error('Error copying text to clipboard: ', err);
@@ -102,7 +102,7 @@ private fallbackCopyToClipboard(text: string): void {
   textArea.select();
   document.execCommand('copy');
   document.body.removeChild(textArea);
-  console.log('Text copied using fallback method');
+  //console.log('Text copied using fallback method');
 }
 
 }

@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(): void {
-    console.log("form is : ", this.user)
+    //console.log("form is : ", this.user)
     if (!this.user.email || !this.user.password) {
       alert('Email et mot de passe sont requis');
       return;
@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
               // Si tout est valide, inscrire l'utilisateur
               this.authService.register(this.user).subscribe({
                 next: () => {
-                  console.log('Inscription réussie');
+                  //console.log('Inscription réussie');
                   this.router.navigate(['/login']);
                 },
                 error: (err) => {
@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
           // Si phoneNumber est vide ou non défini, continuer sans vérifier l'unicité du numéro
           this.authService.register(this.user).subscribe({
             next: () => {
-              console.log('Inscription réussie');
+              //console.log('Inscription réussie');
               this.router.navigate(['/login']);
             },
             error: (err) => {

@@ -66,7 +66,7 @@ export class AiRecommendationComponent {
 
     this.http.post<any>(apiUrl, inputData).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         const recommendedIds: number[] = response.recommendations; // Explicitly type it as number[]
 
         // Map the returned listing ids to full MarketItem details

@@ -55,7 +55,7 @@ export class RefundComponent implements OnInit {
 
     this.refundService.deleteRefund(id).subscribe({
       next: () => {
-        console.log('Refund deleted successfully');
+        //console.log('Refund deleted successfully');
       },
       error: (error) => {
         console.error('Error deleting refund:', error);

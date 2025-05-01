@@ -36,7 +36,7 @@ public class WebSocketEventsLogger {
             userSessions.computeIfAbsent(userId, k -> ConcurrentHashMap.newKeySet()).add(sessionId);
             sessionToUser.put(sessionId, userId);
 
-            System.out.println("WebSocket CONNECTED: user=" + userId + ", session=" + sessionId);
+            //System.out.println("WebSocket CONNECTED: user=" + userId + ", session=" + sessionId);
         } else {
             System.err.println("WebSocket CONNECT: no principal for sessionId=" + sessionId);
         }
@@ -53,9 +53,9 @@ public class WebSocketEventsLogger {
                 sessions.remove(sessionId);
                 if (sessions.isEmpty()) {
                     userSessions.remove(userId);
-                    System.out.println("WebSocket DISCONNECTED (last session): user=" + userId);
+                    //System.out.println("WebSocket DISCONNECTED (last session): user=" + userId);
                 } else {
-                    System.out.println("WebSocket DISCONNECTED (partial): user=" + userId + ", remaining=" + sessions.size());
+                    //System.out.println("WebSocket DISCONNECTED (partial): user=" + userId + ", remaining=" + sessions.size());
                 }
             }
         } else {
@@ -69,7 +69,7 @@ public class WebSocketEventsLogger {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         String dest = sha.getDestination();
 
-        System.out.println("WebSocket SUBSCRIBE: user=" + (user != null ? user.getName() : "null") + " destination=" + dest);
+        //System.out.println("WebSocket SUBSCRIBE: user=" + (user != null ? user.getName() : "null") + " destination=" + dest);
     }
 
 

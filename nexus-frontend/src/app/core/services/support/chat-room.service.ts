@@ -40,7 +40,7 @@ export class ChatRoomService {
 
   // Connexion WebSocket
   connect(roomId: string, userId: number, token: string): void {
-    console.log(`Connecting to WebSocket for Room: ${roomId}, User: ${userId}, with token: ${token}`);
+    //console.log(`Connecting to WebSocket for Room: ${roomId}, User: ${userId}, with token: ${token}`);
 
     this.stompClient = new Client({
       brokerURL: 'ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support',
@@ -50,7 +50,7 @@ export class ChatRoomService {
         'Authorization': `Bearer ${token}`,
       },
       onConnect: () => {
-        console.log(`Successfully connected to WebSocket (Room: ${roomId})`);
+        //console.log(`Successfully connected to WebSocket (Room: ${roomId})`);
 
         this.stompClient.subscribe(`/topic/chat-room/${roomId}`, (msg: StompMessage) => {
           // Convert IMessage to ChatMessage
@@ -65,7 +65,7 @@ export class ChatRoomService {
             timestamp: parsedMessage.timestamp || new Date().toISOString(), // Default timestamp if missing
           };
 
-          console.log('Parsed message:', message);
+          //console.log('Parsed message:', message);
 
           this.messageSubject.next(message); // Publish the ChatMessage
         });
@@ -79,10 +79,10 @@ export class ChatRoomService {
   }
 
   sendMessage(roomId: string, message: ChatMessage, token: string): void {
-    console.log(`Attempting to send message to Room: ${roomId}`, message);
+    //console.log(`Attempting to send message to Room: ${roomId}`, message);
   
     if (this.stompClient.connected) {
-      console.log('WebSocket is connected. Sending message...');
+      //console.log('WebSocket is connected. Sending message...');
   
       this.stompClient.publish({
         destination: `/app/chat-room/${roomId}/send`,
@@ -101,7 +101,7 @@ export class ChatRoomService {
   disconnect(): void {
     if (this.stompClient) {
       this.stompClient.deactivate();
-      console.log('Déconnecté de WebSocket (Room)');
+      //console.log('Déconnecté de WebSocket (Room)');
     }
   }
 

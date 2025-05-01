@@ -25,6 +25,6 @@ public class WalletNotificationController {
                 "/queue/notifications",            // destination (always with leading '/')
                 notification                       // payload (the whole object, not just message)
         );
-        System.out.println("Sent notification to user " + notification.getUserId());
+        //System.out.println("Sent notification to user " + notification.getUserId());
     }
 }

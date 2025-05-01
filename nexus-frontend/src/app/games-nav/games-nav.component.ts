@@ -102,7 +102,7 @@ export class GamesNavComponent {
     this.filteredGamesTop = this.games.filter(game => 
       game.name.toLowerCase().includes(lowerSearch)
     );
-    console.log(this.filteredGamesTop)
+    //console.log(this.filteredGamesTop)
   }
   
 

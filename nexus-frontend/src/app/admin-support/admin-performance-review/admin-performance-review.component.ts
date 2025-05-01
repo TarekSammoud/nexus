@@ -62,7 +62,7 @@ export class AdminPerformanceReviewComponent {
         () => {
           this.loadReviews();
           this.resetForm();
-          console.log('Navigating to /support-tickets');
+          //console.log('Navigating to /support-tickets');
           this.router.navigate(['/support-tickets']);
         },
         (error) => console.error('Error adding review:', error)
@@ -83,7 +83,7 @@ export class AdminPerformanceReviewComponent {
 
     this.reviewService.updateReview(updatedReview).subscribe(
       (updatedReview) => {
-        console.log('Review updated successfully:', updatedReview);
+        //console.log('Review updated successfully:', updatedReview);
         this.loadReviews();
         this.resetForm();
       },

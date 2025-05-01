@@ -38,12 +38,12 @@ public class RoomChatController {
    /* @MessageMapping("/chat-sendMessage")
     public void sendMessage(@Payload Message message, SimpMessageHeaderAccessor headerAccessor) {
         String token = (String) headerAccessor.getSessionAttributes().get("token");
-        System.out.println("Debug: Entered sendMessage with token = " + token);
+        //System.out.println("Debug: Entered sendMessage with token = " + token);
 
         if (token == null || !jwtUtil.isTokenValid(token, getUserFromToken(token))) {
             message.setType(MessageType.ERROR);
             message.setContent("Invalid or expired token.");
-            System.out.println("Debug: Token is invalid or expired, sending error message.");
+            //System.out.println("Debug: Token is invalid or expired, sending error message.");
             messagingTemplate.convertAndSend("/topic/chat-room/" + message.getRoom().getRoomId(), message);
             return;
         }
@@ -53,27 +53,27 @@ public class RoomChatController {
         if (sender == null) {
             message.setType(MessageType.ERROR);
             message.setContent("Sender not found.");
-            System.out.println("Debug: Sender not found, sending error message.");
+            //System.out.println("Debug: Sender not found, sending error message.");
             messagingTemplate.convertAndSend("/topic/chat-room/" + message.getRoom().getRoomId(), message);
             return;
         }
 
         // Get the roomId
         Long roomId = Long.parseLong(message.getRoom().getRoomId());
-        System.out.println("Debug: roomId = " + roomId);
+        //System.out.println("Debug: roomId = " + roomId);
 
         // Determine recipients based on sender's role
         if (sender.getRoleType() == RoleType.SUPPORTAGENT) {
             // If the sender is a SupportAgent, send to other users in the room
             List<User> nonSupportUsers = userRepository.findUsersByRoomIdAndRole(roomId, RoleType.PLAYER); // Assuming `PLAYER` is a non-support role
-            System.out.println("Debug: Found " + nonSupportUsers.size() + " non-support users.");
+            //System.out.println("Debug: Found " + nonSupportUsers.size() + " non-support users.");
             for (User user : nonSupportUsers) {
                 messagingTemplate.convertAndSendToUser(user.getId().toString(), "/queue/private", message);
             }
         } else {
             // If the sender is not a SupportAgent, send to the support agents in the room
             List<User> supportAgents = userRepository.findUsersByRoomIdAndRole(roomId, RoleType.SUPPORTAGENT);
-            System.out.println("Debug: Found " + supportAgents.size() + " support agents.");
+            //System.out.println("Debug: Found " + supportAgents.size() + " support agents.");
             for (User supportAgent : supportAgents) {
                 messagingTemplate.convertAndSendToUser(supportAgent.getId().toString(), "/queue/private", message);
             }
@@ -82,27 +82,27 @@ public class RoomChatController {
         // Set timestamp and finalize message
         message.setTimestamp(LocalDateTime.now());
         message.setType(MessageType.CHAT); // It's a regular chat message
-        System.out.println("Debug: Message sent with content: " + message.getContent());
+        //System.out.println("Debug: Message sent with content: " + message.getContent());
     }
 
     @MessageMapping("/chat-addUser")
     @SendTo("/topic/privateroom")
     public Message addUser(@Payload Message message, SimpMessageHeaderAccessor headerAccessor) {
         String token = (String) headerAccessor.getSessionAttributes().get("token");
-        System.out.println("Debug: Entered addUser with token = " + token);
+        //System.out.println("Debug: Entered addUser with token = " + token);
 
         // Token validation
         if (token == null || !jwtUtil.isTokenValid(token, getUserFromToken(token))) {
             message.setType(MessageType.ERROR);
             message.setContent("Invalid or expired token.");
-            System.out.println("Debug: Token is invalid or expired, sending error message.");
+            //System.out.println("Debug: Token is invalid or expired, sending error message.");
             return message;
         }
 
         if (message.getSenderId() == null) {
             message.setType(MessageType.ERROR);
             message.setContent("Sender ID is missing.");
-            System.out.println("Debug: Sender ID missing, sending error message.");
+            //System.out.println("Debug: Sender ID missing, sending error message.");
             return message;
         }
 
@@ -114,11 +114,11 @@ public class RoomChatController {
             message.setSendername(user.getFirstName());
             message.setType(MessageType.JOIN);
             message.setTimestamp(LocalDateTime.now());
-            System.out.println("Debug: User " + user.getFirstName() + " joined the chat.");
+            //System.out.println("Debug: User " + user.getFirstName() + " joined the chat.");
         } else {
             message.setType(MessageType.ERROR);
             message.setContent("User not found.");
-            System.out.println("Debug: User not found, sending error message.");
+            //System.out.println("Debug: User not found, sending error message.");
         }
 
         return message;
@@ -128,13 +128,13 @@ public class RoomChatController {
     @SendTo("/topic/private/{recipient}")
     public Message privateMessage(@Payload Message message, @DestinationVariable String recipient, SimpMessageHeaderAccessor headerAccessor) {
         String token = (String) headerAccessor.getSessionAttributes().get("token");
-        System.out.println("Debug: Entered privateMessage with token = " + token + " and recipient = " + recipient);
+        //System.out.println("Debug: Entered privateMessage with token = " + token + " and recipient = " + recipient);
 
         // Token validation
         if (token == null || !jwtUtil.isTokenValid(token, getUserFromToken(token))) {
             message.setType(MessageType.ERROR);
             message.setContent("Invalid or expired token.");
-            System.out.println("Debug: Token is invalid or expired, sending error message.");
+            //System.out.println("Debug: Token is invalid or expired, sending error message.");
             return message;
         }
 
@@ -142,12 +142,12 @@ public class RoomChatController {
         if (recipient == null || message.getContent() == null) {
             message.setType(MessageType.ERROR);
             message.setContent("Recipient or message content is missing.");
-            System.out.println("Debug: Missing recipient or content, sending error message.");
+            //System.out.println("Debug: Missing recipient or content, sending error message.");
             return message;
         }
 
         messagingTemplate.convertAndSendToUser(recipient, "/queue/private", message);
-        System.out.println("Debug: Private message sent to recipient: " + recipient);
+        //System.out.println("Debug: Private message sent to recipient: " + recipient);
         return message;
     }
 
@@ -158,28 +158,28 @@ public class RoomChatController {
             throw new IllegalArgumentException("Room ID cannot be null or empty");
         }
 
-        System.out.println("Debug: Fetching message history for roomId = " + roomId);
+        //System.out.println("Debug: Fetching message history for roomId = " + roomId);
         List<Message> messages = messageRepository.findMessagesByRoomId(Long.parseLong(roomId));
         if (messages.isEmpty()) {
             Message noMessages = new Message();
             noMessages.setType(MessageType.INFO);
             noMessages.setContent("No messages in this room yet.");
             messages.add(noMessages);
-            System.out.println("Debug: No messages found in room " + roomId + ".");
+            //System.out.println("Debug: No messages found in room " + roomId + ".");
         }
         return messages;
     }
 
     @GetMapping("/msg/getRoomMessages")
     public List<Message> getRoomMessages(@RequestParam Long roomId) {
-        System.out.println("Debug: Getting messages for roomId = " + roomId);
+        //System.out.println("Debug: Getting messages for roomId = " + roomId);
         List<Message> messages = messageRepository.findMessagesByRoomId(roomId);
         if (messages.isEmpty()) {
             Message noMessages = new Message();
             noMessages.setType(MessageType.INFO);
             noMessages.setContent("No messages in this room yet.");
             messages.add(noMessages);
-            System.out.println("Debug: No messages found in room " + roomId + ".");
+            //System.out.println("Debug: No messages found in room " + roomId + ".");
         }
         return messages;
     }*/
@@ -191,7 +191,7 @@ public class RoomChatController {
                 "/queue/room/"+message.getRoomId(),            // destination (always with leading '/')
                 message                       // payload (the whole object, not just message)
         );
-        System.out.println("Sent message to user " + message.getUserId());
+        //System.out.println("Sent message to user " + message.getUserId());
     }
 
    /* @MessageMapping("/chat-room/{roomId}/send")
@@ -199,7 +199,7 @@ public class RoomChatController {
                                 @Payload Message message,
                                 SimpMessageHeaderAccessor headerAccessor) {
         String token = (String) headerAccessor.getSessionAttributes().get("token");
-        System.out.println("Debug: Sending message to room " + roomId + " with token = " + token);
+        //System.out.println("Debug: Sending message to room " + roomId + " with token = " + token);
 
         // Check token validity
         if (token == null || !jwtUtil.isTokenValid(token, getUserFromToken(token))) {
@@ -208,7 +208,7 @@ public class RoomChatController {
             errorMessage.setContent("Invalid or expired token.");
             errorMessage.setTimestamp(LocalDateTime.now());
             messagingTemplate.convertAndSend("/topic/chat-room/" + roomId, errorMessage);
-            System.out.println("Debug: Token is invalid or expired, sending error message.");
+            //System.out.println("Debug: Token is invalid or expired, sending error message.");
             return;
         }
 
@@ -220,17 +220,17 @@ public class RoomChatController {
         // Set message metadata
         message.setTimestamp(LocalDateTime.now());
         message.setType(MessageType.CHAT); // Regular chat message
-        System.out.println("Debug: Sending message content: " + message.getContent());
+        //System.out.println("Debug: Sending message content: " + message.getContent());
 
         messagingTemplate.convertAndSend("/topic/chat-room/" + roomId, message);
     }
 
     @GetMapping("/chat-room/users")
     public List<User> getUsersInRoom(@RequestParam Long roomId) {
-        System.out.println("Debug: Fetching users for roomId = " + roomId);
+        //System.out.println("Debug: Fetching users for roomId = " + roomId);
         List<User> usersInRoom = userRepository.findUsersByRoomId(roomId);
         if (usersInRoom.isEmpty()) {
-            System.out.println("Debug: No users found in room " + roomId + ".");
+            //System.out.println("Debug: No users found in room " + roomId + ".");
         }
         return usersInRoom;
     }*/

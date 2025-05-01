@@ -77,17 +77,17 @@ export class TransferPopupComponent {
   createTransfer(): void {
     this.transferService.createAndAffectTransfer(this.metamaskService.getWalletAddress(),this.transfer).subscribe({
       next: (response) => {
-        console.log('Transfer created:', response);
+        //console.log('Transfer created:', response);
       },
       error: (err) => {
         console.error('Error creating transfer:', err);
       }
     });
-    console.log('Transfer create to the reciever:');
+    //console.log('Transfer create to the reciever:');
     this.transfer.type = TransferType.IN;
     this.transferService.createAndAffectTransfer(this.transfer.receiverMetaMaskAddress,this.transfer).subscribe({
       next: (response) => {
-        console.log('Transfer created:', response);
+        //console.log('Transfer created:', response);
       },
       error: (err) => {
         console.error('Error creating transfer:', err);
@@ -106,7 +106,7 @@ export class TransferPopupComponent {
          await this.metamaskService.TransfertCoins(friend.metaMaskAddress, this.coinAmountTosend);
 
          //notficating the reciever
-  console.log(friend.id.toString());
+  //console.log(friend.id.toString());
          this.notificationService.showNotification(friend.id.toString(),"you have recived " + this.coinAmountTosend+ "coins");
        
        

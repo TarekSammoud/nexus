@@ -33,8 +33,8 @@ public class GitHubAuthService {
      * @return L'utilisateur authentifié ou créé à partir de GitHub
      */
     public User authenticateWithGitHub(String code) throws Exception {
-        System.out.println("Authentification via GitHub démarrée...");
-        System.out.println("Code GitHub reçu: " + code);
+        //System.out.println("Authentification via GitHub démarrée...");
+        //System.out.println("Code GitHub reçu: " + code);
 
         // Construire l'URL pour obtenir un token d'accès à partir du code
         String tokenUrl = "https://github.com/login/oauth/access_token";
@@ -54,13 +54,13 @@ public class GitHubAuthService {
         // Vérifier la réussite de la réponse
         if (response.getStatusCode().is2xxSuccessful()) {
             String responseBody = response.getBody();
-            System.out.println("Réponse reçue pour l'échange de code contre jeton: " + responseBody);
+            //System.out.println("Réponse reçue pour l'échange de code contre jeton: " + responseBody);
             String accessToken = extractAccessToken(responseBody);
-            System.out.println("Token d'accès récupéré: " + accessToken);
+            //System.out.println("Token d'accès récupéré: " + accessToken);
 
             // Utiliser le token d'accès pour récupérer les informations de l'utilisateur depuis GitHub
             User githubUser = fetchGitHubUserInfo(accessToken);
-            System.out.println("Utilisateur GitHub récupéré : " + githubUser.getFirstName());
+            //System.out.println("Utilisateur GitHub récupéré : " + githubUser.getFirstName());
 
             // Créer ou récupérer un utilisateur dans notre base de données
             User user = new User();
@@ -71,19 +71,19 @@ public class GitHubAuthService {
             // Vérifier si l'utilisateur existe déjà
             User existingUser = userRepository.findByEmail(githubUser.getEmail());
             if (existingUser == null) {
-                System.out.println("Nouvel utilisateur - Enregistrement en base.");
+                //System.out.println("Nouvel utilisateur - Enregistrement en base.");
                 user = userRepository.save(user); // Enregistrement du nouvel utilisateur
             } else {
-                System.out.println("Utilisateur existant trouvé : " + existingUser.getEmail());
+                //System.out.println("Utilisateur existant trouvé : " + existingUser.getEmail());
                 user = existingUser; // Retourner l'utilisateur existant
             }
 
             // Maintenant, l'utilisateur est enregistré, et vous pouvez obtenir son ID pour générer le token
-            System.out.println("ID de l'utilisateur : " + user.getId());
+            //System.out.println("ID de l'utilisateur : " + user.getId());
 
             return user; // Retourner l'utilisateur pour la génération du token
         } else {
-            System.out.println("Erreur dans la réponse GitHub, code de statut: " + response.getStatusCode());
+            //System.out.println("Erreur dans la réponse GitHub, code de statut: " + response.getStatusCode());
             throw new Exception("Échec de l'échange du code GitHub contre un jeton.");
         }
     }
@@ -95,7 +95,7 @@ public class GitHubAuthService {
      */
     private User fetchGitHubUserInfo(String accessToken) {
         String userInfoUrl = "https://api.github.com/user";
-        System.out.println("Récupération des informations de l'utilisateur GitHub à partir de: " + userInfoUrl);
+        //System.out.println("Récupération des informations de l'utilisateur GitHub à partir de: " + userInfoUrl);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
@@ -106,7 +106,7 @@ public class GitHubAuthService {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             String responseBody = response.getBody();
-            System.out.println("Réponse GitHub reçue avec succès: " + responseBody);
+            //System.out.println("Réponse GitHub reçue avec succès: " + responseBody);
             JsonNode jsonNode = parseJson(responseBody);
             User githubUser = new User();
             githubUser.setEmail(jsonNode.get("email").asText());
@@ -114,7 +114,7 @@ public class GitHubAuthService {
             return githubUser;
         }
 
-        System.out.println("Erreur dans la récupération des informations GitHub, code de statut: " + response.getStatusCode());
+        //System.out.println("Erreur dans la récupération des informations GitHub, code de statut: " + response.getStatusCode());
         throw new RuntimeException("Impossible de récupérer les informations de l'utilisateur GitHub");
     }
 
@@ -127,7 +127,7 @@ public class GitHubAuthService {
     private String extractAccessToken(String responseBody) {
         JsonNode jsonNode = parseJson(responseBody);
         String accessToken = jsonNode.get("access_token").asText();
-        System.out.println("Token d'accès extrait: " + accessToken);
+        //System.out.println("Token d'accès extrait: " + accessToken);
         return accessToken;
     }
 
@@ -140,7 +140,7 @@ public class GitHubAuthService {
         try {
             return objectMapper.readTree(responseBody);
         } catch (Exception e) {
-            System.out.println("Erreur lors de l'analyse de la réponse JSON: " + e.getMessage());
+            //System.out.println("Erreur lors de l'analyse de la réponse JSON: " + e.getMessage());
             throw new RuntimeException("Erreur lors de l'analyse de la réponse JSON", e);
         }
     }

@@ -133,7 +133,7 @@ public class GameController {
                     if (i < 0) {
                         break;
                     }
-                    System.out.print(new String(buffer, 0, i));
+                    //System.out.print(new String(buffer, 0, i));
                 }
                 if (channel.isClosed()) {
                     if (inputStream.available() > 0) continue;
@@ -193,7 +193,7 @@ public class GameController {
                     if (i < 0) {
                         break;
                     }
-                    System.out.print(new String(buffer, 0, i));
+                    //System.out.print(new String(buffer, 0, i));
                 }
                 if (channel.isClosed()) {
                     if (inputStream.available() > 0) continue;

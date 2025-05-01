@@ -70,7 +70,7 @@ export class PublicationFormComponent implements OnInit {
     this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
-        console.log('✅ Catégories récupérées :', this.categories);
+        //console.log('✅ Catégories récupérées :', this.categories);
       },
       error: (error) => {
         this.toastr.error('❌ Erreur lors du chargement des catégories : ' + error.message);

@@ -67,7 +67,7 @@ public class PdfUtil {
             headerTable.addCell(logoCell);
         } catch (Exception e) {
             headerTable.addCell(new Cell().setBorder(Border.NO_BORDER));
-            System.out.println("Logo loading failed: " + e.getMessage());
+            //System.out.println("Logo loading failed: " + e.getMessage());
         }
 
         // Right cell for user info

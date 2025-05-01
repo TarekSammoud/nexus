@@ -19,7 +19,7 @@ export class WsNotificationsService {
 
     this.stompClient = new Stomp.Client({
       webSocketFactory: () => socket, // Directly use the native WebSocket connection
-      debug: (str: string) => console.log(str), // Enable debugging to log messages in console
+      debug: (str: string) => //console.log(str), // Enable debugging to log messages in console
     });
 
     // Configure the STOMP client
@@ -28,7 +28,7 @@ export class WsNotificationsService {
         Authorization: 'Bearer ' + token // Attach JWT token for authentication
       },
       onConnect: () => {
-        console.log('WebSocket connected');
+        //console.log('WebSocket connected');
         this.stompClient.subscribe('/user/queue/notifications', (message) => {
           const body = JSON.parse(message.body);
           onMessage(body); // Handle incoming notification
@@ -49,7 +49,7 @@ export class WsNotificationsService {
   disconnect(): void {
     if (this.stompClient) {
       this.stompClient.deactivate();
-      console.log('Disconnected from WebSocket server.');
+      //console.log('Disconnected from WebSocket server.');
     }
   }
 
@@ -66,7 +66,7 @@ export class WsNotificationsService {
           destination: destination,
           body: JSON.stringify(message)
         });
-        console.log(`Message sent to ${destination}`);
+        //console.log(`Message sent to ${destination}`);
       } catch (error) {
         console.error('Error sending message:', error);
       }

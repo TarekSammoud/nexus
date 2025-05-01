@@ -55,8 +55,8 @@ export class HeaderComponent implements OnInit {
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
         this.user = user;
-        console.log('User profile:', this.user);
-        console.log('User role:', this.user.roleType);
+        //console.log('User profile:', this.user);
+        //console.log('User role:', this.user.roleType);
         this.role = this.user.roleType 
         const userId = TokenService.getUserId();
 
@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToWallet() {
-    //console.log("wallet ", this.iswall)
+    ////console.log("wallet ", this.iswall)
    this._router.navigate([this.isWalletConnected ? '/wallet' : '/connectWallet']);
   }
 

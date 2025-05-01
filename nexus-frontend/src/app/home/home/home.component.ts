@@ -24,12 +24,12 @@ export class HomeComponent {
 
         this._gameService.getBrowserGames().subscribe(games => {
           this.browserGames = games;
-          console.log(this.browserGames);
+          //console.log(this.browserGames);
         })
 
         this._gameService.getEmulatedGames().subscribe(games => {
           this.emulatedGames = games;
-          console.log(this.browserGames);
+          //console.log(this.browserGames);
         })
        
 
@@ -79,7 +79,7 @@ export class HomeComponent {
         }
     
         OnSelectEmulated(game: Game){
-          console.log(game)
+          //console.log(game)
           this._router.navigate(['/games', game.id]);
         }
 

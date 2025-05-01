@@ -480,7 +480,7 @@
 		//url:        null,
 		//type:       'GET',
 		log:          function(msg) {
-										window['console'] && window.console.log && window.console.log(msg);
+										window['console'] && window.//console.log && window.//console.log(msg);
 					  			},
 		status:       200,
 		statusText:   "OK",

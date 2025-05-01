@@ -88,7 +88,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                                     UsernamePasswordAuthenticationToken(userId.toString(), null, new ArrayList<>());
                             accessor.getSessionAttributes().put("userId", userId.toString());
                             accessor.setUser(principal);
-                            System.out.println("WebSocket connected - User ID: " + userId);
+                            //System.out.println("WebSocket connected - User ID: " + userId);
                         } catch (Exception e) {
                             System.err.println("Invalid JWT in WebSocket CONNECT: " + e.getMessage());
                             throw new IllegalArgumentException("Invalid JWT token for WebSocket");

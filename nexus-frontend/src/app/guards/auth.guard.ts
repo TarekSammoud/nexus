@@ -13,8 +13,8 @@ export class AuthGuard implements CanActivate {
      this.authService.getLoggedInUserProfile().subscribe({
        next: (user: any) => {
          this.user = user;
-         console.log('User profile:', this.user);
-         console.log('User role:', this.user.roleType);
+         //console.log('User profile:', this.user);
+         //console.log('User role:', this.user.roleType);
        },
        error: (error) => {
          console.error('Error fetching user profile:', error);

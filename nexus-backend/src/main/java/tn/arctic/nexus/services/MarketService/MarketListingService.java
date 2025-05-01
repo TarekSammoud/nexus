@@ -96,7 +96,7 @@ public class MarketListingService {
             }
 
             repository.delete(listing);
-            System.out.println("✅ MarketListing " + listing.getId() + " supprimé après fin de l'enchère.");
+            //System.out.println("✅ MarketListing " + listing.getId() + " supprimé après fin de l'enchère.");
         }
     }
 }

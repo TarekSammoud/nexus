@@ -35,7 +35,7 @@ export class SondageCreateComponent implements OnInit {
     this.streamerService.getAllStreamers().subscribe({
       next: (data) => {
         this.streamers = data;
-        console.log("✅ Streamers chargés :", data);
+        //console.log("✅ Streamers chargés :", data);
       },
       error: (err) => {
         console.error('❌ Erreur chargement streamers :', err);

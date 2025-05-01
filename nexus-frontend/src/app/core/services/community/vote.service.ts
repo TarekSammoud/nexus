@@ -34,7 +34,7 @@ export class VoteService {
       .set('sondageId', sondageId.toString())
       .set('userId', userId.toString())
       .set('voteOui', voteOui.toString());
-      console.log(userId);
+      //console.log(userId);
   
     return this.http.post<Vote>(this.apiUrl, null, { params, headers });
   }

@@ -50,7 +50,7 @@ export class GameCategoryListComponent implements OnInit {
    deleteGameCategory(data: GameCategory){
     if (confirm('Are you sure you want to delete this game category?')) {
       this._gameCategoryService.deleteGameCategory(data.id!).subscribe((response) => {
-        console.log('Game category deleted successfully', response);
+        //console.log('Game category deleted successfully', response);
         this.data = this.data?.filter((category) => category.id !== data.id);
       }, (error) => {
         console.error('Error deleting game category', error);

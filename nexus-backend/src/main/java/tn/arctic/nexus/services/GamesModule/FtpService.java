@@ -144,7 +144,7 @@ public class FtpService {
              path = FTP_UPLOAD_DIR+"/"+type;
 
             ftpClient.changeWorkingDirectory(path);
-            System.out.println("FTP working directory: " + ftpClient.printWorkingDirectory());
+            //System.out.println("FTP working directory: " + ftpClient.printWorkingDirectory());
 
 
 

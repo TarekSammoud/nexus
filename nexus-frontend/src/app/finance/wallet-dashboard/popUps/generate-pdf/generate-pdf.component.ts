@@ -42,7 +42,7 @@ export class GeneratePdfComponent {
       fromDate: fromDate ? new Date(fromDate + 'T00:00:00Z').toISOString() : null,
       toDate: toDate ? new Date(toDate + 'T23:59:59Z').toISOString() : null
     };
-    console.log(body); // for debugging
+    //console.log(body); // for debugging
     this.http.post('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/pdf/transactions/report/pdf', body, { responseType: 'blob' })
       .subscribe(blob => {
         this.loading = false;

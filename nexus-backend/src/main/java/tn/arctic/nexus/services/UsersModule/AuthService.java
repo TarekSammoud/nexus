@@ -23,7 +23,7 @@ public class AuthService {
 
     // Enregistrement de l'utilisateur avec le mot de passe crypté
     public User register(User user) {
-        System.out.println("trying to register "+user.getFirstName());
+        //System.out.println("trying to register "+user.getFirstName());
         user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypte le mot de passe
         return userRepository.save(user); // Sauvegarde l'utilisateur
     }

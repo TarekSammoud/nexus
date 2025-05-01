@@ -61,7 +61,7 @@ export class PerformanceReviewComponent implements OnInit {
         () => {
           this.loadReviews();
           this.resetForm();
-          console.log('Navigating to /support');
+          //console.log('Navigating to /support');
           this.router.navigate(['/support']);
         },
         (error) => console.error('Error adding review:', error)
@@ -88,7 +88,7 @@ export class PerformanceReviewComponent implements OnInit {
 
     this.reviewService.updateReview(updatedReview).subscribe(
       (updatedReview) => {
-        console.log('Review updated successfully:', updatedReview);
+        //console.log('Review updated successfully:', updatedReview);
         this.loadReviews();
         this.resetForm();
       },

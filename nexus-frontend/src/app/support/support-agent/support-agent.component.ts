@@ -35,7 +35,7 @@ export class SupportAgentComponent implements OnInit {
   ngOnInit(): void {
     this.loadAgents();
     // Add console log to confirm initialization
-    console.log('Component initialized, attempting to load agents...');
+    //console.log('Component initialized, attempting to load agents...');
   }
 
   loadAgents(): void {
@@ -43,7 +43,7 @@ export class SupportAgentComponent implements OnInit {
       (data: SupportAgent[]) => {
         // Log the data to ensure it's correctly loaded
         this.agents = data;
-        console.log('Agents loaded:', this.agents);
+        //console.log('Agents loaded:', this.agents);
       },
       (error: any) => console.error('Error loading agents', error)
     );

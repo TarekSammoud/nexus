@@ -24,7 +24,7 @@ export class LoginComponent {
         (response) => {
           const token = response.token;
           // Sauvegarde du jeton JWT dans localStorage
-          console.log('Token JWT:', token);
+          //console.log('Token JWT:', token);
           localStorage.setItem('auth_token', token);
 
           // Redirection vers la page du profil
@@ -47,7 +47,7 @@ export class LoginComponent {
     FB.login((response: any) => {
       if (response.authResponse) {
         const accessToken = response.authResponse.accessToken;
-        console.log('Access Token:', accessToken);
+        //console.log('Access Token:', accessToken);
 
         // Appel à ton backend pour valider le token Facebook et recevoir ton JWT
         this.authService.facebookLogin(accessToken).subscribe({
@@ -61,7 +61,7 @@ export class LoginComponent {
         });
 
       } else {
-        console.log("Connexion Facebook annulée ou refusée.");
+        //console.log("Connexion Facebook annulée ou refusée.");
       }
     }, { scope: 'email,public_profile' });
   }

@@ -33,7 +33,7 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
 
-        System.out.println("Generated token: " + token); // Log pour vérifier le jeton généré
+        //System.out.println("Generated token: " + token); // Log pour vérifier le jeton généré
         return token;
     }
 
@@ -43,7 +43,7 @@ public class JwtUtil {
             Claims claims = getClaims(token);
             return claims.get("id", Integer.class).longValue(); // ou Long.class si tu veux directement un Long
         } catch (Exception e) {
-            System.out.println("Error extracting userId from token: " + e.getMessage());
+            //System.out.println("Error extracting userId from token: " + e.getMessage());
             throw e;
         }
     }
@@ -52,10 +52,10 @@ public class JwtUtil {
         try {
             Claims claims = getClaims(token);
             String email = claims.getSubject();
-            System.out.println("Extracted email from token: " + email); // Log pour vérifier l'email extrait
+            //System.out.println("Extracted email from token: " + email); // Log pour vérifier l'email extrait
             return email;
         } catch (Exception e) {
-            System.out.println("Error extracting email from token: " + e.getMessage()); // Log d'erreur
+            //System.out.println("Error extracting email from token: " + e.getMessage()); // Log d'erreur
             throw e;
         }
     }
@@ -63,7 +63,7 @@ public class JwtUtil {
     public boolean isTokenValid(String token, User user) {
         final String email = extractEmail(token);
         boolean isValid = email.equals(user.getEmail()) && !isTokenExpired(token);
-        System.out.println("Token valid: " + isValid); // Log pour vérifier la validité du jeton
+        //System.out.println("Token valid: " + isValid); // Log pour vérifier la validité du jeton
         return isValid;
     }
 

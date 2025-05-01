@@ -41,29 +41,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         final String token = authHeader.substring(7);
-        System.out.println("Received token: " + token); // Log pour vérifier le token
+        //System.out.println("Received token: " + token); // Log pour vérifier le token
 
         try {
             Long userId = jwtUtil.extractUserId(token);
-            System.out.println("Extracted userId from token: " + userId); // Log pour vérifier l'ID extrait
+            //System.out.println("Extracted userId from token: " + userId); // Log pour vérifier l'ID extrait
 
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User user = authService.loadUserById(userId); // 👈 utiliser loadUserById ici
                 if (user == null) {
-                    System.out.println("User not found for ID: " + userId); // Log si l'utilisateur n'est pas trouvé
+                    //System.out.println("User not found for ID: " + userId); // Log si l'utilisateur n'est pas trouvé
                 }
                 if (user != null && jwtUtil.isTokenValid(token, user)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             user, null, Collections.emptyList());
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                    System.out.println("Authentication set for user ID: " + userId);
+                    //System.out.println("Authentication set for user ID: " + userId);
                 } else {
-                    System.out.println("Invalid token or user mismatch");
+                    //System.out.println("Invalid token or user mismatch");
                 }
             }
         } catch (Exception e) {
-            System.out.println("Exception in JWT filter: " + e.getMessage());
+            //System.out.println("Exception in JWT filter: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);

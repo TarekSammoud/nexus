@@ -27,13 +27,13 @@ export class GameReviewListComponent implements OnInit {
       constructor(private _router : Router,private gameService: GameService) {
         this.gameService.getReviews().subscribe(reviews => {
           this.data = reviews; 
-          console.log(this.data);
+          //console.log(this.data);
 
           for (let i = 0; i < this.data.length; i++) {
             for (let j = 0; j < this.data[i].game.gameMediaList.length; j++) {
               if (this.data[i].game.gameMediaList[j].gameMediaType == 'COVER') {
                 this.data[i].game.coverPicture = this.data[i].game.gameMediaList[j]; 
-                console.log(this.data[i].game.coverPicture?.mediaUrl);
+                //console.log(this.data[i].game.coverPicture?.mediaUrl);
                 break; 
               }
             }

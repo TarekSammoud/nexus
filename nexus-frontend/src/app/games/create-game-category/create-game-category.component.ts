@@ -33,7 +33,7 @@ export class CreateGameCategoryComponent implements OnInit {
       this.isEditMode = !!this.gameCategoryId;  // If ID exists, it's edit mode
   
 
-      console.log(this.isEditMode);
+      //console.log(this.isEditMode);
 
 
 
@@ -51,16 +51,16 @@ export class CreateGameCategoryComponent implements OnInit {
   onSubmit() {
     if (this.isEditMode) {
       this.gameCategoryForm.value.id = this.gameCategoryId;
-      console.log(this.gameCategoryForm.value);
+      //console.log(this.gameCategoryForm.value);
       this._gameCategoryService.updateGameCategory(this.gameCategoryForm.value).subscribe((response) => {
-        console.log('Game category updated successfully', response);
+        //console.log('Game category updated successfully', response);
         this.gameCategoryForm.reset();
       }, (error) => {
         console.error('Error updating game category', error);
       });
     } else {
       this._gameCategoryService.createGameCategory(this.gameCategoryForm.value).subscribe((response) => {
-        console.log('Game category created successfully', response);
+        //console.log('Game category created successfully', response);
         this.gameCategoryForm.reset();
       }, (error) => {
         console.error('Error creating game category', error);

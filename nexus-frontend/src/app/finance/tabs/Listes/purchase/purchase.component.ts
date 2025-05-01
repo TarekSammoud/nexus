@@ -57,7 +57,7 @@ export class PurchaseComponent implements OnInit {
     // Then make API call
     this.purchaseService.deletePurchase(id).subscribe({
       next: () => {
-        console.log('Purchase deleted successfully');
+        //console.log('Purchase deleted successfully');
       },
       error: (error) => {
         console.error('Error deleting purchase:', error);

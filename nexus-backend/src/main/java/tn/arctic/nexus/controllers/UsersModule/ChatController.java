@@ -34,7 +34,7 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         chatMessage.setTimestamp(LocalDateTime.now());
-        System.out.println("Message envoyé par: " + chatMessage.getSendername());
+        //System.out.println("Message envoyé par: " + chatMessage.getSendername());
         return chatMessage;
     }
 

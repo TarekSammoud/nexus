@@ -27,13 +27,13 @@ export class GameGridComponent {
       for (let j = 0; j < this.games[i].gameMediaList.length; j++) {
         if (this.games[i].gameMediaList[j].gameMediaType == 'COVER') {
           this.games[i].coverPicture = this.games[i].gameMediaList[j]; 
-          console.log(this.games[i].coverPicture?.mediaUrl);
+          //console.log(this.games[i].coverPicture?.mediaUrl);
           break; 
         }
-        console.log(this.games[i].coverPicture?.mediaUrl);
+        //console.log(this.games[i].coverPicture?.mediaUrl);
       }
     }
-    console.log(this.games);
+    //console.log(this.games);
   })
     }
     else {
@@ -43,13 +43,13 @@ export class GameGridComponent {
           for (let j = 0; j < this.games[i].gameMediaList.length; j++) {
             if (this.games[i].gameMediaList[j].gameMediaType == 'COVER') {
               this.games[i].coverPicture = this.games[i].gameMediaList[j]; 
-              console.log(this.games[i].coverPicture?.mediaUrl);
+              //console.log(this.games[i].coverPicture?.mediaUrl);
               break; 
             }
-            console.log(this.games[i].coverPicture?.mediaUrl);
+            //console.log(this.games[i].coverPicture?.mediaUrl);
           }
         }
-        console.log(this.games);
+        //console.log(this.games);
       })
     }
   
@@ -57,7 +57,7 @@ export class GameGridComponent {
 
     
   OnSelect(game: Game) {
-    console.log(game);
+    //console.log(game);
     this._router.navigate(['/games', game.id]);
     }
 

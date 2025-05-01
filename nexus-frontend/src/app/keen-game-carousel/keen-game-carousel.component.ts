@@ -94,7 +94,7 @@ export class KeenGameCarouselComponent implements AfterViewInit, OnInit {
       [ThumbnailPlugin(this.slider!)]
     );
 
-    console.log(this.slider.slides);
+    //console.log(this.slider.slides);
   }
 
 

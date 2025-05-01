@@ -174,7 +174,7 @@ export class CreateBrowserGameComponent implements OnInit{
     // 🔥 Call your service to upload the file
     this._gameMediaService.createZip(formData).subscribe({
       next: (response) => {
-        console.log('Upload success:', response);
+        //console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -220,7 +220,7 @@ export class CreateBrowserGameComponent implements OnInit{
 
       this._gameMediaService.uploadFileToFtp(formData).subscribe( {
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -270,7 +270,7 @@ export class CreateBrowserGameComponent implements OnInit{
 
       this._gameMediaService.uploadFileToFtp(formData).subscribe({
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -293,7 +293,7 @@ export class CreateBrowserGameComponent implements OnInit{
     this.filesToUpload.splice(index, 1);
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
   removeImageFile(index: number) {
@@ -301,7 +301,7 @@ export class CreateBrowserGameComponent implements OnInit{
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
     this.imagesFile.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
   removeImageCover(index: number) {
@@ -309,7 +309,7 @@ export class CreateBrowserGameComponent implements OnInit{
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
     this.imagesCover.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
   removeImageBanner(index: number) {
@@ -317,7 +317,7 @@ export class CreateBrowserGameComponent implements OnInit{
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
     this.imagesBanner.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
   removeImageScreenshots(index: number) {
@@ -325,7 +325,7 @@ export class CreateBrowserGameComponent implements OnInit{
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
     this.imagesScreenshots.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
 
@@ -382,7 +382,7 @@ export class CreateBrowserGameComponent implements OnInit{
       this.authService.getLoggedInUserProfile().subscribe({
         next: (user: any) => {
           this.userId = user.id;
-          console.log('User profile: id from create', this.userId);
+          //console.log('User profile: id from create', this.userId);
           this.gameForm.patchValue({
             developer: {id: this.userId}
           });
@@ -459,10 +459,10 @@ export class CreateBrowserGameComponent implements OnInit{
     onSubmit(): void {
       this.gameForm.value.categories = Array.from(this.selectedCategories);
       this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
-      console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+      //console.log('Form Data:', JSON.stringify(this.gameForm?.value));
 
       this._gameService.addGame(this.gameForm.value).subscribe((data) => {
-        console.log('Game added:', data);
+        //console.log('Game added:', data);
         this.uploadFiles(); 
       });
   
@@ -471,7 +471,7 @@ export class CreateBrowserGameComponent implements OnInit{
         // Loop through the controls and log errors
         for (const controlName in this.gameForm.controls) {
           if (this.gameForm.controls[controlName].errors) {
-            console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
+            //console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
           }
         }
       } else {
@@ -479,7 +479,7 @@ export class CreateBrowserGameComponent implements OnInit{
       if (this.isEditMode) {
         this.gameForm.value.id = this.gameId;
         this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
-          console.log('Game updated:', data);
+          //console.log('Game updated:', data);
         });
       }
       else {
@@ -494,7 +494,7 @@ export class CreateBrowserGameComponent implements OnInit{
       for (let i = 0; i < this.ftpFiles.length; i++) {
         this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe({
           next: (response) => {
-            console.log('Game Media Entity success:', response);
+            //console.log('Game Media Entity success:', response);
             // You can store the result or update the form as needed
           },
           error: (err) => {

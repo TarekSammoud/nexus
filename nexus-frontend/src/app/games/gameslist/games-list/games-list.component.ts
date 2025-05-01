@@ -31,7 +31,7 @@ export class GamesListComponent  implements OnInit {
             for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
               if (this.data[i].gameMediaList[j].gameMediaType == 'COVER') {
                 this.data[i].coverPicture = this.data[i].gameMediaList[j]; 
-                console.log(this.data[i].coverPicture?.mediaUrl);
+                //console.log(this.data[i].coverPicture?.mediaUrl);
                 break; 
               }
             }

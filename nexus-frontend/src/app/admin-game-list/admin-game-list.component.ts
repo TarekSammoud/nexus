@@ -52,9 +52,9 @@ export class AdminGameListComponent implements OnInit {
     
 
       this.isAuthentificated = this.authService.isAuthenticated();
-      console.log(this.isAuthentificated);
-      console.log(this.role," from game list");
-      console.log("this role is :",this.role)
+      //console.log(this.isAuthentificated);
+      //console.log(this.role," from game list");
+      //console.log("this role is :",this.role)
       if (this.role === 'ADMIN') {
         this.gameService.getGames().subscribe(games => {
           this.data = games; 
@@ -62,7 +62,7 @@ export class AdminGameListComponent implements OnInit {
             for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
               if (this.data[i].gameMediaList[j].gameMediaType == 'COVER') {
                 this.data[i].coverPicture = this.data[i].gameMediaList[j]; 
-                console.log(this.data[i].coverPicture?.mediaUrl);
+                //console.log(this.data[i].coverPicture?.mediaUrl);
                 break; 
               }
             }
@@ -72,11 +72,11 @@ export class AdminGameListComponent implements OnInit {
       else {
         this.authService.getLoggedInUserProfile().subscribe(user => {
         this.devId = user.id;
-        console.log(this.devId);
+        //console.log(this.devId);
       
         this.gameService.getDeveloperGames(this.devId!).subscribe(games => {
           this.data = games; 
-          console.log(this.data);
+          //console.log(this.data);
           for (let i = 0; i < this.data.length; i++) {
             for (let j = 0; j < this.data[i].gameMediaList.length; j++) {
               if (this.data[i].gameMediaList[j].gameMediaType === 'COVER') {
@@ -96,9 +96,9 @@ export class AdminGameListComponent implements OnInit {
           this.user = user;
           this.role = user.roleType;
           this.isAuthentificated = this.authService.isAuthenticated();
-          console.log(this.isAuthentificated);
-          console.log(this.role, " from game list");
-          console.log("this role is :", this.role);
+          //console.log(this.isAuthentificated);
+          //console.log(this.role, " from game list");
+          //console.log("this role is :", this.role);
       
           if (this.role === 'ADMIN') {
             this.gameService.getGames().subscribe(games => {
@@ -179,12 +179,12 @@ export class AdminGameListComponent implements OnInit {
   }
 
   generateKey(data: Game){
-    console.log(data);
+    //console.log(data);
     const token = localStorage.getItem('token');
     
      var gameKey: any = { game: data, user: { id: 1 } };  // Initialize gameKey with required properties
 
-     console.log(gameKey);
+     //console.log(gameKey);
     this._gameKeyService.addGameKey(gameKey).subscribe((response) => {
       alert("Game key generated successfully");
       this._router.navigate(['admin/games', data.id]);

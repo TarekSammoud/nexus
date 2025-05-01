@@ -36,7 +36,7 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody User user) {
 
 
-        System.out.println("INPUT USER : "+ user.getFirstName());
+        //System.out.println("INPUT USER : "+ user.getFirstName());
 
         if (!checkEmailUnique(user.getEmail())) {
             return ResponseEntity.badRequest().body(new AuthResponse("L'email est déjà utilisé."));
@@ -212,25 +212,25 @@ public class AuthController {
             String code = request.getCode();
 
             // Afficher le code reçu pour le débogage
-            System.out.println("Code GitHub reçu: " + code);
+            //System.out.println("Code GitHub reçu: " + code);
 
             // Authentifier l'utilisateur avec le code GitHub et récupérer l'objet User
             User user = gitHubAuthService.authenticateWithGitHub(code);
 
             // Afficher les informations de l'utilisateur récupéré
-            System.out.println("Utilisateur authentifié avec GitHub: " + user.getEmail());
+            //System.out.println("Utilisateur authentifié avec GitHub: " + user.getEmail());
 
             // Générer un JWT pour l'utilisateur authentifié
             String jwt = jwtUtil.generateToken(user);
 
             // Afficher le token généré
-            System.out.println("JWT généré: " + jwt);
+            //System.out.println("JWT généré: " + jwt);
 
             // Retourner le JWT dans la réponse
             return ResponseEntity.ok(new AuthResponse(jwt));
         } catch (Exception e) {
             // Afficher l'erreur pour aider au débogage
-            System.out.println("Erreur lors de la connexion via GitHub: " + e.getMessage());
+            //System.out.println("Erreur lors de la connexion via GitHub: " + e.getMessage());
 
             // Retourner une erreur si l'authentification échoue
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

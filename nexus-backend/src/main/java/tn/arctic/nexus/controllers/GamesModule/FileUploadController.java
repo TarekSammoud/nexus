@@ -21,7 +21,7 @@ public class FileUploadController {
 
     @PostMapping
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        System.out.println("adding");
+        //System.out.println("adding");
         try {
             String message = ftpService.uploadFile(file);
             return ResponseEntity.ok(message);
@@ -33,7 +33,7 @@ public class FileUploadController {
 
     @PostMapping("/n64")
     public ResponseEntity<String> uploadN64File(@RequestParam("file") MultipartFile file) {
-        System.out.println("adding");
+        //System.out.println("adding");
         try {
             String message = ftpService.uploadN64File(file);
             return ResponseEntity.ok(message);
@@ -44,7 +44,7 @@ public class FileUploadController {
 
     @PostMapping("/psp")
     public ResponseEntity<String> uploadPSPFile(@RequestParam("file") MultipartFile file) {
-        System.out.println("adding");
+        //System.out.println("adding");
         try {
             String message = ftpService.uploadPSPFile(file);
             return ResponseEntity.ok(message);
@@ -55,7 +55,7 @@ public class FileUploadController {
 
     @PostMapping("/rar")
     public ResponseEntity<String> uploadRARFile(@RequestParam("file") MultipartFile file) {
-        System.out.println("adding");
+        //System.out.println("adding");
         try {
             String message = ftpService.handleZipAndExtractToFtp(file);
 

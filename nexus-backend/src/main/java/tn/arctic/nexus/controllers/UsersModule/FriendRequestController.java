@@ -52,7 +52,7 @@ public class FriendRequestController {
     // pour retourner les user qui n ont pas des invitavtion
     @GetMapping("/players/available/{id}")
     public List<User> getAvailablePlayers(@PathVariable Long id) {
-        System.out.println("==> getAvailablePlayers called for id: " + id);
+        //System.out.println("==> getAvailablePlayers called for id: " + id);
         return friendRequestService.findAvailablePlayersForFriendRequest(id);
     }
 

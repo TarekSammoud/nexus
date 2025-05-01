@@ -68,17 +68,17 @@ export class GamePageComponent implements OnInit {
     for ( let platform of this.game.platforms) {
       if (platform == "BROWSER") {
         this.browserGame = true ;
-        console.log(this.browserGame)
+        //console.log(this.browserGame)
       }
 
       if (platform == "N64") {
         this.emulatedGame = true ;
-        console.log(this.emulatedGame)
+        //console.log(this.emulatedGame)
       }
 
       if (platform == "PSP") {
         this.emulatedPSPGame = true ;
-        console.log(this.emulatedPSPGame)
+        //console.log(this.emulatedPSPGame)
       }
     }
         
@@ -90,7 +90,7 @@ export class GamePageComponent implements OnInit {
           for (let game of games) {
             if (game.id === this.game?.id) {
               this.inLibrary = true;
-              console.log(this.inLibrary);
+              //console.log(this.inLibrary);
               break;
             }
           }
@@ -134,17 +134,17 @@ export class GamePageComponent implements OnInit {
     for ( let platform of this.game.platforms) {
       if (platform == "BROWSER") {
         this.browserGame = true ;
-        console.log(this.browserGame)
+        //console.log(this.browserGame)
       }
 
       if (platform == "N64") {
         this.emulatedGame = true ;
-        console.log(this.emulatedGame)
+        //console.log(this.emulatedGame)
       }
 
       if (platform == "PSP") {
         this.emulatedPSPGame = true ;
-        console.log(this.emulatedPSPGame)
+        //console.log(this.emulatedPSPGame)
       }
     }
         
@@ -156,7 +156,7 @@ export class GamePageComponent implements OnInit {
           for (let game of games) {
             if (game.id === this.game?.id) {
               this.inLibrary = true;
-              console.log(this.inLibrary);
+              //console.log(this.inLibrary);
               break;
             }
           }
@@ -245,9 +245,9 @@ browserGame = false;
 
     this.reviewForm.value.game.id = this.game?.id; // Set the game ID in the form value
     if (this.reviewForm.valid && !this.isGenerated) {
-      console.log('Review submitted:', this.reviewForm.value);
+      //console.log('Review submitted:', this.reviewForm.value);
       this._gameService.addGameReview(this.reviewForm.value).subscribe((response) => {
-        console.log('Review added successfully:', response);
+        //console.log('Review added successfully:', response);
         this.reviewForm.reset();
       });
     } else {
@@ -261,7 +261,7 @@ changeSlide(index: number): void {
 }
 
 setActiveSlide(index: number): void {
-  console.log("Setting active slide to: " + index);
+  //console.log("Setting active slide to: " + index);
   this.activeIndex = index; // Set the active index
 
   // Update the carousel to show the active slide
@@ -349,7 +349,7 @@ nextSlide() {
   this.metamaskService.SpendCoinsSingleGme(this.game.price, this.game)
   this._gameService.addGameToLibrary(gameId).subscribe(() => {
     this.inLibrary = true;
-    console.log(this.inLibrary);
+    //console.log(this.inLibrary);
     this.notificationService.showNotification("Game added to library", "success");
   })}
 else
@@ -360,7 +360,7 @@ else
   this.metamaskService.SpendCoinsSingleGme(newPrice, this.game)
   this._gameService.addGameToLibrary(gameId).subscribe(() => {
     this.inLibrary = true;
-    console.log(this.inLibrary);
+    //console.log(this.inLibrary);
     this.notificationService.showNotification("Game added to library", "success");
   })
 }

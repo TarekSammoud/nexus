@@ -23,7 +23,7 @@ export class LibraryComponent {
 
       }
       
-      console.log(this.games);
+      //console.log(this.games);
     }
     );
   }

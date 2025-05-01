@@ -46,7 +46,7 @@ $index: any;
   ngOnInit(): void {
     this.loadAgents();
     this.loadRankedAgents();
-    console.log('Component initialized, attempting to load agents...');
+    //console.log('Component initialized, attempting to load agents...');
   }
 
   
@@ -227,7 +227,7 @@ loadRankedAgents(): void {
       (data: SupportAgent[]) => {
         this.rankedAgents = data;
         this.calculateMetrics(); // Add this line to calculate metrics
-        console.log('Ranked agents loaded:', this.rankedAgents);
+        //console.log('Ranked agents loaded:', this.rankedAgents);
       },
       (error: any) => {
         console.error('Error loading ranked agents', error);
@@ -247,7 +247,7 @@ loadAgents(): void {
       (data: SupportAgent[]) => {
         this.agents = data;
         this.calculateMetrics(); // Add this line to calculate metrics
-        console.log('Agents loaded:', this.agents);
+        //console.log('Agents loaded:', this.agents);
       },
       (error: any) => {
         console.error('Error loading agents', error);

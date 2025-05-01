@@ -121,7 +121,7 @@ export class CreateDiscountComponent implements OnInit {
     if (this.isEditMode) {
       this._gameDiscountService.updateGameDiscount(discountData).subscribe(
         (response) => {
-          console.log('Game discount updated successfully', response);
+          //console.log('Game discount updated successfully', response);
           this.gameDiscountForm.reset();
         },
         (error) => {
@@ -131,7 +131,7 @@ export class CreateDiscountComponent implements OnInit {
     } else {
       this._gameDiscountService.createGameDiscount(discountData).subscribe(
         (response) => {
-          console.log('Game discount created successfully', response);
+          //console.log('Game discount created successfully', response);
           this.gameDiscountForm.reset();
         },
         (error) => {

@@ -182,7 +182,7 @@
 
         //output
         if ( defaults.consoleLog === true )
-          console.log(csvData);
+          //console.log(csvData);
 
         if ( defaults.outputMode === 'string' )
           return csvData;
@@ -246,7 +246,7 @@
 
         //output
         if ( defaults.consoleLog === true )
-          console.log(tdData);
+          //console.log(tdData);
 
         if ( defaults.outputMode === 'string' )
           return tdData;
@@ -312,7 +312,7 @@
           sdata = JSON.stringify({header: jsonHeaderArray, data: jsonArray});
 
         if ( defaults.consoleLog === true )
-          console.log(sdata);
+          //console.log(sdata);
 
         if ( defaults.outputMode === 'string' )
           return sdata;
@@ -374,7 +374,7 @@
 
         //output
         if ( defaults.consoleLog === true )
-          console.log(xml);
+          //console.log(xml);
 
         if ( defaults.outputMode === 'string' )
           return xml;
@@ -468,7 +468,7 @@
           docDatas.push(docData);
 
           if ( defaults.consoleLog === true )
-            console.log(docData);
+            //console.log(docData);
         });
 
         var CreationDate = new Date().toISOString();
@@ -521,7 +521,7 @@
         xmlssDocFile += '</Workbook>';
 
         if ( defaults.consoleLog === true )
-          console.log(xmlssDocFile);
+          //console.log(xmlssDocFile);
 
         if ( defaults.outputMode === 'string' )
           return xmlssDocFile;
@@ -644,7 +644,7 @@
           docData += '</tbody></table>';
 
           if ( defaults.consoleLog === true )
-            console.log(docData);
+            //console.log(docData);
         });
 
         //noinspection XmlUnusedNamespaceDeclaration
@@ -677,7 +677,7 @@
         docFile += "</html>";
 
         if ( defaults.consoleLog === true )
-          console.log(docFile);
+          //console.log(docFile);
 
         if ( defaults.outputMode === 'string' )
           return docFile;
@@ -794,7 +794,7 @@
               intArray[i] = byteString.charCodeAt(i);
 
             if ( defaults.consoleLog === true )
-              console.log(byteString);
+              //console.log(byteString);
 
             if ( defaults.outputMode === 'string' )
               return byteString;
@@ -1410,7 +1410,7 @@
 
       function jsPdfOutput (doc, hasimages) {
         if ( defaults.consoleLog === true )
-          console.log(doc.output());
+          //console.log(doc.output());
 
         if ( defaults.outputMode === 'string' )
           return doc.output();

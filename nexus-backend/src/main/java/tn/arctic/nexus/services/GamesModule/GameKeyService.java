@@ -39,7 +39,7 @@ public class GameKeyService implements IGameKeyService{
         GameKey gk = this.gameKeyRepository.findGameKeyByKeyCode(gameKey);
         if (gk != null){
             if (gk.getStatus().equals("ACTIVATED") ) {
-                System.out.println("ERROR KEY");
+                //System.out.println("ERROR KEY");
                 return false;
             }
             gk.setStatus("ACTIVATED");

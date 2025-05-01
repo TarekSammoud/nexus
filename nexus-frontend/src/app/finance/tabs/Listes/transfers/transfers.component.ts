@@ -56,7 +56,7 @@ export class TransfersComponent implements OnInit {
 
     this.transferService.deleteTransfer(id).subscribe({
       next: () => {
-        console.log('Transfer deleted successfully');
+        //console.log('Transfer deleted successfully');
       },
       error: (error) => {
         console.error('Error deleting transfer:', error);

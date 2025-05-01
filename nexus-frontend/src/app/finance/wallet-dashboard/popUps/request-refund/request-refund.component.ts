@@ -91,22 +91,22 @@ export class RequestRefundComponent {
               throw new Error('Refund creation did not return an id');
             }
             this.refund.id = createdRefund.id;
-            console.log('Refund created:', createdRefund);
+            //console.log('Refund created:', createdRefund);
             const email: string = TokenService.getUserEmail() ?? '';
-            console.log("emailllll :"+email)
+            //console.log("emailllll :"+email)
             return this.geminiService.analyzeRefund(createdRefund.id,email);
           })
         )
         .subscribe({
           next: (res) => {
             this.response = res;
-            console.log('Analysis response:', res);
+            //console.log('Analysis response:', res);
             this.notificationService.show("Your refund has been " + res.decision);
   
             if (res.decision === "APPROVED" && this.refund.id) {
               this.refundService.updateRefundStatus(this.refund.id).subscribe({
                 next: () => {
-                  console.log("Refund status updated!");
+                  //console.log("Refund status updated!");
                   // Optionally update UI or state here
                 },
                 error: (err) => {
@@ -114,7 +114,7 @@ export class RequestRefundComponent {
                 }
               });
             } else {
-              console.log("Refund failed or id undefined");
+              //console.log("Refund failed or id undefined");
             }
           },
           error: (err) => {

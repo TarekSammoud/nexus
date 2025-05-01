@@ -67,7 +67,7 @@ public class VipJamService implements IVipJamService {
                 vipJam.setBannerType((String) style.get("banner_type"));
             }
         } catch (Exception e) {
-            System.out.println("⚠️ Failed to fetch style from AI service: " + e.getMessage());
+            //System.out.println("⚠️ Failed to fetch style from AI service: " + e.getMessage());
         }
 
         return vipJamRepository.save(vipJam);

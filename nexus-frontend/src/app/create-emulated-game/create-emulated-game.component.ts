@@ -41,21 +41,21 @@ removeImageBanner(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesBanner.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 removeImageScreenshots(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesScreenshots.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 removeImageCover(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesCover.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
   
@@ -199,7 +199,7 @@ userId: number = 1;
     // 🔥 Call your service to upload the file
     this._gameMediaService.createZip(formData).subscribe({
       next: (response) => {
-        console.log('Upload success:', response);
+        //console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -245,7 +245,7 @@ userId: number = 1;
 
       this._gameMediaService.uploadFileToFtp(formData).subscribe( {
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -298,7 +298,7 @@ userId: number = 1;
       if (this.selectedPlatforms.has('PSP')) {
         this._gameMediaService.uploadPSPFileToFtp(formData).subscribe( {
           next: (response) => {
-            console.log('Upload success:', response);
+            //console.log('Upload success:', response);
             // You can store the result or update the form as needed
           },
           error: (err) => {
@@ -311,7 +311,7 @@ userId: number = 1;
       if (this.selectedPlatforms.has('N64')) {
         this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
           next: (response) => {
-            console.log('Upload success:', response);
+            //console.log('Upload success:', response);
             // You can store the result or update the form as needed
           },
           error: (err) => {
@@ -363,7 +363,7 @@ userId: number = 1;
 
       this._gameMediaService.uploadFileToFtp(formData).subscribe({
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -385,7 +385,7 @@ userId: number = 1;
     this.filesToUpload.splice(index, 1);
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
 
   removeImageFile(index: number) {
@@ -393,7 +393,7 @@ userId: number = 1;
     this.ftpFiles.splice(index, 1);
     this.images.splice(index, 1);
     this.imagesFile.splice(index, 1);
-    console.log(this.filesToUpload.length); 
+    //console.log(this.filesToUpload.length); 
   }
   
   gameId? : number; 
@@ -447,7 +447,7 @@ userId: number = 1;
       this.authService.getLoggedInUserProfile().subscribe({
         next: (user: any) => {
           this.userId = user.id;
-          console.log('User profile: id from create', this.userId);
+          //console.log('User profile: id from create', this.userId);
           this.gameForm.patchValue({
             developer: {id: this.userId}
           });
@@ -526,10 +526,10 @@ userId: number = 1;
     onSubmit(): void {
       this.gameForm.value.categories = Array.from(this.selectedCategories);
       this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
-      console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+      //console.log('Form Data:', JSON.stringify(this.gameForm?.value));
 
       this._gameService.addGame(this.gameForm.value).subscribe((data) => {
-        console.log('Game added:', data);
+        //console.log('Game added:', data);
         this.uploadFiles(); 
       });
   
@@ -538,7 +538,7 @@ userId: number = 1;
         // Loop through the controls and log errors
         for (const controlName in this.gameForm.controls) {
           if (this.gameForm.controls[controlName].errors) {
-            console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
+            //console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
           }
         }
       } else {
@@ -546,7 +546,7 @@ userId: number = 1;
       if (this.isEditMode) {
         this.gameForm.value.id = this.gameId;
         this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
-          console.log('Game updated:', data);
+          //console.log('Game updated:', data);
         });
       }
       else {
@@ -561,7 +561,7 @@ userId: number = 1;
       for (let i = 0; i < this.ftpFiles.length; i++) {
         this._gameMediaService.addGameMedia(this.filesToUpload[i].value).subscribe({
           next: (response) => {
-            console.log('Game Media Entity success:', response);
+            //console.log('Game Media Entity success:', response);
             // You can store the result or update the form as needed
           },
           error: (err) => {

@@ -28,26 +28,26 @@ public class FacebookAuthService {
      * @return L'utilisateur authentifié de notre propre entité User
      */
     public tn.arctic.nexus.entities.User authenticateWithFacebook(String accessToken) {
-        System.out.println("Authentification via Facebook démarrée...");
+        //System.out.println("Authentification via Facebook démarrée...");
         FacebookClient facebookClient = new DefaultFacebookClient(accessToken, facebookAppSecret, Version.LATEST);
 
         User fbUser = facebookClient.fetchObject("me", User.class);
-        System.out.println("Utilisateur Facebook récupéré : " + fbUser.getName() + " | Email: " + fbUser.getEmail());
+        //System.out.println("Utilisateur Facebook récupéré : " + fbUser.getName() + " | Email: " + fbUser.getEmail());
 
         tn.arctic.nexus.entities.User user = new tn.arctic.nexus.entities.User();
         user.setEmail(fbUser.getEmail());
         user.setFirstName(fbUser.getName());
         user.setRoleType(RoleType.PLAYER); // 🔥 VÉRIFIE ICI
 
-        System.out.println("Nouvel utilisateur à sauvegarder : " + user.getEmail() + " | RoleType: " + user.getRoleType());
+        //System.out.println("Nouvel utilisateur à sauvegarder : " + user.getEmail() + " | RoleType: " + user.getRoleType());
 
         tn.arctic.nexus.entities.User existingUser = userRepository.findByEmail(fbUser.getEmail());
         if (existingUser == null) {
-            System.out.println("Nouvel utilisateur - Enregistrement en base.");
+            //System.out.println("Nouvel utilisateur - Enregistrement en base.");
             return userRepository.save(user);
         }
 
-        System.out.println("Utilisateur existant trouvé : " + existingUser.getEmail() + " | RoleType: " + existingUser.getRoleType());
+        //System.out.println("Utilisateur existant trouvé : " + existingUser.getEmail() + " | RoleType: " + existingUser.getRoleType());
         return existingUser;
     }
 

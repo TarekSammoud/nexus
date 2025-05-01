@@ -45,7 +45,7 @@ export class PaymentsComponent implements OnInit {
     this.paymentService.deletePayment(id).subscribe({
       next: () => {
         // Success - UI is already updated
-        console.log('Payment deleted successfully');
+        //console.log('Payment deleted successfully');
       },
       error: (error) => {
         console.error('Error deleting payment:', error);

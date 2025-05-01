@@ -23,9 +23,9 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
             String token = servletRequest.getServletRequest().getParameter("token");
             if (token != null) {
                 attributes.put("Authorization", token);
-                System.out.println("Token captured in handshake: " + token);
+                //System.out.println("Token captured in handshake: " + token);
             } else {
-                System.out.println("No token found in handshake.");
+                //System.out.println("No token found in handshake.");
             }
         }
         return true;

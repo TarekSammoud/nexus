@@ -90,7 +90,7 @@ export class RefundAdminComponent implements OnInit, OnDestroy {
     if (target.closest('.delete-btn') || target.closest('.fa-trash-alt')) {
       return;
     }
-    console.log('showUpdateDialog', refund);
+    //console.log('showUpdateDialog', refund);
     this.updateDialogData = {
       show: true,
       refund: { ...refund }

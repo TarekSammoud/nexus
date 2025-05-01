@@ -50,7 +50,7 @@ const userId = TokenService.getUserId(); // Get the user ID from the token servi
       next: (data) => {
         this.connectedwallet = data;
         this.error = '';
-        console.log('Wallet fetched successfully:', this.connectedwallet);
+        //console.log('Wallet fetched successfully:', this.connectedwallet);
       },
       error: (err) => {
         this.connectedwallet = undefined;

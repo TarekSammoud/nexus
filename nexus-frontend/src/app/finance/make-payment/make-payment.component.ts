@@ -34,7 +34,7 @@ export class MakePaymentComponent {
         // Access the Ethereum price from the API response
         this.ethereumPrice = data.ethereum.usd;
         this.oneNexusCoinPrice = 1 / this.ethereumPrice;
-        console.log('Ethereum Price:', this.ethereumPrice);
+        //console.log('Ethereum Price:', this.ethereumPrice);
         this.isFetched = true; // Set the flag to true after fetching the price
       },
       (error) => {
@@ -49,17 +49,17 @@ export class MakePaymentComponent {
   async lsitenToEtherReceived() {
     this.metaMaskService.connectWallet()
     this.connectedWalletAddress = await this.metaMaskService.getWalletAddress() || '';
-    console.log("this.connectedWalletAddress",this.connectedWalletAddress)
-    if(this.connectedWalletAddress =='') {console.log("adrres null") } else{// Get the connected wallet address from the service
+    //console.log("this.connectedWalletAddress",this.connectedWalletAddress)
+    if(this.connectedWalletAddress =='') {//console.log("adrres null") } else{// Get the connected wallet address from the service
    await   this.metaMaskService.listenToEtherReceived();}
   }
 
   async sendTransaction(numberOfTokens: number, amountInEther: number) {
    try {
       localStorage.setItem('coinsToPurchase', numberOfTokens.toString());
-      console.log("numberOfTokens",Number(localStorage.getItem('coinsToPurchase')))
+      //console.log("numberOfTokens",Number(localStorage.getItem('coinsToPurchase')))
       localStorage.setItem('n', amountInEther.toFixed(6));
-      console.log("price",(localStorage.getItem('n')))
+      //console.log("price",(localStorage.getItem('n')))
      const nexusCoinAmount = (numberOfTokens * this.oneNexusCoinPrice).toFixed(6);
      const txReceipt = await this.metaMaskService.sendTransaction( nexusCoinAmount);
      this.txReceiptLabel =txReceipt

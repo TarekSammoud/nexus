@@ -37,8 +37,8 @@ export class RoomChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.token = localStorage.getItem('auth_token') || '';
     this.roomId = +this.route.snapshot.paramMap.get('roomId')!; // Retrieve the token from local storage or set a default value
-    console.log('Token:', this.token);
-    console.log('Room ID:', this.roomId);
+    //console.log('Token:', this.token);
+    //console.log('Room ID:', this.roomId);
     
     // Connect to the WebSocket server and listen for notifications
     this.websocketService.connect(this.token, this.roomId,(notification: any) => {
@@ -46,7 +46,7 @@ export class RoomChatComponent implements OnInit, OnDestroy {
       this.messages.push({ message: notification.message, type: 'input' });
 
      // Handle the incoming notification
-     console.log('Received notification:', notification);
+     //console.log('Received notification:', notification);
    })
   } 
 
@@ -62,25 +62,25 @@ export class RoomChatComponent implements OnInit, OnDestroy {
   userIdFromToken: number = 0;
   sendMessage() {
     this.tokenToId = localStorage.getItem('auth_token') || '';
-    console.log('Token:', this.tokenToId);
+    //console.log('Token:', this.tokenToId);
   
     this.websocketService.getUserIdFromToken(this.tokenToId).subscribe({
       next: (userId: number) => {
         this.userIdFromToken = userId;
-        console.log('User ID from token:', this.userIdFromToken);
+        //console.log('User ID from token:', this.userIdFromToken);
   
          if(this.userIdFromToken == this.userId){
           const message = { userId: this.supportAgentId, message: this.newMessage,roomId: "5"  };///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';
-          console.log('message:', this.messages);
+          //console.log('message:', this.messages);
          }else{
           const message = { userId: this.userId, message: this.newMessage,roomId: "5" }; ///badl room id 
           this.messages.push({ message: this.newMessage, type: 'output' });
           this.websocketService.sendMessage('/app/send-message', message);
           this.newMessage = '';
-          console.log('message:', this.messages);
+          //console.log('message:', this.messages);
          }       
 
       },
@@ -177,8 +177,8 @@ export class RoomChatComponent implements OnInit, OnDestroy {
       room: { roomId: this.roomId }
     };
   
-    console.log("Sending message to room:", this.roomId);
-    console.log("Message content:", message);
+    //console.log("Sending message to room:", this.roomId);
+    //console.log("Message content:", message);
   
     if (this.token) {
       const rawToken = localStorage.getItem('auth_token'); // Fetch the raw token again

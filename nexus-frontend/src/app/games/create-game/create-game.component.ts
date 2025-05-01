@@ -59,8 +59,8 @@ export class CreateGameComponent implements OnInit {
         this.gpuOptions = filteredData.map(item => item[0]).filter(gpu => gpu.trim() !== ''); // Ensure GPU is not empty
         this.cpuOptions = filteredData.map(item => item[1]).filter(cpu => cpu.trim() !== ''); // Ensure CPU is not empty
   
-        console.log('Filtered GPU Options:', this.gpuOptions);
-        console.log('Filtered CPU Options:', this.cpuOptions);
+        //console.log('Filtered GPU Options:', this.gpuOptions);
+        //console.log('Filtered CPU Options:', this.cpuOptions);
   
         // Optionally, you can set default values or apply further logic here
         if (this.gpuOptions.length > 0 && this.cpuOptions.length > 0) {
@@ -158,7 +158,7 @@ onSelectFileFile(event: any): void {
     if (this.selectedPlatforms.has('PSP')) {
       this._gameMediaService.uploadPSPFileToFtp(formData).subscribe( {
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -171,7 +171,7 @@ onSelectFileFile(event: any): void {
     if (this.selectedPlatforms.has('N64')) {
       this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
         next: (response) => {
-          console.log('Upload success:', response);
+          //console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -191,7 +191,7 @@ removeImageFile(index: number) {
   this.ftpFiles.splice(index, 1);
   this.images.splice(index, 1);
   this.imagesFile.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 isPlatformSelected(platform: string): boolean {
@@ -237,7 +237,7 @@ onSelectFileCover(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        console.log('Upload success:', response);
+        //console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -286,7 +286,7 @@ onSelectFileBanner(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        console.log('Upload success:', response);
+        //console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -336,7 +336,7 @@ onSelectFileScreenShots(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        console.log('Upload success:', response);
+        //console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -358,7 +358,7 @@ removeImage(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.images.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 
@@ -366,21 +366,21 @@ removeImageBanner(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesBanner.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 removeImageScreenshots(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesScreenshots.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 removeImageCover(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesCover.splice(index, 1);
-  console.log(this.filesToUpload.length); 
+  //console.log(this.filesToUpload.length); 
 }
 
 
@@ -441,7 +441,7 @@ get recommendedRequirements() {
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
         this.userId = user.id;
-        console.log('User profile: id from create', this.userId);
+        //console.log('User profile: id from create', this.userId);
         this.gameForm.patchValue({
           developer: {id: this.userId}
         });
@@ -522,7 +522,7 @@ loadExcelData(fileName: string): void {
   onSubmit(): void {
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
-    console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+    //console.log('Form Data:', JSON.stringify(this.gameForm?.value));
    // this.gameForm.value.developer.id = this.userId;
 
 
@@ -530,7 +530,7 @@ loadExcelData(fileName: string): void {
       // Loop through the controls and log errors
       for (const controlName in this.gameForm.controls) {
         if (this.gameForm.controls[controlName].errors) {
-          console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
+          //console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
         }
       }
     } else {
@@ -538,12 +538,12 @@ loadExcelData(fileName: string): void {
     if (this.isEditMode) {
       this.gameForm.value.id = this.gameId;
       this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
-        console.log('Game updated:', data);
+        //console.log('Game updated:', data);
       });
     }
     else {
     this._gameService.addGame(this.gameForm.value).subscribe((data) => {
-      console.log('Game added:', data);
+      //console.log('Game added:', data);
       this.uploadFiles(); // Call the upload function after adding the game
     });
   }

@@ -74,12 +74,12 @@ countItems(): number {
     if(this.total > parseInt(coinsBalance)){
   alert("not enough coins in your wallet")
   } else {
-    console.log('Proceeding to checkout...', this.cartItems)
+    //console.log('Proceeding to checkout...', this.cartItems)
     this.metamaskService.SpendCoinsFromCart(this.total,this.cartItems);
     for (const item of this.cartItems) {
       this.gameService.addGameToLibrary(item.id).subscribe(
         response => {
-          console.log('Game added to library:', response);
+          //console.log('Game added to library:', response);
         }
       );  
     }

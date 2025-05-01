@@ -13,19 +13,19 @@ export class ChatService {
 
     // Connexion WebSocket
     connect(userId: number): void {
-        console.log('Connexion à WebSocket...');
+        //console.log('Connexion à WebSocket...');
         this.stompClient = new Client({
             brokerURL: 'ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws',
             reconnectDelay: 5000,
             webSocketFactory: () => new SockJS('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws'),
             onConnect: () => {
-                console.log('Connecté à WebSocket');
+                //console.log('Connecté à WebSocket');
 
                 // Remplacer par l'abonnement au canal public
                 this.stompClient.subscribe('/topic/public', (msg: Message) => {
                     const message: ChatMessage = JSON.parse(msg.body);
                     this.messageSubject.next(message);
-                    console.log('Message public reçu:', message);
+                    //console.log('Message public reçu:', message);
                 });
             }
             ,
@@ -61,7 +61,7 @@ export class ChatService {
     disconnect(): void {
         if (this.stompClient) {
             this.stompClient.deactivate();
-            console.log('Déconnecté de WebSocket');
+            //console.log('Déconnecté de WebSocket');
         }
     }
 

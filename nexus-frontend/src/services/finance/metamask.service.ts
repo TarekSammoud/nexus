@@ -65,7 +65,7 @@ export class MetamaskService {
           localStorage.setItem('walletAddress', this.userAddress);
         }
   
-        console.log('Wallet connected:', this.userAddress, 'Balance:', this.userwalletBalance);
+        //console.log('Wallet connected:', this.userAddress, 'Balance:', this.userwalletBalance);
   
         // Initialize the contract
         this.initializeContract();
@@ -86,7 +86,7 @@ export class MetamaskService {
       this.contract = new ethers.Contract(this.contractAddress, this.contractABI, this.signer);
 
 
-      console.log('Contract initialized:', this.contract);
+      //console.log('Contract initialized:', this.contract);
 
     } catch (error) {
       console.error('Error initializing contract:', error);
@@ -116,7 +116,7 @@ export class MetamaskService {
   this.provider = null;
   this.signer = null;
   this.contract = null;  
-    console.log('Wallet disconnected');
+    //console.log('Wallet disconnected');
   }
   async getAddress(): Promise<string> {
     if (!this.signer) return "null";
@@ -159,29 +159,29 @@ async addUser(addrese:string): Promise<string> {
 
     // Send the transaction to add the user
     const tx = await this.contract['addUser'](addrese);
-    console.log('Transaction sent:', tx.hash);
+    //console.log('Transaction sent:', tx.hash);
 
     // Wait for the transaction to be mined
     await tx.wait();
     this.router.navigate(['/wallet']);
 
-    console.log('Transaction mined:', tx.hash);
-    console.log('User added successfully:', addrese);
+    //console.log('Transaction mined:', tx.hash);
+    //console.log('User added successfully:', addrese);
 
 
     return 'User added successfully';
   } catch (error: any) {
     // Check if the error is due to an already existing user
     if (error.reason?.includes('User already exists')) {
-      console.log('Error: User already exists');
+      //console.log('Error: User already exists');
       this.errorMessage = 'User already exists.';
       
     } else if  (error.message?.includes('Contract or signer not initialized')) {
-      console.log('Error: Contract or signer not initialized');
+      //console.log('Error: Contract or signer not initialized');
       this.errorMessage = 'Contract or signer not initialized.';
     } else{
 
-      console.log('error:', error.message || error);
+      //console.log('error:', error.message || error);
 
     }
     return this.errorMessage;
@@ -192,7 +192,7 @@ async getBalance(addrese:string): Promise<string | null> {
     if (!this.contract) throw new Error('Contract not initialized');
     const value = await this.contract['getBalance'](addrese);
     this.balanceuser = value.toString();
-    console.log('balance:', this.balanceuser);
+    //console.log('balance:', this.balanceuser);
     return this.balanceuser;
   } catch (error: any) {
     console.error('Error fetching stored value:', error.message || error);
@@ -205,10 +205,10 @@ async userExists(addrese:string): Promise<boolean> {
     if (!this.contract) throw new Error('Contract not initialized');
     const value = await this.contract['userExists'](addrese);
     const checkUser: boolean = Boolean(value);
-    console.log('is wallet exists:', value);
+    //console.log('is wallet exists:', value);
     return checkUser;
   } catch (error: any) {
-    console.log('Error checking user:', error.message || error);
+    //console.log('Error checking user:', error.message || error);
     this.errorMessage = error.message || 'Failed to fetch value.';
     return false;
 
@@ -222,7 +222,7 @@ payment:  Payment = {
 };
 
 public async listenToEtherReceived() {
-  console.log('Listening to EtherReceived event...');
+  //console.log('Listening to EtherReceived event...');
   // Ensure the contract is initialized
   if (!this.contract) {
     console.error('Contract not initialized');
@@ -230,16 +230,16 @@ public async listenToEtherReceived() {
   }
   // Listen to the EtherReceived event
   this.contract.on('EtherReceived', (sender: string, amount: number) => {
-    console.log(`EtherReceived Event:`);
-    console.log(`Sender: ${sender}`);
-    console.log(`Amount: ${ethers.formatEther(amount)} ETH`); // Convert amount to ETH for better readability
+    //console.log(`EtherReceived Event:`);
+    //console.log(`Sender: ${sender}`);
+    //console.log(`Amount: ${ethers.formatEther(amount)} ETH`); // Convert amount to ETH for better readability
 
     this.addCoins(sender, Number(localStorage.getItem('coinsToPurchase')));
     this.payment.coinAmount = Number(localStorage.getItem('coinsToPurchase'));
     this.payment.price = localStorage.getItem('n') || '0';
     this.paymentService.createAndAffectPayment(this.userAddress,this.payment).subscribe({
       next: (response) => {
-        console.log('Payment created:', response);
+        //console.log('Payment created:', response);
         // reset form
         this.payment = {   coinAmount: 0,
           status: 'Completed',
@@ -257,17 +257,17 @@ async addCoins(addrese:string,amount:number) {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['addVirtualCoins'](addrese, amount);
-    console.log('Transaction sent:', tx.hash);
+    //console.log('Transaction sent:', tx.hash);
 
     await tx.wait();
     this.notificationService.show("Coins added successfully",5000);
-    console.log('Transaction mined:', tx.hash);
-    console.log('Coins added successfully:', 'to : ', addrese," and amount of coin", amount);
+    //console.log('Transaction mined:', tx.hash);
+    //console.log('Coins added successfully:', 'to : ', addrese," and amount of coin", amount);
 
   } catch (error: any) {
     console.error('Error setting value:', error.message || error);
     this.errorMessage = error.message || 'Failed to set value.';
-    console.log(this.errorMessage);
+    //console.log(this.errorMessage);
 
   }
 }
@@ -275,13 +275,13 @@ async TransfertCoins(_to:String,amount:number): Promise<boolean> {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['transferVirtualCoins'](this. getWalletAddress(),_to, amount);
-    console.log('Transaction sent (transfert):', tx.hash);
+    //console.log('Transaction sent (transfert):', tx.hash);
 
     await tx.wait();
     this.notificationService.show("Coins sended successfully",5000);
 
-    console.log('Transaction mined (transfert):', tx.hash);
-    console.log('Coins sended  successfully:', "from :",this. getWalletAddress() , ' to : ', _to," and amount of coin", amount);
+    //console.log('Transaction mined (transfert):', tx.hash);
+    //console.log('Coins sended  successfully:', "from :",this. getWalletAddress() , ' to : ', _to," and amount of coin", amount);
     return true;
   } catch (error: any) {
     if(error.reason?.includes('Not enough virtual coins')){
@@ -291,7 +291,7 @@ async TransfertCoins(_to:String,amount:number): Promise<boolean> {
     else {
       console.error('Error transfer value:', error.message || error);
       this.errorMessage = error.message || 'Failed to transfer coins.';
-      console.log(this.errorMessage);
+      //console.log(this.errorMessage);
       return false;
 
     }
@@ -311,7 +311,7 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
-    console.log('Transaction sent (Purchase Coins):', tx.hash);
+    //console.log('Transaction sent (Purchase Coins):', tx.hash);
     for (const game of games) {
       this.purchase.productId = game.id;
       this.purchase.price = game.price;
@@ -320,7 +320,7 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
 
     this.purchaseService.createAndAffectPurchases(this.userAddress,this.purchases).subscribe({
       next: (response) => {
-        console.log('Purchases created:', response);
+        //console.log('Purchases created:', response);
         // reset form
         this.purchases = [];
       },
@@ -332,8 +332,8 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
 
     await tx.wait();
     this.notificationService.show("Success! Your purchase has been confirmed.",5000);
-    console.log('Transaction mined (spend):', tx.hash);
-    console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
+    //console.log('Transaction mined (spend):', tx.hash);
+    //console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
 
   } catch (error: any) {
     if(error.reason?.includes('Not enough virtual coins')){
@@ -343,7 +343,7 @@ async SpendCoinsFromCart(amount:number,games: Game[]) {
     else {
       console.error('Error Spend value:', error.message || error);
       this.errorMessage = error.message || 'Failed to Spend value.';
-      console.log(this.errorMessage);
+      //console.log(this.errorMessage);
     }
   }
 }
@@ -353,14 +353,14 @@ async SpendCoinsSingleGme(amount:number,game: Game) {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['SpendVirtualCoins'](this. getWalletAddress(), amount);
-    console.log('Transaction sent (Purchase Coins):', tx.hash);
+    //console.log('Transaction sent (Purchase Coins):', tx.hash);
       this.purchase.productId = game.id;
       this.purchase.price = game.price;
 
 
     this.purchaseService.createAndAffectPurchase(this.userAddress,this.purchase).subscribe({
       next: (response) => {
-        console.log('1 Purchase created:', response);
+        //console.log('1 Purchase created:', response);
         // reset form
         this.purchases = [];
       },
@@ -372,8 +372,8 @@ async SpendCoinsSingleGme(amount:number,game: Game) {
 
     await tx.wait();
     this.notificationService.show("Success! Your purchase has been confirmed.",5000);
-    console.log('Transaction mined (spend):', tx.hash);
-    console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
+    //console.log('Transaction mined (spend):', tx.hash);
+    //console.log('Coins Spended  successfully:', "of user :",this. getWalletAddress() ,  "and amount of coin spended", amount);
 
   } catch (error: any) {
     if(error.reason?.includes('Not enough virtual coins')){
@@ -383,7 +383,7 @@ async SpendCoinsSingleGme(amount:number,game: Game) {
     else {
       console.error('Error Spend value:', error.message || error);
       this.errorMessage = error.message || 'Failed to Spend value.';
-      console.log(this.errorMessage);
+      //console.log(this.errorMessage);
     }
   }
 }
@@ -395,7 +395,7 @@ async getContractBalance(): Promise<BigInt> {
     const balance: BigInt = BigInt(value);
     return balance;
   } catch (error: any) {
-    console.log('Error gettong contract balance user:', error.message || error);
+    //console.log('Error gettong contract balance user:', error.message || error);
     this.errorMessage = error.message || 'Failed to fetch value.';
     return BigInt(-1);
 
@@ -406,15 +406,15 @@ async withdrawEther() {
   try {
     if (!this.contract || !this.signer) throw new Error('Contract or signer not initialized');
     const tx = await this.contract['withdrawEther']("0x9375f2d84f9843Df4BC29260219B7B25E73a92d1");
-    console.log('Transaction sent (withdrawEther):', tx.hash);
+    //console.log('Transaction sent (withdrawEther):', tx.hash);
 
     await tx.wait();
-    console.log('Transaction mined (withdrawEther):', tx.hash);
+    //console.log('Transaction mined (withdrawEther):', tx.hash);
 
   } catch (error: any) {
     console.error('Error setting value:', error.message || error);
     this.errorMessage = error.message || 'Failed to set value.';
-    console.log(this.errorMessage);
+    //console.log(this.errorMessage);
 
   }
 }
@@ -424,7 +424,7 @@ async withdrawEther() {
 
   async sendTransaction( amountEther: string): Promise<any> {
     if (!this.signer) {
-      console.log('MetaMask is not connected');
+      //console.log('MetaMask is not connected');
       throw new Error('MetaMask is not connected');
     }
 
@@ -441,11 +441,11 @@ async withdrawEther() {
       // Send the transaction and wait for confirmation
       const txResponse = await this.signer.sendTransaction(transaction);
       const txReceipt = await txResponse.wait(); // Wait for transaction to be mined
-      console.log('Transaction successful', txReceipt);
+      //console.log('Transaction successful', txReceipt);
 
       return txReceipt; // Return the transaction receipt after it's confirmed
     } catch (error) {
-      console.log('Error sending transaction:', error);
+      //console.log('Error sending transaction:', error);
       throw new Error('Transaction failed');
     }
   }
