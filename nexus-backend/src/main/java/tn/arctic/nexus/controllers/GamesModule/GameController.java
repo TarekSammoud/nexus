@@ -99,7 +99,7 @@ public class GameController {
 
     @PostMapping("/emulated/launch")
     public ResponseEntity<String> launchGame(@RequestParam String romName) {
-        String remoteHost = "192.168.83.130"; // Remote machine IP
+        String remoteHost = "192.168.1.190"; // Remote machine IP
         String user = "nexus-emu"; // SSH username
         String password = "123456789"; // SSH password
         String remoteScriptPath = "/home/nexus-emu/launch_game.sh";
@@ -146,7 +146,7 @@ public class GameController {
             session.disconnect();
 
             // Return noVNC URL
-            String vncUrl = "http://192.168.83.130:6080/vnc.html";
+            String vncUrl = "http://192.168.1.190:6080/vnc.html";
             return ResponseEntity.ok(vncUrl);
 
         } catch (JSchException | IOException e) {
@@ -159,7 +159,7 @@ public class GameController {
 
     @PostMapping("/emulated/launch/psp")
     public ResponseEntity<String> launchPSPGame(@RequestParam String romName) {
-        String remoteHost = "192.168.83.130"; // Remote machine IP
+        String remoteHost = "192.168.1.190"; // Remote machine IP
         String user = "nexus-emu"; // SSH username
         String password = "123456789"; // SSH password
         String remoteScriptPath = "/home/nexus-emu/launch_game_psp.sh";
@@ -206,7 +206,7 @@ public class GameController {
             session.disconnect();
 
             // Return noVNC URL
-            String vncUrl = "http://192.168.83.130:6080/vnc.html";
+            String vncUrl = "http://192.168.1.190:6080/vnc.html";
             return ResponseEntity.ok(vncUrl);
 
         } catch (JSchException | IOException e) {
