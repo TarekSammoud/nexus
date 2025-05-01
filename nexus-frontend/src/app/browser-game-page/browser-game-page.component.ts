@@ -18,7 +18,7 @@ export class BrowserGamePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const url = `http://localhost:5050/${this.gameName}/index.html`;
+    const url = `http://nexus-browser-games.frontend.svc.cluster.local:5050/${this.gameName}/index.html`;
     this.safeGameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

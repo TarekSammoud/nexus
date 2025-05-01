@@ -1,13 +1,13 @@
 import os
 import time
 import requests
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
 
 # Récupération correcte du token via son nom de variable d'environnement
-
 API_URL = "https://api-inference.huggingface.co/models/databricks/dolly-v2-3b"
 HEADERS = {"Authorization": f"Bearer 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"}
 
@@ -48,3 +48,6 @@ async def analyze(req: AnalyzeRequest):
     else:
         # Renvoie l’erreur brute de HF pour diagnostic
         raise HTTPException(resp.status_code, resp.text)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=5002)
