@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import tn.arctic.nexus.entities.FinanceModule.WalletNotifications;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 public class WalletNotificationController {
 

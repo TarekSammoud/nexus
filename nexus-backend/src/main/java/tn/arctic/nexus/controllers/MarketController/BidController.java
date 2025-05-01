@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bids")  // <- important
-@CrossOrigin(origins = "http://localhost:4200")  // allow frontend access
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")  // allow frontend access
 public class BidController {
     private final BidService service;
 

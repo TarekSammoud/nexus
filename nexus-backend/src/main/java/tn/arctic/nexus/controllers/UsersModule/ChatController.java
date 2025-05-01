@@ -18,7 +18,7 @@ import java.util.Optional;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 
 public class ChatController {
 

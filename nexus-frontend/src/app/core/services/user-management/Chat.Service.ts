@@ -17,7 +17,7 @@ export class ChatService {
         this.stompClient = new Client({
             brokerURL: 'ws://localhost:9000/nexus-backend/ws',
             reconnectDelay: 5000,
-            webSocketFactory: () => new SockJS('http://localhost:9000/nexus-backend/ws'),
+            webSocketFactory: () => new SockJS('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws'),
             onConnect: () => {
                 console.log('Connecté à WebSocket');
 
@@ -68,6 +68,6 @@ export class ChatService {
 
     constructor(private http: HttpClient) { }
     getMessages(userId: number): Observable<ChatMessage[]> {
-        return this.http.get<ChatMessage[]>(`http://localhost:9000/nexus-backend/msg/getMessages?userId=${userId}`);
+        return this.http.get<ChatMessage[]>(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/msg/getMessages?userId=${userId}`);
     }
 }

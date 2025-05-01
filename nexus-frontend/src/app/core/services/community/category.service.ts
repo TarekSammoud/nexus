@@ -9,7 +9,7 @@ import { Category } from '../../entities/community/category';
 })
 export class CategoryService {
 
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/categories';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/categories';
 
   constructor(private http: HttpClient) {}
 

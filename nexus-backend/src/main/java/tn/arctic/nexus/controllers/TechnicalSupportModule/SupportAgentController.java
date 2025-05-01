@@ -13,7 +13,7 @@ import tn.arctic.nexus.services.TechnicalSupportModule.SupportAgentService;
 import java.util.List;
 import java.util.Optional;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 @RequestMapping("/agents")
 public class SupportAgentController {

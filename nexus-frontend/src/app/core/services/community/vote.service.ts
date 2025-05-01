@@ -7,7 +7,7 @@ import { Vote } from '../../entities/community/vote';
   providedIn: 'root'
 })
 export class VoteService {
-  private apiUrl = 'http://localhost:9000/nexus-backend/api/votes';
+  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/votes';
 
   constructor(private http: HttpClient) {}
 

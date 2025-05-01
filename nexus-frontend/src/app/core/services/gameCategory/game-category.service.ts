@@ -10,7 +10,7 @@ import { GameCategory } from '../../entities/game/game-category';
 export class GameCategoryService {
 
 
-    private gamesCategoryUrl = 'http://localhost:9000/nexus-backend/games/categories';
+    private gamesCategoryUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/categories';
   
     constructor(private http: HttpClient) {}
   

@@ -11,7 +11,7 @@ import { Publication } from '../../entities/community/publication';
 })
 export class CommunityService {
 
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/publications';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/publications';
 
   constructor(private http: HttpClient) {}
 

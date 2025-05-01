@@ -7,7 +7,7 @@ import { User } from '../../entities/user/user.model';
     providedIn: 'root'
 })
 export class FriendRequestService {
-    private baseUrl = 'http://localhost:9000/nexus-backend';
+    private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend';
 
     constructor(private http: HttpClient) { }
 

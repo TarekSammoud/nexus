@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("wallet")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 
 public class WalletController {
 

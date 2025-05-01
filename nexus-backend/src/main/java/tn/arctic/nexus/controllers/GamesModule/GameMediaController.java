@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/games/media")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 public class GameMediaController {
     @Autowired
     IGameMediaService gameMediaService;

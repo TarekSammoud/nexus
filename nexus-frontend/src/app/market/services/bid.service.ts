@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const BASE_URL = 'http://localhost:9000/nexus-backend';
+const BASE_URL = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend';
 
 @Injectable({
   providedIn: 'root'

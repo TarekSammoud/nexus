@@ -26,7 +26,7 @@
         <tr *ngFor="let game of data  | paginate: { itemsPerPage: 3, currentPage: page }">
           <td>
             <img [src]="game.coverPicture?.mediaUrl 
-              ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+              ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
               : './assets/default-game.jpg'" 
               alt="{{ game.name }}" 
               class="img-thumbnail" 

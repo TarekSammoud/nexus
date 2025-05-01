@@ -6,7 +6,7 @@
       <div class="col" *ngFor="let game of games">
         <div class="card h-100 border-0 shadow-sm game-card">
           <img  *ngIf="game.coverPicture"  [src]="game.coverPicture?.mediaUrl 
-          ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+          ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
           : './assets/default-game.jpg'" [alt]="game.name" class="card-img-top cover-img" />
   
           <div class="card-body d-flex flex-column justify-content-between">

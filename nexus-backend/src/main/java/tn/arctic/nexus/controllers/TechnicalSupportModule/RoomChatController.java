@@ -12,7 +12,7 @@ import tn.arctic.nexus.repositories.UsersModule.IUserRepository;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 public class RoomChatController {
 

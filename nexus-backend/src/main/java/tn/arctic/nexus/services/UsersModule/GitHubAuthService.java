@@ -25,7 +25,7 @@ public class GitHubAuthService {
 
     private final String clientId = "Ov23li0qwXhIrPaTVfkg"; // Client ID GitHub
     private final String clientSecret = "7f0d71b6484a0f961a0148fc770827dd10d81d3e"; // Client Secret GitHub
-    private static final String REDIRECT_URI = "http://localhost:4200/github-callback"; // URI de redirection
+    private static final String REDIRECT_URI = "http://nexus-frontend.frontend.svc.cluster.local:4200/github-callback"; // URI de redirection
 
     /**
      * Authentifie l'utilisateur avec GitHub en utilisant le code d'autorisation

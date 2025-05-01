@@ -6,11 +6,11 @@
         <div class="slide-media">
           <picture (click)="goToGame(game.id)">
             <source media="(min-width: 1280px)" [srcset]="game.coverPicture?.mediaUrl 
-              ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl 
+              ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl 
               : './assets/default-game.jpg'">
             <img 
               [src]="game.coverPicture?.mediaUrl 
-                ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl
+                ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.bannerPicture?.mediaUrl
                 : './assets/default-game.jpg'" 
               [alt]="game.name"
             />
@@ -67,7 +67,7 @@
       <div class="thumbnail-image">
         <img class="e-game-image" 
              [src]="game.coverPicture?.mediaUrl 
-             ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
+             ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture?.mediaUrl 
              : './assets/default-game.jpg'"
              [alt]="game.name" />
         <span class="thumbnail-title">&nbsp;&nbsp;{{ game.name }}</span>

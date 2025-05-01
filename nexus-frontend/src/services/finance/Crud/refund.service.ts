@@ -9,7 +9,7 @@ import { Refund } from 'src/app/core/entities/finance/refund.model';
   providedIn: 'root'
 })
 export class RefundService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/refund';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/refund';
 
   constructor(private http: HttpClient) {}
 

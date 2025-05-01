@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class GameDiscountService {
 
 
-  private gamesUrl = 'http://localhost:9000/nexus-backend/games/discount';
+  private gamesUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/discount';
 
   constructor(private http: HttpClient) {}
 

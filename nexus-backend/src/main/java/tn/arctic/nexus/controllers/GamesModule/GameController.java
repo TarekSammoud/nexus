@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Tag(name = "Game Management")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 @RequestMapping("/games")
 public class GameController {

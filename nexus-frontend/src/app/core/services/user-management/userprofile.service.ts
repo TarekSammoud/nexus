@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class UserProfileService {
-    private baseUrl = 'http://localhost:9000/nexus-backend/pic';
-    private apiUrl = 'http://localhost:9000/nexus-backend/user';
+    private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/pic';
+    private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user';
 
     constructor(private http: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class UserProfileService {
     }
 
     getUserById(userId: number): Observable<any> {
-        return this.http.get(`http://localhost:9000/nexus-backend/user/getbyid/${userId}`);
+        return this.http.get(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user/getbyid/${userId}`);
     }
 
 

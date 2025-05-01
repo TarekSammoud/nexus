@@ -9,7 +9,7 @@ import tn.arctic.nexus.services.CommunityModule.LikeService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 
 @RestController
 @RequestMapping("/api/likes")

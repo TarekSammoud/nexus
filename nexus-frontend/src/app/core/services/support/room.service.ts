@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class RoomService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/rooms';  // Update with your backend URL
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/rooms';  // Update with your backend URL
 
   constructor(private http: HttpClient) {}
 

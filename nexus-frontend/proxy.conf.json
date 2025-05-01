@@ -1,6 +1,6 @@
 { 
 "/api/*": { 
-"target": "http://localhost:9000", 
+"target": "http://nexus-backend.backend.svc.cluster.local:9000", 
 "secure": false, 
 "logLevel": "debug", 
 "changeOrigin": true, 

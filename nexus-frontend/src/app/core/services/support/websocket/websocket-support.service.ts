@@ -81,7 +81,7 @@ export class WebsocketSupportService {
 
 
 
-  private apiUrl = '  http://localhost:9000/nexus-backend/user';  // Replace with your actual Spring Boot server URL
+  private apiUrl = '  http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user';  // Replace with your actual Spring Boot server URL
 
 
   getUserIdFromToken(token: string): Observable<number> {

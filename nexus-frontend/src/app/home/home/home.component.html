@@ -25,7 +25,7 @@
         <div class="col" *ngFor="let game of games">
           <div (click)="OnSelect(game)" style="cursor: pointer;" class="card h-100 border-0 shadow-sm game-card">
             <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl
-            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+            ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
             : '../../../../assets/img/missing.jpg'" [alt]="game.name" class="card-img-top cover-img" />
             <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />
 
@@ -59,7 +59,7 @@
         <div class="col" *ngFor="let game of emulatedGames">
           <div (click)="OnSelectEmulated(game)" style="cursor: pointer;" class="card h-100 border-0 shadow-sm game-card">
             <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl 
-            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+            ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
             : '../../../../assets/img/missing.jpg'" [alt]="game.name" class="card-img-top cover-img" />
             <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />
 
@@ -93,7 +93,7 @@
         <div class="col" *ngFor="let game of browserGames">
           <div (click)="OnSelectBrowser(game)" style="cursor: pointer;" class="card h-100 border-0 shadow-sm game-card">
             <img *ngIf="game.coverPicture" [src]="game.coverPicture?.mediaUrl 
-            ? 'http://localhost:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
+            ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.coverPicture.mediaUrl 
             : '../../../../assets/img/missing.jpg'" [alt]="game.name" class="card-img-top cover-img" />
             <img *ngIf="!game.coverPicture" src="../../../../assets/img/missing.jpg" class="card-img-top cover-img" />
 

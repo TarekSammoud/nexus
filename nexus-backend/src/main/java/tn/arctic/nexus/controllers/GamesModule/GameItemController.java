@@ -7,7 +7,7 @@ import tn.arctic.nexus.repositories.GameItemRepository;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 @RequestMapping("/gameitem")
 public class GameItemController {

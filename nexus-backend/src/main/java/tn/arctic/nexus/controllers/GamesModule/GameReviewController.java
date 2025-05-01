@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/games/reviews")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 
 public class GameReviewController {
     @Autowired

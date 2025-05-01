@@ -19,7 +19,7 @@ export interface VipJam {
   providedIn: 'root'
 })
 export class VipJamService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/vip-jams';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/vip-jams';
 
   constructor(private http: HttpClient) {}
 

@@ -38,7 +38,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws-notifications").setAllowedOriginPatterns("*").addInterceptors(handshakeInterceptor);
 
         registry.addEndpoint("/ws-support")
-                .setAllowedOriginPatterns("http://localhost:4200").addInterceptors(handshakeInterceptor);  // WebSocket endpoint
+                .setAllowedOriginPatterns("http://nexus-frontend.frontend.svc.cluster.local:4200").addInterceptors(handshakeInterceptor);  // WebSocket endpoint
 
         // ou sans SockJS
         // registry.addEndpoint("/ws").setAllowedOrigins("*");

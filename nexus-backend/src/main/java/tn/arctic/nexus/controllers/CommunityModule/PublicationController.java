@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 
 @RestController
 @RequestMapping("/api/publications")

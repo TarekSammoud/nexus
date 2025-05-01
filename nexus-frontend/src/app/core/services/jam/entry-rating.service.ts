@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EntryRatingService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/entry-ratings';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/entry-ratings';
 
   constructor(private http: HttpClient) {}
 
@@ -36,7 +36,7 @@ export class EntryRatingService {
   }
 
 hasUserRated(entryId: number, userId: number): Observable<boolean> {
-  return this.http.get<boolean>(`http://localhost:9000/nexus-backend/api/entry-ratings/has-rated/${entryId}/${userId}`);
+  return this.http.get<boolean>(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/entry-ratings/has-rated/${entryId}/${userId}`);
 }
 
   

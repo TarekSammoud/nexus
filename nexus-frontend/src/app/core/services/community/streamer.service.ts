@@ -7,7 +7,7 @@ import { Streamer } from '../../entities/community/streamer';
   providedIn: 'root'
 })
 export class StreamerService {
-  private apiUrl = 'http://localhost:9000/nexus-backend/api/streamers';
+  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/streamers';
 
   constructor(private http: HttpClient) {}
 

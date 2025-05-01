@@ -10,7 +10,7 @@ import { N, Wallet } from 'ethers';
 })
 export class WalletService {
   
-  private baseUrl = 'http://localhost:9000/nexus-backend/wallet';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/wallet';
   connectedWallet: NexusWallet ={};
   constructor(private http: HttpClient,private metamskService: MetamaskService) {}
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ReportService {
 
-  private apiUrl = 'http://localhost:9000/nexus-backend/api/reports';
+  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/reports';
 
   constructor(private http: HttpClient) {}
 

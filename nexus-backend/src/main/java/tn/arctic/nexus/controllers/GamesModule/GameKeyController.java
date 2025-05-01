@@ -7,7 +7,7 @@ import tn.arctic.nexus.services.GamesModule.IGameKeyService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 @RequestMapping("/games/game-keys")
 public class GameKeyController {

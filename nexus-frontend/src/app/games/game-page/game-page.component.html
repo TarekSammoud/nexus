@@ -12,7 +12,7 @@
         <!-- Carousel Inner -->
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let media of game?.screenshots; let i = index" [class.active]="i === 0">
-            <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game screenshot">
+            <img [src]="'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="d-block w-100" alt="Game screenshot">
           </div>
         </div>
 
@@ -30,7 +30,7 @@
       <!-- Thumbnails -->
       <div class="thumbnail-container d-flex justify-content-center mt-3">
         <div class="thumbnail mx-1" *ngFor="let media of game?.screenshots; let i = index" (click)="setActiveSlide(i)" [ngClass]="{'active-thumbnail': i === activeIndex}">
-          <img [src]="'http://localhost:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
+          <img [src]="'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + media.mediaUrl" class="rounded" alt="thumbnail">
         </div>
       </div>
 
@@ -193,7 +193,7 @@
       <div >
         <ng-container>
           <div class="banner-section">
-            <img src="http://localhost:9000/nexus-backend/games/upload/download/{{game.bannerPicture?.mediaUrl}}" class="d-block w-100 mb-3" alt="Game banner">
+            <img src="http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/{{game.bannerPicture?.mediaUrl}}" class="d-block w-100 mb-3" alt="Game banner">
           </div>
         </ng-container>
       </div>

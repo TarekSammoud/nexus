@@ -56,7 +56,7 @@ public class RoomService implements IRoomService {
         room.setDernierMessage(LocalDateTime.now());
         room.setActive(true);
         roomRepository.save(room);
-        room.setLien("http://localhost:4200/room/" + room.getId());
+        room.setLien("http://nexus-frontend.frontend.svc.cluster.local:4200/room/" + room.getId());
         // Associer la room au ticket
         ticket.setRoom(room);
         ticketRepository.save(ticket);

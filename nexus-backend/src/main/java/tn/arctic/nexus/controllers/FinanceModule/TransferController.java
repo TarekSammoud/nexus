@@ -12,7 +12,7 @@ import tn.arctic.nexus.services.FinanceModule.TransferService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200")
 @RestController
 @RequestMapping("transfer")
 public class TransferController {

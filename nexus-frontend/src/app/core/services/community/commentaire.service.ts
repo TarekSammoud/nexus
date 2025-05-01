@@ -7,7 +7,7 @@ import { Commentaire } from '../../entities/community/commentaire';
   providedIn: 'root'
 })
 export class CommentaireService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/commentaires';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/commentaires';
 
   constructor(private http: HttpClient) {}
 

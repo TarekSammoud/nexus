@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EntryMediaService {
-  private baseUrl = 'http://localhost:9000/nexus-backend/api/entry-media';
+  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/entry-media';
 
   constructor(private http: HttpClient) {}
 

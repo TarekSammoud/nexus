@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/marketlistings")
-@CrossOrigin(origins = "http://localhost:4200") // Add CORS if needed
+@CrossOrigin(origins = "http://nexus-frontend.frontend.svc.cluster.local:4200") // Add CORS if needed
 public class MarketListingController {
 
     private final MarketListingService service;
