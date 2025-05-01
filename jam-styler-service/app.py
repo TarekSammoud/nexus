@@ -59,4 +59,4 @@ def style_jam():
     return jsonify(style)
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5003)

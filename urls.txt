@@ -1,0 +1,6 @@
+FTP_SERVER : ftp-server.ftp.svc.cluster.local:21
+SPAM_AI : spam-ai.ai.svc.cluster.local:5001
+STYLE_AI : style-ai.ai.svc.cluster.local:5003
+SUPPORT_AI : support-ai.ai.svc.cluster.local:5002
+RECOMMENDATION_AI : recommendation-ai.ai.svc.cluster.local:5000
+TOXIC_AI : toxic-ai.ai.svc.cluster.local:5004

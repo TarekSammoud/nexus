@@ -22,7 +22,7 @@ import java.util.zip.ZipInputStream;
 
 @Service
 public class FtpService {
-    private static final String FTP_SERVER = "localhost";
+    private static final String FTP_SERVER = "ftp-server.ftp.svc.cluster.local";
     private static final int FTP_PORT = 21;
     private static final String FTP_USER = "nexus-ftp";
     private static final String FTP_PASSWORD = "123456789";

@@ -49,7 +49,7 @@ public class VipJamService implements IVipJamService {
     private VipJam applyAIStylingAndSave(VipJam vipJam) {
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String url = "http://localhost:5001/style";
+            String url = "http://style-ai.ai.svc.cluster.local:5003/style";
 
             Map<String, String> payload = new HashMap<>();
             payload.put("title", vipJam.getName());
