@@ -14,8 +14,8 @@ import { HttpParams } from '@angular/common/http';
 })
 export class AuthService {
 
-    private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/auth';
-    private userUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user';
+    private baseUrl = '/api/nexus-backend/auth';
+    private userUrl = '/api/nexus-backend/user';
 
     constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
@@ -95,7 +95,7 @@ export class AuthService {
 
     facebookLogin(accessToken: string): Observable<any> {
         const params = new HttpParams().set('accessToken', accessToken);
-        return this.http.post(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/auth/facebook-login`, null, { params });
+        return this.http.post(`/api/nexus-backend/auth/facebook-login`, null, { params });
 
     }
 

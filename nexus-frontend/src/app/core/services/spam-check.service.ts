@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class SpamCheckService {
 
 
-  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/reviews/check';  // Your Spring Boot endpoint
+  private apiUrl = '/api/nexus-backend/games/reviews/check';  // Your Spring Boot endpoint
 
   constructor(private http: HttpClient) { }
 

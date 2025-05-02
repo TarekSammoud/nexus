@@ -7,7 +7,7 @@ import { PerformanceReview } from '../../entities/support/PerformanceReview.mode
   providedIn: 'root'
 })
 export class PerformanceReviewService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/performancereviews';
+  private baseUrl = '/api/nexus-backend/performancereviews';
 
   constructor(private http: HttpClient) {}
 

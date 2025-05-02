@@ -8,7 +8,7 @@ import { Purchase } from 'src/app/core/entities/finance/purchase.model';
   providedIn: 'root'
 })
 export class PurchaseService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/purchase';
+  private baseUrl = '/api/nexus-backend/purchase';
 
   constructor(private http: HttpClient) {}
 

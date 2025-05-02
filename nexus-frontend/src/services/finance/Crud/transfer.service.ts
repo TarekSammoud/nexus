@@ -8,7 +8,7 @@ import { Transfer } from 'src/app/core/entities/finance/transfer.model';
 })
 export class TransferService {
 
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/transfer';
+  private baseUrl = '/api/nexus-backend/transfer';
 
   constructor(private http: HttpClient) {}
 

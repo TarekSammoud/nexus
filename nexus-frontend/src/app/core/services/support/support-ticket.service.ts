@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class SupportService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/tickets';
+  private baseUrl = '/api/nexus-backend/tickets';
 
   constructor(private http: HttpClient) {}
 

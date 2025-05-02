@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GameMediaService {
-  private gamesUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/media';
-  private ftpUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload';
+  private gamesUrl = '/api/nexus-backend/games/media';
+  private ftpUrl = '/api/nexus-backend/games/upload';
 
   constructor(private http: HttpClient) {}
 

@@ -11,7 +11,7 @@
            [ngStyle]="{'animation-delay': i * 0.1 + 's'}">
         <div class="item-image">
           <img [src]="item.coverPicture?.mediaUrl 
-            ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + item.coverPicture?.mediaUrl 
+            ? '/api/nexus-backend/games/upload/download/' + item.coverPicture?.mediaUrl 
             : '../../../../assets/img/missing.jpg'"
             [alt]="item.name" class="result-img" />        </div>
         <div class="item-details">

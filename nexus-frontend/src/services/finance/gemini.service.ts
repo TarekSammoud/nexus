@@ -14,7 +14,7 @@ export interface RefundAnalysisResponse {
 
 export class GeminiService {
 
-  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/refund/analyze';
+  private apiUrl = '/api/nexus-backend/api/refund/analyze';
 
   constructor(private http: HttpClient) {}
 

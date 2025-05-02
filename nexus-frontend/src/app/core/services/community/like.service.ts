@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LikeService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/likes';
+  private baseUrl = '/api/nexus-backend/api/likes';
 
   constructor(private http: HttpClient) {}
 

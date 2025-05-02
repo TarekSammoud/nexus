@@ -12,7 +12,7 @@ import { Streamer } from 'src/app/core/entities/community/streamer';
   providedIn: 'root'
 })
 export class SondageService {
-  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/sondages';
+  private apiUrl = '/api/nexus-backend/api/sondages';
 
   constructor(private http: HttpClient) {}
 

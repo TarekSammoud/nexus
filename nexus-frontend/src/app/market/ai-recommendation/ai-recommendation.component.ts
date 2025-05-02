@@ -54,7 +54,7 @@ export class AiRecommendationComponent {
 
   // Fetch recommendations from Flask API
   getRecommendations(): void {
-    const apiUrl = 'http://recommendation-ai.ai.svc.cluster.local:5000/recommend'; // Adjust with your actual Flask API URL
+    const apiUrl = '/recommendation-ai/recommend'; // Adjust with your actual Flask API URL
     const inputData = {
       game: this.inputListing.game,
       genre: this.inputListing.genre,

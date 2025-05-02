@@ -8,7 +8,7 @@ import { Payment } from 'src/app/core/entities/finance/payment.model';
   providedIn: 'root'
 })
 export class PaymentService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/payment';
+  private baseUrl = '/api/nexus-backend/payment';
 
   constructor(private http: HttpClient) {}
 

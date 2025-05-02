@@ -45,7 +45,7 @@ export class ChatRoomService {
     this.stompClient = new Client({
       brokerURL: 'ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support',
       reconnectDelay: 5000,
-      webSocketFactory: () => new SockJS('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support'),
+      webSocketFactory: () => new SockJS('/api/nexus-backend/ws-support'),
       connectHeaders: {
         'Authorization': `Bearer ${token}`,
       },
@@ -107,11 +107,11 @@ export class ChatRoomService {
 
   // Récupérer les anciens messages pour une room
   getMessages(roomId: string): Observable<ChatMessage[]> {
-    return this.http.get<ChatMessage[]>(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/msg/getRoomMessages?roomId=${roomId}`);
+    return this.http.get<ChatMessage[]>(`/api/nexus-backend/msg/getRoomMessages?roomId=${roomId}`);
   }
 
   getRoomUsers(roomId: string): Observable<User[]> {
-    return this.http.get<User[]>(`http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/chat-room/users?roomId=${roomId}`);
+    return this.http.get<User[]>(`/api/nexus-backend/chat-room/users?roomId=${roomId}`);
   }
   
 }

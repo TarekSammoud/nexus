@@ -18,7 +18,7 @@
           <tr *ngFor="let review of data">
             <td>
               <img [src]="review.game.coverPicture?.mediaUrl 
-                ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + review.game.coverPicture?.mediaUrl 
+                ? '/api/nexus-backend/games/upload/download/' + review.game.coverPicture?.mediaUrl 
                 : './assets/default-game.jpg'"
                 alt="{{ review.game.name }}"
                 class="img-thumbnail" />

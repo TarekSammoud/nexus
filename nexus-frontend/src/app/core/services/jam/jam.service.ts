@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JamService {
-  private apiUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/gamejams'; 
+  private apiUrl = '/api/nexus-backend/api/gamejams'; 
 
 
   constructor(private http: HttpClient) {}

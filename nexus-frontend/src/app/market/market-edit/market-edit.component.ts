@@ -26,7 +26,7 @@ export class MarketEditComponent implements OnInit {
       user_id: this.item.user?.id // ✅ store it internally but do NOT modify it
     };
 
-    this.http.get<any[]>('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
+    this.http.get<any[]>('/api/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
   }
 
   submitUpdate(): void {

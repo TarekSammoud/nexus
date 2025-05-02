@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ExcelService {
 
-  private ftpUrl= 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/excel'; 
+  private ftpUrl= '/api/nexus-backend/games/upload/download/excel'; 
 
   constructor(private http: HttpClient) { }
 

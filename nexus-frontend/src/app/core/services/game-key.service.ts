@@ -7,7 +7,7 @@ import { GameKey } from '../entities/game-key';
   providedIn: 'root'
 })
 export class GameKeyService {
-  private gamesUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/game-keys';
+  private gamesUrl = '/api/nexus-backend/games/game-keys';
 
   constructor(private http: HttpClient) { }
 

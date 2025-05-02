@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EntryService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/api/entries';
+  private baseUrl = '/api/nexus-backend/api/entries';
 
   constructor(private http: HttpClient) {}
 

@@ -8,7 +8,7 @@ import { GameReview } from '../../entities/game/game-review';
   providedIn: 'root'
 })
 export class GameService {
-  private gamesUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games';
+  private gamesUrl = '/api/nexus-backend/games';
 
   constructor(private http: HttpClient) {}
 

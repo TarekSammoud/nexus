@@ -8,7 +8,7 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
     <div *ngFor="let game of Games; let i = index" class="carousel-item" [class.active]="i === 0" 
-    [ngStyle]="{ 'background-image': 'url(' + 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + game.gameMediaList[0].mediaUrl + ')' }">  
+    [ngStyle]="{ 'background-image': 'url(' + '/api/nexus-backend/games/upload/download/' + game.gameMediaList[0].mediaUrl + ')' }">  
     
     
     

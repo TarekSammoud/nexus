@@ -7,7 +7,7 @@ import { SupportAgent } from '../../entities/support/SupportAgent.model';
   providedIn: 'root'
 })
 export class SupportAgentService {
-  private baseUrl = 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/agents';
+  private baseUrl = '/api/nexus-backend/agents';
 
   constructor(private http: HttpClient) {}
 

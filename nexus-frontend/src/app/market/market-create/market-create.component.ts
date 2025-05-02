@@ -28,7 +28,7 @@ export class MarketCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUserId = TokenService.getUserId()!; // ✅ Get the logged-in user ID
-    this.http.get<any[]>('http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
+    this.http.get<any[]>('/api/nexus-backend/gameitem').subscribe(data => this.gameItems = data);
   }
 
   createItem(): void {

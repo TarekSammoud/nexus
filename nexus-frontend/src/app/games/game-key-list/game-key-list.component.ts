@@ -36,7 +36,7 @@ export class GameKeyListComponent implements OnInit {
 
   getImageUrl(data: GameKey): string {
     if (data && data.game && data.game.gameMediaList && data.game.gameMediaList.length > 0) {
-      return 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + data.game.gameMediaList[0].mediaUrl;
+      return '/api/nexus-backend/games/upload/download/' + data.game.gameMediaList[0].mediaUrl;
     }
     return './assets/default-game.jpg';
   }

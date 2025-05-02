@@ -10,7 +10,7 @@ import { SignUp } from '../../entities/user/signup.model';
     providedIn: 'root'
 })
 export class UserService {
-    private apiUrl = `http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user/addUser`;  // L'URL de l'API backend
+    private apiUrl = `/api/nexus-backend/user/addUser`;  // L'URL de l'API backend
 
     constructor(private http: HttpClient) { }
     createUser(signUpData: SignUp): Observable<User> {
@@ -26,7 +26,7 @@ export class UserService {
 
         return this.http.post<User>(this.apiUrl, body);
     }
-    private apiUrl2 = `http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/user/check-email`;
+    private apiUrl2 = `/api/nexus-backend/user/check-email`;
     // L'URL de l'API backend
 
     checkEmailUnique(email: string): Observable<boolean> {

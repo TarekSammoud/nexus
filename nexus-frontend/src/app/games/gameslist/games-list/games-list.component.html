@@ -11,7 +11,7 @@
                         <div class="e-game-image-layout">
                             <img class="e-game-image" 
                             [src]="data.coverPicture?.mediaUrl 
-                            ? 'http://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/games/upload/download/' + data.coverPicture.mediaUrl 
+                            ? '/api/nexus-backend/games/upload/download/' + data.coverPicture.mediaUrl 
                             : './assets/default-game.jpg'"
                     alt="Game Cover"
                                                 alt="{{data.name}}" />
