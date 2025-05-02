@@ -15,9 +15,14 @@ FROM nginx:alpine
 # Copy Angular build output
 COPY --from=builder /app/dist/out/ /usr/share/nginx/html
 
-# Use a custom NGINX config to serve on port 4200
+# Copy the NGINX config template
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 4200
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
+EXPOSE 80
+
+# Use entrypoint script to substitute env vars and start nginx
 CMD ["nginx", "-g", "daemon off;"]
