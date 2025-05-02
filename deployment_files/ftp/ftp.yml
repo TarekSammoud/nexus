@@ -5,6 +5,22 @@ metadata:
 
 ---
 
+# PersistentVolume (optional, only if not using dynamic provisioning)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ftp-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:  # Use hostPath for local clusters only
+    path: /mnt/data/ftp
+  persistentVolumeReclaimPolicy: Retain
+
+---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -16,6 +32,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  volumeName: ftp-pv  # Bind to the above PV
 
 ---
 
@@ -27,7 +44,7 @@ metadata:
 type: Opaque
 stringData:
   FTP_USER: nexus-ftp
-  FTP_PASSWORD: 123456789
+  FTP_PASSWORD: "123456789"
 
 ---
 
