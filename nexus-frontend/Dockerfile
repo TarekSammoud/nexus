@@ -7,15 +7,15 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build --configuration=production
+RUN npm run build -- --output-path=./dist/out --output-hashing=all
 
 # Stage 2: Serve with NGINX
 FROM nginx:alpine
 
 # Copy Angular build output
-COPY --from=builder /app/dist/nexus-frontend/ /usr/share/nginx/html
+COPY --from=builder /app/dist/out/ /usr/share/nginx/html
 
-# Replace default nginx config to listen on port 4200
+# Use a custom NGINX config to serve on port 4200
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 4200
