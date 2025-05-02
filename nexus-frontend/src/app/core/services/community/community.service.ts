@@ -29,7 +29,6 @@ export class CommunityService {
   getPublications(): Observable<Publication[]> {
     //console.log('➡️ Requête envoyée vers :', `${this.baseUrl}/all`);
     return this.http.get<Publication[]>(`${this.baseUrl}/all`, { headers: this.getHeaders() }).pipe(
-      tap((data) => //console.log('✅ Données reçues dans le Service:', data)),
       catchError((error) => {
         console.error('❌ Erreur dans le service:', error);
         return throwError(error);
@@ -68,7 +67,6 @@ export class CommunityService {
   getPublicationsVisibles(headers: HttpHeaders): Observable<Publication[]> {
     //console.log('➡️ Requête envoyée vers :', `${this.baseUrl}/visibles`);
     return this.http.get<Publication[]>(`${this.baseUrl}/visibles`, { headers }).pipe(
-      tap((data) => //console.log('✅ Données reçues dans getPublicationsVisibles:', data)),
       catchError((error) => {
         console.error('❌ Erreur dans getPublicationsVisibles:', error);
         return throwError(() => error);

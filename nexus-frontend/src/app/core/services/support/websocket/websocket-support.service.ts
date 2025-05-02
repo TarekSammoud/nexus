@@ -22,8 +22,7 @@ export class WebsocketSupportService {
     const socket = new WebSocket('ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support');
 
     this.stompClient = new Stomp.Client({
-      webSocketFactory: () => socket, // Directly use the native WebSocket connection
-      debug: (str: string) => //console.log(str), // Enable debugging to log messages in console
+      webSocketFactory: () => socket // Directly use the native WebSocket connection
     });
 
     // Configure the STOMP client

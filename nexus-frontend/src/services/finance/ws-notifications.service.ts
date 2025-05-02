@@ -18,8 +18,8 @@ export class WsNotificationsService {
     const socket = new WebSocket('ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-notifications');
 
     this.stompClient = new Stomp.Client({
-      webSocketFactory: () => socket, // Directly use the native WebSocket connection
-      debug: (str: string) => //console.log(str), // Enable debugging to log messages in console
+      webSocketFactory: () => socket // Directly use the native WebSocket connection
+   //   debug: (str: string) => //console.log(str) // Enable debugging to log messages in console
     });
 
     // Configure the STOMP client
