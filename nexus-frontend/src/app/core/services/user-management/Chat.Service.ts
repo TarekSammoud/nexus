@@ -15,7 +15,7 @@ export class ChatService {
     connect(userId: number): void {
         //console.log('Connexion à WebSocket...');
         this.stompClient = new Client({
-            brokerURL: 'ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws',
+            brokerURL: '/ws_api/nexus-backend/ws',
             reconnectDelay: 5000,
             webSocketFactory: () => new SockJS('/api/nexus-backend/ws'),
             onConnect: () => {

@@ -43,7 +43,7 @@ export class ChatRoomService {
     //console.log(`Connecting to WebSocket for Room: ${roomId}, User: ${userId}, with token: ${token}`);
 
     this.stompClient = new Client({
-      brokerURL: 'ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support',
+      brokerURL: '/ws_api/nexus-backend/ws-support',
       reconnectDelay: 5000,
       webSocketFactory: () => new SockJS('/api/nexus-backend/ws-support'),
       connectHeaders: {

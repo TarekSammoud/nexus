@@ -15,7 +15,7 @@ export class WsNotificationsService {
    */
   connect(token: string, onMessage: (msg: any) => void): void {
     // Use native WebSocket connection instead of SockJS
-    const socket = new WebSocket('ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-notifications');
+    const socket = new WebSocket('/ws_api/nexus-backend/ws-notifications');
 
     this.stompClient = new Stomp.Client({
       webSocketFactory: () => socket // Directly use the native WebSocket connection

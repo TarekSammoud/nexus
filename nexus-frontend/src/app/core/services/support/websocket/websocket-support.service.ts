@@ -19,7 +19,7 @@ export class WebsocketSupportService {
    */
   connect(token: string, roomId:Number, onMessage: (msg: any) => void): void {
     // Use native WebSocket connection instead of SockJS
-    const socket = new WebSocket('ws://nexus-backend.backend.svc.cluster.local:9000/nexus-backend/ws-support');
+    const socket = new WebSocket('/ws_api/nexus-backend/ws-support');
 
     this.stompClient = new Stomp.Client({
       webSocketFactory: () => socket // Directly use the native WebSocket connection
