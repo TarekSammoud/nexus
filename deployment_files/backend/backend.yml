@@ -63,5 +63,29 @@ metadata:
 spec:
   selector:
     app: nexus-backend
+  type: LoadBalancer
   ports:
     - port: 9000
+      targetPort: 9000  # Optional: only needed if container uses a different port internally
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nexus-backend-ingress
+  namespace: backend
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    # Remove rewrite-target to preserve /nexus-backend
+spec:
+  ingressClassName: public
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: nexus-backend
+            port:
+              number: 9000
+        path: /nexus-backend
+        pathType: Prefix

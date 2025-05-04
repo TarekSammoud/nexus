@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftp-server
+  namespace: ftp
+spec:
+  selector:
+    app: ftp-server
+  ports:
+    - name: ftp
+      protocol: TCP
+      port: 21
+      targetPort: 21
+    - name: pasv-min
+      protocol: TCP
+      port: 21100
+      targetPort: 21100
+    - name: pasv-max
+      protocol: TCP
+      port: 21110
+      targetPort: 21110
+  clusterIP: None  # Optional: makes this a Headless Service if needed

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftp-server
+  namespace: ftp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftp-server
+  template:
+    metadata:
+      labels:
+        app: ftp-server
+    spec:
+      volumes:
+        - name: ftp-storage
+          emptyDir: {}
+      containers:
+        - name: ftp
+          image: tareksammoud/ftp-server
+          ports:
+            - containerPort: 21
+              name: ftp
+            - containerPort: 21100
+              name: pasv-min
+            - containerPort: 21110
+              name: pasv-max
+          volumeMounts:
+            - mountPath: "/home/vsftpd"
+              name: ftp-storage
+          env:
+            - name: FTP_USER
+              value: "nexus-ftp"
+            - name: FTP_PASS
+              value: "123456789"
+            - name: PASV_ADDRESS
+              value: "ftp-server.ftp.svc.cluster.local"
+            - name: PASV_MIN_PORT
+              value: "21100"
+            - name: PASV_MAX_PORT
+              value: "21110"

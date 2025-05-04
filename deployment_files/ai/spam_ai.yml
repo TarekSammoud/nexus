@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spam-ai
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spam-ai
+  template:
+    metadata:
+      labels:
+        app: spam-ai
+    spec:
+      containers:
+      - name: spam-ai
+        image: tareksammoud/spam-ai:latest
+        ports:
+        - containerPort: 5004
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spam-ai
+  namespace: ai
+spec:
+  selector:
+    app: spam-ai
+  ports:
+  - port: 5004
+    targetPort: 5004
+    protocol: TCP
+  type: ClusterIP
+

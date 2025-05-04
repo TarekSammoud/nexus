@@ -6,6 +6,22 @@ metadata:
 type: Opaque
 data:
   mysql-root-password: MTIzNDU2Nzg5
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+  namespace: database
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard  # Make sure this matches your PVC's storage class if you have one
+  hostPath:
+    path: /mnt/data  # This should point to a directory on the node where data will be stored
 
 ---
 apiVersion: v1
@@ -19,7 +35,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
+  storageClassName: standard
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -18,6 +18,8 @@ COPY --from=builder /app/dist/out/ /usr/share/nginx/html
 # Copy the NGINX config template
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+COPY nginx2.conf /etc/nginx/nginx.conf
+
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

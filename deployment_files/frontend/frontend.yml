@@ -3,7 +3,10 @@ kind: Deployment
 metadata:
   name: nexus-frontend
   namespace: frontend
+  labels:
+    app: nexus-frontend
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: nexus-frontend
@@ -13,11 +16,20 @@ spec:
         app: nexus-frontend
     spec:
       containers:
-        - name: frontend
-          image: tareksammoud/nexus-frontend
-          ports:
-            - containerPort: 80
-
+      - name: nexus-frontend
+        image: tareksammoud/nexus-frontend:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: API_URL
+          value: "http://nexus-backend.backend.svc.cluster.local:9000"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +40,7 @@ spec:
   selector:
     app: nexus-frontend
   ports:
-    - port: 4200
-      targetPort: 80
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
