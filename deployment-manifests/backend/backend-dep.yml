@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: backend
+data:
+  DB_URL: jdbc:mysql://mysql.backend.svc.cluster.local:3306/nexus?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+  DB_USERNAME: root
+  DB_NAME: myappdb
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus-backend
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus-backend
+  template:
+    metadata:
+      labels:
+        app: nexus-backend
+    spec:
+      containers:
+        - name: backend
+          image: hamdounisa4/nexus-backend:latest
+          ports:
+            - containerPort: 9000
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: DB_URL
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: DB_NAME
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus-backend
+  namespace: backend
+spec:
+  selector:
+    app: nexus-backend
+  type: NodePort
+  ports:
+    - port: 9000
+      targetPort: 9000
+
