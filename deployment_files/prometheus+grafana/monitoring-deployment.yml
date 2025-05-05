@@ -1,0 +1,497 @@
+# monitoring-namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/prometheus
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/grafana
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'nexus-frontend'
+        static_configs:
+          - targets: ['nginx-exporter.monitoring.svc.cluster.local:9113']
+      - job_name: 'nexus-backend'
+        static_configs:
+          - targets: ['nexus-backend.backend.svc.cluster.local:9000']
+        metrics_path: /actuator/metrics
+      - job_name: 'mysql'
+        static_configs:
+          - targets: ['mysql-exporter.monitoring.svc.cluster.local:9104']
+      - job_name: 'flask-ai'
+        static_configs:
+          - targets: [      'flask-exporter-recommendation.monitoring.svc.cluster.local:8000',
+      'flask-exporter-spam.monitoring.svc.cluster.local:8000',
+      'flask-exporter-style.monitoring.svc.cluster.local:8000',
+      'flask-exporter-support.monitoring.svc.cluster.local:8000',
+      'flask-exporter-toxic.monitoring.svc.cluster.local:8000']
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/prometheus
+            - name: storage-volume
+              mountPath: /prometheus
+          securityContext:
+            runAsUser: 0
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: prometheus-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  type: LoadBalancer
+  selector:
+    app: prometheus
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+          securityContext:
+            runAsUser: 0
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: grafana.192-168-83-150.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: prometheus.192-168-83-150.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus
+                port:
+                  number: 9090
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-exporter
+  template:
+    metadata:
+      labels:
+        app: mysql-exporter
+    spec:
+      containers:
+      - name: mysql-exporter
+        image: prom/mysqld-exporter:v0.13.0
+        env:
+          - name: DATA_SOURCE_NAME
+            value: "root@tcp(mysql:3306)/"
+        ports:
+          - containerPort: 9104
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-exporter
+  namespace: monitoring
+spec:
+  ports:
+    - port: 9104
+      targetPort: 9104
+  selector:
+    app: mysql-exporter
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-exporter
+  template:
+    metadata:
+      labels:
+        app: nginx-exporter
+    spec:
+      containers:
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter
+        ports:
+          - containerPort: 9113
+        args:
+          - "-nginx.scrape-uri=http://nexus-frontend.frontend.svc.cluster.local:80/stub_status"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-exporter
+  namespace: monitoring
+spec:
+  ports:
+    - port: 9113
+      targetPort: 9113
+  selector:
+    app: nginx-exporter
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-exporter-recommendation
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-exporter-recommendation
+  template:
+    metadata:
+      labels:
+        app: flask-exporter-recommendation
+    spec:
+      containers:
+      - name: flask-exporter
+        image: tareksammoud/flask-exporter:latest
+        ports:
+          - containerPort: 8000
+        env:
+          - name: FLASK_METRICS_ENDPOINT
+            value: "/metrics"
+          - name: FLASK_APP_ENDPOINT
+            value: "http://spam-ai.ai.svc.cluster.local:80"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-exporter-spam
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-exporter-spam
+  template:
+    metadata:
+      labels:
+        app: flask-exporter-spam
+    spec:
+      containers:
+      - name: flask-exporter
+        image: tareksammoud/flask-exporter:latest
+        ports:
+          - containerPort: 8000
+        env:
+          - name: FLASK_METRICS_ENDPOINT
+            value: "/metrics"
+          - name: FLASK_APP_ENDPOINT
+            value: "http://spam-ai.ai.svc.cluster.local:80"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-exporter-style
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-exporter-style
+  template:
+    metadata:
+      labels:
+        app: flask-exporter-style
+    spec:
+      containers:
+      - name: flask-exporter
+        image: tareksammoud/flask-exporter:latest
+        ports:
+          - containerPort: 8000
+        env:
+          - name: FLASK_METRICS_ENDPOINT
+            value: "/metrics"
+          - name: FLASK_APP_ENDPOINT
+            value: "http://spam-ai.ai.svc.cluster.local:80"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-exporter-support
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-exporter-support
+  template:
+    metadata:
+      labels:
+        app: flask-exporter-support
+    spec:
+      containers:
+      - name: flask-exporter
+        image: tareksammoud/flask-exporter:latest
+        ports:
+          - containerPort: 8000
+        env:
+          - name: FLASK_METRICS_ENDPOINT
+            value: "/metrics"
+          - name: FLASK_APP_ENDPOINT
+            value: "http://spam-ai.ai.svc.cluster.local:80"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-exporter-toxic
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-exporter-toxic
+  template:
+    metadata:
+      labels:
+        app: flask-exporter-toxic
+    spec:
+      containers:
+      - name: flask-exporter
+        image: tareksammoud/flask-exporter:latest
+        ports:
+          - containerPort: 8000
+        env:
+          - name: FLASK_METRICS_ENDPOINT
+            value: "/metrics"
+          - name: FLASK_APP_ENDPOINT
+            value: "http://spam-ai.ai.svc.cluster.local:80"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-exporter-recommendation
+  namespace: monitoring
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: flask-exporter-recommendation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-exporter-spam
+  namespace: monitoring
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: flask-exporter-spam
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-exporter-style
+  namespace: monitoring
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: flask-exporter-style
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-exporter-support
+  namespace: monitoring
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: flask-exporter-support
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-exporter-toxic
+  namespace: monitoring
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: flask-exporter-toxic
+
