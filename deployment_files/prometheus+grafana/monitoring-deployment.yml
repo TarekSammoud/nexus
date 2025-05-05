@@ -84,7 +84,7 @@ data:
       - job_name: 'nexus-backend'
         static_configs:
           - targets: ['nexus-backend.backend.svc.cluster.local:9000']
-        metrics_path: /actuator/metrics
+        metrics_path: /nexus-backend/actuator/prometheus
       - job_name: 'mysql'
         static_configs:
           - targets: ['mysql-exporter.monitoring.svc.cluster.local:9104']
