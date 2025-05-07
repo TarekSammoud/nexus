@@ -1,0 +1,2 @@
+sudo chown -R 1000:1000 /mnt/data/uploads
+sudo chmod -R 775 /mnt/data/uploads
