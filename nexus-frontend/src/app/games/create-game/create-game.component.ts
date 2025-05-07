@@ -13,6 +13,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from 'src/app/core/services/user-management/auth.service';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -34,6 +36,58 @@ export class CreateGameComponent implements OnInit {
   numberOfGames!: number; 
   userId? : number ;
 
+  hardwareData = [
+    { gpu: 'GeForce GTS 150', cpu: 'i7-7Y75' },
+    { gpu: 'Radeon HD 2900 XT 512MB', cpu: 'i5-8250U' },
+    { gpu: 'Radeon HD 2900 Pro', cpu: 'i7-8550U' },
+    { gpu: 'Radeon HD 2600 XT Diamond Edition', cpu: 'i7-3820' },
+    { gpu: 'Radeon HD 2600 XT', cpu: 'i5-7Y57' },
+    { gpu: 'Radeon HD 2600 XT 256MB GDDR4', cpu: '3205U' },
+    { gpu: 'Radeon HD 4890 Sapphire Vapor-X OC 2GB Edition', cpu: 'N2805' },
+    { gpu: 'Radeon HD 2900 GT', cpu: 'J1750' },
+    { gpu: 'FirePro D300', cpu: 'G1610' },
+    { gpu: 'Radeon 7000 64mb', cpu: '518' },
+    { gpu: 'Quadro4 980 XGL', cpu: '2020M' },
+    { gpu: 'Tesla M2090', cpu: '773' },
+    { gpu: 'Tesla K20', cpu: '3825U' },
+    { gpu: 'Tesla K40c', cpu: '4405U' },
+    { gpu: 'All-in-Wonder Radeon 7500', cpu: 'N3710' },
+    { gpu: 'Radeon R7 250 v2 MSI OC 2GB + Radeon R7 7870K Dual', cpu: 'C1000' },
+    { gpu: 'Tesla K10', cpu: 'J2850' },
+    { gpu: 'Tesla K20X', cpu: 'J2900' },
+    { gpu: 'Iris i3 6167U', cpu: 'J3710' },
+    { gpu: 'Radeon 9800 XT', cpu: 'J4205' },
+    { gpu: 'Tesla C2070', cpu: 'N3700' },
+    { gpu: 'Tesla C2075', cpu: 'N3510' },
+    { gpu: 'Quadro4 750 XGL', cpu: 'N3520' },
+    { gpu: 'Quadro4 900 XGL', cpu: 'N3530' },
+    { gpu: 'Iris i5 6360U', cpu: 'N3540' },
+    { gpu: 'Quadro4 780 XGL', cpu: 'N4200' },
+    { gpu: 'Tesla C2050', cpu: '4405Y' },
+    { gpu: 'Iris i5 6267U', cpu: '4415Y' },
+    { gpu: 'Iris i5 6260U', cpu: '4410Y' },
+    { gpu: 'Iris i5 4258U', cpu: '4415U' },
+    { gpu: 'Quadro4 580 XGL', cpu: '3805U' },
+    { gpu: 'Iris i5 5350H', cpu: '3561Y' },
+    { gpu: 'Quadro4 550 XGL', cpu: '3560M' },
+    { gpu: 'Quadro4 380 XGL', cpu: '3560Y' },
+    { gpu: 'Quadro4 700 XGL', cpu: '3558U' },
+    { gpu: 'Iris i5 6287U', cpu: '3556U' },
+    { gpu: 'Iris i7 6650U', cpu: '3550M' },
+    { gpu: 'Quadro4 500 XGL', cpu: '2117U' },
+    { gpu: 'Iris i7 6567U', cpu: '2030M' },
+    { gpu: 'Iris i7 6560U', cpu: '2127U' },
+    { gpu: 'Iris i7 5950HQ', cpu: '2129Y' },
+    { gpu: 'Iris i7 5850EQ', cpu: '753' },
+    { gpu: 'Titan X Pascal 2016', cpu: '733' },
+    { gpu: 'Iris i7 5850HQ', cpu: '723' },
+    { gpu: 'Iris i7 5750HQ', cpu: '713' }
+  ];
+
+  // Options for the select form controls
+  gpuOptions: string[] = this.hardwareData.map(item => item.gpu);
+  cpuOptions: string[] = this.hardwareData.map(item => item.cpu);
+
 
   constructor(private authService: AuthService,public modalService: NgbModal,private _excelService: ExcelService,private _router: Router,private _gameMediaService: GameMediaService,private _route: ActivatedRoute
     ,private _gameService : GameService,private fb: FormBuilder,private _gameCategoryService: GameCategoryService) {
@@ -48,32 +102,6 @@ export class CreateGameComponent implements OnInit {
       });
     });
 
-    this._excelService.getExcelDataFromFTP("hardware.xlsx").subscribe(
-      (data: string[][]) => {
-        // Filter out rows where all cells are empty
-        const filteredData = data.filter(row => row.some(cell => cell.trim() !== ''));
-  
-        this.excelData = filteredData;
-  
-        // Extract GPU and CPU options
-        this.gpuOptions = filteredData.map(item => item[0]).filter(gpu => gpu.trim() !== ''); // Ensure GPU is not empty
-        this.cpuOptions = filteredData.map(item => item[1]).filter(cpu => cpu.trim() !== ''); // Ensure CPU is not empty
-  
-        //console.log('Filtered GPU Options:', this.gpuOptions);
-        //console.log('Filtered CPU Options:', this.cpuOptions);
-  
-        // Optionally, you can set default values or apply further logic here
-        if (this.gpuOptions.length > 0 && this.cpuOptions.length > 0) {
-          this.gameForm.patchValue({
-            gpu: this.gpuOptions[0], // Set a default GPU option
-            cpu: this.cpuOptions[0]  // Set a default CPU option
-          });
-        }
-      },
-      error => {
-        console.error('Error loading Excel data', error);
-      }
-    );
 
 
 
@@ -158,7 +186,7 @@ onSelectFileFile(event: any): void {
     if (this.selectedPlatforms.has('PSP')) {
       this._gameMediaService.uploadPSPFileToFtp(formData).subscribe( {
         next: (response) => {
-          //console.log('Upload success:', response);
+          console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -171,7 +199,7 @@ onSelectFileFile(event: any): void {
     if (this.selectedPlatforms.has('N64')) {
       this._gameMediaService.uploadN64FileToFtp(formData).subscribe( {
         next: (response) => {
-          //console.log('Upload success:', response);
+          console.log('Upload success:', response);
           // You can store the result or update the form as needed
         },
         error: (err) => {
@@ -191,7 +219,7 @@ removeImageFile(index: number) {
   this.ftpFiles.splice(index, 1);
   this.images.splice(index, 1);
   this.imagesFile.splice(index, 1);
-  //console.log(this.filesToUpload.length); 
+  console.log(this.filesToUpload.length); 
 }
 
 isPlatformSelected(platform: string): boolean {
@@ -237,7 +265,7 @@ onSelectFileCover(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        //console.log('Upload success:', response);
+        console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -286,7 +314,7 @@ onSelectFileBanner(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        //console.log('Upload success:', response);
+        console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -336,7 +364,7 @@ onSelectFileScreenShots(event: any): void {
 
     this._gameMediaService.uploadFileToFtp(formData).subscribe({
       next: (response) => {
-        //console.log('Upload success:', response);
+        console.log('Upload success:', response);
         // You can store the result or update the form as needed
       },
       error: (err) => {
@@ -358,7 +386,7 @@ removeImage(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.images.splice(index, 1);
-  //console.log(this.filesToUpload.length); 
+  console.log(this.filesToUpload.length); 
 }
 
 
@@ -366,21 +394,21 @@ removeImageBanner(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesBanner.splice(index, 1);
-  //console.log(this.filesToUpload.length); 
+  console.log(this.filesToUpload.length); 
 }
 
 removeImageScreenshots(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesScreenshots.splice(index, 1);
-  //console.log(this.filesToUpload.length); 
+  console.log(this.filesToUpload.length); 
 }
 
 removeImageCover(index: number) {
   this.filesToUpload.splice(index, 1);
   this.ftpFiles.splice(index, 1);
   this.imagesCover.splice(index, 1);
-  //console.log(this.filesToUpload.length); 
+  console.log(this.filesToUpload.length); 
 }
 
 
@@ -441,7 +469,7 @@ get recommendedRequirements() {
     this.authService.getLoggedInUserProfile().subscribe({
       next: (user: any) => {
         this.userId = user.id;
-        //console.log('User profile: id from create', this.userId);
+        console.log('User profile: id from create', this.userId);
         this.gameForm.patchValue({
           developer: {id: this.userId}
         });
@@ -502,8 +530,7 @@ get recommendedRequirements() {
     
   }
   
-gpuOptions: string[] = [];
-cpuOptions: string[] = [];
+
 loadExcelData(fileName: string): void {
  
 }
@@ -522,7 +549,7 @@ loadExcelData(fileName: string): void {
   onSubmit(): void {
     this.gameForm.value.categories = Array.from(this.selectedCategories);
     this.gameForm.value.platforms = Array.from(this.selectedPlatforms);
-    //console.log('Form Data:', JSON.stringify(this.gameForm?.value));
+    console.log('Form Data:', JSON.stringify(this.gameForm?.value));
    // this.gameForm.value.developer.id = this.userId;
 
 
@@ -530,7 +557,7 @@ loadExcelData(fileName: string): void {
       // Loop through the controls and log errors
       for (const controlName in this.gameForm.controls) {
         if (this.gameForm.controls[controlName].errors) {
-          //console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
+          console.log(`Errors in ${controlName}:`, this.gameForm.controls[controlName].errors);
         }
       }
     } else {
@@ -538,12 +565,12 @@ loadExcelData(fileName: string): void {
     if (this.isEditMode) {
       this.gameForm.value.id = this.gameId;
       this._gameService.updateGame( this.gameForm.value).subscribe((data) => {
-        //console.log('Game updated:', data);
+        console.log('Game updated:', data);
       });
     }
     else {
     this._gameService.addGame(this.gameForm.value).subscribe((data) => {
-      //console.log('Game added:', data);
+      console.log('Game added:', data);
       this.uploadFiles(); // Call the upload function after adding the game
     });
   }

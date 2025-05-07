@@ -13,7 +13,7 @@ export class ExcelService {
   constructor(private http: HttpClient) { }
 
   getExcelDataFromFTP(fileName: string): Observable<any> {
-    return this.http.get(`/assets/${fileName}`, { responseType: 'arraybuffer' });
+        return this.http.get<any>(`${this.ftpUrl}?fileName=${fileName}`);
   }
 
 }
