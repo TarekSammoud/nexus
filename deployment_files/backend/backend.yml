@@ -44,7 +44,7 @@ metadata:
   namespace: backend
 type: Opaque
 data:
-  DB_PASSWORD: MTIzNDU2Nzg5
+  DB_PASSWORD: c2Ficmk=
 
 ---
 apiVersion: apps/v1

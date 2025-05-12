@@ -8,7 +8,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 # Récupération correcte du token via son nom de variable d'environnement
-API_URL = "https://api-inference.huggingface.co/models/databricks/dolly-v2-3b"
+API_URL = "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct"
 HEADERS = {"Authorization": f"Bearer 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"}
 
 class AnalyzeRequest(BaseModel):

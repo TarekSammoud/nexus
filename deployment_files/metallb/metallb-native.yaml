@@ -2040,22 +2040,4 @@ webhooks:
     resources:
     - l2advertisements
   sideEffects: None
----
-# ip-pool.yaml
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: my-ip-pool
-  namespace: metallb-system
-spec:
-  addresses:
-    - 192.168.83.150-192.168.83.190
----
-# l2-advertisement.yaml
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: l2
-  namespace: metallb-system
-spec: {}
 

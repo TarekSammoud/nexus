@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toxic-ai
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: toxic-ai
+  template:
+    metadata:
+      labels:
+        app: toxic-ai
+    spec:
+      containers:
+      - name: toxic-ai
+        image: hamdounisabri/toxic-ai:latest
+        ports:
+        - containerPort: 5004
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: toxic-ai
+  namespace: ai
+spec:
+  selector:
+    app: toxic-ai
+  ports:
+  - port: 5004
+    targetPort: 5004
+    protocol: TCP
+  type: ClusterIP

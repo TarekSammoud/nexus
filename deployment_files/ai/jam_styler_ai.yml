@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jam-styler-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jam-styler-ai
+  template:
+    metadata:
+      labels:
+        app: jam-styler-ai
+    spec:
+      containers:
+      - name: jam-styler-ai
+        image: hamdounisabri/jam-styler-ai:latest
+        ports:
+        - containerPort: 5005
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jam-styler-ai
+spec:
+  selector:
+    app: jam-styler-ai
+  ports:
+  - port: 5005
+    targetPort: 5005
+    protocol: TCP
+  type: LoadBalancer

@@ -5,7 +5,7 @@ metadata:
   namespace: database
 type: Opaque
 data:
-  mysql-root-password: MTIzNDU2Nzg5
+  mysql-root-password: c2Ficmk=
 ---
 apiVersion: v1
 kind: PersistentVolume
