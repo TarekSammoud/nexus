@@ -120,7 +120,7 @@ public class PublicationController {
 
 
     public boolean isAcceptable(String content) {
-        String url = "http://toxic-ai.ai.svc.cluster.local:5004/predict";
+        String url = "http://172.189.48.1:5004/predict";
 
         Map<String, String> body = new HashMap<>();
         body.put("text", content);

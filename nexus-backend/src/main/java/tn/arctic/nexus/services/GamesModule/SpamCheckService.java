@@ -12,7 +12,7 @@ public class SpamCheckService implements ISpamCheckService{
     @Override
     public Map<String,Object> checkReview(String reviewText) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://spam-ai.ai.svc.cluster.local:5001/predict";
+        String url = "http://98.66.228.138:5001/predict";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
